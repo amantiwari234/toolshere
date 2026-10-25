@@ -1,0 +1,14 @@
+# Exclude old store files from this love repository
+admin.html
+css/admin.css
+css/style.css
+js/admin.js
+js/app.js
+js/products.js
+assets/images/
+store_archive/
+
+# OS and system logs
+.DS_Store
+Thumbs.db
+*.log

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hey, My Favorite Human! 🥹❤️ | A Love Letter For You</title>
+  <meta name="description" content="A cute, romantic, funny, and interactive website created specially for the prettiest girl in the world!">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Sacramento&display=swap" rel="stylesheet">
+  
+  <!-- Master Romantic Stylesheet -->
+  <link rel="stylesheet" href="css/love.css">
+</head>
+<body>
+
+  <!-- Floating Hearts Background Canvas -->
+  <canvas id="canvas-hearts"></canvas>
+
+  <div class="love-wrapper">
+
+    <!-- Top Sticky Pill Bar -->
+    <header class="top-nav">
+      <a href="#welcomeHero" class="top-brand">
+        <span class="logo-icon">💌</span>
+        <span class="brand-text">Forever Yours</span>
+      </a>
+
+      <div class="top-actions">
+        <!-- Background Romantic Music Switch -->
+        <button id="musicToggleBtn" class="nav-btn music-btn" title="Toggle romantic background melody">
+          🎵 Play Music
+        </button>
+        <!-- Candlelight Romance Mode Toggle -->
+        <button id="candleModeBtn" class="nav-btn" title="Toggle romantic candlelight night mode">
+          🕯️ Candlelight
+        </button>
+        <!-- Personalize Names Button -->
+        <button id="editNamesBtn" class="nav-btn" title="Personalize your names">
+          ✏️ Edit Names
+        </button>
+      </div>
+    </header>
+
+    <!-- SECTION 1: HERO / WELCOME SCREEN -->
+    <section id="welcomeHero" class="hero-section">
+      <div class="special-badge">
+        <span>✨</span> HIGHLY CONFIDENTIAL LOVE REPORT <span>✨</span>
+      </div>
+
+      <h1 class="hero-title">
+        Hey, My Favorite Human! <span class="heart-bounce">🥹❤️</span>
+      </h1>
+
+      <div class="warning-banner">
+        <span class="warning-icon">⚠️</span>
+        <div class="warning-text">
+          <strong>Warning:</strong> Your boyfriend is about to embarrass himself with love.
+        </div>
+      </div>
+
+      <p class="hero-subtitle">
+        Welcome to the website built solely to celebrate you, <span class="var-gf-name" style="font-weight: 800; color: var(--rose-dark);">My Beautiful Girl</span>! Prepare for maximum romance and goofy humor. 🥰
+      </p>
+
+      <!-- RELATIONSHIP LIVE TIME COUNTER -->
+      <div class="counter-box-wrap">
+        <div class="special-badge" style="background:rgba(255,255,255,0.9); margin-bottom:12px;">
+          <span>⏳</span> IN LOVE WITH YOU FOR
+        </div>
+        <div class="counter-grid">
+          <div class="counter-unit">
+            <div id="counterDays" class="counter-num">000</div>
+            <div class="counter-lbl">Days</div>
+          </div>
+          <div class="counter-unit">
+            <div id="counterHours" class="counter-num">00</div>
+            <div class="counter-lbl">Hours</div>
+          </div>
+          <div class="counter-unit">
+            <div id="counterMins" class="counter-num">00</div>
+            <div class="counter-lbl">Minutes</div>
+          </div>
+          <div class="counter-unit">
+            <div id="counterSecs" class="counter-num">00</div>
+            <div class="counter-lbl">Seconds</div>
+          </div>
+        </div>
+        <p style="font-size:0.88rem; color:#6a1a32; margin-top:8px; font-weight:600;">
+          💓 And falling more deeply in love every single millisecond.
+        </p>
+      </div>
+
+      <div class="hero-chips">
+        <a href="#photoSection" class="hero-chip">📸 Look At Your Face</a>
+        <a href="#scrapbookSection" class="hero-chip">📖 Our Love Story</a>
+        <a href="#secretsSection" class="hero-chip">🤫 Secret Thoughts</a>
+        <a href="#proposalSection" class="hero-chip">💍 My Promise</a>
+        <a href="#confessionSection" class="hero-chip">🚨 Breaking News</a>
+        <a href="#messagesSection" class="hero-chip">💌 Sweet Notes</a>
+        <a href="#questionSection" class="hero-chip">💍 The Big Question</a>
+      </div>
+    </section>
+
+    <!-- SECTION 2: GIRLFRIEND PHOTO UPLOAD & HEART-SHAPED FRAME -->
+    <section id="photoSection" class="glass-card">
+      <div class="section-head">
+        <span class="section-tag">Exhibit A: Perfection</span>
+        <h2 class="section-title">The Prettiest Girl In The Multiverse ✨</h2>
+        <p class="section-desc">Warning: Looking directly at this photograph may cause immediate elevated heart rates!</p>
+      </div>
+
+      <div class="photo-showcase-wrap">
+        <!-- Interactive Frame Styles Switcher -->
+        <div class="frame-selector">
+          <button class="frame-btn active" data-frame="heart">💖 Heart Frame</button>
+          <button class="frame-btn" data-frame="circle">💫 Glowing Halo</button>
+          <button class="frame-btn" data-frame="polaroid">📸 Cute Polaroid</button>
+        </div>
+
+        <!-- Interactive Photo Quick Switcher Chips (All 7 Couple Memories) -->
+        <div class="photo-quick-switch">
+          <button class="photo-thumb-btn active" data-src="assets/girlfriend1.jpg" title="Cute Smile">
+            <img src="assets/girlfriend1.jpg" alt="Photo 1">
+            <span>Cute Smile 🥰</span>
+          </button>
+          <button class="photo-thumb-btn" data-src="assets/couple_hands.jpg" title="Holding Hands">
+            <img src="assets/couple_hands.jpg" alt="Photo 2">
+            <span>Holding Hands 🤝🖤</span>
+          </button>
+          <button class="photo-thumb-btn" data-src="assets/couple_pout.jpg" title="Pout Face">
+            <img src="assets/couple_pout.jpg" alt="Photo 3">
+            <span>Goofy Pout 😜💋</span>
+          </button>
+          <button class="photo-thumb-btn" data-src="assets/couple_outdoor.jpg" title="Together Outdoors">
+            <img src="assets/couple_outdoor.jpg" alt="Photo 4">
+            <span>In The Woods 🌲💙</span>
+          </button>
+          <button class="photo-thumb-btn" data-src="assets/couple_hill.jpg" title="Mountain Hill">
+            <img src="assets/couple_hill.jpg" alt="Photo 5">
+            <span>Hillside Hug 🌄🥰</span>
+          </button>
+          <button class="photo-thumb-btn" data-src="assets/couple_road.jpg" title="Winter Road">
+            <img src="assets/couple_road.jpg" alt="Photo 6">
+            <span>Winter Bridge 🛣️❄️</span>
+          </button>
+          <button class="photo-thumb-btn" data-src="assets/girlfriend2.jpg" title="Mountain Queen">
+            <img src="assets/girlfriend2.jpg" alt="Photo 7">
+            <span>Mountain Queen 👑🧣</span>
+          </button>
+        </div>
+
+        <!-- Photo Display Stage with Orbiting Badges -->
+        <div class="photo-frame-container">
+          <div class="orbit-badge top-right">
+            <span>👑</span> 10/10 Queen
+          </div>
+          <div class="orbit-badge bottom-left">
+            <span>🌸</span> Pure Magic
+          </div>
+          <div class="orbit-badge bottom-right">
+            <span>🔥</span> Stunner
+          </div>
+
+          <!-- Dynamic Photo Frame -->
+          <div id="photoFrame" class="photo-frame heart-frame">
+            <div class="heart-frame-outer"></div>
+            <div class="heart-frame-inner">
+              <img id="gfPhotoImg" class="gf-photo-img" src="assets/girlfriend1.jpg" alt="My Beautiful Girlfriend">
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo Upload & Interactive Controls -->
+        <div class="photo-controls">
+          <label class="upload-btn-label">
+            <span>📷</span> Upload Another Photo
+            <input type="file" id="photoFileInput" accept="image/*">
+          </label>
+          <button id="kissPhotoBtn" class="action-pill-btn" title="Send virtual kisses to her photo">
+            <span>💋</span> Give Her A Kiss
+          </button>
+          <button id="resetPhotoBtn" class="action-pill-btn" title="Reset to default photo">
+            <span>🔄</span> Reset
+          </button>
+        </div>
+        <p class="photo-hint">
+          <span>💡</span> Click any photo chip above or tap any polaroid below to load it into the heart frame!
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION: OUR LOVE STORY & MEMORY SCRAPBOOK (ALL 7 COUPLE PHOTOS) -->
+    <section id="scrapbookSection" class="glass-card">
+      <div class="section-head">
+        <span class="section-tag">Chapter By Chapter</span>
+        <h2 class="section-title">Our Story & Sweetest Moments 📖💑</h2>
+        <p class="section-desc">Every picture holds a thousand heartbeats. Tap any polaroid to frame it in your heart above!</p>
+      </div>
+
+      <div class="scrapbook-grid">
+        <!-- Photo 1 -->
+        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
+          <div class="scrapbook-img-wrap">
+            <img src="assets/girlfriend1.jpg" alt="The Prettiest Face Alive">
+            <span class="scrapbook-badge">💖 Moment #1</span>
+          </div>
+          <h4 class="scrapbook-caption">The Prettiest Face Alive 🥹</h4>
+          <p class="scrapbook-sub">That cozy blue sweatshirt and the sweet smile that instantly stole my whole heart forever.</p>
+        </div>
+
+        <!-- Photo 2 -->
+        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
+          <div class="scrapbook-img-wrap">
+            <img src="assets/couple_hands.jpg" alt="Holding Hands Into Forever">
+            <span class="scrapbook-badge">🤝 Moment #2</span>
+          </div>
+          <h4 class="scrapbook-caption">Holding Hands Into Forever 🖤</h4>
+          <p class="scrapbook-sub">Fingers intertwined in the dark. I promise I will never, ever let go of this hand.</p>
+        </div>
+
+        <!-- Photo 3 -->
+        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
+          <div class="scrapbook-img-wrap">
+            <img src="assets/couple_pout.jpg" alt="Matching Each Other's Crazy">
+            <span class="scrapbook-badge">😜 Moment #3</span>
+          </div>
+          <h4 class="scrapbook-caption">Matching Each Other's Crazy 💋</h4>
+          <p class="scrapbook-sub">Making silly pout faces together indoors — because being weird with you is my favorite thing.</p>
+        </div>
+
+        <!-- Photo 4 -->
+        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
+          <div class="scrapbook-img-wrap">
+            <img src="assets/couple_outdoor.jpg" alt="In The Woods Together">
+            <span class="scrapbook-badge">🌲 Moment #4</span>
+          </div>
+          <h4 class="scrapbook-caption">Matching In Blue By The Pines 💙</h4>
+          <p class="scrapbook-sub">Fresh air, tall trees, and the girl who makes every single second feel like home.</p>
+        </div>
+
+        <!-- Photo 5 -->
+        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
+          <div class="scrapbook-img-wrap">
+            <img src="assets/couple_hill.jpg" alt="Hillside Warmth">
+            <span class="scrapbook-badge">🌄 Moment #5</span>
+          </div>
+          <h4 class="scrapbook-caption">Peace On The Hillside 🥰</h4>
+          <p class="scrapbook-sub">Arm wrapped around you, looking at the hills. With you, I have everything I'll ever need.</p>
+        </div>
+
+        <!-- Photo 6 -->
+        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
+          <div class="scrapbook-img-wrap">
+            <img src="assets/couple_road.jpg" alt="Winter Road Trip">
+            <span class="scrapbook-badge">🛣️ Moment #6</span>
+          </div>
+          <h4 class="scrapbook-caption">Winter Road Trips & Highway Wind ❄️</h4>
+          <p class="scrapbook-sub">Cold mountain breeze, bundled up in black jackets, sharing smiles by the roadside bridge.</p>
+        </div>
+
+        <!-- Photo 7 -->
+        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
+          <div class="scrapbook-img-wrap">
+            <img src="assets/girlfriend2.jpg" alt="Queen of the Himalayas">
+            <span class="scrapbook-badge">👑 Moment #7</span>
+          </div>
+          <h4 class="scrapbook-caption">Queen of the Himalayas 🧣</h4>
+          <p class="scrapbook-sub">Even the towering snow peaks and mountain rivers looked dull next to your breathtaking glow.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE SECRET THOUGHTS WALL (3D FLIP CARDS) -->
+    <section id="secretsSection" class="glass-card">
+      <div class="section-head">
+        <span class="section-tag">Confidential Confessions</span>
+        <h2 class="section-title">Tap To Reveal My Secret Thoughts 🤫💌</h2>
+        <p class="section-desc">Things I quietly think about you every day that I don't say out loud often enough:</p>
+      </div>
+
+      <div class="secrets-wall-grid">
+        <div class="secret-note-card">
+          <div class="secret-note-inner">
+            <div class="secret-front">
+              <div class="secret-icon">🦋</div>
+              <h4>Secret #1</h4>
+              <span>Tap to flip ✨</span>
+            </div>
+            <div class="secret-back">
+              "I still get butterflies in my stomach every single time our fingers touch."
+            </div>
+          </div>
+        </div>
+
+        <div class="secret-note-card">
+          <div class="secret-note-inner">
+            <div class="secret-front">
+              <div class="secret-icon">📸</div>
+              <h4>Secret #2</h4>
+              <span>Tap to flip ✨</span>
+            </div>
+            <div class="secret-back">
+              "I secretly take candid photos of you smiling when you're not looking. You're too cute not to capture."
+            </div>
+          </div>
+        </div>
+
+        <div class="secret-note-card">
+          <div class="secret-note-inner">
+            <div class="secret-front">
+              <div class="secret-icon">🫂</div>
+              <h4>Secret #3</h4>
+              <span>Tap to flip ✨</span>
+            </div>
+            <div class="secret-back">
+              "When you fall asleep resting on my shoulder, I literally hold my breath so I don't disturb your peace."
+            </div>
+          </div>
+        </div>
+
+        <div class="secret-note-card">
+          <div class="secret-note-inner">
+            <div class="secret-front">
+              <div class="secret-icon">🌟</div>
+              <h4>Secret #4</h4>
+              <span>Tap to flip ✨</span>
+            </div>
+            <div class="secret-back">
+              "You make me want to work harder, dream bigger, and become the man you truly deserve."
+            </div>
+          </div>
+        </div>
+
+        <div class="secret-note-card">
+          <div class="secret-note-inner">
+            <div class="secret-front">
+              <div class="secret-icon">🍕</div>
+              <h4>Secret #5</h4>
+              <span>Tap to flip ✨</span>
+            </div>
+            <div class="secret-back">
+              "Even in a room filled with the most beautiful art in the world, I would still only stare at you."
+            </div>
+          </div>
+        </div>
+
+        <div class="secret-note-card">
+          <div class="secret-note-inner">
+            <div class="secret-front">
+              <div class="secret-icon">🔒</div>
+              <h4>Secret #6</h4>
+              <span>Tap to flip ✨</span>
+            </div>
+            <div class="secret-back">
+              "My soul recognized yours the day we met. I'm choosing you today, tomorrow, and in every lifetime."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: INTERACTIVE PROPOSAL & LIFETIME PROMISE CARD -->
+    <section id="proposalSection" class="proposal-box-card">
+      <span class="special-badge" style="background:rgba(255,255,255,0.15); color:#ffd700; border-color:rgba(255,215,0,0.5);">
+        <span>👑</span> A LIFETIME COMMITMENT
+      </span>
+
+      <h2 style="font-family: var(--font-heading); font-size:clamp(1.8rem, 4vw, 2.5rem); margin: 15px 0 6px;">
+        My Promise To You Forever 💍
+      </h2>
+
+      <p class="proposal-vow-text">
+        "I promise to always hold your hand, listen to your ramblings, protect your smile, and love you unconditionally through every storm and every sunshine."
+      </p>
+
+      <div class="ring-sparkles-wrap">
+        <span>✨</span><span>★</span><span>💎</span><span>★</span><span>✨</span>
+      </div>
+
+      <!-- Clickable Ring Box -->
+      <div id="ringBoxVisual" class="ring-box-visual" title="Tap the box to open!">
+        🎁
+      </div>
+
+      <p style="font-size:0.92rem; color:#ffccd5; font-weight:600;">
+        Tap the velvet gift box above to open my promise to you! 👆
+      </p>
+    </section>
+
+    <!-- SECTION: OUR SPECIAL SONG (SPOTIFY & BACKGROUND MUSIC) -->
+    <section class="spotify-music-card">
+      <!-- Background Audio Element -->
+      <audio id="bgAudioElement" src="assets/song.mp3" loop preload="auto"></audio>
+
+      <div class="song-header-flex">
+        <div class="song-brand-badge">
+          <span>🎧</span> OUR OFFICIAL LOVE ANTHEM
+        </div>
+        <a href="https://open.spotify.com/track/14mT8BCOXiUUcGlb7KujkT" target="_blank" style="color:#1ed760; font-size:0.88rem; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:6px;">
+          <span>Open on Spotify</span> ↗
+        </a>
+      </div>
+
+      <div class="vinyl-flex-wrap">
+        <!-- Spinning Vinyl Disc -->
+        <div id="vinylDisc" class="vinyl-disc">
+          <div class="vinyl-center">❤️</div>
+        </div>
+
+        <div class="song-info-text">
+          <h3 class="song-info-title">I Think They Call This Love</h3>
+          <div class="song-info-artist">Cover by Matthew Ifield 🎶</div>
+          <p class="song-quote-badge">
+            "Every single time I hear this, my mind immediately thinks of you..." 🥹💕
+          </p>
+          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button id="cardPlayBtn" class="action-pill-btn" style="background:#1ed760; color:#000; border:none; font-weight:800; cursor:pointer;">
+              ▶ Play Our Song
+            </button>
+            <a href="https://open.spotify.com/track/14mT8BCOXiUUcGlb7KujkT" target="_blank" class="action-pill-btn" style="background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.3); text-decoration:none;">
+              Spotify App 💚
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spotify Official Interactive Embed Widget -->
+      <div class="spotify-embed-container">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/14mT8BCOXiUUcGlb7KujkT?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- SECTION 3: FUNNY LOVE CONFESSION - BREAKING NEWS EDITION -->
+    <section id="confessionSection" class="breaking-news-card glass-card" style="padding:0;">
+      <div class="news-header">
+        <div class="news-live-tag">
+          <span class="live-dot"></span>
+          <span>SPECIAL LOVE REPORT • LIVE</span>
+        </div>
+        <div class="news-location">📍 BROADCASTING FROM HIS HEART</div>
+      </div>
+
+      <div class="news-content">
+        <h2 class="news-headline">
+          🚨 Breaking News: Local Boy Officially Obsessed With One Beautiful Girl
+        </h2>
+
+        <div class="news-body-text">
+          "Breaking News 🚨: This boy is officially obsessed with one beautiful girl. Symptoms include smiling like an absolute goofball at his phone, missing her every 2 seconds, and acting like a helpless fool in love. 😂❤️"
+        </div>
+
+        <!-- Hilarious Medical Diagnosis / Stats Grid -->
+        <div class="news-stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon">💓</div>
+            <div class="stat-label">Heart Rate</div>
+            <div class="stat-val">220 BPM</div>
+            <div class="stat-sub">Whenever you text or call</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">🧠</div>
+            <div class="stat-label">Brain Capacity</div>
+            <div class="stat-val">99.9% You</div>
+            <div class="stat-sub">0.1% Remembering to breathe</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">🍕</div>
+            <div class="stat-label">Pizza Sacrifice</div>
+            <div class="stat-val">100% Willing</div>
+            <div class="stat-sub">Will give you the last slice</div>
+          </div>
+
+          <div class="stat-item">
+            <div class="stat-icon">🔒</div>
+            <div class="stat-label">Escape Route</div>
+            <div class="stat-val">0.000%</div>
+            <div class="stat-sub">You're stuck with me forever</div>
+          </div>
+        </div>
+
+        <!-- Live Ticker Bar -->
+        <div class="news-ticker">
+          <span class="ticker-label">LATEST</span>
+          <div class="ticker-marquee">
+            Boyfriend reports: "I tried acting cool, but she smiled and my brain completely short-circuited." • Doctors recommend immediate daily doses of cuddles, bubble tea, and snacks. • Love levels have surpassed all measurable scientific limits!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ROMANTIC MESSAGES (ANIMATED ONE BY ONE) -->
+    <section id="messagesSection" class="glass-card">
+      <div class="section-head">
+        <span class="section-tag">From The Soul</span>
+        <h2 class="section-title">Romantic Messages For You 💌</h2>
+        <p class="section-desc">Click through to read every little truth my heart whispers every single day.</p>
+      </div>
+
+      <div class="messages-container">
+        <!-- Interactive Card Stage -->
+        <div class="message-card-stage">
+          <div class="message-display-card">
+            <div class="message-quote-icon">“</div>
+            <h3 id="msgText" class="message-card-text">
+              I love you more than pizza 🍕❤️
+            </h3>
+            <p id="msgSub" style="color:#7b2c45; font-size:1rem; margin-bottom: 14px;">
+              And you know how much I love pizza!
+            </p>
+            <span id="msgCounter" class="message-counter-badge">1 of 8</span>
+          </div>
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <div class="message-controls">
+          <button id="prevMsgBtn" class="carousel-btn" title="Previous note">‹</button>
+          <div id="msgDots" class="dots-indicator"></div>
+          <button id="nextMsgBtn" class="carousel-btn" title="Next note">›</button>
+        </div>
+
+        <!-- Extra Cute Notes Grid -->
+        <div class="mini-notes-grid">
+          <div class="mini-note-card">
+            <div class="mini-note-icon">🍕</div>
+            <div>
+              <strong>Pizza Comparison:</strong> I love you more than pizza, cheesecakes, and crispy fries combined.
+            </div>
+          </div>
+          <div class="mini-note-card">
+            <div class="mini-note-icon">👑</div>
+            <div>
+              <strong>Executive Order:</strong> You are the permanent, undefeated CEO of my heart and schedule.
+            </div>
+          </div>
+          <div class="mini-note-card">
+            <div class="mini-note-icon">📱</div>
+            <div>
+              <strong>Notification Status:</strong> The only notification sound I never mute or ignore.
+            </div>
+          </div>
+          <div class="mini-note-card">
+            <div class="mini-note-icon">💼</div>
+            <div>
+              <strong>Overtime Policy:</strong> Loving you is my favorite job — overtime guaranteed every day.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: INTERACTIVE LOVE BUTTONS (DODGING NO & EXPANDING YES) -->
+    <section id="questionSection" class="glass-card love-question-card">
+      <div class="question-heart-pulse">💍</div>
+      <h2 class="love-question-title">Quick Question For You... 👀</h2>
+      <p class="love-question-desc">
+        There are two options below. Choose wisely! (Hint: One button is behaving very obediently, the other has trust issues 😂)
+      </p>
+
+      <!-- The Arena for Runaway mechanics -->
+      <div id="buttonsArena" class="buttons-arena">
+        <!-- Dodging Toast notification -->
+        <div id="dodgingToast" class="dodging-toast">
+          Error 404: 'No' does not exist! 🏃‍♂️💨
+        </div>
+
+        <!-- The Glowing & Growing YES Button -->
+        <button id="btnYes" class="btn-yes">
+          YES! Absolutely! 🥰
+        </button>
+
+        <!-- The Teleporting Runaway NO Button -->
+        <button id="btnNo" class="btn-no">
+          No 😒
+        </button>
+      </div>
+
+      <p style="font-size:0.85rem; color:#800f2f; margin-top:10px;">
+        ⚠️ Try hovering or tapping "No" if you dare! It literally won't let you! 😜
+      </p>
+    </section>
+
+    <!-- SECTION 6: INTERACTIVE SECRET LOVE LETTER IN ENVELOPE -->
+    <section id="envelopeSection" class="glass-card">
+      <div class="section-head">
+        <span class="section-tag">Wax-Sealed Mystery</span>
+        <h2 class="section-title">A Secret Letter For Your Eyes Only 📜</h2>
+        <p class="section-desc">Tap the wax seal on the envelope to unfold the handwritten letter.</p>
+      </div>
+
+      <div class="envelope-wrap">
+        <div id="loveEnvelope" class="love-envelope" title="Click to open the letter">
+          <div class="envelope-flap"></div>
+          <div class="wax-seal">💌</div>
+        </div>
+
+        <!-- The Letter Sheet that unfolds -->
+        <div id="letterSheet" class="letter-sheet">
+          <div class="letter-handwriting">
+            <p>Dearest <span id="letterGfName" class="var-gf-name" style="color:var(--primary); font-weight:700;">My Beautiful Girl</span>,</p>
+            <br>
+            <p>If you're reading this, it means you opened my little digital love letter! From the moment you came into my life, everything became so much brighter, louder with laughter, and warmer.</p>
+            <br>
+            <p>You make my ordinary days feel magical just by existing. I love your kindness, your silly jokes, your stubborn little pout, and the way you make me feel like the luckiest person in the whole wide world.</p>
+            <br>
+            <p>Thank you for choosing me every day. I promise to always cheer you on, make you smile when you're down, buy you snacks, and love you relentlessly through all the highs and lows.</p>
+            <div class="letter-signature">
+              Forever & Always Yours,<br>
+              <span id="letterBfName" class="var-bf-name">Your Loving Boyfriend</span> ❤️
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: LOVE COUPONS (VOUCHERS) -->
+    <section class="glass-card">
+      <div class="section-head">
+        <span class="section-tag">Non-Refundable Perks</span>
+        <h2 class="section-title">Redeemable Love Coupons 🎟️</h2>
+        <p class="section-desc">Click any coupon below to redeem it right now in real life!</p>
+      </div>
+
+      <div class="coupons-grid">
+        <div class="coupon-ticket">
+          <span class="coupon-badge">Voucher #01</span>
+          <div class="coupon-icon">🫂</div>
+          <h4 class="coupon-title">Free Long Warm Hug</h4>
+          <p class="coupon-desc">Valid for a continuous, warm bear hug for at least 5 minutes.</p>
+          <button class="redeem-btn">Redeem Now ✨</button>
+        </div>
+
+        <div class="coupon-ticket">
+          <span class="coupon-badge">Voucher #02</span>
+          <div class="coupon-icon">🍦</div>
+          <h4 class="coupon-title">Late Night Snack Trip</h4>
+          <p class="coupon-desc">Boyfriend drives or orders whatever ice cream or snacks you crave.</p>
+          <button class="redeem-btn">Redeem Now ✨</button>
+        </div>
+
+        <div class="coupon-ticket">
+          <span class="coupon-badge">Voucher #03</span>
+          <div class="coupon-icon">🏆</div>
+          <h4 class="coupon-title">You Win Any Argument</h4>
+          <p class="coupon-desc">No questions asked, you are 100% right, boyfriend admits defeat.</p>
+          <button class="redeem-btn">Redeem Now ✨</button>
+        </div>
+
+        <div class="coupon-ticket">
+          <span class="coupon-badge">Voucher #04</span>
+          <div class="coupon-icon">💆‍♀️</div>
+          <h4 class="coupon-title">Deluxe Back / Foot Rub</h4>
+          <p class="coupon-desc">Full 30-minute relaxation massage while listening to your favorite playlist.</p>
+          <button class="redeem-btn">Redeem Now ✨</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: LOVE CALCULATOR & LOVE REASONS JAR -->
+    <div class="fun-extras-grid">
+      <!-- Love Calculator -->
+      <div class="calc-box">
+        <span class="section-tag">Scientific Testing</span>
+        <h3 style="font-family: var(--font-heading); color:#590d22; font-size:1.4rem; margin:10px 0 6px;">
+          Love Compatibility Meter 🧪
+        </h3>
+        <p style="font-size:0.9rem; color:#7b2c45;">
+          Test our biological, spiritual, and romantic alignment:
+        </p>
+
+        <div class="calc-inputs">
+          <input type="text" id="calcBfName" class="calc-input var-bf-name" value="Boyfriend" placeholder="His Name">
+          <span style="font-size:1.5rem; color:var(--primary);">+</span>
+          <input type="text" id="calcGfName" class="calc-input var-gf-name" value="Girlfriend" placeholder="Her Name">
+        </div>
+
+        <button id="calcBtn" class="calc-btn">
+          ⚡ Calculate Love Score
+        </button>
+
+        <div id="calcMeter" class="calc-meter-wrap">
+          <div class="calc-meter-bar">
+            <div id="calcFill" class="calc-meter-fill"></div>
+          </div>
+          <div id="calcScore" class="calc-result-text"></div>
+          <p id="calcVerdict" style="font-size:0.88rem; color:#590d22; margin-top:6px;"></p>
+        </div>
+      </div>
+
+      <!-- Love Reasons Jar -->
+      <div class="jar-box">
+        <span class="section-tag">Infinite Reasons</span>
+        <h3 style="font-family: var(--font-heading); color:#590d22; font-size:1.4rem; margin:10px 0 6px;">
+          Jar of Reasons I Love You 🫙
+        </h3>
+        <p style="font-size:0.9rem; color:#7b2c45;">
+          Tap the cute jar to draw a random reason out of my heart:
+        </p>
+
+        <div id="jarIconWrap" class="jar-icon-wrap" title="Tap to pull a love reason!">
+          🫙
+        </div>
+
+        <div id="jarQuoteDisplay" class="jar-quote-display">
+          💌 "Tap the jar above to unlock a sweet reason!"
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="love-footer">
+      <p>
+        Engineered with infinite love, sleepless devotion & lots of snacks by <strong class="var-bf-name">Your Loving Boyfriend</strong> <span class="footer-heart">❤️</span>
+      </p>
+      <p style="font-size:0.82rem; margin-top:8px; opacity:0.8;">
+        Forever & Always • All Rights to My Heart Belong Exclusively to <strong class="var-gf-name">You</strong>
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- CELEBRATION MODAL (WORLD'S BEST GIRLFRIEND CERTIFICATE) -->
+  <div id="celebrationModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" title="Close">✕</button>
+
+      <span style="font-size:3rem; display:inline-block; animation:bounceSoft 1.5s infinite;">🎉</span>
+      <h2 style="font-family: var(--font-heading); font-size:1.9rem; color:#800f2f; margin-bottom:6px;">
+        I KNEW IT!! 🥰💖
+      </h2>
+      <p style="font-size:1rem; color:#590d22; margin-bottom:15px;">
+        Contract legally confirmed: You just locked yourself into infinite forehead kisses and cuddles forever!
+      </p>
+
+      <!-- Official Certificate Frame -->
+      <div class="certificate-frame">
+        <div class="certificate-seal">
+          <span>★ 100% ★</span>
+          <span>CERTIFIED</span>
+          <span>LOVE</span>
+        </div>
+
+        <h3 class="certificate-title">OFFICIAL CERTIFICATE</h3>
+        <div class="certificate-subtitle">OF THE WORLD'S BEST GIRLFRIEND</div>
+
+        <p style="font-size:0.9rem; color:#6c757d;">This prestigious award is officially presented to:</p>
+        <div id="certGfName" class="certificate-name">My Beautiful Girl</div>
+
+        <p class="certificate-text">
+          For possessing the sweetest smile, the warmest heart, looking ridiculously gorgeous in everything, tolerating all my weird jokes, and making every second of my life a million times happier.
+        </p>
+
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px; padding:0 15px; font-size:0.85rem; color:#590d22;">
+          <div>
+            <strong>Date Issued:</strong><br>
+            <span id="certDate">October 25, 2026</span>
+          </div>
+          <div>
+            <strong>Signed By:</strong><br>
+            <span id="certBfName" style="font-family: var(--font-script); font-size:1.8rem; color:var(--primary);">Your Boyfriend</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px;">
+        <button id="printCertBtn" class="action-pill-btn" style="background:var(--primary); color:white; border:none;">
+          🖨️ Print / Save Certificate
+        </button>
+        <button class="action-pill-btn modal-close-btn-bottom">
+          🥰 Keep Loving Me
+        </button>
+      </div>
+    </div>
+  <!-- RING PROPOSAL COMMITMENT MODAL -->
+  <div id="ringModal" class="modal-overlay">
+    <div class="modal-dialog" style="max-width:500px; text-align:center;">
+      <button class="modal-close-btn" title="Close">✕</button>
+
+      <span style="font-size:3.5rem; display:inline-block; animation:bounceSoft 1.5s infinite;">💍✨</span>
+      <h2 style="font-family: var(--font-heading); font-size:1.85rem; color:#800f2f; margin:10px 0 6px;">
+        My Promise To You Forever 💖
+      </h2>
+      <p style="font-size:0.95rem; color:#590d22; line-height:1.6; margin-bottom:18px;">
+        To <strong class="var-gf-name" style="color:var(--primary);">My Beautiful Girl</strong>: You aren't just my girlfriend — you are my home, my safe haven, and my favorite part of every single day.
+      </p>
+
+      <div style="background:#fff0f3; border:2px dashed #ffb3c1; border-radius:16px; padding:20px 18px; margin-bottom:20px; font-family:var(--font-hand); font-size:1.5rem; color:#800f2f; line-height:1.4;">
+        "I promise to always hold your hand tight in the dark, buy you whatever snacks you want, never stop looking at you like you're pure magic, and love you unconditionally forever." 🤍
+      </div>
+
+      <button class="action-pill-btn modal-close-btn-bottom" style="background:var(--primary); color:white; border:none; padding:12px 30px; font-size:1.05rem; cursor:pointer;">
+        I Promise Too 🥰💍
+      </button>
+    </div>
+  </div>
+
+  <!-- EDIT NAMES PERSONALIZATION MODAL -->
+  <div id="namesModal" class="modal-overlay">
+    <div class="modal-dialog" style="max-width:440px;">
+      <button class="modal-close-btn" title="Close">✕</button>
+
+      <span style="font-size:2.5rem;">✏️❤️</span>
+      <h3 style="font-family: var(--font-heading); color:#800f2f; font-size:1.5rem; margin-top:8px;">
+        Personalize Your Website
+      </h3>
+      <p style="font-size:0.9rem; color:#7b2c45;">
+        Enter her name and yours so the whole website addresses her personally!
+      </p>
+
+      <form id="namesForm" class="name-edit-form">
+        <div class="form-group">
+          <label for="inputGfName">Her Name / Pet Name (e.g. Maya, Honey, Cutie):</label>
+          <input type="text" id="inputGfName" placeholder="Her Name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="inputBfName">Your Name (e.g. Aman, Your Man, Hubby):</label>
+          <input type="text" id="inputBfName" placeholder="Your Name" required>
+        </div>
+
+        <button type="submit" class="upload-btn-label" style="border:none; width:100%; justify-content:center; margin-top:6px;">
+          💾 Save & Update Page
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Master Interactive Script -->
+  <script src="js/love.js"></script>
+</body>
+</html>
