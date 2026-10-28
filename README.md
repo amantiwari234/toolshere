@@ -1,13 +1,13 @@
-# 🛠️ Toolshere.online — Free Online Tools for Everyone
+# 🛠️ Toolshere.online — Free, Private & Fast Online Tools Platform
 
-> **Modern, fast, 100% private client-side online tools website with 12 essential utilities.**
+> **Modern, fast, 100% private client-side online tools website featuring 12 essential utilities, dark/light mode, mobile-first design, and complete SEO infrastructure.**
 
-Toolshere.online is built with vanilla HTML5, modern CSS3 (with responsive layout, glassmorphic design, and dark mode toggle), and optimized client-side JavaScript. All data processing (calculations, text formatting, image compression, and PDF manipulation) executes directly in the user's browser — protecting user privacy with zero server uploads.
+Toolshere.online is built with vanilla HTML5, modern CSS3 (with responsive layout, glassmorphic design, subtle animations, and dark mode toggle), and optimized client-side JavaScript. All data processing (calculations, text formatting, image compression, and PDF manipulation) executes directly in the user's browser — protecting user privacy with zero server uploads.
 
 ---
 
 ## 🎨 Design & Branding
-- **Logo**: Custom Toolshere.online monogram with wrench, pointer, and dark navy & royal blue accents.
+- **Branding**: Clean **Toolshere.online** branding with official uploaded logo ([`assets/logo.png`](assets/logo.png)).
 - **Themes**: Seamless Light and Dark mode with one-click toggle and `localStorage` persistence.
 - **Typography**: Clean, accessible Google Font (*Plus Jakarta Sans*).
 - **Privacy First**: 100% in-browser processing. Zero server uploads.
@@ -19,7 +19,7 @@ Toolshere.online is built with vanilla HTML5, modern CSS3 (with responsive layou
 
 1. **Image Compressor** (`tools/image-compressor.html`): Compress JPG, PNG, and WebP by up to 85% with quality slider and real-time comparison metrics.
 2. **PDF Tools Suite** (`tools/pdf-tools.html`): Complete PDF toolkit:
-   - **Merge PDF** (`tools/merge-pdf.html`): Combine multiple PDFs into a single file.
+   - **Merge PDF** (`tools/merge-pdf.html`): Combine multiple PDFs into a single file with custom order.
    - **Split PDF** (`tools/split-pdf.html`): Extract pages or split documents into separate files.
    - **Compress PDF** (`tools/compress-pdf.html`): Reduce PDF size client-side.
    - **PDF to JPG** (`tools/pdf-to-jpg.html`): Convert PDF pages to high-resolution JPG images.
@@ -37,20 +37,64 @@ Toolshere.online is built with vanilla HTML5, modern CSS3 (with responsive layou
 
 ---
 
-## 📄 Legal & Compliance
-- [About Us](about.html)
-- [Contact Us](contact.html)
-- [Privacy Policy](privacy.html)
-- [Terms and Conditions](terms.html)
-- [Disclaimer](disclaimer.html)
-- [Sitemap](sitemap.xml)
-- [Robots](robots.txt)
+## 🔍 SEO & Google Integration Readiness
+
+### 1. Google Search Console Verification
+In `index.html` (line 38), replace `GSC_VERIFICATION_PLACEHOLDER` with your verification token:
+```html
+<meta name="google-site-verification" content="YOUR_GOOGLE_SEARCH_CONSOLE_CODE">
+```
+After adding, submit your sitemap: `https://toolshere.online/sitemap.xml`.
+
+### 2. Google Analytics 4 (GA4)
+In `index.html` (lines 40-49), uncomment the snippet and replace `G-XXXXXXXXXX` with your GA4 Measurement ID:
+```html
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+```
+
+### 3. XML Sitemap & Robots.txt
+- **Sitemap**: Fully configured with canonical URLs and priorities at [`sitemap.xml`](sitemap.xml).
+- **Robots.txt**: Permissive, pointing to sitemap at [`robots.txt`](robots.txt).
+- **Structured Data**: Schema.org JSON-LD (`WebSite` with SearchAction, `SoftwareApplication`) implemented on homepage and tools.
+
+### 4. Google AdSense & Monetization Readiness
+- Standard responsive leaderboard (728x90) and in-article ad slots are prepared in `.ad-placeholder` blocks.
+- Essential compliance pages are fully linked in header and footer:
+  - [About Us](about.html)
+  - [Contact Us](contact.html)
+  - [Privacy Policy](privacy.html)
+  - [Terms and Conditions](terms.html)
+  - [Disclaimer](disclaimer.html)
 
 ---
 
-## 🚀 Running Locally
+## 🚀 Hosting & Custom Domain Setup
+
+### Option A: GitHub Pages (Free)
+1. Go to your repository on GitHub: `https://github.com/amantiwari234/toolshere`
+2. Click **Settings** > **Pages**
+3. Under **Build and deployment**, select:
+   - Source: **Deploy from a branch**
+   - Branch: **main** / folder: `/(root)`
+4. Under **Custom domain**, enter: `toolshere.online`
+5. In your domain registrar DNS settings (e.g. GoDaddy, Namecheap, Cloudflare), add:
+   - **A Records** pointing to GitHub Pages IPs:
+     - `185.199.108.153`
+     - `185.199.109.153`
+     - `185.199.110.153`
+     - `185.199.111.153`
+   - **CNAME Record**: `www` pointing to `amantiwari234.github.io`
+6. Check **Enforce HTTPS**.
+
+### Option B: Running Locally
 Run the lightweight PowerShell server:
 ```powershell
 powershell -ExecutionPolicy Bypass -File serve.ps1
 ```
-Or open `index.html` directly in any modern web browser.
+Or simply open `index.html` in any modern web browser.
