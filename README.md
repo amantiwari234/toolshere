@@ -47,14 +47,16 @@ In `index.html` (line 38), replace `GSC_VERIFICATION_PLACEHOLDER` with your veri
 After adding, submit your sitemap: `https://toolshere.online/sitemap.xml`.
 
 ### 2. Google Analytics 4 (GA4)
-In `index.html` (lines 40-49), uncomment the snippet and replace `G-XXXXXXXXXX` with your GA4 Measurement ID:
+Google Analytics 4 is active across all pages with Measurement ID `G-RXVYKC5YG5`:
 ```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RXVYKC5YG5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+
+  gtag('config', 'G-RXVYKC5YG5');
 </script>
 ```
 
