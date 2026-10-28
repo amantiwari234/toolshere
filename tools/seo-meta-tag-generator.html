@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -518,7 +518,7 @@
 
       // Copy Code
       copyCodeBtn.addEventListener('click', () => {
-        window.Toolshere.onlineApp?.copyToClipboard(metaCodeOutput.value, 'Meta tags copied to clipboard!');
+        window.ToolshereApp?.copyToClipboard(metaCodeOutput.value, 'Meta tags copied to clipboard!');
       });
 
       // Download .html snippet
@@ -532,12 +532,12 @@
         a.click();
         document.body.removeChild(a);
         setTimeout(() => URL.revokeObjectURL(url), 1000);
-        window.Toolshere.onlineApp?.showToast('Downloaded meta-tags.html!', 'success');
+        window.ToolshereApp?.showToast('Downloaded meta-tags.html!', 'success');
       });
 
       // Initialize
       updateGenerator();
-      window.Toolshere.onlineApp?.renderRelatedTools('seo-meta-tag-generator', 'related-tools-grid', 3);
+      window.ToolshereApp?.renderRelatedTools('seo-meta-tag-generator', 'related-tools-grid', 3);
     });
   </script>
 </body>

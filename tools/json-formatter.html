@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -186,7 +186,7 @@
   <script src="../js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('json-formatter', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('json-formatter', 'related-tools-container', 3);
 
       const input = document.getElementById('json-input');
       const output = document.getElementById('json-output');
@@ -238,7 +238,7 @@
       });
 
       copyBtn.addEventListener('click', () => {
-        window.Toolshere.onlineApp.copyToClipboard(output.value, 'JSON copied to clipboard!');
+        window.ToolshereApp.copyToClipboard(output.value, 'JSON copied to clipboard!');
       });
 
       downloadBtn.addEventListener('click', () => {
@@ -250,7 +250,7 @@
         a.download = `data-${Date.now()}.json`;
         a.click();
         URL.revokeObjectURL(url);
-        window.Toolshere.onlineApp.showToast('JSON file downloaded!', 'success');
+        window.ToolshereApp.showToast('JSON file downloaded!', 'success');
       });
 
       input.value = sample;

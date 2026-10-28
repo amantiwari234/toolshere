@@ -3,15 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toolshere.online — Free Online Tools for Everyone | 12 Fast Browser Utilities</title>
-  <meta name="description" content="Toolshere.online provides 12 free, fast, and privacy-first online tools for calculators, image compression, PDF editing, text formatting, and developer tasks with zero server uploads.">
-  <meta name="keywords" content="free online tools, image compressor, pdf tools, emi calculator, gst calculator, qr code generator, word counter, password generator, json formatter">
+  <title>Toolshere.online — Free, Private &amp; Fast Online Browser Tools</title>
+  <meta name="description" content="Toolshere.online is your premier directory of free, private, client-side tools. Instant image compressor, PDF merger &amp; converter, EMI/GST calculators, QR code generator, and dev utilities with 100% in-browser processing.">
+  <meta name="keywords" content="toolshere, online tools, free online tools, image compressor, pdf tools, merge pdf, compress pdf, emi calculator, gst calculator, qr code generator, word counter, password generator, json formatter">
   <link rel="canonical" href="https://toolshere.online/">
   
-  <!-- Open Graph / Social Meta -->
-  <meta property="og:title" content="Toolshere.online — Free Online Tools for Everyone">
-  <meta property="og:description" content="Instant, secure, and client-side browser tools for text, images, calculations, PDFs, generators, and code. No sign up required.">
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolshere.online/">
+  <meta property="og:title" content="Toolshere.online — Free, Private &amp; Fast Online Tools">
+  <meta property="og:description" content="100% private, client-side online tools for everyday work. PDF Suite, Image processing, calculators, and developer tools. Zero server uploads.">
+  <meta property="og:image" content="https://toolshere.online/assets/logo.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://toolshere.online/">
+  <meta property="twitter:title" content="Toolshere.online — Free Online Tools for Everyone">
+  <meta property="twitter:description" content="12 fast, secure browser utilities for text, calculations, PDFs, images, and code. No sign up required.">
+  <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
   
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +33,46 @@
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://toolshere.online/#website",
+        "url": "https://toolshere.online/",
+        "name": "Toolshere.online",
+        "description": "Free, fast, and 100% private client-side online tools.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Toolshere.online",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://toolshere.online/assets/logo.png"
+          }
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://toolshere.online/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Toolshere Online Tools Suite",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All modern browsers (Chrome, Firefox, Safari, Edge, Android, iOS)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -70,53 +119,86 @@
     <div class="hero-glow-1"></div>
     <div class="container hero-content">
       <div class="hero-badge">
-        <span>⚡ 100% Free &amp; Private</span>
+        <span>🔒 100% Client-Side Private</span>
         <span>•</span>
-        <span>Runs In Your Browser</span>
+        <span>Zero Server Uploads</span>
       </div>
       <h1 class="hero-title">Free Online Tools for <span class="gradient-text">Everyday Life</span></h1>
       <p class="hero-subtitle">
-        Instant, secure, client-side tools for calculations, text formatting, image processing, PDF management, generators, and developer tasks. No installation or registration needed.
+        Instant, secure, browser-powered utilities for PDF editing, image optimization, financial calculations, text formatting, and web development. No sign-up, no subscriptions, zero data leaks.
       </p>
 
-      <!-- Search Box Container -->
+      <!-- Smart Search Bar -->
       <div class="hero-search-wrapper">
         <div class="search-box-container">
           <span class="search-icon">🔍</span>
-          <input type="text" id="search-input" class="search-input" placeholder="Search 12 free online tools (e.g. image compressor, emi, gst, qr code, pdf, json...)" aria-label="Search tools" autocomplete="off">
+          <input type="text" id="search-input" class="search-input" placeholder="Search 12 online tools (e.g., compress image, emi, gst, pdf, qr code, json...)" aria-label="Search tools" autocomplete="off">
           <button type="button" id="search-clear-btn" class="search-clear-btn" style="display:none;" title="Clear search" aria-label="Clear search">✕</button>
           <span class="search-shortcut">Press /</span>
         </div>
         <!-- Live Instant Search Dropdown -->
         <div id="hero-search-results" class="search-results-dropdown" style="display: none;" role="listbox"></div>
+
+        <!-- Quick Category Filter Pills -->
+        <div class="hero-category-pills">
+          <button type="button" class="hero-pill-btn active" data-pill-category="all">⚡ All Tools</button>
+          <button type="button" class="hero-pill-btn" data-pill-category="pdf">📄 PDF Suite</button>
+          <button type="button" class="hero-pill-btn" data-pill-category="images">🖼️ Image Tools</button>
+          <button type="button" class="hero-pill-btn" data-pill-category="calculators">🧮 Calculators</button>
+          <button type="button" class="hero-pill-btn" data-pill-category="text">✍️ Text Tools</button>
+          <button type="button" class="hero-pill-btn" data-pill-category="developer">💻 Dev &amp; SEO</button>
+        </div>
       </div>
 
       <!-- Quick Trust Badges -->
       <div class="hero-badges-list">
-        <span>🔒 Zero Data Uploads</span>
-        <span>⚡ Instant Processing</span>
-        <span>📱 Mobile &amp; Desktop Friendly</span>
-        <span>💸 Always 100% Free</span>
+        <span>🔒 100% In-Browser Privacy</span>
+        <span>⚡ Zero Server Lag</span>
+        <span>📱 Mobile &amp; Desktop Ready</span>
+        <span>💸 Free Forever</span>
       </div>
     </div>
   </section>
 
-  <!-- Responsive Ad Banner Placeholder (Leaderboard 728x90) -->
+  <!-- Live Performance & Trust Stats Banner -->
+  <section class="stats-banner-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Client-Side Private</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">0 KB</div>
+          <div class="stat-label">Server Data Stored</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Essential Power Tools</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Free Without Limits</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Responsive Ad Slot (Top Leaderboard) -->
   <div class="ad-slot-container">
     <div class="ad-placeholder leaderboard">
-      <span class="ad-label">Advertisement Space</span>
-      <span class="ad-text">Responsive AdSense / Partner Slot — Unobtrusive 728x90 Banner</span>
-      <span class="ad-cta">Ad slot ready for monetization</span>
+      <span class="ad-label">Advertisement</span>
+      <span class="ad-text">Fast Cloud Storage &amp; Web Hosting — 728x90 Responsive Banner Slot</span>
     </div>
   </div>
 
   <!-- Popular Tools Section -->
-  <section class="section-padding">
+  <section class="section-padding" id="popular-section">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Most Used</span>
-        <h2 class="section-title">Popular Tools</h2>
-        <p class="section-desc">Handpicked, highly requested utilities trusted by thousands daily.</p>
+        <span class="section-tag">⭐ Most Popular</span>
+        <h2 class="section-title">Trending Online Tools</h2>
+        <p class="section-desc">Handpicked, high-demand utilities trusted by students, professionals, and developers daily.</p>
       </div>
 
       <div class="tools-grid" id="popular-tools-grid">
@@ -125,24 +207,24 @@
     </div>
   </section>
 
-  <!-- Dedicated PDF Tools Suite Section -->
+  <!-- Dedicated PDF Power Suite Showcase -->
   <section class="section-padding" id="pdf-tools-section" style="background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(124, 58, 237, 0.04) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="container">
       <div class="section-header">
         <span class="section-tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25);">📄 PDF Power Suite</span>
-        <h2 class="section-title">Complete Online PDF Tools</h2>
-        <p class="section-desc">Merge, split, compress, convert PDF to JPG, and convert images to PDF directly in your browser. 100% free and totally private.</p>
+        <h2 class="section-title">All-In-One Client-Side PDF Tools</h2>
+        <p class="section-desc">Merge multiple files, split pages, compress file size, convert to JPG, and generate PDFs from images — completely privately inside your web browser.</p>
       </div>
 
       <div class="tools-grid">
-        <!-- PDF Tools Suite Hub -->
+        <!-- PDF Suite Hub -->
         <a href="tools/pdf-tools.html" class="tool-card" style="border-color: rgba(124, 58, 237, 0.35); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.08);">
           <div class="tool-card-header">
             <div class="tool-icon-box" style="background: rgba(124, 58, 237, 0.12); color: var(--primary);">📄</div>
-            <span class="tool-badge popular">All-In-One Hub</span>
+            <span class="tool-badge popular">All-in-One</span>
           </div>
           <h3 class="tool-card-title">PDF Tools Suite</h3>
-          <p class="tool-card-desc">Access the complete suite of PDF utilities in one convenient interface. Zero cloud uploads.</p>
+          <p class="tool-card-desc">The master hub providing instant access to all PDF operations with unified navigation and drag-and-drop support.</p>
           <div class="tool-card-footer">
             <span style="color: var(--primary); font-weight: 700;">Open PDF Suite</span>
             <span class="arrow-icon">→</span>
@@ -156,7 +238,7 @@
             <span class="tool-badge popular">Popular</span>
           </div>
           <h3 class="tool-card-title">Merge PDF Files</h3>
-          <p class="tool-card-desc">Combine multiple PDF documents into a single organized file in seconds. Fast, free, and private client-side binder.</p>
+          <p class="tool-card-desc">Combine multiple PDF documents into a single organized file in seconds with custom ordering and instant download.</p>
           <div class="tool-card-footer">
             <span>Use Tool</span>
             <span class="arrow-icon">→</span>
@@ -170,7 +252,7 @@
             <span class="tool-badge">Document</span>
           </div>
           <h3 class="tool-card-title">Split PDF Files</h3>
-          <p class="tool-card-desc">Extract specific page ranges or split individual pages from a PDF file into separate download-ready documents.</p>
+          <p class="tool-card-desc">Extract specific page ranges or extract individual pages from a PDF file into separate download-ready files.</p>
           <div class="tool-card-footer">
             <span>Use Tool</span>
             <span class="arrow-icon">→</span>
@@ -184,7 +266,7 @@
             <span class="tool-badge popular">Essential</span>
           </div>
           <h3 class="tool-card-title">Compress PDF Files</h3>
-          <p class="tool-card-desc">Reduce PDF document file sizes client-side by optimizing internal object streams without losing text readability.</p>
+          <p class="tool-card-desc">Reduce PDF document file sizes client-side by optimizing object streams without losing text clarity or layout.</p>
           <div class="tool-card-footer">
             <span>Use Tool</span>
             <span class="arrow-icon">→</span>
@@ -198,7 +280,7 @@
             <span class="tool-badge popular">High Res</span>
           </div>
           <h3 class="tool-card-title">PDF to JPG Converter</h3>
-          <p class="tool-card-desc">Convert PDF document pages into high-resolution JPG images at up to 300 DPI directly in your browser.</p>
+          <p class="tool-card-desc">Convert PDF document pages into high-resolution JPG images with adjustable DPI and batch download options.</p>
           <div class="tool-card-footer">
             <span>Use Tool</span>
             <span class="arrow-icon">→</span>
@@ -209,10 +291,10 @@
         <a href="tools/image-to-pdf.html" class="tool-card">
           <div class="tool-card-header">
             <div class="tool-icon-box">📑</div>
-            <span class="tool-badge">Essential</span>
+            <span class="tool-badge">Convert</span>
           </div>
           <h3 class="tool-card-title">Image to PDF</h3>
-          <p class="tool-card-desc">Turn JPG, PNG, and WebP images into a beautifully formatted, print-ready PDF document with custom margins.</p>
+          <p class="tool-card-desc">Turn JPG, PNG, and WebP images into a beautifully formatted, print-ready PDF document with custom page margins.</p>
           <div class="tool-card-footer">
             <span>Use Tool</span>
             <span class="arrow-icon">→</span>
@@ -222,13 +304,13 @@
     </div>
   </section>
 
-  <!-- Categories Section with Filter Tabs -->
+  <!-- Categories Section with Dynamic Filter Tabs -->
   <section class="section-padding section-alt" id="categories-section">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Browse by Category</span>
-        <h2 class="section-title">Explore All 12 Tools</h2>
-        <p class="section-desc">Select a category or use the live search above to find exactly what you need.</p>
+        <span class="section-tag">Explore All Tools</span>
+        <h2 class="section-title">Complete 12-Tool Directory</h2>
+        <p class="section-desc">Click any category chip below or type above to instantly find your required tool.</p>
       </div>
 
       <!-- Category Filter Tabs -->
@@ -245,17 +327,39 @@
     </div>
   </section>
 
-  <!-- Recently Added Tools Section -->
+  <!-- Trust & Privacy Pillars ("Why Choose Toolshere.online") -->
   <section class="section-padding">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Fresh Additions</span>
-        <h2 class="section-title">Recently Added Tools</h2>
-        <p class="section-desc">New productivity tools designed to make your day smoother.</p>
+        <span class="section-tag">🛡️ Privacy First</span>
+        <h2 class="section-title">Why Users Love Toolshere.online</h2>
+        <p class="section-desc">Designed from the ground up for maximum privacy, blistering speed, and effortless productivity.</p>
       </div>
 
-      <div class="tools-grid" id="recent-tools-grid">
-        <!-- Rendered dynamically -->
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">🔒</div>
+          <h3 class="feature-box-title">100% Client-Side Privacy</h3>
+          <p class="feature-box-desc">All calculations, PDF bindings, and image compressions happen right inside your device's browser. Your files never touch our servers.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">⚡</div>
+          <h3 class="feature-box-title">Zero Server Upload Lag</h3>
+          <p class="feature-box-desc">No waiting for slow file uploads or cloud conversion queues. Tools process instantly at your device's full hardware speed.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">💸</div>
+          <h3 class="feature-box-title">Free Forever, No Paywalls</h3>
+          <p class="feature-box-desc">Every tool is free without trial limits, forced subscriptions, hidden watermarks, or mandatory registration forms.</p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon-wrapper">📱</div>
+          <h3 class="feature-box-title">Mobile &amp; Touch Friendly</h3>
+          <p class="feature-box-desc">Responsive layouts specifically optimized for iPhones, Android smartphones, iPads, laptops, and ultra-wide desktop monitors.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -263,9 +367,8 @@
   <!-- Mid-Page In-Article Ad Banner Placeholder -->
   <div class="ad-slot-container">
     <div class="ad-placeholder in-article">
-      <span class="ad-label">Sponsorship &amp; Affiliate Recommendation</span>
-      <span class="ad-text">High-performance hosting &amp; developer productivity resources</span>
-      <span class="ad-cta">Ad slot prepared for future affiliate integration</span>
+      <span class="ad-label">Partner Resource</span>
+      <span class="ad-text">High-Speed Cloud Hosting &amp; Developer Tools — Clean Responsive Ad Slot</span>
     </div>
   </div>
 
@@ -273,59 +376,59 @@
   <section class="section-padding section-alt" id="faq-section">
     <div class="container">
       <div class="section-header" style="text-align: center; align-items: center;">
-        <span class="section-tag">Help &amp; Answers</span>
+        <span class="section-tag">Questions &amp; Answers</span>
         <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-desc">Everything you need to know about Toolshere.online, privacy, and browser execution.</p>
+        <p class="section-desc">Got questions about privacy, file processing, or how Toolshere.online works? We've got answers.</p>
       </div>
 
       <div class="faq-grid">
         <div class="faq-item open">
           <button class="faq-question">
-            <span>Are all tools on Toolshere.online completely free to use?</span>
+            <span>Are all tools on Toolshere.online completely free?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            Yes, 100%! All 12 tools on Toolshere.online are free forever without any hidden fees, subscription plans, usage caps, or forced registrations.
+            Yes, 100%! All 12 tools on Toolshere.online are completely free without any hidden charges, subscriptions, usage limits, or watermarks.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Is my data, text, or uploaded images secure?</span>
+            <span>Are my uploaded photos and PDF documents safe?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            Absolute privacy is our core promise. Toolshere.online executes your calculations, text formatting, image compression, and PDF operations directly within your web browser using client-side JavaScript. Your sensitive documents, photos, or passwords never get sent to any server.
+            Absolute privacy is our core promise. Toolshere.online runs client-side JavaScript inside your browser. Your photos, documents, and calculation data never leave your device and are never uploaded to any remote server.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Do I need to install software, extensions, or create an account?</span>
+            <span>Do I need to install any software or extensions?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            No installation or signup is required. You can bookmark Toolshere.online on your smartphone, tablet, laptop, or desktop and use every tool instantly with one click.
+            No installation is required. Everything runs straight in modern web browsers including Google Chrome, Apple Safari, Microsoft Edge, Mozilla Firefox, and mobile browsers on iOS and Android.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Can I use Toolshere.online offline or on mobile devices?</span>
+            <span>How does client-side compression work?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            Yes. The entire Toolshere.online website is fully responsive, optimized for low data usage, and works smoothly on Android, iOS, Windows, macOS, and Linux devices.
+            We utilize HTML5 Canvas, the Web FileReader API, and WebAssembly libraries to resize, compress, and re-encode files directly on your computer or phone CPU/GPU without cloud roundtrips.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>How does Toolshere.online support its free services?</span>
+            <span>How can I quickly find a specific tool?</span>
             <span class="faq-icon">+</span>
           </button>
           <div class="faq-answer">
-            Toolshere.online is designed to be supported by unobtrusive, clearly labeled advertisements and optional affiliate recommendations that never interfere with your workflow or tool usage.
+            Simply press the <kbd style="background:var(--bg-surface); padding:2px 6px; border:1px solid var(--border); border-radius:4px;">/</kbd> key on your keyboard to instantly focus the smart search bar, or click on any of the category chips to filter the directory immediately.
           </div>
         </div>
       </div>
@@ -341,20 +444,17 @@
             <img src="assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
             <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
           </a>
-          <p>
-            Toolshere.online is your premier directory of free, private, client-side online tools for text manipulation, calculations, image optimization, PDF editing, and software development.
-          </p>
+          <p>Toolshere.online is your premier destination for free, private, client-side online tools. Fast, secure utilities with zero data collection.</p>
         </div>
 
         <div>
           <h4 class="footer-col-title">Categories</h4>
           <div class="footer-links">
-            <a href="all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
-            <a href="all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="all-tools.html?cat=pdf" class="footer-link">PDF Tools Suite</a>
             <a href="all-tools.html?cat=images" class="footer-link">Image Tools</a>
-            <a href="all-tools.html?cat=generators" class="footer-link">Generator Tools</a>
-            <a href="all-tools.html?cat=developer" class="footer-link">Developer Tools</a>
-            <a href="tools/pdf-tools.html" class="footer-link">PDF Tools</a>
+            <a href="all-tools.html?cat=calculators" class="footer-link">Financial Calculators</a>
+            <a href="all-tools.html?cat=text" class="footer-link">Text &amp; Words</a>
+            <a href="all-tools.html?cat=developer" class="footer-link">Developer &amp; SEO</a>
           </div>
         </div>
 
@@ -364,7 +464,7 @@
             <a href="about.html" class="footer-link">About Us</a>
             <a href="contact.html" class="footer-link">Contact Us</a>
             <a href="all-tools.html" class="footer-link">All 12 Tools</a>
-            <a href="sitemap.xml" class="footer-link">XML Sitemap</a>
+            <a href="tools/pdf-tools.html" class="footer-link">PDF Power Suite</a>
           </div>
         </div>
 
@@ -379,11 +479,9 @@
       </div>
 
       <div class="footer-bottom">
-        <div>
-          &copy; <span id="current-year">2026</span> Toolshere.online. All rights reserved. Free Online Tools for Everyone.
-        </div>
+        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
         <div class="footer-badges">
-          <span class="privacy-badge">🔒 100% Client-Side Privacy</span>
+          <span class="privacy-badge">🔒 100% Client-Side Privacy Guaranteed</span>
         </div>
       </div>
     </div>
@@ -394,59 +492,46 @@
   <script src="js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('current-year').textContent = new Date().getFullYear();
+      const activeTools = window.getQuickTools ? window.getQuickTools() : (window.QUICK_TOOLS || []);
+      const activeCategories = window.CATEGORIES || [];
 
       const popularGrid = document.getElementById('popular-tools-grid');
       const allToolsGrid = document.getElementById('all-tools-grid');
-      const recentGrid = document.getElementById('recent-tools-grid');
       const tabsContainer = document.getElementById('category-tabs-container');
       const searchInput = document.getElementById('search-input');
+      const searchClearBtn = document.getElementById('search-clear-btn');
+      const searchDropdown = document.getElementById('hero-search-results');
+      const heroPills = document.querySelectorAll('.hero-pill-btn');
 
       let currentCategory = 'all';
+      let selectedDropdownIndex = -1;
 
-      const activeTools = (window.getToolshere.online ? window.getToolshere.online() : window.QUICK_TOOLS)
-        .filter(t => t.status !== 'inactive');
-
-      // Check Site Settings (Announcement, Ads, Colors)
-      if (window.getSiteSettings) {
-        const settings = window.getSiteSettings();
-        if (settings.announcementEnabled && settings.announcementText) {
-          const banner = document.createElement('div');
-          banner.id = 'top-announcement-bar';
-          banner.style.background = 'var(--primary-gradient)';
-          banner.style.color = '#ffffff';
-          banner.style.padding = '0.5rem 1rem';
-          banner.style.textAlign = 'center';
-          banner.style.fontSize = '0.875rem';
-          banner.style.fontWeight = '700';
-          banner.innerHTML = `<a href="${settings.announcementLink || '#'}" style="color: #ffffff; text-decoration: underline;">${settings.announcementText}</a>`;
-          document.body.insertBefore(banner, document.body.firstChild);
-        }
-
-        if (settings.adsEnabled === false) {
-          document.querySelectorAll('.ad-slot-container').forEach(el => el.style.display = 'none');
-        }
-      }
-
-      // Render Popular Tools (top 6)
+      // 1. Render Popular Tools Section
       if (popularGrid && activeTools) {
         const popularTools = activeTools.filter(t => t.popular).slice(0, 6);
-        popularGrid.innerHTML = popularTools.map(createToolCardHtml).join('');
+        popularGrid.innerHTML = popularTools.map(tool => `
+          <a href="${tool.file ? 'tools/' + tool.file : '#'}" class="tool-card">
+            <div class="tool-card-header">
+              <div class="tool-icon-box">${tool.icon}</div>
+              <span class="tool-badge popular">Popular</span>
+            </div>
+            <h3 class="tool-card-title">${tool.name}</h3>
+            <p class="tool-card-desc">${tool.description}</p>
+            <div class="tool-card-footer">
+              <span class="tool-rating">⭐ 4.9</span>
+              <span style="color: var(--primary); font-weight: 700;">Open Tool →</span>
+            </div>
+          </a>
+        `).join('');
       }
 
-      // Render Recently Added Tools (last 4 tools)
-      if (recentGrid && activeTools) {
-        const recentTools = activeTools.slice(-4);
-        recentGrid.innerHTML = recentTools.map(createToolCardHtml).join('');
-      }
-
-      // Render Category Tabs
-      if (tabsContainer && window.CATEGORIES) {
-        tabsContainer.innerHTML = window.CATEGORIES.map(cat => `
-          <button class="category-tab ${cat.id === 'all' ? 'active' : ''}" data-category="${cat.id}">
+      // 2. Render Category Filter Tabs
+      if (tabsContainer && activeCategories) {
+        tabsContainer.innerHTML = activeCategories.map(cat => `
+          <button type="button" class="category-tab ${cat.id === 'all' ? 'active' : ''}" data-category="${cat.id}">
             <span>${cat.icon}</span>
             <span>${cat.name}</span>
-            <span class="count-badge">${cat.id === 'all' ? activeTools.length : activeTools.filter(t => t.category === cat.id).length}</span>
+            <span class="cat-count-badge">${getCategoryCount(cat.id)}</span>
           </button>
         `).join('');
 
@@ -455,52 +540,59 @@
             tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             currentCategory = tab.getAttribute('data-category');
+            syncHeroPills(currentCategory);
             filterTools();
           });
         });
       }
 
-      // Elements for search dropdown
-      const searchClearBtn = document.getElementById('search-clear-btn');
-      const searchDropdown = document.getElementById('hero-search-results');
-      let selectedDropdownIndex = -1;
+      // Hero Pills Quick Filter
+      heroPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          const catId = pill.getAttribute('data-pill-category');
+          currentCategory = catId;
+          syncHeroPills(catId);
+          syncCategoryTabs(catId);
+          filterTools();
+
+          // Smooth scroll down to categories
+          const catSec = document.getElementById('categories-section');
+          if (catSec) {
+            catSec.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      function syncHeroPills(catId) {
+        heroPills.forEach(p => p.classList.toggle('active', p.getAttribute('data-pill-category') === catId));
+      }
+
+      function syncCategoryTabs(catId) {
+        if (!tabsContainer) return;
+        tabsContainer.querySelectorAll('.category-tab').forEach(t => {
+          t.classList.toggle('active', t.getAttribute('data-category') === catId);
+        });
+      }
+
+      function getCategoryCount(catId) {
+        if (catId === 'all') return activeTools.length;
+        return activeTools.filter(t => t.category === catId).length;
+      }
 
       function highlightText(text, query) {
         if (!query) return text;
-        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+        const qEsc = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`(${qEsc})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
       }
 
       function matchesTool(tool, query) {
         if (!query) return true;
-        const q = (query || '').toLowerCase().trim();
-        if (!q) return true;
-
-        // 1. Direct includes
-        if (tool.name.toLowerCase().includes(q) ||
-            tool.description.toLowerCase().includes(q) ||
-            tool.categoryName.toLowerCase().includes(q) ||
-            (tool.keywords && tool.keywords.some(k => k.toLowerCase().includes(q)))) {
-          return true;
-        }
-
-        // 2. Singular/plural normalization (e.g. "image" vs "images")
-        const qNorm = q.replace(/s\b/g, '');
-        const nameNorm = tool.name.toLowerCase().replace(/s\b/g, '');
-        if (nameNorm.includes(qNorm)) return true;
-
-        // 3. Multi-word tokens (every word in query matches)
-        const words = q.split(/\s+/).filter(w => w.length > 0);
-        if (words.length > 1) {
-          const combined = (tool.name + ' ' + tool.description + ' ' + tool.categoryName + ' ' + (tool.keywords ? tool.keywords.join(' ') : '')).toLowerCase();
-          const combinedNorm = combined.replace(/s\b/g, '');
-          const allMatch = words.every(w => {
-            const wNorm = w.replace(/s\b/g, '');
-            return combined.includes(w) || combinedNorm.includes(wNorm);
-          });
-          if (allMatch) return true;
-        }
-
+        const q = query.toLowerCase().trim();
+        if (tool.name.toLowerCase().includes(q)) return true;
+        if (tool.description.toLowerCase().includes(q)) return true;
+        if (tool.categoryName.toLowerCase().includes(q)) return true;
+        if (tool.keywords && tool.keywords.some(k => k.toLowerCase().includes(q))) return true;
         return false;
       }
 
@@ -587,20 +679,6 @@
         if (!allToolsGrid || !activeTools) return;
         const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
 
-        // When user types a search query, reset category filter to 'all' so no results are accidentally hidden
-        if (query && currentCategory !== 'all') {
-          currentCategory = 'all';
-          if (tabsContainer) {
-            tabsContainer.querySelectorAll('.category-tab').forEach(t => {
-              if (t.getAttribute('data-category') === 'all') {
-                t.classList.add('active');
-              } else {
-                t.classList.remove('active');
-              }
-            });
-          }
-        }
-
         const filtered = activeTools.filter(tool => {
           const matchesCategory = currentCategory === 'all' || tool.category === currentCategory;
           const matchesQuery = matchesTool(tool, query);
@@ -612,7 +690,7 @@
             <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
               <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔍</div>
               <h3 style="font-size: 1.25rem; font-weight: 700;">No tools found matching "${query}"</h3>
-              <p style="color: var(--text-muted); margin-top: 0.5rem;">Try searching for something else or browse categories.</p>
+              <p style="color: var(--text-muted); margin-top: 0.5rem;">Try searching for something else or browse another category.</p>
             </div>
           `;
         } else {
@@ -630,14 +708,14 @@
             <h3 class="tool-card-title">${tool.name}</h3>
             <p class="tool-card-desc">${tool.description}</p>
             <div class="tool-card-footer">
-              <span>Open Tool</span>
-              <span class="arrow-icon">→</span>
+              <span class="tool-rating">⭐ 4.9</span>
+              <span style="color: var(--primary); font-weight: 700;">Open Tool →</span>
             </div>
           </a>
         `;
       }
 
-      // Hook up search input
+      // Search event handlers
       if (searchInput) {
         searchInput.addEventListener('input', () => {
           const q = searchInput.value;
@@ -664,9 +742,7 @@
 
           const items = searchDropdown.querySelectorAll('.search-result-item');
           if (!items.length) {
-            if (e.key === 'Escape') {
-              searchDropdown.style.display = 'none';
-            }
+            if (e.key === 'Escape') searchDropdown.style.display = 'none';
             return;
           }
 
@@ -712,7 +788,7 @@
         }
       });
 
-      // Initial filter render
+      // Initial render
       filterTools();
     });
   </script>

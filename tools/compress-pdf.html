@@ -202,7 +202,7 @@
   <script src="../js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('compress-pdf', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('compress-pdf', 'related-tools-container', 3);
 
       const dropzone = document.getElementById('pdf-comp-dropzone');
       const fileInput = document.getElementById('pdf-comp-file-input');
@@ -225,9 +225,16 @@
         dropzone.classList.remove('dragover');
         if (e.dataTransfer.files && e.dataTransfer.files[0]) processPdf(e.dataTransfer.files[0]);
       });
+      dropzone.addEventListener('click', (e) => {
+        if (e.target !== fileInput) fileInput.click();
+      });
 
       fileInput.addEventListener('change', () => {
-        if (fileInput.files && fileInput.files[0]) processPdf(fileInput.files[0]);
+        if (fileInput.files && fileInput.files[0]) {
+          const selected = fileInput.files[0];
+          fileInput.value = '';
+          processPdf(selected);
+        }
       });
 
       newFileBtn.addEventListener('click', () => {
@@ -238,7 +245,7 @@
 
       async function processPdf(file) {
         if (!file.name.toLowerCase().endsWith('.pdf')) {
-          window.Toolshere.onlineApp.showToast('Please upload a valid PDF document', 'error');
+          window.ToolshereApp.showToast('Please upload a valid PDF document', 'error');
           return;
         }
 
@@ -275,9 +282,9 @@
             savingsElem.style.color = 'var(--primary)';
           }
 
-          window.Toolshere.onlineApp.showToast('PDF optimized and ready for download!', 'success');
+          window.ToolshereApp.showToast('PDF optimized and ready for download!', 'success');
         } catch (err) {
-          window.Toolshere.onlineApp.showToast(`Error optimizing PDF: ${err.message}`, 'error');
+          window.ToolshereApp.showToast(`Error optimizing PDF: ${err.message}`, 'error');
         }
       }
 
@@ -289,7 +296,7 @@
         a.download = `${originalFileName}_compressed.pdf`;
         a.click();
         URL.revokeObjectURL(url);
-        window.Toolshere.onlineApp.showToast('Compressed PDF downloaded!', 'success');
+        window.ToolshereApp.showToast('Compressed PDF downloaded!', 'success');
       });
 
       function formatBytes(bytes) {

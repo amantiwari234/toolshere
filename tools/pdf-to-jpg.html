@@ -255,7 +255,7 @@
   <script src="../js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('pdf-to-image', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('pdf-to-image', 'related-tools-container', 3);
 
       const dropzone = document.getElementById('pdf-img-dropzone');
       const fileInput = document.getElementById('pdf-img-input');
@@ -289,10 +289,15 @@
           handlePdf(e.dataTransfer.files[0]);
         }
       });
+      dropzone.addEventListener('click', (e) => {
+        if (e.target !== fileInput) fileInput.click();
+      });
 
       fileInput.addEventListener('change', () => {
         if (fileInput.files && fileInput.files[0]) {
-          handlePdf(fileInput.files[0]);
+          const selected = fileInput.files[0];
+          fileInput.value = '';
+          handlePdf(selected);
         }
       });
 
@@ -303,7 +308,7 @@
 
       async function handlePdf(file) {
         if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
-          window.Toolshere.onlineApp.showToast('Please select a valid PDF file', 'error');
+          window.ToolshereApp.showToast('Please select a valid PDF file', 'error');
           return;
         }
 
@@ -325,7 +330,7 @@
           fileMetaEl.textContent = `${(file.size / 1024).toFixed(1)} KB • ${loadedPdf.numPages} Page${loadedPdf.numPages > 1 ? 's' : ''}`;
         } catch (err) {
           console.error(err);
-          window.Toolshere.onlineApp.showToast('Error reading PDF: ' + err.message, 'error');
+          window.ToolshereApp.showToast('Error reading PDF: ' + err.message, 'error');
           dropzone.style.display = 'block';
           controls.style.display = 'none';
         }
@@ -390,10 +395,10 @@
           progressStatus.textContent = 'All pages converted successfully!';
 
           renderResults();
-          window.Toolshere.onlineApp.showToast(`Successfully converted ${numPages} page${numPages > 1 ? 's' : ''}! 🎉`, 'success');
+          window.ToolshereApp.showToast(`Successfully converted ${numPages} page${numPages > 1 ? 's' : ''}! 🎉`, 'success');
         } catch (err) {
           console.error(err);
-          window.Toolshere.onlineApp.showToast('Error during conversion: ' + err.message, 'error');
+          window.ToolshereApp.showToast('Error during conversion: ' + err.message, 'error');
         } finally {
           convertBtn.disabled = false;
           setTimeout(() => {
@@ -441,7 +446,7 @@
             window.downloadSingleImage(idx);
           }, idx * 250);
         });
-        window.Toolshere.onlineApp.showToast(`Downloading all ${convertedImages.length} images...`, 'info');
+        window.ToolshereApp.showToast(`Downloading all ${convertedImages.length} images...`, 'info');
       });
 
     });

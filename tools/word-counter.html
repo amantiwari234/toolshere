@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -222,7 +222,7 @@
   <script src="../js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('word-counter', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('word-counter', 'related-tools-container', 3);
 
       const textarea = document.getElementById('text-input');
       const copyBtn = document.getElementById('copy-text-btn');
@@ -299,7 +299,7 @@ Whether you need to count words, compress high-resolution images, format complex
       textarea.addEventListener('input', analyzeText);
 
       copyBtn.addEventListener('click', () => {
-        window.Toolshere.onlineApp.copyToClipboard(textarea.value, 'Text copied to clipboard!');
+        window.ToolshereApp.copyToClipboard(textarea.value, 'Text copied to clipboard!');
       });
 
       sampleBtn.addEventListener('click', () => {

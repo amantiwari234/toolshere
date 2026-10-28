@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -269,7 +269,7 @@
   <script src="../js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('qr-code-generator', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('qr-code-generator', 'related-tools-container', 3);
 
       const typeSelect = document.getElementById('qr-data-type');
       const urlInput = document.getElementById('qr-url-input');
@@ -343,7 +343,7 @@
         a.href = url;
         a.download = `toolshere-qrcode-${Date.now()}.png`;
         a.click();
-        window.Toolshere.onlineApp.showToast('QR Code downloaded!', 'success');
+        window.ToolshereApp.showToast('QR Code downloaded!', 'success');
       });
 
       copyBtn.addEventListener('click', () => {
@@ -352,12 +352,12 @@
           try {
             const item = new ClipboardItem({ 'image/png': blob });
             navigator.clipboard.write([item]).then(() => {
-              window.Toolshere.onlineApp.showToast('QR Code image copied to clipboard!', 'success');
+              window.ToolshereApp.showToast('QR Code image copied to clipboard!', 'success');
             }).catch(() => {
-              window.Toolshere.onlineApp.showToast('Clipboard image write not supported in this browser', 'error');
+              window.ToolshereApp.showToast('Clipboard image write not supported in this browser', 'error');
             });
           } catch (e) {
-            window.Toolshere.onlineApp.showToast('Please use Download PNG button', 'info');
+            window.ToolshereApp.showToast('Please use Download PNG button', 'info');
           }
         });
       });

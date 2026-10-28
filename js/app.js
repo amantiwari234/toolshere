@@ -1,4 +1,4 @@
-/**
+﻿/**
  * QuickTools - Main Application Script
  * Theme toggle, navigation, search, toasts, and shared UI handlers
  */
@@ -181,12 +181,18 @@
   }
 
   // Export functions globally
-  window.QuickToolsApp = {
+  const appExports = {
     toggleTheme,
     showToast,
     copyToClipboard,
     renderRelatedTools
   };
+
+  window.QuickToolsApp = appExports;
+  window.ToolshereApp = appExports;
+  window.Toolshere = window.Toolshere || {};
+  window.ToolshereApp = appExports;
+  window.Toolshere.App = appExports;
 
   // Run on DOM ready
   document.addEventListener('DOMContentLoaded', () => {

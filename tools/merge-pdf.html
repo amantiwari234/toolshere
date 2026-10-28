@@ -192,7 +192,7 @@
   <script src="../js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('merge-pdf', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('merge-pdf', 'related-tools-container', 3);
 
       const dropzone = document.getElementById('merge-dropzone');
       const fileInput = document.getElementById('merge-file-input');
@@ -212,9 +212,16 @@
         dropzone.classList.remove('dragover');
         if (e.dataTransfer.files) handleFiles(e.dataTransfer.files);
       });
+      dropzone.addEventListener('click', (e) => {
+        if (e.target !== fileInput) fileInput.click();
+      });
 
       fileInput.addEventListener('change', () => {
-        if (fileInput.files) handleFiles(fileInput.files);
+        if (fileInput.files) {
+          const files = Array.from(fileInput.files);
+          fileInput.value = '';
+          handleFiles(files);
+        }
       });
 
       addMoreBtn.addEventListener('click', () => fileInput.click());
@@ -238,7 +245,7 @@
               bytes: arrayBuffer
             });
           } catch (err) {
-            window.Toolshere.onlineApp.showToast(`Failed to parse ${file.name}: ${err.message}`, 'error');
+            window.ToolshereApp.showToast(`Failed to parse ${file.name}: ${err.message}`, 'error');
           }
         }
         renderList();
@@ -289,7 +296,7 @@
 
       mergeBtn.addEventListener('click', async () => {
         if (pdfFiles.length < 2) {
-          window.Toolshere.onlineApp.showToast('Please add at least 2 PDF documents to merge', 'error');
+          window.ToolshereApp.showToast('Please add at least 2 PDF documents to merge', 'error');
           return;
         }
 
@@ -315,10 +322,10 @@
           a.click();
           URL.revokeObjectURL(url);
 
-          window.Toolshere.onlineApp.showToast('PDF files merged and downloaded successfully!', 'success');
+          window.ToolshereApp.showToast('PDF files merged and downloaded successfully!', 'success');
         } catch (err) {
           console.error(err);
-          window.Toolshere.onlineApp.showToast(`Error merging PDFs: ${err.message}`, 'error');
+          window.ToolshereApp.showToast(`Error merging PDFs: ${err.message}`, 'error');
         } finally {
           mergeBtn.disabled = false;
           mergeBtn.innerHTML = '<span>Merge & Download PDF</span> <span>🔗</span>';

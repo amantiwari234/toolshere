@@ -203,7 +203,7 @@
   <script src="../js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('image-format-converter', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('image-format-converter', 'related-tools-container', 3);
 
       const dropzone = document.getElementById('conv-dropzone');
       const fileInput = document.getElementById('conv-file-input');
@@ -233,8 +233,15 @@
         dropzone.classList.remove('dragover');
         if (e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
       });
+      dropzone.addEventListener('click', (e) => {
+        if (e.target !== fileInput) fileInput.click();
+      });
       fileInput.addEventListener('change', () => {
-        if (fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+        if (fileInput.files && fileInput.files[0]) {
+          const selected = fileInput.files[0];
+          fileInput.value = '';
+          loadFile(selected);
+        }
       });
 
       newImgBtn.addEventListener('click', () => {
@@ -245,7 +252,7 @@
 
       function loadFile(file) {
         if (!file.type.startsWith('image/')) {
-          window.Toolshere.onlineApp.showToast('Please select a valid image file', 'error');
+          window.ToolshereApp.showToast('Please select a valid image file', 'error');
           return;
         }
 
@@ -307,7 +314,7 @@
         a.download = `${originalFileName}.${ext}`;
         a.click();
         URL.revokeObjectURL(url);
-        window.Toolshere.onlineApp.showToast(`Converted to .${ext} and downloaded!`, 'success');
+        window.ToolshereApp.showToast(`Converted to .${ext} and downloaded!`, 'success');
       });
     });
   </script>

@@ -280,7 +280,7 @@
   <script src="../js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('images-to-pdf', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('images-to-pdf', 'related-tools-container', 3);
 
       const dropzone = document.getElementById('img-pdf-dropzone');
       const fileInput = document.getElementById('img-pdf-input');
@@ -359,9 +359,16 @@
         dropzone.classList.remove('dragover');
         if (e.dataTransfer.files) handleFiles(e.dataTransfer.files);
       });
+      dropzone.addEventListener('click', (e) => {
+        if (e.target !== fileInput) fileInput.click();
+      });
 
       fileInput.addEventListener('change', () => {
-        if (fileInput.files) handleFiles(fileInput.files);
+        if (fileInput.files) {
+          const files = Array.from(fileInput.files);
+          fileInput.value = '';
+          handleFiles(files);
+        }
       });
 
       addMoreBtn.addEventListener('click', () => {
@@ -599,7 +606,7 @@
 
       createPdfBtn.addEventListener('click', async () => {
         if (uploadedImages.length === 0) {
-          window.Toolshere.onlineApp.showToast('Please add at least one image', 'error');
+          window.ToolshereApp.showToast('Please add at least one image', 'error');
           return;
         }
 
@@ -736,10 +743,10 @@
 
           const sizeKb = Math.round(finalBlob.size / 1024);
           const sizeStr = sizeKb > 1024 ? `${(sizeKb / 1024).toFixed(2)} MB` : `${sizeKb} KB`;
-          window.Toolshere.onlineApp.showToast(`PDF created successfully (${sizeStr})! 🎉`, 'success');
+          window.ToolshereApp.showToast(`PDF created successfully (${sizeStr})! 🎉`, 'success');
         } catch (err) {
           console.error('Image to PDF error:', err);
-          window.Toolshere.onlineApp.showToast(`Error creating PDF: ${err.message}`, 'error');
+          window.ToolshereApp.showToast(`Error creating PDF: ${err.message}`, 'error');
         } finally {
           createPdfBtn.disabled = false;
           createPdfBtn.innerHTML = '<span>Generate &amp; Download PDF</span> <span>📄</span>';

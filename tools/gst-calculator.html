@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -546,7 +546,7 @@
         currentRate = 18;
         supplyIntra.checked = true;
         calculateGST();
-        window.Toolshere.onlineApp?.showToast('Reset to default values', 'info');
+        window.ToolshereApp?.showToast('Reset to default values', 'info');
       });
 
       // Copy summary
@@ -564,12 +564,12 @@
           `-----------------------------------------\n` +
           `Calculated privately on: https://toolshere.online/tools/gst-calculator.html`;
 
-        window.Toolshere.onlineApp?.copyToClipboard(text, 'GST breakdown copied to clipboard!');
+        window.ToolshereApp?.copyToClipboard(text, 'GST breakdown copied to clipboard!');
       });
 
       // Initialize
       calculateGST();
-      window.Toolshere.onlineApp?.renderRelatedTools('gst-calculator', 'related-tools-grid', 3);
+      window.ToolshereApp?.renderRelatedTools('gst-calculator', 'related-tools-grid', 3);
     });
   </script>
 </body>

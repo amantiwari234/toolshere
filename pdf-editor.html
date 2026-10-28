@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -417,7 +417,7 @@
   <script src="js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      window.Toolshere.onlineApp.renderRelatedTools('pdf-editor', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('pdf-editor', 'related-tools-container', 3);
 
       // Elements
       const dropzone = document.getElementById('editor-dropzone');
@@ -600,12 +600,12 @@
 
       async function loadPdfFile(file) {
         if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
-          window.Toolshere.onlineApp.showToast('Please select a valid PDF file', 'error');
+          window.ToolshereApp.showToast('Please select a valid PDF file', 'error');
           return;
         }
 
         if (typeof pdfjsLib === 'undefined') {
-          window.Toolshere.onlineApp.showToast('PDF engine is still loading. Please wait 2 seconds and retry.', 'error');
+          window.ToolshereApp.showToast('PDF engine is still loading. Please wait 2 seconds and retry.', 'error');
           return;
         }
 
@@ -645,12 +645,12 @@
             studio.style.display = 'block';
             await renderThumbnailsPanel();
             await switchPage(0);
-            window.Toolshere.onlineApp.showToast(`Loaded ${file.name} (${pdfDoc.numPages} pages)!`, 'success');
+            window.ToolshereApp.showToast(`Loaded ${file.name} (${pdfDoc.numPages} pages)!`, 'success');
           }, 300);
 
         } catch (err) {
           console.error('PDF Load Error:', err);
-          window.Toolshere.onlineApp.showToast('Error loading PDF: ' + (err.message || err), 'error');
+          window.ToolshereApp.showToast('Error loading PDF: ' + (err.message || err), 'error');
           loadingBar.style.display = 'none';
           dropzone.style.display = 'block';
           fileInput.value = '';
@@ -1006,7 +1006,7 @@
         textbox.selectAll();
         fabricCanvas.renderAll();
         recordHistory();
-        window.Toolshere.onlineApp.showToast('Text box added! Type your text directly.', 'success');
+        window.ToolshereApp.showToast('Text box added! Type your text directly.', 'success');
       }
 
       // Add Whiteout Box (To cover/erase existing PDF text)
@@ -1032,7 +1032,7 @@
         fabricCanvas.setActiveObject(rect);
         fabricCanvas.renderAll();
         recordHistory();
-        window.Toolshere.onlineApp.showToast('Whiteout box added! Drag or resize to cover old text.', 'info');
+        window.ToolshereApp.showToast('Whiteout box added! Drag or resize to cover old text.', 'info');
       }
 
       // Add Shapes
@@ -1056,7 +1056,7 @@
           });
           fabricCanvas.add(rect);
           fabricCanvas.setActiveObject(rect);
-          window.Toolshere.onlineApp.showToast('Rectangle box added! Drag or resize.', 'info');
+          window.ToolshereApp.showToast('Rectangle box added! Drag or resize.', 'info');
         } else if (type === 'circle') {
           const circle = new fabric.Circle({
             left: x,
@@ -1072,7 +1072,7 @@
           });
           fabricCanvas.add(circle);
           fabricCanvas.setActiveObject(circle);
-          window.Toolshere.onlineApp.showToast('Circle added! Drag or resize.', 'info');
+          window.ToolshereApp.showToast('Circle added! Drag or resize.', 'info');
         } else if (type === 'arrow') {
           const line = new fabric.Line([x, y + 10, x + 110, y + 10], {
             stroke: color,
@@ -1096,7 +1096,7 @@
           });
           fabricCanvas.add(arrowGroup);
           fabricCanvas.setActiveObject(arrowGroup);
-          window.Toolshere.onlineApp.showToast('Arrow added! Drag or rotate.', 'info');
+          window.ToolshereApp.showToast('Arrow added! Drag or rotate.', 'info');
         }
         fabricCanvas.renderAll();
         recordHistory();
@@ -1114,9 +1114,9 @@
           fabricCanvas.discardActiveObject();
           fabricCanvas.renderAll();
           recordHistory();
-          window.Toolshere.onlineApp.showToast('Annotation deleted', 'info');
+          window.ToolshereApp.showToast('Annotation deleted', 'info');
         } else {
-          window.Toolshere.onlineApp.showToast('Please click an annotation to select it first', 'info');
+          window.ToolshereApp.showToast('Please click an annotation to select it first', 'info');
         }
       });
 
@@ -1158,12 +1158,12 @@
         pageRotations[origPageNum] = ((pageRotations[origPageNum] || 0) + 90) % 360;
         await switchPage(activePageIndex);
         await renderThumbnailsPanel();
-        window.Toolshere.onlineApp.showToast(`Page ${activePageIndex + 1} rotated 90°`, 'info');
+        window.ToolshereApp.showToast(`Page ${activePageIndex + 1} rotated 90°`, 'info');
       });
 
       btnDeletePage.addEventListener('click', async () => {
         if (activePagesList.length <= 1) {
-          window.Toolshere.onlineApp.showToast('Document must contain at least one page', 'error');
+          window.ToolshereApp.showToast('Document must contain at least one page', 'error');
           return;
         }
 
@@ -1180,7 +1180,7 @@
           activePageIndex = -1; // reset so switchPage does not overwrite new page
           await renderThumbnailsPanel();
           await switchPage(nextIndex);
-          window.Toolshere.onlineApp.showToast('Page deleted', 'info');
+          window.ToolshereApp.showToast('Page deleted', 'info');
         }
       });
 
@@ -1305,13 +1305,13 @@
           blank.width = sigPadCanvas.width;
           blank.height = sigPadCanvas.height;
           if (sigPadCanvas.toDataURL() === blank.toDataURL()) {
-            window.Toolshere.onlineApp.showToast('Please draw your signature first', 'error');
+            window.ToolshereApp.showToast('Please draw your signature first', 'error');
             return;
           }
           sigDataUrl = sigPadCanvas.toDataURL('image/png');
         } else {
           if (!sigPreviewImg.src) {
-            window.Toolshere.onlineApp.showToast('Please choose an image file first', 'error');
+            window.ToolshereApp.showToast('Please choose an image file first', 'error');
             return;
           }
           sigDataUrl = sigPreviewImg.src;
@@ -1331,7 +1331,7 @@
           fabricCanvas.renderAll();
           recordHistory();
           closeSigModal();
-          window.Toolshere.onlineApp.showToast('Signature added to page! Drag to position.', 'success');
+          window.ToolshereApp.showToast('Signature added to page! Drag to position.', 'success');
         });
       });
 
@@ -1424,10 +1424,10 @@
           document.body.removeChild(a);
           setTimeout(() => URL.revokeObjectURL(url), 4000);
 
-          window.Toolshere.onlineApp.showToast('Edited PDF downloaded successfully! 🎉', 'success');
+          window.ToolshereApp.showToast('Edited PDF downloaded successfully! 🎉', 'success');
         } catch (err) {
           console.error(err);
-          window.Toolshere.onlineApp.showToast('Error exporting edited PDF: ' + err.message, 'error');
+          window.ToolshereApp.showToast('Error exporting edited PDF: ' + err.message, 'error');
         } finally {
           btnExportPdf.disabled = false;
           btnExportPdf.innerHTML = '<span>Download PDF</span> <span>💾</span>';

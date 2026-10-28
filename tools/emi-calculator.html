@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -558,7 +558,7 @@
         loanTenureSlider.value = 10;
         showMonthly = false;
         calculateEMI();
-        window.Toolshere.onlineApp?.showToast('Reset to default values', 'info');
+        window.ToolshereApp?.showToast('Reset to default values', 'info');
       });
 
       // Copy summary
@@ -574,12 +574,12 @@
           `• Total Repayment Amount: ${summaryTotal.textContent}\n` +
           `Calculated privately on: https://toolshere.online/tools/emi-calculator.html`;
 
-        window.Toolshere.onlineApp?.copyToClipboard(text, 'Loan summary copied to clipboard!');
+        window.ToolshereApp?.copyToClipboard(text, 'Loan summary copied to clipboard!');
       });
 
       // Initialize
       calculateEMI();
-      window.Toolshere.onlineApp?.renderRelatedTools('emi-calculator', 'related-tools-grid', 3);
+      window.ToolshereApp?.renderRelatedTools('emi-calculator', 'related-tools-grid', 3);
     });
   </script>
 </body>

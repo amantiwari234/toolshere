@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -312,7 +312,7 @@
       targetDateInput.value = todayStr;
 
       // Render related tools
-      window.Toolshere.onlineApp.renderRelatedTools('age-calculator', 'related-tools-container', 3);
+      window.ToolshereApp.renderRelatedTools('age-calculator', 'related-tools-container', 3);
 
       let lastSummaryText = '';
 
@@ -322,7 +322,7 @@
         const targetVal = targetDateInput.value || todayStr;
 
         if (!dobVal) {
-          window.Toolshere.onlineApp.showToast('Please select your date of birth', 'error');
+          window.ToolshereApp.showToast('Please select your date of birth', 'error');
           return;
         }
 
@@ -330,7 +330,7 @@
         const target = new Date(targetVal + 'T00:00:00');
 
         if (dob > target) {
-          window.Toolshere.onlineApp.showToast('Date of birth cannot be in the future of the target date', 'error');
+          window.ToolshereApp.showToast('Date of birth cannot be in the future of the target date', 'error');
           return;
         }
 
@@ -402,7 +402,7 @@
       });
 
       copyBtn.addEventListener('click', () => {
-        window.Toolshere.onlineApp.copyToClipboard(lastSummaryText, 'Age summary copied to clipboard!');
+        window.ToolshereApp.copyToClipboard(lastSummaryText, 'Age summary copied to clipboard!');
       });
 
       function getZodiacSign(month, day) {

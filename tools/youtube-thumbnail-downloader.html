@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -399,7 +399,7 @@
         if (!vid) {
           errorMsg.style.display = 'block';
           resultsContainer.style.display = 'none';
-          window.Toolshere.onlineApp?.showToast('Invalid YouTube URL or ID', 'error');
+          window.ToolshereApp?.showToast('Invalid YouTube URL or ID', 'error');
           return;
         }
 
@@ -436,7 +436,7 @@
       // Download helper via Canvas/Fetch to trigger real file download
       async function triggerDownload(imgSrc, filename) {
         try {
-          window.Toolshere.onlineApp?.showToast('Downloading image...', 'info');
+          window.ToolshereApp?.showToast('Downloading image...', 'info');
           // Fetch as blob
           const response = await fetch(imgSrc);
           const blob = await response.blob();
@@ -449,7 +449,7 @@
           a.click();
           document.body.removeChild(a);
           setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
-          window.Toolshere.onlineApp?.showToast('Downloaded successfully!', 'success');
+          window.ToolshereApp?.showToast('Downloaded successfully!', 'success');
         } catch (e) {
           // Fallback: direct window download
           const a = document.createElement('a');
@@ -488,13 +488,13 @@
           const targetId = btn.getAttribute('data-target');
           const img = document.getElementById(targetId);
           if (img && img.src) {
-            window.Toolshere.onlineApp?.copyToClipboard(img.src, 'Thumbnail URL copied to clipboard!');
+            window.ToolshereApp?.copyToClipboard(img.src, 'Thumbnail URL copied to clipboard!');
           }
         });
       });
 
       // Related tools
-      window.Toolshere.onlineApp?.renderRelatedTools('youtube-thumbnail-downloader', 'related-tools-grid', 3);
+      window.ToolshereApp?.renderRelatedTools('youtube-thumbnail-downloader', 'related-tools-grid', 3);
     });
   </script>
 </body>
