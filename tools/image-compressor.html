@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Compressor — Reduce Image File Size Online Free | Toolshere.online</title>
+  <meta name="description" content="Compress JPG, PNG, and WEBP photos up to 85% without noticeable quality loss. Real-time file size comparison. 100% private in-browser compression.">
+  <link rel="canonical" href="https://toolshere.online/tools/image-compressor.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/tools.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="../index.html" class="brand-logo">
+        <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../all-tools.html" class="nav-link">All Tools</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+        <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../all-tools.html" class="nav-link">All Tools</a>
+      <a href="../about.html" class="nav-link">About Us</a>
+      <a href="../contact.html" class="nav-link">Contact Us</a>
+      <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <section class="tool-header-wrapper">
+    <div class="container tool-header-content">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Home</a>
+        <span class="separator">/</span>
+        <a href="../all-tools.html?cat=images">Image Tools</a>
+        <span class="separator">/</span>
+        <span class="current">Image Compressor</span>
+      </nav>
+
+      <div class="tool-header-badge-row">
+        <span class="tool-category-badge">🖼️ Image Tools</span>
+        <span class="tool-privacy-pill">🔒 100% Private In-Browser</span>
+      </div>
+
+      <h1 class="tool-header-title">
+        <span class="tool-icon">🗜️</span>
+        <span>Image Compressor</span>
+      </h1>
+      <p class="tool-header-desc">
+        Reduce image file size dramatically while maintaining high clarity. Fine-tune compression quality with real-time before/after size comparisons.
+      </p>
+    </div>
+  </section>
+
+  <div class="ad-slot-container">
+    <div class="ad-placeholder leaderboard">
+      <span class="ad-label">Advertisement</span>
+      <span class="ad-text">Fast Web Hosting &amp; CDN Storage — 728x90 Banner</span>
+    </div>
+  </div>
+
+  <main class="tool-workspace">
+    <div class="container" style="max-width: 900px;">
+      <div class="tool-card-box">
+        
+        <!-- Dropzone -->
+        <div id="comp-dropzone" class="dropzone">
+          <input type="file" id="comp-file-input" class="file-input-hidden" accept="image/*">
+          <div class="dropzone-icon">🗜️</div>
+          <div class="dropzone-title">Upload Image to Compress</div>
+          <div class="dropzone-sub">Drop JPG, PNG, or WEBP photos here • Private client-side compression</div>
+        </div>
+
+        <!-- Compression Settings (Active after image selected) -->
+        <div id="comp-controls" style="display: none; margin-top: 2rem;">
+          
+          <!-- Metrics Bar Comparison -->
+          <div class="metric-grid" style="margin-bottom: 1.5rem;">
+            <div class="metric-item">
+              <div class="metric-value" id="comp-orig-size">0 KB</div>
+              <div class="metric-label">Original Size</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value" id="comp-new-size" style="color: var(--accent-emerald);">0 KB</div>
+              <div class="metric-label">Compressed Size</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value" id="comp-savings" style="color: var(--primary);">-0%</div>
+              <div class="metric-label">File Size Saved</div>
+            </div>
+          </div>
+
+          <!-- Quality Slider -->
+          <div style="background: var(--bg-muted); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <label class="form-label" for="quality-range" style="margin-bottom: 0;">Compression Quality: <strong id="quality-label" style="color: var(--primary);">75%</strong></label>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">(Lower % = Smaller file size)</span>
+            </div>
+            <input type="range" id="quality-range" min="5" max="95" value="75" style="width: 100%; accent-color: var(--primary); cursor: pointer;">
+          </div>
+
+          <!-- Action and Download -->
+          <div class="tool-actions-bar" style="margin-top: 0; justify-content: space-between;">
+            <button id="download-compressed-btn" class="btn btn-primary btn-lg">
+              <span>Download Compressed Image</span>
+              <span>💾</span>
+            </button>
+            <button id="comp-new-img-btn" class="btn btn-secondary btn-lg">Upload Another Image</button>
+          </div>
+
+          <!-- Preview Canvas and Image -->
+          <div class="preview-image-container">
+            <canvas id="comp-canvas" style="display: none;"></canvas>
+            <img id="comp-preview" alt="Compressed Preview">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FAQ -->
+      <section class="section-padding section-alt" style="border-radius: var(--radius-xl); padding: 2.5rem 2rem; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem; text-align: center;">Image Compressor FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <button class="faq-question">
+              <span>What quality percentage offers the best balance?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Between <strong>70% and 80%</strong> quality is considered the sweet spot. It routinely shrinks image weight by 60% to 80% with virtually zero visual artifacts visible to the human eye.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom: 4rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;">Related Image Tools</h2>
+        <div class="tools-grid" id="related-tools-container"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="brand-logo">
+            <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+          </a>
+          <p>Toolshere.online is your premier directory of free, private, client-side online tools.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Categories</h4>
+          <div class="footer-links">
+            <a href="../all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
+            <a href="../all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="../all-tools.html?cat=images" class="footer-link">Image Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <div class="footer-links">
+            <a href="../about.html" class="footer-link">About Us</a>
+            <a href="../contact.html" class="footer-link">Contact Us</a>
+            <a href="../all-tools.html" class="footer-link">All 24 Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Legal &amp; Privacy</h4>
+          <div class="footer-links">
+            <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="../terms.html" class="footer-link">Terms and Conditions</a>
+            <a href="../disclaimer.html" class="footer-link">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
+        <div class="footer-badges"><span class="privacy-badge">🔒 100% Client-Side Privacy</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/tools-data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.Toolshere.onlineApp.renderRelatedTools('image-compressor', 'related-tools-container', 3);
+
+      const dropzone = document.getElementById('comp-dropzone');
+      const fileInput = document.getElementById('comp-file-input');
+      const controls = document.getElementById('comp-controls');
+      const qualityRange = document.getElementById('quality-range');
+      const qualityLabel = document.getElementById('quality-label');
+      const origSizeElem = document.getElementById('comp-orig-size');
+      const newSizeElem = document.getElementById('comp-new-size');
+      const savingsElem = document.getElementById('comp-savings');
+      const downloadBtn = document.getElementById('download-compressed-btn');
+      const newImgBtn = document.getElementById('comp-new-img-btn');
+      const canvas = document.getElementById('comp-canvas');
+      const ctx = canvas.getContext('2d');
+      const previewImg = document.getElementById('comp-preview');
+
+      let originalImage = new Image();
+      let originalFileSizeBytes = 0;
+      let originalFileName = 'compressed-image';
+      let currentBlob = null;
+
+      // Dropzone
+      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+      });
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+      });
+
+      newImgBtn.addEventListener('click', () => {
+        fileInput.value = '';
+        dropzone.style.display = 'block';
+        controls.style.display = 'none';
+      });
+
+      function loadFile(file) {
+        if (!file.type.startsWith('image/')) {
+          window.Toolshere.onlineApp.showToast('Please select a valid image file', 'error');
+          return;
+        }
+
+        originalFileSizeBytes = file.size;
+        originalFileName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+        origSizeElem.textContent = formatBytes(originalFileSizeBytes);
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          originalImage = new Image();
+          originalImage.onload = () => {
+            dropzone.style.display = 'none';
+            controls.style.display = 'block';
+            compressImage();
+          };
+          originalImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function compressImage() {
+        const quality = parseInt(qualityRange.value, 10) / 100;
+        qualityLabel.textContent = `${qualityRange.value}%`;
+
+        canvas.width = originalImage.naturalWidth;
+        canvas.height = originalImage.naturalHeight;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(originalImage, 0, 0);
+
+        canvas.toBlob((blob) => {
+          if (!blob) return;
+          currentBlob = blob;
+          const newSize = blob.size;
+          newSizeElem.textContent = formatBytes(newSize);
+
+          const savedBytes = originalFileSizeBytes - newSize;
+          const savedPct = ((savedBytes / originalFileSizeBytes) * 100).toFixed(1);
+
+          if (savedPct > 0) {
+            savingsElem.textContent = `-${savedPct}%`;
+            savingsElem.style.color = 'var(--accent-emerald)';
+          } else {
+            savingsElem.textContent = `+${Math.abs(savedPct)}%`;
+            savingsElem.style.color = 'var(--text-muted)';
+          }
+
+          previewImg.src = URL.createObjectURL(blob);
+        }, 'image/jpeg', quality);
+      }
+
+      qualityRange.addEventListener('input', compressImage);
+
+      downloadBtn.addEventListener('click', () => {
+        if (!currentBlob) return;
+        const url = URL.createObjectURL(currentBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${originalFileName}_compressed.jpg`;
+        a.click();
+        URL.revokeObjectURL(url);
+        window.Toolshere.onlineApp.showToast('Compressed image downloaded!', 'success');
+      });
+
+      function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + ' B';
+        if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+        return (bytes / 1048576).toFixed(2) + ' MB';
+      }
+    });
+  </script>
+</body>
+</html>

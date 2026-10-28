@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online PDF Editor — Edit Text, Draw, Add Signatures &amp; Annotate | Toolshere.online</title>
+  <meta name="description" content="Edit PDF files online for free. Add text, freehand drawings, shapes, signatures, and highlights directly in your browser. 100% private with no document uploads.">
+  <link rel="canonical" href="https://toolshere.online/pdf-editor">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tools.css">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  
+  <!-- PDF.js, Fabric.js & pdf-lib (Local Vendor Libraries for 100% Reliable Client-Side Offline & Fast Loading) -->
+  <script src="js/pdf.min.js"></script>
+  <script src="js/fabric.min.js"></script>
+  <script src="js/pdf-lib.min.js"></script>
+  <script>
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo">
+        <img src="assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="all-tools.html" class="nav-link">All Tools</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Drawer -->
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="all-tools.html" class="nav-link">All Tools</a>
+      <a href="about.html" class="nav-link">About Us</a>
+      <a href="contact.html" class="nav-link">Contact Us</a>
+      <a href="privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <!-- Tool Header -->
+  <section class="tool-header-wrapper">
+    <div class="container tool-header-content">
+      <nav class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <span class="separator">/</span>
+        <a href="all-tools.html?cat=pdf">PDF Tools</a>
+        <span class="separator">/</span>
+        <span class="current">PDF Editor</span>
+      </nav>
+
+      <div class="tool-header-badge-row">
+        <span class="tool-category-badge">📄 PDF Tools</span>
+        <span class="tool-privacy-pill">🔒 100% In-Browser Privacy</span>
+        <span class="tool-badge popular">New &amp; Powerful</span>
+      </div>
+
+      <h1 class="tool-header-title">
+        <span class="tool-icon">✏️</span>
+        <span>Online PDF Editor &amp; Signer</span>
+      </h1>
+      <p class="tool-header-desc">
+        Add custom text, draw freehand annotations, insert shapes, highlight areas, and apply signatures directly on your PDF pages. Zero document uploads.
+      </p>
+    </div>
+  </section>
+
+  <!-- Workspace -->
+  <main class="tool-workspace" style="max-width: 1300px; margin: 0 auto; padding: 2rem 1rem;">
+    
+    <!-- Upload Dropzone (Visible before file loaded) -->
+    <div id="editor-dropzone" class="dropzone" style="max-width: 860px; margin: 0 auto 2.5rem; padding: 4rem 2rem;">
+      <input type="file" id="editor-file-input" class="file-input-hidden" accept=".pdf,application/pdf">
+      <div class="dropzone-icon">📄</div>
+      <div class="dropzone-title">Upload a PDF to Start Editing</div>
+      <div class="dropzone-sub">Drag and drop your PDF here, or click anywhere to select from device</div>
+      <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+        <button type="button" id="btn-browse-pdf" class="btn btn-primary" style="padding: 0.8rem 2.2rem; font-weight: 700; font-size: 1.05rem; border-radius: var(--radius-full); pointer-events: none; box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);">
+          📁 Choose PDF File
+        </button>
+      </div>
+      <div style="margin-top: 1.25rem;">
+        <span style="font-size: 0.8rem; background: var(--primary-light); color: var(--primary); padding: 0.35rem 0.85rem; border-radius: var(--radius-full); font-weight: 700;">🔒 100% Client-Side • Your Files Never Leave Your Device</span>
+      </div>
+    </div>
+
+    <!-- Loading Progress Bar -->
+    <div id="editor-loading-bar" style="display: none; max-width: 600px; margin: 2rem auto; text-align: center;">
+      <div style="font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main);" id="loading-status-text">Loading PDF document... ⏳</div>
+      <div style="width: 100%; height: 10px; background: var(--border); border-radius: var(--radius-full); overflow: hidden;">
+        <div id="loading-bar-fill" style="width: 20%; height: 100%; background: var(--primary); transition: width 0.3s ease;"></div>
+      </div>
+    </div>
+
+    <!-- Full PDF Editor Studio Container -->
+    <div id="pdf-editor-studio" class="pdf-editor-wrapper" style="display: none;">
+      
+      <!-- Top Sticky Toolbar -->
+      <div class="pdf-editor-toolbar">
+        
+        <!-- Tool Selection Group -->
+        <div class="pdf-toolbar-group">
+          <button id="tool-select" class="pdf-tool-btn active" title="Select / Move / Resize Annotations">
+            <span>👆</span> <span>Select</span>
+          </button>
+          <button id="tool-text" class="pdf-tool-btn" title="Add Text Box (Click to insert instantly)">
+            <span>✍️</span> <span>Add Text</span>
+          </button>
+          <button id="tool-whiteout" class="pdf-tool-btn" title="Whiteout / Erase Existing PDF Text">
+            <span>⬜</span> <span>Whiteout</span>
+          </button>
+          <button id="tool-draw" class="pdf-tool-btn" title="Freehand Drawing Pen">
+            <span>✏️</span> <span>Draw</span>
+          </button>
+          <button id="tool-highlighter" class="pdf-tool-btn" title="Highlight Area">
+            <span>🖍️</span> <span>Highlight</span>
+          </button>
+          <button id="tool-rect" class="pdf-tool-btn" title="Draw Rectangle Box">
+            <span>🔲</span> <span>Rect</span>
+          </button>
+          <button id="tool-circle" class="pdf-tool-btn" title="Draw Circle">
+            <span>⭕</span> <span>Circle</span>
+          </button>
+          <button id="tool-arrow" class="pdf-tool-btn" title="Draw Arrow">
+            <span>➡️</span> <span>Arrow</span>
+          </button>
+          <button id="tool-sign-modal" class="pdf-tool-btn" title="Add Signature">
+            <span>✒️</span> <span>Sign</span>
+          </button>
+        </div>
+
+        <!-- Color & Styling Group -->
+        <div class="pdf-toolbar-group">
+          <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 700; cursor: pointer;" title="Text & Drawing Color">
+            <span>Color:</span>
+            <input type="color" id="prop-color" value="#1e1e2f" style="width: 26px; height: 26px; border: none; border-radius: 4px; cursor: pointer; background: transparent;">
+          </label>
+
+          <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 700;" title="Text Box Background (White covers existing text)">
+            <span>Bg:</span>
+            <select id="prop-bg" style="padding: 0.2rem 0.35rem; font-size: 0.8rem; border: 1px solid var(--border); border-radius: var(--radius-xs); background: var(--bg-surface); color: var(--text-main);">
+              <option value="transparent">Transparent</option>
+              <option value="#ffffff">White (Cover Text)</option>
+              <option value="#fef08a">Yellow Note</option>
+            </select>
+          </label>
+
+          <div style="width: 1px; height: 20px; background: var(--border); margin: 0 0.15rem;"></div>
+
+          <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 700;" title="Font Size / Stroke Width">
+            <span>Size:</span>
+            <select id="prop-size" style="padding: 0.2rem 0.4rem; font-size: 0.82rem; border: 1px solid var(--border); border-radius: var(--radius-xs); background: var(--bg-surface); color: var(--text-main);">
+              <option value="12">12 pt</option>
+              <option value="14">14 pt</option>
+              <option value="16">16 pt</option>
+              <option value="18" selected>18 pt</option>
+              <option value="22">22 pt</option>
+              <option value="28">28 pt</option>
+              <option value="36">36 pt</option>
+              <option value="48">48 pt</option>
+            </select>
+          </label>
+
+          <button id="prop-bold" class="pdf-tool-btn" title="Toggle Bold" style="padding: 0.25rem 0.5rem; font-weight: 800;"><b>B</b></button>
+          <button id="prop-italic" class="pdf-tool-btn" title="Toggle Italic" style="padding: 0.25rem 0.5rem; font-style: italic;"><i>I</i></button>
+        </div>
+
+        <!-- Undo, Redo, Delete Group -->
+        <div class="pdf-toolbar-group">
+          <button id="btn-undo" class="pdf-tool-btn" title="Undo Last Action" disabled>
+            <span>↩️</span>
+          </button>
+          <button id="btn-redo" class="pdf-tool-btn" title="Redo Action" disabled>
+            <span>↪️</span>
+          </button>
+          <button id="btn-delete-object" class="pdf-tool-btn" title="Delete Selected Item" style="color: #ef4444;">
+            <span>🗑️</span>
+          </button>
+        </div>
+
+        <!-- Page Management & Zoom -->
+        <div class="pdf-toolbar-group">
+          <button id="btn-rotate-page" class="pdf-tool-btn" title="Rotate Current Page 90° Clockwise">
+            <span>🔄 Rotate</span>
+          </button>
+          <button id="btn-delete-page" class="pdf-tool-btn" title="Delete Current Page" style="color: #ef4444;">
+            <span>❌ Page</span>
+          </button>
+
+          <div style="width: 1px; height: 20px; background: var(--border); margin: 0 0.2rem;"></div>
+
+          <button id="btn-zoom-out" class="pdf-tool-btn" title="Zoom Out">➖</button>
+          <span id="zoom-level-text" style="font-size: 0.82rem; font-weight: 700; min-width: 45px; text-align: center;">100%</span>
+          <button id="btn-zoom-in" class="pdf-tool-btn" title="Zoom In">➕</button>
+        </div>
+
+        <!-- Download Action -->
+        <div>
+          <button id="btn-export-pdf" class="btn btn-primary" style="padding: 0.5rem 1.15rem; font-weight: 700; box-shadow: var(--shadow-md);">
+            <span>Download PDF</span> <span>💾</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Main Editor Studio Body: Sidebar + Center Canvas -->
+      <div class="pdf-editor-body">
+        
+        <!-- Left Thumbnail Strip -->
+        <div class="pdf-thumbnails-panel" id="editor-thumbnails-list">
+          <!-- Page previews injected dynamically -->
+        </div>
+
+        <!-- Center Viewport & Canvas Stacks -->
+        <div class="pdf-viewport-container" id="editor-viewport">
+          
+          <div class="pdf-canvas-layers" id="canvas-layers-box">
+            <!-- Background PDF Page Rendered by PDF.js -->
+            <canvas id="pdf-render-canvas"></canvas>
+            <!-- Foreground Interactive Annotations Layer by Fabric.js -->
+            <canvas id="fabric-overlay-canvas"></canvas>
+          </div>
+
+          <!-- Floating Bottom Page Navigation Dock -->
+          <div class="pdf-nav-dock">
+            <button id="dock-prev-page" title="Previous Page">◀</button>
+            <span>Page <span id="dock-current-page">1</span> of <span id="dock-total-pages">1</span></span>
+            <button id="dock-next-page" title="Next Page">▶</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Signature Creator Modal -->
+    <div id="signature-modal" class="pdf-modal-backdrop" style="display: none;">
+      <div class="pdf-modal-box">
+        <div class="pdf-modal-header">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+            <span>✒️</span> <span>Add Your Signature</span>
+          </h3>
+          <button id="modal-close-btn" style="background:none; border:none; font-size:1.25rem; cursor:pointer; color:var(--text-muted);">✕</button>
+        </div>
+        
+        <div class="pdf-modal-body">
+          <!-- Tabs: Draw vs Upload -->
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+            <button id="sig-tab-draw" class="btn btn-secondary btn-sm active" style="flex:1;">✍️ Draw Signature</button>
+            <button id="sig-tab-upload" class="btn btn-secondary btn-sm" style="flex:1;">📁 Upload Signature Image</button>
+          </div>
+
+          <!-- Draw Pad Pane -->
+          <div id="sig-draw-pane">
+            <div style="border: 2px dashed var(--border); border-radius: var(--radius-md); background: #ffffff; margin-bottom: 0.75rem; position: relative;">
+              <canvas id="sig-pad-canvas" width="460" height="180" style="width: 100%; height: 180px; display: block; cursor: crosshair; touch-action: none;"></canvas>
+              <button id="sig-pad-clear" style="position: absolute; bottom: 8px; right: 8px; font-size: 0.75rem; padding: 0.25rem 0.6rem; background: var(--bg-muted); border: 1px solid var(--border); border-radius: 4px; cursor: pointer;">Clear ✕</button>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-muted);">
+              <span>Draw your signature using mouse, stylus, or finger</span>
+              <div style="display: flex; gap: 0.4rem; align-items: center;">
+                <span>Color:</span>
+                <button type="button" class="sig-color-btn active" data-color="#000000" style="width:18px; height:18px; border-radius:50%; background:#000000; border:2px solid var(--primary); cursor:pointer;"></button>
+                <button type="button" class="sig-color-btn" data-color="#1e40af" style="width:18px; height:18px; border-radius:50%; background:#1e40af; border:1px solid #ccc; cursor:pointer;"></button>
+                <button type="button" class="sig-color-btn" data-color="#dc2626" style="width:18px; height:18px; border-radius:50%; background:#dc2626; border:1px solid #ccc; cursor:pointer;"></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upload Pane -->
+          <div id="sig-upload-pane" style="display: none;">
+            <div style="border: 2px dashed var(--border); border-radius: var(--radius-md); padding: 2rem 1rem; text-align: center; margin-bottom: 0.75rem;">
+              <input type="file" id="sig-image-file" accept="image/png, image/jpeg" style="display: none;">
+              <button id="sig-browse-btn" class="btn btn-secondary btn-sm" style="margin-bottom: 0.5rem;">Choose Signature Image</button>
+              <div style="font-size: 0.78rem; color: var(--text-muted);">PNG or JPG with transparent or light background</div>
+            </div>
+            <div id="sig-upload-preview" style="text-align: center; display: none;">
+              <img id="sig-preview-img" style="max-height: 80px; max-width: 100%; object-fit: contain; border: 1px solid var(--border); border-radius: 4px; padding: 4px;">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="pdf-modal-footer">
+          <button id="modal-cancel-btn" class="btn btn-secondary">Cancel</button>
+          <button id="modal-insert-sig-btn" class="btn btn-primary">Place on PDF Page</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instructions & Features Section -->
+    <section class="section-padding section-alt" style="border-radius: var(--radius-xl); padding: 2.5rem 2rem; margin: 3rem 0;">
+      <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 1.5rem;">How to Use Toolshere.online PDF Editor</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+        <div>
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">1️⃣</div>
+          <h4 style="font-weight: 700; margin-bottom: 0.35rem;">Upload Document</h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Drag &amp; drop any PDF. The file is processed completely in your browser and never sent to a server.</p>
+        </div>
+        <div>
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">2️⃣</div>
+          <h4 style="font-weight: 700; margin-bottom: 0.35rem;">Add Text, Annotations &amp; Signs</h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Click the toolbar to write text, highlight content, draw shapes, or create a signature with your mouse or finger.</p>
+        </div>
+        <div>
+          <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">3️⃣</div>
+          <h4 style="font-weight: 700; margin-bottom: 0.35rem;">Download Edited PDF</h4>
+          <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">Click Download PDF to export your completed document with all annotations crisply embedded.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section style="margin-bottom: 3.5rem;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;">Frequently Asked Questions</h2>
+      <div class="faq-grid" style="display: grid; gap: 1rem;">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is this online PDF editor safe and private?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Yes, 100%. Toolshere.online runs entirely inside your browser using client-side JavaScript (PDF.js, Fabric.js, and pdf-lib). Your sensitive documents, signatures, and contracts are never uploaded to any cloud server or database.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I sign multi-page contracts and forms?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Absolutely. You can navigate between pages using the thumbnail sidebar, draw or upload your signature, place it on any page, resize or rotate it, and save the signed PDF.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Will editing reduce the quality of my original PDF?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            No. The original vector text and high-resolution elements of your PDF are preserved, and all new text, shapes, and signatures are merged cleanly at maximum clarity.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related PDF Tools -->
+    <section style="margin-bottom: 4rem;">
+      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;">Related PDF Tools</h2>
+      <div class="tools-grid" id="related-tools-container"></div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <img src="assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+          </a>
+          <p>Toolshere.online is your premier directory of free, private, client-side online tools for text, calculations, images, PDFs, and code.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Categories</h4>
+          <div class="footer-links">
+            <a href="all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
+            <a href="all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="all-tools.html?cat=images" class="footer-link">Image Tools</a>
+            <a href="all-tools.html?cat=pdf" class="footer-link">PDF Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">About Us</a>
+            <a href="contact.html" class="footer-link">Contact Us</a>
+            <a href="all-tools.html" class="footer-link">All Tools</a>
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
+        <div class="footer-badges">
+          <span class="privacy-badge">🔒 100% Client-Side Privacy</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/tools-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.Toolshere.onlineApp.renderRelatedTools('pdf-editor', 'related-tools-container', 3);
+
+      // Elements
+      const dropzone = document.getElementById('editor-dropzone');
+      const fileInput = document.getElementById('editor-file-input');
+      const loadingBar = document.getElementById('editor-loading-bar');
+      const loadingFill = document.getElementById('loading-bar-fill');
+      const loadingText = document.getElementById('loading-status-text');
+      const studio = document.getElementById('pdf-editor-studio');
+      const thumbnailsPanel = document.getElementById('editor-thumbnails-list');
+
+      const renderCanvas = document.getElementById('pdf-render-canvas');
+      const overlayCanvas = document.getElementById('fabric-overlay-canvas');
+      const canvasLayersBox = document.getElementById('canvas-layers-box');
+      const viewportContainer = document.getElementById('editor-viewport');
+
+      const dockCurrentPage = document.getElementById('dock-current-page');
+      const dockTotalPages = document.getElementById('dock-total-pages');
+      const dockPrevBtn = document.getElementById('dock-prev-page');
+      const dockNextBtn = document.getElementById('dock-next-page');
+
+      // Toolbar buttons
+      const toolSelect = document.getElementById('tool-select');
+      const toolText = document.getElementById('tool-text');
+      const toolWhiteout = document.getElementById('tool-whiteout');
+      const toolDraw = document.getElementById('tool-draw');
+      const toolHighlighter = document.getElementById('tool-highlighter');
+      const toolRect = document.getElementById('tool-rect');
+      const toolCircle = document.getElementById('tool-circle');
+      const toolArrow = document.getElementById('tool-arrow');
+      const toolSignModalBtn = document.getElementById('tool-sign-modal');
+
+      const propColor = document.getElementById('prop-color');
+      const propBg = document.getElementById('prop-bg');
+      const propSize = document.getElementById('prop-size');
+      const propBold = document.getElementById('prop-bold');
+      const propItalic = document.getElementById('prop-italic');
+      const btnUndo = document.getElementById('btn-undo');
+      const btnRedo = document.getElementById('btn-redo');
+      const btnDeleteObject = document.getElementById('btn-delete-object');
+      const btnRotatePage = document.getElementById('btn-rotate-page');
+      const btnDeletePage = document.getElementById('btn-delete-page');
+      const btnZoomIn = document.getElementById('btn-zoom-in');
+      const btnZoomOut = document.getElementById('btn-zoom-out');
+      const zoomText = document.getElementById('zoom-level-text');
+      const btnExportPdf = document.getElementById('btn-export-pdf');
+
+      // Signature Modal Elements
+      const sigModal = document.getElementById('signature-modal');
+      const modalCloseBtn = document.getElementById('modal-close-btn');
+      const modalCancelBtn = document.getElementById('modal-cancel-btn');
+      const modalInsertSigBtn = document.getElementById('modal-insert-sig-btn');
+      const sigTabDraw = document.getElementById('sig-tab-draw');
+      const sigTabUpload = document.getElementById('sig-tab-upload');
+      const sigDrawPane = document.getElementById('sig-draw-pane');
+      const sigUploadPane = document.getElementById('sig-upload-pane');
+      const sigPadCanvas = document.getElementById('sig-pad-canvas');
+      const sigPadClear = document.getElementById('sig-pad-clear');
+      const sigImageFileInput = document.getElementById('sig-image-file');
+      const sigBrowseBtn = document.getElementById('sig-browse-btn');
+      const sigUploadPreview = document.getElementById('sig-upload-preview');
+      const sigPreviewImg = document.getElementById('sig-preview-img');
+
+      // State
+      let originalPdfBytes = null;
+      let currentFile = null;
+      let pdfDoc = null;
+      let activePageIndex = 0; // 0-indexed
+      let currentScale = 1.25;
+      let activeMode = 'select'; // 'select', 'text', 'whiteout', 'draw', 'highlighter', 'rect', 'circle', 'arrow'
+      
+      let activePagesList = [];
+      let pageRotations = {};
+      let pageAnnotations = {};
+      let pageHistory = {};
+
+      let fabricCanvas = null;
+
+      // Initialize Fabric Canvas
+      function initFabric() {
+        fabricCanvas = new fabric.Canvas('fabric-overlay-canvas', {
+          isDrawingMode: false,
+          selection: true,
+          preserveObjectStacking: true
+        });
+
+        fabricCanvas.on('object:added', () => recordHistory());
+        fabricCanvas.on('object:modified', () => recordHistory());
+        fabricCanvas.on('object:removed', () => recordHistory());
+
+        // Sync toolbar settings when an object is selected
+        fabricCanvas.on('selection:created', onObjectSelected);
+        fabricCanvas.on('selection:updated', onObjectSelected);
+        fabricCanvas.on('selection:cleared', onObjectDeselected);
+
+        // Double click to edit any text box directly
+        fabricCanvas.on('mouse:dblclick', (opt) => {
+          if (opt.target && (opt.target.type === 'textbox' || opt.target.type === 'i-text')) {
+            opt.target.enterEditing();
+            opt.target.selectAll();
+            fabricCanvas.renderAll();
+          }
+        });
+
+        fabricCanvas.on('mouse:down', (opt) => {
+          fabricCanvas.calcOffset();
+          if (opt.target && (opt.target.type === 'textbox' || opt.target.type === 'i-text')) {
+            return;
+          }
+          if (activeMode === 'text') {
+            const pointer = fabricCanvas.getPointer(opt.e);
+            addTextBox(pointer.x, pointer.y);
+            setMode('select');
+          } else if (activeMode === 'whiteout') {
+            const pointer = fabricCanvas.getPointer(opt.e);
+            addWhiteoutBox(pointer.x, pointer.y);
+            setMode('select');
+          } else if (['rect', 'circle', 'arrow'].includes(activeMode) && !opt.target) {
+            const pointer = fabricCanvas.getPointer(opt.e);
+            addShape(activeMode, pointer.x, pointer.y);
+            setMode('select');
+          }
+        });
+      }
+
+      function onObjectSelected(e) {
+        const obj = e.selected ? e.selected[0] : fabricCanvas.getActiveObject();
+        if (!obj) return;
+        if (obj.type === 'textbox' || obj.type === 'i-text') {
+          if (obj.fill) propColor.value = obj.fill;
+          if (obj.fontSize) propSize.value = obj.fontSize;
+          if (obj.backgroundColor) {
+            propBg.value = obj.backgroundColor === 'transparent' ? 'transparent' : (obj.backgroundColor.toLowerCase() === '#fef08a' ? '#fef08a' : '#ffffff');
+          }
+          if (propBold) propBold.classList.toggle('active', obj.fontWeight === 'bold');
+          if (propItalic) propItalic.classList.toggle('active', obj.fontStyle === 'italic');
+        } else if (obj.stroke && obj.type !== 'image') {
+          propColor.value = obj.stroke;
+        }
+      }
+
+      function onObjectDeselected() {
+        if (propBold) propBold.classList.remove('active');
+        if (propItalic) propItalic.classList.remove('active');
+      }
+
+      viewportContainer.addEventListener('scroll', () => {
+        if (fabricCanvas) fabricCanvas.calcOffset();
+      });
+      window.addEventListener('resize', () => {
+        if (fabricCanvas) fabricCanvas.calcOffset();
+      });
+
+      initFabric();
+
+      // Drag and Drop Upload
+      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          loadPdfFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      // Explicit dropzone click handler (works even if user clicks text/badge)
+      dropzone.addEventListener('click', (e) => {
+        if (e.target !== fileInput) {
+          fileInput.click();
+        }
+      });
+
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files[0]) {
+          const selected = fileInput.files[0];
+          fileInput.value = ''; // Allow selecting same file again
+          loadPdfFile(selected);
+        }
+      });
+
+      async function loadPdfFile(file) {
+        if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+          window.Toolshere.onlineApp.showToast('Please select a valid PDF file', 'error');
+          return;
+        }
+
+        if (typeof pdfjsLib === 'undefined') {
+          window.Toolshere.onlineApp.showToast('PDF engine is still loading. Please wait 2 seconds and retry.', 'error');
+          return;
+        }
+
+        currentFile = file;
+        dropzone.style.display = 'none';
+        loadingBar.style.display = 'block';
+        loadingFill.style.width = '25%';
+        loadingText.textContent = `Reading ${file.name}... ⏳`;
+
+        try {
+          originalPdfBytes = await file.arrayBuffer();
+          loadingFill.style.width = '55%';
+          loadingText.textContent = 'Parsing PDF structure... ⏳';
+
+          const uint8Data = new Uint8Array(originalPdfBytes);
+          const loadingTask = pdfjsLib.getDocument({ data: uint8Data });
+          pdfDoc = await loadingTask.promise;
+
+          loadingFill.style.width = '85%';
+          loadingText.textContent = 'Rendering pages and editor workspace... ⏳';
+
+          activePagesList = [];
+          pageRotations = {};
+          pageAnnotations = {};
+          pageHistory = {};
+
+          for (let i = 1; i <= pdfDoc.numPages; i++) {
+            activePagesList.push(i);
+            pageRotations[i] = 0;
+            pageAnnotations[i] = null;
+            pageHistory[i] = { undo: [], redo: [] };
+          }
+
+          loadingFill.style.width = '100%';
+          setTimeout(async () => {
+            loadingBar.style.display = 'none';
+            studio.style.display = 'block';
+            await renderThumbnailsPanel();
+            await switchPage(0);
+            window.Toolshere.onlineApp.showToast(`Loaded ${file.name} (${pdfDoc.numPages} pages)!`, 'success');
+          }, 300);
+
+        } catch (err) {
+          console.error('PDF Load Error:', err);
+          window.Toolshere.onlineApp.showToast('Error loading PDF: ' + (err.message || err), 'error');
+          loadingBar.style.display = 'none';
+          dropzone.style.display = 'block';
+          fileInput.value = '';
+        }
+      }
+
+      // Render thumbnails panel
+      async function renderThumbnailsPanel() {
+        thumbnailsPanel.innerHTML = '';
+        for (let idx = 0; idx < activePagesList.length; idx++) {
+          const origPageNum = activePagesList[idx];
+          const page = await pdfDoc.getPage(origPageNum);
+          const viewport = page.getViewport({ scale: 0.25 });
+
+          const thumbCanvas = document.createElement('canvas');
+          thumbCanvas.width = viewport.width;
+          thumbCanvas.height = viewport.height;
+          const ctx = thumbCanvas.getContext('2d');
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, thumbCanvas.width, thumbCanvas.height);
+          await page.render({ canvasContext: ctx, viewport }).promise;
+
+          const card = document.createElement('div');
+          card.className = `pdf-thumbnail-card ${idx === activePageIndex ? 'active' : ''}`;
+          card.id = `thumb-card-${idx}`;
+          card.innerHTML = `
+            <img src="${thumbCanvas.toDataURL('image/jpeg', 0.8)}" class="pdf-thumbnail-img" style="transform: rotate(${pageRotations[origPageNum] || 0}deg);">
+            <div class="pdf-thumbnail-label">Page ${idx + 1}</div>
+          `;
+          card.addEventListener('click', () => switchPage(idx));
+          thumbnailsPanel.appendChild(card);
+        }
+      }
+
+      // Switch to Page
+      async function switchPage(newIndex) {
+        if (newIndex < 0 || newIndex >= activePagesList.length) return;
+
+        // 1. Save current page fabric JSON
+        if (fabricCanvas && activePageIndex >= 0 && activePagesList[activePageIndex]) {
+          const currentOrigNum = activePagesList[activePageIndex];
+          pageAnnotations[currentOrigNum] = {
+            json: fabricCanvas.toJSON(),
+            width: fabricCanvas.getWidth(),
+            height: fabricCanvas.getHeight()
+          };
+        }
+
+        activePageIndex = newIndex;
+        dockCurrentPage.textContent = activePageIndex + 1;
+        dockTotalPages.textContent = activePagesList.length;
+        dockPrevBtn.disabled = activePageIndex === 0;
+        dockNextBtn.disabled = activePageIndex === activePagesList.length - 1;
+
+        document.querySelectorAll('.pdf-thumbnail-card').forEach((el, i) => {
+          el.classList.toggle('active', i === activePageIndex);
+        });
+
+        // 2. Render Page Background using PDF.js
+        const origPageNum = activePagesList[activePageIndex];
+        const page = await pdfDoc.getPage(origPageNum);
+        const rotation = (pageRotations[origPageNum] || 0) % 360;
+        const viewport = page.getViewport({ scale: currentScale, rotation });
+
+        renderCanvas.width = viewport.width;
+        renderCanvas.height = viewport.height;
+        const ctx = renderCanvas.getContext('2d');
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, renderCanvas.width, renderCanvas.height);
+
+        await page.render({ canvasContext: ctx, viewport }).promise;
+
+        // 3. Resize and sync Fabric Canvas layer
+        fabricCanvas.setWidth(viewport.width);
+        fabricCanvas.setHeight(viewport.height);
+        fabricCanvas.clear();
+
+        canvasLayersBox.style.width = viewport.width + 'px';
+        canvasLayersBox.style.height = viewport.height + 'px';
+
+        // 4. Restore Fabric Annotations if any
+        if (pageAnnotations[origPageNum]) {
+          const saved = pageAnnotations[origPageNum];
+          const jsonToLoad = saved.json || (typeof saved === 'string' ? JSON.parse(saved) : saved);
+          fabricCanvas.loadFromJSON(jsonToLoad, () => {
+            fabricCanvas.renderAll();
+            fabricCanvas.calcOffset();
+            if (!pageHistory[origPageNum] || pageHistory[origPageNum].undo.length === 0) {
+              pageHistory[origPageNum] = {
+                undo: [JSON.stringify(fabricCanvas.toJSON())],
+                redo: []
+              };
+            }
+            updateUndoRedoButtons();
+          });
+        } else {
+          fabricCanvas.calcOffset();
+          if (!pageHistory[origPageNum] || pageHistory[origPageNum].undo.length === 0) {
+            pageHistory[origPageNum] = {
+              undo: [JSON.stringify(fabricCanvas.toJSON())],
+              redo: []
+            };
+          }
+          updateUndoRedoButtons();
+        }
+        setTimeout(() => {
+          if (fabricCanvas) fabricCanvas.calcOffset();
+        }, 60);
+      }
+
+      // History Management
+      function recordHistory() {
+        const origPageNum = activePagesList[activePageIndex];
+        if (!origPageNum) return;
+        if (!pageHistory[origPageNum]) {
+          pageHistory[origPageNum] = { undo: [], redo: [] };
+        }
+
+        const json = JSON.stringify(fabricCanvas.toJSON());
+        const stack = pageHistory[origPageNum].undo;
+        if (stack.length === 0 || stack[stack.length - 1] !== json) {
+          stack.push(json);
+          pageHistory[origPageNum].redo = [];
+        }
+        updateUndoRedoButtons();
+      }
+
+      function updateUndoRedoButtons() {
+        const origPageNum = activePagesList[activePageIndex];
+        if (!origPageNum || !pageHistory[origPageNum]) {
+          btnUndo.disabled = true;
+          btnRedo.disabled = true;
+          return;
+        }
+        btnUndo.disabled = pageHistory[origPageNum].undo.length <= 1;
+        btnRedo.disabled = pageHistory[origPageNum].redo.length === 0;
+      }
+
+      btnUndo.addEventListener('click', () => {
+        const origPageNum = activePagesList[activePageIndex];
+        const h = pageHistory[origPageNum];
+        if (!h || h.undo.length <= 1) return;
+
+        const current = h.undo.pop();
+        h.redo.push(current);
+        const prev = h.undo[h.undo.length - 1];
+
+        fabricCanvas.loadFromJSON(prev, () => {
+          fabricCanvas.renderAll();
+          updateUndoRedoButtons();
+        });
+      });
+
+      btnRedo.addEventListener('click', () => {
+        const origPageNum = activePagesList[activePageIndex];
+        const h = pageHistory[origPageNum];
+        if (!h || !h.redo.length) return;
+
+        const next = h.redo.pop();
+        h.undo.push(next);
+
+        fabricCanvas.loadFromJSON(next, () => {
+          fabricCanvas.renderAll();
+          updateUndoRedoButtons();
+        });
+      });
+
+      // Navigation Dock handlers
+      dockPrevBtn.addEventListener('click', () => switchPage(activePageIndex - 1));
+      dockNextBtn.addEventListener('click', () => switchPage(activePageIndex + 1));
+
+      // Tool Mode Switcher
+      function setMode(mode) {
+        activeMode = mode;
+        [toolSelect, toolText, toolWhiteout, toolDraw, toolHighlighter, toolRect, toolCircle, toolArrow].forEach(btn => {
+          if (btn) btn.classList.remove('active');
+        });
+
+        if (mode === 'select' && toolSelect) toolSelect.classList.add('active');
+        if (mode === 'text' && toolText) toolText.classList.add('active');
+        if (mode === 'whiteout' && toolWhiteout) toolWhiteout.classList.add('active');
+        if (mode === 'draw' && toolDraw) toolDraw.classList.add('active');
+        if (mode === 'highlighter' && toolHighlighter) toolHighlighter.classList.add('active');
+        if (mode === 'rect' && toolRect) toolRect.classList.add('active');
+        if (mode === 'circle' && toolCircle) toolCircle.classList.add('active');
+        if (mode === 'arrow' && toolArrow) toolArrow.classList.add('active');
+
+        if (mode === 'draw') {
+          fabricCanvas.isDrawingMode = true;
+          fabricCanvas.freeDrawingBrush.color = propColor.value;
+          fabricCanvas.freeDrawingBrush.width = parseInt(propSize.value, 10) / 4 || 4;
+        } else if (mode === 'highlighter') {
+          fabricCanvas.isDrawingMode = true;
+          fabricCanvas.freeDrawingBrush.color = hexToRgba(propColor.value, 0.38);
+          fabricCanvas.freeDrawingBrush.width = 24;
+        } else {
+          fabricCanvas.isDrawingMode = false;
+        }
+      }
+
+      toolSelect.addEventListener('click', () => setMode('select'));
+      
+      // When clicking "Add Text": immediately place an editable text box in center and focus it!
+      toolText.addEventListener('click', () => {
+        if (!fabricCanvas) return;
+        fabricCanvas.calcOffset();
+        const cWidth = fabricCanvas.getWidth();
+        const cHeight = fabricCanvas.getHeight();
+        const posX = Math.max(30, (cWidth / 2) - 110);
+        const posY = Math.max(40, Math.min(180, cHeight / 4));
+        addTextBox(posX, posY);
+        setMode('select');
+      });
+
+      // When clicking "Whiteout": immediately place a whiteout cover box!
+      toolWhiteout.addEventListener('click', () => {
+        if (!fabricCanvas) return;
+        fabricCanvas.calcOffset();
+        const cWidth = fabricCanvas.getWidth();
+        const cHeight = fabricCanvas.getHeight();
+        const posX = Math.max(30, (cWidth / 2) - 70);
+           toolDraw.addEventListener('click', () => setMode('draw'));
+      toolHighlighter.addEventListener('click', () => setMode('highlighter'));
+
+      toolRect.addEventListener('click', () => {
+        if (!fabricCanvas) return;
+        fabricCanvas.calcOffset();
+        const cWidth = fabricCanvas.getWidth();
+        const cHeight = fabricCanvas.getHeight();
+        addShape('rect', Math.max(30, (cWidth / 2) - 80), Math.max(40, (cHeight / 3)));
+        setMode('select');
+      });
+
+      toolCircle.addEventListener('click', () => {
+        if (!fabricCanvas) return;
+        fabricCanvas.calcOffset();
+        const cWidth = fabricCanvas.getWidth();
+        const cHeight = fabricCanvas.getHeight();
+        addShape('circle', Math.max(30, (cWidth / 2) - 60), Math.max(40, (cHeight / 3)));
+        setMode('select');
+      });
+
+      toolArrow.addEventListener('click', () => {
+        if (!fabricCanvas) return;
+        fabricCanvas.calcOffset();
+        const cWidth = fabricCanvas.getWidth();
+        const cHeight = fabricCanvas.getHeight();
+        addShape('arrow', Math.max(30, (cWidth / 2) - 70), Math.max(40, (cHeight / 3)));
+        setMode('select');
+      });
+
+      // Property Changes
+      propColor.addEventListener('input', () => {
+        if (activeMode === 'draw') {
+          fabricCanvas.freeDrawingBrush.color = propColor.value;
+        } else if (activeMode === 'highlighter') {
+          fabricCanvas.freeDrawingBrush.color = hexToRgba(propColor.value, 0.38);
+        }
+        const activeObj = fabricCanvas.getActiveObject();
+        if (activeObj) {
+          if (activeObj.type === 'textbox' || activeObj.type === 'i-text') {
+            activeObj.set('fill', propColor.value);
+          } else if (activeObj.type !== 'image') {
+            activeObj.set('stroke', propColor.value);
+          }
+          fabricCanvas.renderAll();
+          recordHistory();
+        }
+      });
+
+      propBg.addEventListener('change', () => {
+        const activeObj = fabricCanvas.getActiveObject();
+        if (activeObj && (activeObj.type === 'textbox' || activeObj.type === 'i-text')) {
+          activeObj.set('backgroundColor', propBg.value);
+          fabricCanvas.renderAll();
+          recordHistory();
+        }
+      });
+
+      propSize.addEventListener('change', () => {
+        const size = parseInt(propSize.value, 10);
+        if (activeMode === 'draw') {
+          fabricCanvas.freeDrawingBrush.width = Math.max(size / 4, 2);
+        }
+        const activeObj = fabricCanvas.getActiveObject();
+        if (activeObj && (activeObj.type === 'textbox' || activeObj.type === 'i-text')) {
+          activeObj.set('fontSize', size);
+          fabricCanvas.renderAll();
+          recordHistory();
+        }
+      });
+
+      propBold.addEventListener('click', () => {
+        propBold.classList.toggle('active');
+        const isBold = propBold.classList.contains('active');
+        const activeObj = fabricCanvas.getActiveObject();
+        if (activeObj && (activeObj.type === 'textbox' || activeObj.type === 'i-text')) {
+          activeObj.set('fontWeight', isBold ? 'bold' : 'normal');
+          fabricCanvas.renderAll();
+          recordHistory();
+        }
+      });
+
+      propItalic.addEventListener('click', () => {
+        propItalic.classList.toggle('active');
+        const isItalic = propItalic.classList.contains('active');
+        const activeObj = fabricCanvas.getActiveObject();
+        if (activeObj && (activeObj.type === 'textbox' || activeObj.type === 'i-text')) {
+          activeObj.set('fontStyle', isItalic ? 'italic' : 'normal');
+          fabricCanvas.renderAll();
+          recordHistory();
+        }
+      });
+
+      // Add Text Box
+      function addTextBox(x, y, initialText = 'Click to edit text') {
+        if (!fabricCanvas) return;
+        fabricCanvas.calcOffset();
+
+        const cWidth = fabricCanvas.getWidth();
+        const cHeight = fabricCanvas.getHeight();
+        const boxWidth = Math.min(240, cWidth - 40);
+        const left = Math.min(Math.max(10, x), cWidth - boxWidth - 10);
+        const top = Math.min(Math.max(10, y), cHeight - 40);
+
+        const isBold = propBold && propBold.classList.contains('active');
+        const isItalic = propItalic && propItalic.classList.contains('active');
+        const bgColor = propBg ? propBg.value : 'transparent';
+        const fontSize = parseInt(propSize.value, 10) || 18;
+        const color = propColor ? propColor.value : '#1e1e2f';
+
+        const textbox = new fabric.Textbox(initialText, {
+          left: left,
+          top: top,
+          width: boxWidth,
+          fontSize: fontSize,
+          fill: color,
+          backgroundColor: bgColor,
+          fontWeight: isBold ? 'bold' : 'normal',
+          fontStyle: isItalic ? 'italic' : 'normal',
+          fontFamily: 'Helvetica, Arial, sans-serif',
+          borderColor: '#7c3aed',
+          cornerColor: '#7c3aed',
+          cornerSize: 8,
+          transparentCorners: false,
+          padding: 6,
+          editable: true
+        });
+
+        fabricCanvas.add(textbox);
+        fabricCanvas.setActiveObject(textbox);
+        textbox.enterEditing();
+        textbox.selectAll();
+        fabricCanvas.renderAll();
+        recordHistory();
+        window.Toolshere.onlineApp.showToast('Text box added! Type your text directly.', 'success');
+      }
+
+      // Add Whiteout Box (To cover/erase existing PDF text)
+      function addWhiteoutBox(x, y) {
+        if (!fabricCanvas) return;
+        fabricCanvas.calcOffset();
+
+        const rect = new fabric.Rect({
+          left: Math.max(10, x),
+          top: Math.max(10, y),
+          width: 140,
+          height: 36,
+          fill: '#ffffff',
+          stroke: '#e5e7eb',
+          strokeWidth: 1,
+          borderColor: '#7c3aed',
+          cornerColor: '#7c3aed',
+          cornerSize: 8,
+          transparentCorners: false
+        });
+
+        fabricCanvas.add(rect);
+        fabricCanvas.setActiveObject(rect);
+        fabricCanvas.renderAll();
+        recordHistory();
+        window.Toolshere.onlineApp.showToast('Whiteout box added! Drag or resize to cover old text.', 'info');
+      }
+
+      // Add Shapes
+      function addShape(type, x, y) {
+        const color = propColor.value || '#7c3aed';
+        const strokeW = Math.max(parseInt(propSize.value, 10) / 6, 2.5);
+
+        if (type === 'rect') {
+          const rect = new fabric.Rect({
+            left: x,
+            top: y,
+            width: 140,
+            height: 90,
+            fill: 'transparent',
+            stroke: color,
+            strokeWidth: strokeW,
+            borderColor: '#7c3aed',
+            cornerColor: '#7c3aed',
+            cornerSize: 8,
+            transparentCorners: false
+          });
+          fabricCanvas.add(rect);
+          fabricCanvas.setActiveObject(rect);
+          window.Toolshere.onlineApp.showToast('Rectangle box added! Drag or resize.', 'info');
+        } else if (type === 'circle') {
+          const circle = new fabric.Circle({
+            left: x,
+            top: y,
+            radius: 50,
+            fill: 'transparent',
+            stroke: color,
+            strokeWidth: strokeW,
+            borderColor: '#7c3aed',
+            cornerColor: '#7c3aed',
+            cornerSize: 8,
+            transparentCorners: false
+          });
+          fabricCanvas.add(circle);
+          fabricCanvas.setActiveObject(circle);
+          window.Toolshere.onlineApp.showToast('Circle added! Drag or resize.', 'info');
+        } else if (type === 'arrow') {
+          const line = new fabric.Line([x, y + 10, x + 110, y + 10], {
+            stroke: color,
+            strokeWidth: strokeW
+          });
+          const head = new fabric.Triangle({
+            left: x + 110,
+            top: y + 10,
+            originX: 'center',
+            originY: 'center',
+            angle: 90,
+            width: strokeW * 5 + 6,
+            height: strokeW * 5 + 6,
+            fill: color
+          });
+          const arrowGroup = new fabric.Group([line, head], {
+            borderColor: '#7c3aed',
+            cornerColor: '#7c3aed',
+            cornerSize: 8,
+            transparentCorners: false
+          });
+          fabricCanvas.add(arrowGroup);
+          fabricCanvas.setActiveObject(arrowGroup);
+          window.Toolshere.onlineApp.showToast('Arrow added! Drag or rotate.', 'info');
+        }
+        fabricCanvas.renderAll();
+        recordHistory();
+      }
+
+      // Delete Selected Object
+      btnDeleteObject.addEventListener('click', () => {
+        const activeObj = fabricCanvas.getActiveObject();
+        if (activeObj) {
+          if (activeObj.type === 'activeSelection') {
+            activeObj.forEachObject(obj => fabricCanvas.remove(obj));
+          } else {
+            fabricCanvas.remove(activeObj);
+          }
+          fabricCanvas.discardActiveObject();
+          fabricCanvas.renderAll();
+          recordHistory();
+          window.Toolshere.onlineApp.showToast('Annotation deleted', 'info');
+        } else {
+          window.Toolshere.onlineApp.showToast('Please click an annotation to select it first', 'info');
+        }
+      });
+
+      // Keyboard Delete & Shortcuts
+      window.addEventListener('keydown', (e) => {
+        const isInputFocused = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName);
+
+        if ((e.key === 'Delete' || e.key === 'Backspace') && !isInputFocused) {
+          const activeObj = fabricCanvas.getActiveObject();
+          if (activeObj && !activeObj.isEditing) {
+            e.preventDefault();
+            if (activeObj.type === 'activeSelection') {
+              activeObj.forEachObject(obj => fabricCanvas.remove(obj));
+            } else {
+              fabricCanvas.remove(activeObj);
+            }
+            fabricCanvas.discardActiveObject();
+            fabricCanvas.renderAll();
+            recordHistory();
+          }
+        } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z' && !isInputFocused) {
+          e.preventDefault();
+          if (e.shiftKey) {
+            btnRedo.click();
+          } else {
+            btnUndo.click();
+          }
+        } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y' && !isInputFocused) {
+          e.preventDefault();
+          btnRedo.click();
+        } else if (e.key === 'Escape') {
+          setMode('select');
+        }
+      });
+
+      // Page Operations (Rotate, Delete)
+      btnRotatePage.addEventListener('click', async () => {
+        const origPageNum = activePagesList[activePageIndex];
+        pageRotations[origPageNum] = ((pageRotations[origPageNum] || 0) + 90) % 360;
+        await switchPage(activePageIndex);
+        await renderThumbnailsPanel();
+        window.Toolshere.onlineApp.showToast(`Page ${activePageIndex + 1} rotated 90°`, 'info');
+      });
+
+      btnDeletePage.addEventListener('click', async () => {
+        if (activePagesList.length <= 1) {
+          window.Toolshere.onlineApp.showToast('Document must contain at least one page', 'error');
+          return;
+        }
+
+        if (confirm(`Are you sure you want to delete Page ${activePageIndex + 1}?`)) {
+          const origPageNum = activePagesList[activePageIndex];
+          delete pageAnnotations[origPageNum];
+          delete pageRotations[origPageNum];
+          delete pageHistory[origPageNum];
+
+          activePagesList.splice(activePageIndex, 1);
+          const nextIndex = Math.min(activePageIndex, activePagesList.length - 1);
+
+          fabricCanvas.clear();
+          activePageIndex = -1; // reset so switchPage does not overwrite new page
+          await renderThumbnailsPanel();
+          await switchPage(nextIndex);
+          window.Toolshere.onlineApp.showToast('Page deleted', 'info');
+        }
+      });
+
+      // Zoom In / Out
+      btnZoomIn.addEventListener('click', () => {
+        if (currentScale < 2.5) {
+          currentScale += 0.25;
+          zoomText.textContent = `${Math.round(currentScale * 80)}%`;
+          switchPage(activePageIndex);
+        }
+      });
+
+      btnZoomOut.addEventListener('click', () => {
+        if (currentScale > 0.6) {
+          currentScale -= 0.25;
+          zoomText.textContent = `${Math.round(currentScale * 80)}%`;
+          switchPage(activePageIndex);
+        }
+      });
+
+      // Signature Pad Setup
+      let sigPadDrawing = false;
+      const sigPadCtx = sigPadCanvas.getContext('2d');
+      sigPadCtx.lineWidth = 3;
+      sigPadCtx.lineCap = 'round';
+      sigPadCtx.lineJoin = 'round';
+      let activeSigColor = '#000000';
+
+      function getSigPadCoords(e) {
+        const rect = sigPadCanvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return {
+          x: (clientX - rect.left) * (sigPadCanvas.width / rect.width),
+          y: (clientY - rect.top) * (sigPadCanvas.height / rect.height)
+        };
+      }
+
+      function startSigDraw(e) {
+        sigPadDrawing = true;
+        const pos = getSigPadCoords(e);
+        sigPadCtx.beginPath();
+        sigPadCtx.moveTo(pos.x, pos.y);
+      }
+
+      function moveSigDraw(e) {
+        if (!sigPadDrawing) return;
+        e.preventDefault();
+        const pos = getSigPadCoords(e);
+        sigPadCtx.strokeStyle = activeSigColor;
+        sigPadCtx.lineTo(pos.x, pos.y);
+        sigPadCtx.stroke();
+      }
+
+      function stopSigDraw() {
+        sigPadDrawing = false;
+      }
+
+      sigPadCanvas.addEventListener('mousedown', startSigDraw);
+      sigPadCanvas.addEventListener('mousemove', moveSigDraw);
+      window.addEventListener('mouseup', stopSigDraw);
+
+      sigPadCanvas.addEventListener('touchstart', startSigDraw);
+      sigPadCanvas.addEventListener('touchmove', moveSigDraw);
+      window.addEventListener('touchend', stopSigDraw);
+
+      sigPadClear.addEventListener('click', () => {
+        sigPadCtx.clearRect(0, 0, sigPadCanvas.width, sigPadCanvas.height);
+      });
+
+      document.querySelectorAll('.sig-color-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.sig-color-btn').forEach(b => b.style.border = '1px solid #ccc');
+          btn.style.border = '2px solid var(--primary)';
+          activeSigColor = btn.getAttribute('data-color');
+        });
+      });
+
+      // Signature Modal Tabs
+      sigTabDraw.addEventListener('click', () => {
+        sigTabDraw.classList.add('active');
+        sigTabUpload.classList.remove('active');
+        sigDrawPane.style.display = 'block';
+        sigUploadPane.style.display = 'none';
+      });
+
+      sigTabUpload.addEventListener('click', () => {
+        sigTabUpload.classList.add('active');
+        sigTabDraw.classList.remove('active');
+        sigUploadPane.style.display = 'block';
+        sigDrawPane.style.display = 'none';
+      });
+
+      sigBrowseBtn.addEventListener('click', () => sigImageFileInput.click());
+      sigImageFileInput.addEventListener('change', () => {
+        if (sigImageFileInput.files && sigImageFileInput.files[0]) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            sigPreviewImg.src = e.target.result;
+            sigUploadPreview.style.display = 'block';
+          };
+          reader.readAsDataURL(sigImageFileInput.files[0]);
+        }
+      });
+
+      toolSignModalBtn.addEventListener('click', () => {
+        sigModal.style.display = 'flex';
+      });
+
+      function closeSigModal() {
+        sigModal.style.display = 'none';
+      }
+
+      modalCloseBtn.addEventListener('click', closeSigModal);
+      modalCancelBtn.addEventListener('click', closeSigModal);
+
+      modalInsertSigBtn.addEventListener('click', () => {
+        let sigDataUrl = null;
+
+        if (sigTabDraw.classList.contains('active')) {
+          const blank = document.createElement('canvas');
+          blank.width = sigPadCanvas.width;
+          blank.height = sigPadCanvas.height;
+          if (sigPadCanvas.toDataURL() === blank.toDataURL()) {
+            window.Toolshere.onlineApp.showToast('Please draw your signature first', 'error');
+            return;
+          }
+          sigDataUrl = sigPadCanvas.toDataURL('image/png');
+        } else {
+          if (!sigPreviewImg.src) {
+            window.Toolshere.onlineApp.showToast('Please choose an image file first', 'error');
+            return;
+          }
+          sigDataUrl = sigPreviewImg.src;
+        }
+
+        fabric.Image.fromURL(sigDataUrl, (img) => {
+          img.scaleToWidth(180);
+          img.set({
+            left: 100,
+            top: 150,
+            cornerColor: '#7c3aed',
+            cornerSize: 8,
+            transparentCorners: false
+          });
+          fabricCanvas.add(img);
+          fabricCanvas.setActiveObject(img);
+          fabricCanvas.renderAll();
+          recordHistory();
+          closeSigModal();
+          window.Toolshere.onlineApp.showToast('Signature added to page! Drag to position.', 'success');
+        });
+      });
+
+      // Export Edited PDF
+      btnExportPdf.addEventListener('click', async () => {
+        if (!originalPdfBytes) return;
+
+        btnExportPdf.disabled = true;
+        btnExportPdf.innerHTML = '<span>Exporting PDF... ⏳</span>';
+
+        try {
+          const currentOrigNum = activePagesList[activePageIndex];
+          if (currentOrigNum) {
+            pageAnnotations[currentOrigNum] = {
+              json: fabricCanvas.toJSON(),
+              width: fabricCanvas.getWidth(),
+              height: fabricCanvas.getHeight()
+            };
+          }
+
+          const { PDFDocument, degrees } = window.PDFLib;
+          const srcDoc = await PDFDocument.load(originalPdfBytes);
+          const newDoc = await PDFDocument.create();
+
+          for (let i = 0; i < activePagesList.length; i++) {
+            const origNum = activePagesList[i];
+            const [copiedPage] = await newDoc.copyPages(srcDoc, [origNum - 1]);
+            const rotation = (pageRotations[origNum] || 0) % 360;
+            if (rotation) {
+              const currentAngle = copiedPage.getRotation().angle;
+              copiedPage.setRotation(degrees((currentAngle + rotation) % 360));
+            }
+
+            if (pageAnnotations[origNum]) {
+              const savedData = pageAnnotations[origNum];
+              const annotJson = savedData.json || (typeof savedData === 'string' ? JSON.parse(savedData) : savedData);
+              const srcWidth = savedData.width || fabricCanvas.getWidth();
+              const srcHeight = savedData.height || fabricCanvas.getHeight();
+
+              if (annotJson.objects && annotJson.objects.length > 0) {
+                const { width: pWidth, height: pHeight } = copiedPage.getSize();
+                const offscreenCanvasEl = document.createElement('canvas');
+                offscreenCanvasEl.width = pWidth * 2;
+                offscreenCanvasEl.height = pHeight * 2;
+
+                const offFabric = new fabric.StaticCanvas(offscreenCanvasEl);
+                offFabric.setWidth(offscreenCanvasEl.width);
+                offFabric.setHeight(offscreenCanvasEl.height);
+
+                await new Promise((resolve) => {
+                  offFabric.loadFromJSON(annotJson, () => {
+                    const scaleX = offscreenCanvasEl.width / srcWidth;
+                    const scaleY = offscreenCanvasEl.height / srcHeight;
+                    offFabric.getObjects().forEach(obj => {
+                      obj.scaleX = (obj.scaleX || 1) * scaleX;
+                      obj.scaleY = (obj.scaleY || 1) * scaleY;
+                      obj.left = obj.left * scaleX;
+                      obj.top = obj.top * scaleY;
+                      obj.setCoords();
+                    });
+                    offFabric.renderAll();
+                    resolve();
+                  });
+                });
+
+                const pngDataUrl = offFabric.toDataURL({ format: 'png' });
+                const pngBytes = dataUrlToBytes(pngDataUrl);
+                const embeddedPng = await newDoc.embedPng(pngBytes);
+
+                copiedPage.drawImage(embeddedPng, {
+                  x: 0,
+                  y: 0,
+                  width: pWidth,
+                  height: pHeight
+                });
+              }
+            }
+
+            newDoc.addPage(copiedPage);
+          }
+
+          const finalBytes = await newDoc.save();
+          const blob = new Blob([finalBytes], { type: 'application/pdf' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${currentFile.name.replace(/\.[^/.]+$/, "")}-edited.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(url), 4000);
+
+          window.Toolshere.onlineApp.showToast('Edited PDF downloaded successfully! 🎉', 'success');
+        } catch (err) {
+          console.error(err);
+          window.Toolshere.onlineApp.showToast('Error exporting edited PDF: ' + err.message, 'error');
+        } finally {
+          btnExportPdf.disabled = false;
+          btnExportPdf.innerHTML = '<span>Download PDF</span> <span>💾</span>';
+        }
+      });
+
+      // Helpers
+      function hexToRgba(hex, alpha) {
+        let c = hex.replace('#', '');
+        if (c.length === 3) c = c.split('').map(x => x + x).join('');
+        const num = parseInt(c, 16);
+        return `rgba(${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}, ${alpha})`;
+      }
+
+      function dataUrlToBytes(dataUrl) {
+        const parts = dataUrl.split(',');
+        const binary = atob(parts[1]);
+        const len = binary.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        return bytes;
+      }
+
+    });
+  </script>
+</body>
+</html>

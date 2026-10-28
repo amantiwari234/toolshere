@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image to PDF — Convert JPG &amp; PNG Photos to PDF Online | Toolshere.online</title>
+  <meta name="description" content="Combine multiple JPG, PNG, and WEBP images into a single organized PDF document directly in your browser. Fast, free, and private.">
+  <link rel="canonical" href="https://toolshere.online/tools/image-to-pdf.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/tools.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <!-- Client-side PDF-lib with local primary -->
+  <script src="../js/pdf-lib.min.js"></script>
+  <script>
+    if (!window.PDFLib) {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.9/dist/pdf-lib.min.js"><\/script>');
+    }
+  </script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="../index.html" class="brand-logo">
+        <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../all-tools.html" class="nav-link">All Tools</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+        <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../all-tools.html" class="nav-link">All Tools</a>
+      <a href="../about.html" class="nav-link">About Us</a>
+      <a href="../contact.html" class="nav-link">Contact Us</a>
+      <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <section class="tool-header-wrapper">
+    <div class="container tool-header-content">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Home</a>
+        <span class="separator">/</span>
+        <a href="../all-tools.html?cat=pdf">PDF Tools</a>
+        <span class="separator">/</span>
+        <span class="current">Images to PDF</span>
+      </nav>
+
+      <div class="tool-header-badge-row">
+        <span class="tool-category-badge">📄 PDF Tools</span>
+        <span class="tool-privacy-pill">🔒 100% Private In-Browser</span>
+      </div>
+
+      <h1 class="tool-header-title">
+        <span class="tool-icon">📑</span>
+        <span>Images to PDF Converter</span>
+      </h1>
+      <p class="tool-header-desc">
+        Convert multiple JPG, PNG, and WEBP pictures into a single organized PDF document. Reorder pages and customize layout directly in your browser.
+      </p>
+    </div>
+  </section>
+
+  <div class="ad-slot-container">
+    <div class="ad-placeholder leaderboard">
+      <span class="ad-label">Advertisement</span>
+      <span class="ad-text">Document Management &amp; PDF Productivity Solutions — 728x90 Banner</span>
+    </div>
+  </div>
+
+  <main class="tool-workspace">
+    <div class="container" style="max-width: 900px;">
+      <div class="tool-card-box">
+        
+        <!-- Dropzone -->
+        <div id="img-pdf-dropzone" class="dropzone">
+          <input type="file" id="img-pdf-input" class="file-input-hidden" accept="image/*" multiple>
+          <div class="dropzone-icon">📸</div>
+          <div class="dropzone-title">Upload One or More Images</div>
+          <div class="dropzone-sub">Select multiple JPG, PNG, or WEBP photos to convert into PDF</div>
+        </div>
+
+        <!-- Controls (Visible when images added) -->
+        <div id="pdf-builder-controls" style="display: none; margin-top: 2rem;">
+          
+          <div style="background: var(--bg-muted); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.5rem; margin-bottom: 1.75rem;">
+            <div style="font-weight: 700; font-size: 1.05rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+              <span style="display: flex; align-items: center; gap: 0.5rem;">⚙️ PDF Quality &amp; Page Settings</span>
+              <span id="est-pdf-badge" style="font-size: 0.82rem; font-weight: 700; padding: 0.3rem 0.75rem; background: var(--primary-light); color: var(--primary); border-radius: var(--radius-full); border: 1px solid rgba(124, 58, 237, 0.2);">Est. File Size: ~Calculating...</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem;">
+              
+              <!-- Quality & Target PDF File Size Option (User Requested) -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="quality-select" style="display: flex; justify-content: space-between; align-items: center;">
+                  <span>Image Quality &amp; Size</span>
+                  <span style="font-size: 0.72rem; color: #10b981; font-weight: 700; background: rgba(16,185,129,0.12); padding: 0.1rem 0.4rem; border-radius: 4px;">Crisp HD</span>
+                </label>
+                <select id="quality-select" class="form-control">
+                  <option value="original" selected>🌟 Original (100% Crisp — Zero Loss)</option>
+                  <option value="high">💎 High Quality (95% — Sharp &amp; Clear)</option>
+                  <option value="medium">⚖️ Medium Quality (75% — Balanced Size)</option>
+                  <option value="small">🗜️ Low Size (50% — Under 1 MB)</option>
+                  <option value="custom">🎚️ Custom Target Size &amp; Slider</option>
+                </select>
+              </div>
+
+              <!-- Page Format -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="page-size-select">Page Format / Dimensions</label>
+                <select id="page-size-select" class="form-control">
+                  <option value="a4" selected>A4 (210 × 297 mm — Standard)</option>
+                  <option value="letter">US Letter (8.5 × 11 in)</option>
+                  <option value="legal">US Legal (8.5 × 14 in)</option>
+                  <option value="a3">A3 (297 × 420 mm — Large)</option>
+                  <option value="a5">A5 (148 × 210 mm — Small)</option>
+                  <option value="fit">Fit to Image (No White Margins)</option>
+                </select>
+              </div>
+
+              <!-- Page Orientation -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="orientation-select">Page Orientation</label>
+                <select id="orientation-select" class="form-control">
+                  <option value="auto" selected>Auto (Match Image Shape)</option>
+                  <option value="portrait">Portrait (Vertical)</option>
+                  <option value="landscape">Landscape (Horizontal)</option>
+                </select>
+              </div>
+
+              <!-- Margins -->
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="margin-select">Margin Spacing</label>
+                <select id="margin-select" class="form-control">
+                  <option value="0">No Margins (Edge to Edge)</option>
+                  <option value="15" selected>Small Margin (15 pt)</option>
+                  <option value="25">Standard Margin (25 pt)</option>
+                  <option value="40">Wide Margin (40 pt)</option>
+                </select>
+              </div>
+
+            </div>
+
+            <!-- Custom Target Quality / Size Slider (Appears when custom is selected) -->
+            <div id="custom-slider-row" style="display: none; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                <label for="quality-slider" style="font-size: 0.9rem; font-weight: 700; color: var(--text-main);">
+                  Custom Target Quality: <span id="quality-slider-val" style="color: var(--primary);">90%</span>
+                </label>
+                <span style="font-size: 0.78rem; color: var(--text-muted);">Slide left for smaller PDF, right for higher quality</span>
+              </div>
+              <input type="range" id="quality-slider" min="15" max="100" value="90" step="5" style="width: 100%; accent-color: var(--primary); cursor: pointer; height: 6px;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.35rem;">
+                <span>15% (Ultra Compressed)</span>
+                <span>50% (Standard Upload)</span>
+                <span>80% (High Clarity)</span>
+                <span>100% (Maximum Print 300+ DPI)</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Image Queue List -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Selected Images (<span id="img-queue-count">0</span>)</h3>
+            <button id="add-more-imgs-btn" class="btn btn-secondary btn-sm">➕ Add More Images</button>
+          </div>
+
+          <div id="images-queue" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1rem; margin-bottom: 1.75rem; max-height: 350px; overflow-y: auto; padding: 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-md);">
+          </div>
+
+          <!-- Actions -->
+          <div class="tool-actions-bar" style="margin-top: 0;">
+            <button id="create-pdf-btn" class="btn btn-primary btn-lg">
+              <span>Generate &amp; Download PDF</span>
+              <span>📄</span>
+            </button>
+            <button id="clear-all-imgs-btn" class="btn btn-secondary btn-lg">Clear All</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FAQ -->
+      <section class="section-padding section-alt" style="border-radius: var(--radius-xl); padding: 2.5rem 2rem; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem; text-align: center;">Images to PDF FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <button class="faq-question">
+              <span>Are images compressed when converting to PDF?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Your images are directly embedded into the PDF structure at their native crisp resolution, ensuring that scanned receipts, artwork, and photo documents retain full clarity.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I convert multiple images at the same time?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Yes, you can upload dozens of photos at once and arrange them in your preferred sequence before generating your combined multi-page PDF document.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom: 4rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;">Related PDF Tools</h2>
+        <div class="tools-grid" id="related-tools-container"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="brand-logo">
+            <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+          </a>
+          <p>Toolshere.online is your premier directory of free, private, client-side online tools.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Categories</h4>
+          <div class="footer-links">
+            <a href="../all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
+            <a href="../all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="../all-tools.html?cat=images" class="footer-link">Image Tools</a>
+            <a href="../all-tools.html?cat=pdf" class="footer-link">PDF Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <div class="footer-links">
+            <a href="../about.html" class="footer-link">About Us</a>
+            <a href="../contact.html" class="footer-link">Contact Us</a>
+            <a href="../all-tools.html" class="footer-link">All 24 Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Legal &amp; Privacy</h4>
+          <div class="footer-links">
+            <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="../terms.html" class="footer-link">Terms and Conditions</a>
+            <a href="../disclaimer.html" class="footer-link">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
+        <div class="footer-badges"><span class="privacy-badge">🔒 100% Client-Side Privacy</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/tools-data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.Toolshere.onlineApp.renderRelatedTools('images-to-pdf', 'related-tools-container', 3);
+
+      const dropzone = document.getElementById('img-pdf-dropzone');
+      const fileInput = document.getElementById('img-pdf-input');
+      const controls = document.getElementById('pdf-builder-controls');
+      const queueContainer = document.getElementById('images-queue');
+      const countLabel = document.getElementById('img-queue-count');
+
+      const pageSizeSelect = document.getElementById('page-size-select');
+      const orientationSelect = document.getElementById('orientation-select');
+      const marginSelect = document.getElementById('margin-select');
+      const qualitySelect = document.getElementById('quality-select');
+      const customSliderRow = document.getElementById('custom-slider-row');
+      const qualitySlider = document.getElementById('quality-slider');
+      const qualitySliderVal = document.getElementById('quality-slider-val');
+      const estPdfBadge = document.getElementById('est-pdf-badge');
+
+      const createPdfBtn = document.getElementById('create-pdf-btn');
+      const addMoreBtn = document.getElementById('add-more-imgs-btn');
+      const clearAllBtn = document.getElementById('clear-all-imgs-btn');
+
+      let uploadedImages = [];
+
+      // Quality Mode & Custom Slider Handlers
+      if (qualitySelect) {
+        qualitySelect.addEventListener('change', () => {
+          if (qualitySelect.value === 'custom') {
+            customSliderRow.style.display = 'block';
+          } else {
+            customSliderRow.style.display = 'none';
+          }
+          updateEstimatedSize();
+        });
+      }
+
+      if (qualitySlider) {
+        qualitySlider.addEventListener('input', () => {
+          qualitySliderVal.textContent = qualitySlider.value + '%';
+          updateEstimatedSize();
+        });
+      }
+
+      function updateEstimatedSize() {
+        if (!estPdfBadge) return;
+        if (uploadedImages.length === 0) {
+          estPdfBadge.textContent = 'Est. File Size: ~0 KB';
+          return;
+        }
+
+        const mode = qualitySelect ? qualitySelect.value : 'original';
+        let qualityRatio = 1.0;
+        if (mode === 'original') qualityRatio = 1.0;
+        else if (mode === 'high') qualityRatio = 0.85;
+        else if (mode === 'medium') qualityRatio = 0.50;
+        else if (mode === 'small') qualityRatio = 0.25;
+        else if (mode === 'custom') qualityRatio = Math.max((parseInt(qualitySlider.value, 10) / 100), 0.15) * 0.95;
+
+        let totalRawBytes = 0;
+        uploadedImages.forEach(img => {
+          const commaIdx = img.dataUrl.indexOf(',');
+          const b64Len = commaIdx > 0 ? (img.dataUrl.length - commaIdx - 1) : img.dataUrl.length;
+          totalRawBytes += Math.round(b64Len * 0.75);
+        });
+
+        const estBytes = Math.max(Math.round(totalRawBytes * qualityRatio), 25000);
+        if (estBytes > 1024 * 1024) {
+          estPdfBadge.textContent = `Est. File Size: ~${(estBytes / (1024 * 1024)).toFixed(2)} MB`;
+        } else {
+          estPdfBadge.textContent = `Est. File Size: ~${Math.round(estBytes / 1024)} KB`;
+        }
+      }
+
+      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files) handleFiles(e.dataTransfer.files);
+      });
+
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files) handleFiles(fileInput.files);
+      });
+
+      addMoreBtn.addEventListener('click', () => {
+        fileInput.click();
+      });
+
+      clearAllBtn.addEventListener('click', () => {
+        uploadedImages = [];
+        renderQueue();
+        dropzone.style.display = 'block';
+        controls.style.display = 'none';
+        updateEstimatedSize();
+      });
+
+      function handleFiles(files) {
+        Array.from(files).forEach(file => {
+          if (!file.type.startsWith('image/')) return;
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            uploadedImages.push({
+              name: file.name,
+              type: file.type,
+              size: file.size,
+              dataUrl: e.target.result
+            });
+            renderQueue();
+            updateEstimatedSize();
+          };
+          reader.readAsDataURL(file);
+        });
+
+        dropzone.style.display = 'none';
+        controls.style.display = 'block';
+      }
+
+      function renderQueue() {
+        countLabel.textContent = uploadedImages.length;
+        if (uploadedImages.length === 0) {
+          dropzone.style.display = 'block';
+          controls.style.display = 'none';
+          updateEstimatedSize();
+          return;
+        }
+
+        queueContainer.innerHTML = uploadedImages.map((img, idx) => `
+          <div style="position: relative; border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: var(--bg-surface); box-shadow: var(--shadow-sm);">
+            <img src="${img.dataUrl}" style="width: 100%; height: 95px; object-fit: cover;">
+            <div style="padding: 0.35rem 0.5rem; font-size: 0.72rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; font-weight: 600;">${img.name}</div>
+            <button onclick="removeImage(${idx})" style="position: absolute; top: 4px; right: 4px; width: 22px; height: 22px; background: rgba(220,38,38,0.9); color: white; border-radius: 50%; font-size: 11px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none;" title="Delete image">✕</button>
+          </div>
+        `).join('');
+      }
+
+      window.removeImage = function(index) {
+        uploadedImages.splice(index, 1);
+        renderQueue();
+        updateEstimatedSize();
+      };
+
+      // Helpers for binary conversion & image normalization
+      function dataUrlToBytes(dataUrl) {
+        const parts = dataUrl.split(',');
+        const binary = atob(parts[1]);
+        const len = binary.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+          bytes[i] = binary.charCodeAt(i);
+        }
+        return bytes;
+      }
+
+      function loadImageAsync(src) {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = () => reject(new Error('Failed to render image preview'));
+          img.src = src;
+        });
+      }
+
+      // Prepares each image respecting the selected Quality and File Size target
+      async function prepareImage(item, qualityMode, customQuality) {
+        const isJpeg = item.type === 'image/jpeg' || item.type === 'image/jpg' || item.dataUrl.startsWith('data:image/jpeg');
+
+        // PRESERVE ORIGINAL CRISP QUALITY:
+        // If user chose Original Quality and image is already JPEG, keep 100% bit-for-bit pristine original bytes!
+        if (qualityMode === 'original' && isJpeg) {
+          const img = await loadImageAsync(item.dataUrl);
+          const rawBytes = dataUrlToBytes(item.dataUrl);
+          return {
+            width: img.naturalWidth || img.width || 800,
+            height: img.naturalHeight || img.height || 600,
+            jpegBytes: rawBytes
+          };
+        }
+
+        // For PNG, WEBP, or user-selected compression targets:
+        const img = await loadImageAsync(item.dataUrl);
+        const origW = img.naturalWidth || img.width || 800;
+        const origH = img.naturalHeight || img.height || 600;
+
+        let targetW = origW;
+        let targetH = origH;
+        let qualityVal = 0.98; // Default crystal-clear
+
+        if (qualityMode === 'original') {
+          qualityVal = 0.98; // Near-lossless JPEG for transparent/PNG photos
+        } else if (qualityMode === 'high') {
+          qualityVal = 0.92;
+        } else if (qualityMode === 'medium') {
+          qualityVal = 0.76;
+          if (Math.max(origW, origH) > 2400) {
+            const scale = 2400 / Math.max(origW, origH);
+            targetW = Math.round(origW * scale);
+            targetH = Math.round(origH * scale);
+          }
+        } else if (qualityMode === 'small') {
+          qualityVal = 0.52;
+          // Downscale large dimensions for guaranteed small PDF size under 1MB
+          if (Math.max(origW, origH) > 1600) {
+            const scale = 1600 / Math.max(origW, origH);
+            targetW = Math.round(origW * scale);
+            targetH = Math.round(origH * scale);
+          }
+        } else if (qualityMode === 'custom') {
+          qualityVal = Math.max(customQuality / 100, 0.15);
+          if (customQuality < 50 && Math.max(origW, origH) > 1800) {
+            const scale = 1800 / Math.max(origW, origH);
+            targetW = Math.round(origW * scale);
+            targetH = Math.round(origH * scale);
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = targetW;
+        canvas.height = targetH;
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
+        // Render clean white backdrop for transparent PNG/WEBP
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, targetW, targetH);
+        ctx.drawImage(img, 0, 0, targetW, targetH);
+
+        const jpegUrl = canvas.toDataURL('image/jpeg', qualityVal);
+        const jpegBytes = dataUrlToBytes(jpegUrl);
+        return {
+          width: targetW,
+          height: targetH,
+          jpegBytes: jpegBytes
+        };
+      }
+
+      // 100% Offline, Pure-JS Standard PDF 1.4 Builder (Guaranteed fallback)
+      function buildNativePdf(pages) {
+        const objects = [];
+        const offsets = [];
+
+        function addObj(content) {
+          objects.push(content);
+          return objects.length;
+        }
+
+        // Obj 1: Catalog
+        addObj('<< /Type /Catalog /Pages 2 0 R >>');
+
+        // Obj 2: Pages root (placeholder)
+        const pagesObjIdx = 2;
+        objects.push('');
+
+        const pageObjIds = [];
+
+        pages.forEach((p, idx) => {
+          const imgId = idx + 1;
+          const streamStr = `q\n${p.drawW.toFixed(2)} 0 0 ${p.drawH.toFixed(2)} ${p.posX.toFixed(2)} ${p.posY.toFixed(2)} cm\n/Im${imgId} Do\nQ\n`;
+          const contentObjId = addObj(`<< /Length ${streamStr.length} >>\nstream\n${streamStr}endstream`);
+
+          const imgObjId = addObj({
+            isBinary: true,
+            header: `<< /Type /XObject /Subtype /Image /Width ${p.width} /Height ${p.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${p.jpegBytes.length} >>\nstream\n`,
+            binary: p.jpegBytes,
+            footer: '\nendstream'
+          });
+
+          const pageObjId = addObj(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${p.pageW.toFixed(2)} ${p.pageH.toFixed(2)}] /Resources << /ProcSet [/PDF /Text /ImageB /ImageC /ImageI] /XObject << /Im${imgId} ${imgObjId} 0 R >> >> /Contents ${contentObjId} 0 R >>`);
+          pageObjIds.push(pageObjId);
+        });
+
+        objects[pagesObjIdx - 1] = `<< /Type /Pages /Kids [${pageObjIds.map(id => id + ' 0 R').join(' ')}] /Count ${pageObjIds.length} >>`;
+
+        const chunks = [];
+        let currentOffset = 0;
+        const encoder = new TextEncoder();
+
+        function writeAscii(str) {
+          const arr = encoder.encode(str);
+          chunks.push(arr);
+          currentOffset += arr.length;
+        }
+
+        function writeBytes(arr) {
+          chunks.push(arr);
+          currentOffset += arr.length;
+        }
+
+        writeAscii('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+        offsets.push(0);
+
+        for (let i = 0; i < objects.length; i++) {
+          offsets.push(currentOffset);
+          const objNum = i + 1;
+          writeAscii(`${objNum} 0 obj\n`);
+          const obj = objects[i];
+          if (typeof obj === 'string') {
+            writeAscii(obj + '\nendobj\n');
+          } else if (obj.isBinary) {
+            writeAscii(obj.header);
+            writeBytes(obj.binary);
+            writeAscii(obj.footer + '\nendobj\n');
+          }
+        }
+
+        const startXref = currentOffset;
+        writeAscii(`xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`);
+        for (let i = 1; i <= objects.length; i++) {
+          const offStr = String(offsets[i]).padStart(10, '0');
+          writeAscii(`${offStr} 00000 n \n`);
+        }
+
+        writeAscii(`trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${startXref}\n%%EOF\n`);
+
+        return new Blob(chunks, { type: 'application/pdf' });
+      }
+
+      createPdfBtn.addEventListener('click', async () => {
+        if (uploadedImages.length === 0) {
+          window.Toolshere.onlineApp.showToast('Please add at least one image', 'error');
+          return;
+        }
+
+        createPdfBtn.disabled = true;
+        createPdfBtn.innerHTML = '<span>Creating PDF... ⏳</span>';
+
+        try {
+          const format = pageSizeSelect.value;
+          const orient = orientationSelect.value;
+          const margin = parseInt(marginSelect.value, 10);
+          const qualityMode = qualitySelect ? qualitySelect.value : 'original';
+          const customQuality = qualitySlider ? parseInt(qualitySlider.value, 10) : 90;
+
+          // Base dimensions in PDF points (72 pt = 1 inch)
+          let baseW = 595.28; // A4 pt
+          let baseH = 841.89;
+
+          if (format === 'letter') {
+            baseW = 612.0;
+            baseH = 792.0;
+          } else if (format === 'legal') {
+            baseW = 612.0;
+            baseH = 1008.0;
+          } else if (format === 'a3') {
+            baseW = 841.89;
+            baseH = 1190.55;
+          } else if (format === 'a5') {
+            baseW = 419.53;
+            baseH = 595.28;
+          }
+
+          // Process all images respecting selected quality & file size target
+          const preparedList = [];
+          for (let i = 0; i < uploadedImages.length; i++) {
+            createPdfBtn.innerHTML = `<span>Processing image ${i + 1} of ${uploadedImages.length}... ⏳</span>`;
+            const prep = await prepareImage(uploadedImages[i], qualityMode, customQuality);
+
+            let pageW, pageH;
+
+            if (format === 'fit') {
+              // Convert pixel dimensions to points at 150 DPI for balanced printable view
+              const dpi = 150;
+              const ptW = (prep.width / dpi) * 72;
+              const ptH = (prep.height / dpi) * 72;
+              pageW = ptW + (margin * 2);
+              pageH = ptH + (margin * 2);
+            } else {
+              // Check orientation (Auto detects horizontal vs vertical per image!)
+              let isLandscape = false;
+              if (orient === 'auto') {
+                isLandscape = prep.width > prep.height;
+              } else if (orient === 'landscape') {
+                isLandscape = true;
+              }
+
+              if (isLandscape) {
+                pageW = Math.max(baseW, baseH);
+                pageH = Math.min(baseW, baseH);
+              } else {
+                pageW = Math.min(baseW, baseH);
+                pageH = Math.max(baseW, baseH);
+              }
+            }
+
+            const availW = Math.max(pageW - (margin * 2), 10);
+            const availH = Math.max(pageH - (margin * 2), 10);
+
+            const scale = Math.min(availW / prep.width, availH / prep.height);
+            const drawW = prep.width * scale;
+            const drawH = prep.height * scale;
+
+            const posX = margin + (availW - drawW) / 2;
+            const posY = margin + (availH - drawH) / 2;
+
+            preparedList.push({
+              width: prep.width,
+              height: prep.height,
+              jpegBytes: prep.jpegBytes,
+              pageW: pageW,
+              pageH: pageH,
+              availW: availW,
+              availH: availH,
+              drawW: drawW,
+              drawH: drawH,
+              posX: posX,
+              posY: posY
+            });
+          }
+
+          createPdfBtn.innerHTML = '<span>Building PDF document... ⏳</span>';
+          let finalBlob = null;
+
+          // Attempt 1: Try PDFLib if available
+          if (window.PDFLib && window.PDFLib.PDFDocument) {
+            try {
+              const { PDFDocument } = window.PDFLib;
+              const pdfDoc = await PDFDocument.create();
+
+              for (const p of preparedList) {
+                const embeddedImg = await pdfDoc.embedJpg(p.jpegBytes);
+                const page = pdfDoc.addPage([p.pageW, p.pageH]);
+                page.drawImage(embeddedImg, {
+                  x: p.posX,
+                  y: p.posY,
+                  width: p.drawW,
+                  height: p.drawH
+                });
+              }
+
+              const pdfBytes = await pdfDoc.save();
+              finalBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+            } catch (libErr) {
+              console.warn('PDFLib failed, falling back to pure-JS generator:', libErr);
+              finalBlob = buildNativePdf(preparedList);
+            }
+          } else {
+            // Attempt 2: Use Native pure-JS engine
+            finalBlob = buildNativePdf(preparedList);
+          }
+
+          if (!finalBlob) {
+            throw new Error('Could not generate PDF file.');
+          }
+
+          // Download PDF
+          const url = URL.createObjectURL(finalBlob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `toolshere-images-${Date.now()}.pdf`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(url), 4000);
+
+          const sizeKb = Math.round(finalBlob.size / 1024);
+          const sizeStr = sizeKb > 1024 ? `${(sizeKb / 1024).toFixed(2)} MB` : `${sizeKb} KB`;
+          window.Toolshere.onlineApp.showToast(`PDF created successfully (${sizeStr})! 🎉`, 'success');
+        } catch (err) {
+          console.error('Image to PDF error:', err);
+          window.Toolshere.onlineApp.showToast(`Error creating PDF: ${err.message}`, 'error');
+        } finally {
+          createPdfBtn.disabled = false;
+          createPdfBtn.innerHTML = '<span>Generate &amp; Download PDF</span> <span>📄</span>';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

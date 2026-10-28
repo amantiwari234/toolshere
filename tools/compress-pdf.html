@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compress PDF Files — Reduce PDF File Size Online | Toolshere.online</title>
+  <meta name="description" content="Reduce PDF document file size in your browser without uploading to any remote server. Fast, free, and totally private client-side PDF compressor.">
+  <link rel="canonical" href="https://toolshere.online/tools/compress-pdf.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/tools.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="../js/pdf-lib.min.js"></script>
+  <script>
+    if (!window.PDFLib) {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.9/dist/pdf-lib.min.js"><\/script>');
+    }
+  </script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="../index.html" class="brand-logo">
+        <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../all-tools.html" class="nav-link">All Tools</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+        <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../all-tools.html" class="nav-link">All Tools</a>
+      <a href="../about.html" class="nav-link">About Us</a>
+      <a href="../contact.html" class="nav-link">Contact Us</a>
+      <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <section class="tool-header-wrapper">
+    <div class="container tool-header-content">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Home</a>
+        <span class="separator">/</span>
+        <a href="../all-tools.html?cat=pdf">PDF Tools</a>
+        <span class="separator">/</span>
+        <span class="current">Compress PDF Files</span>
+      </nav>
+
+      <div class="tool-header-badge-row">
+        <span class="tool-category-badge">📄 PDF Tools</span>
+        <span class="tool-privacy-pill">🔒 100% Private In-Browser</span>
+      </div>
+
+      <h1 class="tool-header-title">
+        <span class="tool-icon">🗜️</span>
+        <span>Compress PDF Files</span>
+      </h1>
+      <p class="tool-header-desc">
+        Optimize and reduce PDF document file sizes client-side by streamlining structural objects and stream encoding. 100% private.
+      </p>
+    </div>
+  </section>
+
+  <div class="ad-slot-container">
+    <div class="ad-placeholder leaderboard">
+      <span class="ad-label">Advertisement</span>
+      <span class="ad-text">Fast Document Storage &amp; Cloud Workspaces — 728x90 Banner</span>
+    </div>
+  </div>
+
+  <main class="tool-workspace">
+    <div class="container" style="max-width: 900px;">
+      <div class="tool-card-box">
+        
+        <!-- Dropzone -->
+        <div id="pdf-comp-dropzone" class="dropzone">
+          <input type="file" id="pdf-comp-file-input" class="file-input-hidden" accept="application/pdf">
+          <div class="dropzone-icon">🗜️</div>
+          <div class="dropzone-title">Upload PDF File to Compress</div>
+          <div class="dropzone-sub">Drop PDF here for local client-side size optimization</div>
+        </div>
+
+        <!-- Controls -->
+        <div id="pdf-comp-controls" style="display: none; margin-top: 2rem;">
+          
+          <div class="metric-grid" style="margin-bottom: 1.5rem;">
+            <div class="metric-item">
+              <div class="metric-value" id="orig-pdf-size">0 KB</div>
+              <div class="metric-label">Original PDF Size</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value" id="comp-pdf-size" style="color: var(--accent-emerald);">0 KB</div>
+              <div class="metric-label">Optimized Size</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value" id="pdf-savings" style="color: var(--primary);">-0%</div>
+              <div class="metric-label">File Size Reduction</div>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-muted); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.5rem;">
+            <div style="font-weight: 700; margin-bottom: 0.35rem;" id="pdf-comp-filename">document.pdf</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);" id="pdf-comp-details">4 Pages • Internal object stream optimization enabled</div>
+          </div>
+
+          <div class="tool-actions-bar" style="margin-top: 0; justify-content: space-between;">
+            <button id="download-comp-pdf-btn" class="btn btn-primary btn-lg">
+              <span>Download Compressed PDF</span>
+              <span>💾</span>
+            </button>
+            <button id="new-pdf-comp-btn" class="btn btn-secondary btn-lg">Compress Another PDF</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FAQ -->
+      <section class="section-padding section-alt" style="border-radius: var(--radius-xl); padding: 2.5rem 2rem; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem; text-align: center;">PDF Compression FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <button class="faq-question">
+              <span>How does in-browser PDF optimization work?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Many PDF files contain redundant xref tables, duplicate embedded fonts, uncompressed streams, and lingering edit histories. Toolshere.online cleans these structures and repackages the document into compressed object streams using standard PDF FlateDecode algorithms.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom: 4rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;">Related PDF Tools</h2>
+        <div class="tools-grid" id="related-tools-container"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="brand-logo">
+            <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+          </a>
+          <p>Toolshere.online is your premier directory of free, private, client-side online tools.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Categories</h4>
+          <div class="footer-links">
+            <a href="../all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
+            <a href="../all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="../all-tools.html?cat=images" class="footer-link">Image Tools</a>
+            <a href="../all-tools.html?cat=pdf" class="footer-link">PDF Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <div class="footer-links">
+            <a href="../about.html" class="footer-link">About Us</a>
+            <a href="../contact.html" class="footer-link">Contact Us</a>
+            <a href="../all-tools.html" class="footer-link">All 24 Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Legal &amp; Privacy</h4>
+          <div class="footer-links">
+            <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="../terms.html" class="footer-link">Terms and Conditions</a>
+            <a href="../disclaimer.html" class="footer-link">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
+        <div class="footer-badges"><span class="privacy-badge">🔒 100% Client-Side Privacy</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/tools-data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.Toolshere.onlineApp.renderRelatedTools('compress-pdf', 'related-tools-container', 3);
+
+      const dropzone = document.getElementById('pdf-comp-dropzone');
+      const fileInput = document.getElementById('pdf-comp-file-input');
+      const controls = document.getElementById('pdf-comp-controls');
+      const origSizeElem = document.getElementById('orig-pdf-size');
+      const compSizeElem = document.getElementById('comp-pdf-size');
+      const savingsElem = document.getElementById('pdf-savings');
+      const filenameElem = document.getElementById('pdf-comp-filename');
+      const detailsElem = document.getElementById('pdf-comp-details');
+      const downloadBtn = document.getElementById('download-comp-pdf-btn');
+      const newFileBtn = document.getElementById('new-pdf-comp-btn');
+
+      let compressedBlob = null;
+      let originalFileName = 'document';
+
+      dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('dragover'); });
+      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) processPdf(e.dataTransfer.files[0]);
+      });
+
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files[0]) processPdf(fileInput.files[0]);
+      });
+
+      newFileBtn.addEventListener('click', () => {
+        fileInput.value = '';
+        dropzone.style.display = 'block';
+        controls.style.display = 'none';
+      });
+
+      async function processPdf(file) {
+        if (!file.name.toLowerCase().endsWith('.pdf')) {
+          window.Toolshere.onlineApp.showToast('Please upload a valid PDF document', 'error');
+          return;
+        }
+
+        originalFileName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+        filenameElem.textContent = file.name;
+        const origBytes = file.size;
+        origSizeElem.textContent = formatBytes(origBytes);
+
+        dropzone.style.display = 'none';
+        controls.style.display = 'block';
+
+        try {
+          const arrayBuffer = await file.arrayBuffer();
+          const { PDFDocument } = window.PDFLib;
+          const pdfDoc = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
+
+          detailsElem.textContent = `${pdfDoc.getPageCount()} Pages • Object streams cleaned`;
+
+          // Save with object streams and compression
+          const optimizedBytes = await pdfDoc.save({ useObjectStreams: true });
+          compressedBlob = new Blob([optimizedBytes], { type: 'application/pdf' });
+
+          const newBytes = compressedBlob.size;
+          compSizeElem.textContent = formatBytes(newBytes);
+
+          const saved = origBytes - newBytes;
+          const savedPct = ((saved / origBytes) * 100).toFixed(1);
+
+          if (savedPct > 0) {
+            savingsElem.textContent = `-${savedPct}%`;
+            savingsElem.style.color = 'var(--accent-emerald)';
+          } else {
+            savingsElem.textContent = `Optimized`;
+            savingsElem.style.color = 'var(--primary)';
+          }
+
+          window.Toolshere.onlineApp.showToast('PDF optimized and ready for download!', 'success');
+        } catch (err) {
+          window.Toolshere.onlineApp.showToast(`Error optimizing PDF: ${err.message}`, 'error');
+        }
+      }
+
+      downloadBtn.addEventListener('click', () => {
+        if (!compressedBlob) return;
+        const url = URL.createObjectURL(compressedBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${originalFileName}_compressed.pdf`;
+        a.click();
+        URL.revokeObjectURL(url);
+        window.Toolshere.onlineApp.showToast('Compressed PDF downloaded!', 'success');
+      });
+
+      function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + ' B';
+        if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+        return (bytes / 1048576).toFixed(2) + ' MB';
+      }
+    });
+  </script>
+</body>
+</html>

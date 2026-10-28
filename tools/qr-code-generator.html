@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator — Free Custom QR Codes Online | Toolshere.online</title>
+  <meta name="description" content="Generate high-resolution custom QR codes for websites, WiFi, phone numbers, and text with custom colors and instant PNG download. Free and private.">
+  <link rel="canonical" href="https://toolshere.online/tools/qr-code-generator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/tools.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <!-- Client-side QR Code library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="../index.html" class="brand-logo">
+        <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../all-tools.html" class="nav-link">All Tools</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+        <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../all-tools.html" class="nav-link">All Tools</a>
+      <a href="../about.html" class="nav-link">About Us</a>
+      <a href="../contact.html" class="nav-link">Contact Us</a>
+      <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <section class="tool-header-wrapper">
+    <div class="container tool-header-content">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Home</a>
+        <span class="separator">/</span>
+        <a href="../all-tools.html?cat=generators">Generators</a>
+        <span class="separator">/</span>
+        <span class="current">QR Code Generator</span>
+      </nav>
+
+      <div class="tool-header-badge-row">
+        <span class="tool-category-badge">⚙️ Generator Tools</span>
+        <span class="tool-privacy-pill">🔒 100% Private In-Browser</span>
+      </div>
+
+      <h1 class="tool-header-title">
+        <span class="tool-icon">📱</span>
+        <span>QR Code Generator</span>
+      </h1>
+      <p class="tool-header-desc">
+        Create custom QR codes for website URLs, WiFi networks, phone numbers, or plain text with color adjustments and high-res PNG download.
+      </p>
+    </div>
+  </section>
+
+  <div class="ad-slot-container">
+    <div class="ad-placeholder leaderboard">
+      <span class="ad-label">Advertisement</span>
+      <span class="ad-text">Marketing Automation &amp; Digital Card Solutions — 728x90 Banner</span>
+    </div>
+  </div>
+
+  <main class="tool-workspace">
+    <div class="container" style="max-width: 900px;">
+      
+      <div style="display: grid; grid-template-columns: 1.25fr 0.95fr; gap: 2rem;">
+        
+        <!-- Controls Column -->
+        <div class="tool-card-box" style="margin-bottom: 0;">
+          <h2 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1.25rem;">QR Code Configuration</h2>
+          
+          <div class="form-group">
+            <label class="form-label" for="qr-data-type">QR Code Content Type</label>
+            <select id="qr-data-type" class="form-control">
+              <option value="url">Website URL (https://...)</option>
+              <option value="text">Plain Text Message</option>
+              <option value="wifi">WiFi Network Credentials</option>
+              <option value="phone">Phone Call (tel:)</option>
+            </select>
+          </div>
+
+          <!-- Dynamic Input Fields -->
+          <div id="field-url" class="form-group">
+            <label class="form-label" for="qr-url-input">Website URL *</label>
+            <input type="url" id="qr-url-input" class="form-control" placeholder="https://example.com" value="https://toolshere.online">
+          </div>
+
+          <div id="field-text" class="form-group" style="display: none;">
+            <label class="form-label" for="qr-text-input">Text Message *</label>
+            <textarea id="qr-text-input" class="form-control" rows="3" placeholder="Enter your text note or message..."></textarea>
+          </div>
+
+          <div id="field-wifi" style="display: none;">
+            <div class="form-group">
+              <label class="form-label" for="wifi-ssid">Network Name (SSID) *</label>
+              <input type="text" id="wifi-ssid" class="form-control" placeholder="Home_WiFi">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wifi-pass">Password</label>
+              <input type="text" id="wifi-pass" class="form-control" placeholder="SecretPassword123">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wifi-type">Security</label>
+              <select id="wifi-type" class="form-control">
+                <option value="WPA">WPA/WPA2</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">None (Open)</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="field-phone" class="form-group" style="display: none;">
+            <label class="form-label" for="phone-input">Phone Number *</label>
+            <input type="tel" id="phone-input" class="form-control" placeholder="+1234567890">
+          </div>
+
+          <!-- Styling Controls -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+            <div class="form-group">
+              <label class="form-label" for="qr-fg-color">QR Color</label>
+              <input type="color" id="qr-fg-color" value="#7c3aed" class="form-control" style="height: 44px; padding: 0.2rem; cursor: pointer;">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="qr-bg-color">Background Color</label>
+              <input type="color" id="qr-bg-color" value="#ffffff" class="form-control" style="height: 44px; padding: 0.2rem; cursor: pointer;">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="qr-size-select">Export Resolution</label>
+              <select id="qr-size-select" class="form-control">
+                <option value="300">Standard (300 × 300 px)</option>
+                <option value="600" selected>High-Res (600 × 600 px)</option>
+                <option value="1200">Ultra-HD (1200 × 1200 px)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="qr-ecc-select">Error Correction</label>
+              <select id="qr-ecc-select" class="form-control">
+                <option value="M" selected>Medium (15%)</option>
+                <option value="L">Low (7%)</option>
+                <option value="Q">Quality (25%)</option>
+                <option value="H">High (30% - Best for print)</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Preview & Download Column -->
+        <div class="tool-card-box" style="margin-bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1.25rem;">Live QR Preview</h3>
+          
+          <div style="padding: 1.25rem; background: var(--bg-muted); border-radius: var(--radius-lg); border: 1px solid var(--border); margin-bottom: 1.5rem; display: inline-block;">
+            <canvas id="qr-canvas" style="max-width: 240px; height: auto; border-radius: var(--radius-sm); box-shadow: var(--shadow-sm);"></canvas>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; width: 100%;">
+            <button id="download-qr-btn" class="btn btn-primary btn-lg" style="width: 100%;">
+              <span>Download PNG Image</span>
+              <span>💾</span>
+            </button>
+            <button id="copy-qr-btn" class="btn btn-secondary btn-sm" style="width: 100%;">
+              <span>📋 Copy Image to Clipboard</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FAQ -->
+      <section class="section-padding section-alt" style="border-radius: var(--radius-xl); padding: 2.5rem 2rem; margin-top: 3rem; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem; text-align: center;">QR Code FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <button class="faq-question">
+              <span>Do these QR codes ever expire?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Never! These are standard static QR codes. The encoded data is rendered directly into the 2D matrix pattern. They remain scannable forever without recurring subscription fees or server redirects.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What is QR Error Correction (ECC)?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Using Reed-Solomon algorithms, QR codes can sustain dirt, scratches, or logo overlays and still scan perfectly. High (H) error correction allows up to 30% of the code to be damaged or obscured without losing data.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom: 4rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;">Related Generator Tools</h2>
+        <div class="tools-grid" id="related-tools-container"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="brand-logo">
+            <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+          </a>
+          <p>Toolshere.online is your premier directory of free, private, client-side online tools.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Categories</h4>
+          <div class="footer-links">
+            <a href="../all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
+            <a href="../all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="../all-tools.html?cat=images" class="footer-link">Image Tools</a>
+            <a href="../all-tools.html?cat=generators" class="footer-link">Generator Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <div class="footer-links">
+            <a href="../about.html" class="footer-link">About Us</a>
+            <a href="../contact.html" class="footer-link">Contact Us</a>
+            <a href="../all-tools.html" class="footer-link">All 24 Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Legal &amp; Privacy</h4>
+          <div class="footer-links">
+            <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="../terms.html" class="footer-link">Terms and Conditions</a>
+            <a href="../disclaimer.html" class="footer-link">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
+        <div class="footer-badges"><span class="privacy-badge">🔒 100% Client-Side Privacy</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/tools-data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.Toolshere.onlineApp.renderRelatedTools('qr-code-generator', 'related-tools-container', 3);
+
+      const typeSelect = document.getElementById('qr-data-type');
+      const urlInput = document.getElementById('qr-url-input');
+      const textInput = document.getElementById('qr-text-input');
+      const wifiSsid = document.getElementById('wifi-ssid');
+      const wifiPass = document.getElementById('wifi-pass');
+      const wifiType = document.getElementById('wifi-type');
+      const phoneInput = document.getElementById('phone-input');
+
+      const fgColor = document.getElementById('qr-fg-color');
+      const bgColor = document.getElementById('qr-bg-color');
+      const sizeSelect = document.getElementById('qr-size-select');
+      const eccSelect = document.getElementById('qr-ecc-select');
+      const canvas = document.getElementById('qr-canvas');
+      const downloadBtn = document.getElementById('download-qr-btn');
+      const copyBtn = document.getElementById('copy-qr-btn');
+
+      typeSelect.addEventListener('change', () => {
+        document.getElementById('field-url').style.display = typeSelect.value === 'url' ? 'block' : 'none';
+        document.getElementById('field-text').style.display = typeSelect.value === 'text' ? 'block' : 'none';
+        document.getElementById('field-wifi').style.display = typeSelect.value === 'wifi' ? 'block' : 'none';
+        document.getElementById('field-phone').style.display = typeSelect.value === 'phone' ? 'block' : 'none';
+        generateQR();
+      });
+
+      function getPayload() {
+        switch (typeSelect.value) {
+          case 'url':
+            return urlInput.value.trim() || 'https://toolshere.online';
+          case 'text':
+            return textInput.value.trim() || 'Toolshere.online free online utilities';
+          case 'wifi':
+            return `WIFI:S:${wifiSsid.value};T:${wifiType.value};P:${wifiPass.value};;`;
+          case 'phone':
+            return `tel:${phoneInput.value.trim()}`;
+          default:
+            return 'https://toolshere.online';
+        }
+      }
+
+      function generateQR() {
+        const text = getPayload();
+        const size = parseInt(sizeSelect.value, 10);
+        const ecc = eccSelect.value;
+        const darkColor = fgColor.value;
+        const lightColor = bgColor.value;
+
+        if (window.QRCode) {
+          window.QRCode.toCanvas(canvas, text, {
+            width: size,
+            margin: 2,
+            errorCorrectionLevel: ecc,
+            color: {
+              dark: darkColor,
+              light: lightColor
+            }
+          }, (err) => {
+            if (err) console.error(err);
+          });
+        }
+      }
+
+      [urlInput, textInput, wifiSsid, wifiPass, wifiType, phoneInput, fgColor, bgColor, sizeSelect, eccSelect].forEach(el => {
+        el.addEventListener('input', generateQR);
+        el.addEventListener('change', generateQR);
+      });
+
+      downloadBtn.addEventListener('click', () => {
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `toolshere-qrcode-${Date.now()}.png`;
+        a.click();
+        window.Toolshere.onlineApp.showToast('QR Code downloaded!', 'success');
+      });
+
+      copyBtn.addEventListener('click', () => {
+        canvas.toBlob((blob) => {
+          if (!blob) return;
+          try {
+            const item = new ClipboardItem({ 'image/png': blob });
+            navigator.clipboard.write([item]).then(() => {
+              window.Toolshere.onlineApp.showToast('QR Code image copied to clipboard!', 'success');
+            }).catch(() => {
+              window.Toolshere.onlineApp.showToast('Clipboard image write not supported in this browser', 'error');
+            });
+          } catch (e) {
+            window.Toolshere.onlineApp.showToast('Please use Download PNG button', 'info');
+          }
+        });
+      });
+
+      // Initial generation
+      setTimeout(generateQR, 100);
+    });
+  </script>
+</body>
+</html>

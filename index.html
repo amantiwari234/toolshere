@@ -3,834 +3,718 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hey, My Favorite Human! 🥹❤️ | A Love Letter For You</title>
-  <meta name="description" content="A cute, romantic, funny, and interactive website created specially for the prettiest girl in the world!">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+  <title>Toolshere.online — Free Online Tools for Everyone | 12 Fast Browser Utilities</title>
+  <meta name="description" content="Toolshere.online provides 12 free, fast, and privacy-first online tools for calculators, image compression, PDF editing, text formatting, and developer tasks with zero server uploads.">
+  <meta name="keywords" content="free online tools, image compressor, pdf tools, emi calculator, gst calculator, qr code generator, word counter, password generator, json formatter">
+  <link rel="canonical" href="https://toolshere.online/">
   
-  <!-- Modern Google Fonts -->
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:title" content="Toolshere.online — Free Online Tools for Everyone">
+  <meta property="og:description" content="Instant, secure, and client-side browser tools for text, images, calculations, PDFs, generators, and code. No sign up required.">
+  <meta property="og:type" content="website">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Sacramento&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Master Romantic Stylesheet -->
-  <link rel="stylesheet" href="css/love.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/tools.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
 </head>
 <body>
 
-  <!-- Floating Hearts Background Canvas -->
-  <canvas id="canvas-hearts"></canvas>
-
-  <div class="love-wrapper">
-
-    <!-- Top Sticky Pill Bar -->
-    <header class="top-nav">
-      <a href="#welcomeHero" class="top-brand">
-        <span class="logo-icon">💌</span>
-        <span class="brand-text">Forever Yours</span>
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="brand-logo" aria-label="Toolshere.online Home">
+        <img src="assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
       </a>
 
-      <div class="top-actions">
-        <!-- Background Romantic Music Switch -->
-        <button id="musicToggleBtn" class="nav-btn music-btn" title="Toggle romantic background melody">
-          🎵 Play Music
-        </button>
-        <!-- Candlelight Romance Mode Toggle -->
-        <button id="candleModeBtn" class="nav-btn" title="Toggle romantic candlelight night mode">
-          🕯️ Candlelight
-        </button>
-        <!-- Personalize Names Button -->
-        <button id="editNamesBtn" class="nav-btn" title="Personalize your names">
-          ✏️ Edit Names
-        </button>
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="tools/pdf-tools.html" class="nav-link" style="color: var(--primary); font-weight: 700;">📄 PDF Suite</a>
+        <a href="all-tools.html" class="nav-link">All Tools</a>
+        <a href="#categories-section" class="nav-link">Categories</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">☰</button>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <!-- SECTION 1: HERO / WELCOME SCREEN -->
-    <section id="welcomeHero" class="hero-section">
-      <div class="special-badge">
-        <span>✨</span> HIGHLY CONFIDENTIAL LOVE REPORT <span>✨</span>
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="tools/pdf-tools.html" class="nav-link" style="color: var(--primary); font-weight: 700;">📄 PDF Suite</a>
+      <a href="all-tools.html" class="nav-link">All Tools</a>
+      <a href="#categories-section" class="nav-link">Categories</a>
+      <a href="about.html" class="nav-link">About Us</a>
+      <a href="contact.html" class="nav-link">Contact Us</a>
+      <a href="privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-glow-1"></div>
+    <div class="container hero-content">
+      <div class="hero-badge">
+        <span>⚡ 100% Free &amp; Private</span>
+        <span>•</span>
+        <span>Runs In Your Browser</span>
       </div>
-
-      <h1 class="hero-title">
-        Hey, My Favorite Human! <span class="heart-bounce">🥹❤️</span>
-      </h1>
-
-      <div class="warning-banner">
-        <span class="warning-icon">⚠️</span>
-        <div class="warning-text">
-          <strong>Warning:</strong> Your boyfriend is about to embarrass himself with love.
-        </div>
-      </div>
-
+      <h1 class="hero-title">Free Online Tools for <span class="gradient-text">Everyday Life</span></h1>
       <p class="hero-subtitle">
-        Welcome to the website built solely to celebrate you, <span class="var-gf-name" style="font-weight: 800; color: var(--rose-dark);">My Beautiful Girl</span>! Prepare for maximum romance and goofy humor. 🥰
+        Instant, secure, client-side tools for calculations, text formatting, image processing, PDF management, generators, and developer tasks. No installation or registration needed.
       </p>
 
-      <!-- RELATIONSHIP LIVE TIME COUNTER -->
-      <div class="counter-box-wrap">
-        <div class="special-badge" style="background:rgba(255,255,255,0.9); margin-bottom:12px;">
-          <span>⏳</span> IN LOVE WITH YOU FOR
+      <!-- Search Box Container -->
+      <div class="hero-search-wrapper">
+        <div class="search-box-container">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search 12 free online tools (e.g. image compressor, emi, gst, qr code, pdf, json...)" aria-label="Search tools" autocomplete="off">
+          <button type="button" id="search-clear-btn" class="search-clear-btn" style="display:none;" title="Clear search" aria-label="Clear search">✕</button>
+          <span class="search-shortcut">Press /</span>
         </div>
-        <div class="counter-grid">
-          <div class="counter-unit">
-            <div id="counterDays" class="counter-num">000</div>
-            <div class="counter-lbl">Days</div>
-          </div>
-          <div class="counter-unit">
-            <div id="counterHours" class="counter-num">00</div>
-            <div class="counter-lbl">Hours</div>
-          </div>
-          <div class="counter-unit">
-            <div id="counterMins" class="counter-num">00</div>
-            <div class="counter-lbl">Minutes</div>
-          </div>
-          <div class="counter-unit">
-            <div id="counterSecs" class="counter-num">00</div>
-            <div class="counter-lbl">Seconds</div>
-          </div>
-        </div>
-        <p style="font-size:0.88rem; color:#6a1a32; margin-top:8px; font-weight:600;">
-          💓 And falling more deeply in love every single millisecond.
-        </p>
+        <!-- Live Instant Search Dropdown -->
+        <div id="hero-search-results" class="search-results-dropdown" style="display: none;" role="listbox"></div>
       </div>
 
-      <div class="hero-chips">
-        <a href="#photoSection" class="hero-chip">📸 Look At Your Face</a>
-        <a href="#scrapbookSection" class="hero-chip">📖 Our Love Story</a>
-        <a href="#secretsSection" class="hero-chip">🤫 Secret Thoughts</a>
-        <a href="#proposalSection" class="hero-chip">💍 My Promise</a>
-        <a href="#confessionSection" class="hero-chip">🚨 Breaking News</a>
-        <a href="#messagesSection" class="hero-chip">💌 Sweet Notes</a>
-        <a href="#questionSection" class="hero-chip">💍 The Big Question</a>
+      <!-- Quick Trust Badges -->
+      <div class="hero-badges-list">
+        <span>🔒 Zero Data Uploads</span>
+        <span>⚡ Instant Processing</span>
+        <span>📱 Mobile &amp; Desktop Friendly</span>
+        <span>💸 Always 100% Free</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SECTION 2: GIRLFRIEND PHOTO UPLOAD & HEART-SHAPED FRAME -->
-    <section id="photoSection" class="glass-card">
-      <div class="section-head">
-        <span class="section-tag">Exhibit A: Perfection</span>
-        <h2 class="section-title">The Prettiest Girl In The Multiverse ✨</h2>
-        <p class="section-desc">Warning: Looking directly at this photograph may cause immediate elevated heart rates!</p>
-      </div>
+  <!-- Responsive Ad Banner Placeholder (Leaderboard 728x90) -->
+  <div class="ad-slot-container">
+    <div class="ad-placeholder leaderboard">
+      <span class="ad-label">Advertisement Space</span>
+      <span class="ad-text">Responsive AdSense / Partner Slot — Unobtrusive 728x90 Banner</span>
+      <span class="ad-cta">Ad slot ready for monetization</span>
+    </div>
+  </div>
 
-      <div class="photo-showcase-wrap">
-        <!-- Interactive Frame Styles Switcher -->
-        <div class="frame-selector">
-          <button class="frame-btn active" data-frame="heart">💖 Heart Frame</button>
-          <button class="frame-btn" data-frame="circle">💫 Glowing Halo</button>
-          <button class="frame-btn" data-frame="polaroid">📸 Cute Polaroid</button>
-        </div>
-
-        <!-- Interactive Photo Quick Switcher Chips (All 7 Couple Memories) -->
-        <div class="photo-quick-switch">
-          <button class="photo-thumb-btn active" data-src="assets/girlfriend1.jpg" title="Cute Smile">
-            <img src="assets/girlfriend1.jpg" alt="Photo 1">
-            <span>Cute Smile 🥰</span>
-          </button>
-          <button class="photo-thumb-btn" data-src="assets/couple_hands.jpg" title="Holding Hands">
-            <img src="assets/couple_hands.jpg" alt="Photo 2">
-            <span>Holding Hands 🤝🖤</span>
-          </button>
-          <button class="photo-thumb-btn" data-src="assets/couple_pout.jpg" title="Pout Face">
-            <img src="assets/couple_pout.jpg" alt="Photo 3">
-            <span>Goofy Pout 😜💋</span>
-          </button>
-          <button class="photo-thumb-btn" data-src="assets/couple_outdoor.jpg" title="Together Outdoors">
-            <img src="assets/couple_outdoor.jpg" alt="Photo 4">
-            <span>In The Woods 🌲💙</span>
-          </button>
-          <button class="photo-thumb-btn" data-src="assets/couple_hill.jpg" title="Mountain Hill">
-            <img src="assets/couple_hill.jpg" alt="Photo 5">
-            <span>Hillside Hug 🌄🥰</span>
-          </button>
-          <button class="photo-thumb-btn" data-src="assets/couple_road.jpg" title="Winter Road">
-            <img src="assets/couple_road.jpg" alt="Photo 6">
-            <span>Winter Bridge 🛣️❄️</span>
-          </button>
-          <button class="photo-thumb-btn" data-src="assets/girlfriend2.jpg" title="Mountain Queen">
-            <img src="assets/girlfriend2.jpg" alt="Photo 7">
-            <span>Mountain Queen 👑🧣</span>
-          </button>
-        </div>
-
-        <!-- Photo Display Stage with Orbiting Badges -->
-        <div class="photo-frame-container">
-          <div class="orbit-badge top-right">
-            <span>👑</span> 10/10 Queen
-          </div>
-          <div class="orbit-badge bottom-left">
-            <span>🌸</span> Pure Magic
-          </div>
-          <div class="orbit-badge bottom-right">
-            <span>🔥</span> Stunner
-          </div>
-
-          <!-- Dynamic Photo Frame -->
-          <div id="photoFrame" class="photo-frame heart-frame">
-            <div class="heart-frame-outer"></div>
-            <div class="heart-frame-inner">
-              <img id="gfPhotoImg" class="gf-photo-img" src="assets/girlfriend1.jpg" alt="My Beautiful Girlfriend">
-            </div>
-          </div>
-        </div>
-
-        <!-- Photo Upload & Interactive Controls -->
-        <div class="photo-controls">
-          <label class="upload-btn-label">
-            <span>📷</span> Upload Another Photo
-            <input type="file" id="photoFileInput" accept="image/*">
-          </label>
-          <button id="kissPhotoBtn" class="action-pill-btn" title="Send virtual kisses to her photo">
-            <span>💋</span> Give Her A Kiss
-          </button>
-          <button id="resetPhotoBtn" class="action-pill-btn" title="Reset to default photo">
-            <span>🔄</span> Reset
-          </button>
-        </div>
-        <p class="photo-hint">
-          <span>💡</span> Click any photo chip above or tap any polaroid below to load it into the heart frame!
-        </p>
-      </div>
-    </section>
-
-    <!-- SECTION: OUR LOVE STORY & MEMORY SCRAPBOOK (ALL 7 COUPLE PHOTOS) -->
-    <section id="scrapbookSection" class="glass-card">
-      <div class="section-head">
-        <span class="section-tag">Chapter By Chapter</span>
-        <h2 class="section-title">Our Story & Sweetest Moments 📖💑</h2>
-        <p class="section-desc">Every picture holds a thousand heartbeats. Tap any polaroid to frame it in your heart above!</p>
+  <!-- Popular Tools Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Most Used</span>
+        <h2 class="section-title">Popular Tools</h2>
+        <p class="section-desc">Handpicked, highly requested utilities trusted by thousands daily.</p>
       </div>
 
-      <div class="scrapbook-grid">
-        <!-- Photo 1 -->
-        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
-          <div class="scrapbook-img-wrap">
-            <img src="assets/girlfriend1.jpg" alt="The Prettiest Face Alive">
-            <span class="scrapbook-badge">💖 Moment #1</span>
-          </div>
-          <h4 class="scrapbook-caption">The Prettiest Face Alive 🥹</h4>
-          <p class="scrapbook-sub">That cozy blue sweatshirt and the sweet smile that instantly stole my whole heart forever.</p>
-        </div>
-
-        <!-- Photo 2 -->
-        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
-          <div class="scrapbook-img-wrap">
-            <img src="assets/couple_hands.jpg" alt="Holding Hands Into Forever">
-            <span class="scrapbook-badge">🤝 Moment #2</span>
-          </div>
-          <h4 class="scrapbook-caption">Holding Hands Into Forever 🖤</h4>
-          <p class="scrapbook-sub">Fingers intertwined in the dark. I promise I will never, ever let go of this hand.</p>
-        </div>
-
-        <!-- Photo 3 -->
-        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
-          <div class="scrapbook-img-wrap">
-            <img src="assets/couple_pout.jpg" alt="Matching Each Other's Crazy">
-            <span class="scrapbook-badge">😜 Moment #3</span>
-          </div>
-          <h4 class="scrapbook-caption">Matching Each Other's Crazy 💋</h4>
-          <p class="scrapbook-sub">Making silly pout faces together indoors — because being weird with you is my favorite thing.</p>
-        </div>
-
-        <!-- Photo 4 -->
-        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
-          <div class="scrapbook-img-wrap">
-            <img src="assets/couple_outdoor.jpg" alt="In The Woods Together">
-            <span class="scrapbook-badge">🌲 Moment #4</span>
-          </div>
-          <h4 class="scrapbook-caption">Matching In Blue By The Pines 💙</h4>
-          <p class="scrapbook-sub">Fresh air, tall trees, and the girl who makes every single second feel like home.</p>
-        </div>
-
-        <!-- Photo 5 -->
-        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
-          <div class="scrapbook-img-wrap">
-            <img src="assets/couple_hill.jpg" alt="Hillside Warmth">
-            <span class="scrapbook-badge">🌄 Moment #5</span>
-          </div>
-          <h4 class="scrapbook-caption">Peace On The Hillside 🥰</h4>
-          <p class="scrapbook-sub">Arm wrapped around you, looking at the hills. With you, I have everything I'll ever need.</p>
-        </div>
-
-        <!-- Photo 6 -->
-        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
-          <div class="scrapbook-img-wrap">
-            <img src="assets/couple_road.jpg" alt="Winter Road Trip">
-            <span class="scrapbook-badge">🛣️ Moment #6</span>
-          </div>
-          <h4 class="scrapbook-caption">Winter Road Trips & Highway Wind ❄️</h4>
-          <p class="scrapbook-sub">Cold mountain breeze, bundled up in black jackets, sharing smiles by the roadside bridge.</p>
-        </div>
-
-        <!-- Photo 7 -->
-        <div class="scrapbook-polaroid" title="Click to view in heart frame!">
-          <div class="scrapbook-img-wrap">
-            <img src="assets/girlfriend2.jpg" alt="Queen of the Himalayas">
-            <span class="scrapbook-badge">👑 Moment #7</span>
-          </div>
-          <h4 class="scrapbook-caption">Queen of the Himalayas 🧣</h4>
-          <p class="scrapbook-sub">Even the towering snow peaks and mountain rivers looked dull next to your breathtaking glow.</p>
-        </div>
+      <div class="tools-grid" id="popular-tools-grid">
+        <!-- Rendered dynamically by script -->
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- SECTION: INTERACTIVE SECRET THOUGHTS WALL (3D FLIP CARDS) -->
-    <section id="secretsSection" class="glass-card">
-      <div class="section-head">
-        <span class="section-tag">Confidential Confessions</span>
-        <h2 class="section-title">Tap To Reveal My Secret Thoughts 🤫💌</h2>
-        <p class="section-desc">Things I quietly think about you every day that I don't say out loud often enough:</p>
+  <!-- Dedicated PDF Tools Suite Section -->
+  <section class="section-padding" id="pdf-tools-section" style="background: linear-gradient(180deg, var(--bg-surface) 0%, rgba(124, 58, 237, 0.04) 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25);">📄 PDF Power Suite</span>
+        <h2 class="section-title">Complete Online PDF Tools</h2>
+        <p class="section-desc">Merge, split, compress, convert PDF to JPG, and convert images to PDF directly in your browser. 100% free and totally private.</p>
       </div>
 
-      <div class="secrets-wall-grid">
-        <div class="secret-note-card">
-          <div class="secret-note-inner">
-            <div class="secret-front">
-              <div class="secret-icon">🦋</div>
-              <h4>Secret #1</h4>
-              <span>Tap to flip ✨</span>
-            </div>
-            <div class="secret-back">
-              "I still get butterflies in my stomach every single time our fingers touch."
-            </div>
+      <div class="tools-grid">
+        <!-- PDF Tools Suite Hub -->
+        <a href="tools/pdf-tools.html" class="tool-card" style="border-color: rgba(124, 58, 237, 0.35); box-shadow: 0 4px 15px rgba(124, 58, 237, 0.08);">
+          <div class="tool-card-header">
+            <div class="tool-icon-box" style="background: rgba(124, 58, 237, 0.12); color: var(--primary);">📄</div>
+            <span class="tool-badge popular">All-In-One Hub</span>
           </div>
-        </div>
-
-        <div class="secret-note-card">
-          <div class="secret-note-inner">
-            <div class="secret-front">
-              <div class="secret-icon">📸</div>
-              <h4>Secret #2</h4>
-              <span>Tap to flip ✨</span>
-            </div>
-            <div class="secret-back">
-              "I secretly take candid photos of you smiling when you're not looking. You're too cute not to capture."
-            </div>
+          <h3 class="tool-card-title">PDF Tools Suite</h3>
+          <p class="tool-card-desc">Access the complete suite of PDF utilities in one convenient interface. Zero cloud uploads.</p>
+          <div class="tool-card-footer">
+            <span style="color: var(--primary); font-weight: 700;">Open PDF Suite</span>
+            <span class="arrow-icon">→</span>
           </div>
-        </div>
+        </a>
 
-        <div class="secret-note-card">
-          <div class="secret-note-inner">
-            <div class="secret-front">
-              <div class="secret-icon">🫂</div>
-              <h4>Secret #3</h4>
-              <span>Tap to flip ✨</span>
-            </div>
-            <div class="secret-back">
-              "When you fall asleep resting on my shoulder, I literally hold my breath so I don't disturb your peace."
-            </div>
+        <!-- Merge PDF -->
+        <a href="tools/merge-pdf.html" class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-box">🔗</div>
+            <span class="tool-badge popular">Popular</span>
           </div>
-        </div>
-
-        <div class="secret-note-card">
-          <div class="secret-note-inner">
-            <div class="secret-front">
-              <div class="secret-icon">🌟</div>
-              <h4>Secret #4</h4>
-              <span>Tap to flip ✨</span>
-            </div>
-            <div class="secret-back">
-              "You make me want to work harder, dream bigger, and become the man you truly deserve."
-            </div>
+          <h3 class="tool-card-title">Merge PDF Files</h3>
+          <p class="tool-card-desc">Combine multiple PDF documents into a single organized file in seconds. Fast, free, and private client-side binder.</p>
+          <div class="tool-card-footer">
+            <span>Use Tool</span>
+            <span class="arrow-icon">→</span>
           </div>
-        </div>
+        </a>
 
-        <div class="secret-note-card">
-          <div class="secret-note-inner">
-            <div class="secret-front">
-              <div class="secret-icon">🍕</div>
-              <h4>Secret #5</h4>
-              <span>Tap to flip ✨</span>
-            </div>
-            <div class="secret-back">
-              "Even in a room filled with the most beautiful art in the world, I would still only stare at you."
-            </div>
+        <!-- Split PDF -->
+        <a href="tools/split-pdf.html" class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-box">✂️</div>
+            <span class="tool-badge">Document</span>
           </div>
-        </div>
-
-        <div class="secret-note-card">
-          <div class="secret-note-inner">
-            <div class="secret-front">
-              <div class="secret-icon">🔒</div>
-              <h4>Secret #6</h4>
-              <span>Tap to flip ✨</span>
-            </div>
-            <div class="secret-back">
-              "My soul recognized yours the day we met. I'm choosing you today, tomorrow, and in every lifetime."
-            </div>
+          <h3 class="tool-card-title">Split PDF Files</h3>
+          <p class="tool-card-desc">Extract specific page ranges or split individual pages from a PDF file into separate download-ready documents.</p>
+          <div class="tool-card-footer">
+            <span>Use Tool</span>
+            <span class="arrow-icon">→</span>
           </div>
-        </div>
-      </div>
-    </section>
+        </a>
 
-    <!-- SECTION: INTERACTIVE PROPOSAL & LIFETIME PROMISE CARD -->
-    <section id="proposalSection" class="proposal-box-card">
-      <span class="special-badge" style="background:rgba(255,255,255,0.15); color:#ffd700; border-color:rgba(255,215,0,0.5);">
-        <span>👑</span> A LIFETIME COMMITMENT
-      </span>
+        <!-- Compress PDF -->
+        <a href="tools/compress-pdf.html" class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-box">📦</div>
+            <span class="tool-badge popular">Essential</span>
+          </div>
+          <h3 class="tool-card-title">Compress PDF Files</h3>
+          <p class="tool-card-desc">Reduce PDF document file sizes client-side by optimizing internal object streams without losing text readability.</p>
+          <div class="tool-card-footer">
+            <span>Use Tool</span>
+            <span class="arrow-icon">→</span>
+          </div>
+        </a>
 
-      <h2 style="font-family: var(--font-heading); font-size:clamp(1.8rem, 4vw, 2.5rem); margin: 15px 0 6px;">
-        My Promise To You Forever 💍
-      </h2>
+        <!-- PDF to JPG -->
+        <a href="tools/pdf-to-jpg.html" class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-box">🖼️</div>
+            <span class="tool-badge popular">High Res</span>
+          </div>
+          <h3 class="tool-card-title">PDF to JPG Converter</h3>
+          <p class="tool-card-desc">Convert PDF document pages into high-resolution JPG images at up to 300 DPI directly in your browser.</p>
+          <div class="tool-card-footer">
+            <span>Use Tool</span>
+            <span class="arrow-icon">→</span>
+          </div>
+        </a>
 
-      <p class="proposal-vow-text">
-        "I promise to always hold your hand, listen to your ramblings, protect your smile, and love you unconditionally through every storm and every sunshine."
-      </p>
-
-      <div class="ring-sparkles-wrap">
-        <span>✨</span><span>★</span><span>💎</span><span>★</span><span>✨</span>
-      </div>
-
-      <!-- Clickable Ring Box -->
-      <div id="ringBoxVisual" class="ring-box-visual" title="Tap the box to open!">
-        🎁
-      </div>
-
-      <p style="font-size:0.92rem; color:#ffccd5; font-weight:600;">
-        Tap the velvet gift box above to open my promise to you! 👆
-      </p>
-    </section>
-
-    <!-- SECTION: OUR SPECIAL SONG (SPOTIFY & BACKGROUND MUSIC) -->
-    <section class="spotify-music-card">
-      <!-- Background Audio Element -->
-      <audio id="bgAudioElement" src="assets/song.mp3" loop preload="auto"></audio>
-
-      <div class="song-header-flex">
-        <div class="song-brand-badge">
-          <span>🎧</span> OUR OFFICIAL LOVE ANTHEM
-        </div>
-        <a href="https://open.spotify.com/track/14mT8BCOXiUUcGlb7KujkT" target="_blank" style="color:#1ed760; font-size:0.88rem; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:6px;">
-          <span>Open on Spotify</span> ↗
+        <!-- Image to PDF -->
+        <a href="tools/image-to-pdf.html" class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-box">📑</div>
+            <span class="tool-badge">Essential</span>
+          </div>
+          <h3 class="tool-card-title">Image to PDF</h3>
+          <p class="tool-card-desc">Turn JPG, PNG, and WebP images into a beautifully formatted, print-ready PDF document with custom margins.</p>
+          <div class="tool-card-footer">
+            <span>Use Tool</span>
+            <span class="arrow-icon">→</span>
+          </div>
         </a>
       </div>
+    </div>
+  </section>
 
-      <div class="vinyl-flex-wrap">
-        <!-- Spinning Vinyl Disc -->
-        <div id="vinylDisc" class="vinyl-disc">
-          <div class="vinyl-center">❤️</div>
+  <!-- Categories Section with Filter Tabs -->
+  <section class="section-padding section-alt" id="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Browse by Category</span>
+        <h2 class="section-title">Explore All 12 Tools</h2>
+        <p class="section-desc">Select a category or use the live search above to find exactly what you need.</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="category-tabs-wrapper">
+        <div class="category-tabs" id="category-tabs-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Filtered Tools Grid -->
+      <div class="tools-grid" id="all-tools-grid">
+        <!-- Filtered cards injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Recently Added Tools Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Fresh Additions</span>
+        <h2 class="section-title">Recently Added Tools</h2>
+        <p class="section-desc">New productivity tools designed to make your day smoother.</p>
+      </div>
+
+      <div class="tools-grid" id="recent-tools-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid-Page In-Article Ad Banner Placeholder -->
+  <div class="ad-slot-container">
+    <div class="ad-placeholder in-article">
+      <span class="ad-label">Sponsorship &amp; Affiliate Recommendation</span>
+      <span class="ad-text">High-performance hosting &amp; developer productivity resources</span>
+      <span class="ad-cta">Ad slot prepared for future affiliate integration</span>
+    </div>
+  </div>
+
+  <!-- Frequently Asked Questions Section -->
+  <section class="section-padding section-alt" id="faq-section">
+    <div class="container">
+      <div class="section-header" style="text-align: center; align-items: center;">
+        <span class="section-tag">Help &amp; Answers</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Everything you need to know about Toolshere.online, privacy, and browser execution.</p>
+      </div>
+
+      <div class="faq-grid">
+        <div class="faq-item open">
+          <button class="faq-question">
+            <span>Are all tools on Toolshere.online completely free to use?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Yes, 100%! All 12 tools on Toolshere.online are free forever without any hidden fees, subscription plans, usage caps, or forced registrations.
+          </div>
         </div>
 
-        <div class="song-info-text">
-          <h3 class="song-info-title">I Think They Call This Love</h3>
-          <div class="song-info-artist">Cover by Matthew Ifield 🎶</div>
-          <p class="song-quote-badge">
-            "Every single time I hear this, my mind immediately thinks of you..." 🥹💕
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is my data, text, or uploaded images secure?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Absolute privacy is our core promise. Toolshere.online executes your calculations, text formatting, image compression, and PDF operations directly within your web browser using client-side JavaScript. Your sensitive documents, photos, or passwords never get sent to any server.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do I need to install software, extensions, or create an account?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            No installation or signup is required. You can bookmark Toolshere.online on your smartphone, tablet, laptop, or desktop and use every tool instantly with one click.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I use Toolshere.online offline or on mobile devices?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Yes. The entire Toolshere.online website is fully responsive, optimized for low data usage, and works smoothly on Android, iOS, Windows, macOS, and Linux devices.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How does Toolshere.online support its free services?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            Toolshere.online is designed to be supported by unobtrusive, clearly labeled advertisements and optional affiliate recommendations that never interfere with your workflow or tool usage.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo">
+            <img src="assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+          </a>
+          <p>
+            Toolshere.online is your premier directory of free, private, client-side online tools for text manipulation, calculations, image optimization, PDF editing, and software development.
           </p>
-          <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-            <button id="cardPlayBtn" class="action-pill-btn" style="background:#1ed760; color:#000; border:none; font-weight:800; cursor:pointer;">
-              ▶ Play Our Song
-            </button>
-            <a href="https://open.spotify.com/track/14mT8BCOXiUUcGlb7KujkT" target="_blank" class="action-pill-btn" style="background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.3); text-decoration:none;">
-              Spotify App 💚
-            </a>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Categories</h4>
+          <div class="footer-links">
+            <a href="all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
+            <a href="all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="all-tools.html?cat=images" class="footer-link">Image Tools</a>
+            <a href="all-tools.html?cat=generators" class="footer-link">Generator Tools</a>
+            <a href="all-tools.html?cat=developer" class="footer-link">Developer Tools</a>
+            <a href="tools/pdf-tools.html" class="footer-link">PDF Tools</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">About Us</a>
+            <a href="contact.html" class="footer-link">Contact Us</a>
+            <a href="all-tools.html" class="footer-link">All 12 Tools</a>
+            <a href="sitemap.xml" class="footer-link">XML Sitemap</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Legal &amp; Privacy</h4>
+          <div class="footer-links">
+            <a href="privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="terms.html" class="footer-link">Terms and Conditions</a>
+            <a href="disclaimer.html" class="footer-link">Disclaimer</a>
           </div>
         </div>
       </div>
 
-      <!-- Spotify Official Interactive Embed Widget -->
-      <div class="spotify-embed-container">
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/14mT8BCOXiUUcGlb7KujkT?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      </div>
-    </section>
-
-    <!-- SECTION 3: FUNNY LOVE CONFESSION - BREAKING NEWS EDITION -->
-    <section id="confessionSection" class="breaking-news-card glass-card" style="padding:0;">
-      <div class="news-header">
-        <div class="news-live-tag">
-          <span class="live-dot"></span>
-          <span>SPECIAL LOVE REPORT • LIVE</span>
+      <div class="footer-bottom">
+        <div>
+          &copy; <span id="current-year">2026</span> Toolshere.online. All rights reserved. Free Online Tools for Everyone.
         </div>
-        <div class="news-location">📍 BROADCASTING FROM HIS HEART</div>
-      </div>
-
-      <div class="news-content">
-        <h2 class="news-headline">
-          🚨 Breaking News: Local Boy Officially Obsessed With One Beautiful Girl
-        </h2>
-
-        <div class="news-body-text">
-          "Breaking News 🚨: This boy is officially obsessed with one beautiful girl. Symptoms include smiling like an absolute goofball at his phone, missing her every 2 seconds, and acting like a helpless fool in love. 😂❤️"
-        </div>
-
-        <!-- Hilarious Medical Diagnosis / Stats Grid -->
-        <div class="news-stats-grid">
-          <div class="stat-item">
-            <div class="stat-icon">💓</div>
-            <div class="stat-label">Heart Rate</div>
-            <div class="stat-val">220 BPM</div>
-            <div class="stat-sub">Whenever you text or call</div>
-          </div>
-
-          <div class="stat-item">
-            <div class="stat-icon">🧠</div>
-            <div class="stat-label">Brain Capacity</div>
-            <div class="stat-val">99.9% You</div>
-            <div class="stat-sub">0.1% Remembering to breathe</div>
-          </div>
-
-          <div class="stat-item">
-            <div class="stat-icon">🍕</div>
-            <div class="stat-label">Pizza Sacrifice</div>
-            <div class="stat-val">100% Willing</div>
-            <div class="stat-sub">Will give you the last slice</div>
-          </div>
-
-          <div class="stat-item">
-            <div class="stat-icon">🔒</div>
-            <div class="stat-label">Escape Route</div>
-            <div class="stat-val">0.000%</div>
-            <div class="stat-sub">You're stuck with me forever</div>
-          </div>
-        </div>
-
-        <!-- Live Ticker Bar -->
-        <div class="news-ticker">
-          <span class="ticker-label">LATEST</span>
-          <div class="ticker-marquee">
-            Boyfriend reports: "I tried acting cool, but she smiled and my brain completely short-circuited." • Doctors recommend immediate daily doses of cuddles, bubble tea, and snacks. • Love levels have surpassed all measurable scientific limits!
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: ROMANTIC MESSAGES (ANIMATED ONE BY ONE) -->
-    <section id="messagesSection" class="glass-card">
-      <div class="section-head">
-        <span class="section-tag">From The Soul</span>
-        <h2 class="section-title">Romantic Messages For You 💌</h2>
-        <p class="section-desc">Click through to read every little truth my heart whispers every single day.</p>
-      </div>
-
-      <div class="messages-container">
-        <!-- Interactive Card Stage -->
-        <div class="message-card-stage">
-          <div class="message-display-card">
-            <div class="message-quote-icon">“</div>
-            <h3 id="msgText" class="message-card-text">
-              I love you more than pizza 🍕❤️
-            </h3>
-            <p id="msgSub" style="color:#7b2c45; font-size:1rem; margin-bottom: 14px;">
-              And you know how much I love pizza!
-            </p>
-            <span id="msgCounter" class="message-counter-badge">1 of 8</span>
-          </div>
-        </div>
-
-        <!-- Carousel Navigation Controls -->
-        <div class="message-controls">
-          <button id="prevMsgBtn" class="carousel-btn" title="Previous note">‹</button>
-          <div id="msgDots" class="dots-indicator"></div>
-          <button id="nextMsgBtn" class="carousel-btn" title="Next note">›</button>
-        </div>
-
-        <!-- Extra Cute Notes Grid -->
-        <div class="mini-notes-grid">
-          <div class="mini-note-card">
-            <div class="mini-note-icon">🍕</div>
-            <div>
-              <strong>Pizza Comparison:</strong> I love you more than pizza, cheesecakes, and crispy fries combined.
-            </div>
-          </div>
-          <div class="mini-note-card">
-            <div class="mini-note-icon">👑</div>
-            <div>
-              <strong>Executive Order:</strong> You are the permanent, undefeated CEO of my heart and schedule.
-            </div>
-          </div>
-          <div class="mini-note-card">
-            <div class="mini-note-icon">📱</div>
-            <div>
-              <strong>Notification Status:</strong> The only notification sound I never mute or ignore.
-            </div>
-          </div>
-          <div class="mini-note-card">
-            <div class="mini-note-icon">💼</div>
-            <div>
-              <strong>Overtime Policy:</strong> Loving you is my favorite job — overtime guaranteed every day.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 5: INTERACTIVE LOVE BUTTONS (DODGING NO & EXPANDING YES) -->
-    <section id="questionSection" class="glass-card love-question-card">
-      <div class="question-heart-pulse">💍</div>
-      <h2 class="love-question-title">Quick Question For You... 👀</h2>
-      <p class="love-question-desc">
-        There are two options below. Choose wisely! (Hint: One button is behaving very obediently, the other has trust issues 😂)
-      </p>
-
-      <!-- The Arena for Runaway mechanics -->
-      <div id="buttonsArena" class="buttons-arena">
-        <!-- Dodging Toast notification -->
-        <div id="dodgingToast" class="dodging-toast">
-          Error 404: 'No' does not exist! 🏃‍♂️💨
-        </div>
-
-        <!-- The Glowing & Growing YES Button -->
-        <button id="btnYes" class="btn-yes">
-          YES! Absolutely! 🥰
-        </button>
-
-        <!-- The Teleporting Runaway NO Button -->
-        <button id="btnNo" class="btn-no">
-          No 😒
-        </button>
-      </div>
-
-      <p style="font-size:0.85rem; color:#800f2f; margin-top:10px;">
-        ⚠️ Try hovering or tapping "No" if you dare! It literally won't let you! 😜
-      </p>
-    </section>
-
-    <!-- SECTION 6: INTERACTIVE SECRET LOVE LETTER IN ENVELOPE -->
-    <section id="envelopeSection" class="glass-card">
-      <div class="section-head">
-        <span class="section-tag">Wax-Sealed Mystery</span>
-        <h2 class="section-title">A Secret Letter For Your Eyes Only 📜</h2>
-        <p class="section-desc">Tap the wax seal on the envelope to unfold the handwritten letter.</p>
-      </div>
-
-      <div class="envelope-wrap">
-        <div id="loveEnvelope" class="love-envelope" title="Click to open the letter">
-          <div class="envelope-flap"></div>
-          <div class="wax-seal">💌</div>
-        </div>
-
-        <!-- The Letter Sheet that unfolds -->
-        <div id="letterSheet" class="letter-sheet">
-          <div class="letter-handwriting">
-            <p>Dearest <span id="letterGfName" class="var-gf-name" style="color:var(--primary); font-weight:700;">My Beautiful Girl</span>,</p>
-            <br>
-            <p>If you're reading this, it means you opened my little digital love letter! From the moment you came into my life, everything became so much brighter, louder with laughter, and warmer.</p>
-            <br>
-            <p>You make my ordinary days feel magical just by existing. I love your kindness, your silly jokes, your stubborn little pout, and the way you make me feel like the luckiest person in the whole wide world.</p>
-            <br>
-            <p>Thank you for choosing me every day. I promise to always cheer you on, make you smile when you're down, buy you snacks, and love you relentlessly through all the highs and lows.</p>
-            <div class="letter-signature">
-              Forever & Always Yours,<br>
-              <span id="letterBfName" class="var-bf-name">Your Loving Boyfriend</span> ❤️
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 7: LOVE COUPONS (VOUCHERS) -->
-    <section class="glass-card">
-      <div class="section-head">
-        <span class="section-tag">Non-Refundable Perks</span>
-        <h2 class="section-title">Redeemable Love Coupons 🎟️</h2>
-        <p class="section-desc">Click any coupon below to redeem it right now in real life!</p>
-      </div>
-
-      <div class="coupons-grid">
-        <div class="coupon-ticket">
-          <span class="coupon-badge">Voucher #01</span>
-          <div class="coupon-icon">🫂</div>
-          <h4 class="coupon-title">Free Long Warm Hug</h4>
-          <p class="coupon-desc">Valid for a continuous, warm bear hug for at least 5 minutes.</p>
-          <button class="redeem-btn">Redeem Now ✨</button>
-        </div>
-
-        <div class="coupon-ticket">
-          <span class="coupon-badge">Voucher #02</span>
-          <div class="coupon-icon">🍦</div>
-          <h4 class="coupon-title">Late Night Snack Trip</h4>
-          <p class="coupon-desc">Boyfriend drives or orders whatever ice cream or snacks you crave.</p>
-          <button class="redeem-btn">Redeem Now ✨</button>
-        </div>
-
-        <div class="coupon-ticket">
-          <span class="coupon-badge">Voucher #03</span>
-          <div class="coupon-icon">🏆</div>
-          <h4 class="coupon-title">You Win Any Argument</h4>
-          <p class="coupon-desc">No questions asked, you are 100% right, boyfriend admits defeat.</p>
-          <button class="redeem-btn">Redeem Now ✨</button>
-        </div>
-
-        <div class="coupon-ticket">
-          <span class="coupon-badge">Voucher #04</span>
-          <div class="coupon-icon">💆‍♀️</div>
-          <h4 class="coupon-title">Deluxe Back / Foot Rub</h4>
-          <p class="coupon-desc">Full 30-minute relaxation massage while listening to your favorite playlist.</p>
-          <button class="redeem-btn">Redeem Now ✨</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 8: LOVE CALCULATOR & LOVE REASONS JAR -->
-    <div class="fun-extras-grid">
-      <!-- Love Calculator -->
-      <div class="calc-box">
-        <span class="section-tag">Scientific Testing</span>
-        <h3 style="font-family: var(--font-heading); color:#590d22; font-size:1.4rem; margin:10px 0 6px;">
-          Love Compatibility Meter 🧪
-        </h3>
-        <p style="font-size:0.9rem; color:#7b2c45;">
-          Test our biological, spiritual, and romantic alignment:
-        </p>
-
-        <div class="calc-inputs">
-          <input type="text" id="calcBfName" class="calc-input var-bf-name" value="Boyfriend" placeholder="His Name">
-          <span style="font-size:1.5rem; color:var(--primary);">+</span>
-          <input type="text" id="calcGfName" class="calc-input var-gf-name" value="Girlfriend" placeholder="Her Name">
-        </div>
-
-        <button id="calcBtn" class="calc-btn">
-          ⚡ Calculate Love Score
-        </button>
-
-        <div id="calcMeter" class="calc-meter-wrap">
-          <div class="calc-meter-bar">
-            <div id="calcFill" class="calc-meter-fill"></div>
-          </div>
-          <div id="calcScore" class="calc-result-text"></div>
-          <p id="calcVerdict" style="font-size:0.88rem; color:#590d22; margin-top:6px;"></p>
-        </div>
-      </div>
-
-      <!-- Love Reasons Jar -->
-      <div class="jar-box">
-        <span class="section-tag">Infinite Reasons</span>
-        <h3 style="font-family: var(--font-heading); color:#590d22; font-size:1.4rem; margin:10px 0 6px;">
-          Jar of Reasons I Love You 🫙
-        </h3>
-        <p style="font-size:0.9rem; color:#7b2c45;">
-          Tap the cute jar to draw a random reason out of my heart:
-        </p>
-
-        <div id="jarIconWrap" class="jar-icon-wrap" title="Tap to pull a love reason!">
-          🫙
-        </div>
-
-        <div id="jarQuoteDisplay" class="jar-quote-display">
-          💌 "Tap the jar above to unlock a sweet reason!"
+        <div class="footer-badges">
+          <span class="privacy-badge">🔒 100% Client-Side Privacy</span>
         </div>
       </div>
     </div>
+  </footer>
 
-    <!-- FOOTER -->
-    <footer class="love-footer">
-      <p>
-        Engineered with infinite love, sleepless devotion & lots of snacks by <strong class="var-bf-name">Your Loving Boyfriend</strong> <span class="footer-heart">❤️</span>
-      </p>
-      <p style="font-size:0.82rem; margin-top:8px; opacity:0.8;">
-        Forever & Always • All Rights to My Heart Belong Exclusively to <strong class="var-gf-name">You</strong>
-      </p>
-    </footer>
+  <!-- Scripts -->
+  <script src="js/tools-data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('current-year').textContent = new Date().getFullYear();
 
-  </div>
+      const popularGrid = document.getElementById('popular-tools-grid');
+      const allToolsGrid = document.getElementById('all-tools-grid');
+      const recentGrid = document.getElementById('recent-tools-grid');
+      const tabsContainer = document.getElementById('category-tabs-container');
+      const searchInput = document.getElementById('search-input');
 
-  <!-- CELEBRATION MODAL (WORLD'S BEST GIRLFRIEND CERTIFICATE) -->
-  <div id="celebrationModal" class="modal-overlay">
-    <div class="modal-dialog">
-      <button class="modal-close-btn" title="Close">✕</button>
+      let currentCategory = 'all';
 
-      <span style="font-size:3rem; display:inline-block; animation:bounceSoft 1.5s infinite;">🎉</span>
-      <h2 style="font-family: var(--font-heading); font-size:1.9rem; color:#800f2f; margin-bottom:6px;">
-        I KNEW IT!! 🥰💖
-      </h2>
-      <p style="font-size:1rem; color:#590d22; margin-bottom:15px;">
-        Contract legally confirmed: You just locked yourself into infinite forehead kisses and cuddles forever!
-      </p>
+      const activeTools = (window.getToolshere.online ? window.getToolshere.online() : window.QUICK_TOOLS)
+        .filter(t => t.status !== 'inactive');
 
-      <!-- Official Certificate Frame -->
-      <div class="certificate-frame">
-        <div class="certificate-seal">
-          <span>★ 100% ★</span>
-          <span>CERTIFIED</span>
-          <span>LOVE</span>
-        </div>
+      // Check Site Settings (Announcement, Ads, Colors)
+      if (window.getSiteSettings) {
+        const settings = window.getSiteSettings();
+        if (settings.announcementEnabled && settings.announcementText) {
+          const banner = document.createElement('div');
+          banner.id = 'top-announcement-bar';
+          banner.style.background = 'var(--primary-gradient)';
+          banner.style.color = '#ffffff';
+          banner.style.padding = '0.5rem 1rem';
+          banner.style.textAlign = 'center';
+          banner.style.fontSize = '0.875rem';
+          banner.style.fontWeight = '700';
+          banner.innerHTML = `<a href="${settings.announcementLink || '#'}" style="color: #ffffff; text-decoration: underline;">${settings.announcementText}</a>`;
+          document.body.insertBefore(banner, document.body.firstChild);
+        }
 
-        <h3 class="certificate-title">OFFICIAL CERTIFICATE</h3>
-        <div class="certificate-subtitle">OF THE WORLD'S BEST GIRLFRIEND</div>
+        if (settings.adsEnabled === false) {
+          document.querySelectorAll('.ad-slot-container').forEach(el => el.style.display = 'none');
+        }
+      }
 
-        <p style="font-size:0.9rem; color:#6c757d;">This prestigious award is officially presented to:</p>
-        <div id="certGfName" class="certificate-name">My Beautiful Girl</div>
+      // Render Popular Tools (top 6)
+      if (popularGrid && activeTools) {
+        const popularTools = activeTools.filter(t => t.popular).slice(0, 6);
+        popularGrid.innerHTML = popularTools.map(createToolCardHtml).join('');
+      }
 
-        <p class="certificate-text">
-          For possessing the sweetest smile, the warmest heart, looking ridiculously gorgeous in everything, tolerating all my weird jokes, and making every second of my life a million times happier.
-        </p>
+      // Render Recently Added Tools (last 4 tools)
+      if (recentGrid && activeTools) {
+        const recentTools = activeTools.slice(-4);
+        recentGrid.innerHTML = recentTools.map(createToolCardHtml).join('');
+      }
 
-        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:20px; padding:0 15px; font-size:0.85rem; color:#590d22;">
-          <div>
-            <strong>Date Issued:</strong><br>
-            <span id="certDate">October 25, 2026</span>
+      // Render Category Tabs
+      if (tabsContainer && window.CATEGORIES) {
+        tabsContainer.innerHTML = window.CATEGORIES.map(cat => `
+          <button class="category-tab ${cat.id === 'all' ? 'active' : ''}" data-category="${cat.id}">
+            <span>${cat.icon}</span>
+            <span>${cat.name}</span>
+            <span class="count-badge">${cat.id === 'all' ? activeTools.length : activeTools.filter(t => t.category === cat.id).length}</span>
+          </button>
+        `).join('');
+
+        tabsContainer.querySelectorAll('.category-tab').forEach(tab => {
+          tab.addEventListener('click', () => {
+            tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentCategory = tab.getAttribute('data-category');
+            filterTools();
+          });
+        });
+      }
+
+      // Elements for search dropdown
+      const searchClearBtn = document.getElementById('search-clear-btn');
+      const searchDropdown = document.getElementById('hero-search-results');
+      let selectedDropdownIndex = -1;
+
+      function highlightText(text, query) {
+        if (!query) return text;
+        const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+      }
+
+      function matchesTool(tool, query) {
+        if (!query) return true;
+        const q = (query || '').toLowerCase().trim();
+        if (!q) return true;
+
+        // 1. Direct includes
+        if (tool.name.toLowerCase().includes(q) ||
+            tool.description.toLowerCase().includes(q) ||
+            tool.categoryName.toLowerCase().includes(q) ||
+            (tool.keywords && tool.keywords.some(k => k.toLowerCase().includes(q)))) {
+          return true;
+        }
+
+        // 2. Singular/plural normalization (e.g. "image" vs "images")
+        const qNorm = q.replace(/s\b/g, '');
+        const nameNorm = tool.name.toLowerCase().replace(/s\b/g, '');
+        if (nameNorm.includes(qNorm)) return true;
+
+        // 3. Multi-word tokens (every word in query matches)
+        const words = q.split(/\s+/).filter(w => w.length > 0);
+        if (words.length > 1) {
+          const combined = (tool.name + ' ' + tool.description + ' ' + tool.categoryName + ' ' + (tool.keywords ? tool.keywords.join(' ') : '')).toLowerCase();
+          const combinedNorm = combined.replace(/s\b/g, '');
+          const allMatch = words.every(w => {
+            const wNorm = w.replace(/s\b/g, '');
+            return combined.includes(w) || combinedNorm.includes(wNorm);
+          });
+          if (allMatch) return true;
+        }
+
+        return false;
+      }
+
+      function getMatchingTools(query) {
+        if (!activeTools) return [];
+        const q = (query || '').trim();
+        if (!q) return [];
+        return activeTools.filter(tool => matchesTool(tool, q));
+      }
+
+      function updateSearchDropdown(query) {
+        if (!searchDropdown) return;
+        const q = (query || '').trim();
+
+        if (!q) {
+          searchDropdown.style.display = 'none';
+          searchDropdown.innerHTML = '';
+          selectedDropdownIndex = -1;
+          if (searchClearBtn) searchClearBtn.style.display = 'none';
+          return;
+        }
+
+        if (searchClearBtn) searchClearBtn.style.display = 'flex';
+
+        const matches = getMatchingTools(q);
+        selectedDropdownIndex = -1;
+
+        if (matches.length === 0) {
+          searchDropdown.innerHTML = `
+            <div class="search-result-empty">
+              <span class="empty-icon">🔍</span>
+              <div style="font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">No tools found for "${q}"</div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Try searching for: <em>calculator, pdf, image, password, json, word</em></p>
+            </div>
+          `;
+          searchDropdown.style.display = 'block';
+          return;
+        }
+
+        const previewMatches = matches.slice(0, 8);
+        const itemsHtml = previewMatches.map((tool, idx) => `
+          <a href="tools/${tool.file}" class="search-result-item" data-index="${idx}">
+            <div class="search-result-icon">${tool.icon}</div>
+            <div class="search-result-details">
+              <div class="search-result-title">
+                <span>${highlightText(tool.name, q)}</span>
+              </div>
+              <div class="search-result-desc">${highlightText(tool.description, q)}</div>
+            </div>
+            <span class="search-result-badge">${tool.categoryName}</span>
+          </a>
+        `).join('');
+
+        searchDropdown.innerHTML = `
+          <div class="search-results-header">
+            <span>Found ${matches.length} matching tool${matches.length > 1 ? 's' : ''}</span>
+            <span>ESC to close</span>
           </div>
-          <div>
-            <strong>Signed By:</strong><br>
-            <span id="certBfName" style="font-family: var(--font-script); font-size:1.8rem; color:var(--primary);">Your Boyfriend</span>
+          <div class="search-results-list">
+            ${itemsHtml}
           </div>
-        </div>
-      </div>
+          <div class="search-results-footer">
+            <a href="#categories-section" id="view-all-results-link">View all ${matches.length} tools in category list ↓</a>
+          </div>
+        `;
 
-      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px;">
-        <button id="printCertBtn" class="action-pill-btn" style="background:var(--primary); color:white; border:none;">
-          🖨️ Print / Save Certificate
-        </button>
-        <button class="action-pill-btn modal-close-btn-bottom">
-          🥰 Keep Loving Me
-        </button>
-      </div>
-    </div>
-  <!-- RING PROPOSAL COMMITMENT MODAL -->
-  <div id="ringModal" class="modal-overlay">
-    <div class="modal-dialog" style="max-width:500px; text-align:center;">
-      <button class="modal-close-btn" title="Close">✕</button>
+        const viewAllLink = document.getElementById('view-all-results-link');
+        if (viewAllLink) {
+          viewAllLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            searchDropdown.style.display = 'none';
+            const catSec = document.getElementById('categories-section');
+            if (catSec) {
+              catSec.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
+        }
 
-      <span style="font-size:3.5rem; display:inline-block; animation:bounceSoft 1.5s infinite;">💍✨</span>
-      <h2 style="font-family: var(--font-heading); font-size:1.85rem; color:#800f2f; margin:10px 0 6px;">
-        My Promise To You Forever 💖
-      </h2>
-      <p style="font-size:0.95rem; color:#590d22; line-height:1.6; margin-bottom:18px;">
-        To <strong class="var-gf-name" style="color:var(--primary);">My Beautiful Girl</strong>: You aren't just my girlfriend — you are my home, my safe haven, and my favorite part of every single day.
-      </p>
+        searchDropdown.style.display = 'block';
+      }
 
-      <div style="background:#fff0f3; border:2px dashed #ffb3c1; border-radius:16px; padding:20px 18px; margin-bottom:20px; font-family:var(--font-hand); font-size:1.5rem; color:#800f2f; line-height:1.4;">
-        "I promise to always hold your hand tight in the dark, buy you whatever snacks you want, never stop looking at you like you're pure magic, and love you unconditionally forever." 🤍
-      </div>
+      // Filter and render All Tools
+      function filterTools() {
+        if (!allToolsGrid || !activeTools) return;
+        const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
 
-      <button class="action-pill-btn modal-close-btn-bottom" style="background:var(--primary); color:white; border:none; padding:12px 30px; font-size:1.05rem; cursor:pointer;">
-        I Promise Too 🥰💍
-      </button>
-    </div>
-  </div>
+        // When user types a search query, reset category filter to 'all' so no results are accidentally hidden
+        if (query && currentCategory !== 'all') {
+          currentCategory = 'all';
+          if (tabsContainer) {
+            tabsContainer.querySelectorAll('.category-tab').forEach(t => {
+              if (t.getAttribute('data-category') === 'all') {
+                t.classList.add('active');
+              } else {
+                t.classList.remove('active');
+              }
+            });
+          }
+        }
 
-  <!-- EDIT NAMES PERSONALIZATION MODAL -->
-  <div id="namesModal" class="modal-overlay">
-    <div class="modal-dialog" style="max-width:440px;">
-      <button class="modal-close-btn" title="Close">✕</button>
+        const filtered = activeTools.filter(tool => {
+          const matchesCategory = currentCategory === 'all' || tool.category === currentCategory;
+          const matchesQuery = matchesTool(tool, query);
+          return matchesCategory && matchesQuery;
+        });
 
-      <span style="font-size:2.5rem;">✏️❤️</span>
-      <h3 style="font-family: var(--font-heading); color:#800f2f; font-size:1.5rem; margin-top:8px;">
-        Personalize Your Website
-      </h3>
-      <p style="font-size:0.9rem; color:#7b2c45;">
-        Enter her name and yours so the whole website addresses her personally!
-      </p>
+        if (filtered.length === 0) {
+          allToolsGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
+              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔍</div>
+              <h3 style="font-size: 1.25rem; font-weight: 700;">No tools found matching "${query}"</h3>
+              <p style="color: var(--text-muted); margin-top: 0.5rem;">Try searching for something else or browse categories.</p>
+            </div>
+          `;
+        } else {
+          allToolsGrid.innerHTML = filtered.map(createToolCardHtml).join('');
+        }
+      }
 
-      <form id="namesForm" class="name-edit-form">
-        <div class="form-group">
-          <label for="inputGfName">Her Name / Pet Name (e.g. Maya, Honey, Cutie):</label>
-          <input type="text" id="inputGfName" placeholder="Her Name" required>
-        </div>
+      function createToolCardHtml(tool) {
+        return `
+          <a href="${tool.file ? 'tools/' + tool.file : '#'}" class="tool-card">
+            <div class="tool-card-header">
+              <div class="tool-icon-box">${tool.icon}</div>
+              <span class="tool-badge ${tool.popular ? 'popular' : ''}">${tool.badge || tool.categoryName}</span>
+            </div>
+            <h3 class="tool-card-title">${tool.name}</h3>
+            <p class="tool-card-desc">${tool.description}</p>
+            <div class="tool-card-footer">
+              <span>Open Tool</span>
+              <span class="arrow-icon">→</span>
+            </div>
+          </a>
+        `;
+      }
 
-        <div class="form-group">
-          <label for="inputBfName">Your Name (e.g. Aman, Your Man, Hubby):</label>
-          <input type="text" id="inputBfName" placeholder="Your Name" required>
-        </div>
+      // Hook up search input
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          const q = searchInput.value;
+          updateSearchDropdown(q);
+          filterTools();
+        });
 
-        <button type="submit" class="upload-btn-label" style="border:none; width:100%; justify-content:center; margin-top:6px;">
-          💾 Save & Update Page
-        </button>
-      </form>
-    </div>
-  </div>
+        searchInput.addEventListener('focus', () => {
+          if (searchInput.value.trim()) {
+            updateSearchDropdown(searchInput.value);
+          }
+        });
 
-  <!-- Master Interactive Script -->
-  <script src="js/love.js"></script>
+        searchInput.addEventListener('keydown', (e) => {
+          if (!searchDropdown || searchDropdown.style.display === 'none') {
+            if (e.key === 'Enter' && searchInput.value.trim()) {
+              const matches = getMatchingTools(searchInput.value);
+              if (matches.length > 0) {
+                window.location.href = 'tools/' + matches[0].file;
+              }
+            }
+            return;
+          }
+
+          const items = searchDropdown.querySelectorAll('.search-result-item');
+          if (!items.length) {
+            if (e.key === 'Escape') {
+              searchDropdown.style.display = 'none';
+            }
+            return;
+          }
+
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            selectedDropdownIndex = (selectedDropdownIndex + 1) % items.length;
+            items.forEach((it, idx) => it.classList.toggle('active-item', idx === selectedDropdownIndex));
+            items[selectedDropdownIndex].scrollIntoView({ block: 'nearest' });
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            selectedDropdownIndex = (selectedDropdownIndex - 1 + items.length) % items.length;
+            items.forEach((it, idx) => it.classList.toggle('active-item', idx === selectedDropdownIndex));
+            items[selectedDropdownIndex].scrollIntoView({ block: 'nearest' });
+          } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (selectedDropdownIndex >= 0 && items[selectedDropdownIndex]) {
+              items[selectedDropdownIndex].click();
+            } else if (items[0]) {
+              items[0].click();
+            }
+          } else if (e.key === 'Escape') {
+            searchDropdown.style.display = 'none';
+          }
+        });
+      }
+
+      // Clear search button
+      if (searchClearBtn) {
+        searchClearBtn.addEventListener('click', () => {
+          if (searchInput) {
+            searchInput.value = '';
+            searchInput.focus();
+          }
+          updateSearchDropdown('');
+          filterTools();
+        });
+      }
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (searchDropdown && searchInput && !searchDropdown.contains(e.target) && !searchInput.contains(e.target)) {
+          searchDropdown.style.display = 'none';
+        }
+      });
+
+      // Initial filter render
+      filterTools();
+    });
+  </script>
 </body>
 </html>

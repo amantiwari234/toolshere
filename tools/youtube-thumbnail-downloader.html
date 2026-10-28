@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Thumbnail Downloader — Download HD 1080p Thumbnails | Toolshere.online</title>
+  <meta name="description" content="Download YouTube video thumbnails in Maximum Resolution (1080p HD), HQ, MQ, and SD. Free, instant, supports YouTube Shorts, and requires no registration.">
+  <link rel="canonical" href="https://toolshere.online/tools/youtube-thumbnail-downloader.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/tools.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="../index.html" class="brand-logo" aria-label="Toolshere.online Home">
+        <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="pdf-tools.html" class="nav-link">PDF Suite</a>
+        <a href="../all-tools.html" class="nav-link">All Tools</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+        <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="pdf-tools.html" class="nav-link">PDF Suite</a>
+      <a href="../all-tools.html" class="nav-link">All Tools</a>
+      <a href="../about.html" class="nav-link">About Us</a>
+      <a href="../contact.html" class="nav-link">Contact Us</a>
+      <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <!-- Tool Header -->
+  <section class="tool-header-wrapper">
+    <div class="container tool-header-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="separator">/</span>
+        <a href="../all-tools.html?cat=generators">Generators</a>
+        <span class="separator">/</span>
+        <span class="current">YouTube Thumbnail Downloader</span>
+      </nav>
+
+      <div class="tool-header-badge-row">
+        <span class="tool-category-badge">▶️ Media &amp; Video Tools</span>
+        <span class="tool-privacy-pill">⚡ Fast &amp; Free</span>
+      </div>
+
+      <h1 class="tool-header-title">
+        <span class="tool-icon">▶️</span>
+        <span>YouTube Thumbnail Downloader</span>
+      </h1>
+      <p class="tool-header-desc">
+        Grab and download any YouTube video thumbnail in Full HD (1080p), High Quality (480p), Medium, and Standard resolutions. Supports YouTube regular videos and Shorts.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Tool Workspace -->
+  <main class="tool-workspace">
+    <div class="container" style="max-width: 960px;">
+      
+      <!-- Input Card Box -->
+      <div class="tool-card-box">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem;">
+          Enter YouTube Video Link
+        </h2>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 280px; position: relative;">
+            <input type="text" id="yt-url-input" class="form-control" placeholder="Paste YouTube link (e.g. https://www.youtube.com/watch?v=... or https://youtu.be/...)" autocomplete="off">
+            <button type="button" id="clear-input-btn" style="display: none; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1.1rem; color: var(--text-muted); cursor: pointer;" title="Clear">✕</button>
+          </div>
+          <button type="button" id="get-thumbnails-btn" class="btn btn-primary" style="white-space: nowrap;">
+            Get Thumbnails 🚀
+          </button>
+        </div>
+
+        <!-- Sample Link Triggers -->
+        <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+          <span>Try a sample:</span>
+          <button type="button" class="sample-link-btn btn btn-outline" data-url="https://www.youtube.com/watch?v=dQw4w9WgXcQ" style="font-size: 0.75rem; padding: 0.25rem 0.6rem;">
+            Rick Astley (Classic)
+          </button>
+          <button type="button" class="sample-link-btn btn btn-outline" data-url="https://youtu.be/jNQXAC9IVRw" style="font-size: 0.75rem; padding: 0.25rem 0.6rem;">
+            First YouTube Video
+          </button>
+        </div>
+
+        <div id="error-message" style="display: none; margin-top: 1rem; padding: 0.85rem 1rem; background: rgba(239, 68, 68, 0.1); border-left: 4px solid #ef4444; border-radius: 6px; color: #ef4444; font-size: 0.9rem;">
+          ⚠️ Please enter a valid YouTube video URL or ID.
+        </div>
+      </div>
+
+      <!-- Thumbnails Results Section (Visible after fetching) -->
+      <div id="results-container" style="display: none; margin-top: 2rem;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.25rem;">Available Thumbnail Resolutions</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);" id="video-id-display">Video ID: <code>dQw4w9WgXcQ</code></p>
+          </div>
+          <button type="button" id="download-all-btn" class="btn btn-secondary" style="font-size: 0.9rem;">
+            📥 Download Best HD Thumbnail
+          </button>
+        </div>
+
+        <!-- Thumbnail Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem;">
+          
+          <!-- 1. Maximum Resolution HD -->
+          <div class="tool-card-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-weight: 700; font-size: 1rem;">Full HD / Max Quality</span>
+                <span class="tool-badge popular">1080p (1920x1080)</span>
+              </div>
+              <div style="position: relative; background: #000; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; margin-bottom: 1rem;">
+                <img id="img-maxres" src="" alt="YouTube Thumbnail HD" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+                <div id="maxres-fallback-warning" style="display: none; position: absolute; inset: 0; background: rgba(0,0,0,0.75); color: #fff; padding: 1rem; text-align: center; font-size: 0.85rem; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <span>⚠️ 1080p thumbnail not uploaded for this video by creator.</span>
+                  <span style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.3rem;">Please use High Quality (480p) below.</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+              <button type="button" class="btn btn-primary download-thumb-btn" data-target="img-maxres" data-name="1080p-maxres" style="flex: 1;">
+                Download HD
+              </button>
+              <button type="button" class="btn btn-outline copy-thumb-btn" data-target="img-maxres" title="Copy URL">
+                🔗 Copy URL
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. High Quality (HQ) -->
+          <div class="tool-card-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-weight: 700; font-size: 1rem;">High Quality (HQ)</span>
+                <span class="tool-badge">480p (480x360)</span>
+              </div>
+              <div style="background: #000; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; margin-bottom: 1rem;">
+                <img id="img-hq" src="" alt="YouTube Thumbnail HQ" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+              <button type="button" class="btn btn-primary download-thumb-btn" data-target="img-hq" data-name="480p-hq" style="flex: 1;">
+                Download HQ
+              </button>
+              <button type="button" class="btn btn-outline copy-thumb-btn" data-target="img-hq" title="Copy URL">
+                🔗 Copy URL
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. Standard Definition (SD) -->
+          <div class="tool-card-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-weight: 700; font-size: 1rem;">Standard Definition (SD)</span>
+                <span class="tool-badge">640x480</span>
+              </div>
+              <div style="background: #000; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; margin-bottom: 1rem;">
+                <img id="img-sd" src="" alt="YouTube Thumbnail SD" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+              <button type="button" class="btn btn-primary download-thumb-btn" data-target="img-sd" data-name="sd" style="flex: 1;">
+                Download SD
+              </button>
+              <button type="button" class="btn btn-outline copy-thumb-btn" data-target="img-sd" title="Copy URL">
+                🔗 Copy URL
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. Medium Quality (MQ) -->
+          <div class="tool-card-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-weight: 700; font-size: 1rem;">Medium Quality (MQ)</span>
+                <span class="tool-badge">320x180</span>
+              </div>
+              <div style="background: #000; border-radius: 8px; overflow: hidden; aspect-ratio: 16/9; margin-bottom: 1rem;">
+                <img id="img-mq" src="" alt="YouTube Thumbnail MQ" style="width: 100%; height: 100%; object-fit: cover; display: block;" loading="lazy">
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+              <button type="button" class="btn btn-primary download-thumb-btn" data-target="img-mq" data-name="320p-mq" style="flex: 1;">
+                Download MQ
+              </button>
+              <button type="button" class="btn btn-outline copy-thumb-btn" data-target="img-mq" title="Copy URL">
+                🔗 Copy URL
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Informational Guide -->
+      <section class="tool-guide-section" style="margin-top: 3rem;">
+        <h2>Standard YouTube Thumbnail Dimensions</h2>
+        <p>According to YouTube Creator recommendations, custom video thumbnails should satisfy the following specifications:</p>
+        <ul style="margin: 1rem 0 1rem 1.5rem; line-height: 1.8;">
+          <li><strong>Recommended Resolution:</strong> 1280 × 720 (with a minimum width of 640 pixels).</li>
+          <li><strong>Aspect Ratio:</strong> 16:9 widescreen format, which matches the video player on both desktop and mobile.</li>
+          <li><strong>Supported File Formats:</strong> JPG, GIF, or PNG.</li>
+          <li><strong>File Size Limit:</strong> Under 2MB for standard videos; under 10MB for podcasts.</li>
+        </ul>
+        <p>
+          Note: In rare cases where a video was uploaded in low resolution or without a custom thumbnail, YouTube only creates the 480p HQ and 320p MQ fallback images.
+        </p>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="faq-section" style="margin-top: 3rem;">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is it legal to download YouTube thumbnails?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, thumbnails are public preview images served directly by YouTube's content delivery servers. You may download them for design analysis, presentation slides, or personal reference, while respecting the creator's copyright.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Does this work with YouTube Shorts?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Simply paste the YouTube Shorts URL (e.g., <code>https://youtube.com/shorts/...</code>) and the tool will automatically extract the video ID and fetch the thumbnail.</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Why is the 1080p thumbnail sometimes blank or unavailable?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>YouTube only generates the <code>maxresdefault</code> 1080p image if the creator uploaded a sufficiently high-resolution custom thumbnail. For older or standard-def videos, YouTube provides the High Quality (HQ) thumbnail instead.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Tools -->
+      <section style="margin-top: 3rem;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Explore Other Tools</h2>
+        <div id="related-tools-grid" class="tools-grid" style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <a href="../index.html" class="brand-logo">
+          <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+          <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+        </a>
+        <p class="footer-desc">Free, private, browser-based online tools for calculations, documents, images, and developers.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Essential Tools</h4>
+          <a href="youtube-thumbnail-downloader.html">Thumbnail Downloader</a>
+          <a href="image-compressor.html">Image Compressor</a>
+          <a href="image-converter.html">Image Converter</a>
+          <a href="pdf-tools.html">PDF Tools Suite</a>
+        </div>
+        <div class="footer-col">
+          <h4>Calculators</h4>
+          <a href="age-calculator.html">Age Calculator</a>
+          <a href="emi-calculator.html">EMI Calculator</a>
+          <a href="gst-calculator.html">GST Calculator</a>
+          <a href="word-counter.html">Word Counter</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company &amp; Legal</h4>
+          <a href="../about.html">About Us</a>
+          <a href="../contact.html">Contact Us</a>
+          <a href="../privacy.html">Privacy Policy</a>
+          <a href="../terms.html">Terms of Service</a>
+          <a href="../disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 Toolshere.online. YouTube™ is a trademark of Google LLC. This tool is independent and not affiliated with YouTube.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/tools-data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlInput = document.getElementById('yt-url-input');
+      const getBtn = document.getElementById('get-thumbnails-btn');
+      const clearBtn = document.getElementById('clear-input-btn');
+      const errorMsg = document.getElementById('error-message');
+      const resultsContainer = document.getElementById('results-container');
+      const videoIdDisplay = document.getElementById('video-id-display');
+      const downloadAllBtn = document.getElementById('download-all-btn');
+
+      const imgMaxres = document.getElementById('img-maxres');
+      const maxresWarning = document.getElementById('maxres-fallback-warning');
+      const imgHq = document.getElementById('img-hq');
+      const imgSd = document.getElementById('img-sd');
+      const imgMq = document.getElementById('img-mq');
+
+      let currentVideoId = '';
+
+      function extractYouTubeId(url) {
+        if (!url) return null;
+        url = url.trim();
+
+        // If user entered direct 11-char ID
+        if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
+          return url;
+        }
+
+        // Standard watch: youtube.com/watch?v=ID
+        // Shortened: youtu.be/ID
+        // Shorts: youtube.com/shorts/ID
+        // Embed: youtube.com/embed/ID
+        const regExp = /(?:https?:\/\/)?(?:www\.|m\.)?(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|v\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i;
+        const match = url.match(regExp);
+        return match ? match[1] : null;
+      }
+
+      function loadThumbnails(vid) {
+        currentVideoId = vid;
+        errorMsg.style.display = 'none';
+        resultsContainer.style.display = 'block';
+        videoIdDisplay.innerHTML = `Video ID: <code style="color:var(--primary); font-weight:700;">${vid}</code>`;
+
+        const maxUrl = `https://img.youtube.com/vi/${vid}/maxresdefault.jpg`;
+        const hqUrl = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+        const sdUrl = `https://img.youtube.com/vi/${vid}/sddefault.jpg`;
+        const mqUrl = `https://img.youtube.com/vi/${vid}/mqdefault.jpg`;
+
+        // Reset display
+        maxresWarning.style.display = 'none';
+
+        imgMaxres.src = maxUrl;
+        imgHq.src = hqUrl;
+        imgSd.src = sdUrl;
+        imgMq.src = mqUrl;
+
+        // Check if maxres actually exists (YouTube returns a 120x90 placeholder when maxres is absent)
+        imgMaxres.onload = () => {
+          if (imgMaxres.naturalWidth <= 120) {
+            maxresWarning.style.display = 'flex';
+          }
+        };
+        imgMaxres.onerror = () => {
+          maxresWarning.style.display = 'flex';
+        };
+
+        resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function handleFetch() {
+        const url = urlInput.value.trim();
+        const vid = extractYouTubeId(url);
+
+        if (!vid) {
+          errorMsg.style.display = 'block';
+          resultsContainer.style.display = 'none';
+          window.Toolshere.onlineApp?.showToast('Invalid YouTube URL or ID', 'error');
+          return;
+        }
+
+        loadThumbnails(vid);
+      }
+
+      // Input events
+      getBtn.addEventListener('click', handleFetch);
+      urlInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleFetch();
+      });
+
+      urlInput.addEventListener('input', () => {
+        clearBtn.style.display = urlInput.value ? 'block' : 'none';
+      });
+
+      clearBtn.addEventListener('click', () => {
+        urlInput.value = '';
+        clearBtn.style.display = 'none';
+        resultsContainer.style.display = 'none';
+        errorMsg.style.display = 'none';
+        urlInput.focus();
+      });
+
+      // Sample link buttons
+      document.querySelectorAll('.sample-link-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          urlInput.value = btn.getAttribute('data-url');
+          clearBtn.style.display = 'block';
+          handleFetch();
+        });
+      });
+
+      // Download helper via Canvas/Fetch to trigger real file download
+      async function triggerDownload(imgSrc, filename) {
+        try {
+          window.Toolshere.onlineApp?.showToast('Downloading image...', 'info');
+          // Fetch as blob
+          const response = await fetch(imgSrc);
+          const blob = await response.blob();
+          const objectUrl = URL.createObjectURL(blob);
+
+          const a = document.createElement('a');
+          a.href = objectUrl;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+          window.Toolshere.onlineApp?.showToast('Downloaded successfully!', 'success');
+        } catch (e) {
+          // Fallback: direct window download
+          const a = document.createElement('a');
+          a.href = imgSrc;
+          a.target = '_blank';
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+      }
+
+      // Download buttons
+      document.querySelectorAll('.download-thumb-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const nameSuffix = btn.getAttribute('data-name');
+          const img = document.getElementById(targetId);
+          if (img && img.src) {
+            triggerDownload(img.src, `yt-thumb-${nameSuffix}-${currentVideoId}.jpg`);
+          }
+        });
+      });
+
+      // Download best HD button
+      downloadAllBtn.addEventListener('click', () => {
+        const isMaxValid = imgMaxres.naturalWidth > 120 && maxresWarning.style.display !== 'flex';
+        const bestImg = isMaxValid ? imgMaxres : imgHq;
+        const bestName = isMaxValid ? '1080p-maxres' : '480p-hq';
+        triggerDownload(bestImg.src, `yt-thumbnail-${bestName}-${currentVideoId}.jpg`);
+      });
+
+      // Copy buttons
+      document.querySelectorAll('.copy-thumb-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-target');
+          const img = document.getElementById(targetId);
+          if (img && img.src) {
+            window.Toolshere.onlineApp?.copyToClipboard(img.src, 'Thumbnail URL copied to clipboard!');
+          }
+        });
+      });
+
+      // Related tools
+      window.Toolshere.onlineApp?.renderRelatedTools('youtube-thumbnail-downloader', 'related-tools-grid', 3);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Formatter &amp; Validator — Beautify &amp; Minify JSON Online | Toolshere.online</title>
+  <meta name="description" content="Format, beautify, validate, and minify JSON data with instant syntax error highlighting and clean copy. 100% private in-browser developer tool.">
+  <link rel="canonical" href="https://toolshere.online/tools/json-formatter.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/tools.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="../index.html" class="brand-logo">
+        <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../all-tools.html" class="nav-link">All Tools</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+        <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../all-tools.html" class="nav-link">All Tools</a>
+      <a href="../about.html" class="nav-link">About Us</a>
+      <a href="../contact.html" class="nav-link">Contact Us</a>
+      <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <section class="tool-header-wrapper">
+    <div class="container tool-header-content">
+      <nav class="breadcrumbs">
+        <a href="../index.html">Home</a>
+        <span class="separator">/</span>
+        <a href="../all-tools.html?cat=developer">Developer Tools</a>
+        <span class="separator">/</span>
+        <span class="current">JSON Formatter</span>
+      </nav>
+
+      <div class="tool-header-badge-row">
+        <span class="tool-category-badge">💻 Developer Tools</span>
+        <span class="tool-privacy-pill">🔒 100% Private In-Browser</span>
+      </div>
+
+      <h1 class="tool-header-title">
+        <span class="tool-icon">📦</span>
+        <span>JSON Formatter &amp; Validator</span>
+      </h1>
+      <p class="tool-header-desc">
+        Format, beautify, validate, and minify JSON with real-time error syntax diagnostics. Data stays on your machine.
+      </p>
+    </div>
+  </section>
+
+  <div class="ad-slot-container">
+    <div class="ad-placeholder leaderboard">
+      <span class="ad-label">Advertisement</span>
+      <span class="ad-text">Cloud Database APIs &amp; Developer Productivity Tools — 728x90 Banner</span>
+    </div>
+  </div>
+
+  <main class="tool-workspace">
+    <div class="container" style="max-width: 960px;">
+      <div class="tool-card-box">
+        
+        <!-- Status Banner -->
+        <div id="json-status" style="padding: 0.75rem 1rem; border-radius: var(--radius-md); font-size: 0.9rem; font-weight: 700; margin-bottom: 1.25rem; display: none;">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="json-input">Raw JSON Input</label>
+            <textarea id="json-input" class="form-control" style="min-height: 280px; font-family: monospace; font-size: 0.9rem;" placeholder="Paste raw JSON here..."></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
+              <label class="form-label" for="json-output" style="margin-bottom: 0;">Formatted Output</label>
+              <div style="display: flex; gap: 0.4rem;">
+                <button id="copy-json-btn" class="btn btn-primary btn-sm">📋 Copy</button>
+                <button id="download-json-btn" class="btn btn-secondary btn-sm">💾 .json</button>
+              </div>
+            </div>
+            <textarea id="json-output" class="form-control" style="min-height: 280px; font-family: monospace; font-size: 0.9rem;" placeholder="Formatted JSON will appear here..." readonly></textarea>
+          </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="tool-actions-bar" style="margin-top: 1.25rem;">
+          <button id="btn-format-2" class="btn btn-primary btn-sm">✨ Beautify (2 Spaces)</button>
+          <button id="btn-format-4" class="btn btn-secondary btn-sm">Beautify (4 Spaces)</button>
+          <button id="btn-minify" class="btn btn-secondary btn-sm">⚡ Minify (Compact)</button>
+          <button id="btn-sample" class="btn btn-secondary btn-sm">💡 Load Sample</button>
+          <button id="btn-clear" class="btn btn-secondary btn-sm">🗑️ Clear</button>
+        </div>
+
+      </div>
+
+      <!-- FAQ -->
+      <section class="section-padding section-alt" style="border-radius: var(--radius-xl); padding: 2.5rem 2rem; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem; text-align: center;">JSON Formatter FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <button class="faq-question">
+              <span>Is my proprietary API JSON safe on Toolshere.online?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Yes, 100%. Toolshere.online never uploads or logs your JSON. The formatting, linting, and minification parsing are executed entirely through <code>JSON.parse()</code> inside your browser's sandboxed JavaScript runtime.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom: 4rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;">Related Developer Tools</h2>
+        <div class="tools-grid" id="related-tools-container"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="brand-logo">
+            <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+          </a>
+          <p>Toolshere.online is your premier directory of free, private, client-side online tools.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Categories</h4>
+          <div class="footer-links">
+            <a href="../all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
+            <a href="../all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="../all-tools.html?cat=images" class="footer-link">Image Tools</a>
+            <a href="../all-tools.html?cat=developer" class="footer-link">Developer Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <div class="footer-links">
+            <a href="../about.html" class="footer-link">About Us</a>
+            <a href="../contact.html" class="footer-link">Contact Us</a>
+            <a href="../all-tools.html" class="footer-link">All 24 Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Legal &amp; Privacy</h4>
+          <div class="footer-links">
+            <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="../terms.html" class="footer-link">Terms and Conditions</a>
+            <a href="../disclaimer.html" class="footer-link">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
+        <div class="footer-badges"><span class="privacy-badge">🔒 100% Client-Side Privacy</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/tools-data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      window.Toolshere.onlineApp.renderRelatedTools('json-formatter', 'related-tools-container', 3);
+
+      const input = document.getElementById('json-input');
+      const output = document.getElementById('json-output');
+      const status = document.getElementById('json-status');
+      const copyBtn = document.getElementById('copy-json-btn');
+      const downloadBtn = document.getElementById('download-json-btn');
+
+      const sample = `{"product":"Toolshere.online","active":true,"version":2.5,"features":["Zero Server Uploads","Fast Client Execution","Mobile Responsive"],"stats":{"tools":24,"rating":5.0}}`;
+
+      function formatJSON(space) {
+        const raw = input.value.trim();
+        if (!raw) {
+          output.value = '';
+          status.style.display = 'none';
+          return;
+        }
+
+        try {
+          const parsed = JSON.parse(raw);
+          output.value = JSON.stringify(parsed, null, space);
+          status.style.display = 'block';
+          status.style.background = 'rgba(16, 185, 129, 0.12)';
+          status.style.border = '1px solid var(--accent-emerald)';
+          status.style.color = 'var(--accent-emerald)';
+          status.textContent = '✅ Valid JSON Syntax';
+        } catch (err) {
+          output.value = '';
+          status.style.display = 'block';
+          status.style.background = 'rgba(239, 68, 68, 0.12)';
+          status.style.border = '1px solid #ef4444';
+          status.style.color = '#ef4444';
+          status.textContent = `❌ Syntax Error: ${err.message}`;
+        }
+      }
+
+      document.getElementById('btn-format-2').addEventListener('click', () => formatJSON(2));
+      document.getElementById('btn-format-4').addEventListener('click', () => formatJSON(4));
+      document.getElementById('btn-minify').addEventListener('click', () => formatJSON(0));
+
+      document.getElementById('btn-sample').addEventListener('click', () => {
+        input.value = sample;
+        formatJSON(2);
+      });
+
+      document.getElementById('btn-clear').addEventListener('click', () => {
+        input.value = '';
+        output.value = '';
+        status.style.display = 'none';
+      });
+
+      copyBtn.addEventListener('click', () => {
+        window.Toolshere.onlineApp.copyToClipboard(output.value, 'JSON copied to clipboard!');
+      });
+
+      downloadBtn.addEventListener('click', () => {
+        if (!output.value) return;
+        const blob = new Blob([output.value], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `data-${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        window.Toolshere.onlineApp.showToast('JSON file downloaded!', 'success');
+      });
+
+      input.value = sample;
+      formatJSON(2);
+    });
+  </script>
+</body>
+</html>

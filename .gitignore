@@ -1,14 +1,10 @@
-# Exclude old store files from this love repository
-admin.html
-css/admin.css
-css/style.css
-js/admin.js
-js/app.js
-js/products.js
-assets/images/
+# Temporary & Archive Directories
+_tools_archive/
+_love_archive/
 store_archive/
+Test Project
 
-# OS and system logs
+# OS and system files
 .DS_Store
 Thumbs.db
 *.log

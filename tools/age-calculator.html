@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator — Calculate Exact Age in Years, Months, Days | Toolshere.online</title>
+  <meta name="description" content="Calculate your exact age down to the day, hours, and minutes. Includes upcoming birthday countdown, total days lived, and zodiac signs. Free and private.">
+  <link rel="canonical" href="https://toolshere.online/tools/age-calculator.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/tools.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container navbar-container">
+      <a href="../index.html" class="brand-logo">
+        <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../all-tools.html" class="nav-link">All Tools</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+        <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-nav-drawer" class="mobile-nav">
+    <div class="mobile-nav-links">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../all-tools.html" class="nav-link">All Tools</a>
+      <a href="../about.html" class="nav-link">About Us</a>
+      <a href="../contact.html" class="nav-link">Contact Us</a>
+      <a href="../privacy.html" class="nav-link">Privacy Policy</a>
+    </div>
+  </div>
+
+  <!-- Tool Header -->
+  <section class="tool-header-wrapper">
+    <div class="container tool-header-content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="separator">/</span>
+        <a href="../all-tools.html?cat=calculators">Calculators</a>
+        <span class="separator">/</span>
+        <span class="current">Age Calculator</span>
+      </nav>
+
+      <div class="tool-header-badge-row">
+        <span class="tool-category-badge">🧮 Calculator Tools</span>
+        <span class="tool-privacy-pill">🔒 100% Private In-Browser</span>
+      </div>
+
+      <h1 class="tool-header-title">
+        <span class="tool-icon">🎂</span>
+        <span>Age Calculator</span>
+      </h1>
+      <p class="tool-header-desc">
+        Calculate your exact age in years, months, and days from your date of birth. Discover total days lived, hours, minutes, countdown to your next birthday, and zodiac signs.
+      </p>
+    </div>
+  </section>
+
+  <!-- Top Ad Slot -->
+  <div class="ad-slot-container">
+    <div class="ad-placeholder leaderboard">
+      <span class="ad-label">Advertisement Space</span>
+      <span class="ad-text">Responsive AdSense / Partner Slot — 728x90 Banner</span>
+      <span class="ad-cta">Ad slot ready for monetization</span>
+    </div>
+  </div>
+
+  <!-- Tool Main Workspace -->
+  <main class="tool-workspace">
+    <div class="container" style="max-width: 900px;">
+      <div class="tool-card-box">
+        <form id="age-form">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+            <div class="form-group">
+              <label class="form-label" for="dob-input">Date of Birth *</label>
+              <input type="date" id="dob-input" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="target-date-input">Age on Date (Default Today)</label>
+              <input type="date" id="target-date-input" class="form-control">
+            </div>
+          </div>
+
+          <div class="tool-actions-bar">
+            <button type="submit" class="btn btn-primary btn-lg">
+              <span>Calculate Age</span>
+              <span>⚡</span>
+            </button>
+            <button type="button" id="reset-btn" class="btn btn-secondary btn-lg">
+              <span>Reset</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Results Area -->
+        <div id="results-area" class="result-box" style="display: none;">
+          <div class="result-header">
+            <h3 class="result-title">
+              <span>🎉 Calculation Results</span>
+            </h3>
+            <div class="result-tools">
+              <button id="copy-summary-btn" class="btn btn-secondary btn-sm" title="Copy summary">
+                <span>📋 Copy Summary</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Highlight Metric: Exact Age -->
+          <div style="text-align: center; padding: 1.5rem; background: var(--primary-surface); border: 2px solid var(--primary-glow); border-radius: var(--radius-lg); margin-bottom: 1.75rem;">
+            <div style="font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--primary);">Your Current Exact Age</div>
+            <div id="primary-age-result" style="font-size: clamp(1.8rem, 4vw, 2.75rem); font-weight: 800; color: var(--primary); margin: 0.5rem 0;">
+              --
+            </div>
+            <div id="next-birthday-info" style="font-size: 1rem; color: var(--text-muted); font-weight: 600;">
+              --
+            </div>
+          </div>
+
+          <!-- Total Metrics Grid -->
+          <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-main);">Lifetime Breakdown</h4>
+          <div class="metric-grid">
+            <div class="metric-item">
+              <div class="metric-value" id="val-months">0</div>
+              <div class="metric-label">Total Months</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value" id="val-weeks">0</div>
+              <div class="metric-label">Total Weeks</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value" id="val-days">0</div>
+              <div class="metric-label">Total Days</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-value" id="val-hours">0</div>
+              <div class="metric-label">Total Hours</div>
+            </div>
+          </div>
+
+          <!-- Zodiac & Astrology Cards -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.25rem;">
+            <div class="metric-item" style="text-align: left; display: flex; align-items: center; gap: 0.75rem;">
+              <div style="font-size: 2rem;" id="zodiac-icon">✨</div>
+              <div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Sun Sign</div>
+                <div id="zodiac-name" style="font-weight: 800; font-size: 1.1rem; color: var(--text-main);">--</div>
+              </div>
+            </div>
+
+            <div class="metric-item" style="text-align: left; display: flex; align-items: center; gap: 0.75rem;">
+              <div style="font-size: 2rem;" id="chinese-icon">🐉</div>
+              <div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">Chinese Zodiac</div>
+                <div id="chinese-name" style="font-weight: 800; font-size: 1.1rem; color: var(--text-main);">--</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Instructions Section -->
+      <section class="guide-section">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main);">How to Use the Age Calculator</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3>Pick Date of Birth</h3>
+            <p>Select your birth year, month, and day in the date selector or type it directly.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3>Set Target Date</h3>
+            <p>By default, today's date is used. You can pick any historical or future date to see your age at that milestone.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3>Get Instant Metrics</h3>
+            <p>Click "Calculate Age" to view your exact age, days lived, next birthday countdown, and astrology signs.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mid-Page In-Article Ad Banner Placeholder -->
+      <div class="ad-slot-container" style="margin: 1.5rem 0 3rem;">
+        <div class="ad-placeholder in-article">
+          <span class="ad-label">Advertisement</span>
+          <span class="ad-text">High-Speed Cloud Hosting &amp; Productivity Tools</span>
+        </div>
+      </div>
+
+      <!-- Frequently Asked Questions -->
+      <section class="section-padding section-alt" style="border-radius: var(--radius-xl); padding: 2.5rem 2rem; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem; text-align: center;">Age Calculator FAQ</h2>
+        <div class="faq-grid">
+          <div class="faq-item open">
+            <button class="faq-question">
+              <span>How does this calculator handle leap years?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Our algorithm accurately tracks Gregorian calendar leap years, accounting for the 29th of February and variations in month lengths (28, 29, 30, or 31 days).
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is my date of birth stored or sent anywhere?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Never. The entire calculation runs directly inside your web browser. No dates or user metrics are transmitted across the network.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I calculate someone's age on a future wedding or retirement date?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Yes! Simply enter their birth date and change the "Age on Date" field to your target future milestone date.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Tools Section -->
+      <section style="margin-bottom: 4rem;">
+        <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem;">Related Calculator Tools</h2>
+        <div class="tools-grid" id="related-tools-container">
+          <!-- Injected via script -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="brand-logo">
+            <img src="../assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
+            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+          </a>
+          <p>Toolshere.online is your premier directory of free, private, client-side online tools.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Categories</h4>
+          <div class="footer-links">
+            <a href="../all-tools.html?cat=calculators" class="footer-link">Calculator Tools</a>
+            <a href="../all-tools.html?cat=text" class="footer-link">Text Tools</a>
+            <a href="../all-tools.html?cat=images" class="footer-link">Image Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <div class="footer-links">
+            <a href="../about.html" class="footer-link">About Us</a>
+            <a href="../contact.html" class="footer-link">Contact Us</a>
+            <a href="../all-tools.html" class="footer-link">All 24 Tools</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Legal &amp; Privacy</h4>
+          <div class="footer-links">
+            <a href="../privacy.html" class="footer-link">Privacy Policy</a>
+            <a href="../terms.html" class="footer-link">Terms and Conditions</a>
+            <a href="../disclaimer.html" class="footer-link">Disclaimer</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
+        <div class="footer-badges"><span class="privacy-badge">🔒 100% Client-Side Privacy</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/tools-data.js"></script>
+  <script src="../js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set default target date to today
+      const targetDateInput = document.getElementById('target-date-input');
+      const dobInput = document.getElementById('dob-input');
+      const form = document.getElementById('age-form');
+      const resetBtn = document.getElementById('reset-btn');
+      const resultsArea = document.getElementById('results-area');
+      const copyBtn = document.getElementById('copy-summary-btn');
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      targetDateInput.value = todayStr;
+
+      // Render related tools
+      window.Toolshere.onlineApp.renderRelatedTools('age-calculator', 'related-tools-container', 3);
+
+      let lastSummaryText = '';
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const dobVal = dobInput.value;
+        const targetVal = targetDateInput.value || todayStr;
+
+        if (!dobVal) {
+          window.Toolshere.onlineApp.showToast('Please select your date of birth', 'error');
+          return;
+        }
+
+        const dob = new Date(dobVal + 'T00:00:00');
+        const target = new Date(targetVal + 'T00:00:00');
+
+        if (dob > target) {
+          window.Toolshere.onlineApp.showToast('Date of birth cannot be in the future of the target date', 'error');
+          return;
+        }
+
+        // Exact age calculation
+        let years = target.getFullYear() - dob.getFullYear();
+        let months = target.getMonth() - dob.getMonth();
+        let days = target.getDate() - dob.getDate();
+
+        if (days < 0) {
+          months--;
+          // Days in previous month
+          const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0);
+          days += prevMonth.getDate();
+        }
+
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
+
+        // Lifetime totals
+        const diffMs = target.getTime() - dob.getTime();
+        const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const totalWeeks = Math.floor(totalDays / 7);
+        const totalMonths = (years * 12) + months;
+        const totalHours = totalDays * 24;
+
+        // Next Birthday
+        let nextBday = new Date(target.getFullYear(), dob.getMonth(), dob.getDate());
+        if (nextBday < target) {
+          nextBday = new Date(target.getFullYear() + 1, dob.getMonth(), dob.getDate());
+        }
+        const bdayDiffDays = Math.ceil((nextBday.getTime() - target.getTime()) / (1000 * 60 * 60 * 24));
+        const bdayWeekday = nextBday.toLocaleDateString(undefined, { weekday: 'long' });
+
+        // Zodiac Sign
+        const m = dob.getMonth() + 1;
+        const d = dob.getDate();
+        const zodiac = getZodiacSign(m, d);
+        const chinese = getChineseZodiac(dob.getFullYear());
+
+        // Update DOM
+        document.getElementById('primary-age-result').textContent = `${years} Years, ${months} Months, ${days} Days`;
+        document.getElementById('next-birthday-info').textContent = bdayDiffDays === 0 
+          ? '🎉 Happy Birthday Today!' 
+          : `Next birthday in ${bdayDiffDays} days (on a ${bdayWeekday})`;
+
+        document.getElementById('val-months').textContent = totalMonths.toLocaleString();
+        document.getElementById('val-weeks').textContent = totalWeeks.toLocaleString();
+        document.getElementById('val-days').textContent = totalDays.toLocaleString();
+        document.getElementById('val-hours').textContent = totalHours.toLocaleString();
+
+        document.getElementById('zodiac-name').textContent = zodiac.name;
+        document.getElementById('zodiac-icon').textContent = zodiac.icon;
+
+        document.getElementById('chinese-name').textContent = chinese.name;
+        document.getElementById('chinese-icon').textContent = chinese.icon;
+
+        resultsArea.style.display = 'block';
+        resultsArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        lastSummaryText = `Age Summary:\nExact Age: ${years} Years, ${months} Months, ${days} Days\nTotal Days Lived: ${totalDays.toLocaleString()}\nTotal Weeks: ${totalWeeks.toLocaleString()}\nSun Sign: ${zodiac.name}\nCalculated with Toolshere.online (toolshere.online)`;
+      });
+
+      resetBtn.addEventListener('click', () => {
+        dobInput.value = '';
+        targetDateInput.value = todayStr;
+        resultsArea.style.display = 'none';
+      });
+
+      copyBtn.addEventListener('click', () => {
+        window.Toolshere.onlineApp.copyToClipboard(lastSummaryText, 'Age summary copied to clipboard!');
+      });
+
+      function getZodiacSign(month, day) {
+        if ((month == 1 && day <= 19) || (month == 12 && day >= 22)) return { name: "Capricorn", icon: "♑" };
+        if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) return { name: "Aquarius", icon: "♒" };
+        if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) return { name: "Pisces", icon: "♓" };
+        if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) return { name: "Aries", icon: "♈" };
+        if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) return { name: "Taurus", icon: "♉" };
+        if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) return { name: "Gemini", icon: "♊" };
+        if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) return { name: "Cancer", icon: "♋" };
+        if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) return { name: "Leo", icon: "♌" };
+        if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) return { name: "Virgo", icon: "♍" };
+        if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) return { name: "Libra", icon: "♎" };
+        if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) return { name: "Scorpio", icon: "♏" };
+        return { name: "Sagittarius", icon: "♐" };
+      }
+
+      function getChineseZodiac(year) {
+        const animals = [
+          { name: "Rat", icon: "🐀" },
+          { name: "Ox", icon: "🐂" },
+          { name: "Tiger", icon: "🐅" },
+          { name: "Rabbit", icon: "🐇" },
+          { name: "Dragon", icon: "🐉" },
+          { name: "Snake", icon: "🐍" },
+          { name: "Horse", icon: "🐎" },
+          { name: "Goat", icon: "🐐" },
+          { name: "Monkey", icon: "🐒" },
+          { name: "Rooster", icon: "🐓" },
+          { name: "Dog", icon: "🐕" },
+          { name: "Pig", icon: "🐖" }
+        ];
+        return animals[(year - 4) % 12];
+      }
+    });
+  </script>
+</body>
+</html>
