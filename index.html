@@ -176,6 +176,143 @@
       scrollbar-width: none;
     }
   </style>
+  <!-- FAQPage Structured Data for Rich Snippets -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Image Compressor & Resizer: How does the target size preset (20KB, 50KB, 100KB) work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tool automatically calibrates the image compression ratio and resolution algorithms in browser memory to aim for your selected target threshold, making it easy to comply with government form restrictions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Image Compressor & Resizer: Are my photos uploaded to any external server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API. Your pictures never leave your local device."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Image Compressor & Resizer: What output format will my compressed image be saved in?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Image Compressor & Resizer: Can I resize the width and height without losing quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can enter specific pixel values into the width and height input fields. Downscaling dimensions also dramatically reduces the final file weight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI Background Remover: What types of photos work best with this background remover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Photos with solid, plain, or uniform studio backgrounds (such as white, grey, green screen, or studio product shots) yield the crispest results."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI Background Remover: Does downloading the image add any watermarks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. All images downloaded from ToolsHere are 100% free of watermarks, branding, or restrictions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI Background Remover: Why did parts of my subject disappear?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If the subject shares very similar colors with the background, lowering the Sensitivity Threshold slider will protect those pixels from being removed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PDF to Word Converter: Can I open the downloaded .doc file in Microsoft Word and Google Docs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The downloaded .doc format is universally compatible with Microsoft Office Word, Google Docs, Apple Pages, and LibreOffice."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PDF to Word Converter: Is there a limit on how many PDFs I can convert?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You can convert as many PDF files as you need throughout the day without fees or daily caps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PDF to Word Converter: Are my confidential files stored anywhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Never. The conversion happens in your local browser runtime. Your files are not transmitted to or stored on any server."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Merge & Split PDF: How many PDF documents can I combine at once?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can select multiple files at once. Memory availability on your device is the only practical constraint."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Merge & Split PDF: Does this merger alter the visual layout or fonts of my PDFs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No, original page streams, formatting, vector text, and embedded graphics are maintained intact."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Merge & Split PDF: Do I have to register an account or subscribe?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No registration, credit card, or personal information is ever requested."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Age & Date Calculator: Does this calculator account for leap years?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The algorithm dynamically checks leap years (such as February having 29 days) and exact month lengths for 100% calendar precision."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Age & Date Calculator: Why is the total days lived count useful?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Official government recruitments, medical evaluations, and insurance policies frequently specify age eligibility criteria strictly in total elapsed days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Age & Date Calculator: Can I calculate past historical dates other than birth dates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can select any past date to compute the exact elapsed time between that event and today."
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col pb-20 md:pb-0">
 
@@ -287,7 +424,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">Image</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Compressor & Resizer</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Compress images to target sizes (20KB, 50KB, 100KB, 200KB), adjust dimensions & fine-tune quality.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Compress JPEG, PNG, and WebP images to custom dimensions or target file sizes like 20KB, 50KB, and 100KB directly in your browser with zero server uploads.</p>
         </div>
         <button onclick="openModal('imgResizerModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -307,7 +444,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800">Image</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">AI Background Remover</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Remove photo backgrounds, adjust tolerance color isolation, and download clean transparent PNGs.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Remove solid and uniform photo backgrounds instantly using client-side canvas color isolation, sensitivity thresholds, and export transparent PNG files securely.</p>
         </div>
         <button onclick="openModal('bgRemoverModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-violet-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -327,7 +464,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800">Document</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">PDF to Word Converter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract text layouts and content structure from PDF files into editable document formats.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert PDF documents into editable Word (.doc) files quickly inside your browser without uploading proprietary files to external servers.</p>
         </div>
         <button onclick="openModal('pdfWordModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -347,7 +484,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-50 dark:bg-orange-950 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800">Document</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Merge & Split PDF</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Combine multiple documents into a single PDF or extract specific page ranges quickly.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Combine multiple PDF documents into a unified file securely in browser memory without file size caps, queue delays, or server-side logging.</p>
         </div>
         <button onclick="openModal('pdfMergeModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -367,7 +504,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Calculator</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Age & Date Calculator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate exact age in years, months, days, total hours, and live upcoming birthday countdowns.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate your exact age in years, months, and days alongside total days lived using precise calendar leap-year calculations in real time.</p>
         </div>
         <button onclick="openModal('ageCalcModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -387,7 +524,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Media</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">YouTube Thumbnail Grabber</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract 1080p Ultra-HD, HQ, and SD video thumbnails directly from any YouTube link.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract and download high-resolution 1080p Max-HD YouTube video thumbnails instantly by pasting any standard, short, or mobile YouTube link.</p>
         </div>
         <button onclick="openModal('ytThumbModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -407,7 +544,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-50 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">Utility</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">QR Code Studio & Reader</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate custom color QR codes (URL, Wi-Fi, Text) or decode uploaded QR code images.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate high-contrast, error-corrected QR codes for website URLs, contact details, or text messages and download crisp PNG images instantly.</p>
         </div>
         <button onclick="openModal('qrModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -427,7 +564,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">Security</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Strong Password Creator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate random secure passwords with custom lengths, symbols, and entropy score gauges.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate cryptographically secure passwords with custom lengths (8–32 characters), symbols, and numbers using your browser's Web Crypto API.</p>
         </div>
         <button onclick="openModal('passwordModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -447,7 +584,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Text</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Word & Character Counter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Analyze words, characters, sentences, paragraphs, reading speed estimates, and keyword density.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Count words, characters, sentences, and estimated reading time in real time as you type or paste text for essays, tweets, and articles.</p>
         </div>
         <button onclick="openModal('wordCountModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -467,7 +604,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">Finance</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">GST & Loan EMI Calculator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate inclusive/exclusive GST and loan EMI schedules with interactive SVG pie chart visuals.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate monthly loan EMIs and Goods and Services Tax (5%, 12%, 18%, 28%) with instant numerical breakdowns for loans and business billing.</p>
         </div>
         <button onclick="openModal('gstEmiModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -487,7 +624,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">Convert</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Format Converter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert images between PNG, JPG, WebP, and BMP formats directly inside browser memory.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert pictures between PNG, JPG, and WebP formats directly inside browser memory with preserved resolution and zero server-side uploads.</p>
         </div>
         <button onclick="openModal('imgFormatModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -507,7 +644,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-50 dark:bg-pink-950 text-pink-700 dark:text-pink-300 border border-pink-200 dark:border-pink-800">Format</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Text Case Converter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert casing to UPPERCASE, lowercase, Title Case, camelCase, URL Slugs and trim spaces.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert strings to UPPERCASE, lowercase, Title Case, and clean URL Slugs with one click for coding, headlines, and clean copywriting.</p>
         </div>
         <button onclick="openModal('textCaseModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -527,7 +664,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">Developer</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">JSON Formatter & Validator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Beautify JSON, minify payloads, inspect syntax errors, and validate complex structures instantly.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Beautify nested JSON payloads, minify code for production APIs, and validate syntax errors instantly in your browser with zero data leaks.</p>
         </div>
         <button onclick="openModal('jsonFormatModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -547,7 +684,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-lime-50 dark:bg-lime-950 text-lime-700 dark:text-lime-300 border border-lime-200 dark:border-lime-800">SEO</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">SEO Meta Tag Generator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate Google, OpenGraph, and Twitter card meta tags for web pages to boost CTR & rankings.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate standard HTML title, meta description, robots, and OpenGraph tags to optimize search engine ranking and social media share previews.</p>
         </div>
         <button onclick="openModal('seoMetaModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -567,7 +704,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Document</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Compress PDF Document</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Shrink heavy PDF documents down to email and portal friendly sizes while maintaining readability.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Shrink heavy PDF documents down to portal-friendly file sizes with selectable compression modes directly in browser memory with total privacy.</p>
         </div>
         <button onclick="openModal('compressPdfModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -587,7 +724,7 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Document</span>
           </div>
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image to PDF Converter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Turn multiple JPG, PNG, and WebP images into a single neatly paginated PDF file ready for printing.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert and bundle multiple PNG, JPG, and WebP images into a single clean PDF document ready for printing, submission, and sharing.</p>
         </div>
         <button onclick="openModal('imgToPdfModal')" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">
           Use Tool <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -848,29 +985,126 @@
 
     
     // Tool Modal Route Map for Shareable URLs & Dynamic Titles
-    const defaultPageTitle = "ToolsHere.online — Free Online Tools & Web Utilities | 100% Private";
+        const defaultPageTitle = "ToolsHere.online — Free Online Tools & Web Utilities | 100% Private";
+    const defaultPageDesc = "Free, fast, and 100% private client-side web utilities. Compress images, calculate EMI/GST, create QR codes, analyze text, and edit PDFs with zero uploads.";
     const modalRouteMap = {
-      'imgResizerModal': { hash: 'image-compressor', title: 'Image Compressor & Resizer — ToolsHere.online' },
-      'bgRemoverModal': { hash: 'background-remover', title: 'AI Background Remover — ToolsHere.online' },
-      'pdfWordModal': { hash: 'pdf-to-word', title: 'PDF to Word Converter — ToolsHere.online' },
-      'pdfMergeModal': { hash: 'merge-pdf', title: 'Merge & Split PDF — ToolsHere.online' },
-      'ageCalcModal': { hash: 'age-calculator', title: 'Age & Date Calculator — ToolsHere.online' },
-      'ytThumbModal': { hash: 'youtube-thumbnail', title: 'YouTube Thumbnail Grabber — ToolsHere.online' },
-      'qrModal': { hash: 'qr-code-generator', title: 'QR Code Studio & Reader — ToolsHere.online' },
-      'passwordModal': { hash: 'password-generator', title: 'Strong Password Creator — ToolsHere.online' },
-      'wordCountModal': { hash: 'word-counter', title: 'Word & Character Counter — ToolsHere.online' },
-      'gstEmiModal': { hash: 'emi-calculator', title: 'GST & Loan EMI Calculator — ToolsHere.online' },
-      'imgFormatModal': { hash: 'image-converter', title: 'Image Format Converter — ToolsHere.online' },
-      'textCaseModal': { hash: 'text-case-converter', title: 'Text Case Converter — ToolsHere.online' },
-      'jsonFormatModal': { hash: 'json-formatter', title: 'JSON Formatter & Validator — ToolsHere.online' },
-      'seoMetaModal': { hash: 'seo-meta-generator', title: 'SEO Meta Tag Generator — ToolsHere.online' },
-      'compressPdfModal': { hash: 'compress-pdf', title: 'Compress PDF Document — ToolsHere.online' },
-      'imgToPdfModal': { hash: 'image-to-pdf', title: 'Image to PDF Converter — ToolsHere.online' },
-      'aboutModal': { hash: 'about', title: 'About Us — ToolsHere.online' },
-      'contactModal': { hash: 'contact', title: 'Contact Us — ToolsHere.online' },
-      'privacyModal': { hash: 'privacy', title: 'Privacy Policy — ToolsHere.online' },
-      'termsModal': { hash: 'terms', title: 'Terms of Service — ToolsHere.online' },
-      'disclaimerModal': { hash: 'disclaimer', title: 'Disclaimer — ToolsHere.online' }
+      'imgResizerModal': {
+        hash: 'image-compressor',
+        title: 'Free Image Compressor & Resizer Online | Compress to 20KB, 50KB, 100KB — ToolsHere.online',
+        metaDesc: 'Compress and resize images online to custom dimensions or exact file sizes (20KB, 50KB, 100KB). Fast, client-side, and 100% private with no server uploads.',
+        h1: 'Free Online Image Compressor & Photo Resizer',
+        toolId: 'imgResizer'
+      },
+      'bgRemoverModal': {
+        hash: 'background-remover',
+        title: 'Free Background Remover Online | Create Transparent PNG Photos — ToolsHere.online',
+        metaDesc: 'Remove image backgrounds instantly in your browser. Fine-tune color tolerance, isolate subjects, and download transparent PNGs with 100% privacy.',
+        h1: 'Free Client-Side Background Remover & Transparent PNG Maker',
+        toolId: 'bgRemover'
+      },
+      'pdfWordModal': {
+        hash: 'pdf-to-word',
+        title: 'Free PDF to Word Converter Online | Convert PDF to Editable DOC — ToolsHere.online',
+        metaDesc: 'Convert PDF documents to editable Word (.doc) files right in your browser. Fast, free, confidential, and requires no email sign-up or software install.',
+        h1: 'Free Online PDF to Word Converter (Client-Side)',
+        toolId: 'pdfWord'
+      },
+      'pdfMergeModal': {
+        hash: 'merge-pdf',
+        title: 'Free PDF Merger Online | Combine Multiple PDF Files Together — ToolsHere.online',
+        metaDesc: 'Merge multiple PDF files into one single document online. Safe, instant client-side PDF joining with zero server uploads and no file restrictions.',
+        h1: 'Free Online PDF Merger & Document Combiner',
+        toolId: 'pdfMerge'
+      },
+      'ageCalcModal': {
+        hash: 'age-calculator',
+        title: 'Accurate Age & Date Calculator Online | Calculate Exact Age in Days — ToolsHere.online',
+        metaDesc: 'Calculate your exact age in years, months, days, and total days lived. Fast, precise, and handles leap years and calendar variations accurately.',
+        h1: 'Free Online Age & Date of Birth Calculator',
+        toolId: 'ageCalc'
+      },
+      'ytThumbModal': {
+        hash: 'youtube-thumbnail',
+        title: 'Free YouTube Thumbnail Downloader | Download 1080p HD Thumbnails — ToolsHere.online',
+        metaDesc: 'Download high-resolution YouTube video thumbnails in 1080p Maxresdefault HD quality. Just paste any YouTube URL and download or copy image link instantly.',
+        h1: 'Free YouTube Thumbnail Downloader & Image Grabber',
+        toolId: 'ytThumb'
+      },
+      'qrModal': {
+        hash: 'qr-code-generator',
+        title: 'Free QR Code Generator Online | Create High-Resolution QR Codes — ToolsHere.online',
+        metaDesc: 'Create custom QR codes for websites, text, and links instantly. High-correction Level H graphics, 100% private client-side generation, and PNG download.',
+        h1: 'Free Online QR Code Generator & Creator Studio',
+        toolId: 'qrTool'
+      },
+      'passwordModal': {
+        hash: 'password-generator',
+        title: 'Free Strong Password Generator | Cryptographically Secure Passwords — ToolsHere.online',
+        metaDesc: 'Generate cryptographically secure, random passwords with custom lengths, symbols, and numbers using the Web Crypto API. Fast, private, and unhackable.',
+        h1: 'Free Cryptographically Secure Password Generator',
+        toolId: 'passwordGen'
+      },
+      'wordCountModal': {
+        hash: 'word-counter',
+        title: 'Free Word & Character Counter Online | Accurate Text Length Counter — ToolsHere.online',
+        metaDesc: 'Count words, characters, sentences, and estimated reading time live. Perfect for essays, social media posts, academic papers, and SEO content writing.',
+        h1: 'Free Online Word Counter & Character Analyzer',
+        toolId: 'wordCount'
+      },
+      'gstEmiModal': {
+        hash: 'emi-calculator',
+        title: 'Free GST & Loan EMI Calculator Online | Accurate Financial Calculator — ToolsHere.online',
+        metaDesc: 'Calculate monthly loan EMIs and GST amounts (5%, 12%, 18%, 28%) instantly. Accurate financial calculations for home, car, personal loans, and business bills.',
+        h1: 'Free Online GST & Loan EMI Financial Calculator',
+        toolId: 'gstEmi'
+      },
+      'imgFormatModal': {
+        hash: 'image-converter',
+        title: 'Free Image Format Converter Online | Convert PNG, JPG, WebP — ToolsHere.online',
+        metaDesc: 'Convert image formats online between PNG, JPG, and WebP instantly in your browser. Fast, 100% private, free, and preserves original image resolution.',
+        h1: 'Free Online Image Format Converter (PNG, JPG, WebP)',
+        toolId: 'imgFormat'
+      },
+      'textCaseModal': {
+        hash: 'text-case-converter',
+        title: 'Free Text Case Converter Online | UPPERCASE, lowercase, Title Case, Slug — ToolsHere.online',
+        metaDesc: 'Convert text case online instantly. Switch between UPPERCASE, lowercase, Title Case, and URL slugs with one click. Free, private, and instant copy.',
+        h1: 'Free Online Text Case Converter & URL Slug Generator',
+        toolId: 'textCase'
+      },
+      'jsonFormatModal': {
+        hash: 'json-formatter',
+        title: 'Free JSON Formatter & Validator Online | Beautify and Minify JSON — ToolsHere.online',
+        metaDesc: 'Format, beautify, validate, and minify JSON data online. Catch syntax errors with clear line indicators. 100% client-side for secure API debugging.',
+        h1: 'Free Online JSON Formatter, Beautifier & Validator',
+        toolId: 'jsonFormat'
+      },
+      'seoMetaModal': {
+        hash: 'seo-meta-generator',
+        title: 'Free SEO Meta Tag Generator Online | Create Google & OpenGraph Tags — ToolsHere.online',
+        metaDesc: 'Generate SEO meta tags for your website. Create Google titles, meta descriptions, robots, and OpenGraph preview tags with one click. Free and instant.',
+        h1: 'Free Online SEO Meta Tag & OpenGraph Generator',
+        toolId: 'seoMeta'
+      },
+      'compressPdfModal': {
+        hash: 'compress-pdf',
+        title: 'Free PDF Compressor Online | Reduce PDF File Size Privately — ToolsHere.online',
+        metaDesc: 'Compress PDF files online without losing readability. Reduce document size for email attachments and portal uploads. 100% private client-side tool.',
+        h1: 'Free Online PDF Compressor & File Size Reducer',
+        toolId: 'compressPdf'
+      },
+      'imgToPdfModal': {
+        hash: 'image-to-pdf',
+        title: 'Free Image to PDF Converter Online | Convert JPG and PNG to PDF — ToolsHere.online',
+        metaDesc: 'Convert and merge multiple JPG, PNG, and WebP photos into a single PDF document online. Fast, free, confidential, and ideal for printing or official uploads.',
+        h1: 'Free Online Image to PDF Converter & Photo Bundler',
+        toolId: 'imgToPdf'
+      },
+      'aboutModal': { hash: 'about', title: 'About Us — ToolsHere.online', metaDesc: 'Learn about ToolsHere.online, our mission for 100% private client-side browser utilities, and our engineering standards.' },
+      'contactModal': { hash: 'contact', title: 'Contact Us — ToolsHere.online', metaDesc: 'Contact the ToolsHere.online team for support, feature suggestions, or business inquiries.' },
+      'privacyModal': { hash: 'privacy', title: 'Privacy Policy — ToolsHere.online', metaDesc: 'ToolsHere.online Privacy Policy: Learn how all our utilities execute locally on your device with zero server storage.' },
+      'termsModal': { hash: 'terms', title: 'Terms of Service — ToolsHere.online', metaDesc: 'Terms of service and usage guidelines for ToolsHere.online free browser utilities.' },
+      'disclaimerModal': { hash: 'disclaimer', title: 'Disclaimer — ToolsHere.online', metaDesc: 'Legal and technical disclaimer for calculations and tools provided on ToolsHere.online.' }
     };
 
     function checkHashRoute() {
@@ -884,12 +1118,21 @@
       }
     }
 
-    // Modal Display Logic
+        // Modal Display Logic with Dynamic SEO
     function openModal(modalType, updateHash = true) {
       const overlay = document.getElementById('modalOverlay');
-      if (updateHash && modalRouteMap[modalType]) {
-        history.replaceState(null, '', '#' + modalRouteMap[modalType].hash);
-        document.title = modalRouteMap[modalType].title;
+      const route = modalRouteMap[modalType];
+      if (updateHash && route) {
+        history.replaceState(null, '', '#' + route.hash);
+        document.title = route.title;
+        const metaDescEl = document.querySelector('meta[name="description"]');
+        if (metaDescEl && route.metaDesc) {
+          metaDescEl.setAttribute('content', route.metaDesc);
+        }
+        const ogTitleEl = document.querySelector('meta[property="og:title"]');
+        if (ogTitleEl) ogTitleEl.setAttribute('content', route.title);
+        const ogDescEl = document.querySelector('meta[property="og:description"]');
+        if (ogDescEl && route.metaDesc) ogDescEl.setAttribute('content', route.metaDesc);
       }
       const title = document.getElementById('modalTitle');
       const icon = document.getElementById('modalIcon');
@@ -920,6 +1163,11 @@
       else if (modalType === 'privacyModal') renderPrivacyModal(title, icon, content);
       else if (modalType === 'termsModal') renderTermsModal(title, icon, content);
       else if (modalType === 'disclaimerModal') renderDisclaimerModal(title, icon, content);
+
+      // Append verified in-depth SEO documentation and FAQ guide for tool utilities
+      if (route && route.toolId && typeof renderToolSeoDocumentation === 'function') {
+        renderToolSeoDocumentation(route.toolId, content);
+      }
     }
 
     function closeModal() {
@@ -929,6 +1177,12 @@
         history.replaceState(null, '', window.location.pathname);
       }
       document.title = defaultPageTitle;
+      const metaDescEl = document.querySelector('meta[name="description"]');
+      if (metaDescEl) metaDescEl.setAttribute('content', defaultPageDesc);
+      const ogTitleEl = document.querySelector('meta[property="og:title"]');
+      if (ogTitleEl) ogTitleEl.setAttribute('content', "ToolsHere.online — Free Online Tools for Everything");
+      const ogDescEl = document.querySelector('meta[property="og:description"]');
+      if (ogDescEl) ogDescEl.setAttribute('content', "Free, fast, and 100% private client-side web utility tools. Everything runs directly inside your browser.");
     }
 
     function handleOverlayClick(event) {
@@ -966,6 +1220,1006 @@
         showToast('Failed to copy', 'error');
       }
       document.body.removeChild(textArea);
+    }
+
+    
+    /* ================= VERIFIED TOOL SEO DOCUMENTATION REGISTRY ================= */
+    const SEO_TOOL_REGISTRY = [
+  {
+    "id": "imgResizer",
+    "hash": "#image-compressor",
+    "url": "https://toolshere.online/#image-compressor",
+    "name": "Image Compressor & Resizer",
+    "category": "Image",
+    "cardDesc": "Compress JPEG, PNG, and WebP images to custom dimensions or target file sizes like 20KB, 50KB, and 100KB directly in your browser with zero server uploads.",
+    "seoTitle": "Free Image Compressor & Resizer Online | Compress to 20KB, 50KB, 100KB",
+    "metaDesc": "Compress and resize images online to custom dimensions or exact file sizes (20KB, 50KB, 100KB). Fast, client-side, and 100% private with no server uploads.",
+    "h1": "Free Online Image Compressor & Photo Resizer",
+    "intro": "ToolsHere Image Compressor & Resizer is a client-side utility built for students, job applicants, web developers, and designers who need quick, precise image optimization. Whether you must meet strict government portal upload limits—such as 20KB, 50KB, or 100KB requirements for exams, passports, and job applications—or reduce image payload sizes for faster web performance, this tool gives you complete manual and preset control. You can adjust exact pixel dimensions, dial in quality percentages from 10% to 100%, and inspect instant side-by-side file size feedback. Everything processes entirely within your device's browser memory using HTML5 Canvas, ensuring your personal photos never leave your computer or phone.",
+    "howToUse": [
+      "Click or drag your image file (PNG, JPG, WebP, or GIF) into the upload dropzone.",
+      "Choose a quick preset button (20KB, 50KB, 100KB, 200KB) or drag the compression slider to set your custom quality level.",
+      "Optionally adjust the pixel width and height to resize the dimensions to exact specifications.",
+      "Review the live compressed file size and visual preview on the screen.",
+      "Click 'Download Compressed Image' to save your optimized JPG file instantly."
+    ],
+    "features": [
+      "One-click target file size presets: 20 KB, 50 KB, 100 KB, and 200 KB for exam and job portals.",
+      "Granular compression quality slider ranging from 10% to 100%.",
+      "Custom pixel dimension controls to change width and height on the fly.",
+      "Real-time dual file size counter displaying original size versus compressed output size.",
+      "Instant visual preview with checkerboard background support.",
+      "100% private client-side processing with zero server uploads or latency."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "PNG, JPG/JPEG, WebP, GIF",
+      "outputFormat": "JPEG (.jpg) for optimal compression ratios",
+      "limitations": "Single image processing per batch; large raw photos (over 25MB) may require extra browser memory."
+    },
+    "faqs": [
+      {
+        "q": "How does the target size preset (20KB, 50KB, 100KB) work?",
+        "a": "The tool automatically calibrates the image compression ratio and resolution algorithms in browser memory to aim for your selected target threshold, making it easy to comply with government form restrictions."
+      },
+      {
+        "q": "Are my photos uploaded to any external server?",
+        "a": "No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API. Your pictures never leave your local device."
+      },
+      {
+        "q": "What output format will my compressed image be saved in?",
+        "a": "The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals."
+      },
+      {
+        "q": "Can I resize the width and height without losing quality?",
+        "a": "Yes. You can enter specific pixel values into the width and height input fields. Downscaling dimensions also dramatically reduces the final file weight."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Image Format Converter",
+        "hash": "#image-converter"
+      },
+      {
+        "name": "AI Background Remover",
+        "hash": "#background-remover"
+      },
+      {
+        "name": "Image to PDF Converter",
+        "hash": "#image-to-pdf"
+      }
+    ]
+  },
+  {
+    "id": "bgRemover",
+    "hash": "#background-remover",
+    "url": "https://toolshere.online/#background-remover",
+    "name": "AI Background Remover",
+    "category": "Image",
+    "cardDesc": "Remove solid and uniform photo backgrounds instantly using client-side canvas color isolation, sensitivity thresholds, and export transparent PNG files securely.",
+    "seoTitle": "Free Background Remover Online | Create Transparent PNG Photos",
+    "metaDesc": "Remove image backgrounds instantly in your browser. Fine-tune color tolerance, isolate subjects, and download transparent PNGs with 100% privacy.",
+    "h1": "Free Client-Side Background Remover & Transparent PNG Maker",
+    "intro": "The ToolsHere AI Background Remover is a fast, privacy-centric graphic utility designed for e-commerce sellers, graphic artists, and content creators who need clean transparent cutouts without paying for expensive subscription software. Using client-side color-difference algorithms and canvas pixel manipulation, the tool inspects the edge and backdrop tones of your uploaded photo, letting you dial in an interactive sensitivity threshold slider. It isolates the subject cleanly and renders a transparent checkerboard preview instantly. Because the algorithm executes entirely within your browser, sensitive product photos, signatures, and personal portraits remain confidential and never pass through a cloud server.",
+    "howToUse": [
+      "Select or drag your image file onto the background remover upload zone.",
+      "The tool analyzes corner and backdrop reference pixels automatically to isolate the background.",
+      "Adjust the 'Sensitivity Threshold' slider (5 to 80) to fine-tune how aggressively similar backdrop shades are erased.",
+      "Inspect the live cutout on the transparency checkerboard canvas.",
+      "Click 'Download Transparent PNG' to save your cutout with full alpha-channel transparency."
+    ],
+    "features": [
+      "Instant canvas-based color distance isolation algorithm.",
+      "Adjustable sensitivity threshold slider (range 5–80) for granular edge control.",
+      "Real-time transparency preview with high-contrast checkerboard canvas backdrop.",
+      "High-resolution transparent PNG export with full alpha channel preservation.",
+      "Completely free with zero limits, watermarks, or user account requirements."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "PNG, JPG/JPEG, WebP",
+      "outputFormat": "Transparent PNG (.png)",
+      "limitations": "Best suited for photos with solid, high-contrast, or uniform studio backdrops; complex busy backgrounds with matching subject colors may require manual fine-tuning."
+    },
+    "faqs": [
+      {
+        "q": "What types of photos work best with this background remover?",
+        "a": "Photos with solid, plain, or uniform studio backgrounds (such as white, grey, green screen, or studio product shots) yield the crispest results."
+      },
+      {
+        "q": "Does downloading the image add any watermarks?",
+        "a": "No. All images downloaded from ToolsHere are 100% free of watermarks, branding, or restrictions."
+      },
+      {
+        "q": "Why did parts of my subject disappear?",
+        "a": "If the subject shares very similar colors with the background, lowering the Sensitivity Threshold slider will protect those pixels from being removed."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Image Compressor & Resizer",
+        "hash": "#image-compressor"
+      },
+      {
+        "name": "Image Format Converter",
+        "hash": "#image-converter"
+      }
+    ]
+  },
+  {
+    "id": "pdfWord",
+    "hash": "#pdf-to-word",
+    "url": "https://toolshere.online/#pdf-to-word",
+    "name": "PDF to Word Converter",
+    "category": "Document",
+    "cardDesc": "Convert PDF documents into editable Word (.doc) files quickly inside your browser without uploading proprietary files to external servers.",
+    "seoTitle": "Free PDF to Word Converter Online | Convert PDF to Editable DOC",
+    "metaDesc": "Convert PDF documents to editable Word (.doc) files right in your browser. Fast, free, confidential, and requires no email sign-up or software install.",
+    "h1": "Free Online PDF to Word Converter (Client-Side)",
+    "intro": "ToolsHere PDF to Word Converter offers an instant, confidential solution for students, educators, and office workers needing to turn static PDF documents into editable text documents. Rather than sending confidential contracts, resumes, or financial records to unfamiliar remote servers, our tool processes the document container directly in your local session. It parses the document file and outputs a cleanly structured Word-compatible .doc file that opens seamlessly in Microsoft Word, Google Docs, LibreOffice, and WPS Office. It eliminates manual retyping and saves valuable administrative time.",
+    "howToUse": [
+      "Click the file upload area and select a PDF file from your device.",
+      "Click the 'Convert to Word (.doc)' action button.",
+      "Wait a moment while the client-side converter structures the document payload.",
+      "The generated editable .doc file will automatically download to your computer or mobile downloads folder."
+    ],
+    "features": [
+      "Fast client-side document structuring with zero queue wait times.",
+      "Direct export to Microsoft Word compatible .doc format.",
+      "100% confidential processing ensuring sensitive documents stay on your machine.",
+      "Compatible with desktop and mobile browsers with no plugins needed."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Standard PDF (.pdf)",
+      "outputFormat": "Microsoft Word compatible Document (.doc)",
+      "limitations": "Best for text-based PDFs; scanned image-only PDFs without embedded text streams may require external OCR software."
+    },
+    "faqs": [
+      {
+        "q": "Can I open the downloaded .doc file in Microsoft Word and Google Docs?",
+        "a": "Yes. The downloaded .doc format is universally compatible with Microsoft Office Word, Google Docs, Apple Pages, and LibreOffice."
+      },
+      {
+        "q": "Is there a limit on how many PDFs I can convert?",
+        "a": "No. You can convert as many PDF files as you need throughout the day without fees or daily caps."
+      },
+      {
+        "q": "Are my confidential files stored anywhere?",
+        "a": "Never. The conversion happens in your local browser runtime. Your files are not transmitted to or stored on any server."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Merge & Split PDF",
+        "hash": "#merge-pdf"
+      },
+      {
+        "name": "Compress PDF Document",
+        "hash": "#compress-pdf"
+      },
+      {
+        "name": "Image to PDF Converter",
+        "hash": "#image-to-pdf"
+      }
+    ]
+  },
+  {
+    "id": "pdfMerge",
+    "hash": "#merge-pdf",
+    "url": "https://toolshere.online/#merge-pdf",
+    "name": "Merge & Split PDF",
+    "category": "Document",
+    "cardDesc": "Combine multiple PDF documents into a unified file securely in browser memory without file size caps, queue delays, or server-side logging.",
+    "seoTitle": "Free PDF Merger Online | Combine Multiple PDF Files Together",
+    "metaDesc": "Merge multiple PDF files into one single document online. Safe, instant client-side PDF joining with zero server uploads and no file restrictions.",
+    "h1": "Free Online PDF Merger & Document Combiner",
+    "intro": "Merging multiple PDF documents is one of the most frequent administrative tasks for legal teams, job seekers compiling portfolios, students submitting coursework, and business professionals organizing invoices. The ToolsHere Merge & Split PDF utility allows you to select two or more PDF files and assemble them seamlessly directly inside browser memory. Unlike traditional web services that upload bulky files to cloud queues where they linger for hours, ToolsHere guarantees immediate file handling, strict local data privacy, and zero waiting periods.",
+    "howToUse": [
+      "Click the upload area and select two or more PDF files simultaneously from your device.",
+      "Verify the selected documents in the file dialog.",
+      "Click 'Merge PDFs Instantly' to trigger the client-side combining sequence.",
+      "Save your compiled PDF directly onto your storage drive."
+    ],
+    "features": [
+      "Multi-file PDF selection support directly from your system file picker.",
+      "Ultra-fast combining sequence executing in local browser memory.",
+      "Preserves original document integrity without inserting watermarks or advertisements.",
+      "Works smoothly across Windows, macOS, Linux, iOS, and Android."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Multiple PDF documents (.pdf)",
+      "outputFormat": "Merged PDF file (.pdf)",
+      "limitations": "Requires at least 2 PDF files to initiate merging; password-protected encrypted PDFs must be unlocked prior to selection."
+    },
+    "faqs": [
+      {
+        "q": "How many PDF documents can I combine at once?",
+        "a": "You can select multiple files at once. Memory availability on your device is the only practical constraint."
+      },
+      {
+        "q": "Does this merger alter the visual layout or fonts of my PDFs?",
+        "a": "No, original page streams, formatting, vector text, and embedded graphics are maintained intact."
+      },
+      {
+        "q": "Do I have to register an account or subscribe?",
+        "a": "No registration, credit card, or personal information is ever requested."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "PDF to Word Converter",
+        "hash": "#pdf-to-word"
+      },
+      {
+        "name": "Compress PDF Document",
+        "hash": "#compress-pdf"
+      },
+      {
+        "name": "Image to PDF Converter",
+        "hash": "#image-to-pdf"
+      }
+    ]
+  },
+  {
+    "id": "ageCalc",
+    "hash": "#age-calculator",
+    "url": "https://toolshere.online/#age-calculator",
+    "name": "Age & Date Calculator",
+    "category": "Calculator",
+    "cardDesc": "Calculate your exact age in years, months, and days alongside total days lived using precise calendar leap-year calculations in real time.",
+    "seoTitle": "Accurate Age & Date Calculator Online | Calculate Exact Age in Days",
+    "metaDesc": "Calculate your exact age in years, months, days, and total days lived. Fast, precise, and handles leap years and calendar variations accurately.",
+    "h1": "Free Online Age & Date of Birth Calculator",
+    "intro": "The ToolsHere Age & Date Calculator is a precision chronology tool designed for individuals filling out official employment applications, government competitive examination forms, insurance enrollments, or simply discovering their exact milestone metrics. By taking into account Gregorian calendar idiosyncrasies, fluctuating month lengths (28, 29, 30, and 31 days), and leap years, this calculator delivers the exact elapsed duration between any birth date and today. The tool presents your age broken down cleanly into years, months, days, as well as an exact tally of total cumulative days lived.",
+    "howToUse": [
+      "Click the 'Select Date of Birth' date picker field.",
+      "Pick your birth day, month, and year from the interactive calendar dropdown.",
+      "The calculator automatically computes and displays your exact age breakdown instantly.",
+      "View your precise years, months, and days lived alongside total cumulative days."
+    ],
+    "features": [
+      "Instant real-time calculation upon selecting your date of birth.",
+      "Comprehensive breakdown into exact years, months, and remaining days.",
+      "Accurate total days lived counter with localized thousand-separator formatting.",
+      "Integrated date validation preventing impossible future date selections.",
+      "Responsive cards optimized for both mobile and desktop screens."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Valid calendar date (YYYY-MM-DD)",
+      "outputFormat": "Numerical years, months, days, and total days summary",
+      "limitations": "Calculates chronological age based on the current local system date; future dates are restricted."
+    },
+    "faqs": [
+      {
+        "q": "Does this calculator account for leap years?",
+        "a": "Yes. The algorithm dynamically checks leap years (such as February having 29 days) and exact month lengths for 100% calendar precision."
+      },
+      {
+        "q": "Why is the total days lived count useful?",
+        "a": "Official government recruitments, medical evaluations, and insurance policies frequently specify age eligibility criteria strictly in total elapsed days."
+      },
+      {
+        "q": "Can I calculate past historical dates other than birth dates?",
+        "a": "Yes. You can select any past date to compute the exact elapsed time between that event and today."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "GST & Loan EMI Calculator",
+        "hash": "#emi-calculator"
+      },
+      {
+        "name": "Word & Character Counter",
+        "hash": "#word-counter"
+      }
+    ]
+  },
+  {
+    "id": "ytThumb",
+    "hash": "#youtube-thumbnail",
+    "url": "https://toolshere.online/#youtube-thumbnail",
+    "name": "YouTube Thumbnail Grabber",
+    "category": "Media",
+    "cardDesc": "Extract and download high-resolution 1080p Max-HD YouTube video thumbnails instantly by pasting any standard, short, or mobile YouTube link.",
+    "seoTitle": "Free YouTube Thumbnail Downloader | Download 1080p HD Thumbnails",
+    "metaDesc": "Download high-resolution YouTube video thumbnails in 1080p Maxresdefault HD quality. Just paste any YouTube URL and download or copy image link instantly.",
+    "h1": "Free YouTube Thumbnail Downloader & Image Grabber",
+    "intro": "ToolsHere YouTube Thumbnail Grabber is an indispensable utility for digital marketers, graphic designers, video editors, and content researchers looking to download video cover artwork for presentations, blog posts, competitive research, and design inspiration. By parsing standard watch links, shortened youtu.be URLs, embed links, and mobile URLs, our tool extracts the official high-resolution `maxresdefault` 1920x1080 YouTube CDN cover image. You can inspect the preview instantly, download the full-resolution artwork to your local machine, or copy the direct image asset link with a single tap.",
+    "howToUse": [
+      "Copy the web link of any YouTube video from your browser address bar or mobile share button.",
+      "Paste the URL into the 'Paste YouTube Video Link' input field.",
+      "The tool instantly parses the video ID and renders the highest available thumbnail preview.",
+      "Click 'Download Max HD' to open and save the 1080p image, or click 'Copy URL' to copy the direct CDN link."
+    ],
+    "features": [
+      "Supports all YouTube URL structures (standard watch?v=, youtu.be, embed, and mobile links).",
+      "Direct extraction of top-tier Maxresdefault 1080p HD thumbnail graphics.",
+      "Instant visual preview banner before downloading.",
+      "One-click 'Copy URL' button for easy sharing and markdown embedding.",
+      "Completely browser-based with zero external API rate limits."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Any public YouTube video URL or 11-character video ID",
+      "outputFormat": "High-resolution JPEG image (1280x720 / 1920x1080)",
+      "limitations": "Private or unlisted videos with restricted CDN access may fall back to standard high quality (hqdefault) thumbnails."
+    },
+    "faqs": [
+      {
+        "q": "What is the resolution of the downloaded thumbnail?",
+        "a": "The tool fetches the maximum resolution available from YouTube servers, typically 1920x1080 or 1280x720 pixels (Maxresdefault)."
+      },
+      {
+        "q": "Does this tool work with YouTube Shorts URLs?",
+        "a": "Yes. You can paste standard video links, shortened youtu.be links, or Shorts URLs containing the video ID."
+      },
+      {
+        "q": "Can I use downloaded thumbnails commercially?",
+        "a": "Thumbnails belong to their respective video creators. Downloading them for educational, reference, critique, or fair-use review is customary, but obtain permission for commercial reuse."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Image Compressor & Resizer",
+        "hash": "#image-compressor"
+      },
+      {
+        "name": "QR Code Studio & Reader",
+        "hash": "#qr-code-generator"
+      }
+    ]
+  },
+  {
+    "id": "qrTool",
+    "hash": "#qr-code-generator",
+    "url": "https://toolshere.online/#qr-code-generator",
+    "name": "QR Code Studio & Reader",
+    "category": "Utility",
+    "cardDesc": "Generate high-contrast, error-corrected QR codes for website URLs, contact details, or text messages and download crisp PNG images instantly.",
+    "seoTitle": "Free QR Code Generator Online | Create High-Resolution QR Codes",
+    "metaDesc": "Create custom QR codes for websites, text, and links instantly. High-correction Level H graphics, 100% private client-side generation, and PNG download.",
+    "h1": "Free Online QR Code Generator & Creator Studio",
+    "intro": "ToolsHere QR Code Studio is a robust, client-side utility built for small business owners, restaurateurs, event organizers, and marketing managers who need quick, reliable QR codes for product packaging, table menus, Wi-Fi access, business cards, and flyers. Built using robust client-side QR generation libraries with Level H error correction, the codes generated remain easily scannable by modern smartphone cameras even if printed on textured paper or slightly scuffed. Your inputted data is rendered into an interactive canvas locally, guaranteeing that private Wi-Fi passwords and sensitive links are never transmitted over the internet.",
+    "howToUse": [
+      "Type or paste your destination website URL or text into the input box.",
+      "The QR code renders immediately on screen as you type.",
+      "Review the visual code in the high-contrast preview canvas.",
+      "Click 'Download QR Code PNG' to save the sharp, high-resolution graphic directly to your device."
+    ],
+    "features": [
+      "Real-time QR generation responding instantly to every keystroke.",
+      "High Error Correction Level (Level H) ensuring maximum scannability and resilience.",
+      "Crisp vector-to-raster PNG canvas rendering suitable for high-DPI printing.",
+      "Zero server logging—all encoded text stays exclusively on your local device.",
+      "Universal scanning compatibility with iOS Camera, Android Google Lens, and barcode readers."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Any text, URL, email address, phone number, or raw data string",
+      "outputFormat": "PNG image file (.png)",
+      "limitations": "Recommended input length under 1,000 characters to maintain comfortable camera scanning density."
+    },
+    "faqs": [
+      {
+        "q": "Do the QR codes generated on ToolsHere ever expire?",
+        "a": "No! These are standard static QR codes. Because the information is directly encoded into the visual pattern without redirects, they work forever."
+      },
+      {
+        "q": "Can I print these QR codes on physical flyers and banners?",
+        "a": "Yes. The downloaded PNG has sharp contrast and high error correction, making it ideal for business cards, restaurant menus, and poster printing."
+      },
+      {
+        "q": "Is there a scanning limit on my generated QR code?",
+        "a": "There are no scan limits whatsoever. Anyone with a smartphone can scan your QR code an unlimited number of times."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Strong Password Creator",
+        "hash": "#password-generator"
+      },
+      {
+        "name": "SEO Meta Tag Generator",
+        "hash": "#seo-meta-generator"
+      }
+    ]
+  },
+  {
+    "id": "passwordGen",
+    "hash": "#password-generator",
+    "url": "https://toolshere.online/#password-generator",
+    "name": "Strong Password Creator",
+    "category": "Security",
+    "cardDesc": "Generate cryptographically secure passwords with custom lengths (8–32 characters), symbols, and numbers using your browser's Web Crypto API.",
+    "seoTitle": "Free Strong Password Generator | Cryptographically Secure Passwords",
+    "metaDesc": "Generate cryptographically secure, random passwords with custom lengths, symbols, and numbers using the Web Crypto API. Fast, private, and unhackable.",
+    "h1": "Free Cryptographically Secure Password Generator",
+    "intro": "ToolsHere Strong Password Creator is an essential security tool designed to safeguard your online banking, email accounts, cloud databases, and social media profiles against credential stuffing and brute-force attacks. Utilizing your browser's hardware-backed `crypto.getRandomValues()` API rather than predictable pseudorandom math generators, every password generated provides true cryptographic randomness. You can tailor password lengths from 8 to 32 characters, toggle special symbols and numerals, and copy the final output with a single tap. Because no passwords are ever transmitted or stored on a server, your credentials remain strictly between you and your password manager.",
+    "howToUse": [
+      "Use the 'Password Length' slider to select your desired character count (8 to 32 characters).",
+      "Check or uncheck the 'Symbols (@#$%)' and 'Numbers (0-9)' boxes according to your requirements.",
+      "Click 'Generate New Password' to refresh the random string whenever desired.",
+      "Click the 'Copy' button to copy your secure password directly to your clipboard."
+    ],
+    "features": [
+      "Cryptographically secure randomness powered by the browser Web Crypto API.",
+      "Customizable length slider from 8 up to 32 characters.",
+      "Granular symbol (@#$%^&*()_+-=[]{}|) and numeric (0-9) toggle checkboxes.",
+      "One-click clipboard copy button with visual confirmation toast notification.",
+      "100% offline and client-side operation with zero data retention."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Slider length 8–32 characters, symbol and number toggles",
+      "outputFormat": "Alphanumeric and special character string",
+      "limitations": "Passwords are generated in memory and never stored; ensure you save them in a secure password manager before closing the tab."
+    },
+    "faqs": [
+      {
+        "q": "Why is the Web Crypto API more secure than standard generators?",
+        "a": "The Web Crypto API draws on hardware-level system entropy, making the generated numbers mathematically unpredictable and resistant to pattern-prediction attacks."
+      },
+      {
+        "q": "Does ToolsHere store or log any generated passwords?",
+        "a": "Never. The generator runs completely within your device's browser memory. Not a single character is sent to our servers or saved anywhere."
+      },
+      {
+        "q": "What password length is recommended for maximum security?",
+        "a": "Cybersecurity experts recommend a minimum of 16 characters with a mixture of uppercase letters, lowercase letters, numbers, and symbols."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "QR Code Studio & Reader",
+        "hash": "#qr-code-generator"
+      },
+      {
+        "name": "Word & Character Counter",
+        "hash": "#word-counter"
+      }
+    ]
+  },
+  {
+    "id": "wordCount",
+    "hash": "#word-counter",
+    "url": "https://toolshere.online/#word-counter",
+    "name": "Word & Character Counter",
+    "category": "Text",
+    "cardDesc": "Count words, characters, sentences, and estimated reading time in real time as you type or paste text for essays, tweets, and articles.",
+    "seoTitle": "Free Word & Character Counter Online | Accurate Text Length Counter",
+    "metaDesc": "Count words, characters, sentences, and estimated reading time live. Perfect for essays, social media posts, academic papers, and SEO content writing.",
+    "h1": "Free Online Word Counter & Character Analyzer",
+    "intro": "ToolsHere Word & Character Counter is a clean, distraction-free writing companion tailored for students drafting academic essays, authors writing manuscripts, copywriters crafting ad copy, and social media managers meeting character caps for Twitter/X and LinkedIn. As you paste or type your draft, the analyzer updates key metrics simultaneously in real time: total word count, total character count with spaces, sentence count based on standard punctuation markers, and estimated reading time. Its lightweight client-side design ensures zero lag even with lengthy multi-thousand-word documents, helping you hit editorial guidelines without data tracking.",
+    "howToUse": [
+      "Type or paste your text into the large text area.",
+      "Review the live analytics tiles immediately above the editor.",
+      "Check words, characters, sentences, and estimated read time.",
+      "Edit or trim your content to match your required platform limits."
+    ],
+    "features": [
+      "Instant real-time statistical updates with zero delay.",
+      "Accurate word segmentation accounting for multiple spaces and line breaks.",
+      "Exact character counter for social media character cap compliance.",
+      "Sentence counter based on full stops, exclamation marks, and question marks.",
+      "Estimated reading time calculation based on standard 200 words-per-minute speeds."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Raw text, markdown, HTML, or code snippets",
+      "outputFormat": "Numerical statistical counters (words, characters, sentences, read time)",
+      "limitations": "Analyzes standard Unicode text directly in browser memory without language restrictions."
+    },
+    "faqs": [
+      {
+        "q": "How is the estimated reading time calculated?",
+        "a": "Reading time is computed using the universally accepted average adult reading speed of 200 words per minute."
+      },
+      {
+        "q": "Does the character count include spaces?",
+        "a": "Yes, the character counter tallies every typed character including whitespace, line breaks, and punctuation marks."
+      },
+      {
+        "q": "Is there a limit on how much text I can paste?",
+        "a": "You can paste tens of thousands of words without issue; the browser JavaScript engine processes large texts smoothly."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Text Case Converter",
+        "hash": "#text-case-converter"
+      },
+      {
+        "name": "SEO Meta Tag Generator",
+        "hash": "#seo-meta-generator"
+      }
+    ]
+  },
+  {
+    "id": "gstEmi",
+    "hash": "#emi-calculator",
+    "url": "https://toolshere.online/#emi-calculator",
+    "name": "GST & Loan EMI Calculator",
+    "category": "Finance",
+    "cardDesc": "Calculate monthly loan EMIs and Goods and Services Tax (5%, 12%, 18%, 28%) with instant numerical breakdowns for loans and business billing.",
+    "seoTitle": "Free GST & Loan EMI Calculator Online | Accurate Financial Calculator",
+    "metaDesc": "Calculate monthly loan EMIs and GST amounts (5%, 12%, 18%, 28%) instantly. Accurate financial calculations for home, car, personal loans, and business bills.",
+    "h1": "Free Online GST & Loan EMI Financial Calculator",
+    "intro": "Managing financial planning and tax compliance is simple with the ToolsHere GST & Loan EMI Calculator. Built for prospective home buyers, car loan applicants, small business owners, and freelance service providers, this twin-mode calculator handles both loan repayment schedules and Goods & Services Tax (GST) computations. In Loan EMI mode, enter your principal loan amount, annual interest rate, and tenure in months to compute your fixed monthly repayment. In GST mode, enter any base product cost and select 5%, 12%, 18%, or 28% tax slabs to immediately view the exact tax amount and total gross price.",
+    "howToUse": [
+      "Select either the 'Loan EMI' or 'GST Calc' tab at the top of the utility.",
+      "For Loan EMI: Enter your loan Principal amount, annual interest Rate (% p.a.), and Tenure in months to see your monthly EMI.",
+      "For GST: Enter your Base Amount in rupees and choose your GST tax slab (5%, 12%, 18%, or 28%).",
+      "Read the calculated Monthly EMI or the split GST Amount and Total Gross Price instantly."
+    ],
+    "features": [
+      "Dual-purpose interface toggling seamlessly between Loan EMI and GST Calculator.",
+      "Standard reducing-balance banking amortization formula for exact monthly EMIs.",
+      "Preconfigured official GST tax brackets: 5%, 12%, 18%, and 28%.",
+      "Instant real-time output updates as you type numbers.",
+      "Neat localized currency formatting for clear financial budgeting."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Principal, annual interest rate %, tenure in months, and base billing amount",
+      "outputFormat": "Monthly EMI figure, tax amount, and total gross cost",
+      "limitations": "Calculations reflect standard compound amortization and standard GST slabs without auxiliary processing fees or insurance surcharges."
+    },
+    "faqs": [
+      {
+        "q": "What formula is used to calculate the Loan EMI?",
+        "a": "We use the standard banking formula: EMI = [P x R x (1+R)^N] / [(1+R)^N - 1], where P is Principal, R is monthly interest rate, and N is tenure in months."
+      },
+      {
+        "q": "Which GST rates are available?",
+        "a": "The calculator supports all standard official tax slabs: 5% (essentials), 12% (standard items), 18% (services and manufacturing), and 28% (luxury goods)."
+      },
+      {
+        "q": "Can I use this for home loans and car loans?",
+        "a": "Yes. Simply input your total borrowed amount, agreed bank interest rate, and total duration in months to see your monthly installment."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Age & Date Calculator",
+        "hash": "#age-calculator"
+      },
+      {
+        "name": "Word & Character Counter",
+        "hash": "#word-counter"
+      }
+    ]
+  },
+  {
+    "id": "imgFormat",
+    "hash": "#image-converter",
+    "url": "https://toolshere.online/#image-converter",
+    "name": "Image Format Converter",
+    "category": "Image",
+    "cardDesc": "Convert pictures between PNG, JPG, and WebP formats directly inside browser memory with preserved resolution and zero server-side uploads.",
+    "seoTitle": "Free Image Format Converter Online | Convert PNG, JPG, WebP",
+    "metaDesc": "Convert image formats online between PNG, JPG, and WebP instantly in your browser. Fast, 100% private, free, and preserves original image resolution.",
+    "h1": "Free Online Image Format Converter (PNG, JPG, WebP)",
+    "intro": "ToolsHere Image Format Converter is a client-side image transformation tool created for website owners, app developers, photographers, and office workers who need to change image file extensions quickly without sacrificing privacy. Web developers converting legacy PNGs or JPGs to modern lightweight WebP formats for faster page speeds can do so in seconds. Similarly, users needing universally compatible JPGs for official paperwork or transparent PNGs for graphic presentations can convert seamlessly. Everything happens right inside your browser canvas, ensuring zero server lag and absolute privacy for your personal files.",
+    "howToUse": [
+      "Click the upload box or drag your image file (PNG, JPG, WebP, BMP) into the dropzone.",
+      "The tool displays the loaded file name and size.",
+      "Click your desired target format button: 'Convert PNG', 'Convert JPG', or 'Convert WebP'.",
+      "The converted file will automatically render and download onto your device."
+    ],
+    "features": [
+      "One-click conversion between PNG, JPG, and modern WebP formats.",
+      "Automatic clean white background synthesis when converting transparent PNGs into JPEGs.",
+      "Retains natural image dimensions and pixel resolution.",
+      "Instant client-side processing using hardware-accelerated Canvas rendering.",
+      "Completely private with zero data sent across the network."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "PNG, JPG/JPEG, WebP, BMP, GIF",
+      "outputFormat": "PNG (.png), JPEG (.jpg), or WebP (.webp)",
+      "limitations": "Animated GIF frames are converted to static snapshots; conversion is done one image at a time."
+    },
+    "faqs": [
+      {
+        "q": "Why should I convert my images to WebP?",
+        "a": "WebP is a modern image format developed by Google that offers roughly 25-35% smaller file sizes than PNG and JPEG at equivalent visual quality, speeding up web page loading."
+      },
+      {
+        "q": "What happens to transparent backgrounds when converting PNG to JPG?",
+        "a": "Because the standard JPEG format does not support alpha transparency, transparent areas are automatically and cleanly filled with a solid white background."
+      },
+      {
+        "q": "Is there any loss of image resolution during conversion?",
+        "a": "No. The converter reads the natural width and height of the image and renders it on a full-scale canvas, preserving original pixel dimensions."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Image Compressor & Resizer",
+        "hash": "#image-compressor"
+      },
+      {
+        "name": "AI Background Remover",
+        "hash": "#background-remover"
+      },
+      {
+        "name": "Image to PDF Converter",
+        "hash": "#image-to-pdf"
+      }
+    ]
+  },
+  {
+    "id": "textCase",
+    "hash": "#text-case-converter",
+    "url": "https://toolshere.online/#text-case-converter",
+    "name": "Text Case Converter",
+    "category": "Text",
+    "cardDesc": "Convert strings to UPPERCASE, lowercase, Title Case, and clean URL Slugs with one click for coding, headlines, and clean copywriting.",
+    "seoTitle": "Free Text Case Converter Online | UPPERCASE, lowercase, Title Case, Slug",
+    "metaDesc": "Convert text case online instantly. Switch between UPPERCASE, lowercase, Title Case, and URL slugs with one click. Free, private, and instant copy.",
+    "h1": "Free Online Text Case Converter & URL Slug Generator",
+    "intro": "ToolsHere Text Case Converter eliminates the tedious chore of retyping text accidentally written in CAPS LOCK or formatting messy headings by hand. Created for programmers, journalists, digital publishers, and students, this utility provides one-click conversions across the four most crucial typography styles: UPPERCASE, lowercase, Title Case (capitalizing the initial letter of every word), and SEO-friendly URL Slugs (stripping punctuation and separating words with hyphens). Paste your text, select your target transformation, and copy the clean result directly to your clipboard.",
+    "howToUse": [
+      "Paste or type your raw text into the input box.",
+      "Click your desired formatting button: UPPERCASE, lowercase, Title Case, or url-slug.",
+      "The text updates immediately in the text area.",
+      "Click 'Copy Output Text' to copy the formatted string directly to your clipboard."
+    ],
+    "features": [
+      "Instant transformations for UPPERCASE, lowercase, Title Case, and url-slug.",
+      "Smart URL slugification stripping special characters, symbols, and double dashes.",
+      "Title Case capitalization algorithm for headlines, blog titles, and book chapters.",
+      "One-click 'Copy Output Text' button with visual confirmation toast notification.",
+      "Works entirely in local browser memory without character limits."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Any raw text, sentences, titles, or code strings",
+      "outputFormat": "Formatted text matching the selected case style",
+      "limitations": "Best for standard Latin/alphabetic scripts; slug generator strips punctuation and accents."
+    },
+    "faqs": [
+      {
+        "q": "What does the 'url-slug' transformation do?",
+        "a": "It converts your headline into lowercase, removes punctuation marks, and replaces spaces with hyphens, creating clean, SEO-friendly URL permalinks."
+      },
+      {
+        "q": "Can I use Title Case for blog post titles and headlines?",
+        "a": "Yes. Title Case capitalizes the first letter of each word, ensuring uniform styling for headings, essays, and titles."
+      },
+      {
+        "q": "Is there any limit to the amount of text I can format?",
+        "a": "No. You can convert short phrases or multi-page documents without restriction."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Word & Character Counter",
+        "hash": "#word-counter"
+      },
+      {
+        "name": "JSON Formatter & Validator",
+        "hash": "#json-formatter"
+      }
+    ]
+  },
+  {
+    "id": "jsonFormat",
+    "hash": "#json-formatter",
+    "url": "https://toolshere.online/#json-formatter",
+    "name": "JSON Formatter & Validator",
+    "category": "Developer",
+    "cardDesc": "Beautify nested JSON payloads, minify code for production APIs, and validate syntax errors instantly in your browser with zero data leaks.",
+    "seoTitle": "Free JSON Formatter & Validator Online | Beautify and Minify JSON",
+    "metaDesc": "Format, beautify, validate, and minify JSON data online. Catch syntax errors with clear line indicators. 100% client-side for secure API debugging.",
+    "h1": "Free Online JSON Formatter, Beautifier & Validator",
+    "intro": "ToolsHere JSON Formatter & Validator is a fast, secure debugging utility engineered for software engineers, backend developers, API testers, and student programmers. Working with unformatted, minified single-line API responses can make debugging tedious and error-prone. With this tool, simply paste your JSON string and click 'Beautify JSON' to format it with clean 2-space indentation, or click 'Minify JSON' to compress payloads for network transmission. If your JSON contains a trailing comma, unquoted key, or bracket mismatch, our validator flags the exact syntax error immediately, all within your browser memory so sensitive API keys and user data never leave your computer.",
+    "howToUse": [
+      "Paste your raw JSON text or API response into the editor window.",
+      "Click 'Beautify JSON' to reformat with neat, legible 2-space hierarchy indentation.",
+      "Click 'Minify JSON' if you want to strip all whitespace and compress it into a compact payload.",
+      "If the JSON is invalid, an error toast will explain the syntax issue.",
+      "Click the copy button to copy the validated result to your clipboard."
+    ],
+    "features": [
+      "Instant JSON beautification with clean 2-space hierarchical indentation.",
+      "One-click payload minification removing unnecessary whitespace.",
+      "Real-time syntax validation identifying malformed keys, quotes, or missing commas.",
+      "One-click clipboard copy button with confetti and notification confirmation.",
+      "100% confidential client-side processing protecting proprietary API keys and tokens."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Standard JSON objects, arrays, strings, and primitives",
+      "outputFormat": "Beautified indented JSON or minified single-line JSON string",
+      "limitations": "Requires valid standard JSON syntax (strict double quotes for strings and keys; comments are not standard JSON)."
+    },
+    "faqs": [
+      {
+        "q": "Why is client-side JSON formatting safer for developers?",
+        "a": "Many developer payloads include authorization tokens, user passwords, or confidential database records. Because ToolsHere runs entirely in your local browser, your private data is never sent to a remote server."
+      },
+      {
+        "q": "Why did the validator flag an error on my JSON?",
+        "a": "Common causes of invalid JSON include single quotes instead of double quotes around keys/strings, trailing commas after the last item, or unclosed brackets."
+      },
+      {
+        "q": "Can I minify large JSON files for production use?",
+        "a": "Yes. Minifying strips unnecessary whitespace and line breaks, minimizing the payload size for API requests and mobile app efficiency."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "SEO Meta Tag Generator",
+        "hash": "#seo-meta-generator"
+      },
+      {
+        "name": "Text Case Converter",
+        "hash": "#text-case-converter"
+      }
+    ]
+  },
+  {
+    "id": "seoMeta",
+    "hash": "#seo-meta-generator",
+    "url": "https://toolshere.online/#seo-meta-generator",
+    "name": "SEO Meta Tag Generator",
+    "category": "Developer",
+    "cardDesc": "Generate standard HTML title, meta description, robots, and OpenGraph tags to optimize search engine ranking and social media share previews.",
+    "seoTitle": "Free SEO Meta Tag Generator Online | Create Google & OpenGraph Tags",
+    "metaDesc": "Generate SEO meta tags for your website. Create Google titles, meta descriptions, robots, and OpenGraph preview tags with one click. Free and instant.",
+    "h1": "Free Online SEO Meta Tag & OpenGraph Generator",
+    "intro": "ToolsHere SEO Meta Tag Generator is a practical tool for web developers, bloggers, indie hackers, and digital marketers seeking to maximize organic search engine click-through rates and optimize social media link previews. Correctly implementing HTML `<head>` meta tags is crucial for Google indexing and ensures that Facebook, LinkedIn, and Twitter/X render attractive cards when your URL is shared. Simply enter your web page title and a descriptive meta summary, and our generator synthesizes standard Google title, description, robots directives, and OpenGraph tags ready to paste directly into your site's HTML header.",
+    "howToUse": [
+      "Enter your desired page title in the 'Page Title' field.",
+      "Type a concise 140–160 character summary in the 'Meta Description' field.",
+      "Review the synthesized HTML code block generated in real time.",
+      "Click 'Copy HTML Meta Tags' to copy the code directly into your clipboard.",
+      "Paste the generated snippet into the `<head>` section of your website's HTML."
+    ],
+    "features": [
+      "Real-time tag synthesis responding as you type.",
+      "Generates standard `<title>` and `<meta name=\"description\">` tags.",
+      "Includes essential `<meta name=\"robots\" content=\"index, follow\">` directive.",
+      "Generates standard OpenGraph tags (`og:title`, `og:description`) for rich social media cards.",
+      "One-click copy button for rapid integration into any website codebase."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Title string and meta description summary text",
+      "outputFormat": "Standard HTML5 `<head>` meta tag snippet",
+      "limitations": "Outputs core title, description, robots, and OpenGraph tags; additional specialized tags (e.g. Twitter creator, Canonical URL) can be supplemented manually."
+    },
+    "faqs": [
+      {
+        "q": "Where do I paste the generated meta tags in my code?",
+        "a": "Paste the generated snippet inside the `<head>` and `</head>` tags of your HTML document, typically near the top of the file."
+      },
+      {
+        "q": "What is the recommended length for an SEO meta description?",
+        "a": "Search engines like Google generally display between 140 and 160 characters on desktop and mobile search result snippets."
+      },
+      {
+        "q": "Why are OpenGraph (og:) tags important?",
+        "a": "OpenGraph tags ensure that platforms like Facebook, WhatsApp, LinkedIn, and Slack display a clean title, description, and thumbnail when someone shares your link."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Word & Character Counter",
+        "hash": "#word-counter"
+      },
+      {
+        "name": "JSON Formatter & Validator",
+        "hash": "#json-formatter"
+      }
+    ]
+  },
+  {
+    "id": "compressPdf",
+    "hash": "#compress-pdf",
+    "url": "https://toolshere.online/#compress-pdf",
+    "name": "Compress PDF Document",
+    "category": "Document",
+    "cardDesc": "Shrink heavy PDF documents down to portal-friendly file sizes with selectable compression modes directly in browser memory with total privacy.",
+    "seoTitle": "Free PDF Compressor Online | Reduce PDF File Size Privately",
+    "metaDesc": "Compress PDF files online without losing readability. Reduce document size for email attachments and portal uploads. 100% private client-side tool.",
+    "h1": "Free Online PDF Compressor & File Size Reducer",
+    "intro": "Email servers, job portals, college application forms, and government websites frequently restrict PDF uploads to strict size ceilings like 1MB, 2MB, or 500KB. The ToolsHere Compress PDF utility allows you to optimize large PDF documents right on your device. Whether your PDF is bloated by embedded illustrations, high-DPI scans, or redundant metadata streams, our tool prepares an optimized document package without exposing your confidential papers to cloud servers. Simply select your document, review the original size, choose your compression profile, and download your optimized PDF.",
+    "howToUse": [
+      "Click or drag your PDF document into the file selector.",
+      "Check your displayed original file size on screen.",
+      "Select your preferred compression profile ('Standard Quality' or 'Maximum Compression').",
+      "Click 'Download Compressed PDF' to download your optimized document immediately."
+    ],
+    "features": [
+      "Selectable compression profiles for balanced quality or maximum file size reduction.",
+      "Live display of original file size in kilobytes/megabytes.",
+      "Estimated reduction indicator for quick expectations.",
+      "100% confidential processing inside browser memory—no server uploads.",
+      "Fast processing with zero document watermarks or fees."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "Standard PDF documents (.pdf)",
+      "outputFormat": "Compressed PDF file (.pdf)",
+      "limitations": "Encrypted password-locked PDFs must be unlocked before compression."
+    },
+    "faqs": [
+      {
+        "q": "Will compressing a PDF make the text blurry?",
+        "a": "No. Standard vector text and fonts remain crisp. Compression primarily optimizes embedded raster images and strips redundant metadata."
+      },
+      {
+        "q": "What is the difference between Standard and Maximum compression?",
+        "a": "Standard Quality maintains higher image fidelity, while Maximum Compression applies stronger optimization for strict upload size limits."
+      },
+      {
+        "q": "Is there any risk of my personal documents leaking?",
+        "a": "None. All compression actions run locally within your device session. ToolsHere does not upload, log, or store your documents on any server."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "PDF to Word Converter",
+        "hash": "#pdf-to-word"
+      },
+      {
+        "name": "Merge & Split PDF",
+        "hash": "#merge-pdf"
+      },
+      {
+        "name": "Image to PDF Converter",
+        "hash": "#image-to-pdf"
+      }
+    ]
+  },
+  {
+    "id": "imgToPdf",
+    "hash": "#image-to-pdf",
+    "url": "https://toolshere.online/#image-to-pdf",
+    "name": "Image to PDF Converter",
+    "category": "Document",
+    "cardDesc": "Convert and bundle multiple PNG, JPG, and WebP images into a single clean PDF document ready for printing, submission, and sharing.",
+    "seoTitle": "Free Image to PDF Converter Online | Convert JPG and PNG to PDF",
+    "metaDesc": "Convert and merge multiple JPG, PNG, and WebP photos into a single PDF document online. Fast, free, confidential, and ideal for printing or official uploads.",
+    "h1": "Free Online Image to PDF Converter & Photo Bundler",
+    "intro": "ToolsHere Image to PDF Converter makes it effortless to compile receipts, identity documents, handwritten notes, certificate scans, and photo albums into a single, professional PDF document. Rather than sending multiple loose photo attachments that can get disorganized, you can select multiple PNG, JPG, or WebP images simultaneously, preview them on an interactive visual grid, and assemble them into a unified PDF file with a single click. The entire compiling pipeline runs in your device's browser memory, protecting confidential tax records, Aadhaar cards, driver's licenses, and private receipts.",
+    "howToUse": [
+      "Click the upload area and select one or multiple images (PNG, JPG, or WebP) from your device.",
+      "Inspect the live thumbnail gallery grid to verify all selected photos.",
+      "Click 'Generate & Download PDF' to initiate the client-side document synthesis.",
+      "Save your compiled PDF directly onto your computer or phone."
+    ],
+    "features": [
+      "Multi-image selection supporting batch photo uploads.",
+      "Interactive visual thumbnail gallery previewing all selected images.",
+      "Wide format compatibility: accepts JPG, PNG, and modern WebP files.",
+      "Fast client-side document compilation with zero waiting queues.",
+      "Complete data privacy with zero server uploads."
+    ],
+    "formatsAndLimits": {
+      "supportedInputs": "PNG, JPG/JPEG, WebP image files",
+      "outputFormat": "Unified multi-page PDF document (.pdf)",
+      "limitations": "Recommended batch size up to 20-30 images at once depending on your device's available browser memory."
+    },
+    "faqs": [
+      {
+        "q": "Can I combine different image formats into the same PDF?",
+        "a": "Yes. You can select a mixture of PNG, JPG, and WebP files together in the same batch."
+      },
+      {
+        "q": "Can I use this for compiling passport, ID card, and receipt scans?",
+        "a": "Yes, this tool is ideal for compiling government IDs, invoices, tax documents, and assignment notes into one tidy PDF."
+      },
+      {
+        "q": "Are my uploaded photos saved or viewable by anyone else?",
+        "a": "No. The entire process occurs locally on your machine. Your photos are never uploaded to any remote server or stored anywhere."
+      }
+    ],
+    "relatedTools": [
+      {
+        "name": "Image Compressor & Resizer",
+        "hash": "#image-compressor"
+      },
+      {
+        "name": "Merge & Split PDF",
+        "hash": "#merge-pdf"
+      },
+      {
+        "name": "Compress PDF Document",
+        "hash": "#compress-pdf"
+      }
+    ]
+  }
+];
+
+    function renderToolSeoDocumentation(toolId, container) {
+      const tool = SEO_TOOL_REGISTRY.find(t => t.id === toolId);
+      if (!tool) return;
+
+      const guideEl = document.createElement('section');
+      guideEl.className = 'mt-8 pt-6 border-t border-slate-200 dark:border-slate-700/80 space-y-6 text-slate-700 dark:text-slate-300';
+      
+      let relatedToolsHtml = '';
+      if (tool.relatedTools && tool.relatedTools.length > 0) {
+        relatedToolsHtml = `
+          <div class="pt-2">
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Related Online Tools</h3>
+            <div class="flex flex-wrap gap-2">
+              ${tool.relatedTools.map(rt => {
+                const targetHash = rt.hash.replace('#', '');
+                const targetKey = Object.keys(modalRouteMap).find(k => modalRouteMap[k].hash === targetHash);
+                return `<button type="button" onclick="openModal('${targetKey || ''}')" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-1.5">
+                  <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> ${rt.name}
+                </button>`;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      guideEl.innerHTML = `
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800 uppercase tracking-wide">${tool.category} Utility</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"><i class="fa-solid fa-lock text-[9px]"></i> 100% Private (No Uploads)</span>
+          </div>
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug">${tool.h1}</h2>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 leading-relaxed text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+          <p>${tool.intro}</p>
+        </div>
+
+        <div class="space-y-3">
+          <h3 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-list-ol text-sky-600 dark:text-sky-400"></i> Step-by-Step Instructions
+          </h3>
+          <ol class="space-y-2 text-xs sm:text-sm">
+            ${tool.howToUse.map((step, idx) => `
+              <li class="flex items-start gap-2.5">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-sky-100 dark:bg-sky-900 text-sky-700 dark:text-sky-300 font-bold text-[10px] flex items-center justify-center mt-0.5">${idx + 1}</span>
+                <span class="text-slate-600 dark:text-slate-300">${step}</span>
+              </li>
+            `).join('')}
+          </ol>
+        </div>
+
+        <div class="space-y-2.5">
+          <h3 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-500"></i> Verified Features
+          </h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
+            ${tool.features.map(f => `
+              <li class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                <i class="fa-solid fa-check text-emerald-500 text-xs mt-1 shrink-0"></i>
+                <span>${f}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        ${tool.formatsAndLimits ? `
+          <div class="bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 rounded-xl p-3.5 space-y-1.5 text-xs">
+            <div class="font-bold text-amber-900 dark:text-amber-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-info"></i> Supported Formats & Technical Limits
+            </div>
+            <p class="text-slate-600 dark:text-slate-300"><strong>Supported Inputs:</strong> ${tool.formatsAndLimits.supportedInputs}</p>
+            <p class="text-slate-600 dark:text-slate-300"><strong>Output Format:</strong> ${tool.formatsAndLimits.outputFormat}</p>
+            <p class="text-slate-500 dark:text-slate-400"><strong>Operating Note:</strong> ${tool.formatsAndLimits.limitations}</p>
+          </div>
+        ` : ''}
+
+        <div class="space-y-3">
+          <h3 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-question text-violet-500"></i> Frequently Asked Questions
+          </h3>
+          <div class="space-y-2">
+            ${tool.faqs.map(faq => `
+              <details class="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 cursor-pointer">
+                <summary class="font-bold text-slate-800 dark:text-slate-200 text-xs flex justify-between items-center list-none select-none">
+                  <span>${faq.q}</span>
+                  <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <p class="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-700/60 pt-2">${faq.a}</p>
+              </details>
+            `).join('')}
+          </div>
+        </div>
+
+        ${relatedToolsHtml}
+      `;
+
+      container.appendChild(guideEl);
     }
 
     /* ================= UTILITY 1: IMAGE COMPRESSOR & RESIZER ================= */
