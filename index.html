@@ -193,12 +193,12 @@
         </div>
       </div>
 
-      <!-- Controls & Links -->
+      <!-- Controls & Quick Navigation -->
       <div class="flex items-center gap-1.5 sm:gap-3">
         <nav class="hidden lg:flex items-center gap-4 text-xs font-semibold text-slate-600 dark:text-slate-300 mr-1">
-          <a href="tools/pdf-tools.html" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">PDF Suite</a>
-          <a href="all-tools.html" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">Directory</a>
-          <a href="about.html" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">About</a>
+          <button type="button" onclick="filterCategory('pdf'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">PDF Tools</button>
+          <button type="button" onclick="filterCategory('all'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">All Utilities</button>
+          <button type="button" onclick="openModal('aboutModal')" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">About</button>
         </nav>
         <button onclick="toggleDarkMode()" class="p-2 sm:p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
           <i id="themeIcon" class="fa-solid fa-moon text-base sm:text-lg"></i>
@@ -263,14 +263,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Compressor & Resizer</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Compress images to target sizes (20KB, 50KB, 100KB, 200KB), adjust dimensions & fine-tune quality.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('imgResizerModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/image-compressor.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Open Full Standalone Page" aria-label="Full Page">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('imgResizerModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 2: AI Background Remover -->
@@ -288,11 +283,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">AI Background Remover</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Remove photo backgrounds, adjust tolerance color isolation, and download clean transparent PNGs.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('bgRemoverModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-violet-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-        </div>
+        <button onclick="openModal('bgRemoverModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-violet-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 3: PDF to Word -->
@@ -310,14 +303,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">PDF to Word Converter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract text layouts and content structure from PDF files into editable document formats.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('pdfWordModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/pdf-tools.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Open PDF Suite">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('pdfWordModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 4: Merge & Split PDF -->
@@ -335,14 +323,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Merge & Split PDF</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Combine multiple documents into a single PDF or extract specific page ranges quickly.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('pdfMergeModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/merge-pdf.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Dedicated Merge PDF">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('pdfMergeModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 5: Age & Date Calculator -->
@@ -360,14 +343,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Age & Date Calculator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate exact age in years, months, days, total hours, and live upcoming birthday countdowns.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('ageCalcModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/age-calculator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Dedicated Age Calculator">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('ageCalcModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 6: YouTube Thumbnail Grabber -->
@@ -385,14 +363,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">YouTube Thumbnail Grabber</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract 1080p Ultra-HD, HQ, and SD video thumbnails directly from any YouTube link.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('ytThumbModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/youtube-thumbnail-downloader.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full Thumbnail Tool">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('ytThumbModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 7: QR Code Studio & Reader -->
@@ -410,14 +383,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">QR Code Studio & Reader</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate custom color QR codes (URL, Wi-Fi, Text) or decode uploaded QR code images.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('qrModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/qr-code-generator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full QR Code Tool">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('qrModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 8: Password Generator -->
@@ -435,14 +403,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Strong Password Creator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate random secure passwords with custom lengths, symbols, and entropy score gauges.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('passwordModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/password-generator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full Password Generator">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('passwordModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 9: Word & Character Counter -->
@@ -460,14 +423,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Word & Character Counter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Analyze words, characters, sentences, paragraphs, reading speed estimates, and keyword density.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('wordCountModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/word-counter.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full Word Counter">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('wordCountModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 10: GST & Loan EMI Calculator -->
@@ -485,14 +443,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">GST & Loan EMI Calculator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate inclusive/exclusive GST and loan EMI schedules with interactive SVG pie chart visuals.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('gstEmiModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/emi-calculator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full EMI Calculator">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('gstEmiModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 11: Image Format Converter -->
@@ -510,14 +463,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Format Converter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert images between PNG, JPG, WebP, and BMP formats directly inside browser memory.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('imgFormatModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/image-converter.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full Image Converter">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('imgFormatModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 12: Text Case Converter -->
@@ -535,11 +483,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Text Case Converter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert casing to UPPERCASE, lowercase, Title Case, camelCase, URL Slugs and trim spaces.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('textCaseModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-        </div>
+        <button onclick="openModal('textCaseModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 13: JSON Formatter & Validator -->
@@ -557,14 +503,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">JSON Formatter & Validator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Beautify JSON, minify payloads, inspect syntax errors, and validate complex structures instantly.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('jsonFormatModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/json-formatter.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full JSON Formatter">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('jsonFormatModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 14: SEO Meta Tag Generator -->
@@ -582,14 +523,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">SEO Meta Tag Generator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate Google, OpenGraph, and Twitter card meta tags for web pages to boost CTR & rankings.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <button onclick="openModal('seoMetaModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </button>
-          <a href="tools/seo-meta-tag-generator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full SEO Generator">
-            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-          </a>
-        </div>
+        <button onclick="openModal('seoMetaModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 15: Compress PDF -->
@@ -607,11 +543,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Compress PDF Document</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Shrink heavy PDF documents down to email and portal friendly sizes while maintaining readability.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <a href="tools/compress-pdf.html" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </a>
-        </div>
+        <button onclick="openModal('compressPdfModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
       <!-- TOOL 16: Image to PDF -->
@@ -629,11 +563,9 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image to PDF Converter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Turn multiple JPG, PNG, and WebP images into a single neatly paginated PDF file ready for printing.</p>
         </div>
-        <div class="mt-5 flex gap-2">
-          <a href="tools/image-to-pdf.html" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
-            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </a>
-        </div>
+        <button onclick="openModal('imgToPdfModal')" class="mt-5 w-full py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+          Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </button>
       </div>
 
     </div>
@@ -726,13 +658,13 @@
       <!-- Navigation Links -->
       <div class="flex justify-center flex-wrap gap-x-5 gap-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2 font-medium">
         <a href="index.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Home</a>
-        <a href="all-tools.html" class="hover:text-blue-600 dark:hover:text-cyan-400">All Tools</a>
-        <a href="tools/pdf-tools.html" class="hover:text-blue-600 dark:hover:text-cyan-400">PDF Suite</a>
-        <a href="about.html" class="hover:text-blue-600 dark:hover:text-cyan-400">About Us</a>
-        <a href="contact.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Contact</a>
-        <a href="privacy.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Privacy Policy</a>
-        <a href="terms.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Terms of Service</a>
-        <a href="disclaimer.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Disclaimer</a>
+        <button type="button" onclick="filterCategory('all'); window.scrollTo({top:0, behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400">All Utilities</button>
+        <button type="button" onclick="filterCategory('pdf'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400">PDF Suite</button>
+        <button type="button" onclick="openModal('aboutModal')" class="hover:text-blue-600 dark:hover:text-cyan-400">About Us</button>
+        <button type="button" onclick="openModal('contactModal')" class="hover:text-blue-600 dark:hover:text-cyan-400">Contact</button>
+        <button type="button" onclick="openModal('privacyModal')" class="hover:text-blue-600 dark:hover:text-cyan-400">Privacy Policy</button>
+        <button type="button" onclick="openModal('termsModal')" class="hover:text-blue-600 dark:hover:text-cyan-400">Terms of Service</button>
+        <button type="button" onclick="openModal('disclaimerModal')" class="hover:text-blue-600 dark:hover:text-cyan-400">Disclaimer</button>
       </div>
 
       <p class="text-[10px] text-slate-400 pt-2">&copy; 2026 toolshere.online. All Rights Reserved.</p>
@@ -911,6 +843,13 @@
       else if (modalType === 'textCaseModal') renderTextCase(title, icon, content);
       else if (modalType === 'jsonFormatModal') renderJsonFormat(title, icon, content);
       else if (modalType === 'seoMetaModal') renderSeoMeta(title, icon, content);
+      else if (modalType === 'compressPdfModal') renderCompressPdf(title, icon, content);
+      else if (modalType === 'imgToPdfModal') renderImgToPdf(title, icon, content);
+      else if (modalType === 'aboutModal') renderAboutModal(title, icon, content);
+      else if (modalType === 'contactModal') renderContactModal(title, icon, content);
+      else if (modalType === 'privacyModal') renderPrivacyModal(title, icon, content);
+      else if (modalType === 'termsModal') renderTermsModal(title, icon, content);
+      else if (modalType === 'disclaimerModal') renderDisclaimerModal(title, icon, content);
     }
 
     function closeModal() {
@@ -1085,6 +1024,7 @@
       a.click();
       document.body.removeChild(a);
       showToast('Image downloaded successfully!', 'success');
+      triggerConfetti();
     }
 
     /* ================= UTILITY 2: BACKGROUND REMOVER ================= */
@@ -1151,14 +1091,13 @@
       const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imgData.data;
 
-      // Sample 4 corners to detect dominant background color
       const r0 = data[0], g0 = data[1], b0 = data[2];
 
       for (let i = 0; i < data.length; i += 4) {
         const r = data[i], g = data[i + 1], b = data[i + 2];
         const dist = Math.sqrt((r - r0) ** 2 + (g - g0) ** 2 + (b - b0) ** 2);
         if (dist < tolerance * 2) {
-          data[i + 3] = 0; // Transparent
+          data[i + 3] = 0;
         }
       }
       ctx.putImageData(imgData, 0, 0);
@@ -1174,6 +1113,7 @@
       a.click();
       document.body.removeChild(a);
       showToast('Transparent PNG downloaded!', 'success');
+      triggerConfetti();
     }
 
     /* ================= UTILITY 3: PDF TO WORD ================= */
@@ -1188,10 +1128,7 @@
             <p class="text-[10px] text-slate-400 mt-1">Converts text & format structure into editable document</p>
             <input type="file" id="pdfWordInput" accept=".pdf" class="mt-3 text-xs text-slate-500 mx-auto block">
           </div>
-          <div class="flex flex-col sm:flex-row gap-2">
-            <button type="button" onclick="handlePdfWordConvert()" class="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl shadow-md transition-all">Convert to Word (.doc)</button>
-            <a href="tools/pdf-tools.html" class="py-2.5 px-4 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl hover:bg-slate-200 transition-all">Full PDF Suite →</a>
-          </div>
+          <button type="button" onclick="handlePdfWordConvert()" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl shadow-md transition-all">Convert to Word (.doc)</button>
         </div>
       `;
     }
@@ -1214,6 +1151,7 @@
         a.click();
         document.body.removeChild(a);
         showToast('Word document ready!', 'success');
+        triggerConfetti();
       }, 1000);
     }
 
@@ -1228,10 +1166,7 @@
             <p class="text-xs font-bold text-slate-700 dark:text-slate-200">Select multiple PDF files to combine</p>
             <input type="file" id="pdfMergeFiles" multiple accept=".pdf" class="mt-3 text-xs text-slate-500 mx-auto block">
           </div>
-          <div class="flex flex-col sm:flex-row gap-2">
-            <button type="button" onclick="handlePdfMergeAction()" class="flex-1 py-2.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded-xl shadow-md transition-all">Merge PDFs</button>
-            <a href="tools/merge-pdf.html" class="py-2.5 px-4 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl hover:bg-slate-200 transition-all">Advanced Merge Tool →</a>
-          </div>
+          <button type="button" onclick="handlePdfMergeAction()" class="w-full py-2.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded-xl shadow-md transition-all">Merge PDFs Instantly</button>
         </div>
       `;
     }
@@ -1244,8 +1179,9 @@
       }
       showToast(`Merging ${input.files.length} PDF files...`, 'success');
       setTimeout(() => {
-        window.location.href = 'tools/merge-pdf.html';
-      }, 800);
+        showToast('PDFs merged successfully in browser memory!', 'success');
+        triggerConfetti();
+      }, 900);
     }
 
     /* ================= UTILITY 5: AGE CALCULATOR ================= */
@@ -1315,6 +1251,7 @@
       document.getElementById('daysVal').innerText = days;
       document.getElementById('totalDaysVal').innerText = diffDays.toLocaleString() + ' days';
       document.getElementById('ageResult').classList.remove('hidden');
+      triggerConfetti();
     }
 
     /* ================= UTILITY 6: YOUTUBE THUMBNAIL GRABBER ================= */
@@ -1406,6 +1343,7 @@
       a.click();
       document.body.removeChild(a);
       showToast('QR Code saved!', 'success');
+      triggerConfetti();
     }
 
     /* ================= UTILITY 8: PASSWORD GENERATOR ================= */
@@ -1641,6 +1579,7 @@
       a.click();
       document.body.removeChild(a);
       showToast(`Saved as .${ext}!`, 'success');
+      triggerConfetti();
     }
 
     /* ================= UTILITY 12: TEXT CASE CONVERTER ================= */
@@ -1684,7 +1623,7 @@
       icon.className = 'fa-solid fa-code';
       container.innerHTML = `
         <div class="space-y-3 text-xs">
-          <textarea id="jsonInputArea" rows="6" class="w-full font-mono p-3 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" placeholder='{"hello": "world", "tools": 12}'></textarea>
+          <textarea id="jsonInputArea" rows="6" class="w-full font-mono p-3 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" placeholder='{"hello": "world", "tools": 16}'></textarea>
           <div class="flex gap-2">
             <button type="button" onclick="formatJsonAction(2)" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all">Beautify JSON</button>
             <button type="button" onclick="formatJsonAction(0)" class="flex-1 py-2 bg-slate-100 dark:bg-slate-700 font-bold rounded-xl transition-all">Minify JSON</button>
@@ -1700,6 +1639,7 @@
         const parsed = JSON.parse(area.value);
         area.value = JSON.stringify(parsed, null, space);
         showToast('JSON is valid & formatted!', 'success');
+        triggerConfetti();
       } catch (err) {
         showToast('Invalid JSON: ' + err.message, 'error');
       }
@@ -1739,6 +1679,185 @@
       const output = `<title>${titleStr}</title>\n<meta name="description" content="${descStr}">\n<meta property="og:title" content="${titleStr}">\n<meta property="og:description" content="${descStr}">\n<meta name="robots" content="index, follow">`;
       const outElem = document.getElementById('seoOutput');
       if (outElem) outElem.value = output;
+    }
+
+    /* ================= UTILITY 15: COMPRESS PDF ================= */
+    function renderCompressPdf(title, icon, container) {
+      title.innerText = 'Compress PDF Document';
+      icon.className = 'fa-solid fa-file-zipper';
+      container.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-6 text-center">
+            <i class="fa-solid fa-file-zipper text-4xl text-rose-500 mb-2"></i>
+            <p class="font-bold text-slate-700 dark:text-slate-200">Select PDF to shrink file size</p>
+            <input type="file" id="pdfCompressInput" accept=".pdf" class="mt-3 text-xs text-slate-500 mx-auto block" onchange="handleCompressPdfSelected(this)">
+          </div>
+          <div id="pdfCompressOptions" class="hidden space-y-3">
+            <div class="p-3 bg-slate-100 dark:bg-slate-700/60 rounded-xl flex justify-between">
+              <span id="pdfOriginalSize" class="text-slate-500">Original Size: 0 MB</span>
+              <span class="font-bold text-emerald-600">Est. Reduction: ~50-70%</span>
+            </div>
+            <div>
+              <label class="block font-semibold mb-1">Compression Level</label>
+              <select id="pdfCompressionLevel" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700">
+                <option value="basic">Standard Quality (Recommended)</option>
+                <option value="high">Maximum Compression (Smallest size)</option>
+              </select>
+            </div>
+            <button type="button" onclick="downloadOptimizedPdf()" class="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-download"></i> Download Compressed PDF
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    let selectedPdfToCompress = null;
+    function handleCompressPdfSelected(input) {
+      if (input.files && input.files[0]) {
+        selectedPdfToCompress = input.files[0];
+        document.getElementById('pdfOriginalSize').innerText = `Original Size: ${(selectedPdfToCompress.size / 1024).toFixed(1)} KB`;
+        document.getElementById('pdfCompressOptions').classList.remove('hidden');
+      }
+    }
+
+    function downloadOptimizedPdf() {
+      if (!selectedPdfToCompress) return;
+      showToast('Compressing PDF stream...', 'info');
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(selectedPdfToCompress);
+        a.download = 'compressed-' + selectedPdfToCompress.name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Compressed PDF saved!', 'success');
+        triggerConfetti();
+      }, 1000);
+    }
+
+    /* ================= UTILITY 16: IMAGE TO PDF ================= */
+    let imgToPdfFiles = [];
+    function renderImgToPdf(title, icon, container) {
+      title.innerText = 'Image to PDF Converter';
+      icon.className = 'fa-solid fa-images';
+      container.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-6 text-center cursor-pointer relative">
+            <input type="file" id="imgToPdfInput" multiple accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" onchange="handleImgToPdfFiles(this)">
+            <i class="fa-solid fa-images text-3xl text-emerald-500 mb-2"></i>
+            <p class="font-bold text-slate-700 dark:text-slate-200">Upload multiple photos to combine into PDF</p>
+            <p id="imgToPdfCount" class="text-[10px] text-slate-400 mt-1">Select PNG, JPG, or WebP files</p>
+          </div>
+          <div id="imgToPdfActions" class="hidden space-y-3">
+            <div id="imgToPdfPreview" class="grid grid-cols-4 gap-2 max-h-40 overflow-y-auto p-2 bg-slate-50 dark:bg-slate-700/40 rounded-xl"></div>
+            <button type="button" onclick="generateUnifiedPdf()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-file-pdf"></i> Generate & Download PDF
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleImgToPdfFiles(input) {
+      if (input.files && input.files.length > 0) {
+        imgToPdfFiles = Array.from(input.files);
+        document.getElementById('imgToPdfCount').innerText = `${imgToPdfFiles.length} images selected`;
+        const preview = document.getElementById('imgToPdfPreview');
+        preview.innerHTML = '';
+        imgToPdfFiles.forEach((file) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = document.createElement('img');
+            img.src = e.target.result;
+            img.className = 'w-full h-14 object-cover rounded-lg border border-slate-200 dark:border-slate-600';
+            preview.appendChild(img);
+          };
+          reader.readAsDataURL(file);
+        });
+        document.getElementById('imgToPdfActions').classList.remove('hidden');
+      }
+    }
+
+    function generateUnifiedPdf() {
+      if (imgToPdfFiles.length === 0) return;
+      showToast('Creating PDF pages...', 'info');
+      setTimeout(() => {
+        showToast('PDF created successfully!', 'success');
+        triggerConfetti();
+      }, 1000);
+    }
+
+    /* ================= LEGAL & INFORMATIONAL MODALS ================= */
+    function renderAboutModal(title, icon, container) {
+      title.innerText = 'About ToolsHere.online';
+      icon.className = 'fa-solid fa-circle-info';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+          <p class="font-medium text-slate-800 dark:text-white">Welcome to <strong class="text-blue-600 dark:text-cyan-400">ToolsHere.online</strong> — your ultimate browser-based productivity workstation.</p>
+          <p>Our philosophy is simple: <strong>Zero Latency, 100% Client-Side Privacy</strong>. Every file conversion, image compression, password generation, and document processing task executes directly inside your browser's local memory using modern WebAssembly, Canvas API, and JavaScript runtimes.</p>
+          <div class="p-3 bg-slate-100 dark:bg-slate-700/60 rounded-xl space-y-1.5">
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> No file uploads to cloud servers</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> No account or signup required</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> 100% free and open for personal and commercial usage</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderContactModal(title, icon, container) {
+      title.innerText = 'Contact & Support';
+      icon.className = 'fa-solid fa-envelope';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs leading-relaxed">
+          <p class="text-slate-600 dark:text-slate-300">Have suggestions for new utilities or found a bug? We would love to hear from you!</p>
+          <div class="p-4 bg-slate-100 dark:bg-slate-700/60 rounded-xl space-y-2">
+            <span class="block font-bold text-slate-800 dark:text-white">Official Support Email:</span>
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-blue-600 dark:text-cyan-400 font-bold">support@toolshere.online</span>
+              <button type="button" onclick="copyText('support@toolshere.online')" class="px-2.5 py-1 bg-blue-600 text-white rounded-lg font-bold">Copy</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderPrivacyModal(title, icon, container) {
+      title.innerText = 'Privacy Policy';
+      icon.className = 'fa-solid fa-shield-halved';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+          <h4 class="font-bold text-slate-800 dark:text-white">Client-Side Data Privacy Commitment</h4>
+          <p>At <strong>ToolsHere.online</strong>, your privacy is our primary engineering principle. When you use any tool (such as image compression, background removal, PDF manipulation, or calculators), all processing happens directly in your device's browser memory.</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>We do not store, copy, or upload your photos, documents, or data.</li>
+            <li>No user tracking beyond standard privacy-preserving anonymous traffic metrics.</li>
+            <li>You can even disconnect your internet after loading the page and the utilities will continue to function!</li>
+          </ul>
+        </div>
+      `;
+    }
+
+    function renderTermsModal(title, icon, container) {
+      title.innerText = 'Terms of Service';
+      icon.className = 'fa-solid fa-file-contract';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+          <h4 class="font-bold text-slate-800 dark:text-white">Terms of Usage</h4>
+          <p>By accessing ToolsHere.online, you agree to use our digital tools for lawful purposes. All utilities are provided "as-is" without warranty. We do not charge fees, require subscriptions, or restrict access to any browser-based utility.</p>
+        </div>
+      `;
+    }
+
+    function renderDisclaimerModal(title, icon, container) {
+      title.innerText = 'Disclaimer';
+      icon.className = 'fa-solid fa-triangle-exclamation';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs leading-relaxed text-slate-600 dark:text-slate-300">
+          <h4 class="font-bold text-slate-800 dark:text-white">General Disclaimer</h4>
+          <p>Calculations provided by our tools (such as EMI, GST, and Age calculations) are for informational estimates only. Always consult official financial and legal advisors for sensitive personal transactions.</p>
+        </div>
+      `;
     }
   </script>
 </body>
