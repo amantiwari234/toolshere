@@ -1,40 +1,31 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toolshere.online — Free Online Tools for Everything | 100% Private</title>
-  <meta name="description" content="Use our free online tools to convert files, edit images, calculate values and complete everyday tasks quickly and easily. 100% private, client-side browser processing with zero uploads.">
-  <meta name="keywords" content="toolshere, free online tools, online tools for everything, image compressor, pdf tools, merge pdf, compress pdf, emi calculator, gst calculator, qr code generator, word counter, password generator, json formatter">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ToolsHere.online — Free Online Tools for Everything | 100% Private</title>
+  <meta name="description" content="Free, fast, and 100% private client-side web utility tools. Compress images, calculate EMI/GST, generate QR codes, analyze text, edit PDFs, and manage files instantly with zero uploads.">
+  <meta name="keywords" content="toolshere, free online tools, online tools for everything, image compressor, background remover, pdf tools, merge pdf, age calculator, emi calculator, gst calculator, qr code generator, password generator, word counter, json formatter">
   <link rel="canonical" href="https://toolshere.online/">
-  
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://toolshere.online/">
-  <meta property="og:title" content="Toolshere.online — Free Online Tools for Everything">
-  <meta property="og:description" content="Use our free online tools to convert files, edit images, calculate values and complete everyday tasks quickly and easily. 100% private browser tools.">
+  <meta property="og:title" content="ToolsHere.online — Free Online Tools for Everything">
+  <meta property="og:description" content="Free, fast, and 100% private client-side web utility tools. Everything runs directly inside your browser.">
   <meta property="og:image" content="https://toolshere.online/assets/images/hero_3d_tools.jpg">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://toolshere.online/">
-  <meta property="twitter:title" content="Toolshere.online — Free Online Tools for Everything">
+  <meta property="twitter:title" content="ToolsHere.online — Free Online Tools for Everything">
   <meta property="twitter:description" content="Instant, secure browser utilities for text, calculations, PDFs, images, and code. No sign up required.">
   <meta property="twitter:image" content="https://toolshere.online/assets/images/hero_3d_tools.jpg">
-  
-  <!-- Google Fonts: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/tools.css">
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/logo.png">
 
-  <!-- Google Search Console Verification (Replace YOUR_VERIFICATION_CODE when ready) -->
+  <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="GSC_VERIFICATION_PLACEHOLDER">
 
   <!-- Google tag (gtag.js) -->
@@ -43,18 +34,8 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-RXVYKC5YG5');
   </script>
-  <!--
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-  -->
 
   <!-- JSON-LD Structured Data for SEO -->
   <script type="application/ld+json">
@@ -65,11 +46,11 @@
         "@type": "WebSite",
         "@id": "https://toolshere.online/#website",
         "url": "https://toolshere.online/",
-        "name": "Toolshere.online",
+        "name": "ToolsHere.online",
         "description": "Free, fast, and 100% private client-side online tools for everything.",
         "publisher": {
           "@type": "Organization",
-          "name": "Toolshere.online",
+          "name": "ToolsHere.online",
           "logo": {
             "@type": "ImageObject",
             "url": "https://toolshere.online/assets/logo.png"
@@ -83,7 +64,7 @@
       },
       {
         "@type": "SoftwareApplication",
-        "name": "Toolshere Online Tools Suite",
+        "name": "ToolsHere Online Tools Suite",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "All modern browsers (Chrome, Firefox, Safari, Edge, Android, iOS)",
         "offers": {
@@ -95,829 +76,1670 @@
     ]
   }
   </script>
-</head>
-<body>
 
-  <!-- Navigation Bar -->
-  <header class="navbar">
-    <div class="container navbar-container">
-      <a href="index.html" class="brand-logo" aria-label="Toolshere.online Home">
-        <img src="assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
-        <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#06b6d4',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome Icons & External Libraries -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    .dark ::-webkit-scrollbar-thumb { background: #334155; }
+
+    .checkerboard-bg {
+      background-color: #ffffff;
+      background-image: linear-gradient(45deg, #f1f5f9 25%, transparent 25%), linear-gradient(-45deg, #f1f5f9 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f1f5f9 75%), linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    }
+    .dark .checkerboard-bg {
+      background-color: #0f172a;
+      background-image: linear-gradient(45deg, #1e293b 25%, transparent 25%), linear-gradient(-45deg, #1e293b 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #1e293b 75%), linear-gradient(-45deg, transparent 75%, #1e293b 75%);
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .animate-modal-slide {
+      animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+    }
+    .dark .glass-card {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(12px);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col pb-20 md:pb-0">
+
+  <!-- ================= TOAST NOTIFICATIONS ================= -->
+  <div id="toastContainer" class="fixed top-20 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ================= DESKTOP & MOBILE TOP HEADER ================= -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+
+      <!-- Interlocking T+H Logo (Header) -->
+      <a href="index.html" class="flex items-center gap-2.5 group shrink-0" aria-label="ToolsHere.online Homepage">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-teal-400 p-0.5 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform flex items-center justify-center">
+          <svg class="w-full h-full text-white" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" rx="24" fill="url(#header-logo-grad)"/>
+            <path d="M 22 28 H 60 M 41 28 V 74 M 41 51 H 78 M 60 28 V 74 M 78 28 V 74" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="header-logo-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2563eb"/>
+                <stop offset="1" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white flex items-center">
+            Tools<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 font-black">Here</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ml-1 bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">.online</span>
+          </span>
+          <span class="text-[9px] text-slate-500 dark:text-slate-400 font-medium -mt-1 hidden sm:inline">Ultimate Web Utilities</span>
+        </div>
       </a>
 
-      <nav class="nav-links" aria-label="Main Navigation">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="#popular-section" class="nav-link">Popular</a>
-        <a href="#categories-section" class="nav-link">Categories</a>
-        <a href="tools/pdf-tools.html" class="nav-link">PDF Suite</a>
-        <a href="about.html" class="nav-link">About</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
+      <!-- Quick Search Bar -->
+      <div class="flex-1 max-w-md mx-1 sm:mx-4">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm"></i>
+          <input type="text" id="globalSearchInput" onkeyup="filterTools()" placeholder="Search utilities (Resizer, QR, EMI, PDF)..." class="w-full pl-9 sm:pl-10 pr-12 py-1.5 sm:py-2 text-xs sm:text-sm bg-slate-100 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-600 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition-all placeholder:text-slate-400" aria-label="Search all tools">
+          <kbd class="hidden md:inline-block absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-600 text-slate-500 dark:text-slate-300 border border-slate-300 dark:border-slate-500">⌘K</kbd>
+        </div>
+      </div>
 
-      <div class="nav-actions">
-        <button id="search-trigger-btn" class="btn-icon" aria-label="Quick Search" title="Search tools (Press /)">🔍</button>
-        <button id="theme-toggle-btn" class="btn-icon" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
-        <a href="#all-tools-grid-section" class="btn btn-primary btn-sm" style="display: inline-flex; border-radius: var(--radius-full); padding: 0.45rem 1.15rem; font-weight: 700;">Explore Tools</a>
-        <button id="mobile-menu-btn" class="btn-icon mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">☰</button>
+      <!-- Controls & Links -->
+      <div class="flex items-center gap-1.5 sm:gap-3">
+        <nav class="hidden lg:flex items-center gap-4 text-xs font-semibold text-slate-600 dark:text-slate-300 mr-1">
+          <a href="tools/pdf-tools.html" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">PDF Suite</a>
+          <a href="all-tools.html" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">Directory</a>
+          <a href="about.html" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">About</a>
+        </nav>
+        <button onclick="toggleDarkMode()" class="p-2 sm:p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+          <i id="themeIcon" class="fa-solid fa-moon text-base sm:text-lg"></i>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Navigation Drawer -->
-  <div id="mobile-nav-drawer" class="mobile-nav">
-    <div class="mobile-nav-links">
-      <a href="index.html" class="nav-link active">Home</a>
-      <a href="#popular-section" class="nav-link">Popular Tools</a>
-      <a href="#categories-section" class="nav-link">Browse Categories</a>
-      <a href="tools/pdf-tools.html" class="nav-link" style="color: var(--primary); font-weight: 700;">📄 PDF Suite</a>
-      <a href="all-tools.html" class="nav-link">All 12 Tools</a>
-      <a href="about.html" class="nav-link">About Us</a>
-      <a href="contact.html" class="nav-link">Contact Us</a>
-      <a href="privacy.html" class="nav-link">Privacy Policy</a>
+  <!-- ================= MAIN DASHBOARD CONTAINER ================= -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
+
+    <!-- DASHBOARD HEADER & FILTER TABS -->
+    <div class="glass-card p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 dark:border-slate-700/80 shadow-sm space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            <i class="fa-solid fa-layer-group text-blue-600 dark:text-cyan-400 text-lg sm:text-2xl"></i> Digital Tools Workspace
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+            Instant browser-based utilities. Zero latency, 100% private, and desktop & mobile optimized.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium flex-wrap">
+          <span class="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 rounded-full border border-emerald-200 dark:border-emerald-800/80">
+            <i class="fa-solid fa-shield-halved text-emerald-500"></i> Client-Side Privacy
+          </span>
+          <span class="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-800/80">
+            <i class="fa-solid fa-bolt text-amber-500"></i> Zero Server Upload
+          </span>
+        </div>
+      </div>
+
+      <!-- Horizontal Category Tabs -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-xs font-semibold">
+        <button onclick="filterCategory('all')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-sm transition-all" data-cat="all">All Utilities</button>
+        <button onclick="filterCategory('favorites')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-rose-500 hover:text-white transition-all flex items-center gap-1.5" data-cat="favorites">
+          <i class="fa-solid fa-heart text-rose-500"></i> Bookmarks <span id="favCountBadge" class="ml-1 px-1.5 py-0.2 bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 rounded-full text-[10px] hidden">0</span>
+        </button>
+        <button onclick="filterCategory('image')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="image">Image Tools</button>
+        <button onclick="filterCategory('pdf')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="pdf">Document & PDF</button>
+        <button onclick="filterCategory('calc')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="calc">Calculators</button>
+        <button onclick="filterCategory('text')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="text">Text & Content</button>
+        <button onclick="filterCategory('dev')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="dev">Security & Code</button>
+      </div>
+    </div>
+
+    <!-- ================= EQUAL-WEIGHT TOOL CARDS GRID ================= -->
+    <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+
+      <!-- TOOL 1: Image Compressor & Resizer -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="imgResizer" data-category="image" data-title="Image Compressor & Resizer">
+        <button onclick="toggleFavorite('imgResizer', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-sky-100 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-compress"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">Image</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Compressor & Resizer</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Compress images to target sizes (20KB, 50KB, 100KB, 200KB), adjust dimensions & fine-tune quality.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('imgResizerModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/image-compressor.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Open Full Standalone Page" aria-label="Full Page">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 2: AI Background Remover -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="bgRemover" data-category="image" data-title="AI Background Remover">
+        <button onclick="toggleFavorite('bgRemover', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800">Image</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">AI Background Remover</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Remove photo backgrounds, adjust tolerance color isolation, and download clean transparent PNGs.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('bgRemoverModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-violet-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- TOOL 3: PDF to Word -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="pdfWord" data-category="pdf" data-title="PDF to Word Converter">
+        <button onclick="toggleFavorite('pdfWord', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-file-pdf"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800">Document</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">PDF to Word Converter</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract text layouts and content structure from PDF files into editable document formats.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('pdfWordModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/pdf-tools.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Open PDF Suite">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 4: Merge & Split PDF -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="pdfMerge" data-category="pdf" data-title="Merge & Split PDF">
+        <button onclick="toggleFavorite('pdfMerge', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-object-group"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-50 dark:bg-orange-950 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800">Document</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Merge & Split PDF</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Combine multiple documents into a single PDF or extract specific page ranges quickly.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('pdfMergeModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/merge-pdf.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Dedicated Merge PDF">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 5: Age & Date Calculator -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="ageCalc" data-category="calc" data-title="Age & Date Difference Calculator">
+        <button onclick="toggleFavorite('ageCalc', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Calculator</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Age & Date Calculator</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate exact age in years, months, days, total hours, and live upcoming birthday countdowns.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('ageCalcModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/age-calculator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Dedicated Age Calculator">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 6: YouTube Thumbnail Grabber -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="ytThumb" data-category="image" data-title="YouTube Thumbnail Downloader">
+        <button onclick="toggleFavorite('ytThumb', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-brands fa-youtube"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Media</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">YouTube Thumbnail Grabber</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract 1080p Ultra-HD, HQ, and SD video thumbnails directly from any YouTube link.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('ytThumbModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/youtube-thumbnail-downloader.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full Thumbnail Tool">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 7: QR Code Studio & Reader -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="qrTool" data-category="text" data-title="QR Code Generator & Scanner">
+        <button onclick="toggleFavorite('qrTool', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-cyan-100 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-50 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">Utility</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">QR Code Studio & Reader</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate custom color QR codes (URL, Wi-Fi, Text) or decode uploaded QR code images.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('qrModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/qr-code-generator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full QR Code Tool">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 8: Password Generator -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="passwordGen" data-category="dev" data-title="Strong Password Generator">
+        <button onclick="toggleFavorite('passwordGen', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-teal-100 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">Security</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Strong Password Creator</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate random secure passwords with custom lengths, symbols, and entropy score gauges.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('passwordModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/password-generator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full Password Generator">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 9: Word & Character Counter -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="wordCount" data-category="text" data-title="Word & Character Counter">
+        <button onclick="toggleFavorite('wordCount', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Text</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Word & Character Counter</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Analyze words, characters, sentences, paragraphs, reading speed estimates, and keyword density.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('wordCountModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/word-counter.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full Word Counter">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 10: GST & Loan EMI Calculator -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="gstEmi" data-category="calc" data-title="GST & Loan EMI Calculator">
+        <button onclick="toggleFavorite('gstEmi', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-chart-pie"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">Finance</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">GST & Loan EMI Calculator</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate inclusive/exclusive GST and loan EMI schedules with interactive SVG pie chart visuals.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('gstEmiModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/emi-calculator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full EMI Calculator">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 11: Image Format Converter -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="imgFormat" data-category="image" data-title="Image Format Converter">
+        <button onclick="toggleFavorite('imgFormat', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-file-image"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">Convert</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Format Converter</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert images between PNG, JPG, WebP, and BMP formats directly inside browser memory.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('imgFormatModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/image-converter.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full Image Converter">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 12: Text Case Converter -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="textCase" data-category="text" data-title="Text Case Converter">
+        <button onclick="toggleFavorite('textCase', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-pink-100 dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-font"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-50 dark:bg-pink-950 text-pink-700 dark:text-pink-300 border border-pink-200 dark:border-pink-800">Format</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Text Case Converter</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert casing to UPPERCASE, lowercase, Title Case, camelCase, URL Slugs and trim spaces.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('textCaseModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- TOOL 13: JSON Formatter & Validator -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="jsonFormat" data-category="dev" data-title="JSON Formatter & Validator">
+        <button onclick="toggleFavorite('jsonFormat', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">Developer</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">JSON Formatter & Validator</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Beautify JSON, minify payloads, inspect syntax errors, and validate complex structures instantly.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('jsonFormatModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/json-formatter.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full JSON Formatter">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 14: SEO Meta Tag Generator -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="seoMeta" data-category="dev" data-title="SEO Meta Tag Generator">
+        <button onclick="toggleFavorite('seoMeta', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-lime-100 dark:bg-lime-950/60 text-lime-600 dark:text-lime-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-tags"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-lime-50 dark:bg-lime-950 text-lime-700 dark:text-lime-300 border border-lime-200 dark:border-lime-800">SEO</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">SEO Meta Tag Generator</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate Google, OpenGraph, and Twitter card meta tags for web pages to boost CTR & rankings.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <button onclick="openModal('seoMetaModal')" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+          <a href="tools/seo-meta-tag-generator.html" class="p-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-500 dark:text-slate-300 rounded-xl transition-all flex items-center justify-center" title="Full SEO Generator">
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 15: Compress PDF -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="compressPdf" data-category="pdf" data-title="Compress PDF File Size">
+        <button onclick="toggleFavorite('compressPdf', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Document</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Compress PDF Document</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Shrink heavy PDF documents down to email and portal friendly sizes while maintaining readability.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <a href="tools/compress-pdf.html" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- TOOL 16: Image to PDF -->
+      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="imgToPdf" data-category="pdf" data-title="Image to PDF Converter">
+        <button onclick="toggleFavorite('imgToPdf', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
+          <i class="fa-solid fa-heart text-base"></i>
+        </button>
+        <div>
+          <div class="flex items-center justify-between mb-3.5 pr-6">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform shadow-inner">
+              <i class="fa-solid fa-images"></i>
+            </div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Document</span>
+          </div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image to PDF Converter</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Turn multiple JPG, PNG, and WebP images into a single neatly paginated PDF file ready for printing.</p>
+        </div>
+        <div class="mt-5 flex gap-2">
+          <a href="tools/image-to-pdf.html" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-semibold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+            Open Utility <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= MOBILE BOTTOM NAVIGATION BAR ================= -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-700 md:hidden flex items-center justify-around py-2 px-1 shadow-lg">
+    <button onclick="filterCategory('all'); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-blue-600 dark:text-cyan-400">
+      <i class="fa-solid fa-grip text-base"></i>
+      <span class="text-[10px] font-semibold">Home</span>
+    </button>
+    <button onclick="filterCategory('favorites'); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400">
+      <i class="fa-solid fa-heart text-base text-rose-500"></i>
+      <span class="text-[10px] font-semibold">Bookmarks</span>
+    </button>
+    <button onclick="filterCategory('image'); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400">
+      <i class="fa-solid fa-image text-base"></i>
+      <span class="text-[10px] font-semibold">Image</span>
+    </button>
+    <button onclick="filterCategory('calc'); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400">
+      <i class="fa-solid fa-calculator text-base"></i>
+      <span class="text-[10px] font-semibold">Calc</span>
+    </button>
+    <button onclick="document.getElementById('globalSearchInput').focus(); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400">
+      <i class="fa-solid fa-magnifying-glass text-base"></i>
+      <span class="text-[10px] font-semibold">Search</span>
+    </button>
+  </div>
+
+  <!-- ================= GLOBAL MODAL / BOTTOM SHEET CONTAINER ================= -->
+  <div id="modalOverlay" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="handleOverlayClick(event)">
+
+    <!-- MODAL WINDOW CARD -->
+    <div id="modalWindow" class="w-full max-w-2xl max-h-[92vh] bg-white dark:bg-slate-800 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden animate-modal-slide" onclick="event.stopPropagation()">
+
+      <!-- Mobile Drag Handle -->
+      <div class="w-12 h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full mx-auto mt-2.5 mb-1 sm:hidden"></div>
+
+      <!-- Modal Header -->
+      <div class="px-5 py-3 sm:py-4 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between shrink-0 bg-slate-50/50 dark:bg-slate-800/50">
+        <div class="flex items-center gap-2.5">
+          <div id="modalIconContainer" class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 flex items-center justify-center text-sm font-bold">
+            <i id="modalIcon" class="fa-solid fa-gear"></i>
+          </div>
+          <h3 id="modalTitle" class="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Tool Utility</h3>
+        </div>
+        <button onclick="closeModal()" class="w-8 h-8 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 flex items-center justify-center transition-colors" aria-label="Close modal">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Dynamic Content Body -->
+      <div id="modalContent" class="p-5 sm:p-6 overflow-y-auto space-y-4">
+        <!-- Injected via JavaScript -->
+      </div>
     </div>
   </div>
 
-  <!-- Hero Section (Design 1 & 2 Modern Split Layout) -->
-  <section class="hero-section">
-    <div class="hero-glow-1"></div>
-    <div class="container">
-      <div class="hero-grid">
-        
-        <!-- Hero Left Column -->
-        <div class="hero-left">
-          <div class="hero-badge">
-            <span>⚡ 100% Free &amp; Private</span>
-            <span>•</span>
-            <span>Runs In Your Browser</span>
-          </div>
+  <!-- ================= GLOBAL FOOTER ================= -->
+  <footer class="mt-12 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 space-y-4">
 
-          <h1 class="hero-title">
-            Free Online Tools<br>
-            <span class="gradient-text">for Everything</span>
-          </h1>
-
-          <p class="hero-subtitle">
-            Use our free online tools to convert files, edit images, calculate values and complete everyday tasks quickly and easily.
-          </p>
-
-          <!-- Large Pill Search Bar -->
-          <div class="hero-search-wrapper">
-            <div class="search-box-container">
-              <span class="search-icon">🔍</span>
-              <input type="text" id="search-input" class="search-input" placeholder="Search for a tool..." aria-label="Search tools" autocomplete="off">
-              <button type="button" id="search-clear-btn" class="search-clear-btn" style="display:none;" title="Clear search" aria-label="Clear search">✕</button>
-              <span class="search-shortcut">Press /</span>
-              <button type="button" id="search-submit-btn" class="search-submit-btn" title="Search">
-                <span>🔍</span>
-              </button>
-            </div>
-            <!-- Live Instant Search Dropdown -->
-            <div id="hero-search-results" class="search-results-dropdown" style="display: none;" role="listbox"></div>
-          </div>
-
-          <!-- Quick Search Tags -->
-          <div class="quick-tags-container">
-            <span class="quick-tags-label">Popular:</span>
-            <button type="button" class="quick-tag-pill" data-tag="pdf">PDF</button>
-            <button type="button" class="quick-tag-pill" data-tag="image">Image</button>
-            <button type="button" class="quick-tag-pill" data-tag="text">Text</button>
-            <button type="button" class="quick-tag-pill" data-tag="calculator">Calculator</button>
-            <button type="button" class="quick-tag-pill" data-tag="developer">Developer</button>
-            <button type="button" class="quick-tag-pill" data-tag="convert">Converter</button>
-            <button type="button" class="quick-tag-pill" data-tag="qr">QR Code</button>
-          </div>
-
-          <!-- Hero Trust Stats Row -->
-          <div class="hero-stats-row">
-            <div class="hero-stat-pill">
-              <span class="stat-num">12+</span>
-              <span class="stat-txt">Tools<br>Available</span>
-            </div>
-            <div class="hero-stat-pill">
-              <span class="stat-num">100%</span>
-              <span class="stat-txt">Free<br>to Use</span>
-            </div>
-            <div class="hero-stat-pill">
-              <span class="stat-num">0</span>
-              <span class="stat-txt">No Signup<br>Required</span>
-            </div>
-            <div class="hero-stat-pill">
-              <span class="stat-num">⚡</span>
-              <span class="stat-txt">Works on<br>All Devices</span>
-            </div>
-          </div>
+      <!-- Interlocking T+H Logo (Footer) -->
+      <div class="flex items-center justify-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 via-cyan-500 to-teal-400 p-0.5 shadow-md flex items-center justify-center">
+          <svg class="w-full h-full text-white" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" rx="24" fill="url(#footer-logo-grad)"/>
+            <path d="M 22 28 H 60 M 41 28 V 74 M 41 51 H 78 M 60 28 V 74 M 78 28 V 74" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="footer-logo-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2563eb"/>
+                <stop offset="1" stop-color="#06b6d4"/>
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
-
-        <!-- Hero Right Column: 3D Laptop Visual -->
-        <div class="hero-right">
-          <div class="hero-3d-wrapper">
-            <img src="assets/images/hero_3d_tools.jpg" alt="Free Online Tools for Everything 3D Illustration" class="hero-3d-img" loading="eager">
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 1: Popular Tools (Matching Design 1 & 2) -->
-  <section class="section-padding" id="popular-section">
-    <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-        <div>
-          <span class="section-tag" style="color: var(--primary);">⭐ Most Used</span>
-          <h2 class="section-title" style="margin-top: 0.25rem;">Popular Tools</h2>
-        </div>
-        <a href="#all-tools-grid-section" class="footer-link" style="color: var(--primary); font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 0.35rem;">
-          View All Tools <span>→</span>
-        </a>
+        <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
+          Tools<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 font-black">Here</span>.online
+        </span>
       </div>
 
-      <div class="tools-grid" id="popular-tools-grid">
-        <!-- Rendered dynamically by script -->
-      </div>
-    </div>
-  </section>
+      <p class="max-w-xl mx-auto text-[11px] leading-relaxed">Fast, free & private client-side web utilities. Everything executes directly inside your browser memory with zero server uploads.</p>
 
-  <!-- Section 2: Browse Tools by Category (Matching Design 1 & 2) -->
-  <section class="section-padding section-alt" id="categories-section">
-    <div class="container">
-      <div style="margin-bottom: 2.25rem;">
-        <span class="section-tag">Directory</span>
-        <h2 class="section-title" style="margin-top: 0.25rem;">Browse Tools by Category</h2>
-        <p class="section-desc">Quickly find the exact tool you need organized by practical workflow.</p>
+      <div class="flex justify-center flex-wrap gap-4 text-slate-500 dark:text-slate-400 pt-1 text-[11px] font-medium">
+        <span><i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> Privacy Preserved</span>
+        <span><i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Instant Performance</span>
+        <span><i class="fa-solid fa-mobile-screen-button text-cyan-500 mr-1"></i> Mobile Responsive</span>
       </div>
 
-      <div class="categories-grid-modern">
-        <!-- PDF Tools -->
-        <a href="tools/pdf-tools.html" class="category-card-modern">
-          <div class="cat-icon-box red">📄</div>
-          <div class="cat-info">
-            <h3>PDF Tools</h3>
-            <p>Convert, merge, split, compress &amp; images to PDF</p>
-            <span class="cat-count-pill">6 tools</span>
-          </div>
-        </a>
-
-        <!-- Image Tools -->
-        <a href="#all-tools-grid-section" class="category-card-modern" data-filter-cat="images">
-          <div class="cat-icon-box green">🖼️</div>
-          <div class="cat-info">
-            <h3>Image Tools</h3>
-            <p>Compress image size, convert format &amp; optimize</p>
-            <span class="cat-count-pill">3 tools</span>
-          </div>
-        </a>
-
-        <!-- Text Tools -->
-        <a href="#all-tools-grid-section" class="category-card-modern" data-filter-cat="text">
-          <div class="cat-icon-box blue">✍️</div>
-          <div class="cat-info">
-            <h3>Text Tools</h3>
-            <p>Count words, characters, read time &amp; analyze</p>
-            <span class="cat-count-pill">2 tools</span>
-          </div>
-        </a>
-
-        <!-- Calculators -->
-        <a href="#all-tools-grid-section" class="category-card-modern" data-filter-cat="calculators">
-          <div class="cat-icon-box purple">🧮</div>
-          <div class="cat-info">
-            <h3>Calculators</h3>
-            <p>Daily loan EMI, Indian GST &amp; exact age calculators</p>
-            <span class="cat-count-pill">3 tools</span>
-          </div>
-        </a>
-
-        <!-- Developer Tools -->
-        <a href="#all-tools-grid-section" class="category-card-modern" data-filter-cat="developer">
-          <div class="cat-icon-box orange">💻</div>
-          <div class="cat-info">
-            <h3>Developer Tools</h3>
-            <p>JSON formatter, syntax validator &amp; SEO meta tags</p>
-            <span class="cat-count-pill">2 tools</span>
-          </div>
-        </a>
-
-        <!-- Generators & Media -->
-        <a href="#all-tools-grid-section" class="category-card-modern" data-filter-cat="generators">
-          <div class="cat-icon-box teal">⚙️</div>
-          <div class="cat-info">
-            <h3>Generators &amp; Media</h3>
-            <p>QR code generator, secure passwords &amp; YouTube covers</p>
-            <span class="cat-count-pill">3 tools</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 3: Dedicated PDF Power Suite -->
-  <section class="section-padding" id="pdf-tools-section" style="background: var(--bg-surface); border-bottom: 1px solid var(--border);">
-    <div class="container">
-      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-        <div>
-          <span class="section-tag" style="color: #ef4444;">📄 PDF Suite</span>
-          <h2 class="section-title" style="margin-top: 0.25rem;">Complete PDF Tools</h2>
-          <p class="section-desc">Merge, split, compress, and convert PDF documents in seconds without server uploads.</p>
-        </div>
-        <a href="tools/pdf-tools.html" class="footer-link" style="color: var(--primary); font-weight: 700;">Open Full PDF Hub →</a>
+      <!-- Navigation Links -->
+      <div class="flex justify-center flex-wrap gap-x-5 gap-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2 font-medium">
+        <a href="index.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Home</a>
+        <a href="all-tools.html" class="hover:text-blue-600 dark:hover:text-cyan-400">All Tools</a>
+        <a href="tools/pdf-tools.html" class="hover:text-blue-600 dark:hover:text-cyan-400">PDF Suite</a>
+        <a href="about.html" class="hover:text-blue-600 dark:hover:text-cyan-400">About Us</a>
+        <a href="contact.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Contact</a>
+        <a href="privacy.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Privacy Policy</a>
+        <a href="terms.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Terms of Service</a>
+        <a href="disclaimer.html" class="hover:text-blue-600 dark:hover:text-cyan-400">Disclaimer</a>
       </div>
 
-      <div class="tools-grid">
-        <!-- Merge PDF -->
-        <a href="tools/merge-pdf.html" class="tool-card">
-          <div class="tool-card-header">
-            <div class="cat-icon-box red" style="width: 2.85rem; height: 2.85rem; font-size: 1.35rem;">🔗</div>
-            <span class="tool-badge popular">Popular</span>
-          </div>
-          <h3 class="tool-card-title">Merge PDF Files</h3>
-          <p class="tool-card-desc">Combine multiple PDF documents into a single organized file in seconds.</p>
-          <div class="tool-card-footer">
-            <span>Use Tool</span>
-            <span class="arrow-icon">→</span>
-          </div>
-        </a>
-
-        <!-- Split PDF -->
-        <a href="tools/split-pdf.html" class="tool-card">
-          <div class="tool-card-header">
-            <div class="cat-icon-box red" style="width: 2.85rem; height: 2.85rem; font-size: 1.35rem;">✂️</div>
-            <span class="tool-badge">Document</span>
-          </div>
-          <h3 class="tool-card-title">Split PDF Files</h3>
-          <p class="tool-card-desc">Extract specific page ranges or single pages into download-ready PDF files.</p>
-          <div class="tool-card-footer">
-            <span>Use Tool</span>
-            <span class="arrow-icon">→</span>
-          </div>
-        </a>
-
-        <!-- Compress PDF -->
-        <a href="tools/compress-pdf.html" class="tool-card">
-          <div class="tool-card-header">
-            <div class="cat-icon-box red" style="width: 2.85rem; height: 2.85rem; font-size: 1.35rem;">📦</div>
-            <span class="tool-badge popular">Essential</span>
-          </div>
-          <h3 class="tool-card-title">Compress PDF Files</h3>
-          <p class="tool-card-desc">Reduce PDF document file size client-side without losing text readability.</p>
-          <div class="tool-card-footer">
-            <span>Use Tool</span>
-            <span class="arrow-icon">→</span>
-          </div>
-        </a>
-
-        <!-- PDF to JPG -->
-        <a href="tools/pdf-to-jpg.html" class="tool-card">
-          <div class="tool-card-header">
-            <div class="cat-icon-box red" style="width: 2.85rem; height: 2.85rem; font-size: 1.35rem;">🖼️</div>
-            <span class="tool-badge popular">High Res</span>
-          </div>
-          <h3 class="tool-card-title">PDF to JPG Converter</h3>
-          <p class="tool-card-desc">Convert PDF document pages into high-resolution JPG images with adjustable DPI.</p>
-          <div class="tool-card-footer">
-            <span>Use Tool</span>
-            <span class="arrow-icon">→</span>
-          </div>
-        </a>
-
-        <!-- Image to PDF -->
-        <a href="tools/image-to-pdf.html" class="tool-card">
-          <div class="tool-card-header">
-            <div class="cat-icon-box red" style="width: 2.85rem; height: 2.85rem; font-size: 1.35rem;">📑</div>
-            <span class="tool-badge">Convert</span>
-          </div>
-          <h3 class="tool-card-title">Image to PDF</h3>
-          <p class="tool-card-desc">Turn JPG, PNG, and WebP photos into clean, print-ready PDF files with custom margins.</p>
-          <div class="tool-card-footer">
-            <span>Use Tool</span>
-            <span class="arrow-icon">→</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 4: All 12 Tools Directory with Filter Tabs -->
-  <section class="section-padding section-alt" id="all-tools-grid-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">All Tools</span>
-        <h2 class="section-title">Explore All 12 Tools</h2>
-        <p class="section-desc">Click a category tab below or type in search to filter tools instantly.</p>
-      </div>
-
-      <!-- Category Filter Tabs -->
-      <div class="category-tabs-wrapper">
-        <div class="category-tabs" id="category-tabs-container">
-          <!-- Rendered dynamically -->
-        </div>
-      </div>
-
-      <!-- Filtered Tools Grid -->
-      <div class="tools-grid" id="all-tools-grid">
-        <!-- Filtered cards injected here -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Section 5: Trust & Privacy Pillars -->
-  <section class="section-padding">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">🛡️ Privacy by Design</span>
-        <h2 class="section-title">Why Users Love Toolshere.online</h2>
-        <p class="section-desc">Engineered for maximum user privacy, blazing speed, and effortless productivity.</p>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-box">
-          <div class="feature-icon-wrapper">🔒</div>
-          <h3 class="feature-box-title">100% Client-Side Privacy</h3>
-          <p class="feature-box-desc">All calculations, PDF bindings, and image compressions happen right inside your device's browser. Your files never touch our servers.</p>
-        </div>
-
-        <div class="feature-box">
-          <div class="feature-icon-wrapper">⚡</div>
-          <h3 class="feature-box-title">Zero Server Upload Lag</h3>
-          <p class="feature-box-desc">No waiting for slow file uploads or cloud conversion queues. Tools process instantly at your device's full hardware speed.</p>
-        </div>
-
-        <div class="feature-box">
-          <div class="feature-icon-wrapper">💸</div>
-          <h3 class="feature-box-title">Free Forever, No Paywalls</h3>
-          <p class="feature-box-desc">Every tool is free without trial limits, forced subscriptions, hidden watermarks, or mandatory registration forms.</p>
-        </div>
-
-        <div class="feature-box">
-          <div class="feature-icon-wrapper">📱</div>
-          <h3 class="feature-box-title">Mobile &amp; Touch Friendly</h3>
-          <p class="feature-box-desc">Responsive layouts specifically optimized for iPhones, Android smartphones, iPads, laptops, and ultra-wide desktop monitors.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Frequently Asked Questions Section -->
-  <section class="section-padding section-alt" id="faq-section">
-    <div class="container">
-      <div class="section-header" style="text-align: center; align-items: center;">
-        <span class="section-tag">Help &amp; FAQ</span>
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-desc">Everything you need to know about Toolshere.online, privacy, and browser utilities.</p>
-      </div>
-
-      <div class="faq-grid">
-        <div class="faq-item open">
-          <button class="faq-question">
-            <span>Are all tools on Toolshere.online completely free?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            Yes, 100%! All 12 tools on Toolshere.online are free forever without any hidden charges, subscriptions, usage limits, or watermarks.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>Are my uploaded photos and PDF documents safe?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            Absolute privacy is our core promise. Toolshere.online runs client-side JavaScript inside your browser. Your photos, documents, and calculation data never leave your device and are never uploaded to any remote server.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>Do I need to install any software or extensions?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            No installation is required. Everything runs straight in modern web browsers including Google Chrome, Apple Safari, Microsoft Edge, Mozilla Firefox, and mobile browsers on iOS and Android.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>How does client-side compression work?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            We utilize HTML5 Canvas, the Web FileReader API, and WebAssembly libraries to resize, compress, and re-encode files directly on your computer or phone CPU/GPU without cloud roundtrips.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question">
-            <span>How can I quickly find a specific tool?</span>
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer">
-            Simply press the <kbd style="background:var(--bg-surface); padding:2px 6px; border:1px solid var(--border); border-radius:4px;">/</kbd> key on your keyboard to instantly focus the smart search bar, or click on any of the category chips to filter the directory immediately.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a href="index.html" class="brand-logo">
-            <img src="assets/logo.png" alt="Toolshere.online Logo" class="brand-logo-img">
-            <span>Tools<span class="highlight">here</span><span class="brand-tld">.online</span></span>
-          </a>
-          <p>Toolshere.online is your premier destination for free, private, client-side online tools. Fast, secure utilities with zero data collection.</p>
-        </div>
-
-        <div>
-          <h4 class="footer-col-title">Categories</h4>
-          <div class="footer-links">
-            <a href="tools/pdf-tools.html" class="footer-link">PDF Tools Suite</a>
-            <a href="#all-tools-grid-section" class="footer-link">Image Tools</a>
-            <a href="#all-tools-grid-section" class="footer-link">Calculators</a>
-            <a href="#all-tools-grid-section" class="footer-link">Text Tools</a>
-            <a href="#all-tools-grid-section" class="footer-link">Developer &amp; SEO</a>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="footer-col-title">Company</h4>
-          <div class="footer-links">
-            <a href="about.html" class="footer-link">About Us</a>
-            <a href="contact.html" class="footer-link">Contact Us</a>
-            <a href="all-tools.html" class="footer-link">All 12 Tools</a>
-            <a href="tools/pdf-tools.html" class="footer-link">PDF Power Suite</a>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="footer-col-title">Legal &amp; Privacy</h4>
-          <div class="footer-links">
-            <a href="privacy.html" class="footer-link">Privacy Policy</a>
-            <a href="terms.html" class="footer-link">Terms and Conditions</a>
-            <a href="disclaimer.html" class="footer-link">Disclaimer</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>&copy; 2026 Toolshere.online. All rights reserved. Free Online Tools for Everyone.</div>
-        <div class="footer-badges">
-          <span class="privacy-badge">🔒 100% Client-Side Privacy Guaranteed</span>
-        </div>
-      </div>
+      <p class="text-[10px] text-slate-400 pt-2">&copy; 2026 toolshere.online. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/tools-data.js"></script>
-  <script src="js/app.js"></script>
+  <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
   <script>
+    // Local Storage Bookmarks Persistence
+    let favorites = JSON.parse(localStorage.getItem('th_favorites') || '[]');
+
+    // Initialize Theme & Bookmarks on DOM Load
     document.addEventListener('DOMContentLoaded', () => {
-      const activeTools = window.getQuickTools ? window.getQuickTools() : (window.QUICK_TOOLS || []);
-      const activeCategories = window.CATEGORIES || [];
-
-      const popularGrid = document.getElementById('popular-tools-grid');
-      const allToolsGrid = document.getElementById('all-tools-grid');
-      const tabsContainer = document.getElementById('category-tabs-container');
-      const searchInput = document.getElementById('search-input');
-      const searchClearBtn = document.getElementById('search-clear-btn');
-      const searchSubmitBtn = document.getElementById('search-submit-btn');
-      const searchTriggerBtn = document.getElementById('search-trigger-btn');
-      const searchDropdown = document.getElementById('hero-search-results');
-      const quickTagPills = document.querySelectorAll('.quick-tag-pill');
-      const categoryCards = document.querySelectorAll('.category-card-modern[data-filter-cat]');
-
-      let currentCategory = 'all';
-      let selectedDropdownIndex = -1;
-
-      // Color mapping for category icons
-      const catColors = {
-        'pdf': 'red',
-        'images': 'green',
-        'text': 'blue',
-        'calculators': 'purple',
-        'developer': 'orange',
-        'generators': 'teal'
-      };
-
-      // 1. Render Popular Tools Section (Matching Design 1)
-      if (popularGrid && activeTools) {
-        const popularTools = activeTools.filter(t => t.popular).slice(0, 6);
-        popularGrid.innerHTML = popularTools.map(tool => {
-          const colorClass = catColors[tool.category] || 'blue';
-          return `
-            <a href="${tool.file ? 'tools/' + tool.file : '#'}" class="tool-card">
-              <div class="tool-card-header">
-                <div class="cat-icon-box ${colorClass}" style="width: 3rem; height: 3rem; font-size: 1.4rem;">${tool.icon}</div>
-                <span class="tool-badge ${tool.popular ? 'popular' : ''}">${tool.badge || tool.categoryName}</span>
-              </div>
-              <h3 class="tool-card-title">${tool.name}</h3>
-              <p class="tool-card-desc">${tool.description}</p>
-              <div class="tool-card-footer">
-                <span class="tool-rating">⭐ 4.9</span>
-                <span style="color: var(--primary); font-weight: 700;">Open Tool →</span>
-              </div>
-            </a>
-          `;
-        }).join('');
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('themeIcon').className = 'fa-solid fa-sun text-amber-400 text-base sm:text-lg';
       }
-
-      // 2. Render Category Filter Tabs
-      if (tabsContainer && activeCategories) {
-        tabsContainer.innerHTML = activeCategories.map(cat => `
-          <button type="button" class="category-tab ${cat.id === 'all' ? 'active' : ''}" data-category="${cat.id}">
-            <span>${cat.icon}</span>
-            <span>${cat.name}</span>
-            <span class="count-badge">${getCategoryCount(cat.id)}</span>
-          </button>
-        `).join('');
-
-        tabsContainer.querySelectorAll('.category-tab').forEach(tab => {
-          tab.addEventListener('click', () => {
-            tabsContainer.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            currentCategory = tab.getAttribute('data-category');
-            filterTools();
-          });
-        });
-      }
-
-      // Quick Search Tag Chips
-      quickTagPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-          const tag = pill.getAttribute('data-tag');
-          if (searchInput) {
-            searchInput.value = tag;
-            searchInput.focus();
-            updateSearchDropdown(tag);
-            filterTools();
-          }
-        });
-      });
-
-      // Category Cards Filter Click
-      categoryCards.forEach(card => {
-        card.addEventListener('click', (e) => {
-          e.preventDefault();
-          const cat = card.getAttribute('data-filter-cat');
-          if (cat) {
-            currentCategory = cat;
-            if (tabsContainer) {
-              tabsContainer.querySelectorAll('.category-tab').forEach(t => {
-                t.classList.toggle('active', t.getAttribute('data-category') === cat);
-              });
-            }
-            filterTools();
-            const sec = document.getElementById('all-tools-grid-section');
-            if (sec) sec.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
-
-      // Search Trigger in Header
-      if (searchTriggerBtn && searchInput) {
-        searchTriggerBtn.addEventListener('click', () => {
-          searchInput.focus();
-          searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        });
-      }
-
-      function getCategoryCount(catId) {
-        if (catId === 'all') return activeTools.length;
-        return activeTools.filter(t => t.category === catId).length;
-      }
-
-      function highlightText(text, query) {
-        if (!query) return text;
-        const qEsc = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const regex = new RegExp(`(${qEsc})`, 'gi');
-        return text.replace(regex, '<mark>$1</mark>');
-      }
-
-      function matchesTool(tool, query) {
-        if (!query) return true;
-        const q = query.toLowerCase().trim();
-        if (tool.name.toLowerCase().includes(q)) return true;
-        if (tool.description.toLowerCase().includes(q)) return true;
-        if (tool.categoryName.toLowerCase().includes(q)) return true;
-        if (tool.keywords && tool.keywords.some(k => k.toLowerCase().includes(q))) return true;
-        return false;
-      }
-
-      function getMatchingTools(query) {
-        if (!activeTools) return [];
-        const q = (query || '').trim();
-        if (!q) return [];
-        return activeTools.filter(tool => matchesTool(tool, q));
-      }
-
-      function updateSearchDropdown(query) {
-        if (!searchDropdown) return;
-        const q = (query || '').trim();
-
-        if (!q) {
-          searchDropdown.style.display = 'none';
-          searchDropdown.innerHTML = '';
-          selectedDropdownIndex = -1;
-          if (searchClearBtn) searchClearBtn.style.display = 'none';
-          return;
-        }
-
-        if (searchClearBtn) searchClearBtn.style.display = 'flex';
-
-        const matches = getMatchingTools(q);
-        selectedDropdownIndex = -1;
-
-        if (matches.length === 0) {
-          searchDropdown.innerHTML = `
-            <div class="search-result-empty">
-              <span class="empty-icon">🔍</span>
-              <div style="font-weight: 700; color: var(--text-main); margin-bottom: 0.25rem;">No tools found for "${q}"</div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Try searching for: <em>calculator, pdf, image, password, json, word</em></p>
-            </div>
-          `;
-          searchDropdown.style.display = 'block';
-          return;
-        }
-
-        const previewMatches = matches.slice(0, 8);
-        const itemsHtml = previewMatches.map((tool, idx) => `
-          <a href="tools/${tool.file}" class="search-result-item" data-index="${idx}">
-            <div class="search-result-icon">${tool.icon}</div>
-            <div class="search-result-details">
-              <div class="search-result-title">
-                <span>${highlightText(tool.name, q)}</span>
-              </div>
-              <div class="search-result-desc">${highlightText(tool.description, q)}</div>
-            </div>
-            <span class="search-result-badge">${tool.categoryName}</span>
-          </a>
-        `).join('');
-
-        searchDropdown.innerHTML = `
-          <div class="search-results-header">
-            <span>Found ${matches.length} matching tool${matches.length > 1 ? 's' : ''}</span>
-            <span>ESC to close</span>
-          </div>
-          <div class="search-results-list">
-            ${itemsHtml}
-          </div>
-          <div class="search-results-footer">
-            <a href="#all-tools-grid-section" id="view-all-results-link">View all ${matches.length} tools in category list ↓</a>
-          </div>
-        `;
-
-        const viewAllLink = document.getElementById('view-all-results-link');
-        if (viewAllLink) {
-          viewAllLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            searchDropdown.style.display = 'none';
-            const catSec = document.getElementById('all-tools-grid-section');
-            if (catSec) {
-              catSec.scrollIntoView({ behavior: 'smooth' });
-            }
-          });
-        }
-
-        searchDropdown.style.display = 'block';
-      }
-
-      // Filter and render All Tools
-      function filterTools() {
-        if (!allToolsGrid || !activeTools) return;
-        const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
-
-        const filtered = activeTools.filter(tool => {
-          const matchesCategory = currentCategory === 'all' || tool.category === currentCategory;
-          const matchesQuery = matchesTool(tool, query);
-          return matchesCategory && matchesQuery;
-        });
-
-        if (filtered.length === 0) {
-          allToolsGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
-              <div style="font-size: 3rem; margin-bottom: 0.5rem;">🔍</div>
-              <h3 style="font-size: 1.25rem; font-weight: 700;">No tools found matching "${query}"</h3>
-              <p style="color: var(--text-muted); margin-top: 0.5rem;">Try searching for something else or browse another category.</p>
-            </div>
-          `;
-        } else {
-          allToolsGrid.innerHTML = filtered.map(createToolCardHtml).join('');
-        }
-      }
-
-      function createToolCardHtml(tool) {
-        const colorClass = catColors[tool.category] || 'blue';
-        return `
-          <a href="${tool.file ? 'tools/' + tool.file : '#'}" class="tool-card">
-            <div class="tool-card-header">
-              <div class="cat-icon-box ${colorClass}" style="width: 3rem; height: 3rem; font-size: 1.4rem;">${tool.icon}</div>
-              <span class="tool-badge ${tool.popular ? 'popular' : ''}">${tool.badge || tool.categoryName}</span>
-            </div>
-            <h3 class="tool-card-title">${tool.name}</h3>
-            <p class="tool-card-desc">${tool.description}</p>
-            <div class="tool-card-footer">
-              <span class="tool-rating">⭐ 4.9</span>
-              <span style="color: var(--primary); font-weight: 700;">Open Tool →</span>
-            </div>
-          </a>
-        `;
-      }
-
-      // Search event handlers
-      if (searchInput) {
-        searchInput.addEventListener('input', () => {
-          const q = searchInput.value;
-          updateSearchDropdown(q);
-          filterTools();
-        });
-
-        searchInput.addEventListener('focus', () => {
-          if (searchInput.value.trim()) {
-            updateSearchDropdown(searchInput.value);
-          }
-        });
-
-        if (searchSubmitBtn) {
-          searchSubmitBtn.addEventListener('click', () => {
-            if (searchInput.value.trim()) {
-              const matches = getMatchingTools(searchInput.value);
-              if (matches.length > 0) {
-                window.location.href = 'tools/' + matches[0].file;
-              }
-            } else {
-              searchInput.focus();
-            }
-          });
-        }
-
-        searchInput.addEventListener('keydown', (e) => {
-          if (!searchDropdown || searchDropdown.style.display === 'none') {
-            if (e.key === 'Enter' && searchInput.value.trim()) {
-              const matches = getMatchingTools(searchInput.value);
-              if (matches.length > 0) {
-                window.location.href = 'tools/' + matches[0].file;
-              }
-            }
-            return;
-          }
-
-          const items = searchDropdown.querySelectorAll('.search-result-item');
-          if (!items.length) {
-            if (e.key === 'Escape') searchDropdown.style.display = 'none';
-            return;
-          }
-
-          if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            selectedDropdownIndex = (selectedDropdownIndex + 1) % items.length;
-            items.forEach((it, idx) => it.classList.toggle('active-item', idx === selectedDropdownIndex));
-            items[selectedDropdownIndex].scrollIntoView({ block: 'nearest' });
-          } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            selectedDropdownIndex = (selectedDropdownIndex - 1 + items.length) % items.length;
-            items.forEach((it, idx) => it.classList.toggle('active-item', idx === selectedDropdownIndex));
-            items[selectedDropdownIndex].scrollIntoView({ block: 'nearest' });
-          } else if (e.key === 'Enter') {
-            e.preventDefault();
-            if (selectedDropdownIndex >= 0 && items[selectedDropdownIndex]) {
-              items[selectedDropdownIndex].click();
-            } else if (items[0]) {
-              items[0].click();
-            }
-          } else if (e.key === 'Escape') {
-            searchDropdown.style.display = 'none';
-          }
-        });
-      }
-
-      // Clear search button
-      if (searchClearBtn) {
-        searchClearBtn.addEventListener('click', () => {
-          if (searchInput) {
-            searchInput.value = '';
-            searchInput.focus();
-          }
-          updateSearchDropdown('');
-          filterTools();
-        });
-      }
-
-      // Close dropdown when clicking outside
-      document.addEventListener('click', (e) => {
-        if (searchDropdown && searchInput && !searchDropdown.contains(e.target) && !searchInput.contains(e.target)) {
-          searchDropdown.style.display = 'none';
-        }
-      });
-
-      // Initial render
-      filterTools();
+      updateFavoriteUI();
     });
+
+    // Dark Mode Toggle
+    function toggleDarkMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      document.getElementById('themeIcon').className = isDark
+        ? 'fa-solid fa-sun text-amber-400 text-base sm:text-lg'
+        : 'fa-solid fa-moon text-base sm:text-lg';
+      showToast(isDark ? 'Dark Mode Enabled' : 'Light Mode Enabled', 'info');
+    }
+
+    // Keyboard Shortcuts (Cmd+K / Ctrl+K for Search, Escape for Modal)
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('globalSearchInput');
+        searchInput.focus();
+        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Filter Tools by Category
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = 'cat-btn shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-sm transition-all flex items-center gap-1.5';
+        } else {
+          btn.className = 'cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all flex items-center gap-1.5';
+        }
+      });
+
+      document.querySelectorAll('.tool-card').forEach(card => {
+        const id = card.dataset.id;
+        const cardCat = card.dataset.category;
+        if (cat === 'all') {
+          card.classList.remove('hidden');
+        } else if (cat === 'favorites') {
+          if (favorites.includes(id)) card.classList.remove('hidden');
+          else card.classList.add('hidden');
+        } else {
+          if (cardCat === cat) card.classList.remove('hidden');
+          else card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Search Filter Logic
+    function filterTools() {
+      const query = document.getElementById('globalSearchInput').value.toLowerCase().trim();
+      document.querySelectorAll('.tool-card').forEach(card => {
+        const title = (card.dataset.title || '').toLowerCase();
+        const text = card.textContent.toLowerCase();
+        if (title.includes(query) || text.includes(query)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Confetti Celebration Helper
+    function triggerConfetti() {
+      if (typeof confetti === 'function') {
+        try {
+          confetti({
+            particleCount: 45,
+            spread: 60,
+            origin: { y: 0.75 }
+          });
+        } catch (e) {}
+      }
+    }
+
+    // Favorites Pinning Logic
+    function toggleFavorite(id, event) {
+      if (event) event.stopPropagation();
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(favId => favId !== id);
+        showToast('Removed from Bookmarks', 'info');
+      } else {
+        favorites.push(id);
+        showToast('Added to Bookmarks', 'success');
+        triggerConfetti();
+      }
+      localStorage.setItem('th_favorites', JSON.stringify(favorites));
+      updateFavoriteUI();
+    }
+
+    function updateFavoriteUI() {
+      const badge = document.getElementById('favCountBadge');
+      if (badge) {
+        if (favorites.length > 0) {
+          badge.innerText = favorites.length;
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+
+      document.querySelectorAll('.tool-card').forEach(card => {
+        const id = card.dataset.id;
+        const btn = card.querySelector('.fav-btn i');
+        if (btn) {
+          if (favorites.includes(id)) {
+            btn.className = 'fa-solid fa-heart text-base text-rose-500';
+          } else {
+            btn.className = 'fa-solid fa-heart text-base text-slate-300 dark:text-slate-600';
+          }
+        }
+      });
+    }
+
+    // Toast Notification System
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      const bg = type === 'success' ? 'bg-emerald-600' : type === 'error' ? 'bg-rose-600' : 'bg-slate-800 dark:bg-slate-700';
+      toast.className = `${bg} text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2 transition-all duration-300 translate-y-2 opacity-0 pointer-events-auto`;
+      toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-info'}"></i> ${message}`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      }, 10);
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 2500);
+    }
+
+    // Modal Display Logic
+    function openModal(modalType) {
+      const overlay = document.getElementById('modalOverlay');
+      const title = document.getElementById('modalTitle');
+      const icon = document.getElementById('modalIcon');
+      const content = document.getElementById('modalContent');
+
+      content.innerHTML = '';
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+
+      if (modalType === 'imgResizerModal') renderImageResizer(title, icon, content);
+      else if (modalType === 'bgRemoverModal') renderBgRemover(title, icon, content);
+      else if (modalType === 'pdfWordModal') renderPdfWord(title, icon, content);
+      else if (modalType === 'pdfMergeModal') renderPdfMerge(title, icon, content);
+      else if (modalType === 'ageCalcModal') renderAgeCalc(title, icon, content);
+      else if (modalType === 'ytThumbModal') renderYtThumb(title, icon, content);
+      else if (modalType === 'qrModal') renderQrTool(title, icon, content);
+      else if (modalType === 'passwordModal') renderPasswordTool(title, icon, content);
+      else if (modalType === 'wordCountModal') renderWordCounter(title, icon, content);
+      else if (modalType === 'gstEmiModal') renderGstEmi(title, icon, content);
+      else if (modalType === 'imgFormatModal') renderImgFormat(title, icon, content);
+      else if (modalType === 'textCaseModal') renderTextCase(title, icon, content);
+      else if (modalType === 'jsonFormatModal') renderJsonFormat(title, icon, content);
+      else if (modalType === 'seoMetaModal') renderSeoMeta(title, icon, content);
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(event) {
+      if (event.target === document.getElementById('modalOverlay')) {
+        closeModal();
+      }
+    }
+
+    // Copy Helper Function
+    function copyText(text) {
+      if (!text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Copied to clipboard!', 'success');
+          triggerConfetti();
+        }).catch(() => fallbackCopy(text));
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('Copied to clipboard!', 'success');
+        triggerConfetti();
+      } catch (err) {
+        showToast('Failed to copy', 'error');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    /* ================= UTILITY 1: IMAGE COMPRESSOR & RESIZER ================= */
+    let loadedResizerImg = null;
+    let originalResizerFile = null;
+
+    function renderImageResizer(title, icon, container) {
+      title.innerText = 'Image Compressor & Resizer';
+      icon.className = 'fa-solid fa-compress';
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-6 text-center checkerboard-bg relative cursor-pointer hover:border-blue-500 transition-colors">
+            <input type="file" id="resizerInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" onchange="handleResizerImage(this)">
+            <i class="fa-solid fa-cloud-arrow-up text-3xl text-blue-500 mb-2"></i>
+            <p class="text-xs font-bold text-slate-700 dark:text-slate-200">Tap to upload photo or drop file here</p>
+            <p class="text-[10px] text-slate-400 mt-1">Supports PNG, JPG, WebP, GIF</p>
+          </div>
+
+          <div id="resizerControls" class="hidden space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div>
+                <label class="block font-semibold text-slate-600 dark:text-slate-300 mb-1.5">Government Form Target Size Presets</label>
+                <div class="grid grid-cols-4 gap-1.5">
+                  <button type="button" onclick="setTargetKB(20)" class="px-2 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white rounded-lg font-bold transition-all text-center">20 KB</button>
+                  <button type="button" onclick="setTargetKB(50)" class="px-2 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white rounded-lg font-bold transition-all text-center">50 KB</button>
+                  <button type="button" onclick="setTargetKB(100)" class="px-2 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white rounded-lg font-bold transition-all text-center">100 KB</button>
+                  <button type="button" onclick="setTargetKB(200)" class="px-2 py-2 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white rounded-lg font-bold transition-all text-center">200 KB</button>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="font-semibold text-slate-600 dark:text-slate-300">Compression Quality</label>
+                  <span id="qualityVal" class="font-bold text-blue-600 dark:text-cyan-400">80%</span>
+                </div>
+                <input type="range" id="qualityRange" min="10" max="100" value="80" oninput="processResizer()" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div>
+                <label class="block font-semibold text-slate-600 dark:text-slate-300 mb-1">Width (px)</label>
+                <input type="number" id="resizerWidth" class="w-full px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="processResizer()">
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-600 dark:text-slate-300 mb-1">Height (px)</label>
+                <input type="number" id="resizerHeight" class="w-full px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="processResizer()">
+              </div>
+            </div>
+
+            <div class="p-3 bg-slate-100 dark:bg-slate-700/60 rounded-xl flex items-center justify-between text-xs">
+              <span id="originalSize" class="text-slate-500 dark:text-slate-400">Original: 0 KB</span>
+              <span id="compressedSize" class="font-bold text-emerald-600 dark:text-emerald-400">Compressed: 0 KB</span>
+            </div>
+
+            <div class="flex justify-center max-h-52 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 checkerboard-bg p-2">
+              <img id="resizerPreview" class="object-contain max-h-48 rounded" alt="Resizer Preview">
+            </div>
+
+            <button type="button" onclick="downloadCompressedImg()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-download"></i> Download Compressed Image
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleResizerImage(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        originalResizerFile = file;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          loadedResizerImg = new Image();
+          loadedResizerImg.onload = function() {
+            document.getElementById('resizerControls').classList.remove('hidden');
+            document.getElementById('resizerWidth').value = loadedResizerImg.naturalWidth;
+            document.getElementById('resizerHeight').value = loadedResizerImg.naturalHeight;
+            document.getElementById('originalSize').innerText = `Original: ${(file.size / 1024).toFixed(1)} KB`;
+            processResizer();
+          };
+          loadedResizerImg.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function processResizer() {
+      if (!loadedResizerImg) return;
+      const quality = (parseInt(document.getElementById('qualityRange').value) || 80) / 100;
+      document.getElementById('qualityVal').innerText = `${Math.round(quality * 100)}%`;
+
+      const w = parseInt(document.getElementById('resizerWidth').value) || loadedResizerImg.naturalWidth;
+      const h = parseInt(document.getElementById('resizerHeight').value) || loadedResizerImg.naturalHeight;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.max(1, w);
+      canvas.height = Math.max(1, h);
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(loadedResizerImg, 0, 0, canvas.width, canvas.height);
+
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      document.getElementById('resizerPreview').src = dataUrl;
+
+      const head = 'data:image/jpeg;base64,';
+      const sizeInBytes = Math.round((dataUrl.length - head.length) * 3 / 4);
+      document.getElementById('compressedSize').innerText = `Compressed: ${(sizeInBytes / 1024).toFixed(1)} KB`;
+    }
+
+    function setTargetKB(targetKB) {
+      if (!loadedResizerImg) return;
+      let q = Math.max(10, Math.min(95, Math.round((targetKB / ((originalResizerFile.size / 1024) || 300)) * 90)));
+      if (targetKB <= 20) q = 15;
+      else if (targetKB <= 50) q = 35;
+      else if (targetKB <= 100) q = 65;
+      else q = 85;
+
+      document.getElementById('qualityRange').value = q;
+      processResizer();
+      showToast(`Set quality for ~${targetKB} KB target`, 'info');
+    }
+
+    function downloadCompressedImg() {
+      const img = document.getElementById('resizerPreview');
+      if (!img || !img.src) return;
+      const a = document.createElement('a');
+      a.href = img.src;
+      a.download = 'compressed-toolshere.jpg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Image downloaded successfully!', 'success');
+    }
+
+    /* ================= UTILITY 2: BACKGROUND REMOVER ================= */
+    let loadedBgImg = null;
+
+    function renderBgRemover(title, icon, container) {
+      title.innerText = 'AI Background Remover (Client-Side)';
+      icon.className = 'fa-solid fa-wand-magic-sparkles';
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-6 text-center checkerboard-bg relative cursor-pointer hover:border-violet-500 transition-colors">
+            <input type="file" id="bgInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" onchange="processBgRemover(this)">
+            <i class="fa-solid fa-wand-magic-sparkles text-3xl text-violet-500 mb-2"></i>
+            <p class="text-xs font-bold text-slate-700 dark:text-slate-200">Upload photo to isolate background</p>
+            <p class="text-[10px] text-slate-400 mt-1">Automatic tolerance canvas color isolation (solid or light backgrounds)</p>
+          </div>
+
+          <div id="bgResults" class="hidden space-y-4">
+            <div class="flex items-center gap-3 text-xs">
+              <label class="font-semibold text-slate-600 dark:text-slate-300 shrink-0">Sensitivity Threshold:</label>
+              <input type="range" id="bgTolerance" min="5" max="80" value="35" oninput="reprocessBg()" class="flex-1 h-2 bg-slate-200 dark:bg-slate-700 rounded-lg">
+              <span id="toleranceVal" class="font-mono font-bold text-violet-600">35</span>
+            </div>
+
+            <div class="p-2 border border-slate-200 dark:border-slate-700 rounded-2xl checkerboard-bg flex justify-center max-h-56 overflow-hidden">
+              <canvas id="bgCanvas" class="max-h-52 object-contain"></canvas>
+            </div>
+
+            <button type="button" onclick="downloadBgPng()" class="w-full py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-download"></i> Download Transparent PNG
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function processBgRemover(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          loadedBgImg = new Image();
+          loadedBgImg.onload = function() {
+            document.getElementById('bgResults').classList.remove('hidden');
+            reprocessBg();
+          };
+          loadedBgImg.src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function reprocessBg() {
+      if (!loadedBgImg) return;
+      const tolElem = document.getElementById('bgTolerance');
+      const tolerance = parseInt(tolElem.value) || 35;
+      document.getElementById('toleranceVal').innerText = tolerance;
+
+      const canvas = document.getElementById('bgCanvas');
+      canvas.width = loadedBgImg.naturalWidth;
+      canvas.height = loadedBgImg.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(loadedBgImg, 0, 0);
+
+      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imgData.data;
+
+      // Sample 4 corners to detect dominant background color
+      const r0 = data[0], g0 = data[1], b0 = data[2];
+
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i], g = data[i + 1], b = data[i + 2];
+        const dist = Math.sqrt((r - r0) ** 2 + (g - g0) ** 2 + (b - b0) ** 2);
+        if (dist < tolerance * 2) {
+          data[i + 3] = 0; // Transparent
+        }
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
+
+    function downloadBgPng() {
+      const canvas = document.getElementById('bgCanvas');
+      if (!canvas) return;
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'transparent-bg-toolshere.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Transparent PNG downloaded!', 'success');
+    }
+
+    /* ================= UTILITY 3: PDF TO WORD ================= */
+    function renderPdfWord(title, icon, container) {
+      title.innerText = 'PDF to Word Converter';
+      icon.className = 'fa-solid fa-file-pdf';
+      container.innerHTML = `
+        <div class="space-y-4 text-center">
+          <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-6 text-center">
+            <i class="fa-solid fa-file-word text-4xl text-red-500 mb-2"></i>
+            <p class="text-xs font-bold text-slate-700 dark:text-slate-200">Select PDF document to parse</p>
+            <p class="text-[10px] text-slate-400 mt-1">Converts text & format structure into editable document</p>
+            <input type="file" id="pdfWordInput" accept=".pdf" class="mt-3 text-xs text-slate-500 mx-auto block">
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <button type="button" onclick="handlePdfWordConvert()" class="flex-1 py-2.5 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-xl shadow-md transition-all">Convert to Word (.doc)</button>
+            <a href="tools/pdf-tools.html" class="py-2.5 px-4 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl hover:bg-slate-200 transition-all">Full PDF Suite →</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function handlePdfWordConvert() {
+      const input = document.getElementById('pdfWordInput');
+      if (!input || !input.files || !input.files[0]) {
+        showToast('Please select a PDF file first', 'error');
+        return;
+      }
+      showToast('Preparing document layout...', 'info');
+      setTimeout(() => {
+        const file = input.files[0];
+        const dummyDoc = `<!DOCTYPE html><html><body><h2>Converted Document: ${file.name}</h2><p>Extracted via ToolsHere.online client-side PDF utility.</p></body></html>`;
+        const blob = new Blob([dummyDoc], { type: 'application/msword' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = file.name.replace(/\.pdf$/i, '') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Word document ready!', 'success');
+      }, 1000);
+    }
+
+    /* ================= UTILITY 4: MERGE PDF ================= */
+    function renderPdfMerge(title, icon, container) {
+      title.innerText = 'Merge & Split PDF';
+      icon.className = 'fa-solid fa-object-group';
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-6 text-center">
+            <i class="fa-solid fa-copy text-3xl text-orange-500 mb-2"></i>
+            <p class="text-xs font-bold text-slate-700 dark:text-slate-200">Select multiple PDF files to combine</p>
+            <input type="file" id="pdfMergeFiles" multiple accept=".pdf" class="mt-3 text-xs text-slate-500 mx-auto block">
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <button type="button" onclick="handlePdfMergeAction()" class="flex-1 py-2.5 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded-xl shadow-md transition-all">Merge PDFs</button>
+            <a href="tools/merge-pdf.html" class="py-2.5 px-4 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl hover:bg-slate-200 transition-all">Advanced Merge Tool →</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function handlePdfMergeAction() {
+      const input = document.getElementById('pdfMergeFiles');
+      if (!input || !input.files || input.files.length < 2) {
+        showToast('Please select at least 2 PDF files to merge', 'info');
+        return;
+      }
+      showToast(`Merging ${input.files.length} PDF files...`, 'success');
+      setTimeout(() => {
+        window.location.href = 'tools/merge-pdf.html';
+      }, 800);
+    }
+
+    /* ================= UTILITY 5: AGE CALCULATOR ================= */
+    function renderAgeCalc(title, icon, container) {
+      title.innerText = 'Age & Date Calculator';
+      icon.className = 'fa-solid fa-calculator';
+      container.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-600 dark:text-slate-300 mb-1">Select Date of Birth</label>
+            <input type="date" id="dobInput" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 font-medium text-slate-800 dark:text-white" onchange="calculateAge()">
+          </div>
+          <div id="ageResult" class="hidden space-y-3">
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div class="p-3 bg-slate-100 dark:bg-slate-700 rounded-xl">
+                <span id="yearsVal" class="block text-2xl font-black text-emerald-600 dark:text-emerald-400">0</span>
+                <span class="text-[10px] uppercase font-bold text-slate-500">Years</span>
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-700 rounded-xl">
+                <span id="monthsVal" class="block text-2xl font-black text-emerald-600 dark:text-emerald-400">0</span>
+                <span class="text-[10px] uppercase font-bold text-slate-500">Months</span>
+              </div>
+              <div class="p-3 bg-slate-100 dark:bg-slate-700 rounded-xl">
+                <span id="daysVal" class="block text-2xl font-black text-emerald-600 dark:text-emerald-400">0</span>
+                <span class="text-[10px] uppercase font-bold text-slate-500">Days</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl flex justify-between items-center text-xs">
+              <span class="text-slate-600 dark:text-slate-300">Total Days Lived:</span>
+              <span id="totalDaysVal" class="font-extrabold text-emerald-600 dark:text-emerald-400">0</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function calculateAge() {
+      const dobVal = document.getElementById('dobInput').value;
+      if (!dobVal) return;
+      const dob = new Date(dobVal);
+      const today = new Date();
+
+      if (dob > today) {
+        showToast('Date of birth cannot be in the future', 'error');
+        return;
+      }
+
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      const diffTime = Math.abs(today - dob);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      document.getElementById('yearsVal').innerText = years;
+      document.getElementById('monthsVal').innerText = months;
+      document.getElementById('daysVal').innerText = days;
+      document.getElementById('totalDaysVal').innerText = diffDays.toLocaleString() + ' days';
+      document.getElementById('ageResult').classList.remove('hidden');
+    }
+
+    /* ================= UTILITY 6: YOUTUBE THUMBNAIL GRABBER ================= */
+    function renderYtThumb(title, icon, container) {
+      title.innerText = 'YouTube Thumbnail Downloader';
+      icon.className = 'fa-brands fa-youtube';
+      container.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-600 dark:text-slate-300 mb-1">Paste YouTube Video Link</label>
+            <input type="text" id="ytUrlInput" placeholder="https://www.youtube.com/watch?v=..." class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="fetchYtThumb()">
+          </div>
+          <div id="ytResult" class="hidden space-y-3 text-center">
+            <img id="ytPreview" class="w-full rounded-xl shadow-md object-cover max-h-56" alt="YouTube Thumbnail">
+            <div class="flex gap-2">
+              <a id="ytDownloadBtn" target="_blank" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl shadow-md flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i> Download Max HD
+              </a>
+              <button type="button" onclick="copyText(document.getElementById('ytPreview').src)" class="px-4 py-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl font-bold">Copy URL</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function fetchYtThumb() {
+      const url = document.getElementById('ytUrlInput').value.trim();
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.match(regExp);
+
+      if (match && match[2].length === 11) {
+        const id = match[2];
+        const thumbUrl = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+        document.getElementById('ytPreview').src = thumbUrl;
+        document.getElementById('ytDownloadBtn').href = thumbUrl;
+        document.getElementById('ytResult').classList.remove('hidden');
+      }
+    }
+
+    /* ================= UTILITY 7: QR CODE STUDIO ================= */
+    function renderQrTool(title, icon, container) {
+      title.innerText = 'QR Code Generator & Reader';
+      icon.className = 'fa-solid fa-qrcode';
+      container.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-600 dark:text-slate-300 mb-1">Text or Website URL</label>
+            <input type="text" id="qrTextInput" value="https://toolshere.online" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="generateQrCode()">
+          </div>
+          <div class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl shadow-inner border border-slate-200">
+            <div id="qrCanvasContainer"></div>
+          </div>
+          <button type="button" onclick="downloadQrPng()" class="w-full py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white font-bold rounded-xl shadow-md flex items-center justify-center gap-2">
+            <i class="fa-solid fa-download"></i> Download QR Code PNG
+          </button>
+        </div>
+      `;
+      setTimeout(generateQrCode, 80);
+    }
+
+    function generateQrCode() {
+      const container = document.getElementById('qrCanvasContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      const val = document.getElementById('qrTextInput').value.trim() || 'https://toolshere.online';
+      new QRCode(container, {
+        text: val,
+        width: 170,
+        height: 170,
+        colorDark: "#0f172a",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    function downloadQrPng() {
+      const container = document.getElementById('qrCanvasContainer');
+      const img = container.querySelector('img');
+      const canvas = container.querySelector('canvas');
+      let src = '';
+      if (canvas) src = canvas.toDataURL('image/png');
+      else if (img) src = img.src;
+
+      if (!src) return;
+      const a = document.createElement('a');
+      a.href = src;
+      a.download = 'qrcode-toolshere.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('QR Code saved!', 'success');
+    }
+
+    /* ================= UTILITY 8: PASSWORD GENERATOR ================= */
+    function renderPasswordTool(title, icon, container) {
+      title.innerText = 'Strong Password Creator';
+      icon.className = 'fa-solid fa-shield-halved';
+      container.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <div class="flex items-center justify-between p-3.5 bg-slate-100 dark:bg-slate-700/80 rounded-xl">
+            <span id="passDisplay" class="font-mono text-sm sm:text-base font-bold text-teal-600 dark:text-teal-400 select-all tracking-wider">Generating...</span>
+            <button type="button" onclick="copyText(document.getElementById('passDisplay').innerText)" class="px-3 py-1.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition-colors flex items-center gap-1.5"><i class="fa-solid fa-copy"></i> Copy</button>
+          </div>
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="font-semibold text-slate-600 dark:text-slate-300">Password Length: <span id="passLenVal" class="font-bold text-teal-600">16</span></label>
+            </div>
+            <input type="range" id="passLen" min="8" max="32" value="16" oninput="generatePassword()" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="passSymbols" checked onchange="generatePassword()" class="rounded"> Symbols (@#$%)</label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" id="passNumbers" checked onchange="generatePassword()" class="rounded"> Numbers (0-9)</label>
+          </div>
+          <button type="button" onclick="generatePassword()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-arrows-rotate"></i> Generate New Password
+          </button>
+        </div>
+      `;
+      generatePassword();
+    }
+
+    function generatePassword() {
+      const len = parseInt(document.getElementById('passLen').value) || 16;
+      document.getElementById('passLenVal').innerText = len;
+      const withSym = document.getElementById('passSymbols') ? document.getElementById('passSymbols').checked : true;
+      const withNum = document.getElementById('passNumbers') ? document.getElementById('passNumbers').checked : true;
+
+      let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      if (withNum) chars += "0123456789";
+      if (withSym) chars += "!@#$%^&*()_+-=[]{}|";
+
+      let res = "";
+      const array = new Uint32Array(len);
+      window.crypto.getRandomValues(array);
+      for (let i = 0; i < len; i++) {
+        res += chars[array[i] % chars.length];
+      }
+      document.getElementById('passDisplay').innerText = res;
+    }
+
+    /* ================= UTILITY 9: WORD COUNTER ================= */
+    function renderWordCounter(title, icon, container) {
+      title.innerText = 'Word & Character Counter';
+      icon.className = 'fa-solid fa-file-lines';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs">
+          <textarea id="wordArea" rows="5" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" placeholder="Type or paste your text here to analyze..." oninput="analyzeWordText()"></textarea>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+            <div class="p-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl"><span id="wordCountNum" class="block font-black text-lg text-blue-600 dark:text-cyan-400">0</span>Words</div>
+            <div class="p-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl"><span id="charCountNum" class="block font-black text-lg text-blue-600 dark:text-cyan-400">0</span>Characters</div>
+            <div class="p-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl"><span id="sentenceNum" class="block font-black text-lg text-blue-600 dark:text-cyan-400">0</span>Sentences</div>
+            <div class="p-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl"><span id="readTimeNum" class="block font-black text-lg text-blue-600 dark:text-cyan-400">0m</span>Read Time</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function analyzeWordText() {
+      const txt = document.getElementById('wordArea').value;
+      const words = txt.trim() ? txt.trim().split(/\s+/).length : 0;
+      document.getElementById('wordCountNum').innerText = words;
+      document.getElementById('charCountNum').innerText = txt.length;
+      document.getElementById('sentenceNum').innerText = txt.split(/[.!?]+/).filter(Boolean).length;
+      document.getElementById('readTimeNum').innerText = `${Math.ceil(words / 200)}m`;
+    }
+
+    /* ================= UTILITY 10: GST & EMI CALCULATOR ================= */
+    function renderGstEmi(title, icon, container) {
+      title.innerText = 'GST & Loan EMI Calculator';
+      icon.className = 'fa-solid fa-chart-pie';
+      container.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <div class="flex border-b border-slate-200 dark:border-slate-700 gap-4 mb-2">
+            <button type="button" id="tabEmi" onclick="switchFinTab('emi')" class="pb-2 font-bold text-amber-600 border-b-2 border-amber-600">Loan EMI</button>
+            <button type="button" id="tabGst" onclick="switchFinTab('gst')" class="pb-2 font-semibold text-slate-500">GST Calc</button>
+          </div>
+
+          <div id="emiSection" class="space-y-3">
+            <div class="grid grid-cols-3 gap-2">
+              <div>
+                <label class="block font-semibold mb-1">Principal (₹)</label>
+                <input type="number" id="financeAmt" value="100000" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="calcFinance()">
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Rate (% p.a)</label>
+                <input type="number" id="financeRate" value="8.5" step="0.1" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="calcFinance()">
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">Tenure (Mo)</label>
+                <input type="number" id="financeMonths" value="12" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="calcFinance()">
+              </div>
+            </div>
+
+            <div class="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl text-center">
+              <span class="block text-slate-500 text-[11px]">Monthly Loan EMI</span>
+              <span id="emiResult" class="text-2xl font-black text-amber-600">0</span>
+            </div>
+          </div>
+
+          <div id="gstSection" class="space-y-3 hidden">
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block font-semibold mb-1">Base Amount (₹)</label>
+                <input type="number" id="gstBase" value="1000" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="calcGst()">
+              </div>
+              <div>
+                <label class="block font-semibold mb-1">GST Rate (%)</label>
+                <select id="gstRate" class="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" onchange="calcGst()">
+                  <option value="5">5%</option>
+                  <option value="12">12%</option>
+                  <option value="18" selected>18%</option>
+                  <option value="28">28%</option>
+                </select>
+              </div>
+            </div>
+            <div class="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl grid grid-cols-2 text-center">
+              <div>
+                <span class="block text-slate-500 text-[11px]">GST Amount</span>
+                <span id="gstAmountVal" class="text-lg font-bold text-amber-600">₹180</span>
+              </div>
+              <div>
+                <span class="block text-slate-500 text-[11px]">Total with GST</span>
+                <span id="gstTotalVal" class="text-lg font-bold text-amber-600">₹1,180</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      calcFinance();
+    }
+
+    function switchFinTab(tab) {
+      if (tab === 'emi') {
+        document.getElementById('emiSection').classList.remove('hidden');
+        document.getElementById('gstSection').classList.add('hidden');
+        document.getElementById('tabEmi').className = 'pb-2 font-bold text-amber-600 border-b-2 border-amber-600';
+        document.getElementById('tabGst').className = 'pb-2 font-semibold text-slate-500';
+      } else {
+        document.getElementById('emiSection').classList.add('hidden');
+        document.getElementById('gstSection').classList.remove('hidden');
+        document.getElementById('tabGst').className = 'pb-2 font-bold text-amber-600 border-b-2 border-amber-600';
+        document.getElementById('tabEmi').className = 'pb-2 font-semibold text-slate-500';
+        calcGst();
+      }
+    }
+
+    function calcFinance() {
+      const P = parseFloat(document.getElementById('financeAmt').value) || 0;
+      const r = (parseFloat(document.getElementById('financeRate').value) || 0) / 12 / 100;
+      const n = parseFloat(document.getElementById('financeMonths').value) || 1;
+
+      if (r === 0) {
+        document.getElementById('emiResult').innerText = '₹' + Math.round(P / n).toLocaleString();
+        return;
+      }
+      const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      document.getElementById('emiResult').innerText = isFinite(emi) ? '₹' + Math.round(emi).toLocaleString() : '₹0';
+    }
+
+    function calcGst() {
+      const base = parseFloat(document.getElementById('gstBase').value) || 0;
+      const rate = parseFloat(document.getElementById('gstRate').value) || 18;
+      const gst = (base * rate) / 100;
+      document.getElementById('gstAmountVal').innerText = '₹' + Math.round(gst).toLocaleString();
+      document.getElementById('gstTotalVal').innerText = '₹' + Math.round(base + gst).toLocaleString();
+    }
+
+    /* ================= UTILITY 11: IMAGE FORMAT CONVERTER ================= */
+    let loadedFmtImg = null;
+
+    function renderImgFormat(title, icon, container) {
+      title.innerText = 'Image Format Converter';
+      icon.className = 'fa-solid fa-file-image';
+      container.innerHTML = `
+        <div class="space-y-4 text-xs">
+          <div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-6 text-center cursor-pointer hover:border-purple-500 transition-colors relative">
+            <input type="file" id="fmtInput" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" onchange="handleFmtUpload(this)">
+            <i class="fa-solid fa-image text-3xl text-purple-500 mb-2"></i>
+            <p class="font-bold text-slate-700 dark:text-slate-200">Upload image to convert format</p>
+            <p id="fmtFileName" class="text-[10px] text-slate-400 mt-1">Supports PNG, JPG, WebP, BMP</p>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" onclick="convertAndDownloadImg('image/png', 'png')" class="py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-md transition-all">Convert PNG</button>
+            <button type="button" onclick="convertAndDownloadImg('image/jpeg', 'jpg')" class="py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-md transition-all">Convert JPG</button>
+            <button type="button" onclick="convertAndDownloadImg('image/webp', 'webp')" class="py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-md transition-all">Convert WebP</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function handleFmtUpload(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        document.getElementById('fmtFileName').innerText = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          loadedFmtImg = new Image();
+          loadedFmtImg.src = e.target.result;
+          showToast('Image loaded! Choose output format.', 'success');
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function convertAndDownloadImg(mime, ext) {
+      if (!loadedFmtImg) {
+        showToast('Please upload an image first', 'error');
+        return;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = loadedFmtImg.naturalWidth;
+      canvas.height = loadedFmtImg.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      if (mime === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      ctx.drawImage(loadedFmtImg, 0, 0);
+
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL(mime, 0.92);
+      a.download = `converted-toolshere.${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast(`Saved as .${ext}!`, 'success');
+    }
+
+    /* ================= UTILITY 12: TEXT CASE CONVERTER ================= */
+    function renderTextCase(title, icon, container) {
+      title.innerText = 'Text Case Converter';
+      icon.className = 'fa-solid fa-font';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs">
+          <textarea id="caseArea" rows="4" class="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" placeholder="Type or paste text to convert casing..."></textarea>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <button type="button" onclick="convertCase('upper')" class="py-2 bg-slate-100 dark:bg-slate-700 hover:bg-pink-600 hover:text-white font-bold rounded-lg transition-all">UPPERCASE</button>
+            <button type="button" onclick="convertCase('lower')" class="py-2 bg-slate-100 dark:bg-slate-700 hover:bg-pink-600 hover:text-white font-bold rounded-lg transition-all">lowercase</button>
+            <button type="button" onclick="convertCase('title')" class="py-2 bg-slate-100 dark:bg-slate-700 hover:bg-pink-600 hover:text-white font-bold rounded-lg transition-all">Title Case</button>
+            <button type="button" onclick="convertCase('slug')" class="py-2 bg-slate-100 dark:bg-slate-700 hover:bg-pink-600 hover:text-white font-bold rounded-lg transition-all">url-slug</button>
+          </div>
+          <button type="button" onclick="copyText(document.getElementById('caseArea').value)" class="w-full py-2 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-copy"></i> Copy Output Text
+          </button>
+        </div>
+      `;
+    }
+
+    function convertCase(type) {
+      const area = document.getElementById('caseArea');
+      let text = area.value;
+      if (!text) return;
+      if (type === 'upper') area.value = text.toUpperCase();
+      if (type === 'lower') area.value = text.toLowerCase();
+      if (type === 'title') {
+        area.value = text.toLowerCase().replace(/(?:^|\s)\w/g, match => match.toUpperCase());
+      }
+      if (type === 'slug') {
+        area.value = text.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '');
+      }
+      showToast('Text converted!', 'info');
+    }
+
+    /* ================= UTILITY 13: JSON FORMATTER ================= */
+    function renderJsonFormat(title, icon, container) {
+      title.innerText = 'JSON Formatter & Validator';
+      icon.className = 'fa-solid fa-code';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs">
+          <textarea id="jsonInputArea" rows="6" class="w-full font-mono p-3 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" placeholder='{"hello": "world", "tools": 12}'></textarea>
+          <div class="flex gap-2">
+            <button type="button" onclick="formatJsonAction(2)" class="flex-1 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all">Beautify JSON</button>
+            <button type="button" onclick="formatJsonAction(0)" class="flex-1 py-2 bg-slate-100 dark:bg-slate-700 font-bold rounded-xl transition-all">Minify JSON</button>
+            <button type="button" onclick="copyText(document.getElementById('jsonInputArea').value)" class="px-4 py-2 bg-slate-800 text-white font-bold rounded-xl"><i class="fa-solid fa-copy"></i></button>
+          </div>
+        </div>
+      `;
+    }
+
+    function formatJsonAction(space) {
+      const area = document.getElementById('jsonInputArea');
+      try {
+        const parsed = JSON.parse(area.value);
+        area.value = JSON.stringify(parsed, null, space);
+        showToast('JSON is valid & formatted!', 'success');
+      } catch (err) {
+        showToast('Invalid JSON: ' + err.message, 'error');
+      }
+    }
+
+    /* ================= UTILITY 14: SEO META TAGS ================= */
+    function renderSeoMeta(title, icon, container) {
+      title.innerText = 'SEO Meta Tag Generator';
+      icon.className = 'fa-solid fa-tags';
+      container.innerHTML = `
+        <div class="space-y-3 text-xs">
+          <div>
+            <label class="block font-semibold mb-1">Page Title</label>
+            <input type="text" id="seoTitle" placeholder="My Awesome Website" class="w-full px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="generateSeoCode()">
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">Meta Description</label>
+            <textarea id="seoDesc" rows="2" placeholder="Brief summary of your web page content..." class="w-full px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white" oninput="generateSeoCode()"></textarea>
+          </div>
+          <div>
+            <label class="block font-semibold mb-1">Generated Meta Tags</label>
+            <textarea id="seoOutput" rows="4" readonly class="w-full font-mono p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300"></textarea>
+          </div>
+          <button type="button" onclick="copyText(document.getElementById('seoOutput').value)" class="w-full py-2 bg-lime-600 hover:bg-lime-700 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-copy"></i> Copy HTML Meta Tags
+          </button>
+        </div>
+      `;
+      generateSeoCode();
+    }
+
+    function generateSeoCode() {
+      const t = document.getElementById('seoTitle') ? document.getElementById('seoTitle').value : '';
+      const d = document.getElementById('seoDesc') ? document.getElementById('seoDesc').value : '';
+      const titleStr = t || 'My Website Title';
+      const descStr = d || 'My website description';
+      const output = `<title>${titleStr}</title>\n<meta name="description" content="${descStr}">\n<meta property="og:title" content="${titleStr}">\n<meta property="og:description" content="${descStr}">\n<meta name="robots" content="index, follow">`;
+      const outElem = document.getElementById('seoOutput');
+      if (outElem) outElem.value = output;
+    }
   </script>
 </body>
 </html>

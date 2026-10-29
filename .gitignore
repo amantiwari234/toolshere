@@ -8,3 +8,4 @@ Test Project
 .DS_Store
 Thumbs.db
 *.log
+*.backup.html
