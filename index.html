@@ -2,8 +2,8 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ToolsHere.online — Free Online Tools for Everything | 100% Private</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolsHere.online — Free Online Tools & Web Utilities | 100% Private</title>
   <meta name="description" content="Free, fast, and 100% private client-side web utilities. Compress images, calculate EMI/GST, create QR codes, analyze text, and edit PDFs with zero uploads.">
   <meta name="keywords" content="toolshere, free online tools, online tools for everything, image compressor, background remover, pdf tools, merge pdf, age calculator, emi calculator, gst calculator, qr code generator, password generator, word counter, json formatter">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -24,7 +24,8 @@
   <meta property="twitter:image" content="https://toolshere.online/assets/images/hero_3d_tools.jpg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="icon" type="image/png" href="/assets/logo.png">
+  <link rel="apple-touch-icon" href="/assets/logo.png">
 
   <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="GSC_VERIFICATION_PLACEHOLDER">
@@ -73,6 +74,29 @@
           "price": "0",
           "priceCurrency": "USD"
         }
+      },
+      {
+        "@type": "ItemList",
+        "name": "ToolsHere Online Utilities Suite",
+        "description": "Comprehensive collection of free, client-side online tools.",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Image Compressor & Resizer", "url": "https://toolshere.online/#image-compressor" },
+          { "@type": "ListItem", "position": 2, "name": "AI Background Remover", "url": "https://toolshere.online/#background-remover" },
+          { "@type": "ListItem", "position": 3, "name": "PDF to Word Converter", "url": "https://toolshere.online/#pdf-to-word" },
+          { "@type": "ListItem", "position": 4, "name": "Merge & Split PDF", "url": "https://toolshere.online/#merge-pdf" },
+          { "@type": "ListItem", "position": 5, "name": "Age & Date Calculator", "url": "https://toolshere.online/#age-calculator" },
+          { "@type": "ListItem", "position": 6, "name": "YouTube Thumbnail Grabber", "url": "https://toolshere.online/#youtube-thumbnail" },
+          { "@type": "ListItem", "position": 7, "name": "QR Code Studio & Reader", "url": "https://toolshere.online/#qr-code-generator" },
+          { "@type": "ListItem", "position": 8, "name": "Strong Password Creator", "url": "https://toolshere.online/#password-generator" },
+          { "@type": "ListItem", "position": 9, "name": "Word & Character Counter", "url": "https://toolshere.online/#word-counter" },
+          { "@type": "ListItem", "position": 10, "name": "GST & Loan EMI Calculator", "url": "https://toolshere.online/#emi-calculator" },
+          { "@type": "ListItem", "position": 11, "name": "Image Format Converter", "url": "https://toolshere.online/#image-converter" },
+          { "@type": "ListItem", "position": 12, "name": "Text Case Converter", "url": "https://toolshere.online/#text-case-converter" },
+          { "@type": "ListItem", "position": 13, "name": "JSON Formatter & Validator", "url": "https://toolshere.online/#json-formatter" },
+          { "@type": "ListItem", "position": 14, "name": "SEO Meta Tag Generator", "url": "https://toolshere.online/#seo-meta-generator" },
+          { "@type": "ListItem", "position": 15, "name": "Compress PDF Document", "url": "https://toolshere.online/#compress-pdf" },
+          { "@type": "ListItem", "position": 16, "name": "Image to PDF Converter", "url": "https://toolshere.online/#image-to-pdf" }
+        ]
       }
     ]
   }
@@ -216,7 +240,7 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-            <i class="fa-solid fa-layer-group text-blue-600 dark:text-cyan-400 text-lg sm:text-2xl"></i> Digital Tools Workspace
+            <i class="fa-solid fa-layer-group text-blue-600 dark:text-cyan-400 text-lg sm:text-2xl"></i> Free Online Tools & Web Utilities
           </h1>
           <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             Instant browser-based utilities. Zero latency, 100% private, and desktop & mobile optimized.
@@ -247,6 +271,7 @@
     </div>
 
     <!-- ================= EQUAL-WEIGHT TOOL CARDS GRID ================= -->
+    <h2 class="sr-only">Free Online Tools & Productivity Utilities Suite</h2>
     <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
 
       <!-- TOOL 1: Image Compressor & Resizer -->
@@ -600,7 +625,7 @@
   <div id="modalOverlay" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-end sm:items-center justify-center p-0 sm:p-4" onclick="handleOverlayClick(event)">
 
     <!-- MODAL WINDOW CARD -->
-    <div id="modalWindow" class="w-full max-w-2xl max-h-[92vh] bg-white dark:bg-slate-800 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden animate-modal-slide" onclick="event.stopPropagation()">
+    <div id="modalWindow" role="dialog" aria-modal="true" aria-labelledby="modalTitle" class="w-full max-w-2xl max-h-[92vh] bg-white dark:bg-slate-800 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col overflow-hidden animate-modal-slide" onclick="event.stopPropagation()">
 
       <!-- Mobile Drag Handle -->
       <div class="w-12 h-1.5 bg-slate-300 dark:bg-slate-600 rounded-full mx-auto mt-2.5 mb-1 sm:hidden"></div>
@@ -684,7 +709,9 @@
         document.getElementById('themeIcon').className = 'fa-solid fa-sun text-amber-400 text-base sm:text-lg';
       }
       updateFavoriteUI();
+      checkHashRoute();
     });
+    window.addEventListener('hashchange', checkHashRoute);
 
     // Dark Mode Toggle
     function toggleDarkMode() {
@@ -819,9 +846,51 @@
       }, 2500);
     }
 
+    
+    // Tool Modal Route Map for Shareable URLs & Dynamic Titles
+    const defaultPageTitle = "ToolsHere.online — Free Online Tools & Web Utilities | 100% Private";
+    const modalRouteMap = {
+      'imgResizerModal': { hash: 'image-compressor', title: 'Image Compressor & Resizer — ToolsHere.online' },
+      'bgRemoverModal': { hash: 'background-remover', title: 'AI Background Remover — ToolsHere.online' },
+      'pdfWordModal': { hash: 'pdf-to-word', title: 'PDF to Word Converter — ToolsHere.online' },
+      'pdfMergeModal': { hash: 'merge-pdf', title: 'Merge & Split PDF — ToolsHere.online' },
+      'ageCalcModal': { hash: 'age-calculator', title: 'Age & Date Calculator — ToolsHere.online' },
+      'ytThumbModal': { hash: 'youtube-thumbnail', title: 'YouTube Thumbnail Grabber — ToolsHere.online' },
+      'qrModal': { hash: 'qr-code-generator', title: 'QR Code Studio & Reader — ToolsHere.online' },
+      'passwordModal': { hash: 'password-generator', title: 'Strong Password Creator — ToolsHere.online' },
+      'wordCountModal': { hash: 'word-counter', title: 'Word & Character Counter — ToolsHere.online' },
+      'gstEmiModal': { hash: 'emi-calculator', title: 'GST & Loan EMI Calculator — ToolsHere.online' },
+      'imgFormatModal': { hash: 'image-converter', title: 'Image Format Converter — ToolsHere.online' },
+      'textCaseModal': { hash: 'text-case-converter', title: 'Text Case Converter — ToolsHere.online' },
+      'jsonFormatModal': { hash: 'json-formatter', title: 'JSON Formatter & Validator — ToolsHere.online' },
+      'seoMetaModal': { hash: 'seo-meta-generator', title: 'SEO Meta Tag Generator — ToolsHere.online' },
+      'compressPdfModal': { hash: 'compress-pdf', title: 'Compress PDF Document — ToolsHere.online' },
+      'imgToPdfModal': { hash: 'image-to-pdf', title: 'Image to PDF Converter — ToolsHere.online' },
+      'aboutModal': { hash: 'about', title: 'About Us — ToolsHere.online' },
+      'contactModal': { hash: 'contact', title: 'Contact Us — ToolsHere.online' },
+      'privacyModal': { hash: 'privacy', title: 'Privacy Policy — ToolsHere.online' },
+      'termsModal': { hash: 'terms', title: 'Terms of Service — ToolsHere.online' },
+      'disclaimerModal': { hash: 'disclaimer', title: 'Disclaimer — ToolsHere.online' }
+    };
+
+    function checkHashRoute() {
+      const currentHash = window.location.hash.replace(/^#/, '').toLowerCase();
+      if (!currentHash) return;
+      for (const [modalId, config] of Object.entries(modalRouteMap)) {
+        if (config.hash.toLowerCase() === currentHash) {
+          openModal(modalId, false);
+          break;
+        }
+      }
+    }
+
     // Modal Display Logic
-    function openModal(modalType) {
+    function openModal(modalType, updateHash = true) {
       const overlay = document.getElementById('modalOverlay');
+      if (updateHash && modalRouteMap[modalType]) {
+        history.replaceState(null, '', '#' + modalRouteMap[modalType].hash);
+        document.title = modalRouteMap[modalType].title;
+      }
       const title = document.getElementById('modalTitle');
       const icon = document.getElementById('modalIcon');
       const content = document.getElementById('modalContent');
@@ -856,6 +925,10 @@
     function closeModal() {
       document.getElementById('modalOverlay').classList.add('hidden');
       document.body.style.overflow = '';
+      if (window.location.hash) {
+        history.replaceState(null, '', window.location.pathname);
+      }
+      document.title = defaultPageTitle;
     }
 
     function handleOverlayClick(event) {
