@@ -1,0 +1,21 @@
+{
+  "name": "ToolsHere.online",
+  "short_name": "ToolsHere",
+  "description": "Free Online Tools & Web Utilities | 100% Private Client-Side",
+  "icons": [
+    {
+      "src": "/assets/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb"
+}
