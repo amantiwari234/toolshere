@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToolsHere.online — Redirecting...</title>
+  <script>
+    // GitHub Pages SPA Single-Page Router Redirect
+    var path = window.location.pathname.replace(/^\/+/, '').replace(/\.html$/i, '');
+    if (path.indexOf('tools/') === 0) {
+      path = path.substring(6);
+    }
+    if (path && path !== '404' && path !== 'index') {
+      window.location.replace('/#' + encodeURIComponent(path));
+    } else {
+      window.location.replace('/');
+    }
+  </script>
+</head>
+<body style="font-family: system-ui, -apple-system, sans-serif; background: #0f172a; color: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center;">
+  <div style="padding: 2rem;">
+    <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Redirecting to ToolsHere.online...</h1>
+    <p style="color: #94a3b8; font-size: 0.875rem;">If you are not redirected automatically, <a href="/" style="color: #38bdf8; text-decoration: underline;">click here</a>.</p>
+  </div>
+</body>
+</html>
