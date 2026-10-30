@@ -23,6 +23,9 @@ while ($listener.IsListening) {
         if (-not (Test-Path $localPath -PathType Leaf) -and (Test-Path "$localPath.html" -PathType Leaf)) {
             $localPath = "$localPath.html"
         }
+        if (-not (Test-Path $localPath -PathType Leaf)) {
+            $localPath = Join-Path $root "404.html"
+        }
 
         if (Test-Path $localPath -PathType Leaf) {
             $bytes = [System.IO.File]::ReadAllBytes($localPath)
