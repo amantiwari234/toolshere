@@ -360,52 +360,45 @@
 
   <!-- ================= DESKTOP & MOBILE TOP HEADER ================= -->
   <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
       
       <!-- Brand Logo (Tap returns Home) -->
-      <a href="/" onclick="if(window.location.pathname!=='/'||window.location.hash){navigateToHome(event);}" class="flex items-center gap-2 sm:gap-2.5 shrink-0 group min-h-[44px] py-1" aria-label="ToolsHere.online Homepage">
+      <a href="/" onclick="if(window.location.pathname!=='/'||window.location.hash){navigateToHome(event);}" class="flex items-center gap-2.5 shrink-0 group min-h-[44px] py-1" aria-label="ToolsHere.online Homepage">
         <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white text-base shadow-xs group-hover:bg-blue-700 transition-colors">
           <i class="fa-solid fa-shapes"></i>
         </div>
         <div class="flex flex-col">
-          <span class="font-extrabold text-base sm:text-xl tracking-tight text-slate-900 dark:text-white leading-none">
+          <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white leading-none">
             Tools<span class="text-blue-600">Here</span><span class="text-[11px] text-slate-400 font-semibold">.online</span>
           </span>
           <span class="text-[10px] text-slate-400 font-medium tracking-wide hidden min-[360px]:inline">Free Online Tools</span>
         </div>
       </a>
 
-      <!-- Compact Search Bar Near Centre (Desktop) -->
-      <div class="hidden md:flex flex-1 max-w-sm mx-4">
-        <div class="relative w-full">
-          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-          <input type="text" id="headerSearchInput" onkeyup="handleHeaderSearch(this.value)" placeholder="Search tools (e.g. compress, pdf, emi)..." class="w-full pl-9 pr-10 py-2 text-xs bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-full focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-slate-800 placeholder:text-slate-400 font-medium">
-          <kbd class="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-mono text-slate-400 px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">⌘K</kbd>
-        </div>
-      </div>
+      <!-- Desktop Navigation Links (Clean, minimal, spacious like iLovePDF) -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+        <button type="button" onclick="filterCategory('pdf'); scrollToTools();" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">PDF Tools</button>
+        <button type="button" onclick="filterCategory('image'); scrollToTools();" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Image Tools</button>
+        <button type="button" onclick="filterCategory('calc'); scrollToTools();" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Calculators</button>
+        <button type="button" onclick="filterCategory('all'); scrollToTools();" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">All Utilities</button>
+        <a href="/about" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">About</a>
+        <a href="/contact" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Contact</a>
+      </nav>
 
-      <!-- Navigation Links & Mobile Controls -->
-      <div class="flex items-center gap-1 sm:gap-3">
-        <!-- Desktop Nav -->
-        <nav class="hidden lg:flex items-center gap-5 text-sm font-semibold text-slate-600 dark:text-slate-300">
-          <button type="button" onclick="filterCategory('pdf'); scrollToTools();" class="hover:text-blue-600 transition-colors">PDF Tools</button>
-          <button type="button" onclick="filterCategory('image'); scrollToTools();" class="hover:text-blue-600 transition-colors">Image Tools</button>
-          <button type="button" onclick="filterCategory('all'); scrollToTools();" class="hover:text-blue-600 transition-colors">All Tools</button>
-          <a href="/about" class="hover:text-blue-600 transition-colors">About</a>
-        </nav>
-
-        <!-- Search Icon Button for Mobile (Scrolls/Focuses Search) -->
-        <button type="button" onclick="focusHeroSearch()" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl text-slate-600 dark:text-slate-300 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors min-w-[44px] min-h-[44px]" aria-label="Search tools">
+      <!-- Right Header Controls -->
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <!-- Quick Search Focus Button -->
+        <button type="button" onclick="focusHeroSearch()" class="w-10 h-10 flex items-center justify-center rounded-xl text-slate-600 dark:text-slate-300 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors min-w-[44px] min-h-[44px]" title="Search tools" aria-label="Search tools">
           <i class="fa-solid fa-magnifying-glass text-base"></i>
         </button>
 
         <!-- Theme Toggle Button -->
-        <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
+        <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors flex items-center justify-center text-sm min-w-[44px] min-h-[44px]" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
           <i id="themeIcon" class="fa-solid fa-moon"></i>
         </button>
 
-        <!-- Accessible Mobile Menu Button -->
-        <button type="button" onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors min-w-[44px] min-h-[44px]" aria-label="Open mobile navigation menu">
+        <!-- Accessible Mobile Menu Button (Mobile only) -->
+        <button type="button" onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 flex items-center justify-center rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors min-w-[44px] min-h-[44px]" aria-label="Open mobile navigation menu">
           <i class="fa-solid fa-bars text-lg"></i>
         </button>
       </div>
@@ -511,13 +504,14 @@
         </p>
 
         <!-- Prominent Full-Width Search Bar Below Heading -->
-        <div class="mt-5 sm:mt-8 max-w-xl mx-auto">
-          <div class="relative flex items-center bg-white border border-slate-300 rounded-2xl sm:rounded-full shadow-xs hover:border-blue-400 focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100 transition-all p-1.5 pl-3.5 sm:pl-5 min-h-[50px]">
-            <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm mr-2.5 sm:mr-3"></i>
-            <input type="text" id="heroSearchInput" onkeyup="filterToolsByQuery(this.value)" placeholder="Search for a tool..." class="w-full py-2.5 text-sm sm:text-base bg-transparent text-slate-800 placeholder:text-slate-400 focus:outline-none font-medium">
-            <span id="searchResultCount" class="hidden text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 mr-2 shrink-0"></span>
-            <button type="button" onclick="clearHeroSearch()" id="heroClearBtn" class="hidden w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-600 active:scale-90 min-w-[44px] min-h-[44px]" title="Clear search">
-              <i class="fa-solid fa-xmark text-sm"></i>
+        <div class="mt-6 sm:mt-8 max-w-2xl mx-auto">
+          <div class="relative flex items-center bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl shadow-xs hover:border-blue-400 focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30 transition-all p-2 pl-4 sm:pl-5 min-h-[52px]">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 text-base mr-3"></i>
+            <input type="text" id="heroSearchInput" onkeyup="filterToolsByQuery(this.value)" placeholder="Search any tool (e.g. compress, merge, emi, background)..." class="w-full py-2 text-sm sm:text-base bg-transparent text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none font-medium">
+            <span id="searchResultCount" class="hidden text-xs font-bold px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 mr-2 shrink-0"></span>
+            <kbd class="hidden sm:inline-block text-[10px] font-mono text-slate-400 dark:text-slate-500 px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600 mr-2 shrink-0">⌘K</kbd>
+            <button type="button" onclick="clearHeroSearch()" id="heroClearBtn" class="hidden w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 active:scale-90 min-w-[44px] min-h-[44px]" title="Clear search">
+              <i class="fa-solid fa-xmark text-base"></i>
             </button>
           </div>
         </div>
@@ -1024,7 +1018,7 @@
       <i class="fa-solid fa-calculator text-base"></i>
       <span class="text-[10px] font-semibold">Calc</span>
     </button>
-    <button onclick="document.getElementById('globalSearchInput').focus(); window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400">
+    <button onclick="focusHeroSearch()" class="flex flex-col items-center gap-0.5 text-slate-500 dark:text-slate-400">
       <i class="fa-solid fa-magnifying-glass text-base"></i>
       <span class="text-[10px] font-semibold">Search</span>
     </button>
@@ -1140,10 +1134,14 @@
     }
 
     function focusHeroSearch() {
+      const homeView = document.getElementById('homeView');
+      if (homeView && homeView.classList.contains('hidden')) {
+        navigateToHome();
+      }
       const heroSearch = document.getElementById('heroSearchInput');
       if (heroSearch) {
         heroSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => heroSearch.focus(), 300);
+        setTimeout(() => heroSearch.focus(), 200);
       }
     }
 
@@ -1213,9 +1211,9 @@
     function filterCategory(cat) {
       document.querySelectorAll('.cat-pill').forEach(pill => {
         if (pill.dataset.cat === cat) {
-          pill.className = 'cat-pill px-4 py-2 rounded-full bg-slate-900 text-white shadow-xs transition-all';
+          pill.className = 'cat-pill shrink-0 px-4 py-2 rounded-full bg-blue-600 text-white shadow-xs transition-all text-xs sm:text-sm font-semibold min-h-[40px] flex items-center justify-center active:scale-95';
         } else {
-          pill.className = 'cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all';
+          pill.className = 'cat-pill shrink-0 px-4 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs sm:text-sm font-semibold min-h-[40px] flex items-center justify-center active:scale-95';
         }
       });
 
@@ -1255,83 +1253,20 @@
     window.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        const searchInput = document.getElementById('globalSearchInput');
-        searchInput.focus();
-        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        focusHeroSearch();
       }
       if (e.key === 'Escape') {
         closeModal();
       }
     });
 
-    // Filter Tools by Category
-    function filterCategory(cat) {
-      document.querySelectorAll('.cat-btn').forEach(btn => {
-        if (btn.dataset.cat === cat) {
-          btn.className = 'cat-btn shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-sm transition-all flex items-center gap-1.5';
-        } else {
-          btn.className = 'cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all flex items-center gap-1.5';
-        }
-      });
-
-      document.querySelectorAll('.tool-card').forEach(card => {
-        const id = card.dataset.id;
-        const cardCat = card.dataset.category;
-        if (cat === 'all') {
-          card.classList.remove('hidden');
-        } else if (cat === 'favorites') {
-          if (favorites.includes(id)) card.classList.remove('hidden');
-          else card.classList.add('hidden');
-        } else {
-          if (cardCat === cat) card.classList.remove('hidden');
-          else card.classList.add('hidden');
-        }
-      });
-    }
-
-    // Search Filter & Clear Logic
+    // Backward Compatibility aliases
     function filterTools() {
-      const query = document.getElementById('globalSearchInput').value.toLowerCase().trim();
-      const clearBtn = document.getElementById('clearSearchBtn');
-      const countBadge = document.getElementById('searchCountBadge');
-      
-      if (clearBtn) clearBtn.classList.toggle('hidden', query.length === 0);
-
-      // Return to home view if user searches while on a tool page
-      const homeView = document.getElementById('homeView');
-      if (query.length > 0 && homeView && homeView.classList.contains('hidden')) {
-        navigateToHome();
-      }
-
-      let matches = 0;
-      document.querySelectorAll('.tool-card').forEach(card => {
-        const title = (card.dataset.title || '').toLowerCase();
-        const text = card.textContent.toLowerCase();
-        if (title.includes(query) || text.includes(query)) {
-          card.classList.remove('hidden');
-          matches++;
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-
-      if (countBadge) {
-        if (query.length > 0) {
-          countBadge.innerText = `${matches}`;
-          countBadge.classList.remove('hidden');
-        } else {
-          countBadge.classList.add('hidden');
-        }
-      }
+      const hero = document.getElementById('heroSearchInput');
+      if (hero) filterToolsByQuery(hero.value);
     }
-
     function clearSearch() {
-      const input = document.getElementById('globalSearchInput');
-      if (input) {
-        input.value = '';
-        input.focus();
-        filterTools();
-      }
+      clearHeroSearch();
     }
 
     // Confetti Celebration Helper
