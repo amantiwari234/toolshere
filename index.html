@@ -2381,15 +2381,29 @@
 
               <!-- Right Column: Granular Controls -->
               <div class="lg:col-span-5 space-y-5 bg-slate-50/70 dark:bg-slate-700/40 p-5 sm:p-6 rounded-3xl border border-slate-200/80 dark:border-slate-700/80">
-                <div>
-                  <label class="block font-bold text-xs sm:text-sm text-slate-800 dark:text-white mb-2">
-                    Target File Size Presets (Job & Exam Portals)
-                  </label>
+                <div class="space-y-2.5">
+                  <div class="flex items-center justify-between">
+                    <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white flex items-center gap-1.5">
+                      <i class="fa-solid fa-bullseye text-sky-600 dark:text-cyan-400"></i> Target File Size
+                    </label>
+                    <span class="text-[11px] text-slate-400 font-medium">Presets or Custom</span>
+                  </div>
+                  <!-- Quick Preset Chips -->
                   <div class="grid grid-cols-4 gap-2 text-xs">
-                    <button type="button" onclick="setTargetKB(20)" class="preset-btn px-2.5 py-2.5 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center">20 KB</button>
-                    <button type="button" onclick="setTargetKB(50)" class="preset-btn px-2.5 py-2.5 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center">50 KB</button>
-                    <button type="button" onclick="setTargetKB(100)" class="preset-btn px-2.5 py-2.5 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center">100 KB</button>
-                    <button type="button" onclick="setTargetKB(200)" class="preset-btn px-2.5 py-2.5 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center">200 KB</button>
+                    <button type="button" onclick="setTargetKB(20)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center shadow-sm">20 KB</button>
+                    <button type="button" onclick="setTargetKB(50)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center shadow-sm">50 KB</button>
+                    <button type="button" onclick="setTargetKB(100)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center shadow-sm">100 KB</button>
+                    <button type="button" onclick="setTargetKB(200)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center shadow-sm">200 KB</button>
+                  </div>
+                  <!-- Custom Size Input Box -->
+                  <div class="flex items-center gap-2">
+                    <div class="relative flex-1">
+                      <input type="number" id="customTargetKB" min="5" max="50000" placeholder="Type custom size (e.g. 35, 75, 150)" onkeydown="if(event.key==='Enter'){event.preventDefault();applyCustomTargetKB();}" class="w-full pl-3 pr-10 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white font-semibold text-xs focus:ring-2 focus:ring-sky-500 focus:outline-none placeholder:text-slate-400">
+                      <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">KB</span>
+                    </div>
+                    <button type="button" onclick="applyCustomTargetKB()" class="px-4 py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all shrink-0 flex items-center gap-1.5 active:scale-95">
+                      <i class="fa-solid fa-check"></i> Set Size
+                    </button>
                   </div>
                 </div>
 
@@ -2513,17 +2527,85 @@
       }
     }
 
-    function setTargetKB(targetKB) {
-      if (!loadedResizerImg || !originalResizerFile) return;
-      let q = Math.max(10, Math.min(95, Math.round((targetKB / ((originalResizerFile.size / 1024) || 300)) * 90)));
-      if (targetKB <= 20) q = 15;
-      else if (targetKB <= 50) q = 35;
-      else if (targetKB <= 100) q = 65;
-      else q = 85;
+    function applyCustomTargetKB() {
+      const input = document.getElementById('customTargetKB');
+      const val = parseFloat(input ? input.value : 0);
+      if (!val || val <= 0) {
+        showToast('Please enter a valid target size (e.g. 50 KB)', 'warning');
+        return;
+      }
+      setTargetKB(val);
+    }
 
-      document.getElementById('qualityRange').value = q;
+    function setTargetKB(targetKB) {
+      if (!loadedResizerImg) {
+        showToast('Please upload an image first', 'warning');
+        return;
+      }
+      targetKB = parseFloat(targetKB);
+      if (!targetKB || targetKB <= 0) {
+        showToast('Please enter a valid target size in KB', 'warning');
+        return;
+      }
+
+      const customInput = document.getElementById('customTargetKB');
+      if (customInput) customInput.value = targetKB;
+
+      const targetBytes = targetKB * 1024;
+      const naturalW = loadedResizerImg.naturalWidth;
+      const naturalH = loadedResizerImg.naturalHeight;
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      let bestW = naturalW;
+      let bestH = naturalH;
+
+      // Check min size at natural resolution
+      canvas.width = naturalW;
+      canvas.height = naturalH;
+      ctx.drawImage(loadedResizerImg, 0, 0, naturalW, naturalH);
+      const dataUrlMin = canvas.toDataURL('image/jpeg', 0.1);
+      const minSizeBytes = Math.round((dataUrlMin.length - 23) * 3 / 4);
+
+      if (minSizeBytes > targetBytes) {
+        const scale = Math.sqrt(targetBytes / minSizeBytes) * 0.95;
+        bestW = Math.max(50, Math.round(naturalW * Math.min(0.92, scale)));
+        bestH = Math.max(50, Math.round(naturalH * Math.min(0.92, scale)));
+      }
+
+      canvas.width = bestW;
+      canvas.height = bestH;
+      ctx.drawImage(loadedResizerImg, 0, 0, bestW, bestH);
+
+      let low = 0.05, high = 0.98;
+      let finalQ = 0.8;
+      let closestDiff = Infinity;
+
+      for (let i = 0; i < 9; i++) {
+        const mid = (low + high) / 2;
+        const testUrl = canvas.toDataURL('image/jpeg', mid);
+        const testBytes = Math.round((testUrl.length - 23) * 3 / 4);
+        const diff = Math.abs(testBytes - targetBytes);
+
+        if (diff < closestDiff) {
+          closestDiff = diff;
+          finalQ = mid;
+        }
+
+        if (testBytes > targetBytes) {
+          high = mid;
+        } else {
+          low = mid;
+        }
+      }
+
+      document.getElementById('resizerWidth').value = bestW;
+      document.getElementById('resizerHeight').value = bestH;
+      document.getElementById('qualityRange').value = Math.round(finalQ * 100);
+
       processResizer();
-      showToast(`Set quality for ~${targetKB} KB target`, 'info');
+      showToast(`Optimized for target ${targetKB} KB`, 'success');
     }
 
     function downloadCompressedImg() {
