@@ -132,16 +132,17 @@
           },
           colors: {
             brand: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              500: '#06b6d4',
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
               600: '#2563eb',
               700: '#1d4ed8',
+              800: '#1e40af',
             }
           }
         }
       }
-    }
+    };
   </script>
 
   <!-- FontAwesome Icons & Libraries -->
@@ -166,95 +167,76 @@
       background-size: 16px 16px;
       background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
     }
-    .dark .checkerboard-bg {
-      background-color: #0f172a;
-      background-image: linear-gradient(45deg, #1e293b 25%, transparent 25%), linear-gradient(-45deg, #1e293b 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #1e293b 75%), linear-gradient(-45deg, transparent 75%, #1e293b 75%);
-    }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col pb-20 md:pb-0">
+<body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
 
   <!-- Toast Notification System -->
   <div id="toastContainer" class="fixed top-20 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700/80 shadow-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
-      <a href="/" class="flex items-center gap-2.5 group shrink-0" aria-label="ToolsHere.online Homepage">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-teal-400 p-0.5 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform flex items-center justify-center">
-          <svg class="w-full h-full text-white" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" rx="24" fill="url(#header-logo-grad)"/>
-            <path d="M 22 28 H 60 M 41 28 V 74 M 41 51 H 78 M 60 28 V 74 M 78 28 V 74" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-            <defs>
-              <linearGradient id="header-logo-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#2563eb"/>
-                <stop offset="1" stop-color="#06b6d4"/>
-              </linearGradient>
-            </defs>
-          </svg>
+  <!-- Redesigned Clean White Header -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Brand Logo -->
+      <a href="/" class="flex items-center gap-2.5 shrink-0 group" aria-label="ToolsHere.online Homepage">
+        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-lg shadow-xs group-hover:bg-blue-700 transition-colors">
+          <i class="fa-solid fa-shapes text-sm"></i>
         </div>
         <div class="flex flex-col">
-          <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white flex items-center">
-            Tools<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 font-black">Here</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ml-1 bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">.online</span>
+          <span class="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white leading-tight">
+            Tools<span class="text-blue-600">here</span><span class="text-slate-400 font-normal text-xs">.online</span>
           </span>
-          <span class="text-[9px] text-slate-500 dark:text-slate-400 font-medium -mt-1 hidden sm:inline">Ultimate Web Utilities</span>
+          <span class="text-[10px] text-slate-400 -mt-0.5 font-medium hidden sm:inline">Free &amp; Private Online Tools</span>
         </div>
       </a>
 
-      <!-- Sleek Glowing Search Capsule -->
-      <div class="flex-1 max-w-[170px] sm:max-w-[240px] md:max-w-[280px] transition-all duration-300 focus-within:max-w-[360px] mx-1 sm:mx-3">
-        <div class="relative group">
-          <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 rounded-full blur-xs opacity-0 group-hover:opacity-40 group-focus-within:opacity-80 transition duration-300"></div>
-          <div class="relative flex items-center bg-slate-100/90 dark:bg-slate-800/90 backdrop-blur-md rounded-full border border-slate-200/90 dark:border-slate-700/90 shadow-2xs group-hover:border-cyan-400/60 dark:group-hover:border-cyan-500/50 transition-all duration-200">
-            <div class="pl-2.5 sm:pl-3 pr-1.5 flex items-center justify-center text-slate-400 group-hover:text-cyan-500 dark:group-hover:text-cyan-400 group-focus-within:text-cyan-500 transition-colors">
-              <i class="fa-solid fa-magnifying-glass text-xs"></i>
-            </div>
-            <input type="text" id="globalSearchInput" placeholder="Search tools..." onkeydown="if(event.key==='Enter'){window.location.href='/?q='+encodeURIComponent(this.value);}" class="w-full py-1 sm:py-1.5 text-xs bg-transparent text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none tracking-tight font-medium" aria-label="Search all utilities">
-            <div class="pr-2 sm:pr-2.5 shrink-0 hidden sm:flex items-center">
-              <kbd class="text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded-md bg-white dark:bg-slate-700 text-slate-400 dark:text-slate-400 border border-slate-200 dark:border-slate-600 shadow-2xs tracking-tighter">⌘K</kbd>
-            </div>
-          </div>
+      <!-- Compact Header Search Bar -->
+      <div class="flex-1 max-w-md hidden md:block">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+          <input type="text" id="globalSearchInput" placeholder="Search a tool (e.g. compress, pdf, emi)..." onkeydown="if(event.key==='Enter'){window.location.href='/?q='+encodeURIComponent(this.value);}" class="w-full pl-9 pr-14 py-2 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-medium" aria-label="Search all tools">
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-mono text-slate-400 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 px-1.5 py-0.5 rounded">↵</span>
         </div>
       </div>
 
-      <!-- Nav Links & Controls -->
-      <div class="flex items-center gap-1.5 sm:gap-3">
-        <nav class="hidden lg:flex items-center gap-4 text-xs font-semibold text-slate-600 dark:text-slate-300 mr-1">
-          <a href="/#pdf" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">PDF Tools</a>
-          <a href="/" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">All Utilities</a>
-          <a href="/about" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">About</a>
+      <!-- Right Navigation Links -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <nav class="hidden sm:flex items-center gap-5 text-xs font-semibold text-slate-600 dark:text-slate-300">
+          <a href="/#pdf" class="hover:text-blue-600 transition-colors">PDF Tools</a>
+          <a href="/#image" class="hover:text-blue-600 transition-colors">Image Tools</a>
+          <a href="/" class="hover:text-blue-600 transition-colors">All Tools</a>
+          <a href="/about" class="hover:text-blue-600 transition-colors">About</a>
         </nav>
-        <button onclick="toggleDarkMode()" class="p-2 sm:p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
-          <i id="themeIcon" class="fa-solid fa-moon text-base sm:text-lg"></i>
+        <button onclick="toggleDarkMode()" class="w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors flex items-center justify-center text-xs" title="Toggle Theme" aria-label="Toggle theme">
+          <i id="themeIcon" class="fa-solid fa-moon"></i>
         </button>
       </div>
     </div>
   </header>
 
   <!-- Main Content Area -->
-  <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
-    <!-- Breadcrumb Navigation -->
-    <nav aria-label="Breadcrumb" class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200/80 dark:border-slate-700/80">
+  <main class="flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <!-- Clean Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
       <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 flex-wrap">
-        <a href="/" class="inline-flex items-center gap-1.5 font-bold text-blue-600 dark:text-cyan-400 hover:underline">
-          <i class="fa-solid fa-arrow-left"></i> All Tools
+        <a href="/" class="inline-flex items-center gap-1.5 font-semibold text-blue-600 hover:text-blue-700 hover:underline">
+          <i class="fa-solid fa-arrow-left text-xs"></i> All Tools
         </a>
-        <span>/</span>
-        <span class="font-medium text-slate-600 dark:text-slate-300">Document</span><span>/</span>
+        <span class="text-slate-300">/</span>
+        <span class="font-medium text-slate-600 dark:text-slate-300">Document</span><span class="text-slate-300">/</span>
         <span class="font-bold text-slate-900 dark:text-white truncate max-w-[200px] sm:max-w-md">Free Online Image to PDF Converter & Photo Bundler</span>
       </div>
       <div class="flex items-center gap-2 self-start sm:self-auto">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs font-semibold rounded-full border border-emerald-200 dark:border-emerald-800/80 shadow-2xs">
-          <i class="fa-solid fa-shield-halved text-emerald-500 text-[10px]"></i> 100% In-Browser Privacy
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 text-xs font-semibold rounded-full border border-emerald-200 dark:border-emerald-800">
+          <i class="fa-solid fa-shield-halved text-emerald-600 text-[10px]"></i> 100% In-Browser Privacy
         </span>
       </div>
     </nav>
 
     <!-- Page H1 Heading Header -->
     <div class="space-y-2">
-      <div class="flex items-start gap-3.5">
-        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center text-2xl sm:text-3xl font-bold shadow-lg shadow-cyan-500/20 shrink-0">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-2xl sm:text-3xl shrink-0 shadow-2xs">
           <i class="fa-solid fa-images"></i>
         </div>
         <div>
@@ -269,7 +251,7 @@
     </div>
 
     <!-- Pre-rendered Tool Workspace -->
-    <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-3xl p-5 sm:p-8 md:p-10 border border-slate-200/90 dark:border-slate-700/90 shadow-xl shadow-slate-200/40 dark:shadow-slate-950/40 space-y-8">
+    <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-8">
       
         <div class="space-y-6">
           <div class="relative border-2 border-dashed border-emerald-400 dark:border-emerald-500 hover:border-emerald-600 dark:hover:border-emerald-400 bg-gradient-to-b from-emerald-50/70 via-white to-emerald-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
@@ -296,44 +278,44 @@
 
     <!-- Pre-rendered SEO Guide & FAQs -->
     
-    <article class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700/80 space-y-8 text-slate-700 dark:text-slate-300">
+    <article class="mt-10 pt-8 border-t border-slate-200 space-y-8 text-slate-700">
       <div class="space-y-3">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 uppercase tracking-wide">Document Utility</span>
-          <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5"><i class="fa-solid fa-lock text-[9px]"></i> 100% In-Browser Privacy</span>
-          <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-500 text-[9px]"></i> Zero Server Latency</span>
+          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 uppercase tracking-wide">Document Utility</span>
+          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-[10px] text-emerald-600"></i> 100% In-Browser Privacy</span>
+          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug">About Image to PDF Converter</h2>
-        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">About Image to PDF Converter</h2>
+        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 leading-relaxed text-sm text-slate-600">
           <p>ToolsHere Image to PDF Converter makes it effortless to compile receipts, identity documents, handwritten notes, certificate scans, and photo albums into a single, professional PDF document. Rather than sending multiple loose photo attachments that can get disorganized, you can select multiple PNG, JPG, or WebP images simultaneously, preview them on an interactive visual grid, and assemble them into a unified PDF file with a single click. The entire compiling pipeline runs in your device's browser memory, protecting confidential tax records, Aadhaar cards, driver's licenses, and private receipts.</p>
         </div>
       </div>
 
       <!-- Step-by-Step Instructions -->
       <section class="space-y-4">
-        <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <i class="fa-solid fa-list-ol text-blue-600 dark:text-cyan-400"></i> How to Use Image to PDF Converter (Step-by-Step)
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-list-ol text-blue-600"></i> How to Use Image to PDF Converter (Step-by-Step)
         </h3>
         <ol class="space-y-2.5 text-sm">
           
-            <li class="flex items-start gap-3 p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
-              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-bold text-xs flex items-center justify-center mt-0.5">1</span>
-              <span class="text-slate-700 dark:text-slate-200 font-medium leading-relaxed">Click the upload area and select one or multiple images (PNG, JPG, or WebP) from your device.</span>
+            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">1</span>
+              <span class="text-slate-700 font-medium leading-relaxed">Click the upload area and select one or multiple images (PNG, JPG, or WebP) from your device.</span>
             </li>
           
-            <li class="flex items-start gap-3 p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
-              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-bold text-xs flex items-center justify-center mt-0.5">2</span>
-              <span class="text-slate-700 dark:text-slate-200 font-medium leading-relaxed">Inspect the live thumbnail gallery grid to verify all selected photos.</span>
+            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">2</span>
+              <span class="text-slate-700 font-medium leading-relaxed">Inspect the live thumbnail gallery grid to verify all selected photos.</span>
             </li>
           
-            <li class="flex items-start gap-3 p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
-              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
-              <span class="text-slate-700 dark:text-slate-200 font-medium leading-relaxed">Click 'Generate & Download PDF' to initiate the client-side document synthesis.</span>
+            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
+              <span class="text-slate-700 font-medium leading-relaxed">Click 'Generate & Download PDF' to initiate the client-side document synthesis.</span>
             </li>
           
-            <li class="flex items-start gap-3 p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700/80 shadow-2xs">
-              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-bold text-xs flex items-center justify-center mt-0.5">4</span>
-              <span class="text-slate-700 dark:text-slate-200 font-medium leading-relaxed">Save your compiled PDF directly onto your computer or phone.</span>
+            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">4</span>
+              <span class="text-slate-700 font-medium leading-relaxed">Save your compiled PDF directly onto your computer or phone.</span>
             </li>
           
         </ol>
@@ -341,101 +323,101 @@
 
       <!-- Key Verified Features -->
       <section class="space-y-4">
-        <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <i class="fa-solid fa-circle-check text-emerald-500"></i> Key Features & Capabilities
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-circle-check text-emerald-600"></i> Key Features & Capabilities
         </h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           
-            <div class="flex items-start gap-2.5 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-              <i class="fa-solid fa-check text-emerald-500 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-200">Multi-image selection supporting batch photo uploads.</span>
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 font-medium">Multi-image selection supporting batch photo uploads.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-              <i class="fa-solid fa-check text-emerald-500 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-200">Interactive visual thumbnail gallery previewing all selected images.</span>
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 font-medium">Interactive visual thumbnail gallery previewing all selected images.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-              <i class="fa-solid fa-check text-emerald-500 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-200">Wide format compatibility: accepts JPG, PNG, and modern WebP files.</span>
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 font-medium">Wide format compatibility: accepts JPG, PNG, and modern WebP files.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-              <i class="fa-solid fa-check text-emerald-500 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-200">Fast client-side document compilation with zero waiting queues.</span>
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 font-medium">Fast client-side document compilation with zero waiting queues.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-              <i class="fa-solid fa-check text-emerald-500 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-200">Complete data privacy with zero server uploads.</span>
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 font-medium">Complete data privacy with zero server uploads.</span>
             </div>
           
         </div>
       </section>
 
       <!-- Supported Formats & Limits -->
-      <section class="space-y-3 p-5 rounded-2xl bg-gradient-to-br from-blue-50/60 to-cyan-50/40 dark:from-slate-800 dark:to-slate-800/60 border border-blue-200/70 dark:border-slate-700">
-        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <i class="fa-solid fa-sliders text-blue-600 dark:text-cyan-400"></i> Technical Specifications & File Compatibility
+      <section class="space-y-3 p-5 rounded-xl bg-slate-50 border border-slate-200">
+        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-blue-600"></i> Technical Specifications & File Compatibility
         </h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
-          <div class="p-3 bg-white dark:bg-slate-700/70 rounded-xl border border-slate-200 dark:border-slate-600">
+          <div class="p-3 bg-white rounded-lg border border-slate-200">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
-            <span class="font-semibold text-slate-800 dark:text-white">PNG, JPG/JPEG, WebP image files</span>
+            <span class="font-semibold text-slate-800">PNG, JPG/JPEG, WebP image files</span>
           </div>
-          <div class="p-3 bg-white dark:dark:bg-slate-700/70 rounded-xl border border-slate-200 dark:border-slate-600">
+          <div class="p-3 bg-white rounded-lg border border-slate-200">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
-            <span class="font-semibold text-slate-800 dark:text-white">Unified multi-page PDF document (.pdf)</span>
+            <span class="font-semibold text-slate-800">Unified multi-page PDF document (.pdf)</span>
           </div>
-          <div class="p-3 bg-white dark:bg-slate-700/70 rounded-xl border border-slate-200 dark:border-slate-600">
+          <div class="p-3 bg-white rounded-lg border border-slate-200">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
-            <span class="font-semibold text-slate-800 dark:text-white">Recommended batch size up to 20-30 images at once depending on your device's available browser memory.</span>
+            <span class="font-semibold text-slate-800">Recommended batch size up to 20-30 images at once depending on your device's available browser memory.</span>
           </div>
         </div>
       </section>
 
       <!-- Frequently Asked Questions -->
       <section class="space-y-4">
-        <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <i class="fa-solid fa-circle-question text-blue-600 dark:text-cyan-400"></i> Frequently Asked Questions (Image to PDF Converter)
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-circle-question text-blue-600"></i> Frequently Asked Questions (Image to PDF Converter)
         </h3>
         <div class="space-y-3">
           
-            <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/90 shadow-2xs space-y-2">
-              <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-500 text-xs"></i> Can I combine different image formats into the same PDF?
+            <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2">
+              <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Can I combine different image formats into the same PDF?
               </h4>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Yes. You can select a mixture of PNG, JPG, and WebP files together in the same batch.</p>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">Yes. You can select a mixture of PNG, JPG, and WebP files together in the same batch.</p>
             </div>
           
-            <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/90 shadow-2xs space-y-2">
-              <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-500 text-xs"></i> Can I use this for compiling passport, ID card, and receipt scans?
+            <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2">
+              <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Can I use this for compiling passport, ID card, and receipt scans?
               </h4>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Yes, this tool is ideal for compiling government IDs, invoices, tax documents, and assignment notes into one tidy PDF.</p>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">Yes, this tool is ideal for compiling government IDs, invoices, tax documents, and assignment notes into one tidy PDF.</p>
             </div>
           
-            <div class="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700/90 shadow-2xs space-y-2">
-              <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-500 text-xs"></i> Are my uploaded photos saved or viewable by anyone else?
+            <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2">
+              <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Are my uploaded photos saved or viewable by anyone else?
               </h4>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">No. The entire process occurs locally on your machine. Your photos are never uploaded to any remote server or stored anywhere.</p>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">No. The entire process occurs locally on your machine. Your photos are never uploaded to any remote server or stored anywhere.</p>
             </div>
           
         </div>
       </section>
 
       
-      <div class="pt-4 border-t border-slate-200/80 dark:border-slate-700/80">
+      <div class="pt-6 border-t border-slate-200">
         <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Related Productivity Utilities</h3>
-        <div class="flex flex-wrap gap-2.5">
-          <a href="/image-compressor" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-200 dark:border-slate-600">
-              <i class="fa-solid fa-arrow-right text-[10px] text-blue-500 group-hover:text-white"></i> Image Compressor & Resizer
-            </a><a href="/merge-pdf" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-200 dark:border-slate-600">
-              <i class="fa-solid fa-arrow-right text-[10px] text-blue-500 group-hover:text-white"></i> Merge & Split PDF
-            </a><a href="/compress-pdf" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-200 dark:border-slate-600">
-              <i class="fa-solid fa-arrow-right text-[10px] text-blue-500 group-hover:text-white"></i> Compress PDF Document
+        <div class="flex flex-wrap gap-2">
+          <a href="/image-compressor" class="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 text-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-slate-200">
+              <i class="fa-solid fa-arrow-right text-[10px] text-blue-500"></i> Image Compressor & Resizer
+            </a><a href="/merge-pdf" class="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 text-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-slate-200">
+              <i class="fa-solid fa-arrow-right text-[10px] text-blue-500"></i> Merge & Split PDF
+            </a><a href="/compress-pdf" class="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 text-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-slate-200">
+              <i class="fa-solid fa-arrow-right text-[10px] text-blue-500"></i> Compress PDF Document
             </a>
         </div>
       </div>
@@ -444,20 +426,73 @@
   
   </main>
 
-  <!-- Footer -->
-  <footer class="mt-auto border-t border-slate-200 dark:border-slate-700/80 py-8 px-4 text-center text-xs text-slate-500 dark:text-slate-400 bg-white/50 dark:bg-slate-800/50">
-    <div class="max-w-7xl mx-auto space-y-3">
-      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 font-semibold">
-        <a href="/" class="hover:text-blue-600 dark:hover:text-cyan-400">Home</a>
-        <a href="/#all" class="hover:text-blue-600 dark:hover:text-cyan-400">All Utilities</a>
-        <a href="/#pdf" class="hover:text-blue-600 dark:hover:text-cyan-400">PDF Suite</a>
-        <a href="/about" class="hover:text-blue-600 dark:hover:text-cyan-400">About Us</a>
-        <a href="/contact" class="hover:text-blue-600 dark:hover:text-cyan-400">Contact</a>
-        <a href="/privacy" class="hover:text-blue-600 dark:hover:text-cyan-400">Privacy Policy</a>
-        <a href="/terms" class="hover:text-blue-600 dark:hover:text-cyan-400">Terms of Service</a>
-        <a href="/disclaimer" class="hover:text-blue-600 dark:hover:text-cyan-400">Disclaimer</a>
+  <!-- Clean Minimal Structured Footer -->
+  <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 pt-12 pb-8 text-slate-600 dark:text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-slate-200 dark:border-slate-800">
+        <!-- Col 1: Brand & Privacy -->
+        <div class="space-y-3 md:col-span-1">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
+              <i class="fa-solid fa-shapes"></i>
+            </div>
+            <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
+              Tools<span class="text-blue-600">here</span>.online
+            </span>
+          </div>
+          <p class="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+            A free, clean suite of client-side web utilities for PDF processing, image compression, developer tools, and everyday calculations.
+          </p>
+          <div class="pt-1">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[11px] font-semibold">
+              <i class="fa-solid fa-lock text-[10px] text-emerald-600"></i> Zero Server File Uploads
+            </span>
+          </div>
+        </div>
+
+        <!-- Col 2: Categories -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">Tool Categories</h4>
+          <ul class="space-y-2">
+            <li><a href="/#pdf" class="hover:text-blue-600 transition-colors">PDF Tools</a></li>
+            <li><a href="/#image" class="hover:text-blue-600 transition-colors">Image Utilities</a></li>
+            <li><a href="/#text" class="hover:text-blue-600 transition-colors">Text &amp; Writing</a></li>
+            <li><a href="/#calc" class="hover:text-blue-600 transition-colors">Financial Calculators</a></li>
+            <li><a href="/#dev" class="hover:text-blue-600 transition-colors">Developer Utilities</a></li>
+            <li><a href="/#security" class="hover:text-blue-600 transition-colors">Security &amp; QR</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Popular Tools -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">Popular Tools</h4>
+          <ul class="space-y-2">
+            <li><a href="/image-compressor" class="hover:text-blue-600 transition-colors">Image Compressor</a></li>
+            <li><a href="/background-remover" class="hover:text-blue-600 transition-colors">Background Remover</a></li>
+            <li><a href="/merge-pdf" class="hover:text-blue-600 transition-colors">Merge PDF Files</a></li>
+            <li><a href="/compress-pdf" class="hover:text-blue-600 transition-colors">Compress PDF</a></li>
+            <li><a href="/age-calculator" class="hover:text-blue-600 transition-colors">Age Calculator</a></li>
+            <li><a href="/qr-code-generator" class="hover:text-blue-600 transition-colors">QR Code Generator</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Trust & Legal -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">About &amp; Trust</h4>
+          <ul class="space-y-2">
+            <li><a href="/about" class="hover:text-blue-600 transition-colors">About Toolshere</a></li>
+            <li><a href="/contact" class="hover:text-blue-600 transition-colors">Contact Support</a></li>
+            <li><a href="/privacy" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
+            <li><a href="/disclaimer" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
+          </ul>
+        </div>
       </div>
-      <p class="text-[10px] text-slate-400 pt-2">&copy; 2026 toolshere.online. All Rights Reserved. Client-Side Private Processing.</p>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-400">
+        <p>&copy; 2026 Toolshere.online. All Rights Reserved. Client-Side Private Processing.</p>
+        <p>Built with simplicity, speed, and privacy in mind.</p>
+      </div>
     </div>
   </footer>
 
@@ -477,6 +512,99 @@
       checkHashRoute();
     });
     window.addEventListener('hashchange', checkHashRoute);
+
+    
+    // Mobile Navigation Drawer Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    // Hero Search Real-time Filter
+    function filterToolsByQuery(query) {
+      query = (query || '').toLowerCase().trim();
+      const clearBtn = document.getElementById('heroClearBtn');
+      const countBadge = document.getElementById('searchResultCount');
+      if (clearBtn) clearBtn.classList.toggle('hidden', query.length === 0);
+
+      // Synchronize with header search
+      const headerInput = document.getElementById('headerSearchInput');
+      if (headerInput && headerInput.value !== query) headerInput.value = query;
+
+      let count = 0;
+      document.querySelectorAll('#tools-grid .tool-card').forEach(card => {
+        const title = (card.dataset.title || '').toLowerCase();
+        const text = card.textContent.toLowerCase();
+        if (title.includes(query) || text.includes(query)) {
+          card.classList.remove('hidden');
+          count++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (countBadge) {
+        if (query.length > 0) {
+          countBadge.innerText = `${count} tools`;
+          countBadge.classList.remove('hidden');
+        } else {
+          countBadge.classList.add('hidden');
+        }
+      }
+
+      // Hide popular section when searching
+      const popular = document.getElementById('popularSection');
+      if (popular) popular.classList.toggle('hidden', query.length > 0);
+    }
+
+    function clearHeroSearch() {
+      const input = document.getElementById('heroSearchInput');
+      if (input) {
+        input.value = '';
+        filterToolsByQuery('');
+        input.focus();
+      }
+    }
+
+    function handleHeaderSearch(query) {
+      const heroInput = document.getElementById('heroSearchInput');
+      if (heroInput) {
+        heroInput.value = query;
+        filterToolsByQuery(query);
+      }
+    }
+
+    // Category Filter Pills Handler
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-pill').forEach(pill => {
+        if (pill.dataset.cat === cat) {
+          pill.className = 'cat-pill px-4 py-2 rounded-full bg-slate-900 text-white shadow-xs transition-all';
+        } else {
+          pill.className = 'cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all';
+        }
+      });
+
+      // Clear search input when switching category
+      const heroInput = document.getElementById('heroSearchInput');
+      if (heroInput && heroInput.value) {
+        heroInput.value = '';
+        document.getElementById('heroClearBtn')?.classList.add('hidden');
+        document.getElementById('searchResultCount')?.classList.add('hidden');
+      }
+
+      // Show/hide popular section
+      const popular = document.getElementById('popularSection');
+      if (popular) popular.classList.toggle('hidden', cat !== 'all');
+
+      document.querySelectorAll('#tools-grid .tool-card').forEach(card => {
+        const cardCat = card.dataset.category;
+        if (cat === 'all' || cardCat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
 
     // Dark Mode Toggle
     function toggleDarkMode() {

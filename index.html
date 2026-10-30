@@ -122,16 +122,17 @@
           },
           colors: {
             brand: {
-              50: '#f0f9ff',
-              100: '#e0f2fe',
-              500: '#06b6d4',
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
               600: '#2563eb',
               700: '#1d4ed8',
+              800: '#1e40af',
             }
           }
         }
       }
-    }
+    };
   </script>
 
   <!-- FontAwesome Icons & External Libraries -->
@@ -144,44 +145,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; background-color: #FFFFFF; color: #1F2937; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-    .dark ::-webkit-scrollbar-thumb { background: #334155; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
 
     .checkerboard-bg {
-      background-color: #ffffff;
-      background-image: linear-gradient(45deg, #f1f5f9 25%, transparent 25%), linear-gradient(-45deg, #f1f5f9 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f1f5f9 75%), linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
+      background-color: #FFFFFF;
+      background-image: linear-gradient(45deg, #F1F5F9 25%, transparent 25%), linear-gradient(-45deg, #F1F5F9 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #F1F5F9 75%), linear-gradient(-45deg, transparent 75%, #F1F5F9 75%);
       background-size: 16px 16px;
       background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
     }
-    .dark .checkerboard-bg {
-      background-color: #0f172a;
-      background-image: linear-gradient(45deg, #1e293b 25%, transparent 25%), linear-gradient(-45deg, #1e293b 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #1e293b 75%), linear-gradient(-45deg, transparent 75%, #1e293b 75%);
-    }
 
-    @keyframes modalSlideUp {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    .tool-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .animate-modal-slide {
-      animation: modalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-    }
-    .dark .glass-card {
-      background: rgba(30, 41, 59, 0.85);
-      backdrop-filter: blur(12px);
-    }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+    .tool-card:hover {
+      border-color: #3B82F6;
+      box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.08), 0 8px 10px -6px rgba(59, 130, 246, 0.04);
+      transform: translateY(-2px);
     }
   </style>
   <!-- FAQPage Structured Data for Rich Snippets -->
@@ -322,418 +305,528 @@
 }
   </script>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col pb-20 md:pb-0">
+<body class="bg-white text-slate-800 min-h-screen flex flex-col font-sans antialiased">
 
   <!-- ================= TOAST NOTIFICATIONS ================= -->
   <div id="toastContainer" class="fixed top-20 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
   <!-- ================= DESKTOP & MOBILE TOP HEADER ================= -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-700/80 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
 
-      <!-- Interlocking T+H Logo (Header) -->
-      <a href="/" class="flex items-center gap-2.5 group shrink-0" aria-label="ToolsHere.online Homepage">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-cyan-500 to-teal-400 p-0.5 shadow-md shadow-cyan-500/20 group-hover:scale-105 transition-transform flex items-center justify-center">
-          <svg class="w-full h-full text-white" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" rx="24" fill="url(#header-logo-grad)"/>
-            <path d="M 22 28 H 60 M 41 28 V 74 M 41 51 H 78 M 60 28 V 74 M 78 28 V 74" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-            <defs>
-              <linearGradient id="header-logo-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#2563eb"/>
-                <stop offset="1" stop-color="#06b6d4"/>
-              </linearGradient>
-            </defs>
-          </svg>
+      <!-- Logo on the left -->
+      <a href="/" class="flex items-center gap-2.5 shrink-0 group" aria-label="ToolsHere.online Homepage">
+        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-base shadow-sm group-hover:bg-blue-700 transition-colors">
+          <i class="fa-solid fa-shapes"></i>
         </div>
         <div class="flex flex-col">
-          <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white flex items-center">
-            Tools<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 font-black">Here</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ml-1 bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">.online</span>
+          <span class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 leading-none">
+            Tools<span class="text-blue-600">Here</span><span class="text-xs text-slate-400 font-semibold">.online</span>
           </span>
-          <span class="text-[9px] text-slate-500 dark:text-slate-400 font-medium -mt-1 hidden sm:inline">Ultimate Web Utilities</span>
+          <span class="text-[10px] text-slate-400 font-medium tracking-wide">Free Online Tools</span>
         </div>
       </a>
 
-      <!-- Sleek Glowing Search Capsule -->
-      <div class="flex-1 max-w-[170px] sm:max-w-[240px] md:max-w-[280px] transition-all duration-300 focus-within:max-w-[360px] mx-1 sm:mx-3">
-        <div class="relative group">
-          <!-- Ambient Glow Effect on Hover/Focus -->
-          <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 rounded-full blur-xs opacity-0 group-hover:opacity-40 group-focus-within:opacity-80 transition duration-300"></div>
-          
-          <div class="relative flex items-center bg-slate-100/90 dark:bg-slate-800/90 backdrop-blur-md rounded-full border border-slate-200/90 dark:border-slate-700/90 shadow-2xs group-hover:border-cyan-400/60 dark:group-hover:border-cyan-500/50 transition-all duration-200">
-            <!-- Sleek Search Icon -->
-            <div class="pl-2.5 sm:pl-3 pr-1.5 flex items-center justify-center text-slate-400 group-hover:text-cyan-500 dark:group-hover:text-cyan-400 group-focus-within:text-cyan-500 transition-colors">
-              <i class="fa-solid fa-magnifying-glass text-xs"></i>
-            </div>
-            
-            <!-- Compact Search Input -->
-            <input type="text" id="globalSearchInput" onkeyup="filterTools()" placeholder="Search tools..." class="w-full py-1 sm:py-1.5 text-xs bg-transparent text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none tracking-tight font-medium" aria-label="Search all utilities">
-            
-            <!-- Live Match Count Badge -->
-            <span id="searchCountBadge" class="hidden shrink-0 text-[10px] font-bold px-1.5 py-0.2 rounded-full bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 mr-1 animate-pulse"></span>
-
-            <!-- Clear Search Button -->
-            <button type="button" id="clearSearchBtn" onclick="clearSearch()" class="hidden shrink-0 p-1 mr-1 text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 transition-colors" title="Clear search">
-              <i class="fa-solid fa-circle-xmark text-xs"></i>
-            </button>
-            
-            <!-- Refined Shortcut Pill -->
-            <div class="pr-2 sm:pr-2.5 shrink-0 hidden sm:flex items-center">
-              <kbd class="text-[9px] font-mono font-semibold px-1.5 py-0.5 rounded-md bg-white dark:bg-slate-700 text-slate-400 dark:text-slate-400 border border-slate-200 dark:border-slate-600 shadow-2xs tracking-tighter">⌘K</kbd>
-            </div>
-          </div>
+      <!-- Compact Search Bar Near Centre (Desktop) -->
+      <div class="hidden md:flex flex-1 max-w-sm mx-4">
+        <div class="relative w-full">
+          <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+          <input type="text" id="headerSearchInput" onkeyup="handleHeaderSearch(this.value)" placeholder="Search 16+ tools (PDF, Image, EMI)..." class="w-full pl-9 pr-10 py-1.5 text-xs bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 rounded-full focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-slate-800 placeholder:text-slate-400 font-medium">
+          <kbd class="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-mono text-slate-400 px-1 py-0.5 rounded bg-slate-100 border border-slate-200">⌘K</kbd>
         </div>
       </div>
 
-      <!-- Controls & Quick Navigation -->
-      <div class="flex items-center gap-1.5 sm:gap-3">
-        <nav class="hidden lg:flex items-center gap-4 text-xs font-semibold text-slate-600 dark:text-slate-300 mr-1">
-          <button type="button" onclick="filterCategory('pdf'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">PDF Tools</button>
-          <button type="button" onclick="filterCategory('all'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">All Utilities</button>
-          <a href="/about" onclick="openToolPage('about', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">About</a>
+      <!-- Navigation Links on the right -->
+      <div class="flex items-center gap-3">
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-slate-600">
+          <button type="button" onclick="filterCategory('pdf'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 transition-colors">PDF Tools</button>
+          <button type="button" onclick="filterCategory('image'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 transition-colors">Image Tools</button>
+          <button type="button" onclick="filterCategory('all'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 transition-colors">All Tools</button>
+          <a href="/about" class="hover:text-blue-600 transition-colors">About</a>
         </nav>
-        <button onclick="toggleDarkMode()" class="p-2 sm:p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
-          <i id="themeIcon" class="fa-solid fa-moon text-base sm:text-lg"></i>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors" aria-label="Toggle navigation menu">
+          <i class="fa-solid fa-bars text-lg"></i>
         </button>
       </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-2 text-sm font-semibold">
+      <div class="relative w-full mb-3">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+        <input type="text" onkeyup="handleHeaderSearch(this.value)" placeholder="Search utilities..." class="w-full pl-9 pr-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 text-slate-800 font-medium">
+      </div>
+      <button type="button" onclick="filterCategory('pdf'); toggleMobileMenu(); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="block w-full text-left py-2 text-slate-700 hover:text-blue-600">PDF Tools</button>
+      <button type="button" onclick="filterCategory('image'); toggleMobileMenu(); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="block w-full text-left py-2 text-slate-700 hover:text-blue-600">Image Tools</button>
+      <button type="button" onclick="filterCategory('all'); toggleMobileMenu(); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="block w-full text-left py-2 text-slate-700 hover:text-blue-600">All Utilities</button>
+      <a href="/about" class="block py-2 text-slate-700 hover:text-blue-600">About ToolsHere</a>
     </div>
   </header>
 
   <!-- ================= MAIN DASHBOARD CONTAINER ================= -->
   <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
     <!-- ================= HOME DASHBOARD VIEW ================= -->
-    <div id="homeView" class="space-y-6">
-      <!-- DASHBOARD HEADER & FILTER TABS -->
-    <div class="glass-card p-5 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-200/80 dark:border-slate-700/80 shadow-sm space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div>
-          <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-            <i class="fa-solid fa-layer-group text-blue-600 dark:text-cyan-400 text-lg sm:text-2xl"></i> Free Online Tools & Web Utilities
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
-            Instant browser-based utilities. Zero latency, 100% private, and desktop & mobile optimized.
-          </p>
+    <div id="homeView" class="space-y-10">
+
+      <!-- Minimal White Hero Header Inspired by iLovePDF / Smallpdf -->
+      <section class="pt-8 sm:pt-14 pb-4 text-center max-w-4xl mx-auto px-4">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          Free Online Tools
+        </h1>
+        <p class="text-base sm:text-lg text-slate-500 mt-3 max-w-2xl mx-auto leading-relaxed font-normal">
+          Simple, fast, and easy-to-use tools for your everyday tasks.
+        </p>
+
+        <!-- Prominent Search Bar Below Heading -->
+        <div class="mt-8 max-w-xl mx-auto">
+          <div class="relative flex items-center bg-white border border-slate-300 rounded-full shadow-xs hover:border-blue-400 focus-within:border-blue-600 focus-within:ring-4 focus-within:ring-blue-100 transition-all p-1.5 pl-4 sm:pl-5">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm mr-3"></i>
+            <input type="text" id="heroSearchInput" onkeyup="filterToolsByQuery(this.value)" placeholder="Search for a tool..." class="w-full py-2 text-sm sm:text-base bg-transparent text-slate-800 placeholder:text-slate-400 focus:outline-none font-medium">
+            <span id="searchResultCount" class="hidden text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 mr-2 shrink-0"></span>
+            <button type="button" onclick="clearHeroSearch()" id="heroClearBtn" class="hidden p-1.5 text-slate-400 hover:text-slate-600 mr-1" title="Clear search">
+              <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+          </div>
         </div>
-        <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium flex-wrap">
-          <span class="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 rounded-full border border-emerald-200 dark:border-emerald-800/80">
-            <i class="fa-solid fa-shield-halved text-emerald-500"></i> Client-Side Privacy
-          </span>
-          <span class="hidden sm:flex items-center gap-1.5 px-3 py-1 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-800/80">
-            <i class="fa-solid fa-bolt text-amber-500"></i> Zero Server Upload
-          </span>
+
+        <!-- Filter Category Tabs (Only real categories in project) -->
+        <div class="flex items-center justify-center gap-2 flex-wrap mt-8 text-xs font-semibold">
+          <button onclick="filterCategory('all')" class="cat-pill px-4 py-2 rounded-full bg-slate-900 text-white shadow-xs transition-all" data-cat="all">All Tools</button>
+          <button onclick="filterCategory('pdf')" class="cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all" data-cat="pdf">PDF Tools</button>
+          <button onclick="filterCategory('image')" class="cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all" data-cat="image">Image Tools</button>
+          <button onclick="filterCategory('text')" class="cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all" data-cat="text">Text Tools</button>
+          <button onclick="filterCategory('calc')" class="cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all" data-cat="calc">Calculators</button>
+          <button onclick="filterCategory('dev')" class="cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all" data-cat="dev">Developer Tools</button>
+          <button onclick="filterCategory('security')" class="cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all" data-cat="security">Security Tools</button>
+        </div>
+      </section>
+
+      <!-- Popular Tools Section (Highlighted Top 4 Utilities) -->
+      <section id="popularSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-fire text-amber-500"></i>
+            <h2 class="text-base sm:text-lg font-bold text-slate-900">Popular Tools</h2>
+          </div>
+          <span class="text-xs text-slate-400 font-medium">Most used online utilities</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <!-- Pop 1: Image Compressor -->
+          <a href="/image-compressor" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-lg mb-3.5 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-compress"></i>
+              </div>
+              <h3 class="font-bold text-base text-slate-900 group-hover:text-blue-600 transition-colors mb-1">Image Compressor</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Compress JPG, PNG & WebP to 20KB, 50KB or custom size.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-600">Image</span>
+              <span class="text-xs font-bold text-blue-600">Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+            </div>
+          </a>
+
+          <!-- Pop 2: Merge PDF -->
+          <a href="/merge-pdf" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-red-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-lg mb-3.5 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-object-group"></i>
+              </div>
+              <h3 class="font-bold text-base text-slate-900 group-hover:text-red-600 transition-colors mb-1">Merge PDF</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Combine multiple PDF files into one single document.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-red-50 text-red-600">PDF</span>
+              <span class="text-xs font-bold text-red-600">Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+            </div>
+          </a>
+
+          <!-- Pop 3: Background Remover -->
+          <a href="/background-remover" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-violet-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-violet-50 border border-violet-100 text-violet-600 flex items-center justify-center text-lg mb-3.5 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <h3 class="font-bold text-base text-slate-900 group-hover:text-violet-600 transition-colors mb-1">Background Remover</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Remove photo backgrounds and download transparent PNGs.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-violet-50 text-violet-600">Image</span>
+              <span class="text-xs font-bold text-violet-600">Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+            </div>
+          </a>
+
+          <!-- Pop 4: Age Calculator -->
+          <a href="/age-calculator" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full">
+            <div>
+              <div class="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center text-lg mb-3.5 group-hover:scale-105 transition-transform">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <h3 class="font-bold text-base text-slate-900 group-hover:text-emerald-600 transition-colors mb-1">Age Calculator</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">Calculate exact age in years, months, days and next birthday.</p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-emerald-50 text-emerald-600">Calculator</span>
+              <span class="text-xs font-bold text-emerald-600">Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Main Tools Section Heading -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900">All Available Tools</h2>
+          <span class="text-xs text-slate-400 font-medium">16 Client-Side Utilities</span>
         </div>
       </div>
 
-      <!-- Horizontal Category Tabs -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-xs font-semibold">
-        <button onclick="filterCategory('all')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-sm transition-all" data-cat="all">All Utilities</button>
-        <button onclick="filterCategory('favorites')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-rose-500 hover:text-white transition-all flex items-center gap-1.5" data-cat="favorites">
-          <i class="fa-solid fa-heart text-rose-500"></i> Bookmarks <span id="favCountBadge" class="ml-1 px-1.5 py-0.2 bg-rose-100 dark:bg-rose-950 text-rose-700 dark:text-rose-300 rounded-full text-[10px] hidden">0</span>
-        </button>
-        <button onclick="filterCategory('image')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="image">Image Tools</button>
-        <button onclick="filterCategory('pdf')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="pdf">Document & PDF</button>
-        <button onclick="filterCategory('calc')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="calc">Calculators</button>
-        <button onclick="filterCategory('text')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="text">Text & Content</button>
-        <button onclick="filterCategory('dev')" class="cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all" data-cat="dev">Security & Code</button>
-      </div>
-    </div>
-
-    <!-- ================= EQUAL-WEIGHT TOOL CARDS GRID ================= -->
+      <!-- ================= EQUAL-WEIGHT TOOL CARDS GRID ================= -->
     <h2 class="sr-only">Free Online Tools & Productivity Utilities Suite</h2>
-    <div id="tools-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+    <div id="tools-grid" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
 
       <!-- TOOL 1: Image Compressor & Resizer -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="imgResizer" data-category="image" data-title="Image Compressor & Resizer">
-        <button onclick="toggleFavorite('imgResizer', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/image-compressor" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="imgResizer" data-category="image" data-title="Image Compressor & Resizer">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-sky-100 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-compress"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800">Image</span>
+          <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-compress"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Compressor & Resizer</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Compress JPEG, PNG, and WebP images to custom dimensions or target file sizes like 20KB, 50KB, and 100KB directly in your browser with zero server uploads.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-blue-600 transition-colors mb-1.5 leading-snug">
+            Image Compressor & Resizer
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Compress JPEG, PNG, and WebP images to custom dimensions or exact file sizes (20KB, 50KB, 100KB) with zero server uploads.
+          </p>
         </div>
-        <a href="/image-compressor" onclick="openToolPage('image-compressor', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-600">Image</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 group-hover:text-blue-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 2: AI Background Remover -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="bgRemover" data-category="image" data-title="AI Background Remover">
-        <button onclick="toggleFavorite('bgRemover', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/background-remover" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-violet-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="bgRemover" data-category="image" data-title="AI Background Remover">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-violet-100 dark:bg-violet-950/60 text-violet-600 dark:text-violet-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-wand-magic-sparkles"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800">Image</span>
+          <div class="w-12 h-12 rounded-xl bg-violet-50 border border-violet-100 text-violet-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">AI Background Remover</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Remove solid and uniform photo backgrounds instantly using client-side canvas color isolation, sensitivity thresholds, and export transparent PNG files securely.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-violet-600 transition-colors mb-1.5 leading-snug">
+            AI Background Remover
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Isolate subjects and create transparent PNG photos directly in your browser using client-side color tolerance algorithms.
+          </p>
         </div>
-        <a href="/background-remover" onclick="openToolPage('background-remover', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-violet-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-violet-50 text-violet-600">Image</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-violet-600 group-hover:text-violet-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
-      <!-- TOOL 3: PDF to Word -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="pdfWord" data-category="pdf" data-title="PDF to Word Converter">
-        <button onclick="toggleFavorite('pdfWord', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <!-- TOOL 3: PDF to Word Converter -->
+      <a href="/pdf-to-word" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-red-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="pdfWord" data-category="pdf" data-title="PDF to Word Converter">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-file-pdf"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border border-red-200 dark:border-red-800">Document</span>
+          <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-file-word"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">PDF to Word Converter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert PDF documents into editable Word (.doc) files quickly inside your browser without uploading proprietary files to external servers.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
+            PDF to Word Converter
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Convert confidential PDF documents into editable Word (.doc) files safely without server queue delays or file retention.
+          </p>
         </div>
-        <a href="/pdf-to-word" onclick="openToolPage('pdf-to-word', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600">PDF</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 group-hover:text-red-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 4: Merge & Split PDF -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="pdfMerge" data-category="pdf" data-title="Merge & Split PDF">
-        <button onclick="toggleFavorite('pdfMerge', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/merge-pdf" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-red-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="pdfMerge" data-category="pdf" data-title="Merge & Split PDF">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-orange-100 dark:bg-orange-950/60 text-orange-600 dark:text-orange-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-object-group"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-orange-50 dark:bg-orange-950 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800">Document</span>
+          <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-object-group"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Merge & Split PDF</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Combine multiple PDF documents into a unified file securely in browser memory without file size caps, queue delays, or server-side logging.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
+            Merge & Split PDF
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Combine multiple PDF files into one clean document or organize pages in seconds right in your browser memory.
+          </p>
         </div>
-        <a href="/merge-pdf" onclick="openToolPage('merge-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600">PDF</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 group-hover:text-red-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 5: Age & Date Calculator -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="ageCalc" data-category="calc" data-title="Age & Date Difference Calculator">
-        <button onclick="toggleFavorite('ageCalc', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/age-calculator" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="ageCalc" data-category="calc" data-title="Age & Date Calculator">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-calculator"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Calculator</span>
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-calendar-check"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Age & Date Calculator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate your exact age in years, months, and days alongside total days lived using precise calendar leap-year calculations in real time.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-emerald-600 transition-colors mb-1.5 leading-snug">
+            Age & Date Calculator
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Calculate your exact age in years, months, and days alongside total days lived and next birthday countdown.
+          </p>
         </div>
-        <a href="/age-calculator" onclick="openToolPage('age-calculator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-600">Calculator</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
-      <!-- TOOL 6: YouTube Thumbnail Grabber -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="ytThumb" data-category="image" data-title="YouTube Thumbnail Downloader">
-        <button onclick="toggleFavorite('ytThumb', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <!-- TOOL 6: YouTube Thumbnail Downloader -->
+      <a href="/youtube-thumbnail" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-rose-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="ytThumb" data-category="security" data-title="YouTube Thumbnail Downloader">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-brands fa-youtube"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Media</span>
+          <div class="w-12 h-12 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-brands fa-youtube"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">YouTube Thumbnail Grabber</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract and download high-resolution 1080p Max-HD YouTube video thumbnails instantly by pasting any standard, short, or mobile YouTube link.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-rose-600 transition-colors mb-1.5 leading-snug">
+            YouTube Thumbnail Grabber
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Download high-resolution 1080p Full-HD video thumbnails instantly from any standard or Shorts YouTube URL.
+          </p>
         </div>
-        <a href="/youtube-thumbnail" onclick="openToolPage('youtube-thumbnail', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-rose-50 text-rose-600">Media</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 group-hover:text-rose-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
-      <!-- TOOL 7: QR Code Studio & Reader -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="qrTool" data-category="text" data-title="QR Code Generator & Scanner">
-        <button onclick="toggleFavorite('qrTool', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <!-- TOOL 7: QR Code Generator & Studio -->
+      <a href="/qr-code-generator" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-cyan-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="qrTool" data-category="dev" data-title="QR Code Studio & Reader">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-cyan-100 dark:bg-cyan-950/60 text-cyan-600 dark:text-cyan-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-qrcode"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-50 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">Utility</span>
+          <div class="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-qrcode"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">QR Code Studio & Reader</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate high-contrast, error-corrected QR codes for website URLs, contact details, or text messages and download crisp PNG images instantly.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-cyan-600 transition-colors mb-1.5 leading-snug">
+            QR Code Studio & Creator
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Generate custom, scannable QR codes for websites, WiFi, and contact cards with high-correction Level H graphics.
+          </p>
         </div>
-        <a href="/qr-code-generator" onclick="openToolPage('qr-code-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-cyan-50 text-cyan-600">Developer</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-600 group-hover:text-cyan-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
-      <!-- TOOL 8: Password Generator -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="passwordGen" data-category="dev" data-title="Strong Password Generator">
-        <button onclick="toggleFavorite('passwordGen', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <!-- TOOL 8: Strong Password Generator -->
+      <a href="/password-generator" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-teal-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="passwordGen" data-category="security" data-title="Strong Password Creator">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-teal-100 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">Security</span>
+          <div class="w-12 h-12 rounded-xl bg-teal-50 border border-teal-100 text-teal-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-shield-halved"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Strong Password Creator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate cryptographically secure passwords with custom lengths (8–32 characters), symbols, and numbers using your browser's Web Crypto API.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-teal-600 transition-colors mb-1.5 leading-snug">
+            Strong Password Creator
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Generate cryptographically secure passwords with custom lengths and symbols using the browser's Web Crypto API.
+          </p>
         </div>
-        <a href="/password-generator" onclick="openToolPage('password-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-teal-50 text-teal-600">Security</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-teal-600 group-hover:text-teal-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 9: Word & Character Counter -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="wordCount" data-category="text" data-title="Word & Character Counter">
-        <button onclick="toggleFavorite('wordCount', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/word-counter" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-indigo-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="wordCount" data-category="text" data-title="Word & Character Counter">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-file-lines"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Text</span>
+          <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-font"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Word & Character Counter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Count words, characters, sentences, and estimated reading time in real time as you type or paste text for essays, tweets, and articles.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-indigo-600 transition-colors mb-1.5 leading-snug">
+            Word & Character Counter
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Count words, characters, sentences, paragraphs, and reading time in real time as you type or paste text.
+          </p>
         </div>
-        <a href="/word-counter" onclick="openToolPage('word-counter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-600">Text</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 group-hover:text-indigo-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 10: GST & Loan EMI Calculator -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="gstEmi" data-category="calc" data-title="GST & Loan EMI Calculator">
-        <button onclick="toggleFavorite('gstEmi', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/emi-calculator" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-emerald-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="gstEmi" data-category="calc" data-title="GST & Loan EMI Calculator">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-chart-pie"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800">Finance</span>
+          <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-calculator"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">GST & Loan EMI Calculator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate monthly loan EMIs and Goods and Services Tax (5%, 12%, 18%, 28%) with instant numerical breakdowns for loans and business billing.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-emerald-600 transition-colors mb-1.5 leading-snug">
+            GST & Loan EMI Calculator
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Calculate monthly loan EMIs and Goods and Services Tax (5%, 12%, 18%, 28%) with accurate numerical breakdowns.
+          </p>
         </div>
-        <a href="/emi-calculator" onclick="openToolPage('emi-calculator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-600">Calculator</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 11: Image Format Converter -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="imgFormat" data-category="image" data-title="Image Format Converter">
-        <button onclick="toggleFavorite('imgFormat', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/image-converter" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="imgFormat" data-category="image" data-title="Image Format Converter">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-purple-100 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-file-image"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">Convert</span>
+          <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-arrows-rotate"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Format Converter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert pictures between PNG, JPG, and WebP formats directly inside browser memory with preserved resolution and zero server-side uploads.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-blue-600 transition-colors mb-1.5 leading-snug">
+            Image Format Converter
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Convert image files between PNG, JPG, and WebP instantly in your browser while preserving full original resolution.
+          </p>
         </div>
-        <a href="/image-converter" onclick="openToolPage('image-converter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-600">Image</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 group-hover:text-blue-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 12: Text Case Converter -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="textCase" data-category="text" data-title="Text Case Converter">
-        <button onclick="toggleFavorite('textCase', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/text-case-converter" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-indigo-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="textCase" data-category="text" data-title="Text Case Converter">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-pink-100 dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-font"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-pink-50 dark:bg-pink-950 text-pink-700 dark:text-pink-300 border border-pink-200 dark:border-pink-800">Format</span>
+          <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-text-height"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Text Case Converter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert strings to UPPERCASE, lowercase, Title Case, and clean URL Slugs with one click for coding, headlines, and clean copywriting.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-indigo-600 transition-colors mb-1.5 leading-snug">
+            Text Case Converter
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Convert text between UPPERCASE, lowercase, Title Case, Sentence case, and clean URL Slugs with one click.
+          </p>
         </div>
-        <a href="/text-case-converter" onclick="openToolPage('text-case-converter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-600">Text</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 group-hover:text-indigo-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 13: JSON Formatter & Validator -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="jsonFormat" data-category="dev" data-title="JSON Formatter & Validator">
-        <button onclick="toggleFavorite('jsonFormat', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/json-formatter" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-amber-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="jsonFormat" data-category="dev" data-title="JSON Formatter & Validator">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-code"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">Developer</span>
+          <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-code"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">JSON Formatter & Validator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Beautify nested JSON payloads, minify code for production APIs, and validate syntax errors instantly in your browser with zero data leaks.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-amber-600 transition-colors mb-1.5 leading-snug">
+            JSON Formatter & Validator
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Beautify nested JSON payloads, minify code for production APIs, and validate syntax errors privately.
+          </p>
         </div>
-        <a href="/json-formatter" onclick="openToolPage('json-formatter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-50 text-amber-600">Developer</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 group-hover:text-amber-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
       <!-- TOOL 14: SEO Meta Tag Generator -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="seoMeta" data-category="dev" data-title="SEO Meta Tag Generator">
-        <button onclick="toggleFavorite('seoMeta', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <a href="/seo-meta-generator" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-amber-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="seoMeta" data-category="dev" data-title="SEO Meta Tag Generator">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-lime-100 dark:bg-lime-950/60 text-lime-600 dark:text-lime-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-tags"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-lime-50 dark:bg-lime-950 text-lime-700 dark:text-lime-300 border border-lime-200 dark:border-lime-800">SEO</span>
+          <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">SEO Meta Tag Generator</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate standard HTML title, meta description, robots, and OpenGraph tags to optimize search engine ranking and social media share previews.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-amber-600 transition-colors mb-1.5 leading-snug">
+            SEO Meta Tag Generator
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Generate standard HTML title, meta description, robots, and OpenGraph tags to optimize search engine ranking.
+          </p>
         </div>
-        <a href="/seo-meta-generator" onclick="openToolPage('seo-meta-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-50 text-amber-600">Developer</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 group-hover:text-amber-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
-      <!-- TOOL 15: Compress PDF -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="compressPdf" data-category="pdf" data-title="Compress PDF File Size">
-        <button onclick="toggleFavorite('compressPdf', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <!-- TOOL 15: Compress PDF Document -->
+      <a href="/compress-pdf" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-red-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="compressPdf" data-category="pdf" data-title="Compress PDF Document">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-rose-100 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-file-zipper"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Document</span>
+          <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-file-zipper"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Compress PDF Document</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Shrink heavy PDF documents down to portal-friendly file sizes with selectable compression modes directly in browser memory with total privacy.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
+            Compress PDF Document
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Shrink heavy PDF documents down to portal-friendly file sizes with selectable compression modes privately.
+          </p>
         </div>
-        <a href="/compress-pdf" onclick="openToolPage('compress-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600">PDF</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 group-hover:text-red-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
-      <!-- TOOL 16: Image to PDF -->
-      <div class="tool-card relative bg-white dark:bg-slate-800 rounded-2xl p-5 border border-slate-200 dark:border-slate-700/80 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col justify-between group" data-id="imgToPdf" data-category="pdf" data-title="Image to PDF Converter">
-        <button onclick="toggleFavorite('imgToPdf', event)" class="fav-btn absolute top-4 right-4 text-slate-300 dark:text-slate-600 hover:text-rose-500 transition-colors p-1" title="Pin to Favorites" aria-label="Pin to Favorites">
-          <i class="fa-solid fa-heart text-base"></i>
-        </button>
+      <!-- TOOL 16: Image to PDF Converter -->
+      <a href="/image-to-pdf" class="tool-card group block bg-white rounded-xl border border-slate-200 hover:border-red-500 hover:shadow-md transition-all p-5 flex flex-col justify-between h-full" data-id="imgToPdf" data-category="pdf" data-title="Image to PDF Converter">
         <div>
-          <div class="flex items-center justify-between mb-3.5 pr-6">
-            <div class="w-14 h-14 sm:w-12 sm:h-12 rounded-2xl shadow-sm bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl sm:text-xl font-bold group-hover:scale-110 transition-transform shadow-inner">
-              <i class="fa-solid fa-images"></i>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Document</span>
+          <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-images"></i>
           </div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image to PDF Converter</h3>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert and bundle multiple PNG, JPG, and WebP images into a single clean PDF document ready for printing, submission, and sharing.</p>
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
+            Image to PDF Converter
+          </h3>
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Convert and bundle multiple PNG, JPG, and WebP images into a single clean PDF document ready for printing.
+          </p>
         </div>
-        <a href="/image-to-pdf" onclick="openToolPage('image-to-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
-      </div>
+        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600">PDF</span>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 group-hover:text-red-700">
+            Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </span>
+        </div>
+      </a>
 
     </div>
-    </div>
+  </div>
 
-    <!-- ================= DEDICATED FULL-PAGE TOOL CONTAINER ================= -->
+  <!-- ================= DEDICATED FULL-PAGE TOOL CONTAINER ================= -->
     <section id="toolView" class="hidden min-h-[75vh] w-full" aria-label="Dedicated Tool Utility Workspace">
       <div class="max-w-5xl mx-auto px-0 sm:px-2 py-2 sm:py-4 space-y-6">
         
@@ -808,49 +901,68 @@
 
   <!-- ================= GLOBAL MODAL / BOTTOM SHEET CONTAINER ================= -->
   <!-- ================= GLOBAL FOOTER ================= -->
-  <footer class="mt-12 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-8 text-center text-xs text-slate-500 dark:text-slate-400">
-    <div class="max-w-7xl mx-auto px-4 space-y-4">
-
-      <!-- Interlocking T+H Logo (Footer) -->
-      <div class="flex items-center justify-center gap-2.5">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-600 via-cyan-500 to-teal-400 p-0.5 shadow-md flex items-center justify-center">
-          <svg class="w-full h-full text-white" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" rx="24" fill="url(#footer-logo-grad)"/>
-            <path d="M 22 28 H 60 M 41 28 V 74 M 41 51 H 78 M 60 28 V 74 M 78 28 V 74" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-            <defs>
-              <linearGradient id="footer-logo-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#2563eb"/>
-                <stop offset="1" stop-color="#06b6d4"/>
-              </linearGradient>
-            </defs>
-          </svg>
+  <footer class="bg-slate-50 border-t border-slate-200 py-12 px-4 sm:px-6 lg:px-8 mt-20 text-slate-600">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 mb-10">
+      
+      <!-- Brand column -->
+      <div class="md:col-span-2 space-y-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-sm">
+            <i class="fa-solid fa-shapes"></i>
+          </div>
+          <span class="font-bold text-lg text-slate-900 tracking-tight">ToolsHere.online</span>
         </div>
-        <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
-          Tools<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 font-black">Here</span>.online
-        </span>
+        <p class="text-xs text-slate-500 leading-relaxed max-w-sm">
+          Free, fast, and 100% private online digital utilities. Every conversion and calculation executes directly inside your browser memory with zero server uploads.
+        </p>
+        <div class="flex items-center gap-2 text-xs text-emerald-700 font-semibold pt-1">
+          <i class="fa-solid fa-shield-halved"></i> 100% Client-Side In-Browser Processing
+        </div>
+      </div>
+      
+      <!-- PDF Tools Column -->
+      <div>
+        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">PDF & Document</h4>
+        <ul class="space-y-2 text-xs text-slate-500 font-medium">
+          <li><a href="/merge-pdf" class="hover:text-blue-600 transition-colors">Merge PDF</a></li>
+          <li><a href="/pdf-to-word" class="hover:text-blue-600 transition-colors">PDF to Word</a></li>
+          <li><a href="/compress-pdf" class="hover:text-blue-600 transition-colors">Compress PDF</a></li>
+          <li><a href="/image-to-pdf" class="hover:text-blue-600 transition-colors">Image to PDF</a></li>
+        </ul>
       </div>
 
-      <p class="max-w-xl mx-auto text-[11px] leading-relaxed">Fast, free & private client-side web utilities. Everything executes directly inside your browser memory with zero server uploads.</p>
-
-      <div class="flex justify-center flex-wrap gap-4 text-slate-500 dark:text-slate-400 pt-1 text-[11px] font-medium">
-        <span><i class="fa-solid fa-shield-halved text-emerald-500 mr-1"></i> Privacy Preserved</span>
-        <span><i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Instant Performance</span>
-        <span><i class="fa-solid fa-mobile-screen-button text-cyan-500 mr-1"></i> Mobile Responsive</span>
+      <!-- Image Tools Column -->
+      <div>
+        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Image & Media</h4>
+        <ul class="space-y-2 text-xs text-slate-500 font-medium">
+          <li><a href="/image-compressor" class="hover:text-blue-600 transition-colors">Image Compressor</a></li>
+          <li><a href="/background-remover" class="hover:text-blue-600 transition-colors">Background Remover</a></li>
+          <li><a href="/image-converter" class="hover:text-blue-600 transition-colors">Image Converter</a></li>
+          <li><a href="/youtube-thumbnail" class="hover:text-blue-600 transition-colors">YouTube Thumbnail</a></li>
+        </ul>
       </div>
 
-      <!-- Navigation Links -->
-      <div class="flex justify-center flex-wrap gap-x-5 gap-y-2 text-xs text-slate-500 dark:text-slate-400 pt-2 font-medium">
-        <a href="/" class="hover:text-blue-600 dark:hover:text-cyan-400">Home</a>
-        <button type="button" onclick="filterCategory('all'); window.scrollTo({top:0, behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400">All Utilities</button>
-        <button type="button" onclick="filterCategory('pdf'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400">PDF Suite</button>
-        <a href="/about" onclick="openToolPage('about', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">About Us</a>
-        <a href="/contact" onclick="openToolPage('contact', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Contact</a>
-        <a href="/privacy" onclick="openToolPage('privacy', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Privacy Policy</a>
-        <a href="/terms" onclick="openToolPage('terms', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Terms of Service</a>
-        <a href="/disclaimer" onclick="openToolPage('disclaimer', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Disclaimer</a>
+      <!-- Company & Legal Column -->
+      <div>
+        <h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Company & Legal</h4>
+        <ul class="space-y-2 text-xs text-slate-500 font-medium">
+          <li><a href="/about" class="hover:text-blue-600 transition-colors">About Us</a></li>
+          <li><a href="/contact" class="hover:text-blue-600 transition-colors">Contact & Support</a></li>
+          <li><a href="/privacy" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
+          <li><a href="/disclaimer" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
+        </ul>
       </div>
+    </div>
 
-      <p class="text-[10px] text-slate-400 pt-2">&copy; 2026 toolshere.online. All Rights Reserved.</p>
+    <!-- Bottom sub-footer -->
+    <div class="max-w-7xl mx-auto pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+      <p>&copy; 2026 ToolsHere.online. All Rights Reserved. Client-Side Private Processing.</p>
+      <div class="flex items-center gap-4 font-medium">
+        <a href="/privacy" class="hover:text-slate-600">Privacy</a>
+        <a href="/terms" class="hover:text-slate-600">Terms</a>
+        <a href="/contact" class="hover:text-slate-600">Support</a>
+      </div>
     </div>
   </footer>
 
@@ -869,6 +981,99 @@
       checkHashRoute();
     });
     window.addEventListener('hashchange', checkHashRoute);
+
+    
+    // Mobile Navigation Drawer Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) menu.classList.toggle('hidden');
+    }
+
+    // Hero Search Real-time Filter
+    function filterToolsByQuery(query) {
+      query = (query || '').toLowerCase().trim();
+      const clearBtn = document.getElementById('heroClearBtn');
+      const countBadge = document.getElementById('searchResultCount');
+      if (clearBtn) clearBtn.classList.toggle('hidden', query.length === 0);
+
+      // Synchronize with header search
+      const headerInput = document.getElementById('headerSearchInput');
+      if (headerInput && headerInput.value !== query) headerInput.value = query;
+
+      let count = 0;
+      document.querySelectorAll('#tools-grid .tool-card').forEach(card => {
+        const title = (card.dataset.title || '').toLowerCase();
+        const text = card.textContent.toLowerCase();
+        if (title.includes(query) || text.includes(query)) {
+          card.classList.remove('hidden');
+          count++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (countBadge) {
+        if (query.length > 0) {
+          countBadge.innerText = `${count} tools`;
+          countBadge.classList.remove('hidden');
+        } else {
+          countBadge.classList.add('hidden');
+        }
+      }
+
+      // Hide popular section when searching
+      const popular = document.getElementById('popularSection');
+      if (popular) popular.classList.toggle('hidden', query.length > 0);
+    }
+
+    function clearHeroSearch() {
+      const input = document.getElementById('heroSearchInput');
+      if (input) {
+        input.value = '';
+        filterToolsByQuery('');
+        input.focus();
+      }
+    }
+
+    function handleHeaderSearch(query) {
+      const heroInput = document.getElementById('heroSearchInput');
+      if (heroInput) {
+        heroInput.value = query;
+        filterToolsByQuery(query);
+      }
+    }
+
+    // Category Filter Pills Handler
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-pill').forEach(pill => {
+        if (pill.dataset.cat === cat) {
+          pill.className = 'cat-pill px-4 py-2 rounded-full bg-slate-900 text-white shadow-xs transition-all';
+        } else {
+          pill.className = 'cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all';
+        }
+      });
+
+      // Clear search input when switching category
+      const heroInput = document.getElementById('heroSearchInput');
+      if (heroInput && heroInput.value) {
+        heroInput.value = '';
+        document.getElementById('heroClearBtn')?.classList.add('hidden');
+        document.getElementById('searchResultCount')?.classList.add('hidden');
+      }
+
+      // Show/hide popular section
+      const popular = document.getElementById('popularSection');
+      if (popular) popular.classList.toggle('hidden', cat !== 'all');
+
+      document.querySelectorAll('#tools-grid .tool-card').forEach(card => {
+        const cardCat = card.dataset.category;
+        if (cat === 'all' || cardCat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
 
     // Dark Mode Toggle
     function toggleDarkMode() {
