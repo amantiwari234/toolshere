@@ -88,22 +88,22 @@
         "name": "ToolsHere Online Utilities Suite",
         "description": "Comprehensive collection of free, client-side online tools.",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Image Compressor & Resizer", "url": "https://toolshere.online/#image-compressor" },
-          { "@type": "ListItem", "position": 2, "name": "AI Background Remover", "url": "https://toolshere.online/#background-remover" },
-          { "@type": "ListItem", "position": 3, "name": "PDF to Word Converter", "url": "https://toolshere.online/#pdf-to-word" },
-          { "@type": "ListItem", "position": 4, "name": "Merge & Split PDF", "url": "https://toolshere.online/#merge-pdf" },
-          { "@type": "ListItem", "position": 5, "name": "Age & Date Calculator", "url": "https://toolshere.online/#age-calculator" },
-          { "@type": "ListItem", "position": 6, "name": "YouTube Thumbnail Grabber", "url": "https://toolshere.online/#youtube-thumbnail" },
-          { "@type": "ListItem", "position": 7, "name": "QR Code Studio & Reader", "url": "https://toolshere.online/#qr-code-generator" },
-          { "@type": "ListItem", "position": 8, "name": "Strong Password Creator", "url": "https://toolshere.online/#password-generator" },
-          { "@type": "ListItem", "position": 9, "name": "Word & Character Counter", "url": "https://toolshere.online/#word-counter" },
-          { "@type": "ListItem", "position": 10, "name": "GST & Loan EMI Calculator", "url": "https://toolshere.online/#emi-calculator" },
-          { "@type": "ListItem", "position": 11, "name": "Image Format Converter", "url": "https://toolshere.online/#image-converter" },
-          { "@type": "ListItem", "position": 12, "name": "Text Case Converter", "url": "https://toolshere.online/#text-case-converter" },
-          { "@type": "ListItem", "position": 13, "name": "JSON Formatter & Validator", "url": "https://toolshere.online/#json-formatter" },
-          { "@type": "ListItem", "position": 14, "name": "SEO Meta Tag Generator", "url": "https://toolshere.online/#seo-meta-generator" },
-          { "@type": "ListItem", "position": 15, "name": "Compress PDF Document", "url": "https://toolshere.online/#compress-pdf" },
-          { "@type": "ListItem", "position": 16, "name": "Image to PDF Converter", "url": "https://toolshere.online/#image-to-pdf" }
+          { "@type": "ListItem", "position": 1, "name": "Image Compressor & Resizer", "url": "https://toolshere.online/image-compressor" },
+          { "@type": "ListItem", "position": 2, "name": "AI Background Remover", "url": "https://toolshere.online/background-remover" },
+          { "@type": "ListItem", "position": 3, "name": "PDF to Word Converter", "url": "https://toolshere.online/pdf-to-word" },
+          { "@type": "ListItem", "position": 4, "name": "Merge & Split PDF", "url": "https://toolshere.online/merge-pdf" },
+          { "@type": "ListItem", "position": 5, "name": "Age & Date Calculator", "url": "https://toolshere.online/age-calculator" },
+          { "@type": "ListItem", "position": 6, "name": "YouTube Thumbnail Grabber", "url": "https://toolshere.online/youtube-thumbnail" },
+          { "@type": "ListItem", "position": 7, "name": "QR Code Studio & Reader", "url": "https://toolshere.online/qr-code-generator" },
+          { "@type": "ListItem", "position": 8, "name": "Strong Password Creator", "url": "https://toolshere.online/password-generator" },
+          { "@type": "ListItem", "position": 9, "name": "Word & Character Counter", "url": "https://toolshere.online/word-counter" },
+          { "@type": "ListItem", "position": 10, "name": "GST & Loan EMI Calculator", "url": "https://toolshere.online/emi-calculator" },
+          { "@type": "ListItem", "position": 11, "name": "Image Format Converter", "url": "https://toolshere.online/image-converter" },
+          { "@type": "ListItem", "position": 12, "name": "Text Case Converter", "url": "https://toolshere.online/text-case-converter" },
+          { "@type": "ListItem", "position": 13, "name": "JSON Formatter & Validator", "url": "https://toolshere.online/json-formatter" },
+          { "@type": "ListItem", "position": 14, "name": "SEO Meta Tag Generator", "url": "https://toolshere.online/seo-meta-generator" },
+          { "@type": "ListItem", "position": 15, "name": "Compress PDF Document", "url": "https://toolshere.online/compress-pdf" },
+          { "@type": "ListItem", "position": 16, "name": "Image to PDF Converter", "url": "https://toolshere.online/image-to-pdf" }
         ]
       }
     ]
@@ -390,7 +390,7 @@
         <nav class="hidden lg:flex items-center gap-4 text-xs font-semibold text-slate-600 dark:text-slate-300 mr-1">
           <button type="button" onclick="filterCategory('pdf'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">PDF Tools</button>
           <button type="button" onclick="filterCategory('all'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">All Utilities</button>
-          <a href="#about" onclick="openToolPage('about', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">About</a>
+          <a href="/about" onclick="openToolPage('about', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400 transition-colors">About</a>
         </nav>
         <button onclick="toggleDarkMode()" class="p-2 sm:p-2.5 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme" aria-label="Toggle theme">
           <i id="themeIcon" class="fa-solid fa-moon text-base sm:text-lg"></i>
@@ -457,7 +457,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Compressor & Resizer</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Compress JPEG, PNG, and WebP images to custom dimensions or target file sizes like 20KB, 50KB, and 100KB directly in your browser with zero server uploads.</p>
         </div>
-        <a href="#image-compressor" onclick="openToolPage('image-compressor', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/image-compressor" onclick="openToolPage('image-compressor', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-sky-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 2: AI Background Remover -->
@@ -475,7 +475,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">AI Background Remover</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Remove solid and uniform photo backgrounds instantly using client-side canvas color isolation, sensitivity thresholds, and export transparent PNG files securely.</p>
         </div>
-        <a href="#background-remover" onclick="openToolPage('background-remover', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-violet-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/background-remover" onclick="openToolPage('background-remover', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-violet-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 3: PDF to Word -->
@@ -493,7 +493,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">PDF to Word Converter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert PDF documents into editable Word (.doc) files quickly inside your browser without uploading proprietary files to external servers.</p>
         </div>
-        <a href="#pdf-to-word" onclick="openToolPage('pdf-to-word', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/pdf-to-word" onclick="openToolPage('pdf-to-word', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-red-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 4: Merge & Split PDF -->
@@ -511,7 +511,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Merge & Split PDF</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Combine multiple PDF documents into a unified file securely in browser memory without file size caps, queue delays, or server-side logging.</p>
         </div>
-        <a href="#merge-pdf" onclick="openToolPage('merge-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/merge-pdf" onclick="openToolPage('merge-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-orange-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 5: Age & Date Calculator -->
@@ -529,7 +529,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Age & Date Calculator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate your exact age in years, months, and days alongside total days lived using precise calendar leap-year calculations in real time.</p>
         </div>
-        <a href="#age-calculator" onclick="openToolPage('age-calculator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/age-calculator" onclick="openToolPage('age-calculator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 6: YouTube Thumbnail Grabber -->
@@ -547,7 +547,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">YouTube Thumbnail Grabber</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Extract and download high-resolution 1080p Max-HD YouTube video thumbnails instantly by pasting any standard, short, or mobile YouTube link.</p>
         </div>
-        <a href="#youtube-thumbnail" onclick="openToolPage('youtube-thumbnail', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/youtube-thumbnail" onclick="openToolPage('youtube-thumbnail', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 7: QR Code Studio & Reader -->
@@ -565,7 +565,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">QR Code Studio & Reader</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate high-contrast, error-corrected QR codes for website URLs, contact details, or text messages and download crisp PNG images instantly.</p>
         </div>
-        <a href="#qr-code-generator" onclick="openToolPage('qr-code-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/qr-code-generator" onclick="openToolPage('qr-code-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-cyan-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 8: Password Generator -->
@@ -583,7 +583,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Strong Password Creator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate cryptographically secure passwords with custom lengths (8–32 characters), symbols, and numbers using your browser's Web Crypto API.</p>
         </div>
-        <a href="#password-generator" onclick="openToolPage('password-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/password-generator" onclick="openToolPage('password-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-teal-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 9: Word & Character Counter -->
@@ -601,7 +601,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Word & Character Counter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Count words, characters, sentences, and estimated reading time in real time as you type or paste text for essays, tweets, and articles.</p>
         </div>
-        <a href="#word-counter" onclick="openToolPage('word-counter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/word-counter" onclick="openToolPage('word-counter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-blue-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 10: GST & Loan EMI Calculator -->
@@ -619,7 +619,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">GST & Loan EMI Calculator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Calculate monthly loan EMIs and Goods and Services Tax (5%, 12%, 18%, 28%) with instant numerical breakdowns for loans and business billing.</p>
         </div>
-        <a href="#emi-calculator" onclick="openToolPage('emi-calculator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/emi-calculator" onclick="openToolPage('emi-calculator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-amber-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 11: Image Format Converter -->
@@ -637,7 +637,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image Format Converter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert pictures between PNG, JPG, and WebP formats directly inside browser memory with preserved resolution and zero server-side uploads.</p>
         </div>
-        <a href="#image-converter" onclick="openToolPage('image-converter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/image-converter" onclick="openToolPage('image-converter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-purple-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 12: Text Case Converter -->
@@ -655,7 +655,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Text Case Converter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert strings to UPPERCASE, lowercase, Title Case, and clean URL Slugs with one click for coding, headlines, and clean copywriting.</p>
         </div>
-        <a href="#text-case-converter" onclick="openToolPage('text-case-converter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/text-case-converter" onclick="openToolPage('text-case-converter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-pink-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 13: JSON Formatter & Validator -->
@@ -673,7 +673,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">JSON Formatter & Validator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Beautify nested JSON payloads, minify code for production APIs, and validate syntax errors instantly in your browser with zero data leaks.</p>
         </div>
-        <a href="#json-formatter" onclick="openToolPage('json-formatter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/json-formatter" onclick="openToolPage('json-formatter', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-indigo-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 14: SEO Meta Tag Generator -->
@@ -691,7 +691,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">SEO Meta Tag Generator</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Generate standard HTML title, meta description, robots, and OpenGraph tags to optimize search engine ranking and social media share previews.</p>
         </div>
-        <a href="#seo-meta-generator" onclick="openToolPage('seo-meta-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/seo-meta-generator" onclick="openToolPage('seo-meta-generator', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-lime-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 15: Compress PDF -->
@@ -709,7 +709,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Compress PDF Document</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Shrink heavy PDF documents down to portal-friendly file sizes with selectable compression modes directly in browser memory with total privacy.</p>
         </div>
-        <a href="#compress-pdf" onclick="openToolPage('compress-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/compress-pdf" onclick="openToolPage('compress-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-rose-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
       <!-- TOOL 16: Image to PDF -->
@@ -727,7 +727,7 @@
           <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1.5">Image to PDF Converter</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Convert and bundle multiple PNG, JPG, and WebP images into a single clean PDF document ready for printing, submission, and sharing.</p>
         </div>
-        <a href="#image-to-pdf" onclick="openToolPage('image-to-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
+        <a href="/image-to-pdf" onclick="openToolPage('image-to-pdf', event)" class="mt-5 w-full py-3 sm:py-2.5 bg-slate-100 dark:bg-slate-700/80 hover:bg-emerald-600 hover:text-white text-slate-700 dark:text-slate-200 font-bold text-sm sm:text-xs rounded-xl transition-all flex items-center justify-center gap-2">Use Tool <i class="fa-solid fa-arrow-right text-xs"></i></a>
       </div>
 
     </div>
@@ -763,9 +763,9 @@
               <i id="toolPageIcon" class="fa-solid fa-wrench"></i>
             </div>
             <div>
-              <h1 id="toolPageH1" class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+              <h2 id="toolPageH1" class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
                 Tool Utility
-              </h1>
+              </h2>
               <p id="toolPageDesc" class="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 mt-1 max-w-3xl leading-relaxed">
                 Client-side tool description.
               </p>
@@ -843,11 +843,11 @@
         <a href="/" class="hover:text-blue-600 dark:hover:text-cyan-400">Home</a>
         <button type="button" onclick="filterCategory('all'); window.scrollTo({top:0, behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400">All Utilities</button>
         <button type="button" onclick="filterCategory('pdf'); document.getElementById('tools-grid').scrollIntoView({behavior:'smooth'})" class="hover:text-blue-600 dark:hover:text-cyan-400">PDF Suite</button>
-        <a href="#about" onclick="openToolPage('about', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">About Us</a>
-        <a href="#contact" onclick="openToolPage('contact', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Contact</a>
-        <a href="#privacy" onclick="openToolPage('privacy', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Privacy Policy</a>
-        <a href="#terms" onclick="openToolPage('terms', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Terms of Service</a>
-        <a href="#disclaimer" onclick="openToolPage('disclaimer', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Disclaimer</a>
+        <a href="/about" onclick="openToolPage('about', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">About Us</a>
+        <a href="/contact" onclick="openToolPage('contact', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Contact</a>
+        <a href="/privacy" onclick="openToolPage('privacy', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Privacy Policy</a>
+        <a href="/terms" onclick="openToolPage('terms', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Terms of Service</a>
+        <a href="/disclaimer" onclick="openToolPage('disclaimer', event)" type="button"  class="hover:text-blue-600 dark:hover:text-cyan-400">Disclaimer</a>
       </div>
 
       <p class="text-[10px] text-slate-400 pt-2">&copy; 2026 toolshere.online. All Rights Reserved.</p>
@@ -1371,7 +1371,7 @@
   {
     "id": "imgResizer",
     "hash": "#image-compressor",
-    "url": "https://toolshere.online/#image-compressor",
+    "url": "https://toolshere.online/image-compressor",
     "name": "Image Compressor & Resizer",
     "category": "Image",
     "cardDesc": "Compress JPEG, PNG, and WebP images to custom dimensions or target file sizes like 20KB, 50KB, and 100KB directly in your browser with zero server uploads.",
@@ -1435,7 +1435,7 @@
   {
     "id": "bgRemover",
     "hash": "#background-remover",
-    "url": "https://toolshere.online/#background-remover",
+    "url": "https://toolshere.online/background-remover",
     "name": "AI Background Remover",
     "category": "Image",
     "cardDesc": "Remove solid and uniform photo backgrounds instantly using client-side canvas color isolation, sensitivity thresholds, and export transparent PNG files securely.",
@@ -1490,7 +1490,7 @@
   {
     "id": "pdfWord",
     "hash": "#pdf-to-word",
-    "url": "https://toolshere.online/#pdf-to-word",
+    "url": "https://toolshere.online/pdf-to-word",
     "name": "PDF to Word Converter",
     "category": "Document",
     "cardDesc": "Convert PDF documents into editable Word (.doc) files quickly inside your browser without uploading proprietary files to external servers.",
@@ -1547,7 +1547,7 @@
   {
     "id": "pdfMerge",
     "hash": "#merge-pdf",
-    "url": "https://toolshere.online/#merge-pdf",
+    "url": "https://toolshere.online/merge-pdf",
     "name": "Merge & Split PDF",
     "category": "Document",
     "cardDesc": "Combine multiple PDF documents into a unified file securely in browser memory without file size caps, queue delays, or server-side logging.",
@@ -1604,7 +1604,7 @@
   {
     "id": "ageCalc",
     "hash": "#age-calculator",
-    "url": "https://toolshere.online/#age-calculator",
+    "url": "https://toolshere.online/age-calculator",
     "name": "Age & Date Calculator",
     "category": "Calculator",
     "cardDesc": "Calculate your exact age in years, months, and days alongside total days lived using precise calendar leap-year calculations in real time.",
@@ -1658,7 +1658,7 @@
   {
     "id": "ytThumb",
     "hash": "#youtube-thumbnail",
-    "url": "https://toolshere.online/#youtube-thumbnail",
+    "url": "https://toolshere.online/youtube-thumbnail",
     "name": "YouTube Thumbnail Grabber",
     "category": "Media",
     "cardDesc": "Extract and download high-resolution 1080p Max-HD YouTube video thumbnails instantly by pasting any standard, short, or mobile YouTube link.",
@@ -1712,7 +1712,7 @@
   {
     "id": "qrTool",
     "hash": "#qr-code-generator",
-    "url": "https://toolshere.online/#qr-code-generator",
+    "url": "https://toolshere.online/qr-code-generator",
     "name": "QR Code Studio & Reader",
     "category": "Utility",
     "cardDesc": "Generate high-contrast, error-corrected QR codes for website URLs, contact details, or text messages and download crisp PNG images instantly.",
@@ -1766,7 +1766,7 @@
   {
     "id": "passwordGen",
     "hash": "#password-generator",
-    "url": "https://toolshere.online/#password-generator",
+    "url": "https://toolshere.online/password-generator",
     "name": "Strong Password Creator",
     "category": "Security",
     "cardDesc": "Generate cryptographically secure passwords with custom lengths (8–32 characters), symbols, and numbers using your browser's Web Crypto API.",
@@ -1820,7 +1820,7 @@
   {
     "id": "wordCount",
     "hash": "#word-counter",
-    "url": "https://toolshere.online/#word-counter",
+    "url": "https://toolshere.online/word-counter",
     "name": "Word & Character Counter",
     "category": "Text",
     "cardDesc": "Count words, characters, sentences, and estimated reading time in real time as you type or paste text for essays, tweets, and articles.",
@@ -1874,7 +1874,7 @@
   {
     "id": "gstEmi",
     "hash": "#emi-calculator",
-    "url": "https://toolshere.online/#emi-calculator",
+    "url": "https://toolshere.online/emi-calculator",
     "name": "GST & Loan EMI Calculator",
     "category": "Finance",
     "cardDesc": "Calculate monthly loan EMIs and Goods and Services Tax (5%, 12%, 18%, 28%) with instant numerical breakdowns for loans and business billing.",
@@ -1928,7 +1928,7 @@
   {
     "id": "imgFormat",
     "hash": "#image-converter",
-    "url": "https://toolshere.online/#image-converter",
+    "url": "https://toolshere.online/image-converter",
     "name": "Image Format Converter",
     "category": "Image",
     "cardDesc": "Convert pictures between PNG, JPG, and WebP formats directly inside browser memory with preserved resolution and zero server-side uploads.",
@@ -1986,7 +1986,7 @@
   {
     "id": "textCase",
     "hash": "#text-case-converter",
-    "url": "https://toolshere.online/#text-case-converter",
+    "url": "https://toolshere.online/text-case-converter",
     "name": "Text Case Converter",
     "category": "Text",
     "cardDesc": "Convert strings to UPPERCASE, lowercase, Title Case, and clean URL Slugs with one click for coding, headlines, and clean copywriting.",
@@ -2040,7 +2040,7 @@
   {
     "id": "jsonFormat",
     "hash": "#json-formatter",
-    "url": "https://toolshere.online/#json-formatter",
+    "url": "https://toolshere.online/json-formatter",
     "name": "JSON Formatter & Validator",
     "category": "Developer",
     "cardDesc": "Beautify nested JSON payloads, minify code for production APIs, and validate syntax errors instantly in your browser with zero data leaks.",
@@ -2095,7 +2095,7 @@
   {
     "id": "seoMeta",
     "hash": "#seo-meta-generator",
-    "url": "https://toolshere.online/#seo-meta-generator",
+    "url": "https://toolshere.online/seo-meta-generator",
     "name": "SEO Meta Tag Generator",
     "category": "Developer",
     "cardDesc": "Generate standard HTML title, meta description, robots, and OpenGraph tags to optimize search engine ranking and social media share previews.",
@@ -2150,7 +2150,7 @@
   {
     "id": "compressPdf",
     "hash": "#compress-pdf",
-    "url": "https://toolshere.online/#compress-pdf",
+    "url": "https://toolshere.online/compress-pdf",
     "name": "Compress PDF Document",
     "category": "Document",
     "cardDesc": "Shrink heavy PDF documents down to portal-friendly file sizes with selectable compression modes directly in browser memory with total privacy.",
@@ -2208,7 +2208,7 @@
   {
     "id": "imgToPdf",
     "hash": "#image-to-pdf",
-    "url": "https://toolshere.online/#image-to-pdf",
+    "url": "https://toolshere.online/image-to-pdf",
     "name": "Image to PDF Converter",
     "category": "Document",
     "cardDesc": "Convert and bundle multiple PNG, JPG, and WebP images into a single clean PDF document ready for printing, submission, and sharing.",

@@ -20,6 +20,9 @@ while ($listener.IsListening) {
 
         $localPath = Join-Path $root $urlPath.Replace('/', '\')
 
+        if (Test-Path (Join-Path $localPath "index.html") -PathType Leaf) {
+            $localPath = Join-Path $localPath "index.html"
+        }
         if (-not (Test-Path $localPath -PathType Leaf) -and (Test-Path "$localPath.html" -PathType Leaf)) {
             $localPath = "$localPath.html"
         }
