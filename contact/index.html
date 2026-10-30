@@ -333,7 +333,7 @@
       
         <div class="space-y-4 text-sm leading-relaxed">
           <p class="text-slate-600 dark:text-slate-300">Have suggestions for new utilities or found a bug? We would love to hear from you!</p>
-          <div class="p-6 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+          <div class="p-6 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-3">
             <span class="block font-bold text-slate-800 dark:text-white">Official Support Email:</span>
             <div class="flex items-center justify-between">
               <span class="font-mono text-blue-600 dark:text-cyan-400 font-bold text-base">support@toolshere.online</span>
@@ -462,10 +462,14 @@
     }
 
     function focusHeroSearch() {
+      const homeView = document.getElementById('homeView');
+      if (homeView && homeView.classList.contains('hidden')) {
+        navigateToHome();
+      }
       const heroSearch = document.getElementById('heroSearchInput');
       if (heroSearch) {
         heroSearch.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(() => heroSearch.focus(), 300);
+        setTimeout(() => heroSearch.focus(), 200);
       }
     }
 
@@ -477,14 +481,26 @@
     }
 
 
+    // Quick Search Suggestion
+    function setSearchSuggestion(keyword) {
+      const input = document.getElementById('heroSearchInput');
+      if (input) {
+        input.value = keyword;
+        filterToolsByQuery(keyword);
+        input.focus();
+      }
+    }
+
     // Hero Search Real-time Filter
     function filterToolsByQuery(query) {
       query = (query || '').toLowerCase().trim();
       const clearBtn = document.getElementById('heroClearBtn');
       const countBadge = document.getElementById('searchResultCount');
+      const noResults = document.getElementById('noResultsMessage');
+      const noResultsQuery = document.getElementById('noResultsQuery');
       if (clearBtn) clearBtn.classList.toggle('hidden', query.length === 0);
 
-      // Synchronize with header search
+      // Synchronize with header search if present
       const headerInput = document.getElementById('headerSearchInput');
       if (headerInput && headerInput.value !== query) headerInput.value = query;
 
@@ -506,6 +522,16 @@
           countBadge.classList.remove('hidden');
         } else {
           countBadge.classList.add('hidden');
+        }
+      }
+
+      // Toggle No Results Message
+      if (noResults) {
+        if (count === 0 && query.length > 0) {
+          if (noResultsQuery) noResultsQuery.textContent = query;
+          noResults.classList.remove('hidden');
+        } else {
+          noResults.classList.add('hidden');
         }
       }
 
@@ -535,9 +561,9 @@
     function filterCategory(cat) {
       document.querySelectorAll('.cat-pill').forEach(pill => {
         if (pill.dataset.cat === cat) {
-          pill.className = 'cat-pill px-4 py-2 rounded-full bg-slate-900 text-white shadow-xs transition-all';
+          pill.className = 'cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white shadow-xs transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95';
         } else {
-          pill.className = 'cat-pill px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all';
+          pill.className = 'cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95';
         }
       });
 
@@ -548,6 +574,8 @@
         document.getElementById('heroClearBtn')?.classList.add('hidden');
         document.getElementById('searchResultCount')?.classList.add('hidden');
       }
+      const noResults = document.getElementById('noResultsMessage');
+      if (noResults) noResults.classList.add('hidden');
 
       // Show/hide popular section
       const popular = document.getElementById('popularSection');
@@ -577,83 +605,21 @@
     window.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        const searchInput = document.getElementById('globalSearchInput');
-        searchInput.focus();
-        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        focusHeroSearch();
       }
       if (e.key === 'Escape') {
         closeModal();
+        closeMobileMenu();
       }
     });
 
-    // Filter Tools by Category
-    function filterCategory(cat) {
-      document.querySelectorAll('.cat-btn').forEach(btn => {
-        if (btn.dataset.cat === cat) {
-          btn.className = 'cat-btn shrink-0 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-sm transition-all flex items-center gap-1.5';
-        } else {
-          btn.className = 'cat-btn shrink-0 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-700/80 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition-all flex items-center gap-1.5';
-        }
-      });
-
-      document.querySelectorAll('.tool-card').forEach(card => {
-        const id = card.dataset.id;
-        const cardCat = card.dataset.category;
-        if (cat === 'all') {
-          card.classList.remove('hidden');
-        } else if (cat === 'favorites') {
-          if (favorites.includes(id)) card.classList.remove('hidden');
-          else card.classList.add('hidden');
-        } else {
-          if (cardCat === cat) card.classList.remove('hidden');
-          else card.classList.add('hidden');
-        }
-      });
-    }
-
-    // Search Filter & Clear Logic
+    // Backward Compatibility aliases
     function filterTools() {
-      const query = document.getElementById('globalSearchInput').value.toLowerCase().trim();
-      const clearBtn = document.getElementById('clearSearchBtn');
-      const countBadge = document.getElementById('searchCountBadge');
-      
-      if (clearBtn) clearBtn.classList.toggle('hidden', query.length === 0);
-
-      // Return to home view if user searches while on a tool page
-      const homeView = document.getElementById('homeView');
-      if (query.length > 0 && homeView && homeView.classList.contains('hidden')) {
-        navigateToHome();
-      }
-
-      let matches = 0;
-      document.querySelectorAll('.tool-card').forEach(card => {
-        const title = (card.dataset.title || '').toLowerCase();
-        const text = card.textContent.toLowerCase();
-        if (title.includes(query) || text.includes(query)) {
-          card.classList.remove('hidden');
-          matches++;
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-
-      if (countBadge) {
-        if (query.length > 0) {
-          countBadge.innerText = `${matches}`;
-          countBadge.classList.remove('hidden');
-        } else {
-          countBadge.classList.add('hidden');
-        }
-      }
+      const hero = document.getElementById('heroSearchInput');
+      if (hero) filterToolsByQuery(hero.value);
     }
-
     function clearSearch() {
-      const input = document.getElementById('globalSearchInput');
-      if (input) {
-        input.value = '';
-        input.focus();
-        filterTools();
-      }
+      clearHeroSearch();
     }
 
     // Confetti Celebration Helper
@@ -1963,7 +1929,7 @@
       if (!tool) return;
 
       const guideEl = document.createElement('section');
-      guideEl.className = 'mt-8 pt-6 border-t border-slate-200 dark:border-slate-700/80 space-y-6 text-slate-700 dark:text-slate-300';
+      guideEl.className = 'mt-8 pt-6 border-t border-[#E5E7EB] dark:border-slate-700/80 space-y-6 text-slate-700 dark:text-slate-300';
       
       let relatedToolsHtml = '';
       if (tool.relatedTools && tool.relatedTools.length > 0) {
@@ -1992,7 +1958,7 @@
           <h2 class="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight leading-snug">${tool.h1}</h2>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 leading-relaxed text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E5E7EB] dark:border-slate-700 leading-relaxed text-xs sm:text-sm text-slate-600 dark:text-slate-300">
           <p>${tool.intro}</p>
         </div>
 
@@ -2041,7 +2007,7 @@
           </h3>
           <div class="space-y-2">
             ${tool.faqs.map(faq => `
-              <details class="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 cursor-pointer">
+              <details class="group bg-white dark:bg-slate-800 border border-[#E5E7EB] dark:border-slate-700 rounded-xl p-3 cursor-pointer">
                 <summary class="font-bold text-slate-800 dark:text-slate-200 text-xs flex justify-between items-center list-none select-none">
                   <span>${faq.q}</span>
                   <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform"></i>
@@ -2081,17 +2047,17 @@
             </span>
             <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Drag and drop your image here</p>
             <div class="flex flex-wrap items-center justify-center gap-2 mt-3">
-              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600">JPG</span>
-              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600">PNG</span>
-              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600">WebP</span>
-              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600">GIF</span>
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-600">JPG</span>
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-600">PNG</span>
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-600">WebP</span>
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-600">GIF</span>
             </div>
             <p class="text-[11px] text-slate-400 mt-2">Up to 50MB per photo • 100% processed directly in your browser memory</p>
           </div>
 
           <!-- Active Controls (revealed once image is chosen) -->
           <div id="resizerControls" class="hidden space-y-6">
-            <div class="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex-wrap gap-2">
+            <div class="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 flex-wrap gap-2">
               <div class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
                 <i class="fa-solid fa-image text-sky-500"></i>
                 <span id="selectedFileName">photo.jpg</span>
@@ -2105,13 +2071,13 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <!-- Left Column: Large Preview & Comparison -->
               <div class="lg:col-span-7 space-y-4">
-                <div class="p-3 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-slate-200 dark:border-slate-700/80 checkerboard-bg flex justify-center items-center min-h-[300px] max-h-[460px] overflow-hidden">
+                <div class="p-3 bg-slate-50 dark:bg-slate-900/60 rounded-2xl border border-[#E5E7EB] dark:border-slate-700/80 checkerboard-bg flex justify-center items-center min-h-[300px] max-h-[460px] overflow-hidden">
                   <img id="resizerPreview" class="max-h-[420px] w-auto max-w-full object-contain rounded-xl shadow-md" alt="Compressed Preview">
                 </div>
 
                 <!-- Metrics Comparison Cards -->
                 <div class="grid grid-cols-3 gap-3 text-center">
-                  <div class="p-3.5 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border border-slate-200 dark:border-slate-600">
+                  <div class="p-3.5 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border border-[#E5E7EB] dark:border-slate-600">
                     <span class="block text-[11px] font-semibold text-slate-500 dark:text-slate-400">Original Size</span>
                     <span id="originalSize" class="text-sm sm:text-base font-extrabold text-slate-800 dark:text-white">0 KB</span>
                   </div>
@@ -2127,7 +2093,7 @@
               </div>
 
               <!-- Right Column: Granular Controls -->
-              <div class="lg:col-span-5 space-y-5 bg-slate-50/70 dark:bg-slate-700/40 p-5 sm:p-6 rounded-3xl border border-slate-200/80 dark:border-slate-700/80">
+              <div class="lg:col-span-5 space-y-5 bg-slate-50/70 dark:bg-slate-700/40 p-5 sm:p-6 rounded-3xl border border-[#E5E7EB]/80 dark:border-slate-700/80">
                 <div class="space-y-2.5">
                   <div class="flex items-center justify-between">
                     <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white flex items-center gap-1.5">
@@ -2137,10 +2103,10 @@
                   </div>
                   <!-- Quick Preset Chips -->
                   <div class="grid grid-cols-4 gap-2 text-xs">
-                    <button type="button" onclick="setTargetKB(20)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center shadow-sm">20 KB</button>
-                    <button type="button" onclick="setTargetKB(50)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center shadow-sm">50 KB</button>
-                    <button type="button" onclick="setTargetKB(100)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center shadow-sm">100 KB</button>
-                    <button type="button" onclick="setTargetKB(200)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-slate-200 dark:border-slate-600 transition-all text-center shadow-sm">200 KB</button>
+                    <button type="button" onclick="setTargetKB(20)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-[#E5E7EB] dark:border-slate-600 transition-all text-center shadow-sm">20 KB</button>
+                    <button type="button" onclick="setTargetKB(50)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-[#E5E7EB] dark:border-slate-600 transition-all text-center shadow-sm">50 KB</button>
+                    <button type="button" onclick="setTargetKB(100)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-[#E5E7EB] dark:border-slate-600 transition-all text-center shadow-sm">100 KB</button>
+                    <button type="button" onclick="setTargetKB(200)" class="preset-btn px-2 py-2 bg-white dark:bg-slate-700 hover:bg-sky-600 hover:text-white text-slate-800 dark:text-white rounded-xl font-bold border border-[#E5E7EB] dark:border-slate-600 transition-all text-center shadow-sm">200 KB</button>
                   </div>
                   <!-- Custom Size Input Box -->
                   <div class="flex items-center gap-2">
@@ -2390,7 +2356,7 @@
           </div>
 
           <div id="bgResults" class="hidden space-y-6">
-            <div class="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex-wrap gap-2">
+            <div class="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 flex-wrap gap-2">
               <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 flex-1">
                 <label class="shrink-0">Sensitivity Threshold:</label>
                 <input type="range" id="bgTolerance" min="5" max="80" value="35" oninput="reprocessBg()" class="w-48 sm:w-64 h-2 bg-slate-200 dark:bg-slate-700 rounded-lg accent-violet-600 cursor-pointer">
@@ -2401,7 +2367,7 @@
               </button>
             </div>
 
-            <div class="p-4 border border-slate-200 dark:border-slate-700 rounded-3xl checkerboard-bg flex justify-center items-center min-h-[300px] max-h-[480px] overflow-hidden">
+            <div class="p-4 border border-[#E5E7EB] dark:border-slate-700 rounded-3xl checkerboard-bg flex justify-center items-center min-h-[300px] max-h-[480px] overflow-hidden">
               <canvas id="bgCanvas" class="max-h-[440px] max-w-full object-contain rounded-xl"></canvas>
             </div>
 
@@ -2571,7 +2537,7 @@
       if (icon) icon.className = 'fa-solid fa-cake-candles';
       container.innerHTML = `
         <div class="space-y-6">
-          <div class="p-6 bg-slate-50 dark:bg-slate-700/40 rounded-3xl border border-slate-200/80 dark:border-slate-700/80 space-y-4">
+          <div class="p-6 bg-slate-50 dark:bg-slate-700/40 rounded-3xl border border-[#E5E7EB]/80 dark:border-slate-700/80 space-y-4">
             <label class="block font-bold text-sm text-slate-800 dark:text-white">Select Your Date of Birth</label>
             <input type="date" id="dobInput" class="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white font-semibold text-base" onchange="calculateAge()">
           </div>
@@ -2639,12 +2605,12 @@
             </button>
           </div>
           <div id="ytThumbResults" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-2">
               <span class="font-bold text-xs">1080p Full HD (Maxresdefault)</span>
               <img id="ytImgMax" class="w-full h-44 object-cover rounded-xl" alt="1080p Thumbnail">
               <a id="ytLinkMax" target="_blank" download="thumbnail-1080p.jpg" class="block text-center py-2 bg-red-600 text-white rounded-xl text-xs font-bold">Download 1080p</a>
             </div>
-            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-2">
               <span class="font-bold text-xs">720p High Quality (Hqdefault)</span>
               <img id="ytImgHq" class="w-full h-44 object-cover rounded-xl" alt="720p Thumbnail">
               <a id="ytLinkHq" target="_blank" download="thumbnail-hq.jpg" class="block text-center py-2 bg-slate-800 text-white rounded-xl text-xs font-bold">Download HQ</a>
@@ -2685,7 +2651,7 @@
               Update QR Code
             </button>
           </div>
-          <div class="md:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-700/40 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4">
+          <div class="md:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-700/40 rounded-3xl border border-[#E5E7EB] dark:border-slate-700 space-y-4">
             <div id="qrCanvasContainer" class="p-3 bg-white rounded-2xl shadow-md">
               <canvas id="qrCanvas" width="220" height="220"></canvas>
             </div>
@@ -2746,7 +2712,7 @@
       if (icon) icon.className = 'fa-solid fa-key';
       container.innerHTML = `
         <div class="space-y-6">
-          <div class="p-6 bg-slate-50 dark:bg-slate-700/50 rounded-3xl border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-4">
+          <div class="p-6 bg-slate-50 dark:bg-slate-700/50 rounded-3xl border border-[#E5E7EB] dark:border-slate-700 flex items-center justify-between gap-4">
             <span id="passOutput" class="font-mono text-lg sm:text-2xl font-black text-slate-800 dark:text-white break-all">Generating...</span>
             <button type="button" onclick="copyPassword()" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-sm shrink-0 flex items-center gap-2">
               <i class="fa-solid fa-copy"></i> Copy
@@ -2814,19 +2780,19 @@
         <div class="space-y-6">
           <textarea id="wordTextInput" rows="8" placeholder="Type or paste your text here to count words, characters, and reading time..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm" oninput="updateWordCounts()"></textarea>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
               <span class="block text-xs font-semibold text-slate-500">Words</span>
               <span id="countWords" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
               <span class="block text-xs font-semibold text-slate-500">Characters</span>
               <span id="countChars" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
               <span class="block text-xs font-semibold text-slate-500">Sentences</span>
               <span id="countSentences" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
               <span class="block text-xs font-semibold text-slate-500">Reading Time</span>
               <span id="countReadTime" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0m</span>
             </div>
@@ -2854,7 +2820,7 @@
       if (icon) icon.className = 'fa-solid fa-calculator';
       container.innerHTML = `
         <div class="space-y-6">
-          <div class="flex border-b border-slate-200 dark:border-slate-700">
+          <div class="flex border-b border-[#E5E7EB] dark:border-slate-700">
             <button type="button" id="tabEmiBtn" onclick="switchCalcTab('emi')" class="px-6 py-3 border-b-2 border-blue-600 font-bold text-sm text-blue-600 dark:text-cyan-400">Loan EMI Calculator</button>
             <button type="button" id="tabGstBtn" onclick="switchCalcTab('gst')" class="px-6 py-3 border-b-2 border-transparent font-bold text-sm text-slate-500 hover:text-slate-800 dark:hover:text-white">GST Calculator</button>
           </div>
@@ -2876,7 +2842,7 @@
               </div>
             </div>
 
-            <div class="p-6 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 text-center">
+            <div class="p-6 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 text-center">
               <span class="block text-xs font-bold text-slate-500 mb-1">Monthly Loan EMI</span>
               <span id="emiMonthly" class="text-3xl sm:text-4xl font-black text-blue-600 dark:text-cyan-400">₹0</span>
               <div class="flex justify-center gap-6 mt-3 text-xs text-slate-500">
@@ -2902,7 +2868,7 @@
                 <button type="button" onclick="setGstRate(28)" class="py-2 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white">28%</button>
               </div>
             </div>
-            <div class="p-6 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 text-center">
+            <div class="p-6 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 text-center">
               <span class="block text-xs font-bold text-slate-500 mb-1">Total Gross Price (Incl. GST)</span>
               <span id="gstTotal" class="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400">₹0</span>
               <div class="flex justify-center gap-6 mt-3 text-xs text-slate-500">
@@ -2979,7 +2945,7 @@
           </div>
 
           <div id="formatControls" class="hidden space-y-6">
-            <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
               <span id="formatFileName" class="font-bold text-sm">image.png</span>
               <button type="button" onclick="document.getElementById('formatInput').click()" class="text-xs font-bold text-sky-600 hover:underline">Change Image</button>
             </div>
@@ -3141,12 +3107,12 @@
             <label class="block text-xs font-bold mb-1">Meta Description</label>
             <textarea id="seoDesc" rows="2" placeholder="Brief summary of your webpage..." class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()"></textarea>
           </div>
-          <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+          <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-2">
             <div class="flex justify-between items-center">
               <span class="font-bold text-xs">Generated Meta Tags</span>
               <button type="button" onclick="copyText(document.getElementById('seoOutput').value)" class="px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold">Copy Tags</button>
             </div>
-            <textarea id="seoOutput" rows="5" readonly class="w-full p-3 font-mono text-[11px] bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300"></textarea>
+            <textarea id="seoOutput" rows="5" readonly class="w-full p-3 font-mono text-[11px] bg-white dark:bg-slate-900 rounded-xl border border-[#E5E7EB] dark:border-slate-700 text-slate-700 dark:text-slate-300"></textarea>
           </div>
         </div>
       `;
@@ -3262,7 +3228,7 @@
           reader.onload = (e) => {
             const img = document.createElement('img');
             img.src = e.target.result;
-            img.className = 'w-full h-16 object-cover rounded-xl border border-slate-200 dark:border-slate-600';
+            img.className = 'w-full h-16 object-cover rounded-xl border border-[#E5E7EB] dark:border-slate-600';
             preview.appendChild(img);
           };
           reader.readAsDataURL(file);
@@ -3288,7 +3254,7 @@
         <div class="space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           <p class="font-medium text-slate-800 dark:text-white text-base">Welcome to <strong class="text-blue-600 dark:text-cyan-400">ToolsHere.online</strong> — your ultimate browser-based productivity workstation.</p>
           <p>Our philosophy is simple: <strong>Zero Latency, 100% Client-Side Privacy</strong>. Every file conversion, image compression, password generation, and document processing task executes directly inside your browser's local memory using modern WebAssembly, Canvas API, and JavaScript runtimes.</p>
-          <div class="p-4 bg-slate-50 dark:bg-slate-700/60 rounded-2xl space-y-2 border border-slate-200 dark:border-slate-700">
+          <div class="p-4 bg-slate-50 dark:bg-slate-700/60 rounded-2xl space-y-2 border border-[#E5E7EB] dark:border-slate-700">
             <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> No file uploads to cloud servers</div>
             <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> No account or signup required</div>
             <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> 100% free and open for personal and commercial usage</div>
@@ -3303,7 +3269,7 @@
       container.innerHTML = `
         <div class="space-y-4 text-sm leading-relaxed">
           <p class="text-slate-600 dark:text-slate-300">Have suggestions for new utilities or found a bug? We would love to hear from you!</p>
-          <div class="p-6 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+          <div class="p-6 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-3">
             <span class="block font-bold text-slate-800 dark:text-white">Official Support Email:</span>
             <div class="flex items-center justify-between">
               <span class="font-mono text-blue-600 dark:text-cyan-400 font-bold text-base">support@toolshere.online</span>
