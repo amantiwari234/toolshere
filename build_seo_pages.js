@@ -115,7 +115,7 @@ function generateGuideHtml(tool) {
   }
 
   return `
-    <article class="mt-10 pt-8 border-t border-slate-200 space-y-8 text-slate-700">
+    <article class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800 space-y-8 text-slate-700 dark:text-slate-300">
       <div class="space-y-3">
         <div class="flex items-center gap-2 flex-wrap">
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 uppercase tracking-wide">${tool.category} Utility</span>
@@ -123,7 +123,7 @@ function generateGuideHtml(tool) {
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
         </div>
         <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">About ${tool.name}</h2>
-        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 leading-relaxed text-sm text-slate-600">
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
           <p>${tool.intro}</p>
         </div>
       </div>
@@ -135,9 +135,9 @@ function generateGuideHtml(tool) {
         </h3>
         <ol class="space-y-2.5 text-sm">
           ${tool.howToUse.map((step, idx) => `
-            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+            <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">${idx + 1}</span>
-              <span class="text-slate-700 font-medium leading-relaxed">${step}</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">${step}</span>
             </li>
           `).join('')}
         </ol>
@@ -150,7 +150,7 @@ function generateGuideHtml(tool) {
         </h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           ${tool.features.map(f => `
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
               <span class="text-xs sm:text-sm text-slate-700 font-medium">${f}</span>
             </div>
@@ -159,20 +159,20 @@ function generateGuideHtml(tool) {
       </section>
 
       <!-- Supported Formats & Limits -->
-      <section class="space-y-3 p-5 rounded-xl bg-slate-50 border border-slate-200">
+      <section class="space-y-3 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
           <i class="fa-solid fa-sliders text-blue-600"></i> Technical Specifications & File Compatibility
         </h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
-          <div class="p-3 bg-white rounded-lg border border-slate-200">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
             <span class="font-semibold text-slate-800">${tool.formatsAndLimits.supportedInputs}</span>
           </div>
-          <div class="p-3 bg-white rounded-lg border border-slate-200">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
             <span class="font-semibold text-slate-800">${tool.formatsAndLimits.outputFormat}</span>
           </div>
-          <div class="p-3 bg-white rounded-lg border border-slate-200">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
             <span class="font-semibold text-slate-800">${tool.formatsAndLimits.limitations}</span>
           </div>
@@ -186,7 +186,7 @@ function generateGuideHtml(tool) {
         </h3>
         <div class="space-y-3">
           ${tool.faqs.map(faq => `
-            <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2">
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> ${faq.q}
               </h4>
@@ -279,7 +279,14 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
 
   <!-- FontAwesome Icons & Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.9/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -367,7 +374,7 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
         <div class="relative w-full">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
           <input type="text" id="headerSearchInput" onkeydown="if(event.key==='Enter'){window.location.href='/?q='+encodeURIComponent(this.value);}" placeholder="Search 16+ tools (e.g. compress, pdf, emi)..." class="w-full pl-9 pr-10 py-2 text-xs bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-full focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-slate-800 placeholder:text-slate-400 font-medium">
-          <kbd class="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-mono text-slate-400 px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">⌘K</kbd>
+          
         </div>
       </div>
 
@@ -392,15 +399,16 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
         </button>
       </div>
     </div>
+  </header>
 
-    <!-- Mobile Navigation Drawer & Backdrop -->
+  <!-- Mobile Navigation Drawer & Backdrop (Direct child of body for proper fixed positioning) -->
     <div id="mobileDrawerBackdrop" onclick="closeMobileMenu()" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs transition-opacity lg:hidden"></div>
     <div id="mobileMenu" class="hidden fixed top-0 right-0 z-50 w-full max-w-xs h-full bg-white dark:bg-slate-900 shadow-2xl border-l border-slate-200 dark:border-slate-800 flex flex-col justify-between overflow-y-auto lg:hidden">
       <!-- Drawer Header -->
       <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-sm">
-            <i class="fa-solid fa-shapes"></i>
+          <div class="w-8 h-8 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center p-1 shadow-xs">
+            <img src="/assets/logo.png" alt="ToolsHere Logo" class="w-full h-full object-contain">
           </div>
           <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
             Tools<span class="text-blue-600">Here</span>
@@ -476,7 +484,6 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
         <p class="text-[10px] text-slate-400 mt-3 text-center">100% In-Browser Local Processing • Zero Server Uploads</p>
       </div>
     </div>
-  </header>
 
   <!-- Main Content Area -->
   <main class="flex-grow max-w-5xl w-full mx-auto px-2.5 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6">

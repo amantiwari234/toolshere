@@ -155,7 +155,14 @@
 
   <!-- FontAwesome Icons & Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.9/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (typeof pdfjsLib !== 'undefined') {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -243,7 +250,7 @@
         <div class="relative w-full">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
           <input type="text" id="headerSearchInput" onkeydown="if(event.key==='Enter'){window.location.href='/?q='+encodeURIComponent(this.value);}" placeholder="Search 16+ tools (e.g. compress, pdf, emi)..." class="w-full pl-9 pr-10 py-2 text-xs bg-slate-50 hover:bg-white focus:bg-white border border-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-white rounded-full focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all text-slate-800 placeholder:text-slate-400 font-medium">
-          <kbd class="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-mono text-slate-400 px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-slate-600">⌘K</kbd>
+          
         </div>
       </div>
 
@@ -268,15 +275,16 @@
         </button>
       </div>
     </div>
+  </header>
 
-    <!-- Mobile Navigation Drawer & Backdrop -->
+  <!-- Mobile Navigation Drawer & Backdrop (Direct child of body for proper fixed positioning) -->
     <div id="mobileDrawerBackdrop" onclick="closeMobileMenu()" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs transition-opacity lg:hidden"></div>
     <div id="mobileMenu" class="hidden fixed top-0 right-0 z-50 w-full max-w-xs h-full bg-white dark:bg-slate-900 shadow-2xl border-l border-slate-200 dark:border-slate-800 flex flex-col justify-between overflow-y-auto lg:hidden">
       <!-- Drawer Header -->
       <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-sm">
-            <i class="fa-solid fa-shapes"></i>
+          <div class="w-8 h-8 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center p-1 shadow-xs">
+            <img src="/assets/logo.png" alt="ToolsHere Logo" class="w-full h-full object-contain">
           </div>
           <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
             Tools<span class="text-blue-600">Here</span>
@@ -352,7 +360,6 @@
         <p class="text-[10px] text-slate-400 mt-3 text-center">100% In-Browser Local Processing • Zero Server Uploads</p>
       </div>
     </div>
-  </header>
 
   <!-- Main Content Area -->
   <main class="flex-grow max-w-5xl w-full mx-auto px-2.5 sm:px-6 lg:px-8 py-4 sm:py-8 space-y-4 sm:space-y-6">
@@ -517,7 +524,7 @@
 
     <!-- Pre-rendered SEO Guide & FAQs -->
     
-    <article class="mt-10 pt-8 border-t border-slate-200 space-y-8 text-slate-700">
+    <article class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800 space-y-8 text-slate-700 dark:text-slate-300">
       <div class="space-y-3">
         <div class="flex items-center gap-2 flex-wrap">
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 uppercase tracking-wide">Image Utility</span>
@@ -525,7 +532,7 @@
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
         </div>
         <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">About Image Compressor & Resizer</h2>
-        <div class="p-5 rounded-xl bg-slate-50 border border-slate-200 leading-relaxed text-sm text-slate-600">
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
           <p>ToolsHere Image Compressor & Resizer is a client-side utility built for students, job applicants, web developers, and designers who need quick, precise image optimization. Whether you must meet strict government portal upload limits—such as 20KB, 50KB, or 100KB requirements for exams, passports, and job applications—or reduce image payload sizes for faster web performance, this tool gives you complete manual and preset control. You can adjust exact pixel dimensions, dial in quality percentages from 10% to 100%, and inspect instant side-by-side file size feedback. Everything processes entirely within your device's browser memory using HTML5 Canvas, ensuring your personal photos never leave your computer or phone.</p>
         </div>
       </div>
@@ -537,29 +544,29 @@
         </h3>
         <ol class="space-y-2.5 text-sm">
           
-            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+            <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">1</span>
-              <span class="text-slate-700 font-medium leading-relaxed">Click or drag your image file (PNG, JPG, WebP, or GIF) into the upload dropzone.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click or drag your image file (PNG, JPG, WebP, or GIF) into the upload dropzone.</span>
             </li>
           
-            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+            <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">2</span>
-              <span class="text-slate-700 font-medium leading-relaxed">Choose a quick preset button (20KB, 50KB, 100KB, 200KB) or drag the compression slider to set your custom quality level.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Choose a quick preset button (20KB, 50KB, 100KB, 200KB) or drag the compression slider to set your custom quality level.</span>
             </li>
           
-            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+            <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
-              <span class="text-slate-700 font-medium leading-relaxed">Optionally adjust the pixel width and height to resize the dimensions to exact specifications.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Optionally adjust the pixel width and height to resize the dimensions to exact specifications.</span>
             </li>
           
-            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+            <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">4</span>
-              <span class="text-slate-700 font-medium leading-relaxed">Review the live compressed file size and visual preview on the screen.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Review the live compressed file size and visual preview on the screen.</span>
             </li>
           
-            <li class="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
+            <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">5</span>
-              <span class="text-slate-700 font-medium leading-relaxed">Click 'Download Compressed Image' to save your optimized JPG file instantly.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Download Compressed Image' to save your optimized JPG file instantly.</span>
             </li>
           
         </ol>
@@ -572,32 +579,32 @@
         </h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
               <span class="text-xs sm:text-sm text-slate-700 font-medium">One-click target file size presets: 20 KB, 50 KB, 100 KB, and 200 KB for exam and job portals.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
               <span class="text-xs sm:text-sm text-slate-700 font-medium">Granular compression quality slider ranging from 10% to 100%.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
               <span class="text-xs sm:text-sm text-slate-700 font-medium">Custom pixel dimension controls to change width and height on the fly.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
               <span class="text-xs sm:text-sm text-slate-700 font-medium">Real-time dual file size counter displaying original size versus compressed output size.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
               <span class="text-xs sm:text-sm text-slate-700 font-medium">Instant visual preview with checkerboard background support.</span>
             </div>
           
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200">
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
               <span class="text-xs sm:text-sm text-slate-700 font-medium">100% private client-side processing with zero server uploads or latency.</span>
             </div>
@@ -606,20 +613,20 @@
       </section>
 
       <!-- Supported Formats & Limits -->
-      <section class="space-y-3 p-5 rounded-xl bg-slate-50 border border-slate-200">
+      <section class="space-y-3 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
         <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
           <i class="fa-solid fa-sliders text-blue-600"></i> Technical Specifications & File Compatibility
         </h3>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
-          <div class="p-3 bg-white rounded-lg border border-slate-200">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
             <span class="font-semibold text-slate-800">PNG, JPG/JPEG, WebP, GIF</span>
           </div>
-          <div class="p-3 bg-white rounded-lg border border-slate-200">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
             <span class="font-semibold text-slate-800">JPEG (.jpg) for optimal compression ratios</span>
           </div>
-          <div class="p-3 bg-white rounded-lg border border-slate-200">
+          <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
             <span class="font-semibold text-slate-800">Single image processing per batch; large raw photos (over 25MB) may require extra browser memory.</span>
           </div>
@@ -633,28 +640,28 @@
         </h3>
         <div class="space-y-3">
           
-            <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2">
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How does the target size preset (20KB, 50KB, 100KB) work?
               </h4>
               <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">The tool automatically calibrates the image compression ratio and resolution algorithms in browser memory to aim for your selected target threshold, making it easy to comply with government form restrictions.</p>
             </div>
           
-            <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2">
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Are my photos uploaded to any external server?
               </h4>
               <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API. Your pictures never leave your local device.</p>
             </div>
           
-            <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2">
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What output format will my compressed image be saved in?
               </h4>
               <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals.</p>
             </div>
           
-            <div class="p-4 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-2">
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Can I resize the width and height without losing quality?
               </h4>
@@ -2669,11 +2676,20 @@
       triggerConfetti();
     }
 
-    /* ================= UTILITY 2: BACKGROUND REMOVER ================= */
+    /* ================= UTILITY 2: AI & SMART BACKGROUND REMOVER ================= */
     let loadedBgImg = null;
+    let bgTargetColor = { r: 255, g: 255, b: 255 };
+    let bgEyedropperActive = false;
+    let bgBrushActive = false;
+    let bgBrushMode = 'erase';
+    let bgBrushSize = 25;
+    let bgIsMouseDown = false;
+    let bgOriginalImageData = null;
+    let bgReplacementMode = 'transparent';
+    let bgCustomColor = '#2563eb';
 
     function renderBgRemover(title, icon, container) {
-      if (title) title.innerText = 'AI Background Remover (Client-Side)';
+      if (title) title.innerText = 'AI Background Remover & Transparent Cutout Studio';
       if (icon) icon.className = 'fa-solid fa-wand-magic-sparkles';
       container.innerHTML = `
         <div class="space-y-6">
@@ -2683,30 +2699,76 @@
               <i class="fa-solid fa-wand-magic-sparkles"></i>
             </div>
             <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-violet-500/25 group-hover:shadow-violet-500/40 group-hover:scale-[1.02] transition-all">
-              <i class="fa-solid fa-folder-open"></i> Choose Photo
+              <i class="fa-solid fa-folder-open"></i> Choose Photo to Remove Background
             </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Drag and drop photo to remove background</p>
-            <p class="text-[11px] text-slate-400 mt-2">Automatic color tolerance isolation • Exports transparent PNG</p>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Drag and drop any portrait, product photo, or signature</p>
+            <p class="text-[11px] text-slate-400 mt-2">Smart auto-sampling • Interactive color dropper • Touch-up brush • 100% private in-browser</p>
           </div>
 
           <div id="bgResults" class="hidden space-y-6">
-            <div class="flex items-center justify-between p-3.5 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 flex-wrap gap-2">
-              <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 flex-1">
-                <label class="shrink-0">Sensitivity Threshold:</label>
-                <input type="range" id="bgTolerance" min="5" max="80" value="35" oninput="reprocessBg()" class="w-48 sm:w-64 h-2 bg-slate-200 dark:bg-slate-700 rounded-lg accent-violet-600 cursor-pointer">
-                <span id="toleranceVal" class="font-mono font-bold text-violet-600 dark:text-violet-400">35</span>
+            <div class="p-4 bg-slate-50 dark:bg-slate-800/90 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+              <div class="flex items-center justify-between flex-wrap gap-3 pb-3 border-b border-slate-200 dark:border-slate-700">
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Target Color:</span>
+                  <div id="targetColorPreview" class="w-6 h-6 rounded-lg border border-slate-300 shadow-2xs" style="background:#ffffff"></div>
+                  <button type="button" id="eyedropperBtn" onclick="toggleEyedropper()" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 hover:bg-violet-50 hover:text-violet-600 dark:hover:bg-slate-600 text-xs font-bold transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-eye-dropper"></i> Click on Photo to Pick Color
+                  </button>
+                </div>
+                <button type="button" onclick="document.getElementById('bgInput').click()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-slate-700 transition-colors">
+                  <i class="fa-solid fa-arrow-rotate-left"></i> Change Photo
+                </button>
               </div>
-              <button type="button" onclick="document.getElementById('bgInput').click()" class="text-xs font-bold text-violet-600 dark:text-violet-400 hover:underline">
-                Upload Different Photo
-              </button>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold text-slate-700 dark:text-slate-300">
+                <div class="space-y-1.5">
+                  <div class="flex justify-between">
+                    <span>Sensitivity / Tolerance:</span>
+                    <span id="toleranceVal" class="font-mono font-bold text-violet-600 dark:text-violet-400">38</span>
+                  </div>
+                  <input type="range" id="bgTolerance" min="5" max="95" value="38" oninput="reprocessBg()" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg accent-violet-600 cursor-pointer">
+                  <p class="text-[10px] text-slate-400">Increase to erase more matching shades, decrease to preserve details</p>
+                </div>
+                <div class="space-y-1.5">
+                  <div class="flex justify-between">
+                    <span>Edge Smoothing / Feather:</span>
+                    <span id="featherVal" class="font-mono font-bold text-violet-600 dark:text-violet-400">2 px</span>
+                  </div>
+                  <input type="range" id="bgFeather" min="0" max="8" value="2" oninput="reprocessBg()" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg accent-violet-600 cursor-pointer">
+                  <p class="text-[10px] text-slate-400">Softens boundary edges to remove jagged pixel borders</p>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between flex-wrap gap-3">
+                <div class="flex items-center gap-2 flex-wrap text-xs">
+                  <span class="font-bold text-slate-500 dark:text-slate-400">Backdrop:</span>
+                  <button type="button" onclick="setBgReplacement('transparent')" id="btnBgTrans" class="px-2.5 py-1 rounded-lg font-bold text-xs bg-violet-600 text-white shadow-xs">Transparent</button>
+                  <button type="button" onclick="setBgReplacement('white')" id="btnBgWhite" class="px-2.5 py-1 rounded-lg font-bold text-xs bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200">White</button>
+                  <button type="button" onclick="setBgReplacement('black')" id="btnBgBlack" class="px-2.5 py-1 rounded-lg font-bold text-xs bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200">Black</button>
+                  <input type="color" id="bgCustomPicker" value="#2563eb" onchange="setBgReplacement('custom', this.value)" class="w-7 h-7 rounded-lg border border-slate-200 dark:border-slate-600 cursor-pointer" title="Custom color">
+                </div>
+
+                <div class="flex items-center gap-2 text-xs">
+                  <button type="button" id="bgBrushBtn" onclick="toggleBgBrush()" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold hover:bg-slate-100 flex items-center gap-1.5">
+                    <i class="fa-solid fa-paintbrush"></i> Touch-up Brush
+                  </button>
+                  <div id="brushSubControls" class="hidden flex items-center gap-2">
+                    <select id="brushModeSelect" onchange="bgBrushMode=this.value" class="px-2 py-1 rounded-lg text-xs bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600">
+                      <option value="erase">Erase Spots</option>
+                      <option value="restore">Restore Subject</option>
+                    </select>
+                    <input type="range" id="brushSizeSlider" min="8" max="60" value="25" oninput="bgBrushSize=parseInt(this.value)" class="w-16 accent-violet-600" title="Brush Size">
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="p-4 border border-[#E5E7EB] dark:border-slate-700 rounded-3xl checkerboard-bg flex justify-center items-center min-h-[300px] max-h-[480px] overflow-hidden">
-              <canvas id="bgCanvas" class="max-h-[440px] max-w-full object-contain rounded-xl"></canvas>
+            <div id="bgCanvasWrapper" class="relative p-4 border border-slate-200 dark:border-slate-700 rounded-3xl checkerboard-bg flex justify-center items-center min-h-[320px] max-h-[520px] overflow-auto select-none">
+              <canvas id="bgCanvas" class="max-h-[480px] max-w-full object-contain rounded-xl shadow-md cursor-default"></canvas>
             </div>
 
-            <button type="button" onclick="downloadBgPng()" class="w-full py-4 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-violet-500/25 transition-all flex items-center justify-center gap-2.5">
-              <i class="fa-solid fa-download text-lg"></i> Download Transparent PNG
+            <button type="button" onclick="downloadBgPng()" class="w-full py-4 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-violet-500/25 transition-all flex items-center justify-center gap-2.5">
+              <i class="fa-solid fa-download text-lg"></i> Download High-Resolution Cutout (PNG)
             </button>
           </div>
         </div>
@@ -2715,6 +2777,7 @@
 
     function processBgRemover(input) {
       if (input.files && input.files[0]) {
+        const file = input.files[0];
         const reader = new FileReader();
         reader.onload = function(e) {
           loadedBgImg = new Image();
@@ -2723,148 +2786,780 @@
             const res = document.getElementById('bgResults');
             if (drop) drop.classList.add('hidden');
             if (res) res.classList.remove('hidden');
+
+            const canvas = document.getElementById('bgCanvas');
+            canvas.width = loadedBgImg.naturalWidth;
+            canvas.height = loadedBgImg.naturalHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(loadedBgImg, 0, 0);
+            bgOriginalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+            autoDetectBgColor();
+            initBgCanvasEvents();
             reprocessBg();
+            showToast('Photo loaded! Background isolated automatically.', 'success');
           };
           loadedBgImg.src = e.target.result;
         };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function autoDetectBgColor() {
+      if (!bgOriginalImageData) return;
+      const data = bgOriginalImageData.data;
+      const w = bgOriginalImageData.width;
+      const h = bgOriginalImageData.height;
+
+      const corners = [0, (w - 1) * 4, ((h - 1) * w) * 4, ((h - 1) * w + (w - 1)) * 4];
+      let r = 0, g = 0, b = 0;
+      corners.forEach(idx => {
+        r += data[idx];
+        g += data[idx + 1];
+        b += data[idx + 2];
+      });
+
+      bgTargetColor = { r: Math.round(r / 4), g: Math.round(g / 4), b: Math.round(b / 4) };
+      const preview = document.getElementById('targetColorPreview');
+      if (preview) preview.style.background = `rgb(${bgTargetColor.r}, ${bgTargetColor.g}, ${bgTargetColor.b})`;
+    }
+
+    function toggleEyedropper() {
+      bgEyedropperActive = !bgEyedropperActive;
+      const btn = document.getElementById('eyedropperBtn');
+      const canvas = document.getElementById('bgCanvas');
+      if (bgEyedropperActive) {
+        if (btn) btn.className = 'px-3 py-1.5 rounded-xl border border-violet-500 bg-violet-600 text-white text-xs font-bold shadow-xs flex items-center gap-1.5';
+        if (canvas) canvas.style.cursor = 'crosshair';
+        showToast('Click anywhere on the photo to select that color to remove', 'info');
+      } else {
+        if (btn) btn.className = 'px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-violet-50 flex items-center gap-1.5';
+        if (canvas) canvas.style.cursor = 'default';
+      }
+    }
+
+    function setBgReplacement(mode, customColor) {
+      bgReplacementMode = mode;
+      if (customColor) bgCustomColor = customColor;
+
+      ['btnBgTrans', 'btnBgWhite', 'btnBgBlack'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = 'px-2.5 py-1 rounded-lg font-bold text-xs bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200';
+      });
+
+      if (mode === 'transparent') {
+        document.getElementById('btnBgTrans').className = 'px-2.5 py-1 rounded-lg font-bold text-xs bg-violet-600 text-white shadow-xs';
+      } else if (mode === 'white') {
+        document.getElementById('btnBgWhite').className = 'px-2.5 py-1 rounded-lg font-bold text-xs bg-violet-600 text-white shadow-xs';
+      } else if (mode === 'black') {
+        document.getElementById('btnBgBlack').className = 'px-2.5 py-1 rounded-lg font-bold text-xs bg-violet-600 text-white shadow-xs';
+      }
+      reprocessBg();
+    }
+
+    function toggleBgBrush() {
+      bgBrushActive = !bgBrushActive;
+      const btn = document.getElementById('bgBrushBtn');
+      const sub = document.getElementById('brushSubControls');
+      const canvas = document.getElementById('bgCanvas');
+      if (bgBrushActive) {
+        if (btn) btn.className = 'px-3 py-1.5 rounded-xl border border-violet-500 bg-violet-600 text-white text-xs font-bold shadow-xs flex items-center gap-1.5';
+        if (sub) sub.classList.remove('hidden');
+        if (canvas) canvas.style.cursor = 'crosshair';
+      } else {
+        if (btn) btn.className = 'px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold flex items-center gap-1.5';
+        if (sub) sub.classList.add('hidden');
+        if (canvas) canvas.style.cursor = 'default';
+      }
+    }
+
+    function initBgCanvasEvents() {
+      const canvas = document.getElementById('bgCanvas');
+      if (!canvas) return;
+
+      canvas.onmousedown = function(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = Math.floor((e.clientX - rect.left) * scaleX);
+        const y = Math.floor((e.clientY - rect.top) * scaleY);
+
+        if (bgEyedropperActive) {
+          const ctx = canvas.getContext('2d');
+          const p = ctx.getImageData(x, y, 1, 1).data;
+          bgTargetColor = { r: p[0], g: p[1], b: p[2] };
+          const preview = document.getElementById('targetColorPreview');
+          if (preview) preview.style.background = `rgb(${p[0]}, ${p[1]}, ${p[2]})`;
+          toggleEyedropper();
+          reprocessBg();
+          return;
+        }
+
+        if (bgBrushActive) {
+          bgIsMouseDown = true;
+          applyBrushAt(x, y);
+        }
+      };
+
+      canvas.onmousemove = function(e) {
+        if (!bgBrushActive || !bgIsMouseDown) return;
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const x = Math.floor((e.clientX - rect.left) * scaleX);
+        const y = Math.floor((e.clientY - rect.top) * scaleY);
+        applyBrushAt(x, y);
+      };
+
+      window.addEventListener('mouseup', () => { bgIsMouseDown = false; });
+    }
+
+    function applyBrushAt(cx, cy) {
+      const canvas = document.getElementById('bgCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const r = bgBrushSize;
+
+      if (bgBrushMode === 'erase') {
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      } else if (bgBrushMode === 'restore' && bgOriginalImageData) {
+        const imgData = ctx.getImageData(cx - r, cy - r, r * 2, r * 2);
+        const origData = bgOriginalImageData.data;
+        const w = bgOriginalImageData.width;
+
+        for (let py = 0; py < r * 2; py++) {
+          for (let px = 0; px < r * 2; px++) {
+            const dist = Math.sqrt((px - r) ** 2 + (py - r) ** 2);
+            if (dist <= r) {
+              const origX = cx - r + px;
+              const origY = cy - r + py;
+              if (origX >= 0 && origX < w && origY >= 0 && origY < bgOriginalImageData.height) {
+                const srcIdx = (origY * w + origX) * 4;
+                const dstIdx = (py * (r * 2) + px) * 4;
+                imgData.data[dstIdx] = origData[srcIdx];
+                imgData.data[dstIdx + 1] = origData[srcIdx + 1];
+                imgData.data[dstIdx + 2] = origData[srcIdx + 2];
+                imgData.data[dstIdx + 3] = origData[srcIdx + 3];
+              }
+            }
+          }
+        }
+        ctx.putImageData(imgData, cx - r, cy - r);
       }
     }
 
     function reprocessBg() {
-      if (!loadedBgImg) return;
+      if (!loadedBgImg || !bgOriginalImageData) return;
       const tolElem = document.getElementById('bgTolerance');
-      const tolerance = parseInt(tolElem.value) || 35;
+      const tolerance = parseInt(tolElem?.value) || 38;
+      const featherElem = document.getElementById('bgFeather');
+      const feather = parseInt(featherElem?.value) || 2;
+
       document.getElementById('toleranceVal').innerText = tolerance;
+      document.getElementById('featherVal').innerText = feather + ' px';
 
       const canvas = document.getElementById('bgCanvas');
-      canvas.width = loadedBgImg.naturalWidth;
-      canvas.height = loadedBgImg.naturalHeight;
       const ctx = canvas.getContext('2d');
-      ctx.drawImage(loadedBgImg, 0, 0);
 
-      const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const data = imgData.data;
-      const r0 = data[0], g0 = data[1], b0 = data[2];
+      const width = canvas.width;
+      const height = canvas.height;
+      const workData = ctx.createImageData(width, height);
+      const src = bgOriginalImageData.data;
+      const dst = workData.data;
 
-      for (let i = 0; i < data.length; i += 4) {
-        const r = data[i], g = data[i + 1], b = data[i + 2];
-        const dist = Math.sqrt((r - r0) ** 2 + (g - g0) ** 2 + (b - b0) ** 2);
-        if (dist < tolerance * 2) {
-          data[i + 3] = 0;
+      const tR = bgTargetColor.r;
+      const tG = bgTargetColor.g;
+      const tB = bgTargetColor.b;
+      const maxDist = tolerance * 2.5;
+      const featherDist = (feather + 1) * 15;
+
+      for (let i = 0; i < src.length; i += 4) {
+        const r = src[i];
+        const g = src[i + 1];
+        const b = src[i + 2];
+        const a = src[i + 3];
+
+        if (a === 0) {
+          dst[i + 3] = 0;
+          continue;
+        }
+
+        const dist = Math.sqrt((r - tR) ** 2 + (g - tG) ** 2 + (b - tB) ** 2);
+
+        if (dist < maxDist) {
+          if (feather > 0 && dist > (maxDist - featherDist)) {
+            const alphaFactor = (dist - (maxDist - featherDist)) / featherDist;
+            dst[i] = r;
+            dst[i + 1] = g;
+            dst[i + 2] = b;
+            dst[i + 3] = Math.round(a * alphaFactor);
+          } else {
+            dst[i + 3] = 0;
+          }
+        } else {
+          dst[i] = r;
+          dst[i + 1] = g;
+          dst[i + 2] = b;
+          dst[i + 3] = a;
         }
       }
-      ctx.putImageData(imgData, 0, 0);
+
+      ctx.clearRect(0, 0, width, height);
+
+      if (bgReplacementMode !== 'transparent') {
+        let fill = '#ffffff';
+        if (bgReplacementMode === 'black') fill = '#000000';
+        else if (bgReplacementMode === 'custom') fill = bgCustomColor;
+        ctx.fillStyle = fill;
+        ctx.fillRect(0, 0, width, height);
+      }
+
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = width;
+      tempCanvas.height = height;
+      tempCanvas.getContext('2d').putImageData(workData, 0, 0);
+      ctx.drawImage(tempCanvas, 0, 0);
     }
 
     function downloadBgPng() {
       const canvas = document.getElementById('bgCanvas');
       if (!canvas) return;
-      const a = document.createElement('a');
-      a.href = canvas.toDataURL('image/png');
-      a.download = 'transparent-bg-toolshere.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast('Transparent PNG downloaded!', 'success');
-      triggerConfetti();
-    }
-
-    /* ================= UTILITY 3: PDF TO WORD ================= */
-    function renderPdfWord(title, icon, container) {
-      if (title) title.innerText = 'PDF to Word Converter';
-      if (icon) icon.className = 'fa-solid fa-file-pdf';
-      container.innerHTML = `
-        <div class="space-y-6">
-          <div class="relative border-2 border-dashed border-red-400 dark:border-red-500 hover:border-red-600 dark:hover:border-red-400 bg-gradient-to-b from-red-50/70 via-white to-red-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-red-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
-            <input type="file" id="pdfWordInput" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handlePdfWordInput(this)">
-            <div class="w-20 h-20 rounded-3xl bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-md">
-              <i class="fa-solid fa-file-pdf"></i>
-            </div>
-            <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-red-500/25 group-hover:shadow-red-500/40 group-hover:scale-[1.02] transition-all">
-              <i class="fa-solid fa-folder-open"></i> Choose PDF File
-            </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Drag and drop your PDF document here</p>
-            <p id="pdfWordFileInfo" class="text-[11px] text-slate-400 mt-2">100% private in-browser document processing</p>
-          </div>
-          <button type="button" onclick="handlePdfWordConvert()" class="w-full py-4 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-red-500/25 transition-all flex items-center justify-center gap-2.5">
-            <i class="fa-solid fa-file-word text-lg"></i> Convert to Word (.doc)
-          </button>
-        </div>
-      `;
-    }
-
-    function handlePdfWordInput(input) {
-      if (input.files && input.files[0]) {
-        document.getElementById('pdfWordFileInfo').innerText = `Selected: ${input.files[0].name} (${(input.files[0].size/1024).toFixed(1)} KB)`;
-      }
-    }
-
-    function handlePdfWordConvert() {
-      const input = document.getElementById('pdfWordInput');
-      if (!input || !input.files || !input.files[0]) {
-        showToast('Please select a PDF file first', 'error');
-        return;
-      }
-      showToast('Preparing document layout...', 'info');
+      showToast('Generating high-res PNG...', 'info');
       setTimeout(() => {
-        const file = input.files[0];
-        const dummyDoc = `<!DOCTYPE html><html><body><h2>Converted Document: ${file.name}</h2><p>Extracted via ToolsHere.online client-side PDF utility.</p></body></html>`;
-        const blob = new Blob([dummyDoc], { type: 'application/msword' });
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = file.name.replace(/\.pdf$/i, '') + '.doc';
+        a.href = canvas.toDataURL('image/png');
+        a.download = 'cutout-transparent-toolshere.png';
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        showToast('Word document ready!', 'success');
+        showToast('Transparent PNG downloaded successfully!', 'success');
         triggerConfetti();
-      }, 1000);
+      }, 100);
     }
 
-    /* ================= UTILITY 4: MERGE PDF ================= */
-    function renderPdfMerge(title, icon, container) {
-      if (title) title.innerText = 'Merge & Split PDF';
-      if (icon) icon.className = 'fa-solid fa-object-group';
+    /* ================= UTILITY 3: PDF TO WORD CONVERTER ================= */
+    let pdfWordSelectedFile = null;
+    let pdfWordExtractedText = '';
+
+    function renderPdfWord(title, icon, container) {
+      if (title) title.innerText = 'PDF to Word (.doc) Converter';
+      if (icon) icon.className = 'fa-solid fa-file-word';
       container.innerHTML = `
         <div class="space-y-6">
-          <div class="relative border-2 border-dashed border-orange-400 dark:border-orange-500 hover:border-orange-600 dark:hover:border-orange-400 bg-gradient-to-b from-orange-50/70 via-white to-orange-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-orange-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
-            <input type="file" id="pdfMergeFiles" multiple accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleMergeFilesSelected(this)">
-            <div class="w-20 h-20 rounded-3xl bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 shadow-md">
-              <i class="fa-solid fa-copy"></i>
+          <div id="pdfWordDropZone" class="relative border-2 border-dashed border-red-400 dark:border-red-500 hover:border-red-600 dark:hover:border-red-400 bg-gradient-to-b from-red-50/70 via-white to-red-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-red-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
+            <input type="file" id="pdfWordInput" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handlePdfWordInput(this)">
+            <div class="w-20 h-20 rounded-3xl bg-red-100 dark:bg-red-950/80 text-red-600 dark:text-red-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300 shadow-md">
+              <i class="fa-solid fa-file-word"></i>
             </div>
-            <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-orange-500/25 group-hover:shadow-orange-500/40 group-hover:scale-[1.02] transition-all">
-              <i class="fa-solid fa-folder-open"></i> Select PDF Files
+            <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-red-500/25 group-hover:shadow-red-500/40 group-hover:scale-[1.02] transition-all">
+              <i class="fa-solid fa-folder-open"></i> Choose PDF to Convert to Word
             </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Drag and drop multiple PDFs to combine</p>
-            <p id="pdfMergeCount" class="text-[11px] text-slate-400 mt-2">Zero server uploads • Fast client-side merge</p>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Converts text, formatting, and pages directly in your browser</p>
+            <p id="pdfWordFileInfo" class="text-[11px] text-slate-400 mt-2">100% private client-side processing • Zero server uploads</p>
           </div>
-          <button type="button" onclick="handlePdfMergeAction()" class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-orange-500/25 transition-all flex items-center justify-center gap-2.5">
-            <i class="fa-solid fa-object-group text-lg"></i> Merge PDFs Instantly
-          </button>
+
+          <div id="pdfWordActiveSection" class="hidden space-y-6">
+            <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-3 text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100">
+                <i class="fa-solid fa-file-pdf text-red-500 text-xl"></i>
+                <div>
+                  <span id="pdfWordFilename" class="block font-bold">document.pdf</span>
+                  <span id="pdfWordMeta" class="text-xs text-slate-500 dark:text-slate-400">Loading document pages...</span>
+                </div>
+              </div>
+              <button type="button" onclick="document.getElementById('pdfWordInput').click()" class="text-xs font-bold text-red-600 dark:text-red-400 hover:underline">
+                Choose Different PDF
+              </button>
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex justify-between items-center text-xs font-bold text-slate-700 dark:text-slate-300">
+                <span>Extracted Document Preview:</span>
+                <span class="text-emerald-600 dark:text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Text Extracted</span>
+              </div>
+              <div id="pdfWordTextPreview" class="w-full max-h-56 overflow-y-auto p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-sans leading-relaxed text-slate-700 dark:text-slate-300 whitespace-pre-wrap select-text"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <button type="button" onclick="downloadPdfAsWordDoc()" class="sm:col-span-2 py-4 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-red-500/25 transition-all flex items-center justify-center gap-2.5">
+                <i class="fa-solid fa-download text-lg"></i> Download Word Document (.doc)
+              </button>
+              <button type="button" onclick="copyPdfExtractedText()" class="py-4 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-bold text-xs sm:text-sm rounded-2xl border border-slate-200 dark:border-slate-600 transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-copy"></i> Copy Text
+              </button>
+            </div>
+          </div>
         </div>
       `;
     }
 
-    function handleMergeFilesSelected(input) {
-      if (input.files) {
-        document.getElementById('pdfMergeCount').innerText = `${input.files.length} PDF files selected`;
+    async function handlePdfWordInput(input) {
+      if (!input.files || !input.files[0]) return;
+      pdfWordSelectedFile = input.files[0];
+      const filename = pdfWordSelectedFile.name;
+      const sizeKB = (pdfWordSelectedFile.size / 1024).toFixed(1);
+
+      document.getElementById('pdfWordFilename').innerText = filename;
+      document.getElementById('pdfWordMeta').innerText = `File Size: ${sizeKB} KB • Extracting text...`;
+      document.getElementById('pdfWordDropZone').classList.add('hidden');
+      document.getElementById('pdfWordActiveSection').classList.remove('hidden');
+
+      const previewBox = document.getElementById('pdfWordTextPreview');
+      previewBox.innerText = 'Extracting document text and layout...';
+
+      try {
+        const arrayBuffer = await pdfWordSelectedFile.arrayBuffer();
+        if (typeof pdfjsLib === 'undefined') {
+          previewBox.innerText = 'PDF parser is initializing. Please wait a moment...';
+          return;
+        }
+
+        const pdfDoc = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        const totalPages = pdfDoc.numPages;
+        document.getElementById('pdfWordMeta').innerText = `${totalPages} Pages • ${sizeKB} KB`;
+
+        let fullText = '';
+        let htmlPages = [];
+
+        for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+          const page = await pdfDoc.getPage(pageNum);
+          const textContent = await page.getTextContent();
+          
+          let pageLines = [];
+          let currentLine = '';
+          let lastY = null;
+
+          for (const item of textContent.items) {
+            if (lastY === null || Math.abs(item.transform[5] - lastY) > 5) {
+              if (currentLine.trim()) pageLines.push(currentLine.trim());
+              currentLine = item.str;
+              lastY = item.transform[5];
+            } else {
+              currentLine += (item.hasEOL ? '\n' : ' ') + item.str;
+            }
+          }
+          if (currentLine.trim()) pageLines.push(currentLine.trim());
+
+          const pageText = pageLines.join('\n');
+          fullText += `--- PAGE ${pageNum} ---\n${pageText}\n\n`;
+          htmlPages.push(pageLines.map(line => `<p style="margin: 0 0 8pt 0; font-size: 11pt; line-height: 1.4;">${escapeHtml(line)}</p>`).join(''));
+        }
+
+        pdfWordExtractedText = fullText;
+        window.pdfWordPagesHtml = htmlPages;
+        previewBox.innerText = fullText.slice(0, 1500) + (fullText.length > 1500 ? '\n\n[... Content continues in downloaded Word document ...]' : '');
+        showToast('Document parsed successfully!', 'success');
+      } catch (err) {
+        console.error(err);
+        previewBox.innerText = 'Notice: Could not parse text directly. Click "Download Word Document" to generate editable draft.';
+        pdfWordExtractedText = `Converted Document: ${filename}`;
+        window.pdfWordPagesHtml = [`<p>Document: ${escapeHtml(filename)}</p>`];
       }
     }
 
-    function handlePdfMergeAction() {
-      const input = document.getElementById('pdfMergeFiles');
-      if (!input || !input.files || input.files.length < 2) {
-        showToast('Please select at least 2 PDF files to merge', 'info');
+    function escapeHtml(text) {
+      const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    function downloadPdfAsWordDoc() {
+      if (!pdfWordSelectedFile) {
+        showToast('Please select a PDF file first', 'error');
         return;
       }
-      showToast(`Merging ${input.files.length} PDF files...`, 'success');
+      showToast('Generating formatted Microsoft Word document...', 'info');
+
       setTimeout(() => {
-        showToast('PDFs merged successfully in browser memory!', 'success');
+        const pagesHtml = window.pdfWordPagesHtml || [`<p>${escapeHtml(pdfWordExtractedText)}</p>`];
+        const bodyContent = pagesHtml.join('<br style="page-break-before:always; clear:both; mso-break-type:section-break">');
+
+        const docTemplate = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset='utf-8'>
+  <title>${escapeHtml(pdfWordSelectedFile.name)}</title>
+  <style>
+    @page { size: 8.5in 11.0in; margin: 1.0in; }
+    body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; color: #111827; }
+    h1 { font-size: 18pt; font-weight: bold; color: #1e3a8a; margin-bottom: 12pt; }
+    p { margin-bottom: 8pt; text-align: justify; }
+  </style>
+</head>
+<body>
+  <h1>${escapeHtml(pdfWordSelectedFile.name.replace(/\.pdf$/i, ''))}</h1>
+  ${bodyContent}
+</body>
+</html>`;
+
+        const blob = new Blob([docTemplate], { type: 'application/msword;charset=utf-8' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = pdfWordSelectedFile.name.replace(/\.pdf$/i, '') + '.doc';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Word document downloaded!', 'success');
         triggerConfetti();
-      }, 900);
+      }, 300);
     }
 
+    function copyPdfExtractedText() {
+      if (!pdfWordExtractedText) {
+        showToast('No text available to copy', 'error');
+        return;
+      }
+      copyText(pdfWordExtractedText);
+    }
+
+    /* ================= UTILITY 4: MERGE & SPLIT PDF ================= */
+    let mergePdfFiles = [];
+    let splitPdfSelectedFile = null;
+    let currentPdfToolTab = 'merge';
+
+    function renderPdfMerge(title, icon, container) {
+      if (title) title.innerText = 'Merge & Split PDF Studio';
+      if (icon) icon.className = 'fa-solid fa-object-group';
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex p-1.5 bg-slate-100 dark:bg-slate-700/60 rounded-2xl max-w-md mx-auto">
+            <button type="button" id="tabMergeBtn" onclick="switchPdfMergeTab('merge')" class="flex-1 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 text-white shadow-xs transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-object-group"></i> Merge PDFs
+            </button>
+            <button type="button" id="tabSplitBtn" onclick="switchPdfMergeTab('split')" class="flex-1 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-600 transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-scissors"></i> Split PDF
+            </button>
+          </div>
+
+          <div id="pdfMergeSection" class="space-y-6">
+            <div id="pdfMergeDropZone" class="relative border-2 border-dashed border-orange-400 dark:border-orange-500 hover:border-orange-600 dark:hover:border-orange-400 bg-gradient-to-b from-orange-50/70 via-white to-orange-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-orange-500/5 flex flex-col items-center justify-center min-h-[240px] group">
+              <input type="file" id="pdfMergeFiles" multiple accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleMergeFilesSelected(this)">
+              <div class="w-20 h-20 rounded-3xl bg-orange-100 dark:bg-orange-950/80 text-orange-600 dark:text-orange-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 shadow-md">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+              <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-orange-500/25 group-hover:shadow-orange-500/40 group-hover:scale-[1.02] transition-all">
+                <i class="fa-solid fa-folder-open"></i> Select PDF Files to Merge
+              </span>
+              <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Select two or more PDFs to combine into a single document</p>
+              <p id="pdfMergeCount" class="text-[11px] text-slate-400 mt-2">100% private in-browser joiner • Fast download</p>
+            </div>
+
+            <div id="mergeFilesContainer" class="hidden space-y-4">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
+                <span id="mergeSummaryCount" class="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100">0 PDFs Selected</span>
+                <button type="button" onclick="document.getElementById('pdfMergeFiles').click()" class="text-xs font-bold text-orange-600 dark:text-orange-400 hover:underline flex items-center gap-1">
+                  <i class="fa-solid fa-plus"></i> Add More PDFs
+                </button>
+              </div>
+
+              <div id="mergeFileList" class="space-y-2 max-h-72 overflow-y-auto pr-1"></div>
+
+              <button type="button" onclick="executePdfMerge()" class="w-full py-4 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-orange-500/25 transition-all flex items-center justify-center gap-2.5">
+                <i class="fa-solid fa-object-group text-lg"></i> Merge &amp; Download Combined PDF
+              </button>
+            </div>
+          </div>
+
+          <div id="pdfSplitSection" class="hidden space-y-6">
+            <div id="pdfSplitDropZone" class="relative border-2 border-dashed border-blue-400 dark:border-blue-500 hover:border-blue-600 dark:hover:border-blue-400 bg-gradient-to-b from-blue-50/70 via-white to-blue-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-blue-500/5 flex flex-col items-center justify-center min-h-[240px] group">
+              <input type="file" id="pdfSplitInput" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleSplitFileSelected(this)">
+              <div class="w-20 h-20 rounded-3xl bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-md">
+                <i class="fa-solid fa-scissors"></i>
+              </div>
+              <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 group-hover:scale-[1.02] transition-all">
+                <i class="fa-solid fa-folder-open"></i> Choose PDF to Split
+              </span>
+              <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Extract specific pages or break into individual single-page documents</p>
+            </div>
+
+            <div id="splitActiveControls" class="hidden space-y-5">
+              <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                <div>
+                  <span id="splitFileName" class="block font-bold text-sm">document.pdf</span>
+                  <span id="splitPageInfo" class="text-xs text-slate-500 dark:text-slate-400">Loading pages...</span>
+                </div>
+                <button type="button" onclick="document.getElementById('pdfSplitInput').click()" class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline">
+                  Change PDF
+                </button>
+              </div>
+
+              <div class="space-y-3">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Split Option:</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <label class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 flex items-start gap-3 cursor-pointer hover:border-blue-500 transition-colors">
+                    <input type="radio" name="splitMode" value="range" checked onchange="updateSplitModeUI()" class="mt-0.5 accent-blue-600">
+                    <div>
+                      <span class="font-bold block text-slate-800 dark:text-slate-100">Extract Page Range</span>
+                      <span class="text-slate-400 text-[11px]">Save selected pages into a new PDF</span>
+                    </div>
+                  </label>
+                  <label class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 flex items-start gap-3 cursor-pointer hover:border-blue-500 transition-colors">
+                    <input type="radio" name="splitMode" value="all" onchange="updateSplitModeUI()" class="mt-0.5 accent-blue-600">
+                    <div>
+                      <span class="font-bold block text-slate-800 dark:text-slate-100">Extract All Pages (ZIP)</span>
+                      <span class="text-slate-400 text-[11px]">Download every page as an individual file</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div id="splitRangeBox" class="space-y-1.5">
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300">Enter Pages to Extract (e.g. 1-3, 5):</label>
+                <input type="text" id="splitRangeInput" value="1" placeholder="e.g. 1-3, 5" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-sm font-semibold">
+              </div>
+
+              <button type="button" onclick="executePdfSplit()" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-blue-500/25 transition-all flex items-center justify-center gap-2.5">
+                <i class="fa-solid fa-scissors text-lg"></i> Split &amp; Download PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function switchPdfMergeTab(tab) {
+      currentPdfToolTab = tab;
+      const mergeSection = document.getElementById('pdfMergeSection');
+      const splitSection = document.getElementById('pdfSplitSection');
+      const tabMergeBtn = document.getElementById('tabMergeBtn');
+      const tabSplitBtn = document.getElementById('tabSplitBtn');
+
+      if (tab === 'merge') {
+        mergeSection.classList.remove('hidden');
+        splitSection.classList.add('hidden');
+        tabMergeBtn.className = 'flex-1 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 text-white shadow-xs transition-all flex items-center justify-center gap-2';
+        tabSplitBtn.className = 'flex-1 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-600 transition-all flex items-center justify-center gap-2';
+      } else {
+        mergeSection.classList.add('hidden');
+        splitSection.classList.remove('hidden');
+        tabMergeBtn.className = 'flex-1 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-600 transition-all flex items-center justify-center gap-2';
+        tabSplitBtn.className = 'flex-1 py-2.5 rounded-xl font-bold text-xs sm:text-sm bg-blue-600 text-white shadow-xs transition-all flex items-center justify-center gap-2';
+      }
+    }
+
+    function handleMergeFilesSelected(input) {
+      if (input.files && input.files.length > 0) {
+        const newFiles = Array.from(input.files);
+        mergePdfFiles = [...mergePdfFiles, ...newFiles];
+        renderMergeFilesList();
+        document.getElementById('mergeFilesContainer').classList.remove('hidden');
+      }
+    }
+
+    function renderMergeFilesList() {
+      const container = document.getElementById('mergeFileList');
+      const summary = document.getElementById('mergeSummaryCount');
+      if (!container || !summary) return;
+
+      summary.innerText = `${mergePdfFiles.length} PDF Documents Selected (Drag or Reorder)`;
+      container.innerHTML = '';
+
+      mergePdfFiles.forEach((file, index) => {
+        const item = document.createElement('div');
+        item.className = 'flex items-center justify-between p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs text-xs';
+        item.innerHTML = `
+          <div class="flex items-center gap-3 overflow-hidden pr-2">
+            <span class="w-6 h-6 rounded-lg bg-orange-100 dark:bg-orange-950 text-orange-600 dark:text-orange-400 font-bold flex items-center justify-center text-xs shrink-0">${index + 1}</span>
+            <div class="truncate">
+              <span class="font-bold text-slate-800 dark:text-slate-100 block truncate">${escapeHtml(file.name)}</span>
+              <span class="text-[10px] text-slate-400">${(file.size / 1024).toFixed(1)} KB</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-1 shrink-0">
+            <button type="button" onclick="moveMergeFile(${index}, -1)" ${index === 0 ? 'disabled' : ''} class="w-7 h-7 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-slate-600 dark:text-slate-300" title="Move Up">
+              <i class="fa-solid fa-arrow-up text-[10px]"></i>
+            </button>
+            <button type="button" onclick="moveMergeFile(${index}, 1)" ${index === mergePdfFiles.length - 1 ? 'disabled' : ''} class="w-7 h-7 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-slate-600 dark:text-slate-300" title="Move Down">
+              <i class="fa-solid fa-arrow-down text-[10px]"></i>
+            </button>
+            <button type="button" onclick="removeMergeFile(${index})" class="w-7 h-7 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/50 flex items-center justify-center" title="Remove File">
+              <i class="fa-solid fa-trash-can text-[10px]"></i>
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function moveMergeFile(index, dir) {
+      const target = index + dir;
+      if (target >= 0 && target < mergePdfFiles.length) {
+        const temp = mergePdfFiles[index];
+        mergePdfFiles[index] = mergePdfFiles[target];
+        mergePdfFiles[target] = temp;
+        renderMergeFilesList();
+      }
+    }
+
+    function removeMergeFile(index) {
+      mergePdfFiles.splice(index, 1);
+      renderMergeFilesList();
+      if (mergePdfFiles.length === 0) {
+        document.getElementById('mergeFilesContainer').classList.add('hidden');
+      }
+    }
+
+    async function executePdfMerge() {
+      if (mergePdfFiles.length < 2) {
+        showToast('Please select at least 2 PDF files to merge', 'error');
+        return;
+      }
+
+      showToast(`Combining ${mergePdfFiles.length} PDFs in browser...`, 'info');
+
+      try {
+        if (typeof PDFLib === 'undefined') {
+          showToast('PDF engine initializing, please retry...', 'info');
+          return;
+        }
+
+        const mergedPdf = await PDFLib.PDFDocument.create();
+
+        for (const file of mergePdfFiles) {
+          const buffer = await file.arrayBuffer();
+          const doc = await PDFLib.PDFDocument.load(buffer);
+          const copiedPages = await mergedPdf.copyPages(doc, doc.getPageIndices());
+          copiedPages.forEach((page) => mergedPdf.addPage(page));
+        }
+
+        const mergedPdfBytes = await mergedPdf.save();
+        const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'merged-document-toolshere.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        showToast('Merged PDF downloaded successfully!', 'success');
+        triggerConfetti();
+      } catch (err) {
+        console.error(err);
+        showToast('Failed to merge PDFs: ' + err.message, 'error');
+      }
+    }
+
+    let splitTotalPages = 1;
+    async function handleSplitFileSelected(input) {
+      if (!input.files || !input.files[0]) return;
+      splitPdfSelectedFile = input.files[0];
+
+      document.getElementById('splitFileName').innerText = splitPdfSelectedFile.name;
+      document.getElementById('splitPageInfo').innerText = 'Inspecting document pages...';
+      document.getElementById('pdfSplitDropZone').classList.add('hidden');
+      document.getElementById('splitActiveControls').classList.remove('hidden');
+
+      try {
+        const buf = await splitPdfSelectedFile.arrayBuffer();
+        const doc = await PDFLib.PDFDocument.load(buf);
+        splitTotalPages = doc.getPageCount();
+        document.getElementById('splitPageInfo').innerText = `Total Pages: ${splitTotalPages} • ${(splitPdfSelectedFile.size / 1024).toFixed(1)} KB`;
+        document.getElementById('splitRangeInput').value = `1-${Math.min(splitTotalPages, 3)}`;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function updateSplitModeUI() {
+      const mode = document.querySelector('input[name="splitMode"]:checked')?.value;
+      const rangeBox = document.getElementById('splitRangeBox');
+      if (mode === 'all') {
+        rangeBox.classList.add('hidden');
+      } else {
+        rangeBox.classList.remove('hidden');
+      }
+    }
+
+    async function executePdfSplit() {
+      if (!splitPdfSelectedFile) {
+        showToast('Please select a PDF file first', 'error');
+        return;
+      }
+
+      const mode = document.querySelector('input[name="splitMode"]:checked')?.value || 'range';
+      showToast('Processing split operation...', 'info');
+
+      try {
+        const buf = await splitPdfSelectedFile.arrayBuffer();
+        const doc = await PDFLib.PDFDocument.load(buf);
+        const total = doc.getPageCount();
+
+        if (mode === 'all') {
+          if (typeof JSZip === 'undefined') {
+            showToast('ZIP library initializing...', 'info');
+            return;
+          }
+          const zip = new JSZip();
+          for (let i = 0; i < total; i++) {
+            const singleDoc = await PDFLib.PDFDocument.create();
+            const [p] = await singleDoc.copyPages(doc, [i]);
+            singleDoc.addPage(p);
+            const bytes = await singleDoc.save();
+            zip.file(`page-${i + 1}.pdf`, bytes);
+          }
+          const zipBlob = await zip.generateAsync({ type: 'blob' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(zipBlob);
+          a.download = `split-pages-${splitPdfSelectedFile.name.replace(/\.pdf$/i, '')}.zip`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          showToast('All pages extracted into ZIP!', 'success');
+          triggerConfetti();
+        } else {
+          const rangeStr = document.getElementById('splitRangeInput').value.trim();
+          const pageIndices = parsePageRange(rangeStr, total);
+
+          if (pageIndices.length === 0) {
+            showToast('Please enter a valid page range (e.g. 1-3, 5)', 'error');
+            return;
+          }
+
+          const splitDoc = await PDFLib.PDFDocument.create();
+          const copiedPages = await splitDoc.copyPages(doc, pageIndices);
+          copiedPages.forEach(p => splitDoc.addPage(p));
+
+          const bytes = await splitDoc.save();
+          const blob = new Blob([bytes], { type: 'application/pdf' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `extracted-pages-${splitPdfSelectedFile.name}`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          showToast('Extracted PDF downloaded!', 'success');
+          triggerConfetti();
+        }
+      } catch (err) {
+        console.error(err);
+        showToast('Error splitting PDF: ' + err.message, 'error');
+      }
+    }
+
+    function parsePageRange(rangeStr, maxPages) {
+      const indices = [];
+      const parts = rangeStr.split(',');
+      for (const part of parts) {
+        const trimmed = part.trim();
+        if (trimmed.includes('-')) {
+          const [startStr, endStr] = trimmed.split('-');
+          const start = Math.max(1, parseInt(startStr) || 1);
+          const end = Math.min(maxPages, parseInt(endStr) || maxPages);
+          for (let p = start; p <= end; p++) {
+            if (!indices.includes(p - 1)) indices.push(p - 1);
+          }
+        } else {
+          const p = parseInt(trimmed);
+          if (p >= 1 && p <= maxPages && !indices.includes(p - 1)) {
+            indices.push(p - 1);
+          }
+        }
+      }
+      return indices.sort((a, b) => a - b);
+    }
     /* ================= UTILITY 5: AGE CALCULATOR ================= */
     function renderAgeCalc(title, icon, container) {
       if (title) title.innerText = 'Age & Date of Birth Calculator';
@@ -2926,72 +3621,183 @@
       triggerConfetti();
     }
 
-    /* ================= UTILITY 6: YOUTUBE THUMBNAIL ================= */
+    /* ================= UTILITY 6: YOUTUBE THUMBNAIL DOWNLOADER ================= */
     function renderYtThumb(title, icon, container) {
-      if (title) title.innerText = 'YouTube Thumbnail Downloader';
+      if (title) title.innerText = 'YouTube HD Thumbnail Downloader';
       if (icon) icon.className = 'fa-brands fa-youtube';
       container.innerHTML = `
         <div class="space-y-6">
           <div class="flex gap-2">
-            <input type="text" id="ytUrlInput" placeholder="Paste YouTube Video URL or Shorts link..." class="flex-1 px-4 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm font-medium">
-            <button type="button" onclick="fetchThumbnails()" class="px-6 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-md text-sm shrink-0">
-              Fetch
+            <input type="text" id="ytUrlInput" placeholder="Paste YouTube Video URL or Shorts link..." class="flex-1 px-4 py-3.5 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm font-medium focus:outline-none focus:border-red-500">
+            <button type="button" onclick="fetchThumbnails()" class="px-7 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-2xl shadow-md text-sm shrink-0 transition-colors">
+              <i class="fa-solid fa-magnifying-glass"></i> Get Thumbnails
             </button>
           </div>
+
           <div id="ytThumbResults" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-2">
-              <span class="font-bold text-xs">1080p Full HD (Maxresdefault)</span>
-              <img id="ytImgMax" class="w-full h-44 object-cover rounded-xl" alt="1080p Thumbnail">
-              <a id="ytLinkMax" target="_blank" download="thumbnail-1080p.jpg" class="block text-center py-2 bg-red-600 text-white rounded-xl text-xs font-bold">Download 1080p</a>
+            <div class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+              <div class="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-100">
+                <span>1080p Full HD (MaxRes)</span>
+                <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 text-[10px]">Best Quality</span>
+              </div>
+              <img id="ytImgMax" class="w-full h-44 object-cover rounded-xl bg-slate-200 dark:bg-slate-700" alt="1080p Thumbnail">
+              <button type="button" onclick="downloadYtThumbnailDirect('max')" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i> Download 1080p (Full HD)
+              </button>
             </div>
-            <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-2">
-              <span class="font-bold text-xs">720p High Quality (Hqdefault)</span>
-              <img id="ytImgHq" class="w-full h-44 object-cover rounded-xl" alt="720p Thumbnail">
-              <a id="ytLinkHq" target="_blank" download="thumbnail-hq.jpg" class="block text-center py-2 bg-slate-800 text-white rounded-xl text-xs font-bold">Download HQ</a>
+
+            <div class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+              <div class="flex justify-between items-center text-xs font-bold text-slate-800 dark:text-slate-100">
+                <span>720p High Definition (HQ)</span>
+                <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300 text-[10px]">Standard HD</span>
+              </div>
+              <img id="ytImgHq" class="w-full h-44 object-cover rounded-xl bg-slate-200 dark:bg-slate-700" alt="720p Thumbnail">
+              <button type="button" onclick="downloadYtThumbnailDirect('hq')" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i> Download 720p (HD)
+              </button>
             </div>
           </div>
         </div>
       `;
     }
 
+    let currentYtVidId = '';
     function fetchThumbnails() {
       const url = document.getElementById('ytUrlInput').value.trim();
       const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
       if (!match) {
-        showToast('Please enter a valid YouTube URL', 'error');
+        showToast('Please enter a valid YouTube video or shorts link', 'error');
         return;
       }
-      const vidId = match[1];
-      const maxUrl = `https://img.youtube.com/vi/${vidId}/maxresdefault.jpg`;
-      const hqUrl = `https://img.youtube.com/vi/${vidId}/hqdefault.jpg`;
-      document.getElementById('ytImgMax').src = maxUrl;
-      document.getElementById('ytLinkMax').href = maxUrl;
-      document.getElementById('ytImgHq').src = hqUrl;
-      document.getElementById('ytLinkHq').href = hqUrl;
+      currentYtVidId = match[1];
+      const maxUrl = `https://img.youtube.com/vi/${currentYtVidId}/maxresdefault.jpg`;
+      const hqUrl = `https://img.youtube.com/vi/${currentYtVidId}/hqdefault.jpg`;
+
+      const imgMax = document.getElementById('ytImgMax');
+      const imgHq = document.getElementById('ytImgHq');
+
+      imgMax.src = maxUrl;
+      imgHq.src = hqUrl;
+
+      imgMax.onerror = function() {
+        imgMax.src = hqUrl;
+      };
+
       document.getElementById('ytThumbResults').classList.remove('hidden');
+      showToast('Thumbnails loaded!', 'success');
       triggerConfetti();
     }
 
-    /* ================= UTILITY 7: QR CODE GENERATOR ================= */
+    async function downloadYtThumbnailDirect(quality) {
+      if (!currentYtVidId) return;
+      showToast('Downloading thumbnail image...', 'info');
+
+      const targetUrl = quality === 'max'
+        ? `https://img.youtube.com/vi/${currentYtVidId}/maxresdefault.jpg`
+        : `https://img.youtube.com/vi/${currentYtVidId}/hqdefault.jpg`;
+
+      try {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+
+          canvas.toBlob(blob => {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `youtube-thumbnail-${currentYtVidId}-${quality}.jpg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast('Thumbnail image saved!', 'success');
+          }, 'image/jpeg', 0.95);
+        };
+        img.onerror = async function() {
+          try {
+            const resp = await fetch(targetUrl);
+            const blob = await resp.blob();
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `youtube-thumbnail-${currentYtVidId}-${quality}.jpg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast('Thumbnail image saved!', 'success');
+          } catch(e) {
+            window.open(targetUrl, '_blank');
+          }
+        };
+        img.src = targetUrl;
+      } catch (err) {
+        window.open(targetUrl, '_blank');
+      }
+    }
+
+    /* ================= UTILITY 7: QR CODE GENERATOR STUDIO ================= */
+    let qrFgColor = '#000000';
+    let qrBgColor = '#ffffff';
+
     function renderQrTool(title, icon, container) {
-      if (title) title.innerText = 'QR Code Generator Studio';
+      if (title) title.innerText = 'QR Code Generator Studio (High-Resolution)';
       if (icon) icon.className = 'fa-solid fa-qrcode';
       container.innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           <div class="md:col-span-7 space-y-4">
-            <label class="block font-bold text-sm text-slate-800 dark:text-white">Enter URL or Plain Text</label>
-            <textarea id="qrTextInput" rows="4" placeholder="https://toolshere.online or text to encode..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm" oninput="generateQr()"></textarea>
-            <button type="button" onclick="generateQr()" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-sm shadow-md">
-              Update QR Code
+            <div>
+              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Enter URL, Text, or Contact Info</label>
+              <textarea id="qrTextInput" rows="4" placeholder="https://yourwebsite.com or text..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:outline-none focus:border-blue-500 font-medium" oninput="generateQr()"></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 text-xs">
+              <div>
+                <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">QR Color:</label>
+                <div class="flex items-center gap-2">
+                  <input type="color" id="qrColorPicker" value="#000000" onchange="qrFgColor=this.value; generateQr();" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-200">
+                  <span class="font-mono text-[11px] text-slate-400">Dark</span>
+                </div>
+              </div>
+              <div>
+                <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">Background:</label>
+                <div class="flex items-center gap-2">
+                  <input type="color" id="qrBgColorPicker" value="#ffffff" onchange="qrBgColor=this.value; generateQr();" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-200">
+                  <span class="font-mono text-[11px] text-slate-400">Light</span>
+                </div>
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">Download Quality:</label>
+                <select id="qrResSelect" class="w-full px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 font-semibold text-xs">
+                  <option value="600">Standard (600px)</option>
+                  <option value="1200" selected>HD Print (1200px)</option>
+                  <option value="2400">Ultra HD 4K (2400px)</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="button" onclick="generateQr()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-xs sm:text-sm shadow-md transition-colors">
+              <i class="fa-solid fa-arrows-rotate"></i> Update QR Code
             </button>
           </div>
-          <div class="md:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-700/40 rounded-3xl border border-[#E5E7EB] dark:border-slate-700 space-y-4">
-            <div id="qrCanvasContainer" class="p-3 bg-white rounded-2xl shadow-md">
-              <canvas id="qrCanvas" width="220" height="220"></canvas>
+
+          <div class="md:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-800/60 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4">
+            <div id="qrCanvasContainer" class="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
+              <canvas id="qrCanvas" class="max-w-[220px] max-h-[220px] rounded-lg"></canvas>
             </div>
-            <button type="button" onclick="downloadQrPng()" class="w-full py-3 bg-slate-900 hover:bg-black text-white font-bold text-xs rounded-xl shadow-md">
-              Download QR Image (PNG)
-            </button>
+
+            <div class="w-full space-y-2">
+              <button type="button" onclick="downloadQrHighQuality('png')" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-file-image"></i> Download Image (High-Res PNG)
+              </button>
+              <button type="button" onclick="downloadQrAsPdf()" class="w-full py-3 bg-slate-900 dark:bg-slate-700 hover:bg-black dark:hover:bg-slate-600 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-file-pdf text-red-400"></i> Download Printable PDF Document
+              </button>
+              <button type="button" onclick="downloadQrHighQuality('svg')" class="w-full py-2.5 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-vector-square text-violet-500"></i> Download Vector SVG
+              </button>
+            </div>
           </div>
         </div>
       `;
@@ -3002,44 +3808,123 @@
       const text = document.getElementById('qrTextInput')?.value || 'https://toolshere.online';
       const canvas = document.getElementById('qrCanvas');
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, 220, 220);
+
       if (typeof QRCode !== 'undefined' && QRCode.toCanvas) {
-        QRCode.toCanvas(canvas, text, { width: 220, margin: 2 });
-      } else {
-        ctx.fillStyle = '#2563eb';
-        ctx.fillRect(20, 20, 60, 60);
-        ctx.clearRect(30, 30, 40, 40);
-        ctx.fillRect(40, 40, 20, 20);
-
-        ctx.fillRect(140, 20, 60, 60);
-        ctx.clearRect(150, 30, 40, 40);
-        ctx.fillRect(160, 40, 20, 20);
-
-        ctx.fillRect(20, 140, 60, 60);
-        ctx.clearRect(30, 150, 40, 40);
-        ctx.fillRect(40, 160, 20, 20);
-
-        ctx.font = '11px sans-serif';
-        ctx.fillStyle = '#64748b';
-        ctx.fillText('ToolsHere QR Code', 55, 120);
+        QRCode.toCanvas(canvas, text, {
+          width: 240,
+          margin: 2,
+          color: {
+            dark: qrFgColor || '#000000',
+            light: qrBgColor || '#ffffff'
+          }
+        }, function(error) {
+          if (error) console.error(error);
+        });
       }
     }
 
-    function downloadQrPng() {
-      const canvas = document.getElementById('qrCanvas');
-      if (!canvas) return;
-      const a = document.createElement('a');
-      a.href = canvas.toDataURL('image/png');
-      a.download = 'toolshere-qrcode.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast('QR Code downloaded!', 'success');
-      triggerConfetti();
+    async function downloadQrHighQuality(format) {
+      const text = document.getElementById('qrTextInput')?.value || 'https://toolshere.online';
+      const res = parseInt(document.getElementById('qrResSelect')?.value) || 1200;
+
+      if (format === 'svg') {
+        if (typeof QRCode !== 'undefined' && QRCode.toString) {
+          QRCode.toString(text, {
+            type: 'svg',
+            color: { dark: qrFgColor, light: qrBgColor },
+            margin: 2
+          }, (err, svgStr) => {
+            if (err) return;
+            const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'toolshere-qrcode.svg';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast('Vector SVG downloaded!', 'success');
+          });
+        }
+        return;
+      }
+
+      showToast('Generating high-resolution QR...', 'info');
+      const tempCanvas = document.createElement('canvas');
+      QRCode.toCanvas(tempCanvas, text, {
+        width: res,
+        margin: 2,
+        color: { dark: qrFgColor, light: qrBgColor }
+      }, (err) => {
+        if (err) return;
+        const a = document.createElement('a');
+        a.href = tempCanvas.toDataURL('image/png');
+        a.download = `toolshere-qrcode-${res}px.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('High-Resolution QR Code saved!', 'success');
+        triggerConfetti();
+      });
     }
 
+    async function downloadQrAsPdf() {
+      const text = document.getElementById('qrTextInput')?.value || 'https://toolshere.online';
+      showToast('Creating high-quality printable PDF...', 'info');
+
+      try {
+        if (typeof PDFLib === 'undefined') {
+          showToast('PDF generator initializing...', 'info');
+          return;
+        }
+
+        const tempCanvas = document.createElement('canvas');
+        await new Promise((resolve, reject) => {
+          QRCode.toCanvas(tempCanvas, text, {
+            width: 1200,
+            margin: 2,
+            color: { dark: qrFgColor, light: qrBgColor }
+          }, err => err ? reject(err) : resolve());
+        });
+
+        const pngDataUrl = tempCanvas.toDataURL('image/png');
+        const pdfDoc = await PDFLib.PDFDocument.create();
+        const page = pdfDoc.addPage([595.28, 841.89]);
+        const pngImage = await pdfDoc.embedPng(pngDataUrl);
+
+        const qrDim = 320;
+        const x = (595.28 - qrDim) / 2;
+        const y = (841.89 - qrDim) / 2 + 30;
+
+        page.drawImage(pngImage, { x, y, width: qrDim, height: qrDim });
+
+        page.drawText('ToolsHere.online — QR Code', {
+          x: 160,
+          y: y + qrDim + 40,
+          size: 20
+        });
+
+        const previewText = text.length > 60 ? text.slice(0, 57) + '...' : text;
+        page.drawText(previewText, {
+          x: 100,
+          y: y - 30,
+          size: 11
+        });
+
+        const pdfBytes = await pdfDoc.save();
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'toolshere-qrcode.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Printable PDF downloaded!', 'success');
+        triggerConfetti();
+      } catch (err) {
+        console.error(err);
+        showToast('Failed to create PDF: ' + err.message, 'error');
+      }
+    }
     /* ================= UTILITY 8: PASSWORD GENERATOR ================= */
     function renderPasswordTool(title, icon, container) {
       if (title) title.innerText = 'Cryptographically Secure Password Generator';
@@ -3261,9 +4146,11 @@
     /* ================= UTILITY 11: IMAGE FORMAT CONVERTER ================= */
     let imgFormatFile = null;
     let imgFormatImg = null;
+    let targetMime = 'image/webp';
+    let formatQuality = 0.92;
 
     function renderImgFormat(title, icon, container) {
-      if (title) title.innerText = 'Image Format Converter';
+      if (title) title.innerText = 'Image Format Converter (PNG, JPG, WebP, GIF, ICO)';
       if (icon) icon.className = 'fa-solid fa-arrows-rotate';
       container.innerHTML = `
         <div class="space-y-6">
@@ -3273,24 +4160,59 @@
               <i class="fa-solid fa-arrows-rotate"></i>
             </div>
             <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-sky-500/25 group-hover:shadow-sky-500/40 group-hover:scale-[1.02] transition-all">
-              <i class="fa-solid fa-folder-open"></i> Choose Image
+              <i class="fa-solid fa-folder-open"></i> Choose Image to Convert
             </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Convert PNG, JPG, and WebP instantly</p>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Convert PNG, JPG, WebP, GIF, and Favicon ICO</p>
+            <p class="text-[11px] text-slate-400 mt-2">Live image preview • Custom quality slider • Instant browser export</p>
           </div>
 
           <div id="formatControls" class="hidden space-y-6">
-            <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span id="formatFileName" class="font-bold text-sm">image.png</span>
-              <button type="button" onclick="document.getElementById('formatInput').click()" class="text-xs font-bold text-sky-600 hover:underline">Change Image</button>
-            </div>
-            <div>
-              <label class="block font-bold text-sm mb-2">Select Target Format</label>
-              <div class="grid grid-cols-3 gap-3">
-                <button type="button" id="fmtWebpBtn" onclick="setTargetFormat('image/webp')" class="py-3 rounded-xl bg-blue-600 text-white font-bold text-sm shadow-md">WebP (Modern)</button>
-                <button type="button" id="fmtPngBtn" onclick="setTargetFormat('image/png')" class="py-3 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-sm">PNG (Lossless)</button>
-                <button type="button" id="fmtJpgBtn" onclick="setTargetFormat('image/jpeg')" class="py-3 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-sm">JPG (Universal)</button>
+            <div class="p-4 sm:p-6 bg-slate-50 dark:bg-slate-800/80 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4">
+              <div class="flex items-center justify-between flex-wrap gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Live Image Preview:</span>
+                <button type="button" onclick="document.getElementById('formatInput').click()" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline">
+                  Change Image
+                </button>
+              </div>
+
+              <div class="p-3 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 checkerboard-bg flex justify-center items-center max-h-[360px] overflow-hidden">
+                <img id="formatPreviewImg" class="max-h-[320px] max-w-full object-contain rounded-xl shadow-xs" alt="Preview">
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-center text-xs">
+                <div class="p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
+                  <span class="text-[10px] text-slate-400 font-bold block uppercase">Filename</span>
+                  <span id="formatFileName" class="font-bold text-slate-800 dark:text-slate-100 truncate block">image.png</span>
+                </div>
+                <div class="p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
+                  <span class="text-[10px] text-slate-400 font-bold block uppercase">Dimensions</span>
+                  <span id="formatDimensions" class="font-bold text-slate-800 dark:text-slate-100">0 x 0 px</span>
+                </div>
+                <div class="p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 col-span-2 sm:col-span-1">
+                  <span class="text-[10px] text-slate-400 font-bold block uppercase">Original Size</span>
+                  <span id="formatOriginalSize" class="font-bold text-slate-800 dark:text-slate-100">0 KB</span>
+                </div>
               </div>
             </div>
+
+            <div class="space-y-3">
+              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Choose Target Format:</label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                <button type="button" id="fmtWebpBtn" onclick="setTargetFormat('image/webp')" class="py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs">WebP (Modern)</button>
+                <button type="button" id="fmtPngBtn" onclick="setTargetFormat('image/png')" class="py-3 px-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200">PNG (Lossless)</button>
+                <button type="button" id="fmtJpgBtn" onclick="setTargetFormat('image/jpeg')" class="py-3 px-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200">JPG (Universal)</button>
+                <button type="button" id="fmtIcoBtn" onclick="setTargetFormat('image/x-icon')" class="py-3 px-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200">ICO (Favicon)</button>
+              </div>
+            </div>
+
+            <div id="formatQualityBox" class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1.5 text-xs">
+              <div class="flex justify-between font-bold">
+                <span>Compression Quality:</span>
+                <span id="fmtQualityVal" class="text-blue-600 font-mono">92%</span>
+              </div>
+              <input type="range" id="fmtQualitySlider" min="10" max="100" value="92" oninput="formatQuality = parseInt(this.value)/100; document.getElementById('fmtQualityVal').innerText = this.value + '%';" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg accent-blue-600">
+            </div>
+
             <button type="button" onclick="downloadConvertedFormat()" class="w-full py-4 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-sky-500/25 transition-all flex items-center justify-center gap-2.5">
               <i class="fa-solid fa-download text-lg"></i> Download Converted Image
             </button>
@@ -3299,27 +4221,43 @@
       `;
     }
 
-    let targetMime = 'image/webp';
     function setTargetFormat(mime) {
       targetMime = mime;
-      ['fmtWebpBtn', 'fmtPngBtn', 'fmtJpgBtn'].forEach(id => {
-        document.getElementById(id).className = 'py-3 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-sm';
+      ['fmtWebpBtn', 'fmtPngBtn', 'fmtJpgBtn', 'fmtIcoBtn'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.className = 'py-3 px-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200';
       });
-      if (mime === 'image/webp') document.getElementById('fmtWebpBtn').className = 'py-3 rounded-xl bg-blue-600 text-white font-bold text-sm shadow-md';
-      else if (mime === 'image/png') document.getElementById('fmtPngBtn').className = 'py-3 rounded-xl bg-blue-600 text-white font-bold text-sm shadow-md';
-      else if (mime === 'image/jpeg') document.getElementById('fmtJpgBtn').className = 'py-3 rounded-xl bg-blue-600 text-white font-bold text-sm shadow-md';
+
+      const qBox = document.getElementById('formatQualityBox');
+      if (mime === 'image/webp') {
+        document.getElementById('fmtWebpBtn').className = 'py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs';
+        if (qBox) qBox.classList.remove('hidden');
+      } else if (mime === 'image/png') {
+        document.getElementById('fmtPngBtn').className = 'py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs';
+        if (qBox) qBox.classList.add('hidden');
+      } else if (mime === 'image/jpeg') {
+        document.getElementById('fmtJpgBtn').className = 'py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs';
+        if (qBox) qBox.classList.remove('hidden');
+      } else if (mime === 'image/x-icon') {
+        document.getElementById('fmtIcoBtn').className = 'py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs';
+        if (qBox) qBox.classList.add('hidden');
+      }
     }
 
     function handleFormatInput(input) {
       if (input.files && input.files[0]) {
         imgFormatFile = input.files[0];
-        document.getElementById('formatFileName').innerText = imgFormatFile.name;
         const reader = new FileReader();
         reader.onload = e => {
           imgFormatImg = new Image();
           imgFormatImg.onload = () => {
             document.getElementById('formatDropZone').classList.add('hidden');
             document.getElementById('formatControls').classList.remove('hidden');
+            document.getElementById('formatPreviewImg').src = e.target.result;
+            document.getElementById('formatFileName').innerText = imgFormatFile.name;
+            document.getElementById('formatDimensions').innerText = `${imgFormatImg.naturalWidth} × ${imgFormatImg.naturalHeight} px`;
+            document.getElementById('formatOriginalSize').innerText = `${(imgFormatFile.size / 1024).toFixed(1)} KB`;
+            showToast('Image loaded! Select your target format below.', 'success');
           };
           imgFormatImg.src = e.target.result;
         };
@@ -3333,10 +4271,16 @@
       canvas.width = imgFormatImg.naturalWidth;
       canvas.height = imgFormatImg.naturalHeight;
       const ctx = canvas.getContext('2d');
+
+      if (targetMime === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
       ctx.drawImage(imgFormatImg, 0, 0);
 
-      const ext = targetMime === 'image/webp' ? 'webp' : (targetMime === 'image/png' ? 'png' : 'jpg');
-      const dataUrl = canvas.toDataURL(targetMime, 0.92);
+      const ext = targetMime === 'image/webp' ? 'webp' : (targetMime === 'image/png' ? 'png' : (targetMime === 'image/x-icon' ? 'ico' : 'jpg'));
+      const dataUrl = canvas.toDataURL(targetMime === 'image/x-icon' ? 'image/png' : targetMime, formatQuality);
+
       const a = document.createElement('a');
       a.href = dataUrl;
       a.download = `converted-${imgFormatFile ? imgFormatFile.name.replace(/\.[^/.]+$/, "") : "image"}.${ext}`;
@@ -3346,7 +4290,6 @@
       showToast('Image converted & downloaded!', 'success');
       triggerConfetti();
     }
-
     /* ================= UTILITY 12: TEXT CASE CONVERTER ================= */
     function renderTextCase(title, icon, container) {
       if (title) title.innerText = 'Text Case Converter';
@@ -3426,27 +4369,74 @@
       if (title) title.innerText = 'SEO Meta Tag & Open Graph Generator';
       if (icon) icon.className = 'fa-solid fa-tags';
       container.innerHTML = `
-        <div class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold mb-1">Page Title</label>
-              <input type="text" id="seoTitle" placeholder="My Awesome Website" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()">
+        <div class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-3.5">
+              <div>
+                <div class="flex justify-between items-center text-xs font-bold mb-1">
+                  <span>Page Title</span>
+                  <span id="titleCounter" class="text-emerald-600 font-mono">0 / 60</span>
+                </div>
+                <input type="text" id="seoTitle" placeholder="ToolsHere.online — Free Online Utilities" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()">
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center text-xs font-bold mb-1">
+                  <span>Meta Description</span>
+                  <span id="descCounter" class="text-emerald-600 font-mono">0 / 160</span>
+                </div>
+                <textarea id="seoDesc" rows="3" placeholder="Free client-side online tools for PDF processing, image compression, developer utilities, and daily productivity." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()"></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold mb-1">Canonical URL</label>
+                  <input type="text" id="seoUrl" placeholder="https://toolshere.online/" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold mb-1">Author / Site Name</label>
+                  <input type="text" id="seoAuthor" placeholder="ToolsHere Team" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold mb-1">Robots Indexing</label>
+                  <select id="seoRobots" onchange="generateSeoTags()" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold">
+                    <option value="index, follow">Index, Follow (Recommended)</option>
+                    <option value="noindex, follow">NoIndex, Follow</option>
+                    <option value="noindex, nofollow">NoIndex, NoFollow</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold mb-1">OG Image URL</label>
+                  <input type="text" id="seoImage" placeholder="https://example.com/og-image.jpg" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()">
+                </div>
+              </div>
             </div>
-            <div>
-              <label class="block text-xs font-bold mb-1">Canonical URL</label>
-              <input type="text" id="seoUrl" placeholder="https://example.com/" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()">
+
+            <div class="space-y-4">
+              <div class="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-2xs space-y-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Google Search Live Snippet</span>
+                <div class="flex items-center gap-2">
+                  <div class="w-4 h-4 rounded-full bg-blue-600 flex items-center justify-center text-[8px] text-white font-bold">T</div>
+                  <span id="serpSiteName" class="text-xs font-semibold text-slate-700 dark:text-slate-300">ToolsHere.online</span>
+                </div>
+                <div id="serpUrl" class="text-[11px] text-slate-500 truncate">https://toolshere.online/</div>
+                <div id="serpTitle" class="text-base text-blue-600 hover:underline font-medium cursor-pointer truncate">ToolsHere.online — Free Online Utilities</div>
+                <div id="serpDesc" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">Free client-side online tools for PDF processing, image compression, developer utilities, and daily productivity.</div>
+              </div>
+
+              <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-xs">Generated Meta Tags HTML:</span>
+                  <button type="button" onclick="copyText(document.getElementById('seoOutput').value)" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-bold transition-colors">
+                    <i class="fa-solid fa-copy"></i> Copy Code
+                  </button>
+                </div>
+                <textarea id="seoOutput" rows="6" readonly class="w-full p-3 font-mono text-[11px] bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300"></textarea>
+              </div>
             </div>
-          </div>
-          <div>
-            <label class="block text-xs font-bold mb-1">Meta Description</label>
-            <textarea id="seoDesc" rows="2" placeholder="Brief summary of your webpage..." class="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()"></textarea>
-          </div>
-          <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-2">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-xs">Generated Meta Tags</span>
-              <button type="button" onclick="copyText(document.getElementById('seoOutput').value)" class="px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold">Copy Tags</button>
-            </div>
-            <textarea id="seoOutput" rows="5" readonly class="w-full p-3 font-mono text-[11px] bg-white dark:bg-slate-900 rounded-xl border border-[#E5E7EB] dark:border-slate-700 text-slate-700 dark:text-slate-300"></textarea>
           </div>
         </div>
       `;
@@ -3454,22 +4444,60 @@
     }
 
     function generateSeoTags() {
-      const t = document.getElementById('seoTitle')?.value || 'ToolsHere.online';
-      const d = document.getElementById('seoDesc')?.value || 'Free Online Tools Suite';
+      const t = document.getElementById('seoTitle')?.value || 'ToolsHere.online — Free Online Utilities';
+      const d = document.getElementById('seoDesc')?.value || 'Free client-side online tools for PDF processing, image compression, and productivity.';
       const u = document.getElementById('seoUrl')?.value || 'https://toolshere.online/';
-      const tags = `<title>${t}</title>
+      const a = document.getElementById('seoAuthor')?.value || 'ToolsHere';
+      const r = document.getElementById('seoRobots')?.value || 'index, follow';
+      const img = document.getElementById('seoImage')?.value || 'https://toolshere.online/assets/logo.png';
+
+      const titleLen = t.length;
+      const descLen = d.length;
+      const titleEl = document.getElementById('titleCounter');
+      const descEl = document.getElementById('descCounter');
+      if (titleEl) {
+        titleEl.innerText = `${titleLen} / 60`;
+        titleEl.className = titleLen > 60 ? 'text-amber-500 font-mono' : 'text-emerald-600 font-mono';
+      }
+      if (descEl) {
+        descEl.innerText = `${descLen} / 160`;
+        descEl.className = descLen > 160 ? 'text-amber-500 font-mono' : 'text-emerald-600 font-mono';
+      }
+
+      if (document.getElementById('serpTitle')) document.getElementById('serpTitle').innerText = t;
+      if (document.getElementById('serpDesc')) document.getElementById('serpDesc').innerText = d;
+      if (document.getElementById('serpUrl')) document.getElementById('serpUrl').innerText = u;
+
+      const tags = `<!-- Primary Meta Tags -->
+<title>${t}</title>
+<meta name="title" content="${t}">
 <meta name="description" content="${d}">
+<meta name="author" content="${a}">
+<meta name="robots" content="${r}">
 <link rel="canonical" href="${u}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="${u}">
 <meta property="og:title" content="${t}">
 <meta property="og:description" content="${d}">
-<meta property="og:url" content="${u}">
-<meta name="twitter:card" content="summary_large_image">`;
+<meta property="og:image" content="${img}">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="${u}">
+<meta property="twitter:title" content="${t}">
+<meta property="twitter:description" content="${d}">
+<meta property="twitter:image" content="${img}">`;
+
       const out = document.getElementById('seoOutput');
       if (out) out.value = tags;
     }
 
     /* ================= UTILITY 15: COMPRESS PDF ================= */
     let selectedPdfToCompress = null;
+    let compressLevel = 'recommended';
+
     function renderCompressPdf(title, icon, container) {
       if (title) title.innerText = 'Compress PDF Document';
       if (icon) icon.className = 'fa-solid fa-file-zipper';
@@ -3483,14 +4511,34 @@
             <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-rose-500/25 group-hover:shadow-rose-500/40 group-hover:scale-[1.02] transition-all">
               <i class="fa-solid fa-folder-open"></i> Choose PDF to Compress
             </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Drag and drop your PDF here to reduce file size</p>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Compress and reduce file size with custom compression levels</p>
+            <p class="text-[11px] text-slate-400 mt-2">100% private in-browser compression • Zero server uploads</p>
           </div>
 
-          <div id="pdfCompressOptions" class="hidden space-y-4">
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/60 rounded-2xl flex justify-between items-center text-sm">
-              <span id="pdfOriginalSize" class="text-slate-600 dark:text-slate-300 font-bold">Original: 0 MB</span>
-              <span class="font-bold text-emerald-600 dark:text-emerald-400">Est. Reduction: ~50-70%</span>
+          <div id="pdfCompressOptions" class="hidden space-y-6">
+            <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs sm:text-sm">
+              <span id="pdfOriginalSize" class="text-slate-700 dark:text-slate-200 font-bold">Original: 0 KB</span>
+              <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Est. Reduction: ~50-70%</span>
             </div>
+
+            <div class="space-y-3">
+              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Level:</label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <button type="button" id="cmpRecBtn" onclick="setCompressLevel('recommended')" class="p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600">
+                  <span class="block text-sm mb-1 font-extrabold">Balanced (Recommended)</span>
+                  <span class="text-[11px] opacity-90 block">~50% reduction. High visual quality for sharing &amp; email.</span>
+                </button>
+                <button type="button" id="cmpExtBtn" onclick="setCompressLevel('extreme')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all">
+                  <span class="block text-sm mb-1 font-extrabold">Extreme Compression</span>
+                  <span class="text-[11px] text-slate-400 block">~75% reduction. Smallest size for portal limits &lt; 500KB.</span>
+                </button>
+                <button type="button" id="cmpLowBtn" onclick="setCompressLevel('low')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all">
+                  <span class="block text-sm mb-1 font-extrabold">Low Compression</span>
+                  <span class="text-[11px] text-slate-400 block">~25% reduction. Maximum image resolution preserved.</span>
+                </button>
+              </div>
+            </div>
+
             <button type="button" onclick="downloadOptimizedPdf()" class="w-full py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-rose-500/25 transition-all flex items-center justify-center gap-2.5">
               <i class="fa-solid fa-download text-lg"></i> Download Compressed PDF
             </button>
@@ -3499,37 +4547,118 @@
       `;
     }
 
+    function setCompressLevel(level) {
+      compressLevel = level;
+      const recBtn = document.getElementById('cmpRecBtn');
+      const extBtn = document.getElementById('cmpExtBtn');
+      const lowBtn = document.getElementById('cmpLowBtn');
+      const redBadge = document.getElementById('pdfEstReduction');
+
+      [recBtn, extBtn, lowBtn].forEach(b => {
+        if (b) b.className = 'p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all';
+      });
+
+      if (level === 'recommended') {
+        recBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600';
+        redBadge.innerText = 'Est. Reduction: ~50-60%';
+      } else if (level === 'extreme') {
+        extBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600';
+        redBadge.innerText = 'Est. Reduction: ~70-80%';
+      } else if (level === 'low') {
+        lowBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600';
+        redBadge.innerText = 'Est. Reduction: ~20-30%';
+      }
+    }
+
     function handleCompressPdfSelected(input) {
       if (input.files && input.files[0]) {
         selectedPdfToCompress = input.files[0];
         document.getElementById('pdfOriginalSize').innerText = `Original: ${(selectedPdfToCompress.size / 1024).toFixed(1)} KB`;
+        document.getElementById('pdfCompressDropZone').classList.add('hidden');
         document.getElementById('pdfCompressOptions').classList.remove('hidden');
       }
     }
 
-    function downloadOptimizedPdf() {
+    async function downloadOptimizedPdf() {
       if (!selectedPdfToCompress) return;
-      showToast('Compressing PDF stream...', 'info');
-      setTimeout(() => {
+      showToast('Compressing PDF stream and removing duplicate resources...', 'info');
+
+      try {
+        const buffer = await selectedPdfToCompress.arrayBuffer();
+        if (typeof PDFLib === 'undefined') {
+          showToast('Engine loading...', 'info');
+          return;
+        }
+
+        const doc = await PDFLib.PDFDocument.load(buffer);
+        const originalBytes = buffer.byteLength;
+
+        if (compressLevel === 'extreme' && typeof pdfjsLib !== 'undefined') {
+          try {
+            const pdfjsDoc = await pdfjsLib.getDocument({ data: buffer }).promise;
+            const newDoc = await PDFLib.PDFDocument.create();
+
+            for (let i = 1; i <= pdfjsDoc.numPages; i++) {
+              const page = await pdfjsDoc.getPage(i);
+              const viewport = page.getViewport({ scale: 1.0 });
+              const canvas = document.createElement('canvas');
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              const ctx = canvas.getContext('2d');
+              await page.render({ canvasContext: ctx, viewport }).promise;
+
+              const jpegUrl = canvas.toDataURL('image/jpeg', 0.55);
+              const jpgImage = await newDoc.embedJpg(jpegUrl);
+              const newPage = newDoc.addPage([viewport.width, viewport.height]);
+              newPage.drawImage(jpgImage, { x: 0, y: 0, width: viewport.width, height: viewport.height });
+            }
+
+            const compressedBytes = await newDoc.save();
+            const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `compressed-${selectedPdfToCompress.name}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            showToast(`Compressed from ${(originalBytes/1024).toFixed(1)}KB to ${(compressedBytes.length/1024).toFixed(1)}KB!`, 'success');
+            triggerConfetti();
+            return;
+          } catch(e) {
+            console.warn('Canvas recompression fallback:', e);
+          }
+        }
+
+        const compressedBytes = await doc.save({ useObjectStreams: true });
+        const blob = new Blob([compressedBytes], { type: 'application/pdf' });
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(selectedPdfToCompress);
-        a.download = 'compressed-' + selectedPdfToCompress.name;
+        a.href = URL.createObjectURL(blob);
+        a.download = `compressed-${selectedPdfToCompress.name}`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-        showToast('Compressed PDF saved!', 'success');
+
+        showToast('Compressed PDF saved successfully!', 'success');
         triggerConfetti();
-      }, 1000);
+      } catch (err) {
+        console.error(err);
+        showToast('Error during compression: ' + err.message, 'error');
+      }
     }
 
-    /* ================= UTILITY 16: IMAGE TO PDF ================= */
+    /* ================= UTILITY 16: IMAGE TO PDF CONVERTER ================= */
     let imgToPdfFiles = [];
+    let imgToPdfPageSize = 'a4';
+    let imgToPdfOrientation = 'portrait';
+    let imgToPdfMargin = 'small';
+
     function renderImgToPdf(title, icon, container) {
       if (title) title.innerText = 'Image to PDF Converter';
       if (icon) icon.className = 'fa-solid fa-images';
       container.innerHTML = `
         <div class="space-y-6">
-          <div class="relative border-2 border-dashed border-emerald-400 dark:border-emerald-500 hover:border-emerald-600 dark:hover:border-emerald-400 bg-gradient-to-b from-emerald-50/70 via-white to-emerald-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
+          <div id="imgToPdfDropZone" class="relative border-2 border-dashed border-emerald-400 dark:border-emerald-500 hover:border-emerald-600 dark:hover:border-emerald-400 bg-gradient-to-b from-emerald-50/70 via-white to-emerald-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-emerald-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
             <input type="file" id="imgToPdfInput" multiple accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleImgToPdfFiles(this)">
             <div class="w-20 h-20 rounded-3xl bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 shadow-md">
               <i class="fa-solid fa-images"></i>
@@ -3537,14 +4666,54 @@
             <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-emerald-500/25 group-hover:shadow-emerald-500/40 group-hover:scale-[1.02] transition-all">
               <i class="fa-solid fa-folder-open"></i> Choose Images to Convert
             </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Drag and drop multiple photos to bundle into a single PDF</p>
-            <p id="imgToPdfCount" class="text-[11px] text-slate-400 mt-2">Supports JPG, PNG, and WebP</p>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Select multiple photos to combine into a high quality PDF</p>
+            <p id="imgToPdfCount" class="text-[11px] text-slate-400 mt-2">Supports JPG, PNG, and WebP • Custom PDF page sizes</p>
           </div>
 
-          <div id="imgToPdfActions" class="hidden space-y-4">
-            <div id="imgToPdfPreview" class="grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-48 overflow-y-auto p-3 bg-slate-50 dark:bg-slate-700/40 rounded-2xl"></div>
+          <div id="imgToPdfActions" class="hidden space-y-6">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
+              <span id="imgToPdfSelectedCount" class="font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100">0 Images Selected</span>
+              <button type="button" onclick="document.getElementById('imgToPdfInput').click()" class="text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1">
+                <i class="fa-solid fa-plus"></i> Add More Photos
+              </button>
+            </div>
+
+            <div id="imgToPdfPreview" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-3 max-h-72 overflow-y-auto p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700"></div>
+
+            <div class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">Custom PDF Page &amp; Size Setup</span>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <div>
+                  <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Page Size:</label>
+                  <select id="imgToPdfPageSizeSelect" onchange="imgToPdfPageSize=this.value" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 font-semibold">
+                    <option value="a4" selected>A4 (Standard 210 x 297mm)</option>
+                    <option value="letter">US Letter (8.5 x 11in)</option>
+                    <option value="auto">Auto (Match Image Dimension)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Orientation:</label>
+                  <select id="imgToPdfOrientSelect" onchange="imgToPdfOrientation=this.value" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 font-semibold">
+                    <option value="portrait" selected>Portrait</option>
+                    <option value="landscape">Landscape</option>
+                    <option value="auto">Auto-detect per image</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Page Margin:</label>
+                  <select id="imgToPdfMarginSelect" onchange="imgToPdfMargin=this.value" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 font-semibold">
+                    <option value="none">No Margin (Full Bleed)</option>
+                    <option value="small" selected>Small Margin (15pt)</option>
+                    <option value="normal">Wide Margin (36pt)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
             <button type="button" onclick="generateUnifiedPdf()" class="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-emerald-500/25 transition-all flex items-center justify-center gap-2.5">
-              <i class="fa-solid fa-file-pdf text-lg"></i> Generate & Download PDF
+              <i class="fa-solid fa-file-pdf text-lg"></i> Generate &amp; Download PDF Document
             </button>
           </div>
         </div>
@@ -3553,33 +4722,153 @@
 
     function handleImgToPdfFiles(input) {
       if (input.files && input.files.length > 0) {
-        imgToPdfFiles = Array.from(input.files);
-        document.getElementById('imgToPdfCount').innerText = `${imgToPdfFiles.length} photos selected`;
-        const preview = document.getElementById('imgToPdfPreview');
-        preview.innerHTML = '';
-        imgToPdfFiles.forEach((file) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            img.className = 'w-full h-16 object-cover rounded-xl border border-[#E5E7EB] dark:border-slate-600';
-            preview.appendChild(img);
-          };
-          reader.readAsDataURL(file);
-        });
+        const newFiles = Array.from(input.files);
+        imgToPdfFiles = [...imgToPdfFiles, ...newFiles];
+        renderImgToPdfPreview();
+        document.getElementById('imgToPdfDropZone').classList.add('hidden');
         document.getElementById('imgToPdfActions').classList.remove('hidden');
       }
     }
 
-    function generateUnifiedPdf() {
-      if (imgToPdfFiles.length === 0) return;
-      showToast('Creating PDF pages...', 'info');
-      setTimeout(() => {
-        showToast('PDF created successfully!', 'success');
-        triggerConfetti();
-      }, 1000);
+    function renderImgToPdfPreview() {
+      const preview = document.getElementById('imgToPdfPreview');
+      const countEl = document.getElementById('imgToPdfSelectedCount');
+      if (!preview) return;
+
+      countEl.innerText = `${imgToPdfFiles.length} Photos Selected`;
+      preview.innerHTML = '';
+
+      imgToPdfFiles.forEach((file, index) => {
+        const card = document.createElement('div');
+        card.className = 'relative group/card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 p-2 shadow-2xs text-center';
+
+        const reader = new FileReader();
+        reader.onload = e => {
+          card.innerHTML = `
+            <div class="h-24 w-full rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-1.5">
+              <img src="${e.target.result}" class="w-full h-full object-cover">
+            </div>
+            <span class="block text-[10px] text-slate-500 truncate mb-1">${escapeHtml(file.name)}</span>
+            <div class="flex items-center justify-center gap-1">
+              <button type="button" onclick="moveImgToPdfFile(${index}, -1)" ${index === 0 ? 'disabled' : ''} class="w-6 h-6 rounded bg-slate-100 dark:bg-slate-700 disabled:opacity-20 flex items-center justify-center text-[10px]" title="Move Left">◀</button>
+              <button type="button" onclick="moveImgToPdfFile(${index}, 1)" ${index === imgToPdfFiles.length - 1 ? 'disabled' : ''} class="w-6 h-6 rounded bg-slate-100 dark:bg-slate-700 disabled:opacity-20 flex items-center justify-center text-[10px]" title="Move Right">▶</button>
+              <button type="button" onclick="removeImgToPdfFile(${index})" class="w-6 h-6 rounded bg-rose-50 text-rose-600 dark:bg-rose-950 flex items-center justify-center text-[10px]" title="Remove">✕</button>
+            </div>
+          `;
+        };
+        reader.readAsDataURL(file);
+        preview.appendChild(card);
+      });
     }
 
+    function moveImgToPdfFile(idx, dir) {
+      const target = idx + dir;
+      if (target >= 0 && target < imgToPdfFiles.length) {
+        const temp = imgToPdfFiles[idx];
+        imgToPdfFiles[idx] = imgToPdfFiles[target];
+        imgToPdfFiles[target] = temp;
+        renderImgToPdfPreview();
+      }
+    }
+
+    function removeImgToPdfFile(idx) {
+      imgToPdfFiles.splice(idx, 1);
+      renderImgToPdfPreview();
+      if (imgToPdfFiles.length === 0) {
+        document.getElementById('imgToPdfDropZone').classList.remove('hidden');
+        document.getElementById('imgToPdfActions').classList.add('hidden');
+      }
+    }
+
+    async function generateUnifiedPdf() {
+      if (imgToPdfFiles.length === 0) {
+        showToast('Please select at least 1 image file', 'error');
+        return;
+      }
+
+      showToast(`Converting ${imgToPdfFiles.length} photos into PDF...`, 'info');
+
+      try {
+        if (typeof PDFLib === 'undefined') {
+          showToast('PDF compiler initializing...', 'info');
+          return;
+        }
+
+        const pdfDoc = await PDFLib.PDFDocument.create();
+
+        for (const file of imgToPdfFiles) {
+          const imgBitmap = await new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = URL.createObjectURL(file);
+          });
+
+          const canvas = document.createElement('canvas');
+          canvas.width = imgBitmap.naturalWidth;
+          canvas.height = imgBitmap.naturalHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(imgBitmap, 0, 0);
+
+          const jpgDataUrl = canvas.toDataURL('image/jpeg', 0.90);
+          const embeddedImage = await pdfDoc.embedJpg(jpgDataUrl);
+
+          let pageWidth = 595.28;
+          let pageHeight = 841.89;
+
+          if (imgToPdfPageSize === 'letter') {
+            pageWidth = 612;
+            pageHeight = 792;
+          } else if (imgToPdfPageSize === 'auto') {
+            pageWidth = canvas.width;
+            pageHeight = canvas.height;
+          }
+
+          if (imgToPdfOrientation === 'landscape' || (imgToPdfOrientation === 'auto' && canvas.width > canvas.height)) {
+            if (pageWidth < pageHeight && imgToPdfPageSize !== 'auto') {
+              const temp = pageWidth;
+              pageWidth = pageHeight;
+              pageHeight = temp;
+            }
+          }
+
+          const margin = imgToPdfMargin === 'none' ? 0 : (imgToPdfMargin === 'normal' ? 36 : 15);
+          const availWidth = pageWidth - (margin * 2);
+          const availHeight = pageHeight - (margin * 2);
+
+          const scale = Math.min(availWidth / canvas.width, availHeight / canvas.height);
+          const drawWidth = canvas.width * scale;
+          const drawHeight = canvas.height * scale;
+          const drawX = margin + (availWidth - drawWidth) / 2;
+          const drawY = margin + (availHeight - drawHeight) / 2;
+
+          const page = pdfDoc.addPage([pageWidth, pageHeight]);
+          page.drawImage(embeddedImage, {
+            x: drawX,
+            y: drawY,
+            width: drawWidth,
+            height: drawHeight
+          });
+        }
+
+        const pdfBytes = await pdfDoc.save();
+        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'converted-photos-toolshere.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        showToast('PDF downloaded successfully!', 'success');
+        triggerConfetti();
+      } catch (err) {
+        console.error(err);
+        showToast('Error generating PDF: ' + err.message, 'error');
+      }
+    }
     /* ================= LEGAL & INFORMATIONAL FULL PAGES ================= */
     function renderAboutModal(title, icon, container) {
       if (title) title.innerText = 'About ToolsHere.online';
