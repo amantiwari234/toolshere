@@ -279,8 +279,10 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
 
   <!-- FontAwesome Icons & Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.9/dist/pdf-lib.min.js"></script>
+  <script src="/assets/vendor/qrcode.min.js"></script>
+  <script>window.QRCode || document.write('<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"><\\/script>');</script>
+  <script src="/assets/vendor/pdf-lib.min.js"></script>
+  <script>window.PDFLib || document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"><\\/script>');</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
     if (typeof pdfjsLib !== 'undefined') {
@@ -358,8 +360,8 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
       <!-- Brand Logo (Tap returns Home) -->
       <a href="/" class="flex items-center gap-2 sm:gap-2.5 shrink-0 group min-h-[44px] py-1" aria-label="ToolsHere.online Homepage">
-        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white text-base shadow-xs group-hover:bg-blue-700 transition-colors">
-          <i class="fa-solid fa-shapes"></i>
+        <div class="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+          <img src="/assets/logo.png" alt="ToolsHere Logo" class="w-full h-full object-contain">
         </div>
         <div class="flex flex-col">
           <span class="font-extrabold text-base sm:text-xl tracking-tight text-slate-900 dark:text-white leading-none">

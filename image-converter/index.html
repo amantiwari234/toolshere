@@ -147,8 +147,10 @@
 
   <!-- FontAwesome Icons & Libraries -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.9/dist/pdf-lib.min.js"></script>
+  <script src="/assets/vendor/qrcode.min.js"></script>
+  <script>window.QRCode || document.write('<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"><\/script>');</script>
+  <script src="/assets/vendor/pdf-lib.min.js"></script>
+  <script>window.PDFLib || document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"><\/script>');</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
     if (typeof pdfjsLib !== 'undefined') {
@@ -226,8 +228,8 @@
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-4">
       <!-- Brand Logo (Tap returns Home) -->
       <a href="/" class="flex items-center gap-2 sm:gap-2.5 shrink-0 group min-h-[44px] py-1" aria-label="ToolsHere.online Homepage">
-        <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white text-base shadow-xs group-hover:bg-blue-700 transition-colors">
-          <i class="fa-solid fa-shapes"></i>
+        <div class="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+          <img src="/assets/logo.png" alt="ToolsHere Logo" class="w-full h-full object-contain">
         </div>
         <div class="flex flex-col">
           <span class="font-extrabold text-base sm:text-xl tracking-tight text-slate-900 dark:text-white leading-none">
@@ -3617,44 +3619,31 @@
         ? `https://img.youtube.com/vi/${currentYtVidId}/maxresdefault.jpg`
         : `https://img.youtube.com/vi/${currentYtVidId}/hqdefault.jpg`;
 
-      try {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.naturalWidth;
-          canvas.height = img.naturalHeight;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
+      const filename = `youtube-thumbnail-${currentYtVidId}-${quality}.jpg`;
 
-          canvas.toBlob(blob => {
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `youtube-thumbnail-${currentYtVidId}-${quality}.jpg`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            showToast('Thumbnail image saved!', 'success');
-          }, 'image/jpeg', 0.95);
-        };
-        img.onerror = async function() {
-          try {
-            const resp = await fetch(targetUrl);
-            const blob = await resp.blob();
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `youtube-thumbnail-${currentYtVidId}-${quality}.jpg`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            showToast('Thumbnail image saved!', 'success');
-          } catch(e) {
-            window.open(targetUrl, '_blank');
-          }
-        };
-        img.src = targetUrl;
+      try {
+        const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(targetUrl)}&output=jpg`;
+        const resp = await fetch(proxyUrl);
+        if (!resp.ok) throw new Error('Proxy fetch not ok');
+        const blob = await resp.blob();
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Thumbnail image saved!', 'success');
+        triggerConfetti();
       } catch (err) {
-        window.open(targetUrl, '_blank');
+        const a = document.createElement('a');
+        a.href = targetUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast('Thumbnail opened in new tab to save!', 'info');
       }
     }
 
@@ -4298,7 +4287,7 @@
                   <span>Page Title</span>
                   <span id="titleCounter" class="text-emerald-600 font-mono">0 / 60</span>
                 </div>
-                <input type="text" id="seoTitle" placeholder="ToolsHere.online — Free Online Utilities" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()">
+                <input type="text" id="seoTitle" placeholder="ToolsHere.online — Free Online Tools" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-xs font-semibold" oninput="generateSeoTags()">
               </div>
 
               <div>
@@ -4344,7 +4333,7 @@
                   <span id="serpSiteName" class="text-xs font-semibold text-slate-700 dark:text-slate-300">ToolsHere.online</span>
                 </div>
                 <div id="serpUrl" class="text-[11px] text-slate-500 truncate">https://toolshere.online/</div>
-                <div id="serpTitle" class="text-base text-blue-600 hover:underline font-medium cursor-pointer truncate">ToolsHere.online — Free Online Utilities</div>
+                <div id="serpTitle" class="text-base text-blue-600 hover:underline font-medium cursor-pointer truncate">ToolsHere.online — Free Online Tools</div>
                 <div id="serpDesc" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">Free client-side online tools for PDF processing, image compression, developer utilities, and daily productivity.</div>
               </div>
 
@@ -4365,7 +4354,7 @@
     }
 
     function generateSeoTags() {
-      const t = document.getElementById('seoTitle')?.value || 'ToolsHere.online — Free Online Utilities';
+      const t = document.getElementById('seoTitle')?.value || 'ToolsHere.online — Free Online Tools';
       const d = document.getElementById('seoDesc')?.value || 'Free client-side online tools for PDF processing, image compression, and productivity.';
       const u = document.getElementById('seoUrl')?.value || 'https://toolshere.online/';
       const a = document.getElementById('seoAuthor')?.value || 'ToolsHere';
