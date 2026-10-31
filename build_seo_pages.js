@@ -249,6 +249,9 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
     gtag('config', 'G-RXVYKC5YG5');
   </script>
 
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5695881882047202" crossorigin="anonymous"></script>
+
   <!-- Structured Data Schemas -->
   ${jsonLdSchemas.map(s => `<script type="application/ld+json">\n${JSON.stringify(s, null, 2)}\n</script>`).join('\n')}
 
@@ -523,8 +526,8 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
       </div>
     </div>
 
-    <!-- Pre-rendered Tool Workspace -->
-    <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-6 sm:space-y-8">
+    <!-- Pre-rendered Tool Workspace (Exempt from intrusive auto-ads to protect file uploads/downloads) -->
+    <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-6 sm:space-y-8 google-auto-ads-ignore adsbygoogle-noablate">
       ${workspaceHtml}
     </div>
 
@@ -840,6 +843,7 @@ const errorPageHtml = `<!DOCTYPE html>
   <meta name="robots" content="noindex, follow">
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5695881882047202" crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>body { font-family: 'Inter', sans-serif; }</style>
@@ -848,11 +852,11 @@ const errorPageHtml = `<!DOCTYPE html>
   <!-- Minimal White Header -->
   <header class="p-4 border-b border-slate-200">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
-      <a href="/" class="flex items-center gap-2 font-black text-lg text-slate-900">
-        <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-xs">
-          <i class="fa-solid fa-shapes"></i>
+      <a href="/" class="flex items-center gap-2.5 font-bold text-lg text-slate-900">
+        <div class="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
+          <img src="/assets/logo.png" alt="ToolsHere Logo" class="w-full h-full object-contain">
         </div>
-        Tools<span class="text-blue-600">here</span>.online
+        Tools<span class="text-blue-600">Here</span><span class="text-[11px] text-slate-400 font-semibold">.online</span>
       </a>
       <a href="/" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors">
         Browse All Tools
