@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>
+    if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      if (location.protocol === 'http:' || location.hostname.startsWith('www.')) {
+        location.replace('https://toolshere.online' + location.pathname + location.search + location.hash);
+      }
+    }
+  </script>
   <title>Free Image Format Converter Online | Convert PNG, JPG, WebP</title>
   <meta name="description" content="Convert image formats online between PNG, JPG, and WebP instantly in your browser. Fast, 100% private, free, and preserves original image resolution.">
   <meta name="keywords" content="image converter, online tools, free web utilities, image tools, toolshere">

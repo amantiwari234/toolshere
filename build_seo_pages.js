@@ -215,6 +215,13 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>
+    if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      if (location.protocol === 'http:' || location.hostname.startsWith('www.')) {
+        location.replace('https://toolshere.online' + location.pathname + location.search + location.hash);
+      }
+    }
+  </script>
   <title>${title}</title>
   <meta name="description" content="${metaDesc}">
   <meta name="keywords" content="${slug.replace(/-/g, ' ')}, online tools, free web utilities, ${category ? category.toLowerCase() + ' tools,' : ''} toolshere">
