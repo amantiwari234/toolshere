@@ -12,25 +12,31 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolshere">
   <meta property="og:url" content="https://toolshere.online/">
-  <meta property="og:title" content="ToolsHere.online — Free Online Tools for Everything">
+  <meta property="og:title" content="Toolshere — Free Online Tools & Web Utilities | 100% Private">
   <meta property="og:description" content="Free, fast, and 100% private client-side web utility tools. Everything runs directly inside your browser.">
-  <meta property="og:image" content="https://toolshere.online/assets/images/hero_3d_tools.jpg">
+  <meta property="og:image" content="https://toolshere.online/assets/logo.png">
+  <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="Toolshere Logo">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://toolshere.online/">
-  <meta property="twitter:title" content="ToolsHere.online — Free Online Tools for Everything">
+  <meta property="twitter:title" content="Toolshere — Free Online Tools & Web Utilities">
   <meta property="twitter:description" content="Instant, secure browser utilities for text, calculations, PDFs, images, and code. No sign up required.">
-  <meta property="twitter:image" content="https://toolshere.online/assets/images/hero_3d_tools.jpg">
+  <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
 
-  <!-- Favicon & Touch Icons -->
-  <link rel="icon" href="/favicon.ico" sizes="48x48">
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <!-- Favicon & Touch Icons (Google Search Best Practice: 48x48 PNG First) -->
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#2563eb">
@@ -98,18 +104,30 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Organization",
+        "@id": "https://toolshere.online/#organization",
+        "name": "Toolshere",
+        "url": "https://toolshere.online/",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": "https://toolshere.online/#logo",
+          "url": "https://toolshere.online/assets/logo.png",
+          "contentUrl": "https://toolshere.online/assets/logo.png",
+          "caption": "Toolshere Logo",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://toolshere.online/assets/logo.png"
+      },
+      {
         "@type": "WebSite",
         "@id": "https://toolshere.online/#website",
         "url": "https://toolshere.online/",
-        "name": "ToolsHere.online",
+        "name": "Toolshere",
+        "alternateName": "Toolshere.online",
         "description": "Free, fast, and 100% private client-side online tools for everything.",
         "publisher": {
-          "@type": "Organization",
-          "name": "ToolsHere.online",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://toolshere.online/assets/logo.png"
-          }
+          "@id": "https://toolshere.online/#organization"
         },
         "potentialAction": {
           "@type": "SearchAction",

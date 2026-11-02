@@ -12,25 +12,31 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Toolshere">
   <meta property="og:url" content="https://toolshere.online/compress-pdf">
   <meta property="og:title" content="Free PDF Compressor Online | Reduce PDF File Size Privately">
   <meta property="og:description" content="Compress PDF files online without losing readability. Reduce document size for email attachments and portal uploads. 100% private client-side tool.">
-  <meta property="og:image" content="https://toolshere.online/assets/images/hero_3d_tools.jpg">
+  <meta property="og:image" content="https://toolshere.online/assets/logo.png">
+  <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="Toolshere Logo">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://toolshere.online/compress-pdf">
   <meta property="twitter:title" content="Free PDF Compressor Online | Reduce PDF File Size Privately">
   <meta property="twitter:description" content="Compress PDF files online without losing readability. Reduce document size for email attachments and portal uploads. 100% private client-side tool.">
-  <meta property="twitter:image" content="https://toolshere.online/assets/images/hero_3d_tools.jpg">
+  <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
 
-  <!-- Favicon & Touch Icons -->
-  <link rel="icon" href="/favicon.ico" sizes="48x48">
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <!-- Favicon & Touch Icons (Google Search Best Practice: 48x48 PNG First) -->
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#2563eb">
@@ -91,6 +97,38 @@
 
   <!-- Structured Data Schemas -->
   <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://toolshere.online/#organization",
+  "name": "Toolshere",
+  "url": "https://toolshere.online/",
+  "logo": {
+    "@type": "ImageObject",
+    "@id": "https://toolshere.online/#logo",
+    "url": "https://toolshere.online/assets/logo.png",
+    "contentUrl": "https://toolshere.online/assets/logo.png",
+    "caption": "Toolshere Logo",
+    "width": 512,
+    "height": 512
+  },
+  "image": "https://toolshere.online/assets/logo.png"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://toolshere.online/#website",
+  "name": "Toolshere",
+  "alternateName": "Toolshere.online",
+  "url": "https://toolshere.online/",
+  "publisher": {
+    "@id": "https://toolshere.online/#organization"
+  }
+}
+</script>
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
@@ -342,44 +380,72 @@
     <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-6 sm:space-y-8 google-auto-ads-ignore adsbygoogle-noablate">
       
         <div class="space-y-6">
-          <div id="compressPdfDropZone" class="relative border-2 border-dashed border-rose-400 dark:border-rose-500 hover:border-rose-600 dark:hover:border-rose-400 bg-gradient-to-b from-rose-50/70 via-white to-rose-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-rose-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
-            <input type="file" id="pdfCompressInput" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleCompressPdfSelected(this)">
-            <div class="w-20 h-20 rounded-3xl bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-md">
+          <!-- Drop Zone with Direct Tap & Drag-and-Drop Support -->
+          <div id="compressPdfDropZone" onclick="triggerCompressPdfPicker()" ondragover="handleCompressPdfDragOver(event)" ondragleave="handleCompressPdfDragLeave(event)" ondrop="handleCompressPdfDrop(event)" class="relative border-2 border-dashed border-rose-400 dark:border-rose-500 hover:border-rose-600 dark:hover:border-rose-400 bg-gradient-to-b from-rose-50/70 via-white to-rose-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-rose-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
+            <input type="file" id="pdfCompressInput" accept=".pdf,application/pdf" class="hidden" onchange="handleCompressPdfSelected(this)">
+            <div class="w-20 h-20 rounded-3xl bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-md pointer-events-none">
               <i class="fa-solid fa-file-zipper"></i>
             </div>
-            <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-rose-500/25 group-hover:shadow-rose-500/40 group-hover:scale-[1.02] transition-all">
-              <i class="fa-solid fa-folder-open"></i> Choose PDF to Compress
-            </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Compress and reduce file size with custom compression levels</p>
-            <p class="text-[11px] text-slate-400 mt-2">100% private in-browser compression • Zero server uploads</p>
+            <button type="button" onclick="event.stopPropagation(); triggerCompressPdfPicker()" class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-rose-500/25 group-hover:shadow-rose-500/40 group-hover:scale-[1.02] transition-all cursor-pointer">
+              <i class="fa-solid fa-folder-open"></i> Select PDF File
+            </button>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4 pointer-events-none">Drag & drop your PDF file here or tap to select</p>
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-3 pointer-events-none">
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600">.PDF documents</span>
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">100% In-Browser Privacy</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-2 pointer-events-none">All PDF operations execute locally on your device. Zero server file uploads.</p>
           </div>
 
+          <!-- Configuration & Compression Workspace -->
           <div id="pdfCompressOptions" class="hidden space-y-6">
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs sm:text-sm">
-              <span id="pdfOriginalSize" class="text-slate-700 dark:text-slate-200 font-bold">Original: 0 KB</span>
-              <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Est. Reduction: ~50-70%</span>
-            </div>
-
-            <div class="space-y-3">
-              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Level:</label>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <button type="button" id="cmpRecBtn" onclick="setCompressLevel('recommended')" class="p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600">
-                  <span class="block text-sm mb-1 font-extrabold">Balanced (Recommended)</span>
-                  <span class="text-[11px] opacity-90 block">~50% reduction. High visual quality for sharing &amp; email.</span>
+            <!-- Selected File Card with Replace & Remove Controls -->
+            <div class="p-4 sm:p-5 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-center gap-3.5 min-w-0">
+                <div class="w-12 h-12 rounded-xl bg-rose-100 dark:bg-rose-950/70 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl shrink-0 shadow-2xs">
+                  <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="min-w-0">
+                  <p id="pdfSelectedFilename" class="font-bold text-sm sm:text-base text-slate-800 dark:text-white truncate">document.pdf</p>
+                  <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    <span id="pdfOriginalSize" class="font-semibold">0 KB</span>
+                    <span>•</span>
+                    <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Est. Reduction: ~50%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 self-start sm:self-center shrink-0">
+                <button type="button" onclick="triggerCompressPdfPicker()" class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-1.5 shadow-2xs cursor-pointer">
+                  <i class="fa-solid fa-arrow-rotate-right text-slate-500"></i> Replace File
                 </button>
-                <button type="button" id="cmpExtBtn" onclick="setCompressLevel('extreme')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all">
-                  <span class="block text-sm mb-1 font-extrabold">Extreme Compression</span>
-                  <span class="text-[11px] text-slate-400 block">~75% reduction. Smallest size for portal limits &lt; 500KB.</span>
-                </button>
-                <button type="button" id="cmpLowBtn" onclick="setCompressLevel('low')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all">
-                  <span class="block text-sm mb-1 font-extrabold">Low Compression</span>
-                  <span class="text-[11px] text-slate-400 block">~25% reduction. Maximum image resolution preserved.</span>
+                <button type="button" onclick="removeCompressPdfFile()" class="px-3.5 py-2 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50/70 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 hover:bg-rose-100 text-xs font-semibold transition-colors flex items-center gap-1.5 shadow-2xs cursor-pointer">
+                  <i class="fa-solid fa-trash-can"></i> Remove
                 </button>
               </div>
             </div>
 
-            <button type="button" onclick="downloadOptimizedPdf()" class="w-full py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-rose-500/25 transition-all flex items-center justify-center gap-2.5">
-              <i class="fa-solid fa-download text-lg"></i> Download Compressed PDF
+            <!-- Compression Level Presets -->
+            <div class="space-y-3">
+              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Level:</label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <button type="button" id="cmpRecBtn" onclick="setCompressLevel('recommended')" class="p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer">
+                  <span class="block text-sm mb-1 font-extrabold flex items-center justify-between">Balanced <span class="text-[10px] uppercase tracking-wide bg-white/20 px-2 py-0.5 rounded-full font-semibold">Recommended</span></span>
+                  <span class="text-[11px] opacity-90 block">~50% reduction. High visual quality for email, portals, and documents.</span>
+                </button>
+                <button type="button" id="cmpExtBtn" onclick="setCompressLevel('extreme')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer">
+                  <span class="block text-sm mb-1 font-extrabold">Extreme Compression</span>
+                  <span class="text-[11px] text-slate-400 block">~75% reduction. Maximum shrinkage for upload portals under 500KB.</span>
+                </button>
+                <button type="button" id="cmpLowBtn" onclick="setCompressLevel('low')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer">
+                  <span class="block text-sm mb-1 font-extrabold">Low Compression</span>
+                  <span class="text-[11px] text-slate-400 block">~25% reduction. Maximum image and vector resolution preserved.</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <button type="button" id="executeCompressPdfBtn" onclick="downloadOptimizedPdf()" class="w-full py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-rose-500/25 hover:shadow-rose-500/40 transition-all flex items-center justify-center gap-2.5 active:scale-[0.99] cursor-pointer">
+              <i class="fa-solid fa-file-zipper text-lg"></i> Compress & Download PDF
             </button>
           </div>
         </div>

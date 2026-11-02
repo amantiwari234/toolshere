@@ -3789,48 +3789,168 @@ function ensureScript(name) {
       if (icon) icon.className = 'fa-solid fa-file-zipper';
       container.innerHTML = `
         <div class="space-y-6">
-          <div id="compressPdfDropZone" class="relative border-2 border-dashed border-rose-400 dark:border-rose-500 hover:border-rose-600 dark:hover:border-rose-400 bg-gradient-to-b from-rose-50/70 via-white to-rose-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-rose-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
-            <input type="file" id="pdfCompressInput" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleCompressPdfSelected(this)">
-            <div class="w-20 h-20 rounded-3xl bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-md">
+          <!-- Drop Zone with Direct Tap & Drag-and-Drop Support -->
+          <div id="compressPdfDropZone" onclick="triggerCompressPdfPicker()" ondragover="handleCompressPdfDragOver(event)" ondragleave="handleCompressPdfDragLeave(event)" ondrop="handleCompressPdfDrop(event)" class="relative border-2 border-dashed border-rose-400 dark:border-rose-500 hover:border-rose-600 dark:hover:border-rose-400 bg-gradient-to-b from-rose-50/70 via-white to-rose-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-rose-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
+            <input type="file" id="pdfCompressInput" accept=".pdf,application/pdf" class="hidden" onchange="handleCompressPdfSelected(this)">
+            <div class="w-20 h-20 rounded-3xl bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300 shadow-md pointer-events-none">
               <i class="fa-solid fa-file-zipper"></i>
             </div>
-            <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-rose-500/25 group-hover:shadow-rose-500/40 group-hover:scale-[1.02] transition-all">
-              <i class="fa-solid fa-folder-open"></i> Choose PDF to Compress
-            </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Compress and reduce file size with custom compression levels</p>
-            <p class="text-[11px] text-slate-400 mt-2">100% private in-browser compression • Zero server uploads</p>
+            <button type="button" onclick="event.stopPropagation(); triggerCompressPdfPicker()" class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-rose-500/25 group-hover:shadow-rose-500/40 group-hover:scale-[1.02] transition-all cursor-pointer">
+              <i class="fa-solid fa-folder-open"></i> Select PDF File
+            </button>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4 pointer-events-none">Drag & drop your PDF file here or tap to select</p>
+            <div class="flex flex-wrap items-center justify-center gap-2 mt-3 pointer-events-none">
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-white/80 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600">.PDF documents</span>
+              <span class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">100% In-Browser Privacy</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-2 pointer-events-none">All PDF operations execute locally on your device. Zero server file uploads.</p>
           </div>
 
+          <!-- Configuration & Compression Workspace -->
           <div id="pdfCompressOptions" class="hidden space-y-6">
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs sm:text-sm">
-              <span id="pdfOriginalSize" class="text-slate-700 dark:text-slate-200 font-bold">Original: 0 KB</span>
-              <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Est. Reduction: ~50-70%</span>
-            </div>
-
-            <div class="space-y-3">
-              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Level:</label>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <button type="button" id="cmpRecBtn" onclick="setCompressLevel('recommended')" class="p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600">
-                  <span class="block text-sm mb-1 font-extrabold">Balanced (Recommended)</span>
-                  <span class="text-[11px] opacity-90 block">~50% reduction. High visual quality for sharing &amp; email.</span>
+            <!-- Selected File Card with Replace & Remove Controls -->
+            <div class="p-4 sm:p-5 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-center gap-3.5 min-w-0">
+                <div class="w-12 h-12 rounded-xl bg-rose-100 dark:bg-rose-950/70 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl shrink-0 shadow-2xs">
+                  <i class="fa-solid fa-file-pdf"></i>
+                </div>
+                <div class="min-w-0">
+                  <p id="pdfSelectedFilename" class="font-bold text-sm sm:text-base text-slate-800 dark:text-white truncate">document.pdf</p>
+                  <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                    <span id="pdfOriginalSize" class="font-semibold">0 KB</span>
+                    <span>•</span>
+                    <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Est. Reduction: ~50%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 self-start sm:self-center shrink-0">
+                <button type="button" onclick="triggerCompressPdfPicker()" class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-1.5 shadow-2xs cursor-pointer">
+                  <i class="fa-solid fa-arrow-rotate-right text-slate-500"></i> Replace File
                 </button>
-                <button type="button" id="cmpExtBtn" onclick="setCompressLevel('extreme')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all">
-                  <span class="block text-sm mb-1 font-extrabold">Extreme Compression</span>
-                  <span class="text-[11px] text-slate-400 block">~75% reduction. Smallest size for portal limits &lt; 500KB.</span>
-                </button>
-                <button type="button" id="cmpLowBtn" onclick="setCompressLevel('low')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all">
-                  <span class="block text-sm mb-1 font-extrabold">Low Compression</span>
-                  <span class="text-[11px] text-slate-400 block">~25% reduction. Maximum image resolution preserved.</span>
+                <button type="button" onclick="removeCompressPdfFile()" class="px-3.5 py-2 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50/70 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 hover:bg-rose-100 text-xs font-semibold transition-colors flex items-center gap-1.5 shadow-2xs cursor-pointer">
+                  <i class="fa-solid fa-trash-can"></i> Remove
                 </button>
               </div>
             </div>
 
-            <button type="button" onclick="downloadOptimizedPdf()" class="w-full py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-rose-500/25 transition-all flex items-center justify-center gap-2.5">
-              <i class="fa-solid fa-download text-lg"></i> Download Compressed PDF
+            <!-- Compression Level Presets -->
+            <div class="space-y-3">
+              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Level:</label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                <button type="button" id="cmpRecBtn" onclick="setCompressLevel('recommended')" class="p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer">
+                  <span class="block text-sm mb-1 font-extrabold flex items-center justify-between">Balanced <span class="text-[10px] uppercase tracking-wide bg-white/20 px-2 py-0.5 rounded-full font-semibold">Recommended</span></span>
+                  <span class="text-[11px] opacity-90 block">~50% reduction. High visual quality for email, portals, and documents.</span>
+                </button>
+                <button type="button" id="cmpExtBtn" onclick="setCompressLevel('extreme')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer">
+                  <span class="block text-sm mb-1 font-extrabold">Extreme Compression</span>
+                  <span class="text-[11px] text-slate-400 block">~75% reduction. Maximum shrinkage for upload portals under 500KB.</span>
+                </button>
+                <button type="button" id="cmpLowBtn" onclick="setCompressLevel('low')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer">
+                  <span class="block text-sm mb-1 font-extrabold">Low Compression</span>
+                  <span class="text-[11px] text-slate-400 block">~25% reduction. Maximum image and vector resolution preserved.</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Action Button -->
+            <button type="button" id="executeCompressPdfBtn" onclick="downloadOptimizedPdf()" class="w-full py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-rose-500/25 hover:shadow-rose-500/40 transition-all flex items-center justify-center gap-2.5 active:scale-[0.99] cursor-pointer">
+              <i class="fa-solid fa-file-zipper text-lg"></i> Compress & Download PDF
             </button>
           </div>
         </div>
       `;
+    }
+
+    function formatPdfSize(bytes) {
+      if (!bytes || isNaN(bytes)) return '0 KB';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+
+    function triggerCompressPdfPicker() {
+      const input = document.getElementById('pdfCompressInput');
+      if (input) {
+        input.value = '';
+        input.click();
+      }
+    }
+
+    function handleCompressPdfDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const dz = document.getElementById('compressPdfDropZone');
+      if (dz) {
+        dz.classList.add('border-rose-600', 'bg-rose-100/50', 'dark:bg-rose-950/40');
+      }
+    }
+
+    function handleCompressPdfDragLeave(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const dz = document.getElementById('compressPdfDropZone');
+      if (dz) {
+        dz.classList.remove('border-rose-600', 'bg-rose-100/50', 'dark:bg-rose-950/40');
+      }
+    }
+
+    function handleCompressPdfDrop(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const dz = document.getElementById('compressPdfDropZone');
+      if (dz) {
+        dz.classList.remove('border-rose-600', 'bg-rose-100/50', 'dark:bg-rose-950/40');
+      }
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        handleCompressPdfFile(e.dataTransfer.files[0]);
+      }
+    }
+
+    function handleCompressPdfSelected(input) {
+      if (input.files && input.files[0]) {
+        handleCompressPdfFile(input.files[0]);
+      }
+    }
+
+    function handleCompressPdfFile(file) {
+      if (!file) return;
+      const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+      if (!isPdf) {
+        showToast('Invalid file type. Please select a valid PDF file (.pdf)', 'error');
+        const input = document.getElementById('pdfCompressInput');
+        if (input) input.value = '';
+        return;
+      }
+
+      selectedPdfToCompress = file;
+
+      const nameEl = document.getElementById('pdfSelectedFilename');
+      if (nameEl) nameEl.innerText = file.name;
+
+      const sizeEl = document.getElementById('pdfOriginalSize');
+      if (sizeEl) sizeEl.innerText = `Original: ${formatPdfSize(file.size)}`;
+
+      const dropZone = document.getElementById('compressPdfDropZone');
+      if (dropZone) dropZone.classList.add('hidden');
+
+      const options = document.getElementById('pdfCompressOptions');
+      if (options) options.classList.remove('hidden');
+
+      showToast(`Selected "${file.name}" (${formatPdfSize(file.size)})`, 'success');
+    }
+
+    function removeCompressPdfFile() {
+      selectedPdfToCompress = null;
+      const input = document.getElementById('pdfCompressInput');
+      if (input) input.value = '';
+
+      const dropZone = document.getElementById('compressPdfDropZone');
+      if (dropZone) dropZone.classList.remove('hidden');
+
+      const options = document.getElementById('pdfCompressOptions');
+      if (options) options.classList.add('hidden');
+
+      showToast('PDF removed. Select another PDF to compress.', 'info');
     }
 
     function setCompressLevel(level) {
@@ -3841,82 +3961,98 @@ function ensureScript(name) {
       const redBadge = document.getElementById('pdfEstReduction');
 
       [recBtn, extBtn, lowBtn].forEach(b => {
-        if (b) b.className = 'p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all';
+        if (b) b.className = 'p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer';
       });
 
       if (level === 'recommended') {
-        recBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600';
-        redBadge.innerText = 'Est. Reduction: ~50-60%';
+        if (recBtn) recBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer';
+        if (redBadge) redBadge.innerText = 'Est. Reduction: ~50-60%';
       } else if (level === 'extreme') {
-        extBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600';
-        redBadge.innerText = 'Est. Reduction: ~70-80%';
+        if (extBtn) extBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer';
+        if (redBadge) redBadge.innerText = 'Est. Reduction: ~70-80%';
       } else if (level === 'low') {
-        lowBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600';
-        redBadge.innerText = 'Est. Reduction: ~20-30%';
-      }
-    }
-
-    function handleCompressPdfSelected(input) {
-      if (input.files && input.files[0]) {
-        selectedPdfToCompress = input.files[0];
-        document.getElementById('pdfOriginalSize').innerText = `Original: ${(selectedPdfToCompress.size / 1024).toFixed(1)} KB`;
-        document.getElementById('pdfCompressDropZone').classList.add('hidden');
-        document.getElementById('pdfCompressOptions').classList.remove('hidden');
+        if (lowBtn) lowBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer';
+        if (redBadge) redBadge.innerText = 'Est. Reduction: ~20-30%';
       }
     }
 
     async function downloadOptimizedPdf() {
-      if (!selectedPdfToCompress) return;
+      if (!selectedPdfToCompress) {
+        showToast('Please select a PDF file first.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('executeCompressPdfBtn');
+      const originalBtnHtml = btn ? btn.innerHTML : '';
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-lg mr-2"></i> Compressing PDF...';
+      }
+
       showToast('Compressing PDF stream and removing duplicate resources...', 'info');
 
       try {
-        const buffer = await selectedPdfToCompress.arrayBuffer();
         if (typeof PDFLib === 'undefined') {
-          showToast('Engine loading...', 'info');
+          await ensureScript('PDFLib');
+        }
+        if (typeof PDFLib === 'undefined') {
+          showToast('PDF engine initializing, please retry...', 'info');
+          if (btn) { btn.disabled = false; btn.innerHTML = originalBtnHtml; }
           return;
         }
 
-        const doc = await PDFLib.PDFDocument.load(buffer);
+        const buffer = await selectedPdfToCompress.arrayBuffer();
         const originalBytes = buffer.byteLength;
 
-        if (compressLevel === 'extreme' && typeof pdfjsLib !== 'undefined') {
-          try {
-            const pdfjsDoc = await pdfjsLib.getDocument({ data: buffer }).promise;
-            const newDoc = await PDFLib.PDFDocument.create();
+        if (compressLevel === 'extreme') {
+          if (typeof pdfjsLib === 'undefined') {
+            await ensureScript('pdfjsLib');
+          }
+          if (typeof pdfjsLib !== 'undefined') {
+            try {
+              const pdfjsDoc = await pdfjsLib.getDocument({ data: buffer }).promise;
+              const newDoc = await PDFLib.PDFDocument.create();
 
-            for (let i = 1; i <= pdfjsDoc.numPages; i++) {
-              const page = await pdfjsDoc.getPage(i);
-              const viewport = page.getViewport({ scale: 1.0 });
-              const canvas = document.createElement('canvas');
-              canvas.width = viewport.width;
-              canvas.height = viewport.height;
-              const ctx = canvas.getContext('2d');
-              await page.render({ canvasContext: ctx, viewport }).promise;
+              for (let i = 1; i <= pdfjsDoc.numPages; i++) {
+                const page = await pdfjsDoc.getPage(i);
+                const viewport = page.getViewport({ scale: 1.0 });
+                const canvas = document.createElement('canvas');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                const ctx = canvas.getContext('2d');
+                await page.render({ canvasContext: ctx, viewport }).promise;
 
-              const jpegUrl = canvas.toDataURL('image/jpeg', 0.55);
-              const jpgImage = await newDoc.embedJpg(jpegUrl);
-              const newPage = newDoc.addPage([viewport.width, viewport.height]);
-              newPage.drawImage(jpgImage, { x: 0, y: 0, width: viewport.width, height: viewport.height });
+                const jpegUrl = canvas.toDataURL('image/jpeg', 0.55);
+                const jpgImage = await newDoc.embedJpg(jpegUrl);
+                const newPage = newDoc.addPage([viewport.width, viewport.height]);
+                newPage.drawImage(jpgImage, { x: 0, y: 0, width: viewport.width, height: viewport.height });
+              }
+
+              const compressedBytes = await newDoc.save();
+              const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+              const a = document.createElement('a');
+              a.href = URL.createObjectURL(blob);
+              a.download = `compressed-${selectedPdfToCompress.name}`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+
+              showToast(`Compressed from ${formatPdfSize(originalBytes)} to ${formatPdfSize(compressedBytes.length)}!`, 'success');
+              triggerConfetti();
+              if (btn) { btn.disabled = false; btn.innerHTML = originalBtnHtml; }
+              return;
+            } catch(e) {
+              console.warn('Canvas recompression fallback:', e);
             }
-
-            const compressedBytes = await newDoc.save();
-            const blob = new Blob([compressedBytes], { type: 'application/pdf' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = `compressed-${selectedPdfToCompress.name}`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-
-            showToast(`Compressed from ${(originalBytes/1024).toFixed(1)}KB to ${(compressedBytes.length/1024).toFixed(1)}KB!`, 'success');
-            triggerConfetti();
-            return;
-          } catch(e) {
-            console.warn('Canvas recompression fallback:', e);
           }
         }
 
-        const compressedBytes = await doc.save({ useObjectStreams: true });
+        const doc = await PDFLib.PDFDocument.load(buffer, { ignoreEncryption: true });
+        const cleanDoc = await PDFLib.PDFDocument.create();
+        const copiedPages = await cleanDoc.copyPages(doc, doc.getPageIndices());
+        copiedPages.forEach(p => cleanDoc.addPage(p));
+
+        const compressedBytes = await cleanDoc.save({ useObjectStreams: true });
         const blob = new Blob([compressedBytes], { type: 'application/pdf' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
@@ -3925,13 +4061,28 @@ function ensureScript(name) {
         a.click();
         document.body.removeChild(a);
 
-        showToast('Compressed PDF saved successfully!', 'success');
+        showToast(`Compressed PDF downloaded! (${formatPdfSize(compressedBytes.length)})`, 'success');
         triggerConfetti();
       } catch (err) {
         console.error(err);
         showToast('Error during compression: ' + err.message, 'error');
+      } finally {
+        if (btn) { btn.disabled = false; btn.innerHTML = originalBtnHtml; }
       }
     }
+
+    // Explicitly expose handlers to window for cross-platform event dispatch
+    window.renderCompressPdf = renderCompressPdf;
+    window.triggerCompressPdfPicker = triggerCompressPdfPicker;
+    window.handleCompressPdfDragOver = handleCompressPdfDragOver;
+    window.handleCompressPdfDragLeave = handleCompressPdfDragLeave;
+    window.handleCompressPdfDrop = handleCompressPdfDrop;
+    window.handleCompressPdfSelected = handleCompressPdfSelected;
+    window.handleCompressPdfFile = handleCompressPdfFile;
+    window.removeCompressPdfFile = removeCompressPdfFile;
+    window.setCompressLevel = setCompressLevel;
+    window.downloadOptimizedPdf = downloadOptimizedPdf;
+
 
     /* ================= UTILITY 16: IMAGE TO PDF CONVERTER ================= */
     let imgToPdfFiles = [];
