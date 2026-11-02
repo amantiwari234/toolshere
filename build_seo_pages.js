@@ -7,13 +7,19 @@ const indexHtmlPath = path.join(rootDir, 'index.html');
 const indexHtml = fs.readFileSync(indexHtmlPath, 'utf8');
 
 // 1. Extract Main Script and Registry Data
-const scripts = [...indexHtml.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
-const mainScriptObj = scripts.find(s => s[1].includes('SEO_TOOL_REGISTRY'));
-if (!mainScriptObj) {
-  console.error('Could not find script with SEO_TOOL_REGISTRY!');
-  process.exit(1);
+const appJsPath = path.join(rootDir, 'assets', 'js', 'app.js');
+let mainScript = '';
+if (fs.existsSync(appJsPath)) {
+  mainScript = fs.readFileSync(appJsPath, 'utf8');
+} else {
+  const scripts = [...indexHtml.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
+  const mainScriptObj = scripts.find(s => s[1].includes('SEO_TOOL_REGISTRY'));
+  if (!mainScriptObj) {
+    console.error('Could not find script with SEO_TOOL_REGISTRY!');
+    process.exit(1);
+  }
+  mainScript = mainScriptObj[1];
 }
-const mainScript = mainScriptObj[1];
 
 // Sandbox to execute and extract registry and render functions
 const sandbox = {
@@ -240,118 +246,62 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#2563eb">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RXVYKC5YG5"></script>
+  <!-- Preconnect to Font & CDN Origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+  <!-- Preload & Load High-Performance Compiled CSS -->
+  <link rel="preload" href="/assets/css/style.min.css" as="style">
+  <link rel="stylesheet" href="/assets/css/style.min.css">
+
+  <!-- Asynchronous Google Fonts (Inter) with display=swap -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+  <!-- Non-blocking FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- Smart Non-Blocking Google Analytics & AdSense Loader -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-RXVYKC5YG5');
-  </script>
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5695881882047202" crossorigin="anonymous"></script>
+    (function() {
+      let loaded = false;
+      function loadThirdParty() {
+        if (loaded) return;
+        loaded = true;
+        ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'].forEach(function(e) {
+          window.removeEventListener(e, loadThirdParty, { passive: true });
+        });
+        const gtm = document.createElement('script');
+        gtm.src = 'https://www.googletagmanager.com/gtag/js?id=G-RXVYKC5YG5';
+        gtm.async = true;
+        document.head.appendChild(gtm);
+
+        const ads = document.createElement('script');
+        ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5695881882047202';
+        ads.async = true;
+        ads.crossOrigin = 'anonymous';
+        document.head.appendChild(ads);
+      }
+      ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'].forEach(function(e) {
+        window.addEventListener(e, loadThirdParty, { passive: true, once: true });
+      });
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() { setTimeout(loadThirdParty, 3500); });
+      } else {
+        setTimeout(loadThirdParty, 3500);
+      }
+    })();
+  </script>
 
   <!-- Structured Data Schemas -->
   ${jsonLdSchemas.map(s => `<script type="application/ld+json">\n${JSON.stringify(s, null, 2)}\n</script>`).join('\n')}
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-            }
-          }
-        }
-      }
-    };
-  </script>
-
-  <!-- FontAwesome Icons & Libraries -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="/assets/vendor/qrcode.min.js"></script>
-  <script>window.QRCode || document.write('<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"><\\/script>');</script>
-  <script src="/assets/vendor/pdf-lib.min.js"></script>
-  <script>window.PDFLib || document.write('<script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"><\\/script>');</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script>
-    if (typeof pdfjsLib !== 'undefined') {
-      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-        html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    button, a, input, select, textarea { touch-action: manipulation; }
-    
-    input[type="range"] {
-      -webkit-appearance: none;
-      height: 32px;
-      background: transparent;
-      cursor: pointer;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      background: #2563EB;
-      cursor: pointer;
-      margin-top: -9px;
-      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.35);
-      border: 2px solid #FFFFFF;
-    }
-    input[type="range"]::-webkit-slider-runnable-track {
-      width: 100%;
-      height: 6px;
-      cursor: pointer;
-      background: #E2E8F0;
-      border-radius: 9999px;
-    }
-    .dark input[type="range"]::-webkit-slider-runnable-track {
-      background: #334155;
-    }
-    
-    .touch-card {
-      -webkit-tap-highlight-color: transparent;
-      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-    .touch-card:active {
-      transform: scale(0.98);
-    }
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
-    .dark ::-webkit-scrollbar-thumb { background: #334155; }
-
-    .checkerboard-bg {
-      background-color: #ffffff;
-      background-image: linear-gradient(45deg, #f1f5f9 25%, transparent 25%), linear-gradient(-45deg, #f1f5f9 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f1f5f9 75%), linear-gradient(-45deg, transparent 75%, #f1f5f9 75%);
-      background-size: 16px 16px;
-      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
-    }
-  </style>
 </head>
 <body class="bg-white text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-200 min-h-screen flex flex-col">
 
@@ -364,7 +314,7 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
       <!-- Brand Logo (Tap returns Home) -->
       <a href="/" class="flex items-center gap-2 sm:gap-2.5 shrink-0 group min-h-[44px] py-1" aria-label="ToolsHere.online Homepage">
         <div class="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-          <img src="/assets/logo.png" alt="ToolsHere Logo" class="w-full h-full object-contain">
+          <img src="/assets/logo.png" alt="ToolsHere Logo" width="36" height="36" class="w-full h-full object-contain">
         </div>
         <div class="flex flex-col">
           <span class="font-extrabold text-base sm:text-xl tracking-tight text-slate-900 dark:text-white leading-none">
@@ -413,7 +363,7 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
       <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <div class="w-8 h-8 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center p-1 shadow-xs">
-            <img src="/assets/logo.png" alt="ToolsHere Logo" class="w-full h-full object-contain">
+            <img src="/assets/logo.png" alt="ToolsHere Logo" width="36" height="36" class="w-full h-full object-contain">
           </div>
           <span class="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
             Tools<span class="text-blue-600">Here</span>
@@ -605,10 +555,8 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script>
-${mainScript}
-  </script>
+  <!-- Core Minified Application Script (Deferred & Cached) -->
+  <script defer src="/assets/js/app.js"></script>
 </body>
 </html>`;
 }
@@ -854,7 +802,7 @@ const errorPageHtml = `<!DOCTYPE html>
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <a href="/" class="flex items-center gap-2.5 font-bold text-lg text-slate-900">
         <div class="w-8 h-8 rounded-lg overflow-hidden flex items-center justify-center">
-          <img src="/assets/logo.png" alt="ToolsHere Logo" class="w-full h-full object-contain">
+          <img src="/assets/logo.png" alt="ToolsHere Logo" width="36" height="36" class="w-full h-full object-contain">
         </div>
         Tools<span class="text-blue-600">Here</span><span class="text-[11px] text-slate-400 font-semibold">.online</span>
       </a>

@@ -1,3 +1,6 @@
+# Dependencies
+node_modules/
+
 # Temporary & Archive Directories
 _tools_archive/
 _love_archive/
@@ -9,3 +12,11 @@ Test Project
 Thumbs.db
 *.log
 *.backup.html
+
+# Lighthouse test outputs
+*-mobile*.json
+*-desktop*.json
+baseline*.json
+test-*.json
+tool-*.json
+home-*.json

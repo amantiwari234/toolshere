@@ -1,0 +1,24 @@
+{
+  "name": "toolshere",
+  "version": "1.0.0",
+  "description": "ToolsHere.online — Free, fast, and 100% private client-side web utility tools.",
+  "main": "build_seo_pages.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/style.min.css --minify",
+    "build:pages": "node build_seo_pages.js",
+    "build": "npm run build:css && npm run build:pages",
+    "serve": "node server.js",
+    "test:seo": "node verify_audit.js"
+  },
+  "keywords": [
+    "tools",
+    "utilities",
+    "pdf",
+    "image-compressor"
+  ],
+  "author": "ToolsHere",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
