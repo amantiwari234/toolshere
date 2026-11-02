@@ -101,22 +101,376 @@ const toolIconsMap = {
   imgToPdf: 'fa-solid fa-images'
 };
 
-// Build SEO Guide HTML for a tool with clean minimal white design
+const seoOverrides = {
+  imgResizer: {
+    seoTitle: "Image Compressor & Resizer (20KB, 50KB, 100KB) - ToolsHere",
+    metaDesc: "Compress and resize JPG, PNG, and WebP images to exact sizes like 20KB, 50KB, or 100KB directly in your browser. Fast, private, with zero server uploads.",
+    relatedTools: [
+      { name: "Image Format Converter", hash: "#image-converter" },
+      { name: "AI Background Remover", hash: "#background-remover" },
+      { name: "Image to PDF Converter", hash: "#image-to-pdf" },
+      { name: "Compress PDF Document", hash: "#compress-pdf" }
+    ],
+    useCases: [
+      "Compressing passport photos and signatures to under 20KB or 50KB for government job and exam portals.",
+      "Downscaling large camera photos and WebP banners to boost website page loading speeds.",
+      "Resizing graphics to exact pixel dimensions for Instagram, LinkedIn, and blog headers."
+    ]
+  },
+  bgRemover: {
+    seoTitle: "Free Image Background Remover & Transparent PNG - ToolsHere",
+    metaDesc: "Remove image backgrounds instantly in your browser. Fine-tune color tolerance, isolate subjects, and download transparent PNG photos with 100% device privacy.",
+    relatedTools: [
+      { name: "Image Compressor & Resizer", hash: "#image-compressor" },
+      { name: "Image Format Converter", hash: "#image-converter" },
+      { name: "YouTube Thumbnail Grabber", hash: "#youtube-thumbnail" },
+      { name: "Image to PDF Converter", hash: "#image-to-pdf" }
+    ],
+    useCases: [
+      "Creating transparent product cutouts for e-commerce listings on Amazon, eBay, and Shopify.",
+      "Extracting clean headshot portraits for resume profiles, company websites, and badges.",
+      "Isolating logos and vector icons from white or uniform backdrops."
+    ]
+  },
+  pdfWord: {
+    seoTitle: "PDF to Word Converter: Convert PDF to DOC Free - ToolsHere",
+    metaDesc: "Convert PDF files into editable Word (.doc) documents directly in your browser. Fast, free, confidential text extraction with zero server file uploads.",
+    relatedTools: [
+      { name: "Merge & Split PDF", hash: "#merge-pdf" },
+      { name: "Compress PDF Document", hash: "#compress-pdf" },
+      { name: "Image to PDF Converter", hash: "#image-to-pdf" },
+      { name: "Word & Character Counter", hash: "#word-counter" }
+    ],
+    useCases: [
+      "Extracting text from read-only PDF reports and contracts into editable Microsoft Word documents.",
+      "Updating resume text and CV formatting when original source files are lost.",
+      "Copying structured content and paragraphs without manual re-typing."
+    ]
+  },
+  pdfMerge: {
+    seoTitle: "Merge PDF Files Online: Combine PDFs Free - ToolsHere",
+    metaDesc: "Combine multiple PDF documents into a single organized file in seconds. Free, secure, client-side PDF merging with page order preview and no file limits.",
+    relatedTools: [
+      { name: "Compress PDF Document", hash: "#compress-pdf" },
+      { name: "PDF to Word Converter", hash: "#pdf-to-word" },
+      { name: "Image to PDF Converter", hash: "#image-to-pdf" },
+      { name: "Image Compressor & Resizer", hash: "#image-compressor" }
+    ],
+    useCases: [
+      "Combining invoices, tax receipts, and bank statements into one consolidated accounting PDF.",
+      "Merging multi-page legal agreements, leases, and identity cards for official submission.",
+      "Bundling project chapters, cover letters, and resumes into a unified portfolio."
+    ]
+  },
+  ageCalc: {
+    seoTitle: "Age Calculator: Calculate Exact Age & Days - ToolsHere",
+    metaDesc: "Calculate your exact chronological age in years, months, weeks, and total days lived. Accurate date of birth calculator factoring leap years instantly.",
+    relatedTools: [
+      { name: "GST & Loan EMI Calculator", hash: "#emi-calculator" },
+      { name: "Word & Character Counter", hash: "#word-counter" },
+      { name: "Strong Password Creator", hash: "#password-generator" },
+      { name: "QR Code Studio & Reader", hash: "#qr-code-generator" }
+    ],
+    useCases: [
+      "Determining exact eligibility age in years, months, and days for competitive government exams.",
+      "Calculating milestone anniversary countdowns, retirement dates, and lifespan days.",
+      "Verifying age requirements for insurance policies, driving licenses, and visa applications."
+    ]
+  },
+  ytThumb: {
+    seoTitle: "YouTube Thumbnail Downloader: 1080p Full HD - ToolsHere",
+    metaDesc: "Download high-resolution 1080p HD YouTube video and Shorts thumbnails instantly. Paste any video URL to preview and save Maxresdefault images for free.",
+    relatedTools: [
+      { name: "Image Compressor & Resizer", hash: "#image-compressor" },
+      { name: "AI Background Remover", hash: "#background-remover" },
+      { name: "Image Format Converter", hash: "#image-converter" },
+      { name: "SEO Meta Tag Generator", hash: "#seo-meta-generator" }
+    ],
+    useCases: [
+      "Extracting full HD 1080p thumbnails from YouTube videos for editorial commentary and blog previews.",
+      "Saving reference graphic design templates, fonts, and compositions for creator inspiration.",
+      "Downloading video artwork for offline educational and media archives."
+    ]
+  },
+  qrTool: {
+    seoTitle: "Free QR Code Generator: Create Custom QR Codes - ToolsHere",
+    metaDesc: "Generate custom high-resolution QR codes for websites, links, and text instantly. High-correction Level H graphics, private generation, and instant download.",
+    relatedTools: [
+      { name: "Strong Password Creator", hash: "#password-generator" },
+      { name: "Word & Character Counter", hash: "#word-counter" },
+      { name: "SEO Meta Tag Generator", hash: "#seo-meta-generator" },
+      { name: "YouTube Thumbnail Grabber", hash: "#youtube-thumbnail" }
+    ],
+    useCases: [
+      "Creating contactless digital restaurant menu and review landing page QR codes.",
+      "Generating scannable Wi-Fi login codes, vCard business cards, and event invitations.",
+      "Directing physical print marketing flyers and stickers directly to website URLs."
+    ]
+  },
+  passwordGen: {
+    seoTitle: "Strong Password Generator: Secure Random Keys - ToolsHere",
+    metaDesc: "Generate cryptographically secure, random passwords with custom symbols, numbers, and length using the Web Crypto API. 100% private and unhackable.",
+    relatedTools: [
+      { name: "QR Code Studio & Reader", hash: "#qr-code-generator" },
+      { name: "Word & Character Counter", hash: "#word-counter" },
+      { name: "JSON Formatter & Validator", hash: "#json-formatter" },
+      { name: "SEO Meta Tag Generator", hash: "#seo-meta-generator" }
+    ],
+    useCases: [
+      "Generating high-entropy, brute-force-resistant master passwords for email and banking.",
+      "Creating random API keys, database secrets, and SSH passphrases for developers.",
+      "Creating secure one-time credentials for team members and Wi-Fi networks."
+    ]
+  },
+  wordCount: {
+    seoTitle: "Word Counter: Live Word & Character Analyzer - ToolsHere",
+    metaDesc: "Count words, characters, sentences, paragraphs, and reading time in real time. Perfect for essays, social media posts, articles, and SEO copy editing.",
+    relatedTools: [
+      { name: "Text Case Converter", hash: "#text-case-converter" },
+      { name: "SEO Meta Tag Generator", hash: "#seo-meta-generator" },
+      { name: "JSON Formatter & Validator", hash: "#json-formatter" },
+      { name: "Strong Password Creator", hash: "#password-generator" }
+    ],
+    useCases: [
+      "Monitoring character counts to fit Twitter (280c), LinkedIn, and Instagram limits.",
+      "Checking academic essay, dissertation, and college submission word quotas.",
+      "Verifying optimal SEO meta description (150-160c) and title tag (50-60c) lengths."
+    ]
+  },
+  gstEmi: {
+    seoTitle: "Loan EMI & GST Calculator: Quick Financial Tool - ToolsHere",
+    metaDesc: "Calculate monthly loan EMIs and standard GST tax rates (5%, 12%, 18%, 28%) instantly. Accurate financial planning for home, car, and personal loans.",
+    relatedTools: [
+      { name: "Age & Date Calculator", hash: "#age-calculator" },
+      { name: "Word & Character Counter", hash: "#word-counter" },
+      { name: "QR Code Studio & Reader", hash: "#qr-code-generator" },
+      { name: "Strong Password Creator", hash: "#password-generator" }
+    ],
+    useCases: [
+      "Calculating monthly loan repayments, interest components, and total loan payback costs.",
+      "Adding or removing GST amounts from wholesale invoices and retail billings.",
+      "Comparing car, home, or personal loan offers across varied interest rates and tenures."
+    ]
+  },
+  imgFormat: {
+    seoTitle: "Image Format Converter: Convert PNG, JPG, WebP - ToolsHere",
+    metaDesc: "Convert photos between JPG, PNG, and WebP formats instantly in your browser. Fast, free batch image conversion preserving original resolution and privacy.",
+    relatedTools: [
+      { name: "Image Compressor & Resizer", hash: "#image-compressor" },
+      { name: "AI Background Remover", hash: "#background-remover" },
+      { name: "Image to PDF Converter", hash: "#image-to-pdf" },
+      { name: "YouTube Thumbnail Grabber", hash: "#youtube-thumbnail" }
+    ],
+    useCases: [
+      "Converting transparent PNG artwork into universally compatible JPEG photos.",
+      "Transforming JPG pictures into modern WebP format for 30% faster web performance.",
+      "Standardizing image assets for official document portals that reject WebP uploads."
+    ]
+  },
+  textCase: {
+    seoTitle: "Text Case Converter: UPPERCASE, Title Case, Slug - ToolsHere",
+    metaDesc: "Convert text case instantly online. Transform copy between UPPERCASE, lowercase, Title Case, camelCase, and clean URL slugs with one-click clipboard copy.",
+    relatedTools: [
+      { name: "Word & Character Counter", hash: "#word-counter" },
+      { name: "SEO Meta Tag Generator", hash: "#seo-meta-generator" },
+      { name: "JSON Formatter & Validator", hash: "#json-formatter" },
+      { name: "Strong Password Creator", hash: "#password-generator" }
+    ],
+    useCases: [
+      "Capitalizing article headlines into AP or Chicago Title Case automatically.",
+      "Converting article titles into clean URL-friendly slugs for web publishing.",
+      "Sanitizing text to lowercase or UPPERCASE for coding and data entry."
+    ]
+  },
+  jsonFormat: {
+    seoTitle: "JSON Formatter & Validator: Beautify & Minify - ToolsHere",
+    metaDesc: "Format, beautify, validate, and minify JSON data online. Inspect syntax errors with clear line indicators. 100% client-side for secure API debugging.",
+    relatedTools: [
+      { name: "SEO Meta Tag Generator", hash: "#seo-meta-generator" },
+      { name: "Text Case Converter", hash: "#text-case-converter" },
+      { name: "Word & Character Counter", hash: "#word-counter" },
+      { name: "Strong Password Creator", hash: "#password-generator" }
+    ],
+    useCases: [
+      "Formatting compressed API JSON responses into human-readable indented structures.",
+      "Validating complex payload syntax to catch missing commas, quotes, and brackets.",
+      "Minifying configuration files to strip unnecessary whitespace for production deployments."
+    ]
+  },
+  seoMeta: {
+    seoTitle: "SEO Meta Tag Generator: Google & Open Graph Tags - ToolsHere",
+    metaDesc: "Generate search-optimized meta tags for any webpage. Create Google titles, descriptions, Open Graph previews, and Twitter cards with instant copy code.",
+    intro: "ToolsHere SEO Meta Tag Generator is a client-side web utility designed for webmasters, digital marketers, developers, and content writers to craft high-ranking HTML metadata. High-quality meta tags communicate the topic of your webpage to search engines like Google, Bing, and DuckDuckGo, while dictating exactly how your content appears when shared across social networks including Facebook, LinkedIn, X (Twitter), and messaging apps. Writing search snippets without precise character bounds frequently leads to truncated titles and omitted descriptions in Search Engine Results Pages (SERPs). This generator provides real-time character counters, keyword placement validation, and instant code export, ensuring every tag complies with contemporary search engine quality guidelines without any data ever being uploaded to external servers.",
+    howToUse: [
+      "Enter your target Webpage Title in the Title field (aim for 50 to 60 characters for optimal display).",
+      "Draft a compelling Meta Description in the Description field (aim for 140 to 160 characters with a clear call-to-action).",
+      "Provide your Canonical Website URL (use the full https:// format to avoid split indexation).",
+      "Add your target Meta Keywords and the absolute URL to your Open Graph Social Share Image.",
+      "Review the live preview box and click 'Copy Meta Tags' to paste the clean HTML code directly into your document's <head> section."
+    ],
+    features: [
+      "Dual SERP & Social Tag Generation: Outputs standard Google HTML tags, Open Graph (Facebook/LinkedIn), and Twitter Cards.",
+      "Live Length Guidance: Visual helpers indicate ideal lengths for Title (50-60c) and Meta Description (140-160c).",
+      "Crawler Control Ready: Includes robots directives (index, follow, max-snippet:-1, max-image-preview:large).",
+      "Single-Click Clipboard Copy: Instant export formatted in clean, indentation-friendly HTML markup.",
+      "100% Client-Side Privacy: Operates completely inside your local browser memory with zero tracking."
+    ],
+    formatsAndLimits: {
+      supportedInputs: "Text, Canonical URLs, Image URLs, Custom Meta Keywords",
+      outputFormat: "Standard HTML5 <meta> tags, Open Graph tags, Twitter Card tags",
+      limitations: "Generates HTML head tags; structured data (JSON-LD schemas) should be authored alongside these tags."
+    },
+    useCases: [
+      "Optimizing blog posts, e-commerce products, and landing pages for higher click-through rates (CTR) on Google.",
+      "Configuring rich Open Graph social cards with custom images so shared links look professional on social media.",
+      "Standardizing SEO head tags across new client websites during front-end web development."
+    ],
+    extraGuideHtml: `
+      <!-- Technical SEO Metadata Guide -->
+      <section class="space-y-6 p-6 rounded-2xl bg-gradient-to-br from-blue-50/60 to-indigo-50/40 dark:from-slate-800 dark:to-slate-900 border border-blue-200 dark:border-slate-700">
+        <h2 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-code text-blue-600"></i> Technical SEO Metadata Best Practices
+        </h2>
+        <div class="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p>
+            Well-structured meta tags serve as the foundation of organic search visibility. When search engine spiders crawl your web pages, HTML metadata in the document &lt;head&gt; provides direct signals regarding the page's core topic, target audience, and indexing permissions.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-heading text-blue-600"></i> Title Tag Architecture
+              </h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Aim for <strong>50 to 60 characters</strong> (approx. 580 pixels). Front-load your highest-volume primary keyword within the first 35 characters, followed by a secondary qualifier and a clean brand separator (e.g. <code>Primary Keyword: Action Benefit - Brand</code>).
+              </p>
+            </div>
+            <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-align-left text-blue-600"></i> Meta Description Engineering
+              </h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Calibrate descriptions between <strong>140 and 160 characters</strong>. Write compelling, action-oriented copy that directly answers user search intent. Conclude with an active benefit (e.g. <em>"Free online tool with 100% private in-browser processing."</em>) to boost Organic Click-Through Rates (CTR).
+              </p>
+            </div>
+            <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-share-nodes text-purple-600"></i> Social Open Graph Cards
+              </h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Social platforms (Facebook, LinkedIn, Slack, WhatsApp) require <code>og:title</code>, <code>og:description</code>, and <code>og:image</code>. Use high-resolution <strong>1200 x 630 px</strong> graphics with a 1.91:1 ratio to ensure social preview cards render crisply on mobile screens.
+              </p>
+            </div>
+            <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-sm">
+                <i class="fa-solid fa-robot text-emerald-600"></i> Robots &amp; Canonical Directives
+              </h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400">
+                Specify <code>&lt;link rel="canonical" href="https://..."&gt;</code> to designate the authoritative URL and eliminate split-ranking penalties. Pair with <code>max-snippet:-1, max-image-preview:large</code> to permit Google rich snippet previews.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    `,
+    faqs: [
+      {
+        q: "What is the ideal character length for Google meta titles and descriptions?",
+        a: "Google typically displays the first 50 to 60 characters of a Title tag (or up to roughly 580-600 pixels) and 140 to 160 characters for a Meta Description. Exceeding these bounds often results in your snippet being truncated with an ellipsis (...)."
+      },
+      {
+        q: "Why is the Open Graph image tag (og:image) important?",
+        a: "When users share your link on Facebook, LinkedIn, WhatsApp, or Slack, the platforms look for the og:image meta tag to render a prominent visual card. The recommended size is 1200x630 pixels with an aspect ratio of 1.91:1."
+      },
+      {
+        q: "Where should the generated meta tags be placed?",
+        a: "Paste the generated HTML snippet inside the <head> ... </head> section of your webpage HTML document, ideally before any CSS stylesheet or font links."
+      },
+      {
+        q: "Do search engines still use the 'keywords' meta tag for ranking?",
+        a: "Major search engines like Google do not use the meta keywords tag for web search rankings. However, some internal site search engines and regional engines still reference it. It is included for backwards compatibility."
+      },
+      {
+        q: "How does a canonical tag protect my website's SEO?",
+        a: "A canonical link (<link rel='canonical' href='...'>) signals to Google which URL represents the master copy of a page. This prevents duplicate content penalties if your page is accessible via HTTP, HTTPS, www, or query parameters."
+      }
+    ],
+    relatedTools: [
+      { name: "Word & Character Counter", hash: "#word-counter" },
+      { name: "Text Case Converter", hash: "#text-case-converter" },
+      { name: "JSON Formatter & Validator", hash: "#json-formatter" },
+      { name: "YouTube Thumbnail Grabber", hash: "#youtube-thumbnail" }
+    ]
+  },
+  compressPdf: {
+    seoTitle: "Compress PDF Online: Reduce PDF File Size Free - ToolsHere",
+    metaDesc: "Compress PDF files online without losing readability. Reduce document size for email and job portal uploads with 100% private client-side processing.",
+    relatedTools: [
+      { name: "PDF to Word Converter", hash: "#pdf-to-word" },
+      { name: "Merge & Split PDF", hash: "#merge-pdf" },
+      { name: "Image to PDF Converter", hash: "#image-to-pdf" },
+      { name: "Image Compressor & Resizer", hash: "#image-compressor" }
+    ],
+    useCases: [
+      "Shrinking oversized PDF contracts, resumes, and tax filings to under 500KB or 1MB for portal uploads.",
+      "Optimizing scanned school assignments and textbooks for rapid email attachments.",
+      "Compressing archived PDF reports to save local device storage."
+    ]
+  },
+  imgToPdf: {
+    seoTitle: "Image to PDF Converter: Convert JPG & PNG to PDF - ToolsHere",
+    metaDesc: "Convert and bundle multiple JPG, PNG, and WebP images into a single printable PDF document. Set page size, orientation, and margins with zero server uploads.",
+    relatedTools: [
+      { name: "Image Compressor & Resizer", hash: "#image-compressor" },
+      { name: "Image Format Converter", hash: "#image-converter" },
+      { name: "PDF to Word Converter", hash: "#pdf-to-word" },
+      { name: "Merge & Split PDF", hash: "#merge-pdf" }
+    ],
+    useCases: [
+      "Bundling photographed receipt images and ID cards into a single clean PDF for loan and visa applications.",
+      "Creating printable photo albums, digital portfolios, and visual handouts from multiple graphics.",
+      "Combining scanned book pages into an organized, readable PDF book."
+    ]
+  }
+};
+
+
+
+
+// Build SEO Guide HTML for a tool with clean minimal white design and optimized H2/H3 semantic structure
 function generateGuideHtml(tool) {
   let relatedHtml = '';
   if (tool.relatedTools && tool.relatedTools.length > 0) {
     relatedHtml = `
-      <div class="pt-6 border-t border-slate-200">
-        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Related Productivity Utilities</h3>
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-3">
+        <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Related Productivity Utilities</h2>
         <div class="flex flex-wrap gap-2">
           ${tool.relatedTools.map(rt => {
             const slug = rt.hash.replace('#', '');
-            return `<a href="/${slug}" class="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-600 text-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-slate-200">
+            return `<a href="/${slug}" class="px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-arrow-right text-[10px] text-blue-500"></i> ${rt.name}
             </a>`;
           }).join('')}
         </div>
-      </div>
+      </section>
+    `;
+  }
+
+  let useCasesHtml = '';
+  if (tool.useCases && tool.useCases.length > 0) {
+    useCasesHtml = `
+      <!-- Common Use Cases & Workflows -->
+      <section class="space-y-4">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb text-amber-500"></i> Common Use Cases &amp; Practical Workflows
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          ${tool.useCases.map(uc => `
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> ${uc}
+            </div>
+          `).join('')}
+        </div>
+      </section>
     `;
   }
 
@@ -124,11 +478,11 @@ function generateGuideHtml(tool) {
     <article class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800 space-y-8 text-slate-700 dark:text-slate-300">
       <div class="space-y-3">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200 uppercase tracking-wide">${tool.category} Utility</span>
-          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-[10px] text-emerald-600"></i> 100% In-Browser Privacy</span>
-          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
+          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 uppercase tracking-wide">${tool.category} Utility</span>
+          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-[10px] text-emerald-600"></i> 100% In-Browser Privacy</span>
+          <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-snug">About ${tool.name}</h2>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About ${tool.name} &amp; Core Utility</h2>
         <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
           <p>${tool.intro}</p>
         </div>
@@ -136,13 +490,13 @@ function generateGuideHtml(tool) {
 
       <!-- Step-by-Step Instructions -->
       <section class="space-y-4">
-        <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-          <i class="fa-solid fa-list-ol text-blue-600"></i> How to Use ${tool.name} (Step-by-Step)
-        </h3>
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-list-ol text-blue-600"></i> How to Use ${tool.name} (Step-by-Step Guide)
+        </h2>
         <ol class="space-y-2.5 text-sm">
           ${tool.howToUse.map((step, idx) => `
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
-              <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 text-blue-600 font-bold text-xs flex items-center justify-center mt-0.5">${idx + 1}</span>
+              <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">${idx + 1}</span>
               <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">${step}</span>
             </li>
           `).join('')}
@@ -151,14 +505,14 @@ function generateGuideHtml(tool) {
 
       <!-- Key Verified Features -->
       <section class="space-y-4">
-        <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
-          <i class="fa-solid fa-circle-check text-emerald-600"></i> Key Features & Capabilities
-        </h3>
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-circle-check text-emerald-600"></i> Key Features &amp; Core Benefits
+        </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           ${tool.features.map(f => `
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 font-medium">${f}</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">${f}</span>
             </div>
           `).join('')}
         </div>
@@ -166,37 +520,41 @@ function generateGuideHtml(tool) {
 
       <!-- Supported Formats & Limits -->
       <section class="space-y-3 p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-          <i class="fa-solid fa-sliders text-blue-600"></i> Technical Specifications & File Compatibility
-        </h3>
+        <h2 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-blue-600"></i> Technical Specifications &amp; Supported Formats
+        </h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
-            <span class="font-semibold text-slate-800">${tool.formatsAndLimits.supportedInputs}</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">${tool.formatsAndLimits.supportedInputs}</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
-            <span class="font-semibold text-slate-800">${tool.formatsAndLimits.outputFormat}</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">${tool.formatsAndLimits.outputFormat}</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
-            <span class="font-semibold text-slate-800">${tool.formatsAndLimits.limitations}</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">${tool.formatsAndLimits.limitations}</span>
           </div>
         </div>
       </section>
 
+      ${useCasesHtml}
+
+      ${tool.extraGuideHtml || ''}
+
       <!-- Frequently Asked Questions -->
       <section class="space-y-4">
-        <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
           <i class="fa-solid fa-circle-question text-blue-600"></i> Frequently Asked Questions (${tool.name})
-        </h3>
+        </h2>
         <div class="space-y-3">
           ${tool.faqs.map(faq => `
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
-              <h4 class="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> ${faq.q}
-              </h4>
-              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed pl-5">${faq.a}</p>
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">${faq.a}</p>
             </div>
           `).join('')}
         </div>
@@ -206,6 +564,7 @@ function generateGuideHtml(tool) {
     </article>
   `;
 }
+
 
 // Generate complete standalone HTML file for each tool or legal page with clean minimal white design
 function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, category, iconClass, workspaceHtml, guideHtml, jsonLdSchemas }) {
@@ -552,29 +911,33 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
           </div>
         </div>
 
-        <!-- Col 2: Categories -->
+        <!-- Col 2: PDF & Image Utilities (8 Tools) -->
         <div class="space-y-3">
-          <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">Tool Categories</h4>
-          <ul class="space-y-2">
-            <li><a href="/#pdf" class="hover:text-blue-600 transition-colors">PDF Tools</a></li>
-            <li><a href="/#image" class="hover:text-blue-600 transition-colors">Image Utilities</a></li>
-            <li><a href="/#text" class="hover:text-blue-600 transition-colors">Text &amp; Writing</a></li>
-            <li><a href="/#calc" class="hover:text-blue-600 transition-colors">Financial Calculators</a></li>
-            <li><a href="/#dev" class="hover:text-blue-600 transition-colors">Developer Utilities</a></li>
-            <li><a href="/#security" class="hover:text-blue-600 transition-colors">Security &amp; QR</a></li>
+          <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">PDF &amp; Image Tools</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/image-compressor" class="hover:text-blue-600 transition-colors">Image Compressor &amp; Resizer</a></li>
+            <li><a href="/background-remover" class="hover:text-blue-600 transition-colors">AI Background Remover</a></li>
+            <li><a href="/pdf-to-word" class="hover:text-blue-600 transition-colors">PDF to Word Converter</a></li>
+            <li><a href="/merge-pdf" class="hover:text-blue-600 transition-colors">Merge &amp; Split PDF</a></li>
+            <li><a href="/compress-pdf" class="hover:text-blue-600 transition-colors">Compress PDF Document</a></li>
+            <li><a href="/image-to-pdf" class="hover:text-blue-600 transition-colors">Image to PDF Converter</a></li>
+            <li><a href="/image-converter" class="hover:text-blue-600 transition-colors">Image Format Converter</a></li>
+            <li><a href="/youtube-thumbnail" class="hover:text-blue-600 transition-colors">YouTube Thumbnail Grabber</a></li>
           </ul>
         </div>
 
-        <!-- Col 3: Popular Tools -->
+        <!-- Col 3: Text, Calc & Code Utilities (8 Tools) -->
         <div class="space-y-3">
-          <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">Popular Tools</h4>
-          <ul class="space-y-2">
-            <li><a href="/image-compressor" class="hover:text-blue-600 transition-colors">Image Compressor</a></li>
-            <li><a href="/background-remover" class="hover:text-blue-600 transition-colors">Background Remover</a></li>
-            <li><a href="/merge-pdf" class="hover:text-blue-600 transition-colors">Merge PDF Files</a></li>
-            <li><a href="/compress-pdf" class="hover:text-blue-600 transition-colors">Compress PDF</a></li>
-            <li><a href="/age-calculator" class="hover:text-blue-600 transition-colors">Age Calculator</a></li>
-            <li><a href="/qr-code-generator" class="hover:text-blue-600 transition-colors">QR Code Generator</a></li>
+          <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">Calculators &amp; Utilities</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="/age-calculator" class="hover:text-blue-600 transition-colors">Age &amp; Date Calculator</a></li>
+            <li><a href="/emi-calculator" class="hover:text-blue-600 transition-colors">GST &amp; Loan EMI Calculator</a></li>
+            <li><a href="/qr-code-generator" class="hover:text-blue-600 transition-colors">QR Code Studio &amp; Reader</a></li>
+            <li><a href="/password-generator" class="hover:text-blue-600 transition-colors">Strong Password Creator</a></li>
+            <li><a href="/word-counter" class="hover:text-blue-600 transition-colors">Word &amp; Character Counter</a></li>
+            <li><a href="/text-case-converter" class="hover:text-blue-600 transition-colors">Text Case Converter</a></li>
+            <li><a href="/json-formatter" class="hover:text-blue-600 transition-colors">JSON Formatter &amp; Validator</a></li>
+            <li><a href="/seo-meta-generator" class="hover:text-blue-600 transition-colors">SEO Meta Tag Generator</a></li>
           </ul>
         </div>
 
@@ -607,6 +970,9 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
 // 2. Generate All 16 Tool Pages
 console.log('Generating 16 tool pages...');
 for (const tool of tools) {
+  if (seoOverrides[tool.id]) {
+    Object.assign(tool, seoOverrides[tool.id]);
+  }
   const modalKey = Object.keys(routes).find(k => routes[k].toolId === tool.id);
   const route = modalKey ? routes[modalKey] : null;
   const slug = route ? route.hash : tool.hash.replace('#', '');
@@ -693,35 +1059,50 @@ const legalPages = [
     modalKey: 'aboutModal',
     iconClass: 'fa-solid fa-circle-info',
     h1: 'About ToolsHere.online',
-    category: 'Information'
+    title: 'About ToolsHere: Privacy-First Browser Tools - ToolsHere',
+    metaDesc: 'Learn about ToolsHere.online, our mission for 100% private client-side web utility tools, our zero-upload architecture, and our engineering standards.',
+    category: 'Information',
+    h2s: ['Our Client-Side Privacy Architecture', 'Engineering & Security Standards', 'Zero Data Retention Policy']
   },
   {
     slug: 'contact',
     modalKey: 'contactModal',
     iconClass: 'fa-solid fa-envelope',
     h1: 'Contact & Support',
-    category: 'Information'
+    title: 'Contact ToolsHere Support & Feedback Team - ToolsHere',
+    metaDesc: 'Get in touch with the ToolsHere.online team for technical support, feature requests, bug reports, and business inquiries. We value user feedback.',
+    category: 'Information',
+    h2s: ['Technical Support & Bug Inquiries', 'Feature Requests & Suggestions', 'Response Time Expectations']
   },
   {
     slug: 'privacy',
     modalKey: 'privacyModal',
     iconClass: 'fa-solid fa-shield-halved',
     h1: 'Privacy Policy',
-    category: 'Legal'
+    title: 'Privacy Policy: Zero Server Data Storage - ToolsHere',
+    metaDesc: 'Read the ToolsHere.online privacy policy. Understand our client-side architecture where all image, PDF, and text processing stays locally on your device.',
+    category: 'Legal',
+    h2s: ['Local Browser Execution Guarantee', 'Cookies & Analytics Disclosure', 'Third-Party Services & User Rights']
   },
   {
     slug: 'terms',
     modalKey: 'termsModal',
     iconClass: 'fa-solid fa-file-contract',
     h1: 'Terms of Service',
-    category: 'Legal'
+    title: 'Terms of Service & Usage Guidelines - ToolsHere',
+    metaDesc: 'Review the terms of service, conditions of use, and intellectual property policies governing your access to ToolsHere.online free browser utilities.',
+    category: 'Legal',
+    h2s: ['Permitted Utility Usage', 'Intellectual Property & Content Ownership', 'Disclaimer of Warranties & Liability']
   },
   {
     slug: 'disclaimer',
     modalKey: 'disclaimerModal',
     iconClass: 'fa-solid fa-triangle-exclamation',
     h1: 'General Disclaimer',
-    category: 'Legal'
+    title: 'General & Technical Disclaimer Policy - ToolsHere',
+    metaDesc: 'Read the legal and technical disclaimer for ToolsHere.online. Clarifications on calculations, document conversions, and third-party content policies.',
+    category: 'Legal',
+    h2s: ['Calculation & Conversion Estimates', 'Third-Party Content & External Links', 'User Responsibility & Due Diligence']
   }
 ];
 
@@ -752,13 +1133,31 @@ for (const p of legalPages) {
 
   const pageHtml = generatePageTemplate({
     slug: p.slug,
-    title: route.title,
-    metaDesc: route.metaDesc,
+    title: p.title || route.title,
+    metaDesc: p.metaDesc || route.metaDesc,
     canonicalUrl: `https://toolshere.online/${p.slug}`,
     h1: p.h1,
     category: p.category,
     iconClass: p.iconClass,
-    workspaceHtml: container.innerHTML || '<p>Content</p>',
+    workspaceHtml: `
+      <div class="space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed text-sm">
+        ${container.innerHTML || '<p>Content</p>'}
+        ${p.h2s ? `
+          <div class="pt-6 border-t border-slate-200 dark:border-slate-700 space-y-6">
+            ${p.h2s.map(h2 => `
+              <section class="space-y-2">
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <i class="fa-solid fa-shield-check text-blue-600 text-sm"></i> ${h2}
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  ToolsHere is dedicated to providing reliable, private client-side utilities. For inquiries or updates regarding ${h2.toLowerCase()}, our support team is available via our contact page.
+                </p>
+              </section>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `,
     guideHtml: '',
     jsonLdSchemas
   });
