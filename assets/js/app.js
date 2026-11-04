@@ -3433,148 +3433,568 @@ function ensureScript(name) {
     let imgFormatFile = null;
     let imgFormatImg = null;
     let targetMime = 'image/webp';
-    let formatQuality = 0.92;
+    let formatQuality = 0.90;
+    let convertedDataUrl = null;
+    let convertedBlobSize = 0;
+    let convertedExt = 'webp';
+
+    function formatFileSize(bytes) {
+      if (!bytes || bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+    }
+
+    function showFormatError(msg) {
+      const alertBox = document.getElementById('formatErrorAlert');
+      const alertMsg = document.getElementById('formatErrorMsg');
+      if (alertBox && alertMsg) {
+        alertMsg.innerText = msg;
+        alertBox.classList.remove('hidden');
+      } else {
+        showToast(msg, 'error');
+      }
+    }
+
+    function hideFormatError() {
+      const alertBox = document.getElementById('formatErrorAlert');
+      if (alertBox) alertBox.classList.add('hidden');
+    }
+
+    function handleFormatDragOver(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const dropZone = document.getElementById('formatDropZone');
+      if (dropZone) {
+        dropZone.classList.add('border-blue-600', 'bg-blue-50/80', 'dark:bg-blue-950/40');
+      }
+    }
+
+    function handleFormatDragLeave(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      const dropZone = document.getElementById('formatDropZone');
+      if (dropZone) {
+        dropZone.classList.remove('border-blue-600', 'bg-blue-50/80', 'dark:bg-blue-950/40');
+      }
+    }
+
+    function handleFormatDrop(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      handleFormatDragLeave(e);
+      if (e && e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        loadFormatFile(e.dataTransfer.files[0]);
+      }
+    }
+
+    function handleFormatInput(input) {
+      if (input && input.files && input.files[0]) {
+        loadFormatFile(input.files[0]);
+      }
+    }
+
+    function loadFormatFile(file) {
+      hideFormatError();
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        showFormatError('Please select a valid image file (PNG, JPG, WebP, GIF, BMP, or ICO).');
+        return;
+      }
+      imgFormatFile = file;
+      const reader = new FileReader();
+      reader.onerror = () => {
+        showFormatError('Could not read the selected image file. Please try another image.');
+      };
+      reader.onload = e => {
+        const img = new Image();
+        img.onerror = () => {
+          showFormatError('The image appears corrupt or unreadable. Please choose a different file.');
+        };
+        img.onload = () => {
+          imgFormatImg = img;
+          displayFormatConfigureState();
+          showToast('Image loaded successfully!', 'success');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function displayFormatConfigureState() {
+      const uploadState = document.getElementById('formatUploadState');
+      const configState = document.getElementById('formatConfigureState');
+      const progressState = document.getElementById('formatProgressState');
+      const resultState = document.getElementById('formatResultState');
+
+      if (uploadState) uploadState.classList.add('hidden');
+      if (progressState) progressState.classList.add('hidden');
+      if (resultState) resultState.classList.add('hidden');
+      if (configState) configState.classList.remove('hidden');
+
+      const previewImg = document.getElementById('formatPreviewImg');
+      if (previewImg && imgFormatImg) previewImg.src = imgFormatImg.src;
+
+      const fileName = document.getElementById('formatFileName');
+      if (fileName && imgFormatFile) fileName.innerText = imgFormatFile.name;
+
+      const dim = document.getElementById('formatDimensions');
+      if (dim && imgFormatImg) dim.innerText = `${imgFormatImg.naturalWidth} × ${imgFormatImg.naturalHeight} px`;
+
+      const origSize = document.getElementById('formatOriginalSize');
+      if (origSize && imgFormatFile) origSize.innerText = formatFileSize(imgFormatFile.size);
+
+      const origBadge = document.getElementById('formatOriginalType');
+      if (origBadge && imgFormatFile) {
+        const rawType = imgFormatFile.type.replace('image/', '').toUpperCase() || 'IMAGE';
+        origBadge.innerText = rawType;
+      }
+
+      setTargetFormat(targetMime);
+    }
+
+    function setTargetFormat(mime) {
+      targetMime = mime;
+      const formats = [
+        { mime: 'image/webp', id: 'fmtWebpCard', name: 'WebP', ext: 'webp' },
+        { mime: 'image/png', id: 'fmtPngCard', name: 'PNG', ext: 'png' },
+        { mime: 'image/jpeg', id: 'fmtJpgCard', name: 'JPG', ext: 'jpg' },
+        { mime: 'image/x-icon', id: 'fmtIcoCard', name: 'ICO', ext: 'ico' }
+      ];
+
+      formats.forEach(f => {
+        const card = document.getElementById(f.id);
+        if (!card) return;
+        const icon = card.querySelector('.fmt-check-icon');
+        if (f.mime === mime) {
+          card.className = 'format-card-active relative p-3 sm:p-4 rounded-2xl border-2 border-blue-600 bg-blue-50/70 dark:bg-blue-950/40 text-blue-900 dark:text-blue-100 shadow-sm cursor-pointer transition-all flex flex-col justify-between text-left min-h-[88px]';
+          if (icon) icon.classList.remove('opacity-0');
+        } else {
+          card.className = 'format-card-inactive relative p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-500 text-slate-700 dark:text-slate-300 shadow-xs cursor-pointer transition-all flex flex-col justify-between text-left min-h-[88px]';
+          if (icon) icon.classList.add('opacity-0');
+        }
+      });
+
+      const qBox = document.getElementById('formatQualityBox');
+      const infoBox = document.getElementById('formatFormatInfoText');
+      const actionBtnText = document.getElementById('formatConvertBtnText');
+
+      const activeFmt = formats.find(f => f.mime === mime);
+      if (actionBtnText && activeFmt) {
+        actionBtnText.innerText = `Convert to ${activeFmt.name}`;
+      }
+
+      if (mime === 'image/webp') {
+        if (qBox) qBox.classList.remove('hidden');
+        if (infoBox) infoBox.innerText = '⚡ WebP offers up to 30-40% smaller file size with high visual quality across all modern browsers.';
+      } else if (mime === 'image/jpeg') {
+        if (qBox) qBox.classList.remove('hidden');
+        if (infoBox) infoBox.innerText = '💡 JPG does not support transparency. Transparent areas will be synthesized with a clean white background.';
+      } else if (mime === 'image/png') {
+        if (qBox) qBox.classList.add('hidden');
+        if (infoBox) infoBox.innerText = '🔒 Lossless quality is automatically preserved with full alpha transparency support.';
+      } else if (mime === 'image/x-icon') {
+        if (qBox) qBox.classList.add('hidden');
+        if (infoBox) infoBox.innerText = '🏷️ Exported as a favicon ICO file formatted for website tabs and bookmarks.';
+      }
+    }
+
+    function executeImageConversion() {
+      if (!imgFormatImg) {
+        showFormatError('No image loaded to convert.');
+        return;
+      }
+
+      const configState = document.getElementById('formatConfigureState');
+      const progressState = document.getElementById('formatProgressState');
+      const resultState = document.getElementById('formatResultState');
+      const pBar = document.getElementById('conversionProgressBar');
+      const pText = document.getElementById('conversionProgressText');
+
+      if (configState) configState.classList.add('hidden');
+      if (resultState) resultState.classList.add('hidden');
+      if (progressState) progressState.classList.remove('hidden');
+
+      if (pBar) pBar.style.width = '25%';
+      if (pText) pText.innerText = 'Initializing canvas rendering...';
+
+      setTimeout(() => {
+        if (pBar) pBar.style.width = '65%';
+        if (pText) pText.innerText = 'Encoding pixels to target format...';
+
+        setTimeout(() => {
+          try {
+            const canvas = document.createElement('canvas');
+            canvas.width = imgFormatImg.naturalWidth;
+            canvas.height = imgFormatImg.naturalHeight;
+            const ctx = canvas.getContext('2d');
+
+            if (targetMime === 'image/jpeg') {
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            ctx.drawImage(imgFormatImg, 0, 0);
+
+            convertedExt = targetMime === 'image/webp' ? 'webp' : (targetMime === 'image/png' ? 'png' : (targetMime === 'image/x-icon' ? 'ico' : 'jpg'));
+            const exportMime = targetMime === 'image/x-icon' ? 'image/png' : targetMime;
+            convertedDataUrl = canvas.toDataURL(exportMime, formatQuality);
+
+            const base64Str = convertedDataUrl.split(',')[1] || '';
+            convertedBlobSize = Math.round(base64Str.length * 0.75);
+
+            if (pBar) pBar.style.width = '100%';
+            if (pText) pText.innerText = 'Conversion finished!';
+
+            setTimeout(() => {
+              displayFormatResultState();
+            }, 250);
+          } catch (err) {
+            console.error('Conversion error:', err);
+            displayFormatConfigureState();
+            showFormatError('Conversion failed: ' + (err.message || 'Browser memory or canvas error.'));
+          }
+        }, 250);
+      }, 200);
+    }
+
+    function displayFormatResultState() {
+      const progressState = document.getElementById('formatProgressState');
+      const resultState = document.getElementById('formatResultState');
+
+      if (progressState) progressState.classList.add('hidden');
+      if (resultState) resultState.classList.remove('hidden');
+
+      const resultImg = document.getElementById('formatResultPreviewImg');
+      if (resultImg && convertedDataUrl) resultImg.src = convertedDataUrl;
+
+      const baseName = imgFormatFile ? imgFormatFile.name.replace(/\.[^/.]+$/, "") : "image";
+      const outName = `converted-${baseName}.${convertedExt}`;
+
+      const resNameEl = document.getElementById('formatResultFilename');
+      if (resNameEl) resNameEl.innerText = outName;
+
+      const origSizeEl = document.getElementById('formatResultOrigSize');
+      if (origSizeEl && imgFormatFile) origSizeEl.innerText = formatFileSize(imgFormatFile.size);
+
+      const newSizeEl = document.getElementById('formatResultNewSize');
+      if (newSizeEl) newSizeEl.innerText = formatFileSize(convertedBlobSize);
+
+      const diffBadge = document.getElementById('formatResultDiffBadge');
+      if (diffBadge && imgFormatFile && imgFormatFile.size > 0) {
+        const diff = imgFormatFile.size - convertedBlobSize;
+        const pct = Math.round(Math.abs(diff) / imgFormatFile.size * 100);
+        if (diff > 0) {
+          diffBadge.className = 'px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300';
+          diffBadge.innerText = `${pct}% smaller (-${formatFileSize(diff)})`;
+        } else if (diff < 0) {
+          diffBadge.className = 'px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300';
+          diffBadge.innerText = `+${formatFileSize(Math.abs(diff))} (lossless)`;
+        } else {
+          diffBadge.className = 'px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300';
+          diffBadge.innerText = 'Same size';
+        }
+      }
+
+      const resDim = document.getElementById('formatResultDimensions');
+      if (resDim && imgFormatImg) resDim.innerText = `${imgFormatImg.naturalWidth} × ${imgFormatImg.naturalHeight} px`;
+
+      const downloadBtnText = document.getElementById('formatDownloadBtnText');
+      if (downloadBtnText) downloadBtnText.innerText = `Download .${convertedExt.toUpperCase()} (${formatFileSize(convertedBlobSize)})`;
+
+      showToast('Image converted successfully!', 'success');
+      triggerConfetti();
+    }
+
+    function downloadConvertedFormat() {
+      if (!convertedDataUrl) return;
+      const baseName = imgFormatFile ? imgFormatFile.name.replace(/\.[^/.]+$/, "") : "image";
+      const a = document.createElement('a');
+      a.href = convertedDataUrl;
+      a.download = `converted-${baseName}.${convertedExt}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Download started!', 'success');
+    }
+
+    function resetToUpload() {
+      imgFormatFile = null;
+      imgFormatImg = null;
+      convertedDataUrl = null;
+      convertedBlobSize = 0;
+      hideFormatError();
+
+      const input = document.getElementById('formatInput');
+      if (input) input.value = '';
+
+      const uploadState = document.getElementById('formatUploadState');
+      const configState = document.getElementById('formatConfigureState');
+      const progressState = document.getElementById('formatProgressState');
+      const resultState = document.getElementById('formatResultState');
+
+      if (configState) configState.classList.add('hidden');
+      if (progressState) progressState.classList.add('hidden');
+      if (resultState) resultState.classList.add('hidden');
+      if (uploadState) uploadState.classList.remove('hidden');
+    }
+
+    function backToConfigure() {
+      displayFormatConfigureState();
+    }
 
     function renderImgFormat(title, icon, container) {
       if (title) title.innerText = 'Image Format Converter (PNG, JPG, WebP, GIF, ICO)';
       if (icon) icon.className = 'fa-solid fa-arrows-rotate';
       container.innerHTML = `
         <div class="space-y-6">
-          <div id="formatDropZone" class="relative border-2 border-dashed border-sky-400 dark:border-sky-500 hover:border-sky-600 dark:hover:border-sky-400 bg-gradient-to-b from-sky-50/70 via-white to-sky-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-sky-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
-            <input type="file" id="formatInput" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleFormatInput(this)">
-            <div class="w-20 h-20 rounded-3xl bg-sky-100 dark:bg-sky-950/80 text-sky-600 dark:text-sky-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300 shadow-md">
-              <i class="fa-solid fa-arrows-rotate"></i>
+          <!-- Error Alert Banner -->
+          <div id="formatErrorAlert" class="hidden p-4 rounded-2xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-xs sm:text-sm flex items-start justify-between gap-3 shadow-xs">
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-circle-exclamation text-red-600 dark:text-red-400 text-base mt-0.5 shrink-0"></i>
+              <span id="formatErrorMsg">Error loading image.</span>
             </div>
-            <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-sky-500/25 group-hover:shadow-sky-500/40 group-hover:scale-[1.02] transition-all">
-              <i class="fa-solid fa-folder-open"></i> Choose Image to Convert
-            </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Convert PNG, JPG, WebP, GIF, and Favicon ICO</p>
-            <p class="text-[11px] text-slate-400 mt-2">Live image preview • Custom quality slider • Instant browser export</p>
+            <button type="button" onclick="hideFormatError()" class="text-red-500 hover:text-red-700 dark:hover:text-red-300 font-bold text-xs" aria-label="Dismiss error">
+              <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
           </div>
 
-          <div id="formatControls" class="hidden space-y-6">
-            <div class="p-4 sm:p-6 bg-slate-50 dark:bg-slate-800/80 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4">
-              <div class="flex items-center justify-between flex-wrap gap-2">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Live Image Preview:</span>
-                <button type="button" onclick="document.getElementById('formatInput').click()" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline">
-                  Change Image
+          <!-- State 1: Upload Dropzone -->
+          <div id="formatUploadState" class="space-y-6">
+            <div id="formatDropZone" 
+                 ondragover="handleFormatDragOver(event)" 
+                 ondragleave="handleFormatDragLeave(event)" 
+                 ondrop="handleFormatDrop(event)"
+                 onclick="document.getElementById('formatInput').click()"
+                 class="relative border-2 border-dashed border-blue-300 dark:border-blue-700/60 hover:border-blue-600 dark:hover:border-blue-400 bg-gradient-to-b from-blue-50/50 via-white to-blue-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-14 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-blue-500/5 flex flex-col items-center justify-center min-h-[280px] sm:min-h-[340px] group">
+              
+              <input type="file" id="formatInput" accept="image/*" class="hidden" onchange="handleFormatInput(this)">
+              
+              <div class="w-20 h-20 rounded-3xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-4xl mb-5 group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-md shadow-blue-500/10">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+              
+              <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 group-hover:scale-[1.02] transition-all">
+                <i class="fa-solid fa-folder-open"></i> Choose Image to Convert
+              </span>
+              
+              <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">
+                or drag and drop your image file here
+              </p>
+              
+              <div class="flex items-center justify-center gap-2 flex-wrap mt-3 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                <span class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-700">PNG</span>
+                <span class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-700">JPG / JPEG</span>
+                <span class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-700">WEBP</span>
+                <span class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-700">GIF</span>
+                <span class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-700">BMP</span>
+                <span class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-700">ICO</span>
+              </div>
+              
+              <p class="text-xs text-slate-400 mt-4 flex items-center gap-1.5 font-medium">
+                <i class="fa-solid fa-lock text-emerald-600"></i> 100% Client-Side • No server upload • Zero data leaves your device
+              </p>
+            </div>
+          </div>
+
+          <!-- State 2: Configuration & Preview State -->
+          <div id="formatConfigureState" class="hidden space-y-6">
+            <!-- Top File Header Card -->
+            <div class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg shrink-0 border border-blue-100 dark:border-blue-800">
+                  <i class="fa-solid fa-image"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span id="formatFileName" class="font-bold text-slate-900 dark:text-white text-sm truncate max-w-xs sm:max-w-md">image.png</span>
+                    <span id="formatOriginalType" class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">PNG</span>
+                  </div>
+                  <div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
+                    <span id="formatDimensions">0 x 0 px</span>
+                    <span>•</span>
+                    <span id="formatOriginalSize">0 KB</span>
+                  </div>
+                </div>
+              </div>
+              <button type="button" onclick="document.getElementById('formatInput').click()" class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-1.5 shrink-0 min-h-[38px]">
+                <i class="fa-solid fa-rotate text-xs"></i> Change Image
+              </button>
+            </div>
+
+            <!-- Main 2-Column Responsive Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <!-- Left Column: Image Preview -->
+              <div class="lg:col-span-5 space-y-2">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Image Preview</span>
+                  <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-circle-check text-[10px]"></i> Original Loaded
+                  </span>
+                </div>
+                <div class="p-3 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 checkerboard-bg flex justify-center items-center min-h-[260px] max-h-[360px] overflow-hidden shadow-2xs">
+                  <img id="formatPreviewImg" class="max-h-[320px] max-w-full object-contain rounded-xl" alt="Selected Preview">
+                </div>
+              </div>
+
+              <!-- Right Column: Conversion Options -->
+              <div class="lg:col-span-7 space-y-5">
+                <!-- Target Format Selector -->
+                <div class="space-y-2.5">
+                  <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Step 1: Choose Target Format
+                  </label>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                    <!-- WebP -->
+                    <div id="fmtWebpCard" onclick="setTargetFormat('image/webp')" class="format-card-active relative p-3 sm:p-4 rounded-2xl border-2 border-blue-600 bg-blue-50/70 dark:bg-blue-950/40 text-blue-900 dark:text-blue-100 shadow-sm cursor-pointer transition-all flex flex-col justify-between text-left min-h-[88px]">
+                      <div class="flex items-center justify-between">
+                        <span class="font-extrabold text-sm sm:text-base">WebP</span>
+                        <i class="fa-solid fa-circle-check text-blue-600 text-sm fmt-check-icon"></i>
+                      </div>
+                      <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-tight mt-1">Modern &amp; Web</span>
+                      <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300 w-fit">Smallest</span>
+                    </div>
+
+                    <!-- PNG -->
+                    <div id="fmtPngCard" onclick="setTargetFormat('image/png')" class="format-card-inactive relative p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-500 text-slate-700 dark:text-slate-300 shadow-xs cursor-pointer transition-all flex flex-col justify-between text-left min-h-[88px]">
+                      <div class="flex items-center justify-between">
+                        <span class="font-extrabold text-sm sm:text-base">PNG</span>
+                        <i class="fa-solid fa-circle-check text-blue-600 text-sm fmt-check-icon opacity-0"></i>
+                      </div>
+                      <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-tight mt-1">Lossless &amp; Clear</span>
+                      <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 w-fit">Transparent</span>
+                    </div>
+
+                    <!-- JPG -->
+                    <div id="fmtJpgCard" onclick="setTargetFormat('image/jpeg')" class="format-card-inactive relative p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-500 text-slate-700 dark:text-slate-300 shadow-xs cursor-pointer transition-all flex flex-col justify-between text-left min-h-[88px]">
+                      <div class="flex items-center justify-between">
+                        <span class="font-extrabold text-sm sm:text-base">JPG</span>
+                        <i class="fa-solid fa-circle-check text-blue-600 text-sm fmt-check-icon opacity-0"></i>
+                      </div>
+                      <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-tight mt-1">Universal Photo</span>
+                      <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 w-fit">Compatible</span>
+                    </div>
+
+                    <!-- ICO -->
+                    <div id="fmtIcoCard" onclick="setTargetFormat('image/x-icon')" class="format-card-inactive relative p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-500 text-slate-700 dark:text-slate-300 shadow-xs cursor-pointer transition-all flex flex-col justify-between text-left min-h-[88px]">
+                      <div class="flex items-center justify-between">
+                        <span class="font-extrabold text-sm sm:text-base">ICO</span>
+                        <i class="fa-solid fa-circle-check text-blue-600 text-sm fmt-check-icon opacity-0"></i>
+                      </div>
+                      <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-tight mt-1">Favicon Icon</span>
+                      <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 w-fit">Browser Tab</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Step 2: Quality & Options -->
+                <div class="space-y-3">
+                  <!-- Quality Slider (WebP / JPG) -->
+                  <div id="formatQualityBox" class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+                    <div class="flex justify-between items-center font-bold">
+                      <span class="text-slate-700 dark:text-slate-300">Compression Quality:</span>
+                      <span id="fmtQualityVal" class="px-2 py-0.5 rounded-lg bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300 font-mono font-extrabold text-xs">90%</span>
+                    </div>
+                    <input type="range" id="fmtQualitySlider" min="10" max="100" value="90" oninput="formatQuality = parseInt(this.value)/100; document.getElementById('fmtQualityVal').innerText = this.value + '%';" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg accent-blue-600 cursor-pointer">
+                    <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                      <span>Smaller file (10%)</span>
+                      <span>Balanced</span>
+                      <span>Highest quality (100%)</span>
+                    </div>
+                  </div>
+
+                  <!-- Format Information Banner -->
+                  <div class="p-3 bg-blue-50/60 dark:bg-blue-950/30 rounded-xl border border-blue-100 dark:border-blue-900/40 text-xs text-blue-700 dark:text-blue-300 flex items-start gap-2">
+                    <i class="fa-solid fa-circle-info text-blue-500 mt-0.5 shrink-0 text-sm"></i>
+                    <span id="formatFormatInfoText" class="leading-relaxed">⚡ WebP offers up to 30-40% smaller file size with high visual quality across all modern browsers.</span>
+                  </div>
+                </div>
+
+                <!-- Step 3: Convert Action Button -->
+                <button type="button" onclick="executeImageConversion()" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-blue-500/25 transition-all flex items-center justify-center gap-2.5 active:scale-[0.99] min-h-[52px]">
+                  <i class="fa-solid fa-arrows-rotate text-lg"></i>
+                  <span id="formatConvertBtnText">Convert to WebP</span>
                 </button>
               </div>
+            </div>
+          </div>
 
-              <div class="p-3 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 checkerboard-bg flex justify-center items-center max-h-[360px] overflow-hidden">
-                <img id="formatPreviewImg" class="max-h-[320px] max-w-full object-contain rounded-xl shadow-xs" alt="Preview">
+          <!-- State 3: Conversion Progress State -->
+          <div id="formatProgressState" class="hidden py-12 px-4 text-center space-y-6">
+            <div class="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-3xl mx-auto shadow-sm animate-pulse">
+              <i class="fa-solid fa-arrows-rotate animate-spin"></i>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">Converting Image...</h3>
+              <p id="conversionProgressText" class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
+                Rendering canvas pixels and encoding to target format...
+              </p>
+            </div>
+            <div class="w-full max-w-md mx-auto bg-slate-100 dark:bg-slate-700 h-3 rounded-full overflow-hidden shadow-inner">
+              <div id="conversionProgressBar" class="h-full bg-blue-600 rounded-full transition-all duration-300" style="width: 25%"></div>
+            </div>
+          </div>
+
+          <!-- State 4: Result State -->
+          <div id="formatResultState" class="hidden space-y-6">
+            <!-- Success Banner -->
+            <div class="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-emerald-100 dark:bg-emerald-900/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg shrink-0">
+                  <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                  <span class="font-extrabold text-sm sm:text-base text-emerald-900 dark:text-emerald-100 block">Conversion Completed Successfully!</span>
+                  <span class="text-xs text-emerald-700 dark:text-emerald-300">Your converted image is ready to download.</span>
+                </div>
               </div>
-
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-center text-xs">
-                <div class="p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
-                  <span class="text-[10px] text-slate-400 font-bold block uppercase">Filename</span>
-                  <span id="formatFileName" class="font-bold text-slate-800 dark:text-slate-100 truncate block">image.png</span>
-                </div>
-                <div class="p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
-                  <span class="text-[10px] text-slate-400 font-bold block uppercase">Dimensions</span>
-                  <span id="formatDimensions" class="font-bold text-slate-800 dark:text-slate-100">0 x 0 px</span>
-                </div>
-                <div class="p-2.5 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700 col-span-2 sm:col-span-1">
-                  <span class="text-[10px] text-slate-400 font-bold block uppercase">Original Size</span>
-                  <span id="formatOriginalSize" class="font-bold text-slate-800 dark:text-slate-100">0 KB</span>
-                </div>
+              <div class="flex items-center gap-2">
+                <span id="formatResultDiffBadge" class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">Ready</span>
               </div>
             </div>
 
+            <!-- Comparison Summary Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs">
+              <div class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <span class="text-[10px] text-slate-400 font-bold block uppercase tracking-wider mb-1">Original Size</span>
+                <span id="formatResultOrigSize" class="text-base font-extrabold text-slate-800 dark:text-slate-100">0 KB</span>
+              </div>
+              <div class="p-4 bg-blue-50/70 dark:bg-blue-950/40 rounded-2xl border border-blue-200 dark:border-blue-800">
+                <span class="text-[10px] text-blue-600 dark:text-blue-400 font-bold block uppercase tracking-wider mb-1">Converted Size</span>
+                <span id="formatResultNewSize" class="text-base font-extrabold text-blue-700 dark:text-blue-300">0 KB</span>
+              </div>
+              <div class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <span class="text-[10px] text-slate-400 font-bold block uppercase tracking-wider mb-1">Resolution</span>
+                <span id="formatResultDimensions" class="text-base font-extrabold text-slate-800 dark:text-slate-100">0 x 0 px</span>
+              </div>
+            </div>
+
+            <!-- Converted Image Preview Box -->
+            <div class="space-y-2">
+              <div class="flex justify-between items-center text-xs font-bold text-slate-600 dark:text-slate-300">
+                <span>Converted Image Preview:</span>
+                <span id="formatResultFilename" class="text-blue-600 dark:text-blue-400 font-mono text-[11px] truncate max-w-xs">converted-image.webp</span>
+              </div>
+              <div class="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 checkerboard-bg flex justify-center items-center max-h-[360px] overflow-hidden shadow-2xs">
+                <img id="formatResultPreviewImg" class="max-h-[320px] max-w-full object-contain rounded-xl shadow-xs" alt="Converted Preview">
+              </div>
+            </div>
+
+            <!-- Primary Download Action & Secondary Buttons -->
             <div class="space-y-3">
-              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Choose Target Format:</label>
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
-                <button type="button" id="fmtWebpBtn" onclick="setTargetFormat('image/webp')" class="py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs">WebP (Modern)</button>
-                <button type="button" id="fmtPngBtn" onclick="setTargetFormat('image/png')" class="py-3 px-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200">PNG (Lossless)</button>
-                <button type="button" id="fmtJpgBtn" onclick="setTargetFormat('image/jpeg')" class="py-3 px-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200">JPG (Universal)</button>
-                <button type="button" id="fmtIcoBtn" onclick="setTargetFormat('image/x-icon')" class="py-3 px-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200">ICO (Favicon)</button>
+              <button type="button" onclick="downloadConvertedFormat()" class="w-full py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-blue-500/25 transition-all flex items-center justify-center gap-2.5 active:scale-[0.99] min-h-[52px]">
+                <i class="fa-solid fa-download text-lg"></i>
+                <span id="formatDownloadBtnText">Download Converted Image</span>
+              </button>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <button type="button" onclick="backToConfigure()" class="py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 transition-colors flex items-center justify-center gap-2 min-h-[44px]">
+                  <i class="fa-solid fa-sliders text-xs"></i> Change Output Format
+                </button>
+                <button type="button" onclick="resetToUpload()" class="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 font-semibold text-xs sm:text-sm text-slate-700 dark:text-slate-200 transition-colors flex items-center justify-center gap-2 min-h-[44px]">
+                  <i class="fa-solid fa-rotate-right text-xs"></i> Convert Another Image
+                </button>
               </div>
             </div>
-
-            <div id="formatQualityBox" class="p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-1.5 text-xs">
-              <div class="flex justify-between font-bold">
-                <span>Compression Quality:</span>
-                <span id="fmtQualityVal" class="text-blue-600 font-mono">92%</span>
-              </div>
-              <input type="range" id="fmtQualitySlider" min="10" max="100" value="92" oninput="formatQuality = parseInt(this.value)/100; document.getElementById('fmtQualityVal').innerText = this.value + '%';" class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg accent-blue-600">
-            </div>
-
-            <button type="button" onclick="downloadConvertedFormat()" class="w-full py-4 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-sky-500/25 transition-all flex items-center justify-center gap-2.5">
-              <i class="fa-solid fa-download text-lg"></i> Download Converted Image
-            </button>
           </div>
         </div>
       `;
-    }
-
-    function setTargetFormat(mime) {
-      targetMime = mime;
-      ['fmtWebpBtn', 'fmtPngBtn', 'fmtJpgBtn', 'fmtIcoBtn'].forEach(id => {
-        const btn = document.getElementById(id);
-        if (btn) btn.className = 'py-3 px-2 rounded-xl bg-slate-100 dark:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200';
-      });
-
-      const qBox = document.getElementById('formatQualityBox');
-      if (mime === 'image/webp') {
-        document.getElementById('fmtWebpBtn').className = 'py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs';
-        if (qBox) qBox.classList.remove('hidden');
-      } else if (mime === 'image/png') {
-        document.getElementById('fmtPngBtn').className = 'py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs';
-        if (qBox) qBox.classList.add('hidden');
-      } else if (mime === 'image/jpeg') {
-        document.getElementById('fmtJpgBtn').className = 'py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs';
-        if (qBox) qBox.classList.remove('hidden');
-      } else if (mime === 'image/x-icon') {
-        document.getElementById('fmtIcoBtn').className = 'py-3 px-2 rounded-xl bg-blue-600 text-white font-bold shadow-xs';
-        if (qBox) qBox.classList.add('hidden');
-      }
-    }
-
-    function handleFormatInput(input) {
-      if (input.files && input.files[0]) {
-        imgFormatFile = input.files[0];
-        const reader = new FileReader();
-        reader.onload = e => {
-          imgFormatImg = new Image();
-          imgFormatImg.onload = () => {
-            document.getElementById('formatDropZone').classList.add('hidden');
-            document.getElementById('formatControls').classList.remove('hidden');
-            document.getElementById('formatPreviewImg').src = e.target.result;
-            document.getElementById('formatFileName').innerText = imgFormatFile.name;
-            document.getElementById('formatDimensions').innerText = `${imgFormatImg.naturalWidth} × ${imgFormatImg.naturalHeight} px`;
-            document.getElementById('formatOriginalSize').innerText = `${(imgFormatFile.size / 1024).toFixed(1)} KB`;
-            showToast('Image loaded! Select your target format below.', 'success');
-          };
-          imgFormatImg.src = e.target.result;
-        };
-        reader.readAsDataURL(imgFormatFile);
-      }
-    }
-
-    function downloadConvertedFormat() {
-      if (!imgFormatImg) return;
-      const canvas = document.createElement('canvas');
-      canvas.width = imgFormatImg.naturalWidth;
-      canvas.height = imgFormatImg.naturalHeight;
-      const ctx = canvas.getContext('2d');
-
-      if (targetMime === 'image/jpeg') {
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-      ctx.drawImage(imgFormatImg, 0, 0);
-
-      const ext = targetMime === 'image/webp' ? 'webp' : (targetMime === 'image/png' ? 'png' : (targetMime === 'image/x-icon' ? 'ico' : 'jpg'));
-      const dataUrl = canvas.toDataURL(targetMime === 'image/x-icon' ? 'image/png' : targetMime, formatQuality);
-
-      const a = document.createElement('a');
-      a.href = dataUrl;
-      a.download = `converted-${imgFormatFile ? imgFormatFile.name.replace(/\.[^/.]+$/, "") : "image"}.${ext}`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast('Image converted & downloaded!', 'success');
-      triggerConfetti();
     }
     /* ================= UTILITY 12: TEXT CASE CONVERTER ================= */
     function renderTextCase(title, icon, container) {
