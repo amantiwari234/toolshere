@@ -6,7 +6,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/style.min.css --minify",
     "build:pages": "node build_seo_pages.js",
-    "build": "npm run build:css && npm run build:pages",
+    "build:blog": "node build_blog.js",
+    "build": "npm run build:css && npm run build:pages && npm run build:blog",
     "serve": "node server.js",
     "test:seo": "node verify_audit.js"
   },
