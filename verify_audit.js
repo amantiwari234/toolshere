@@ -28,12 +28,13 @@ const pages = [
   '/disclaimer',
   '/blog',
   '/blog/how-to-convert-pdf-to-jpg',
-  '/blog/how-to-compress-pdf-for-email'
+  '/blog/how-to-compress-pdf-for-email',
+  '/blog/how-to-merge-pdf-files-online'
 ];
 
 let totalErrors = 0;
 
-console.log('--- AUDITING ALL 25 PAGES (22 UTILITY & LEGAL + 3 BLOG PAGES) ---');
+console.log('--- AUDITING ALL 26 PAGES (22 UTILITY & LEGAL + 4 BLOG PAGES) ---');
 
 pages.forEach(p => {
   const filePath = p === '/' ? path.join(rootDir, 'index.html') : path.join(rootDir, p.replace(/^\//, ''), 'index.html');
@@ -138,7 +139,7 @@ if (!fs.existsSync(robotsPath)) {
 
 console.log(`\nAudit completed with ${totalErrors} errors.`);
 if (totalErrors === 0) {
-  console.log('🎉 ALL 25 PAGES (22 SITE PAGES + 3 BLOG PAGES) PASSED VALIDATION PERFECTLY! 100% HEALTHY TECHNICAL SEO & MARKUP.');
+  console.log('🎉 ALL 26 PAGES (22 SITE PAGES + 4 BLOG PAGES) PASSED VALIDATION PERFECTLY! 100% HEALTHY TECHNICAL SEO & MARKUP.');
 } else {
   process.exit(1);
 }

@@ -6,6 +6,8 @@ const blogDir = path.join(rootDir, 'blog');
 const articleDir = path.join(blogDir, 'how-to-convert-pdf-to-jpg');
 const article2Dir = path.join(blogDir, 'how-to-compress-pdf-for-email');
 if (!fs.existsSync(article2Dir)) fs.mkdirSync(article2Dir, { recursive: true });
+const article3Dir = path.join(blogDir, 'how-to-merge-pdf-files-online');
+if (!fs.existsSync(article3Dir)) fs.mkdirSync(article3Dir, { recursive: true });
 
 if (!fs.existsSync(blogDir)) fs.mkdirSync(blogDir, { recursive: true });
 if (!fs.existsSync(articleDir)) fs.mkdirSync(articleDir, { recursive: true });
@@ -242,7 +244,7 @@ function getFooterHtml() {
 // 1. GENERATE BLOG LISTING PAGE: /blog/index.html
 function generateBlogListingPage() {
   const title = "ToolsHere Blog: Free Guides, Tutorials & Productivity Tips";
-  const metaDesc = "Read expert how-to guides and tutorials on converting PDFs, compressing images, formatting code, and optimizing digital documents.";
+  const metaDesc = "Read expert how-to guides and tutorials on merging PDFs, compressing documents for email, converting formats, and optimizing digital files.";
   const canonicalUrl = "https://toolshere.online/blog";
 
   const jsonLd = [
@@ -297,7 +299,7 @@ function generateBlogListingPage() {
   </script>
   <title>${title}</title>
   <meta name="description" content="${metaDesc}">
-  <meta name="keywords" content="blog, how to compress pdf for email, how to convert pdf to jpg, pdf guides, email attachment limits, image compression tutorials, productivity tools, online web utilities, toolshere">
+  <meta name="keywords" content="blog, how to merge pdf files online, how to compress pdf for email, how to convert pdf to jpg, combine pdf, pdf guides, document tutorials, toolshere">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="${canonicalUrl}">
 
@@ -377,11 +379,11 @@ function generateBlogListingPage() {
         ToolsHere Blog &amp; How-To Guides
       </h1>
       <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-3xl leading-relaxed">
-        Expert step-by-step tutorials, document compression guides, and practical productivity tips for students, creators, and professionals worldwide.
+        Expert step-by-step tutorials, document management guides, and practical productivity tips for students, creators, and professionals worldwide.
       </p>
     </header>
 
-    <!-- Featured Post Hero Card: How to Compress PDF for Email -->
+    <!-- Featured Post Hero Card: How to Merge PDF Files Online -->
     <section aria-labelledby="featuredHeading" class="bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
       <div class="absolute top-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
       
@@ -391,19 +393,19 @@ function generateBlogListingPage() {
             Featured Guide
           </span>
           <span class="text-slate-400">•</span>
-          <span class="text-slate-500 dark:text-slate-400 font-medium"><i class="fa-regular fa-clock mr-1"></i> 7 min read</span>
+          <span class="text-slate-500 dark:text-slate-400 font-medium"><i class="fa-regular fa-clock mr-1"></i> 8 min read</span>
           <span class="text-slate-400">•</span>
           <span class="text-slate-500 dark:text-slate-400 font-medium">November 2026</span>
         </div>
 
         <h2 id="featuredHeading" class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors leading-tight">
-          <a href="/blog/how-to-compress-pdf-for-email/">
-            How to Compress PDF for Email – Free Online Guide
+          <a href="/blog/how-to-merge-pdf-files-online/">
+            How to Merge PDF Files Online for Free – Step-by-Step Guide
           </a>
         </h2>
 
         <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-          Encountering attachment size errors in Gmail, Outlook, or Apple Mail? Discover why PDF files exceed mailbox limits, how Base64 encoding inflates transfer size by 33%, and how to compress your PDF files quickly and safely using ToolsHere without sacrificing document readability.
+          Need to combine separate invoices, contracts, or job application materials into a single PDF document? Discover how to merge PDF files for free online, manage file order, troubleshoot common encryption or orientation issues, and combine documents easily using ToolsHere.
         </p>
 
         <div class="pt-2 flex items-center justify-between flex-wrap gap-4">
@@ -413,27 +415,53 @@ function generateBlogListingPage() {
             </div>
             <div>
               <span class="block text-xs font-bold text-slate-900 dark:text-white">ToolsHere Editorial Team</span>
-              <span class="block text-[11px] text-slate-400">PDF &amp; Document Optimization Specialists</span>
+              <span class="block text-[11px] text-slate-400">Document Architecture &amp; Workflow Specialists</span>
             </div>
           </div>
 
-          <a href="/blog/how-to-compress-pdf-for-email/" class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow-md shadow-blue-500/20 transition-all hover:gap-3 min-h-[44px]">
+          <a href="/blog/how-to-merge-pdf-files-online/" class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl shadow-md shadow-blue-500/20 transition-all hover:gap-3 min-h-[44px]">
             Read Full Guide <i class="fa-solid fa-arrow-right text-xs"></i>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Recent Guides Grid (2 Cards) -->
+    <!-- All Articles Grid (3 Cards) -->
     <section class="space-y-6">
       <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
         <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">All Educational Articles</h2>
-        <span class="text-xs font-bold text-slate-400">2 Articles Published</span>
+        <span class="text-xs font-bold text-slate-400">3 Articles Published</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         
-        <!-- Card 1: How to Compress PDF for Email -->
+        <!-- Card 1: How to Merge PDF Files Online -->
+        <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+              <span class="px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 font-bold text-[11px] border border-blue-200 dark:border-blue-800">
+                <i class="fa-solid fa-object-group mr-1"></i> Document Merging
+              </span>
+              <span><i class="fa-regular fa-clock mr-1"></i> 8 min read</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors leading-snug">
+              <a href="/blog/how-to-merge-pdf-files-online/">
+                How to Merge PDF Files Online for Free
+              </a>
+            </h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Complete step-by-step guide to combining separate PDFs into a unified document with file ordering, mobile tips, and common solutions.
+            </p>
+          </div>
+          <div class="pt-4 mt-5 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
+            <span class="text-[11px] text-slate-400 font-medium">Updated Nov 2026</span>
+            <a href="/blog/how-to-merge-pdf-files-online/" class="text-xs font-bold text-blue-600 group-hover:text-blue-700 inline-flex items-center gap-1.5">
+              Read Guide <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Card 2: How to Compress PDF for Email -->
         <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
           <div class="space-y-3">
             <div class="flex items-center justify-between text-xs text-slate-400">
@@ -442,16 +470,16 @@ function generateBlogListingPage() {
               </span>
               <span><i class="fa-regular fa-clock mr-1"></i> 7 min read</span>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors leading-snug">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors leading-snug">
               <a href="/blog/how-to-compress-pdf-for-email/">
-                How to Compress PDF for Email – Free Online Guide
+                How to Compress PDF for Email
               </a>
             </h3>
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Step-by-step tutorial to shrink oversized PDF attachments for Gmail, Outlook, Yahoo, and corporate networks with provider limits and MIME overhead tips.
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Practical ways to reduce oversized PDF attachments for Gmail, Outlook, and corporate networks with MIME Base64 overhead guidance.
             </p>
           </div>
-          <div class="pt-5 mt-5 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
+          <div class="pt-4 mt-5 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
             <span class="text-[11px] text-slate-400 font-medium">Updated Nov 2026</span>
             <a href="/blog/how-to-compress-pdf-for-email/" class="text-xs font-bold text-blue-600 group-hover:text-blue-700 inline-flex items-center gap-1.5">
               Read Guide <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -459,7 +487,7 @@ function generateBlogListingPage() {
           </div>
         </article>
 
-        <!-- Card 2: How to Convert PDF to JPG -->
+        <!-- Card 3: How to Convert PDF to JPG -->
         <article class="bg-white dark:bg-slate-800 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 shadow-xs hover:shadow-md transition-all flex flex-col justify-between group">
           <div class="space-y-3">
             <div class="flex items-center justify-between text-xs text-slate-400">
@@ -468,16 +496,16 @@ function generateBlogListingPage() {
               </span>
               <span><i class="fa-regular fa-clock mr-1"></i> 6 min read</span>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors leading-snug">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors leading-snug">
               <a href="/blog/how-to-convert-pdf-to-jpg/">
-                How to Convert PDF to JPG Online – Free Step-by-Step Guide
+                How to Convert PDF to JPG Online
               </a>
             </h3>
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              Learn how to convert PDF pages into high-resolution JPG images using trusted third-party web services or native tools on Windows and Mac.
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Learn how to convert PDF pages into high-resolution JPG images using trusted third-party web services or native desktop software.
             </p>
           </div>
-          <div class="pt-5 mt-5 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
+          <div class="pt-4 mt-5 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
             <span class="text-[11px] text-slate-400 font-medium">Updated Nov 2026</span>
             <a href="/blog/how-to-convert-pdf-to-jpg/" class="text-xs font-bold text-blue-600 group-hover:text-blue-700 inline-flex items-center gap-1.5">
               Read Guide <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -510,6 +538,14 @@ function generateBlogListingPage() {
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+        <a href="/merge-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center text-sm"><i class="fa-solid fa-object-group"></i></span>
+            <span class="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">Merge PDF</span>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2 block">Combine multiple PDFs</span>
+        </a>
+
         <a href="/compress-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
           <div class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center text-sm"><i class="fa-solid fa-file-zipper"></i></span>
@@ -532,14 +568,6 @@ function generateBlogListingPage() {
             <span class="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">PDF to Word</span>
           </div>
           <span class="text-[11px] text-slate-400 mt-2 block">Extract editable DOC text</span>
-        </a>
-
-        <a href="/image-converter" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
-          <div class="flex items-center gap-2.5">
-            <span class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center text-sm"><i class="fa-solid fa-arrows-rotate"></i></span>
-            <span class="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">Image Converter</span>
-          </div>
-          <span class="text-[11px] text-slate-400 mt-2 block">Convert PNG, JPG, WebP</span>
         </a>
       </div>
     </section>
@@ -1920,6 +1948,691 @@ function generateCompressPdfArticlePage() {
   console.log('Generated: /blog/how-to-compress-pdf-for-email/index.html');
 }
 
+// 4. GENERATE THIRD ARTICLE PAGE: /blog/how-to-merge-pdf-files-online/index.html
+function generateMergePdfArticlePage() {
+  const title = "How to Merge PDF Files Online for Free – Step-by-Step Guide - ToolsHere";
+  const metaDesc = "Learn how to merge PDF files into one document online for free. Step-by-step guide with file ordering, common issues, mobile tips, and ToolsHere Merge PDF.";
+  const canonicalUrl = "https://toolshere.online/blog/how-to-merge-pdf-files-online";
+  const publishDate = "2026-11-06";
+
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": canonicalUrl
+      },
+      "headline": "How to Merge PDF Files Online for Free – Step-by-Step Guide",
+      "description": metaDesc,
+      "image": "https://toolshere.online/assets/logo.png",
+      "datePublished": publishDate,
+      "dateModified": publishDate,
+      "author": {
+        "@type": "Organization",
+        "name": "ToolsHere Editorial Team",
+        "url": "https://toolshere.online/about"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ToolsHere",
+        "url": "https://toolshere.online/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://toolshere.online/assets/logo.png"
+        }
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://toolshere.online/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://toolshere.online/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to Merge PDF Files Online",
+          "item": canonicalUrl
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How many PDF files can I merge together at once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ToolsHere Merge PDF lets you select two or more PDF files simultaneously. There is no strict artificial cap on file count, but processing speed depends on your device memory and the total combined page count."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I arrange the file order before merging my documents?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Proper file ordering is essential so pages appear in their logical sequence. In the ToolsHere Merge PDF interface, review the file list after uploading to ensure your cover sheet, main content, and appendices are arranged in the exact order you want them combined."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why won't my password-protected PDF merge with other files?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Encrypted or password-protected PDFs restrict editing and extraction permissions. Web merger utilities cannot read or assemble protected page streams without authorization. You must open the file in its native viewer, enter the password, and save an unrestricted copy before merging."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will merging multiple PDFs reduce visual quality or alter text formatting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Merging combines individual PDF page trees and document catalogs without re-encoding or compressing vector text. Fonts, scalable vectors, charts, and image resolutions remain identical to their original source files."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What should I do if my merged PDF is too large to email?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Combining multiple multi-page reports can produce a file that exceeds email attachment caps (typically 20 MB to 25 MB). If your combined file is too heavy, run it through ToolsHere Compress PDF (https://toolshere.online/compress-pdf/) to downsample raster imagery and reduce stream bloat before emailing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I merge PDF documents on an iPhone, iPad, or Android phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. ToolsHere is fully responsive and runs directly in mobile browsers like Safari and Chrome. Tap the upload button, select multiple PDFs from your Files app or Google Drive, and download the combined document directly to your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it safe to merge confidential legal or financial records online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ToolsHere utilizes HTTPS / TLS encryption to protect data in transit between your browser and the website. However, encryption in transit does not by itself dictate how cloud services handle or store data. For strictly confidential materials (such as tax records, medical charts, or trade secrets), users should follow institutional compliance guidelines, use password protection, or utilize native offline desktop tools."
+          }
+        }
+      ]
+    }
+  ];
+
+  const html = `<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <script>
+    if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+      if (location.protocol === 'http:' || location.hostname.startsWith('www.')) {
+        location.replace('https://toolshere.online' + location.pathname + location.search + location.hash);
+      }
+    }
+  </script>
+  <title>${title}</title>
+  <meta name="description" content="${metaDesc}">
+  <meta name="keywords" content="how to merge pdf files online, combine pdf online free, merge pdf documents, join pdf files, pdf combiner, toolshere">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="${canonicalUrl}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Toolshere">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${metaDesc}">
+  <meta property="og:image" content="https://toolshere.online/assets/logo.png">
+  <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:image:alt" content="ToolsHere Logo">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="${canonicalUrl}">
+  <meta property="twitter:title" content="${title}">
+  <meta property="twitter:description" content="${metaDesc}">
+  <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Fonts & CDN Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+  <!-- High-Performance Compiled Stylesheet -->
+  <link rel="preload" href="/assets/css/style.min.css" as="style">
+  <link rel="stylesheet" href="/assets/css/style.min.css">
+
+  <!-- Asynchronous Google Fonts (Inter) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+
+  <!-- Non-blocking FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+  <!-- Structured Data (JSON-LD) -->
+  ${jsonLd.map(schema => `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`).join('\n  ')}
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans min-h-screen flex flex-col selection:bg-blue-600 selection:text-white transition-colors duration-150">
+
+  ${getHeaderHtml('blog')}
+
+  <!-- Main Article Content -->
+  <main id="mainContent" class="flex-grow max-w-4xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8">
+    
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 flex-wrap">
+      <a href="/" class="hover:text-blue-600 transition-colors inline-flex items-center gap-1 font-medium">
+        <i class="fa-solid fa-house text-xs"></i> Home
+      </a>
+      <span class="text-slate-300 dark:text-slate-600">/</span>
+      <a href="/blog" class="hover:text-blue-600 transition-colors font-medium">Blog</a>
+      <span class="text-slate-300 dark:text-slate-600">/</span>
+      <span class="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-xs sm:max-w-md">How to Merge PDF Files Online</span>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="space-y-4 border-b border-slate-200 dark:border-slate-800 pb-8">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 text-xs font-bold border border-blue-100 dark:border-blue-900">
+          <i class="fa-solid fa-object-group text-blue-600 mr-1"></i> PDF Productivity Guide
+        </span>
+        <span class="text-xs text-slate-400">•</span>
+        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium"><i class="fa-regular fa-calendar mr-1"></i> November 6, 2026</span>
+        <span class="text-xs text-slate-400">•</span>
+        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium"><i class="fa-regular fa-clock mr-1"></i> 8 min read</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+        How to Merge PDF Files Online for Free – Step-by-Step Guide
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+        Handling separate cover letters, resume pages, signed contracts, or financial statements? Combining individual documents into a single, cohesive PDF makes sharing cleaner, professional, and effortless. Here is a complete guide on how to merge PDF files online for free using ToolsHere.
+      </p>
+
+      <div class="flex items-center gap-3 pt-2">
+        <div class="w-10 h-10 rounded-full bg-blue-600 text-white font-bold flex items-center justify-center text-sm shadow-xs">
+          TH
+        </div>
+        <div>
+          <span class="block text-xs font-bold text-slate-900 dark:text-white">ToolsHere Editorial Team</span>
+          <span class="block text-[11px] text-slate-400">Document Architecture &amp; Workflow Specialists</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Quick Summary Callout Box -->
+    <div class="p-5 sm:p-6 rounded-2xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 space-y-3">
+      <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300 font-bold text-sm">
+        <i class="fa-solid fa-bolt text-amber-500"></i> Quick Summary: How to Combine PDFs in Seconds
+      </div>
+      <ul class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-1.5 list-disc pl-5">
+        <li><strong>What Merging Does:</strong> Takes two or more independent PDF files and binds their page trees into a single, unified document in the exact sequence you choose.</li>
+        <li><strong>Ordering is Key:</strong> Arrange your files so cover pages come first, followed by main bodies and exhibits, before clicking the merge action.</li>
+        <li><strong>Fast &amp; Free:</strong> Open <a href="https://toolshere.online/merge-pdf/" class="text-blue-600 font-bold hover:underline">ToolsHere Merge PDF</a>, upload your files, verify the sequence, and download your consolidated file.</li>
+      </ul>
+    </div>
+
+    <!-- Article Semantic Body -->
+    <article class="prose prose-slate dark:prose-invert max-w-none space-y-8 text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+      
+      <!-- Section 1: What is Merging and When Do You Need It -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          What Is PDF Merging and When Do You Need It?
+        </h2>
+        <p>
+          In modern digital workflows across the United States, Canada, Europe, Australia, and Asia, documents rarely originate from a single source. A single business transaction or application packet often gathers pages exported from word processors, accounting software, and physical desktop scanners.
+        </p>
+        <p>
+          <strong>PDF merging</strong> is the technical process of consolidating two or more distinct PDF files into one continuous document file. Instead of emailing five separate attachments or asking a client to download disparate pieces, merging delivers a unified packet with a seamless reading order.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1 not-prose">
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Job Applications &amp; Resumes</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Combine your personalized cover letter, multi-page CV, professional certificates, and work samples into one comprehensive PDF portfolio for recruiters.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+            </div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Tax &amp; Mortgage Packets</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Consolidate annual tax returns (1040s), W-2/1099 wage forms, bank account statements, and itemized receipts into a single binder for your accountant or lender.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-scale-balanced"></i>
+            </div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Legal &amp; Real Estate Contracts</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Assemble commercial lease agreements, disclosure addenda, inspection reports, and signed notary exhibits into an unbroken, sequential master agreement.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Academic Manuscripts &amp; Theses</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Merge research text chapters, statistical appendices, data charts, and institutional ethics review approvals into a complete dissertation document.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Step by Step Guide with ToolsHere -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Step-by-Step Guide: How to Merge PDF Files Using ToolsHere
+        </h2>
+        <p>
+          ToolsHere offers a free in-browser <a href="https://toolshere.online/merge-pdf/" class="text-blue-600 font-bold hover:underline">Merge PDF Tool</a> that combines files with zero installations and no registration required. Here is the straightforward 4-step workflow:
+        </p>
+
+        <!-- 4 Step Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 not-prose">
+          
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 font-extrabold flex items-center justify-center text-sm">
+              1
+            </div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Open the Merger</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Visit <a href="https://toolshere.online/merge-pdf/" class="text-blue-600 hover:underline font-semibold">https://toolshere.online/merge-pdf/</a> on your desktop, tablet, or smartphone browser.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 font-extrabold flex items-center justify-center text-sm">
+              2
+            </div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Upload Your Files</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Click <strong>Select PDF Files to Merge</strong> or drag and drop two or more PDF files directly into the upload area.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 font-extrabold flex items-center justify-center text-sm">
+              3
+            </div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Confirm File Order</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Review the uploaded file list to ensure documents appear in your preferred reading sequence. Add more files if necessary.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xs space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 font-extrabold flex items-center justify-center text-sm">
+              4
+            </div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Merge &amp; Download</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Click <strong>Merge &amp; Download Combined PDF</strong>. Your joined document is assembled and downloaded immediately.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Call To Action Banner -->
+        <div class="pt-2 not-prose">
+          <div class="p-6 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md shadow-blue-500/10">
+            <div class="space-y-1 text-center sm:text-left">
+              <span class="text-xs uppercase tracking-wider font-extrabold text-blue-200">ToolsHere PDF Combiner</span>
+              <h3 class="text-lg font-bold">Have documents you need to combine?</h3>
+              <p class="text-xs text-blue-100">Merge separate PDF files into one clean document right now in your browser.</p>
+            </div>
+            <a href="https://toolshere.online/merge-pdf/" class="px-5 py-2.5 bg-white text-blue-600 hover:bg-blue-50 font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-colors shrink-0 min-h-[44px] flex items-center justify-center">
+              Merge PDFs Now <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: File Ordering and Document Organization -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Document Organization: File Ordering and Final Verification
+        </h2>
+        <p>
+          When multiple PDF files are merged, the PDF page tree is assembled sequentially: Page 1 of your second file immediately follows the last page of your first file. Planning your document sequence prevents costly errors before emailing or printing:
+        </p>
+        <ul class="space-y-2 pl-5 list-disc marker:text-blue-600">
+          <li><strong>Establish a Logical Document Hierarchy:</strong> Place title or cover sheets first, followed by executive summaries, main bodies, financial exhibits, and reference appendices.</li>
+          <li><strong>Verify Page Numbering Continuity:</strong> If your individual PDFs contain pre-printed page numbers (e.g. &ldquo;Page 1 of 5&rdquo;), merging them will create repeating numbers. Where practical, consider exporting source documents without hard-coded page totals or adding fresh global numbering afterward.</li>
+          <li><strong>Inspect Mixed Page Orientations:</strong> If your contract contains standard portrait pages alongside landscape financial spreadsheets, verify that page orientation transitions cleanly in your PDF reader.</li>
+          <li><strong>Review the Downloaded File:</strong> Always open the final combined file in a viewer. Scroll through all pages, confirm the total page count matches your expectations, and ensure no supplementary sheets were omitted.</li>
+        </ul>
+      </section>
+
+      <!-- Section 4: Common Problems and Practical Solutions -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Common PDF Merging Problems and Practical Solutions
+        </h2>
+        <p>
+          While combining PDFs is generally straightforward, specific document protections or file configurations can create obstacles:
+        </p>
+
+        <div class="space-y-3 not-prose">
+          
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/60 text-red-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">!</span>
+            <div>
+              <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block">Problem 1: Password-Protected or Encrypted PDFs</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                If an uploaded document has security encryption or permissions preventing page assembly, the merging engine cannot parse its contents. <em>Solution:</em> Open the document in its native viewer using your valid password, export or print an unprotected copy, and then proceed with merging.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-amber-100 dark:bg-amber-900/60 text-amber-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">!</span>
+            <div>
+              <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block">Problem 2: Resulting Merged File Exceeds Email Limits</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Combining five 6 MB scanned PDFs results in a 30 MB master document that will bounce on email providers with 20 MB or 25 MB caps. <em>Solution:</em> Run the combined document through our <a href="/compress-pdf" class="text-blue-600 hover:underline font-semibold">Compress PDF</a> tool or read our guide on <a href="/blog/how-to-compress-pdf-for-email" class="text-blue-600 hover:underline font-semibold">How to Compress PDF for Email</a> to downsample raster imagery before sending.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-600 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">!</span>
+            <div>
+              <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block">Problem 3: Incompatible Interactive Form Fields</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Merging two fillable PDF forms with identical field names (e.g. &ldquo;First_Name&rdquo; or &ldquo;Signature_1&rdquo;) can cause values to overwrite or mirror each other. <em>Solution:</em> Flatten interactive forms into static pages (&ldquo;Print to PDF&rdquo;) before merging them together.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">!</span>
+            <div>
+              <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block">Problem 4: Mismatched Page Dimensions (Letter vs. A4)</span>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Combining US Letter documents (8.5 &times; 11 inches) with international ISO A4 documents (210 &times; 297 mm) creates subtle size shifts when viewed in continuous scroll mode. Modern PDF readers handle mixed page sizes automatically, but you should adjust print dialogs to &ldquo;Fit to Printable Area&rdquo; when physical copies are needed.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Section 5: Desktop vs Mobile Instructions -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Merging PDFs on Desktop vs. Mobile Devices
+        </h2>
+        <p>
+          ToolsHere works across both desktop workstations and mobile smartphones:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1 not-prose">
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-desktop text-blue-600"></i> Desktop Workstations (Windows, Mac, Linux)
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              On desktop computers, you have the advantage of a large workspace. Hold <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 font-mono text-[10px]">Ctrl</kbd> (Windows) or <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 font-mono text-[10px]">Cmd</kbd> (Mac) in your file explorer to select multiple files at once, then drag them directly into the browser drop zone.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-mobile-screen-button text-blue-600"></i> Mobile Devices (iOS &amp; Android)
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              In Safari or Chrome on your phone, tap the file selection button. Use the native <strong>Files app</strong> on iPhone or the <strong>File Manager</strong> on Android. Long-press on the first PDF to activate multi-select mode, tap all additional files you want to combine, and tap <em>Open</em> or <em>Select</em>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Privacy and Security -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Privacy and Security: Transparent Data Boundaries
+        </h2>
+        <p>
+          Managing private documents requires clear understanding of web security boundaries:
+        </p>
+
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3 not-prose">
+          <div class="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-base">
+            <i class="fa-solid fa-lock text-blue-600"></i> Security Considerations for Online Merging
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            ToolsHere employs HTTPS / TLS encryption to protect data while it travels between your browser and the website. This prevents unauthorized interception across public Wi-Fi networks. However, <strong>HTTPS encryption in transit does not by itself dictate or guarantee how files are processed, cached, or stored on any system</strong>.
+          </p>
+          <div class="space-y-2 text-xs text-slate-500 dark:text-slate-400">
+            <p><strong>Best Practices for Highly Confidential Files:</strong></p>
+            <ul class="list-disc pl-5 space-y-1">
+              <li>For highly sensitive records (such as medical histories, classified legal filings, or Social Security forms), comply with your organization&rsquo;s security policies.</li>
+              <li>When sharing merged files via email, consider applying password encryption or using restricted cloud sharing links with expiration dates.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 7: Related Tools on ToolsHere -->
+      <section class="p-6 sm:p-8 rounded-3xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 space-y-4 not-prose">
+        <div class="space-y-1">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600 dark:text-blue-400">ToolsHere Document Workspace</span>
+          <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">Related Free Tools on ToolsHere</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            Explore our complete suite of browser utilities to format, compress, and convert your documents:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          
+          <!-- Link to merge-pdf -->
+          <a href="https://toolshere.online/merge-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center shrink-0 text-base">
+              <i class="fa-solid fa-object-group"></i>
+            </div>
+            <div>
+              <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">Merge PDF Tool</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Combine multiple PDF documents into a single file in seconds.</span>
+            </div>
+          </a>
+
+          <!-- Link to compress-pdf -->
+          <a href="/compress-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+            <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center shrink-0 text-base">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <div>
+              <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">Compress PDF Document</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Reduce oversized PDF files to help meet email attachment limits.</span>
+            </div>
+          </a>
+
+          <!-- Link to image-to-pdf -->
+          <a href="/image-to-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+            <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/60 text-red-600 flex items-center justify-center shrink-0 text-base">
+              <i class="fa-solid fa-file-pdf"></i>
+            </div>
+            <div>
+              <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">Image to PDF Converter</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document.</span>
+            </div>
+          </a>
+
+          <!-- Link to pdf-to-word -->
+          <a href="/pdf-to-word" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+            <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 flex items-center justify-center shrink-0 text-base">
+              <i class="fa-solid fa-file-word"></i>
+            </div>
+            <div>
+              <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">PDF to Word Converter</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Extract editable text from locked PDF documents to update and resend.</span>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="pt-2 flex flex-col sm:flex-row gap-3 text-xs font-bold text-blue-600 dark:text-blue-400">
+          <a href="/blog/how-to-compress-pdf-for-email/" class="hover:underline inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-right text-[10px]"></i> Guide: How to Compress PDF for Email
+          </a>
+          <a href="/blog/how-to-convert-pdf-to-jpg/" class="hover:underline inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-right text-[10px]"></i> Guide: How to Convert PDF to JPG Online
+          </a>
+        </div>
+      </section>
+
+      <!-- Section 8: Frequently Asked Questions (FAQs) -->
+      <section class="space-y-4">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          Frequently Asked Questions (FAQs)
+        </h2>
+
+        <div class="space-y-3 pt-1 not-prose">
+          
+          <details class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 group cursor-pointer">
+            <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center justify-between list-none">
+              <span>How many PDF files can I merge together at once?</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              ToolsHere Merge PDF lets you select two or more PDF files simultaneously. There is no strict artificial cap on file count, but processing speed depends on your device memory and the total combined page count.
+            </p>
+          </details>
+
+          <details class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 group cursor-pointer">
+            <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center justify-between list-none">
+              <span>Can I arrange the file order before merging my documents?</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              Yes. Proper file ordering is essential so pages appear in their logical sequence. In the ToolsHere Merge PDF interface, review the file list after uploading to ensure your cover sheet, main content, and appendices are arranged in the exact order you want them combined.
+            </p>
+          </details>
+
+          <details class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 group cursor-pointer">
+            <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center justify-between list-none">
+              <span>Why won't my password-protected PDF merge with other files?</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              Encrypted or password-protected PDFs restrict editing and extraction permissions. Web merger utilities cannot read or assemble protected page streams without authorization. You must open the file in its native viewer, enter the password, and save an unrestricted copy before merging.
+            </p>
+          </details>
+
+          <details class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 group cursor-pointer">
+            <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center justify-between list-none">
+              <span>Will merging multiple PDFs reduce visual quality or alter text formatting?</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              No. Merging combines individual PDF page trees and document catalogs without re-encoding or compressing vector text. Fonts, scalable vectors, charts, and image resolutions remain identical to their original source files.
+            </p>
+          </details>
+
+          <details class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 group cursor-pointer">
+            <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center justify-between list-none">
+              <span>What should I do if my merged PDF is too large to email?</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              Combining multiple multi-page reports can produce a file that exceeds email attachment caps (typically 20 MB to 25 MB). If your combined file is too heavy, run it through ToolsHere Compress PDF (<a href="https://toolshere.online/compress-pdf/" class="text-blue-600 font-semibold hover:underline">https://toolshere.online/compress-pdf/</a>) to downsample raster imagery and reduce stream bloat before emailing.
+            </p>
+          </details>
+
+          <details class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 group cursor-pointer">
+            <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center justify-between list-none">
+              <span>Can I merge PDF documents on an iPhone, iPad, or Android phone?</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              Yes. ToolsHere is fully responsive and runs directly in mobile browsers like Safari and Chrome. Tap the upload button, select multiple PDFs from your Files app or Google Drive, and download the combined document directly to your device.
+            </p>
+          </details>
+
+          <details class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 group cursor-pointer">
+            <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white flex items-center justify-between list-none">
+              <span>Is it safe to merge confidential legal or financial records online?</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              ToolsHere utilizes HTTPS / TLS encryption to protect data in transit between your browser and the website. However, encryption in transit does not by itself dictate how cloud services handle or store data. For strictly confidential materials (such as tax records, medical charts, or trade secrets), users should follow institutional compliance guidelines, use password protection, or utilize native offline desktop tools.
+            </p>
+          </details>
+
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Author & Editorial Note -->
+    <div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-start gap-4">
+      <div class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl shrink-0">
+        <i class="fa-solid fa-user-shield"></i>
+      </div>
+      <div class="space-y-1">
+        <span class="font-bold text-sm text-slate-900 dark:text-white block">Published by the ToolsHere Editorial Team</span>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          ToolsHere engineers and writers develop browser-based productivity utilities and technical workflow documentation. We emphasize transparent guidance, document privacy, and frictionless user experiences.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  ${getFooterHtml()}
+
+  <!-- Core Deferred Application Script -->
+  <script defer src="/assets/js/app.js"></script>
+</body>
+</html>`;
+
+  fs.writeFileSync(path.join(article3Dir, 'index.html'), html, 'utf8');
+  console.log('Generated: /blog/how-to-merge-pdf-files-online/index.html');
+}
+
+// 5. UPDATE SITEMAP: Add /blog and all blog articles
 function updateSitemap() {
   const sitemapPath = path.join(rootDir, 'sitemap.xml');
   if (!fs.existsSync(sitemapPath)) {
@@ -1930,6 +2643,7 @@ function updateSitemap() {
   const blogUrl = 'https://toolshere.online/blog';
   const article1Url = 'https://toolshere.online/blog/how-to-convert-pdf-to-jpg';
   const article2Url = 'https://toolshere.online/blog/how-to-compress-pdf-for-email';
+  const article3Url = 'https://toolshere.online/blog/how-to-merge-pdf-files-online';
   const today = new Date().toISOString().split('T')[0];
 
   let addedCount = 0;
@@ -1952,6 +2666,12 @@ function updateSitemap() {
     addedCount++;
   }
 
+  if (!sitemapContent.includes(`<loc>${article3Url}</loc>`)) {
+    const articleEntry = `  <url>\n    <loc>${article3Url}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n`;
+    sitemapContent = sitemapContent.replace('</urlset>', `${articleEntry}</urlset>`);
+    addedCount++;
+  }
+
   if (addedCount > 0) {
     fs.writeFileSync(sitemapPath, sitemapContent, 'utf8');
     console.log(`Updated sitemap.xml with ${addedCount} new blog URLs.`);
@@ -1961,9 +2681,10 @@ function updateSitemap() {
 }
 
 // Execute Build
-console.log('=== Building Blog System (Phase 2, Article 1) ===');
+console.log('=== Building Blog System (Phase 2, Article 2) ===');
 generateBlogListingPage();
 generateArticlePage();
 generateCompressPdfArticlePage();
+generateMergePdfArticlePage();
 updateSitemap();
 console.log('=== Blog System Build Completed Successfully ===');
