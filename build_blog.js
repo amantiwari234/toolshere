@@ -1598,7 +1598,7 @@ function generateCompressPdfArticlePage() {
             </div>
             <h3 class="font-bold text-sm text-slate-900 dark:text-white">Open the Tool</h3>
             <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Navigate directly to <a href="https://toolshere.online/compress-pdf/" class="text-blue-600 hover:underline font-semibold">https://toolshere.online/compress-pdf/</a> in your desktop or mobile web browser.
+              Navigate directly to <a href="https://toolshere.online/compress-pdf/" class="text-blue-600 hover:underline font-semibold break-all">https://toolshere.online/compress-pdf/</a> in your desktop or mobile web browser.
             </p>
           </div>
 
@@ -1826,7 +1826,7 @@ function generateCompressPdfArticlePage() {
             </div>
             <div>
               <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">Image to PDF Converter</span>
-              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document. (Tip: Use our <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a> first for oversized photos).</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document. (Tip: Use our Image Compressor first for oversized photos).</span>
             </div>
           </a>
 
@@ -2289,7 +2289,7 @@ function generateMergePdfArticlePage() {
             </div>
             <h3 class="font-bold text-sm text-slate-900 dark:text-white">Open the Merger</h3>
             <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Visit <a href="https://toolshere.online/merge-pdf/" class="text-blue-600 hover:underline font-semibold">https://toolshere.online/merge-pdf/</a> on your desktop, tablet, or smartphone browser.
+              Visit <a href="https://toolshere.online/merge-pdf/" class="text-blue-600 hover:underline font-semibold break-all">https://toolshere.online/merge-pdf/</a> on your desktop, tablet, or smartphone browser.
             </p>
           </div>
 
@@ -2507,7 +2507,7 @@ function generateMergePdfArticlePage() {
             </div>
             <div>
               <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">Image to PDF Converter</span>
-              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document. (Tip: Use our <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a> first for oversized photos).</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document. (Tip: Use our Image Compressor first for oversized photos).</span>
             </div>
           </a>
 
