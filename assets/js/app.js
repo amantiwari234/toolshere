@@ -706,7 +706,7 @@ function ensureScript(name) {
       },
       {
         "q": "What output format will my compressed image be saved in?",
-        "a": "The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals."
+        "a": "The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals. All uploaded images (including PNG and WebP) are exported as JPEG. Note that transparent backgrounds may not be preserved; if you need to convert to other formats or preserve transparency, use our Image Converter tool."
       },
       {
         "q": "Can I resize the width and height without losing quality?",

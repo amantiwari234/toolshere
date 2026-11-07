@@ -105,6 +105,61 @@ const seoOverrides = {
   imgResizer: {
     seoTitle: "Image Compressor & Resizer (20KB, 50KB, 100KB) - ToolsHere",
     metaDesc: "Compress and resize JPG, PNG, and WebP images to exact sizes like 20KB, 50KB, or 100KB directly in your browser. Fast, private, with zero server uploads.",
+    aboutHeading: "About ToolsHere Image Compressor & Resizer",
+    formatNoticeHtml: `
+        <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
+          <div class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-info text-blue-600 dark:text-blue-400"></i> Output Format &amp; Transparency Notice
+          </div>
+          <p class="leading-relaxed">
+            The Image Compressor exports optimized <strong>JPEG (.jpg)</strong> files for maximum file size reduction, even when your input file is a PNG, WebP, or GIF image. Because the standard JPEG format does not support alpha transparency, transparent backgrounds may not be preserved and will render with a solid background.
+          </p>
+          <p class="leading-relaxed">
+            If you need to maintain transparent backgrounds or convert your files into PNG, WebP, or other formats without compression, please use our <a href="/image-converter" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Image Converter</a> tool.
+          </p>
+        </div>
+    `,
+    helpfulGuidesHtml: `
+      <!-- Helpful Guides & Tutorials Section -->
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-blue-600"></i> Helpful Guides &amp; Tutorials
+          </h2>
+          <a href="/blog" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
+            View All Guides <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="/blog/how-to-convert-pdf-to-jpg" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-image"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Convert PDF to JPG Online
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Step-by-step guide to exporting PDF documents into high-resolution JPG images ready for compression and resizing.
+              </p>
+            </div>
+          </a>
+          <a href="/blog/how-to-compress-pdf-for-email" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Compress Files for Email Attachments
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Understand email provider size limits (under 25MB) and how to optimize document and photo payloads.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    `,
     relatedTools: [
       { name: "Image Format Converter", hash: "#image-converter" },
       { name: "AI Background Remover", hash: "#background-remover" },
@@ -482,7 +537,7 @@ function generateGuideHtml(tool) {
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-[10px] text-emerald-600"></i> 100% In-Browser Privacy</span>
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About ${tool.name} &amp; Core Utility</h2>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">${tool.aboutHeading || (tool.id === 'imgResizer' ? 'About ToolsHere Image Compressor & Resizer' : `About ${tool.name} &amp; Core Utility`)}</h2>
         <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
           <p>${tool.intro}</p>
         </div>
@@ -537,6 +592,7 @@ function generateGuideHtml(tool) {
             <span class="font-semibold text-slate-800 dark:text-slate-200">${tool.formatsAndLimits.limitations}</span>
           </div>
         </div>
+        ${tool.formatNoticeHtml || ''}
       </section>
 
       ${useCasesHtml}
@@ -559,6 +615,8 @@ function generateGuideHtml(tool) {
           `).join('')}
         </div>
       </section>
+
+      ${tool.helpfulGuidesHtml || ''}
 
       ${relatedHtml}
     </article>

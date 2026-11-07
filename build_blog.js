@@ -936,7 +936,7 @@ function generateArticlePage() {
                 <li>Navigate to <strong>Tools &gt; Export PDF</strong>.</li>
                 <li>Choose <strong>Image</strong> and select <strong>JPEG</strong>.</li>
                 <li>Click the settings gear icon to configure color management and resolution (e.g. 300 DPI for print).</li>
-                <li>Click <strong>Export</strong> and select a destination folder. All pages will be exported as individual high-quality JPG files.</li>
+                <li>Click <strong>Export</strong> and select a destination folder. All pages will be exported as individual high-quality JPG files. If the exported images exceed file size limits for email or online portals, optimize them to exact file sizes (such as 20KB, 50KB, or 100KB) using our free <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a>.</li>
               </ol>
 
               <div class="pt-2">
@@ -1034,6 +1034,17 @@ function generateArticlePage() {
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+          <!-- Link to image-compressor -->
+          <a href="/image-compressor" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center shrink-0 text-base">
+              <i class="fa-solid fa-compress"></i>
+            </div>
+            <div>
+              <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">Image Compressor &amp; Resizer</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Compress and resize exported JPG images to exact file sizes (20KB, 50KB, 100KB).</span>
+            </div>
+          </a>
+
           <!-- Link to image-to-pdf -->
           <a href="/image-to-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/60 text-red-600 flex items-center justify-center shrink-0 text-base">
@@ -1815,7 +1826,7 @@ function generateCompressPdfArticlePage() {
             </div>
             <div>
               <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">Image to PDF Converter</span>
-              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document.</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document. (Tip: Use our <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a> first for oversized photos).</span>
             </div>
           </a>
 
@@ -2371,7 +2382,7 @@ function generateMergePdfArticlePage() {
             <div>
               <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block">Problem 2: Resulting Merged File Exceeds Email Limits</span>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Combining five 6 MB scanned PDFs results in a 30 MB master document that will bounce on email providers with 20 MB or 25 MB caps. <em>Solution:</em> Run the combined document through our <a href="/compress-pdf" class="text-blue-600 hover:underline font-semibold">Compress PDF</a> tool or read our guide on <a href="/blog/how-to-compress-pdf-for-email" class="text-blue-600 hover:underline font-semibold">How to Compress PDF for Email</a> to downsample raster imagery before sending.
+                Combining five 6 MB scanned PDFs results in a 30 MB master document that will bounce on email providers with 20 MB or 25 MB caps. <em>Solution:</em> Run the combined document through our <a href="/compress-pdf" class="text-blue-600 hover:underline font-semibold">Compress PDF</a> tool or read our guide on <a href="/blog/how-to-compress-pdf-for-email" class="text-blue-600 hover:underline font-semibold">How to Compress PDF for Email</a> to downsample raster imagery before sending. If your PDF pages contain raw photo scans, you can also optimize the individual images beforehand using our <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a>.
               </p>
             </div>
           </div>
@@ -2496,7 +2507,7 @@ function generateMergePdfArticlePage() {
             </div>
             <div>
               <span class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors block">Image to PDF Converter</span>
-              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document.</span>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Compile photo attachments and receipts into a single PDF document. (Tip: Use our <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a> first for oversized photos).</span>
             </div>
           </a>
 
