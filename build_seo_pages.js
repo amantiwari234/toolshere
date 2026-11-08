@@ -248,8 +248,8 @@ const seoOverrides = {
     ]
   },
   qrTool: {
-    seoTitle: "Free QR Code Generator: Create Custom QR Codes - ToolsHere",
-    metaDesc: "Generate custom high-resolution QR codes for websites, links, and text instantly. High-correction Level H graphics, private generation, and instant download.",
+    seoTitle: "QR Code Generator & Scanner: Create & Read QR Codes - ToolsHere",
+    metaDesc: "Generate custom high-resolution QR codes for websites, Wi-Fi, vCards, and WhatsApp, or scan QR codes from photos and camera live. 100% private in-browser tool.",
     relatedTools: [
       { name: "Strong Password Creator", hash: "#password-generator" },
       { name: "Word & Character Counter", hash: "#word-counter" },
@@ -257,9 +257,10 @@ const seoOverrides = {
       { name: "YouTube Thumbnail Grabber", hash: "#youtube-thumbnail" }
     ],
     useCases: [
-      "Creating contactless digital restaurant menu and review landing page QR codes.",
-      "Generating scannable Wi-Fi login codes, vCard business cards, and event invitations.",
-      "Directing physical print marketing flyers and stickers directly to website URLs."
+      "Generating scannable Wi-Fi login codes, digital business cards (vCard), and WhatsApp chat triggers.",
+      "Scanning QR codes from saved screenshots, photos, and digital flyers directly in the browser.",
+      "Using the live device camera to decode physical product labels, brochures, and event tickets without downloading apps.",
+      "Creating print-ready vector SVG and high-resolution PNG QR codes for marketing materials and packaging."
     ]
   },
   passwordGen: {

@@ -5,6 +5,7 @@ function ensureScript(name) {
   if (name === 'PDFLib' && typeof PDFLib !== 'undefined') return Promise.resolve(true);
   if (name === 'pdfjsLib' && typeof pdfjsLib !== 'undefined') return Promise.resolve(true);
   if (name === 'QRCode' && typeof QRCode !== 'undefined') return Promise.resolve(true);
+  if (name === 'jsQR' && typeof jsQR !== 'undefined') return Promise.resolve(true);
   if (name === 'confetti' && typeof confetti === 'function') return Promise.resolve(true);
   if (name === 'JSZip' && typeof JSZip !== 'undefined') return Promise.resolve(true);
 
@@ -14,6 +15,7 @@ function ensureScript(name) {
     PDFLib: '/assets/vendor/pdf-lib.min.js',
     pdfjsLib: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
     QRCode: '/assets/vendor/qrcode.min.js',
+    jsQR: '/assets/vendor/jsqr.min.js',
     confetti: 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js',
     JSZip: 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'
   };
@@ -369,9 +371,9 @@ function ensureScript(name) {
       },
       'qrModal': {
         hash: 'qr-code-generator',
-        title: 'Free QR Code Generator Online | Create High-Resolution QR Codes — ToolsHere.online',
-        metaDesc: 'Create custom QR codes for websites, text, and links instantly. High-correction Level H graphics, 100% private client-side generation, and PNG download.',
-        h1: 'Free Online QR Code Generator & Creator Studio',
+        title: 'Free QR Code Generator & Scanner Online | Create & Read QR Codes — ToolsHere.online',
+        metaDesc: 'Generate custom QR codes for websites, Wi-Fi, vCards, and WhatsApp, or scan QR codes from photos and live camera in real time. 100% private in-browser QR studio.',
+        h1: 'Free Online QR Code Generator & Scanner Studio',
         toolId: 'qrTool'
       },
       'passwordModal': {
@@ -446,6 +448,7 @@ function ensureScript(name) {
 
     // Full-Page Dedicated Tool Router & Navigation System
     function openToolPage(routeKey, event) {
+      if (typeof stopQrCamera === 'function') stopQrCamera();
       if (["pdfMergeModal", "compressPdfModal", "imgToPdfModal", "pdf-merge", "compress-pdf", "image-to-pdf"].some(x => String(routeKey).includes(x))) { ensureScript("PDFLib"); }
       if (String(routeKey).includes("pdfWord") || String(routeKey).includes("pdf-to-word")) { ensureScript("pdfjsLib"); }
       if (String(routeKey).includes("qr")) { ensureScript("QRCode"); }
@@ -551,6 +554,7 @@ function ensureScript(name) {
     }
 
     function navigateToHome(event) {
+      if (typeof stopQrCamera === 'function') stopQrCamera();
       if (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -615,6 +619,7 @@ function ensureScript(name) {
 
     // Handle Browser Back / Forward Buttons
     window.addEventListener('popstate', (e) => {
+      if (typeof stopQrCamera === 'function') stopQrCamera();
       const cleanPath = window.location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase();
       const cleanHash = window.location.hash.replace(/^#/, '').toLowerCase();
       const target = cleanPath || cleanHash;
@@ -1008,44 +1013,59 @@ function ensureScript(name) {
   {
     "id": "qrTool",
     "hash": "#qr-code-generator",
-    "url": "https://toolshere.online/qr-code-generator",
-    "name": "QR Code Studio & Reader",
+    "url": "https://toolshere.online/qr-code-generator/",
+    "name": "QR Code Generator & Scanner",
     "category": "Utility",
-    "cardDesc": "Generate high-contrast, error-corrected QR codes for website URLs, contact details, or text messages and download crisp PNG images instantly.",
-    "seoTitle": "Free QR Code Generator Online | Create High-Resolution QR Codes",
-    "metaDesc": "Create custom QR codes for websites, text, and links instantly. High-correction Level H graphics, 100% private client-side generation, and PNG download.",
-    "h1": "Free Online QR Code Generator & Creator Studio",
-    "intro": "ToolsHere QR Code Studio is a robust, client-side utility built for small business owners, restaurateurs, event organizers, and marketing managers who need quick, reliable QR codes for product packaging, table menus, Wi-Fi access, business cards, and flyers. Built using robust client-side QR generation libraries with Level H error correction, the codes generated remain easily scannable by modern smartphone cameras even if printed on textured paper or slightly scuffed. Your inputted data is rendered into an interactive canvas locally, guaranteeing that private Wi-Fi passwords and sensitive links are never transmitted over the internet.",
+    "cardDesc": "Generate custom QR codes for websites, Wi-Fi, vCards, and WhatsApp, or scan QR codes from photos and live camera in real time.",
+    "seoTitle": "Free QR Code Generator & Scanner Online | Create & Read QR Codes",
+    "metaDesc": "Generate custom high-resolution QR codes for websites, Wi-Fi, vCards, and WhatsApp, or scan QR codes from photos and camera live. 100% private in-browser QR studio.",
+    "h1": "Free Online QR Code Generator & Scanner Studio",
+    "intro": "ToolsHere QR Code Studio & Scanner is an all-in-one, 100% client-side utility designed for creators, businesses, event coordinators, and everyday users. Create high-contrast, error-corrected QR codes for website URLs, Wi-Fi networks (with password escaping and visibility toggle), vCard business contacts, email drafts, and direct WhatsApp chats. Switch to the Scanner tab to decode QR codes directly from image uploads, rasterized SVGs, or your device camera in real time. Designed with a strict client-side security architecture, your camera stream, Wi-Fi passwords, and scanned results remain strictly in your browser memory with zero server tracking.",
     "howToUse": [
-      "Type or paste your destination website URL or text into the input box.",
-      "The QR code renders immediately on screen as you type.",
-      "Review the visual code in the high-contrast preview canvas.",
-      "Click 'Download QR Code PNG' to save the sharp, high-resolution graphic directly to your device."
+      "Choose 'Generator' to create a QR code or 'Scanner' to read an existing code.",
+      "In Generator mode, select your content type (URL, Text, Wi-Fi, vCard, Email, or WhatsApp) and fill in the details.",
+      "Customize module and background colors, check contrast, and download in high-res PNG, vector SVG, or printable PDF.",
+      "In Scanner mode, drop an image file (PNG, JPG, SVG) or click 'Start Camera Scanner' to point your camera at a physical QR code.",
+      "Review decoded content safely with 1-click Copy, or preview verified HTTP/HTTPS links with zero automated redirects."
     ],
     "features": [
-      "Real-time QR generation responding instantly to every keystroke.",
-      "High Error Correction Level (Level H) ensuring maximum scannability and resilience.",
-      "Crisp vector-to-raster PNG canvas rendering suitable for high-DPI printing.",
-      "Zero server logging—all encoded text stays exclusively on your local device.",
-      "Universal scanning compatibility with iOS Camera, Android Google Lens, and barcode readers."
+      "Six dedicated QR generator modes: URL, Plain Text, Wi-Fi Network, vCard Contact, Email, and WhatsApp.",
+      "Dual scanner engine: instant photo/SVG file decoding and live device camera scanning.",
+      "Standard Wi-Fi encoding with special character escaping and password visibility toggle.",
+      "Strict security link policy: decoded URLs are never automatically opened or redirected.",
+      "Safe SVG rasterization preventing direct markup injection or script execution.",
+      "High-resolution exports: standard to 4K Ultra HD PNG, vector SVG, and printable PDF.",
+      "100% private in-browser processing with zero server storage, logging, or third-party API dependencies."
     ],
     "formatsAndLimits": {
-      "supportedInputs": "Any text, URL, email address, phone number, or raw data string",
-      "outputFormat": "PNG image file (.png)",
-      "limitations": "Recommended input length under 1,000 characters to maintain comfortable camera scanning density."
+      "supportedInputs": "URL, Wi-Fi credentials, vCard 3.0, email, WhatsApp, plain text, and PNG/JPG/WebP/SVG images for scanning",
+      "outputFormat": "High-Res PNG (600px, 1200px, 2400px), Vector SVG (.svg), Printable PDF (.pdf)",
+      "limitations": "Camera scanner requires browser permission over HTTPS; image upload serves as an instant zero-permission fallback."
     },
     "faqs": [
       {
+        "q": "How do I create a Wi-Fi QR code that guests can scan to connect?",
+        "a": "Select the 'Wi-Fi' tab, type your network SSID name, choose your security type (WPA/WPA2/WPA3 or WEP), and enter your password. Guests scanning with their phone camera will see an instant 'Join Network' prompt without typing the password."
+      },
+      {
+        "q": "Can I scan a QR code from a picture or screenshot without a camera?",
+        "a": "Yes! Switch to the 'Scanner' tab and upload your image (PNG, JPG, WebP, or SVG). Our client-side decoder analyzes the pixel data directly in your browser and reveals the encoded text instantly."
+      },
+      {
+        "q": "Does the scanner automatically open links found in QR codes?",
+        "a": "No, never. For your online security, all decoded content is displayed as text first. If a valid web link is detected, you are shown an explicit 'Visit Link' button so you can inspect the destination before opening it."
+      },
+      {
         "q": "Do the QR codes generated on ToolsHere ever expire?",
-        "a": "No! These are standard static QR codes. Because the information is directly encoded into the visual pattern without redirects, they work forever."
+        "a": "No! These are standard static QR codes. Because the information is directly encoded into the visual matrix without redirects, they work forever."
       },
       {
-        "q": "Can I print these QR codes on physical flyers and banners?",
-        "a": "Yes. The downloaded PNG has sharp contrast and high error correction, making it ideal for business cards, restaurant menus, and poster printing."
+        "q": "Is my camera video stream or uploaded photo sent to a server?",
+        "a": "No, 100%. Camera video frames and uploaded images are processed entirely inside your local device's memory using JavaScript and Web APIs. Nothing is ever recorded or uploaded."
       },
       {
-        "q": "Is there a scanning limit on my generated QR code?",
-        "a": "There are no scan limits whatsoever. Anyone with a smartphone can scan your QR code an unlimited number of times."
+        "q": "Can I print these QR codes on banners, packaging, and business cards?",
+        "a": "Yes. You can download vector SVG files for infinite print scaling with crisp edges, or high-resolution PNGs up to 2400px (4K print quality)."
       }
     ],
     "relatedTools": [
@@ -3045,112 +3065,575 @@ function ensureScript(name) {
       }
     }
 
-    /* ================= UTILITY 7: QR CODE GENERATOR STUDIO ================= */
+    /* ================= UTILITY 7: QR CODE STUDIO & READER ================= */
     let qrFgColor = '#000000';
     let qrBgColor = '#ffffff';
+    let qrActiveTab = 'generator';
+    let qrActiveType = 'url';
+    let qrCameraStream = null;
+    let qrCameraRaf = null;
+
+    function escapeWifiString(str) {
+      if (!str) return '';
+      return str.replace(/([\\;:,"])/g, '\\$1');
+    }
 
     function renderQrTool(title, icon, container) {
-      if (title) title.innerText = 'QR Code Generator Studio (High-Resolution)';
+      if (title) title.innerText = 'QR Code Generator & Scanner Studio';
       if (icon) icon.className = 'fa-solid fa-qrcode';
+
       container.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-          <div class="md:col-span-7 space-y-4">
-            <div>
-              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Enter URL, Text, or Contact Info</label>
-              <textarea id="qrTextInput" rows="4" placeholder="https://yourwebsite.com or text..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:outline-none focus:border-blue-500 font-medium" oninput="generateQr()"></textarea>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 text-xs">
-              <div>
-                <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">QR Color:</label>
-                <div class="flex items-center gap-2">
-                  <input type="color" id="qrColorPicker" value="#000000" onchange="qrFgColor=this.value; generateQr();" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-200">
-                  <span class="font-mono text-[11px] text-slate-400">Dark</span>
-                </div>
-              </div>
-              <div>
-                <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">Background:</label>
-                <div class="flex items-center gap-2">
-                  <input type="color" id="qrBgColorPicker" value="#ffffff" onchange="qrBgColor=this.value; generateQr();" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-200">
-                  <span class="font-mono text-[11px] text-slate-400">Light</span>
-                </div>
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">Download Quality:</label>
-                <select id="qrResSelect" class="w-full px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 font-semibold text-xs">
-                  <option value="600">Standard (600px)</option>
-                  <option value="1200" selected>HD Print (1200px)</option>
-                  <option value="2400">Ultra HD 4K (2400px)</option>
-                </select>
-              </div>
-            </div>
-
-            <button type="button" onclick="generateQr()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl text-xs sm:text-sm shadow-md transition-colors">
-              <i class="fa-solid fa-arrows-rotate"></i> Update QR Code
+        <div class="space-y-6">
+          <!-- Top Tab Switcher: Generator vs Scanner -->
+          <div class="flex p-1.5 bg-slate-100 dark:bg-slate-700/60 rounded-2xl max-w-xs mx-auto shadow-2xs">
+            <button type="button" id="tabQrGenBtn" onclick="switchQrTab('generator')" class="flex-1 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 bg-white dark:bg-slate-800 text-blue-600 dark:text-cyan-400 shadow-xs">
+              <i class="fa-solid fa-qrcode"></i> Generator
+            </button>
+            <button type="button" id="tabQrScanBtn" onclick="switchQrTab('scanner')" class="flex-1 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white">
+              <i class="fa-solid fa-camera"></i> Scanner
             </button>
           </div>
 
-          <div class="md:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-800/60 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4">
-            <div id="qrCanvasContainer" class="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700">
-              <canvas id="qrCanvas" class="max-w-[220px] max-h-[220px] rounded-lg"></canvas>
+          <!-- ================= VIEW 1: GENERATOR ================= -->
+          <div id="qrGenView" class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            <div class="md:col-span-7 space-y-4">
+              <!-- Content Type Selectors -->
+              <div>
+                <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Select Content Type</label>
+                <div class="flex flex-wrap gap-1.5 p-1 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold">
+                  <button type="button" onclick="switchQrType('url')" id="qrTypeBtn-url" class="qr-type-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-blue-600 dark:text-cyan-400 shadow-2xs">
+                    <i class="fa-solid fa-link mr-1"></i> URL
+                  </button>
+                  <button type="button" onclick="switchQrType('text')" id="qrTypeBtn-text" class="qr-type-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900">
+                    <i class="fa-solid fa-align-left mr-1"></i> Text
+                  </button>
+                  <button type="button" onclick="switchQrType('wifi')" id="qrTypeBtn-wifi" class="qr-type-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900">
+                    <i class="fa-solid fa-wifi mr-1"></i> Wi-Fi
+                  </button>
+                  <button type="button" onclick="switchQrType('vcard')" id="qrTypeBtn-vcard" class="qr-type-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900">
+                    <i class="fa-solid fa-address-card mr-1"></i> vCard
+                  </button>
+                  <button type="button" onclick="switchQrType('email')" id="qrTypeBtn-email" class="qr-type-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900">
+                    <i class="fa-solid fa-envelope mr-1"></i> Email
+                  </button>
+                  <button type="button" onclick="switchQrType('wa')" id="qrTypeBtn-wa" class="qr-type-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900">
+                    <i class="fa-brands fa-whatsapp mr-1 text-emerald-500"></i> WhatsApp
+                  </button>
+                </div>
+              </div>
+
+              <!-- TYPE 1: URL -->
+              <div id="qrInputForm-url" class="qr-input-form space-y-2">
+                <label class="block text-xs font-bold text-slate-600 dark:text-slate-300">Website or Landing Page URL</label>
+                <div class="relative">
+                  <input type="url" id="qrUrlInput" value="https://toolshere.online" placeholder="https://yourwebsite.com" class="w-full p-3.5 pl-10 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none" oninput="generateQr()">
+                  <i class="fa-solid fa-globe absolute left-3.5 top-4 text-slate-400 text-sm"></i>
+                </div>
+                <p class="text-[11px] text-slate-400">Standard HTTPS/HTTP link. Scanners will prompt to open this destination.</p>
+              </div>
+
+              <!-- TYPE 2: Plain Text -->
+              <div id="qrInputForm-text" class="qr-input-form hidden space-y-2">
+                <label class="block text-xs font-bold text-slate-600 dark:text-slate-300">Plain Text / Message / Code</label>
+                <textarea id="qrTextInput" rows="4" placeholder="Type any plain text, notes, or serial codes..." class="w-full p-3.5 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 outline-none" oninput="generateQr()"></textarea>
+              </div>
+
+              <!-- TYPE 3: Wi-Fi Credentials -->
+              <div id="qrInputForm-wifi" class="qr-input-form hidden space-y-3 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Network Name (SSID) *</label>
+                    <input type="text" id="qrWifiSsid" placeholder="e.g. Guest_WiFi" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs focus:ring-2 focus:ring-blue-500 outline-none" oninput="generateQr()">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Security Type</label>
+                    <select id="qrWifiEnc" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs focus:ring-2 focus:ring-blue-500 outline-none" onchange="toggleWifiPasswordField(); generateQr();">
+                      <option value="WPA" selected>WPA / WPA2 / WPA3 (Standard)</option>
+                      <option value="WEP">WEP (Legacy)</option>
+                      <option value="nopass">None (Open Network)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div id="qrWifiPassGroup">
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Wi-Fi Password</label>
+                  <div class="relative">
+                    <input type="password" id="qrWifiPass" placeholder="Network password..." class="w-full p-2.5 pr-10 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs focus:ring-2 focus:ring-blue-500 outline-none" oninput="generateQr()">
+                    <button type="button" onclick="toggleQrWifiPassVisibility()" title="Toggle visibility" class="absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs">
+                      <i id="qrWifiPassEye" class="fa-solid fa-eye"></i>
+                    </button>
+                  </div>
+                  <p class="text-[10px] text-slate-400 mt-1">Processed 100% locally in your browser memory. Never uploaded or saved.</p>
+                </div>
+
+                <div class="flex items-center gap-2 pt-1">
+                  <input type="checkbox" id="qrWifiHidden" class="rounded text-blue-600 focus:ring-blue-500 cursor-pointer" onchange="generateQr()">
+                  <label for="qrWifiHidden" class="text-xs text-slate-600 dark:text-slate-300 cursor-pointer">Hidden Network (SSID is not publicly broadcasted)</label>
+                </div>
+              </div>
+
+              <!-- TYPE 4: vCard Contact -->
+              <div id="qrInputForm-vcard" class="qr-input-form hidden space-y-3 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">First Name *</label>
+                    <input type="text" id="qrVcardFn" placeholder="Alex" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Last Name</label>
+                    <input type="text" id="qrVcardLn" placeholder="Taylor" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Organization / Company</label>
+                    <input type="text" id="qrVcardOrg" placeholder="ToolsHere" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Job Title</label>
+                    <input type="text" id="qrVcardTitle" placeholder="Lead Engineer" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Phone Number</label>
+                    <input type="tel" id="qrVcardPhone" placeholder="+1 555 019 2834" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Email Address</label>
+                    <input type="email" id="qrVcardEmail" placeholder="alex@example.com" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Website URL</label>
+                    <input type="url" id="qrVcardUrl" placeholder="https://example.com" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                  </div>
+                </div>
+              </div>
+
+              <!-- TYPE 5: Email -->
+              <div id="qrInputForm-email" class="qr-input-form hidden space-y-3 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Recipient Email *</label>
+                  <input type="email" id="qrEmailTo" placeholder="support@toolshere.online" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Subject</label>
+                  <input type="text" id="qrEmailSub" placeholder="Customer Feedback" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Pre-filled Body</label>
+                  <textarea id="qrEmailBody" rows="3" placeholder="Hello ToolsHere team..." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()"></textarea>
+                </div>
+              </div>
+
+              <!-- TYPE 6: WhatsApp -->
+              <div id="qrInputForm-wa" class="qr-input-form hidden space-y-3 p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700">
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">WhatsApp Phone Number * (with Country Code)</label>
+                  <input type="tel" id="qrWaPhone" placeholder="e.g. 15550192834 (numbers only)" class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()">
+                  <p class="text-[10px] text-slate-400 mt-1">Include country code without '+' or spaces (e.g. 1 for USA, 91 for India, 44 for UK).</p>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-1">Pre-filled Chat Message (Optional)</label>
+                  <textarea id="qrWaMsg" rows="3" placeholder="Hello! I scanned your QR code and would like more info." class="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 text-slate-800 dark:text-white text-xs" oninput="generateQr()"></textarea>
+                </div>
+              </div>
+
+              <!-- Customization Controls (Colors, Presets, Quality) -->
+              <div class="p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                  <div>
+                    <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">QR Code Color:</label>
+                    <div class="flex items-center gap-2">
+                      <input type="color" id="qrColorPicker" value="#000000" onchange="qrFgColor=this.value; generateQr();" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-200">
+                      <span class="font-mono text-[11px] text-slate-400">Dark</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">Background:</label>
+                    <div class="flex items-center gap-2">
+                      <input type="color" id="qrBgColorPicker" value="#ffffff" onchange="qrBgColor=this.value; generateQr();" class="w-8 h-8 rounded-lg cursor-pointer border border-slate-200">
+                      <span class="font-mono text-[11px] text-slate-400">Light</span>
+                    </div>
+                  </div>
+                  <div class="col-span-2 sm:col-span-1">
+                    <label class="block font-bold text-slate-600 dark:text-slate-300 mb-1">Download Quality:</label>
+                    <select id="qrResSelect" class="w-full px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 font-semibold text-xs">
+                      <option value="600">Standard (600px)</option>
+                      <option value="1200" selected>HD Print (1200px)</option>
+                      <option value="2400">Ultra HD 4K (2400px)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Palette Shortcuts -->
+                <div class="pt-2 border-t border-slate-200 dark:border-slate-700/60 flex flex-wrap items-center gap-1.5">
+                  <span class="text-[10px] font-bold uppercase text-slate-400 mr-1">Palettes:</span>
+                  <button type="button" onclick="applyQrPalette('#000000', '#ffffff')" class="px-2 py-1 rounded-md text-[10px] font-semibold bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200">Classic B&W</button>
+                  <button type="button" onclick="applyQrPalette('#1e3a8a', '#eff6ff')" class="px-2 py-1 rounded-md text-[10px] font-semibold bg-blue-50 border border-blue-200 text-blue-900">Navy</button>
+                  <button type="button" onclick="applyQrPalette('#065f46', '#ecfdf5')" class="px-2 py-1 rounded-md text-[10px] font-semibold bg-emerald-50 border border-emerald-200 text-emerald-900">Emerald</button>
+                  <button type="button" onclick="applyQrPalette('#581c87', '#faf5ff')" class="px-2 py-1 rounded-md text-[10px] font-semibold bg-purple-50 border border-purple-200 text-purple-900">Purple</button>
+                  <button type="button" onclick="applyQrPalette('#0f172a', '#f8fafc')" class="px-2 py-1 rounded-md text-[10px] font-semibold bg-slate-900 text-white">Slate</button>
+                </div>
+
+                <div id="qrContrastWarn" class="hidden p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-[11px] text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
+                  <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Low contrast between QR color and background may cause scanning issues.
+                </div>
+              </div>
             </div>
 
-            <div class="w-full space-y-2">
-              <button type="button" onclick="downloadQrHighQuality('png')" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-file-image"></i> Download Image (High-Res PNG)
-              </button>
-              <button type="button" onclick="downloadQrAsPdf()" class="w-full py-3 bg-slate-900 dark:bg-slate-700 hover:bg-black dark:hover:bg-slate-600 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-file-pdf text-red-400"></i> Download Printable PDF Document
-              </button>
-              <button type="button" onclick="downloadQrHighQuality('svg')" class="w-full py-2.5 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-vector-square text-violet-500"></i> Download Vector SVG
-              </button>
+            <!-- Right Column: Live QR Preview & Downloads -->
+            <div class="md:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-50 dark:bg-slate-800/60 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4 md:sticky md:top-24">
+              <div id="qrCanvasContainer" class="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-slate-200 dark:border-slate-700 flex items-center justify-center min-h-[240px] w-full">
+                <canvas id="qrCanvas" class="max-w-[220px] max-h-[220px] rounded-lg"></canvas>
+              </div>
+              <div class="w-full text-center">
+                <span id="qrLiveTypeBadge" class="inline-block text-[11px] font-bold px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950/80 text-blue-700 dark:text-cyan-400">Website URL</span>
+              </div>
+
+              <div class="w-full space-y-2">
+                <button type="button" onclick="downloadQrHighQuality('png')" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-file-image"></i> Download Image (High-Res PNG)
+                </button>
+                <button type="button" onclick="downloadQrHighQuality('svg')" class="w-full py-2.5 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-vector-square text-violet-500"></i> Download Vector SVG
+                </button>
+                <button type="button" onclick="downloadQrAsPdf()" class="w-full py-2.5 bg-slate-900 dark:bg-slate-700 hover:bg-black dark:hover:bg-slate-600 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-file-pdf text-red-400"></i> Download Printable PDF
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= VIEW 2: SCANNER ================= -->
+          <div id="qrScanView" class="hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+              <!-- Scanner Option A: Upload Image File -->
+              <div class="p-6 bg-slate-50 dark:bg-slate-800/60 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4">
+                <div class="flex items-center gap-2.5 font-bold text-slate-800 dark:text-white text-sm">
+                  <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-cyan-400 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-image"></i>
+                  </div>
+                  <h3>Upload QR Image or SVG</h3>
+                </div>
+
+                <div id="qrScanDropZone" onclick="document.getElementById('qrScanFileInput').click()" ondragover="handleQrDragOver(event)" ondragleave="handleQrDragLeave(event)" ondrop="handleQrDrop(event)" class="border-2 border-dashed border-slate-300 dark:border-slate-600 hover:border-blue-500 rounded-2xl p-6 text-center cursor-pointer transition-all bg-white dark:bg-slate-800/80 group min-h-[160px] flex flex-col items-center justify-center">
+                  <input type="file" id="qrScanFileInput" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg" class="hidden" onchange="handleQrImageSelect(this)">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-slate-700 text-blue-600 dark:text-cyan-400 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                  </div>
+                  <p class="text-xs font-bold text-slate-700 dark:text-slate-200">Click to choose image or drag & drop</p>
+                  <p class="text-[10px] text-slate-400 mt-1">Supports PNG, JPG, WebP, GIF, and vector SVG files</p>
+                </div>
+              </div>
+
+              <!-- Scanner Option B: Scan with Live Camera -->
+              <div class="p-6 bg-slate-50 dark:bg-slate-800/60 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4">
+                <div class="flex items-center gap-2.5 font-bold text-slate-800 dark:text-white text-sm">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-sm">
+                    <i class="fa-solid fa-camera"></i>
+                  </div>
+                  <h3>Scan with Device Camera</h3>
+                </div>
+
+                <div id="qrCameraInitial">
+                  <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                    Point your camera or webcam at a printed or displayed QR code to decode its contents instantly in real time.
+                  </p>
+                  <button type="button" id="startCameraBtn" onclick="startQrCamera()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 min-h-[42px]">
+                    <i class="fa-solid fa-video"></i> Start Camera Scanner
+                  </button>
+                </div>
+
+                <div id="qrCameraActive" class="hidden space-y-3">
+                  <div class="relative bg-black rounded-2xl overflow-hidden aspect-video flex items-center justify-center">
+                    <video id="qrVideo" playsinline autoplay muted class="w-full h-full object-cover"></video>
+                    <!-- Targeting Reticle -->
+                    <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
+                      <div class="w-44 h-44 border-2 border-emerald-400/80 rounded-2xl shadow-[0_0_0_9999px_rgba(0,0,0,0.45)] relative">
+                        <div class="absolute top-0 left-0 w-3 h-3 border-t-4 border-l-4 border-emerald-400 -mt-1 -ml-1"></div>
+                        <div class="absolute top-0 right-0 w-3 h-3 border-t-4 border-r-4 border-emerald-400 -mt-1 -mr-1"></div>
+                        <div class="absolute bottom-0 left-0 w-3 h-3 border-b-4 border-l-4 border-emerald-400 -mb-1 -ml-1"></div>
+                        <div class="absolute bottom-0 right-0 w-3 h-3 border-b-4 border-r-4 border-emerald-400 -mb-1 -mr-1"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" onclick="stopQrCamera()" class="w-full py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[38px]">
+                    <i class="fa-solid fa-stop"></i> Stop Camera Scanner
+                  </button>
+                </div>
+
+                <div id="qrCameraError" class="hidden p-3 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-xs text-red-700 dark:text-red-300 space-y-2">
+                  <p id="qrCameraErrorMsg" class="font-semibold"></p>
+                  <button type="button" onclick="document.getElementById('qrScanFileInput').click()" class="text-[11px] font-bold text-red-800 dark:text-red-200 underline">Upload an image file instead</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Decoded Result Card -->
+            <div id="qrDecodedCard" class="hidden p-6 bg-slate-50 dark:bg-slate-800/80 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-4">
+              <div class="flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span class="font-bold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-200">Decoded QR Code Result</span>
+                </div>
+                <span id="qrDecodedBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-cyan-400">Plain Text</span>
+              </div>
+
+              <!-- Sanitized Text Container (Safe textContent rendering) -->
+              <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 font-mono text-xs sm:text-sm text-slate-800 dark:text-slate-100 break-all leading-relaxed max-h-60 overflow-y-auto select-all">
+                <span id="qrDecodedText"></span>
+              </div>
+
+              <!-- Specialized Action Block (Safe link buttons, Wi-Fi password copy) -->
+              <div id="qrSpecializedActions" class="space-y-2"></div>
+
+              <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+                <button type="button" onclick="copyQrDecodedContent()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center gap-1.5 min-h-[38px]">
+                  <i class="fa-solid fa-copy"></i> Copy Content
+                </button>
+                <button type="button" onclick="resetQrScanner()" class="px-4 py-2.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-bold text-xs rounded-xl transition-all flex items-center gap-1.5 min-h-[38px]">
+                  <i class="fa-solid fa-rotate-left"></i> Scan Another
+                </button>
+              </div>
             </div>
           </div>
         </div>
       `;
+
       setTimeout(generateQr, 50);
     }
 
+    function switchQrTab(tab) {
+      qrActiveTab = tab;
+      const genBtn = document.getElementById('tabQrGenBtn');
+      const scanBtn = document.getElementById('tabQrScanBtn');
+      const genView = document.getElementById('qrGenView');
+      const scanView = document.getElementById('qrScanView');
+
+      if (tab === 'generator') {
+        stopQrCamera();
+        if (genBtn) {
+          genBtn.className = 'flex-1 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 bg-white dark:bg-slate-800 text-blue-600 dark:text-cyan-400 shadow-xs';
+        }
+        if (scanBtn) {
+          scanBtn.className = 'flex-1 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white';
+        }
+        if (genView) genView.classList.remove('hidden');
+        if (scanView) scanView.classList.add('hidden');
+        generateQr();
+      } else {
+        ensureScript('jsQR');
+        if (scanBtn) {
+          scanBtn.className = 'flex-1 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 bg-white dark:bg-slate-800 text-blue-600 dark:text-cyan-400 shadow-xs';
+        }
+        if (genBtn) {
+          genBtn.className = 'flex-1 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white';
+        }
+        if (genView) genView.classList.add('hidden');
+        if (scanView) scanView.classList.remove('hidden');
+      }
+    }
+
+    function switchQrType(type) {
+      qrActiveType = type;
+      // Update pill buttons
+      document.querySelectorAll('.qr-type-btn').forEach(btn => {
+        btn.className = 'qr-type-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900';
+      });
+      const activeBtn = document.getElementById('qrTypeBtn-' + type);
+      if (activeBtn) {
+        activeBtn.className = 'qr-type-btn px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 text-blue-600 dark:text-cyan-400 shadow-2xs font-bold';
+      }
+
+      // Hide all input forms, show active one
+      document.querySelectorAll('.qr-input-form').forEach(f => f.classList.add('hidden'));
+      const activeForm = document.getElementById('qrInputForm-' + type);
+      if (activeForm) activeForm.classList.remove('hidden');
+
+      // Update badge label
+      const badgeLabels = {
+        url: 'Website URL',
+        text: 'Plain Text',
+        wifi: 'Wi-Fi Network',
+        vcard: 'vCard Contact',
+        email: 'Email Draft',
+        wa: 'WhatsApp Chat'
+      };
+      const badge = document.getElementById('qrLiveTypeBadge');
+      if (badge) badge.innerText = badgeLabels[type] || 'QR Code';
+
+      generateQr();
+    }
+
+    function toggleWifiPasswordField() {
+      const enc = document.getElementById('qrWifiEnc')?.value || 'WPA';
+      const passGroup = document.getElementById('qrWifiPassGroup');
+      if (passGroup) {
+        if (enc === 'nopass') {
+          passGroup.classList.add('hidden');
+        } else {
+          passGroup.classList.remove('hidden');
+        }
+      }
+    }
+
+    function toggleQrWifiPassVisibility() {
+      const passInput = document.getElementById('qrWifiPass');
+      const eyeIcon = document.getElementById('qrWifiPassEye');
+      if (!passInput) return;
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye-slash';
+      } else {
+        passInput.type = 'password';
+        if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye';
+      }
+    }
+
+    function applyQrPalette(fg, bg) {
+      qrFgColor = fg;
+      qrBgColor = bg;
+      const fgPicker = document.getElementById('qrColorPicker');
+      const bgPicker = document.getElementById('qrBgColorPicker');
+      if (fgPicker) fgPicker.value = fg;
+      if (bgPicker) bgPicker.value = bg;
+      generateQr();
+    }
+
+    function checkQrContrast(hex1, hex2) {
+      function getLuminance(hex) {
+        const c = hex.replace('#', '');
+        const r = parseInt(c.substr(0, 2), 16) / 255;
+        const g = parseInt(c.substr(2, 2), 16) / 255;
+        const b = parseInt(c.substr(4, 2), 16) / 255;
+        const a = [r, g, b].map(v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+        return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+      }
+      try {
+        const l1 = getLuminance(hex1);
+        const l2 = getLuminance(hex2);
+        const ratio = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+        return ratio >= 2.5;
+      } catch (e) {
+        return true;
+      }
+    }
+
+    function getQrPayload() {
+      if (qrActiveType === 'url') {
+        let url = document.getElementById('qrUrlInput')?.value?.trim() || 'https://toolshere.online';
+        if (url && !/^https?:\/\//i.test(url) && !url.startsWith('/')) {
+          url = 'https://' + url;
+        }
+        return url;
+      }
+      if (qrActiveType === 'text') {
+        return document.getElementById('qrTextInput')?.value || 'ToolsHere.online';
+      }
+      if (qrActiveType === 'wifi') {
+        const ssid = document.getElementById('qrWifiSsid')?.value || '';
+        const pass = document.getElementById('qrWifiPass')?.value || '';
+        const enc = document.getElementById('qrWifiEnc')?.value || 'WPA';
+        const isHidden = document.getElementById('qrWifiHidden')?.checked || false;
+
+        let payload = `WIFI:T:${enc};S:${escapeWifiString(ssid)};`;
+        if (enc !== 'nopass' && pass) {
+          payload += `P:${escapeWifiString(pass)};`;
+        }
+        if (isHidden) {
+          payload += 'H:true;';
+        }
+        payload += ';';
+        return payload;
+      }
+      if (qrActiveType === 'vcard') {
+        const fn = document.getElementById('qrVcardFn')?.value?.trim() || '';
+        const ln = document.getElementById('qrVcardLn')?.value?.trim() || '';
+        const org = document.getElementById('qrVcardOrg')?.value?.trim() || '';
+        const title = document.getElementById('qrVcardTitle')?.value?.trim() || '';
+        const phone = document.getElementById('qrVcardPhone')?.value?.trim() || '';
+        const email = document.getElementById('qrVcardEmail')?.value?.trim() || '';
+        const url = document.getElementById('qrVcardUrl')?.value?.trim() || '';
+
+        const fullName = [fn, ln].filter(Boolean).join(' ') || 'Contact';
+        const lines = ['BEGIN:VCARD', 'VERSION:3.0', `FN:${fullName}`, `N:${ln};${fn};;;`];
+        if (org) lines.push(`ORG:${org}`);
+        if (title) lines.push(`TITLE:${title}`);
+        if (phone) lines.push(`TEL;TYPE=CELL:${phone}`);
+        if (email) lines.push(`EMAIL:${email}`);
+        if (url) lines.push(`URL:${url}`);
+        lines.push('END:VCARD');
+        return lines.join('\n');
+      }
+      if (qrActiveType === 'email') {
+        const to = document.getElementById('qrEmailTo')?.value?.trim() || 'support@toolshere.online';
+        const sub = document.getElementById('qrEmailSub')?.value?.trim() || '';
+        const body = document.getElementById('qrEmailBody')?.value || '';
+        const params = [];
+        if (sub) params.push(`subject=${encodeURIComponent(sub)}`);
+        if (body) params.push(`body=${encodeURIComponent(body)}`);
+        return `mailto:${to}${params.length ? '?' + params.join('&') : ''}`;
+      }
+      if (qrActiveType === 'wa') {
+        const phone = (document.getElementById('qrWaPhone')?.value || '').replace(/[^0-9]/g, '');
+        const msg = document.getElementById('qrWaMsg')?.value || '';
+        return `https://wa.me/${phone}${msg ? '?text=' + encodeURIComponent(msg) : ''}`;
+      }
+      return 'https://toolshere.online';
+    }
+
     function generateQr() {
-      const text = document.getElementById('qrTextInput')?.value || 'https://toolshere.online';
+      const payload = getQrPayload();
       const canvas = document.getElementById('qrCanvas');
       if (!canvas) return;
 
+      // Contrast check
+      const contrastWarn = document.getElementById('qrContrastWarn');
+      if (contrastWarn) {
+        if (!checkQrContrast(qrFgColor, qrBgColor)) {
+          contrastWarn.classList.remove('hidden');
+        } else {
+          contrastWarn.classList.add('hidden');
+        }
+      }
+
       if (typeof QRCode !== 'undefined' && QRCode.toCanvas) {
-        QRCode.toCanvas(canvas, text, {
+        QRCode.toCanvas(canvas, payload, {
           width: 240,
           margin: 2,
+          errorCorrectionLevel: 'H',
           color: {
             dark: qrFgColor || '#000000',
             light: qrBgColor || '#ffffff'
           }
         }, function(error) {
-          if (error) console.error(error);
+          if (error) console.error('QRCode canvas generation error:', error);
         });
       }
     }
 
     async function downloadQrHighQuality(format) {
-      const text = document.getElementById('qrTextInput')?.value || 'https://toolshere.online';
+      const payload = getQrPayload();
       const res = parseInt(document.getElementById('qrResSelect')?.value) || 1200;
 
       if (format === 'svg') {
         if (typeof QRCode !== 'undefined' && QRCode.toString) {
-          QRCode.toString(text, {
+          QRCode.toString(payload, {
             type: 'svg',
+            errorCorrectionLevel: 'H',
             color: { dark: qrFgColor, light: qrBgColor },
             margin: 2
           }, (err, svgStr) => {
-            if (err) return;
+            if (err) {
+              showToast('Failed to generate SVG', 'error');
+              return;
+            }
             const blob = new Blob([svgStr], { type: 'image/svg+xml' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = 'toolshere-qrcode.svg';
+            a.download = `toolshere-qrcode-${qrActiveType}.svg`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             showToast('Vector SVG downloaded!', 'success');
+            triggerConfetti();
           });
         }
         return;
@@ -3158,15 +3641,19 @@ function ensureScript(name) {
 
       showToast('Generating high-resolution QR...', 'info');
       const tempCanvas = document.createElement('canvas');
-      QRCode.toCanvas(tempCanvas, text, {
+      QRCode.toCanvas(tempCanvas, payload, {
         width: res,
         margin: 2,
+        errorCorrectionLevel: 'H',
         color: { dark: qrFgColor, light: qrBgColor }
       }, (err) => {
-        if (err) return;
+        if (err) {
+          showToast('Failed to generate PNG: ' + err.message, 'error');
+          return;
+        }
         const a = document.createElement('a');
         a.href = tempCanvas.toDataURL('image/png');
-        a.download = `toolshere-qrcode-${res}px.png`;
+        a.download = `toolshere-qrcode-${qrActiveType}-${res}px.png`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -3176,20 +3663,24 @@ function ensureScript(name) {
     }
 
     async function downloadQrAsPdf() {
-      const text = document.getElementById('qrTextInput')?.value || 'https://toolshere.online';
+      const payload = getQrPayload();
       showToast('Creating high-quality printable PDF...', 'info');
 
       try {
         if (typeof PDFLib === 'undefined') {
-          showToast('PDF generator initializing...', 'info');
+          await ensureScript('PDFLib');
+        }
+        if (typeof PDFLib === 'undefined') {
+          showToast('PDF generator initializing, please retry...', 'info');
           return;
         }
 
         const tempCanvas = document.createElement('canvas');
         await new Promise((resolve, reject) => {
-          QRCode.toCanvas(tempCanvas, text, {
+          QRCode.toCanvas(tempCanvas, payload, {
             width: 1200,
             margin: 2,
+            errorCorrectionLevel: 'H',
             color: { dark: qrFgColor, light: qrBgColor }
           }, err => err ? reject(err) : resolve());
         });
@@ -3205,24 +3696,24 @@ function ensureScript(name) {
 
         page.drawImage(pngImage, { x, y, width: qrDim, height: qrDim });
 
-        page.drawText('ToolsHere.online — QR Code', {
-          x: 160,
+        page.drawText('ToolsHere.online — QR Code Studio', {
+          x: 140,
           y: y + qrDim + 40,
-          size: 20
+          size: 18
         });
 
-        const previewText = text.length > 60 ? text.slice(0, 57) + '...' : text;
+        const previewText = payload.length > 55 ? payload.slice(0, 52) + '...' : payload;
         page.drawText(previewText, {
-          x: 100,
-          y: y - 30,
-          size: 11
+          x: 80,
+          y: y - 25,
+          size: 10
         });
 
         const pdfBytes = await pdfDoc.save();
         const blob = new Blob([pdfBytes], { type: 'application/pdf' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'toolshere-qrcode.pdf';
+        a.download = `toolshere-qrcode-${qrActiveType}.pdf`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -3232,6 +3723,364 @@ function ensureScript(name) {
         console.error(err);
         showToast('Failed to create PDF: ' + err.message, 'error');
       }
+    }
+
+    /* ================= QR SCANNER ENGINE ================= */
+    function handleQrDragOver(e) {
+      if (e) e.preventDefault();
+      const dropZone = document.getElementById('qrScanDropZone');
+      if (dropZone) dropZone.classList.add('border-blue-500', 'bg-blue-50/50', 'dark:bg-slate-700/50');
+    }
+
+    function handleQrDragLeave(e) {
+      if (e) e.preventDefault();
+      const dropZone = document.getElementById('qrScanDropZone');
+      if (dropZone) dropZone.classList.remove('border-blue-500', 'bg-blue-50/50', 'dark:bg-slate-700/50');
+    }
+
+    function handleQrDrop(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      handleQrDragLeave();
+      const files = e.dataTransfer ? e.dataTransfer.files : null;
+      if (files && files.length > 0) {
+        processQrImageFile(files[0]);
+      }
+    }
+
+    function handleQrImageSelect(input) {
+      if (input && input.files && input.files.length > 0) {
+        processQrImageFile(input.files[0]);
+      }
+    }
+
+    function showQrScanError(msg) {
+      showToast(msg, 'error');
+    }
+
+    function processQrImageFile(file) {
+      if (!file) return;
+      showToast('Processing image...', 'info');
+
+      // Check if SVG or image
+      const isSvg = file.type === 'image/svg+xml' || (file.name && file.name.toLowerCase().endsWith('.svg'));
+
+      const img = new Image();
+      const objUrl = URL.createObjectURL(file);
+
+      img.onload = () => {
+        try {
+          const maxDim = 1200;
+          let w = img.naturalWidth || img.width || 600;
+          let h = img.naturalHeight || img.height || 600;
+
+          if (w > maxDim || h > maxDim) {
+            const ratio = Math.min(maxDim / w, maxDim / h);
+            w = Math.round(w * ratio);
+            h = Math.round(h * ratio);
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+          // Fill white background before drawing (vital for transparent PNG/SVG)
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, w, h);
+
+          URL.revokeObjectURL(objUrl);
+          decodeQrFromCanvas(canvas);
+        } catch (err) {
+          URL.revokeObjectURL(objUrl);
+          showQrScanError('Could not process image pixels: ' + err.message);
+        }
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(objUrl);
+        showQrScanError('Could not load image file. Please provide a valid PNG, JPG, or SVG.');
+      };
+
+      img.src = objUrl;
+    }
+
+    async function decodeQrFromCanvas(canvas) {
+      if (!canvas) return;
+
+      // Strategy 1: Native BarcodeDetector if available
+      if (typeof window !== 'undefined' && 'BarcodeDetector' in window) {
+        try {
+          const detector = new window.BarcodeDetector({ formats: ['qr_code'] });
+          const barcodes = await detector.detect(canvas);
+          if (barcodes && barcodes.length > 0 && barcodes[0].rawValue) {
+            renderDecodedResult(barcodes[0].rawValue);
+            return;
+          }
+        } catch (e) {
+          // Native detector threw or unsupported format; proceed to fallback
+        }
+      }
+
+      // Strategy 2: Client-side jsQR fallback
+      if (typeof jsQR === 'undefined') {
+        await ensureScript('jsQR');
+      }
+
+      if (typeof jsQR !== 'undefined') {
+        try {
+          const ctx = canvas.getContext('2d', { willReadFrequently: true });
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const code = jsQR(imageData.data, imageData.width, imageData.height, {
+            inversionAttempts: 'attemptBoth'
+          });
+          if (code && code.data) {
+            renderDecodedResult(code.data);
+            return;
+          }
+        } catch (e) {
+          console.error('jsQR decoding error:', e);
+        }
+      }
+
+      showQrScanError('No QR code detected in this image. Please ensure the code is clear and well-lit.');
+    }
+
+    async function startQrCamera() {
+      if (typeof navigator === 'undefined' || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        const errorBox = document.getElementById('qrCameraError');
+        const errorMsg = document.getElementById('qrCameraErrorMsg');
+        if (errorBox && errorMsg) {
+          errorMsg.innerText = 'Camera access is not supported by your browser or requires a secure HTTPS connection.';
+          errorBox.classList.remove('hidden');
+        }
+        return;
+      }
+
+      stopQrCamera(); // Prevent multiple streams
+
+      const initialView = document.getElementById('qrCameraInitial');
+      const activeView = document.getElementById('qrCameraActive');
+      const errorBox = document.getElementById('qrCameraError');
+      const errorMsg = document.getElementById('qrCameraErrorMsg');
+
+      if (errorBox) errorBox.classList.add('hidden');
+
+      try {
+        await ensureScript('jsQR');
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
+        });
+
+        qrCameraStream = stream;
+        const video = document.getElementById('qrVideo');
+        if (video) {
+          video.srcObject = stream;
+          await video.play();
+
+          if (initialView) initialView.classList.add('hidden');
+          if (activeView) activeView.classList.remove('hidden');
+
+          // Frame scanning loop
+          scanCameraFrame();
+        }
+      } catch (err) {
+        if (initialView) initialView.classList.remove('hidden');
+        if (activeView) activeView.classList.add('hidden');
+        if (errorBox && errorMsg) {
+          if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+            errorMsg.innerText = 'Camera permission was denied. Please allow camera permissions in your browser address bar.';
+          } else if (err.name === 'NotFoundError') {
+            errorMsg.innerText = 'No camera device found on this system. Please upload an image file instead.';
+          } else if (err.name === 'NotReadableError') {
+            errorMsg.innerText = 'Camera is currently in use by another program. Please close other camera apps and retry.';
+          } else {
+            errorMsg.innerText = 'Could not start camera: ' + err.message;
+          }
+          errorBox.classList.remove('hidden');
+        }
+      }
+    }
+
+    function scanCameraFrame() {
+      const video = document.getElementById('qrVideo');
+      if (!video || !qrCameraStream || video.readyState !== video.HAVE_ENOUGH_DATA) {
+        qrCameraRaf = requestAnimationFrame(scanCameraFrame);
+        return;
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth || 640;
+      canvas.height = video.videoHeight || 480;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      let foundData = null;
+
+      if (typeof jsQR !== 'undefined') {
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: 'dontInvert'
+        });
+        if (code && code.data) {
+          foundData = code.data;
+        }
+      }
+
+      if (foundData) {
+        stopQrCamera();
+        renderDecodedResult(foundData);
+        showToast('QR code detected!', 'success');
+        triggerConfetti();
+        return;
+      }
+
+      qrCameraRaf = requestAnimationFrame(scanCameraFrame);
+    }
+
+    function stopQrCamera() {
+      if (qrCameraRaf) {
+        cancelAnimationFrame(qrCameraRaf);
+        qrCameraRaf = null;
+      }
+      if (qrCameraStream) {
+        qrCameraStream.getTracks().forEach(track => {
+          try { track.stop(); } catch (e) {}
+        });
+        qrCameraStream = null;
+      }
+      const video = document.getElementById('qrVideo');
+      if (video) video.srcObject = null;
+
+      const initialView = document.getElementById('qrCameraInitial');
+      const activeView = document.getElementById('qrCameraActive');
+      if (initialView) initialView.classList.remove('hidden');
+      if (activeView) activeView.classList.add('hidden');
+    }
+
+    function classifyDecodedPayload(text) {
+      if (!text) return { type: 'empty', label: 'Empty' };
+      const trimmed = text.trim();
+      if (/^https?:\/\//i.test(trimmed)) {
+        return { type: 'url', label: 'Website Link', isHttp: true, safeUrl: trimmed };
+      }
+      if (/^WIFI:/i.test(trimmed)) {
+        return { type: 'wifi', label: 'Wi-Fi Network' };
+      }
+      if (/^BEGIN:VCARD/i.test(trimmed)) {
+        return { type: 'vcard', label: 'Contact Card (vCard)' };
+      }
+      if (/^mailto:/i.test(trimmed)) {
+        return { type: 'email', label: 'Email Action', isHttp: true, safeUrl: trimmed };
+      }
+      if (/^https:\/\/wa\.me\//i.test(trimmed)) {
+        return { type: 'wa', label: 'WhatsApp Chat', isHttp: true, safeUrl: trimmed };
+      }
+      return { type: 'text', label: 'Plain Text' };
+    }
+
+    function renderDecodedResult(rawText) {
+      const card = document.getElementById('qrDecodedCard');
+      const textBox = document.getElementById('qrDecodedText');
+      const badge = document.getElementById('qrDecodedBadge');
+      const actions = document.getElementById('qrSpecializedActions');
+
+      if (!card || !textBox) return;
+
+      // STRICT SECURITY: Use textContent to prevent XSS execution
+      textBox.textContent = rawText;
+
+      const meta = classifyDecodedPayload(rawText);
+      if (badge) badge.innerText = meta.label;
+
+      if (actions) {
+        actions.innerHTML = '';
+
+        // If safe HTTP/HTTPS URL
+        if (meta.type === 'url' && meta.isHttp) {
+          const alertP = document.createElement('p');
+          alertP.className = 'text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5';
+          alertP.innerHTML = '<i class="fa-solid fa-shield-halved text-blue-500"></i> Review the destination link carefully before opening:';
+
+          const linkA = document.createElement('a');
+          linkA.href = meta.safeUrl;
+          linkA.target = '_blank';
+          linkA.rel = 'noopener noreferrer';
+          linkA.className = 'inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition-colors';
+          linkA.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Website Link';
+
+          actions.appendChild(alertP);
+          actions.appendChild(linkA);
+        } else if (meta.type === 'wifi') {
+          // Parse SSID and Password safely
+          const ssidMatch = rawText.match(/S:([^;]+);/);
+          const passMatch = rawText.match(/P:([^;]+);/);
+          const rawSsid = ssidMatch ? ssidMatch[1].replace(/\\([\\;:,"])/g, '$1') : 'Unknown';
+          const rawPass = passMatch ? passMatch[1].replace(/\\([\\;:,"])/g, '$1') : '';
+
+          const wifiBox = document.createElement('div');
+          wifiBox.className = 'p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 text-xs space-y-1.5';
+
+          const ssidLine = document.createElement('div');
+          ssidLine.className = 'font-semibold text-slate-800 dark:text-slate-200 flex items-center justify-between';
+          ssidLine.textContent = 'SSID: ' + rawSsid;
+
+          wifiBox.appendChild(ssidLine);
+
+          if (rawPass) {
+            const passLine = document.createElement('div');
+            passLine.className = 'flex items-center justify-between text-slate-700 dark:text-slate-300 font-mono text-xs';
+            passLine.textContent = 'Password: ' + rawPass;
+
+            const copyPassBtn = document.createElement('button');
+            copyPassBtn.type = 'button';
+            copyPassBtn.className = 'text-xs font-bold text-blue-600 dark:text-cyan-400 hover:underline ml-2';
+            copyPassBtn.textContent = 'Copy Password';
+            copyPassBtn.onclick = () => copyTextValue(rawPass, 'Wi-Fi Password');
+
+            passLine.appendChild(copyPassBtn);
+            wifiBox.appendChild(passLine);
+          }
+          actions.appendChild(wifiBox);
+        } else if (!meta.isHttp && /^([a-zA-Z0-9_-]+):/i.test(rawText.trim())) {
+          // Potentially suspicious URI scheme (e.g. javascript:, data:, file:)
+          const warnP = document.createElement('p');
+          warnP.className = 'text-[11px] text-amber-700 dark:text-amber-300 font-semibold flex items-center gap-1.5';
+          warnP.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Non-standard scheme detected. For your security, this payload is displayed strictly as plain text.';
+          actions.appendChild(warnP);
+        }
+      }
+
+      card.classList.remove('hidden');
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function copyQrDecodedContent() {
+      const textBox = document.getElementById('qrDecodedText');
+      const text = textBox ? textBox.textContent : '';
+      if (!text) {
+        showToast('No decoded content to copy', 'error');
+        return;
+      }
+      copyText(text);
+    }
+
+    function copyTextValue(val, label) {
+      if (!val) return;
+      copyText(val);
+      showToast(`${label || 'Text'} copied!`, 'success');
+    }
+
+    function resetQrScanner() {
+      const card = document.getElementById('qrDecodedCard');
+      const textBox = document.getElementById('qrDecodedText');
+      const fileInput = document.getElementById('qrScanFileInput');
+      if (card) card.classList.add('hidden');
+      if (textBox) textBox.textContent = '';
+      if (fileInput) fileInput.value = '';
     }
     /* ================= UTILITY 8: PASSWORD GENERATOR ================= */
     function renderPasswordTool(title, icon, container) {
