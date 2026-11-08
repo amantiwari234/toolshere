@@ -489,7 +489,7 @@ function ensureScript(name) {
 
       // 3. Clear and Render Tool Workspace (skip if already pre-rendered on dedicated page)
       const workspace = document.getElementById('toolWorkspace');
-      const isDedicatedPage = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '').toLowerCase() === route.hash.toLowerCase();
+      const isDedicatedPage = window.location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase() === route.hash.toLowerCase();
       if (workspace && (!isDedicatedPage || workspace.children.length === 0)) {
         workspace.innerHTML = '';
         const titleHolder = { innerText: '' };
@@ -599,7 +599,7 @@ function ensureScript(name) {
       if (p.includes("pdf-to-word")) { ensureScript("pdfjsLib"); }
       if (p.includes("qr")) { ensureScript("QRCode"); }
 
-      const cleanPath = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '').toLowerCase();
+      const cleanPath = window.location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase();
       const cleanHash = window.location.hash.replace(/^#/, '').toLowerCase();
       const target = cleanPath || cleanHash;
 
@@ -615,7 +615,7 @@ function ensureScript(name) {
 
     // Handle Browser Back / Forward Buttons
     window.addEventListener('popstate', (e) => {
-      const cleanPath = window.location.pathname.replace(/^\//, '').replace(/\.html$/, '').toLowerCase();
+      const cleanPath = window.location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase();
       const cleanHash = window.location.hash.replace(/^#/, '').toLowerCase();
       const target = cleanPath || cleanHash;
 

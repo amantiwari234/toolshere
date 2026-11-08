@@ -62,8 +62,8 @@ function getHeaderHtml(activeTab = 'blog') {
           <a href="/#pdf" class="hover:text-blue-600 transition-colors">PDF Tools</a>
           <a href="/#image" class="hover:text-blue-600 transition-colors">Image Tools</a>
           <a href="/" class="hover:text-blue-600 transition-colors">All Tools</a>
-          <a href="/blog" class="${activeTab === 'blog' ? 'text-blue-600 font-bold' : 'hover:text-blue-600 transition-colors'}">Blog</a>
-          <a href="/about" class="${activeTab === 'about' ? 'text-blue-600 font-bold' : 'hover:text-blue-600 transition-colors'}">About</a>
+          <a href="/blog/" class="${activeTab === 'blog' ? 'text-blue-600 font-bold' : 'hover:text-blue-600 transition-colors'}">Blog</a>
+          <a href="/about/" class="${activeTab === 'about' ? 'text-blue-600 font-bold' : 'hover:text-blue-600 transition-colors'}">About</a>
         </nav>
 
         <!-- Theme Toggle Button -->
@@ -111,7 +111,7 @@ function getHeaderHtml(activeTab = 'blog') {
       <!-- Navigation & Categories -->
       <div class="space-y-1">
         <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2 block">Navigation</label>
-        <a href="/blog" class="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-800 hover:text-blue-600 text-sm font-semibold transition-colors min-h-[44px]">
+        <a href="/blog/" class="w-full flex items-center gap-3 px-3 py-3 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-blue-50 dark:hover:bg-slate-800 hover:text-blue-600 text-sm font-semibold transition-colors min-h-[44px]">
           <span class="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-xs"><i class="fa-solid fa-newspaper"></i></span>
           Blog &amp; Guides
         </a>
@@ -132,10 +132,10 @@ function getHeaderHtml(activeTab = 'blog') {
       <!-- Informational & Legal Links -->
       <div class="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-1">
         <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2 block">Information</label>
-        <a href="/about" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">About ToolsHere</a>
-        <a href="/contact" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Contact Support</a>
-        <a href="/privacy" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Privacy Policy</a>
-        <a href="/terms" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Terms of Service</a>
+        <a href="/about/" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">About ToolsHere</a>
+        <a href="/contact/" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Contact Support</a>
+        <a href="/privacy/" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Privacy Policy</a>
+        <a href="/terms/" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Terms of Service</a>
       </div>
     </div>
 
@@ -184,14 +184,14 @@ function getFooterHtml() {
         <div class="space-y-3">
           <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">PDF &amp; Image Tools</h4>
           <ul class="space-y-2">
-            <li><a href="/image-compressor" class="hover:text-blue-600 transition-colors">Image Compressor</a></li>
-            <li><a href="/background-remover" class="hover:text-blue-600 transition-colors">Background Remover</a></li>
-            <li><a href="/pdf-to-word" class="hover:text-blue-600 transition-colors">PDF to Word Converter</a></li>
-            <li><a href="/merge-pdf" class="hover:text-blue-600 transition-colors">Merge &amp; Split PDF</a></li>
-            <li><a href="/compress-pdf" class="hover:text-blue-600 transition-colors">Compress PDF Document</a></li>
-            <li><a href="/image-to-pdf" class="hover:text-blue-600 transition-colors">Image to PDF Converter</a></li>
-            <li><a href="/image-converter" class="hover:text-blue-600 transition-colors">Image Format Converter</a></li>
-            <li><a href="/youtube-thumbnail" class="hover:text-blue-600 transition-colors">YouTube Thumbnail Grabber</a></li>
+            <li><a href="/image-compressor/" class="hover:text-blue-600 transition-colors">Image Compressor</a></li>
+            <li><a href="/background-remover/" class="hover:text-blue-600 transition-colors">Background Remover</a></li>
+            <li><a href="/pdf-to-word/" class="hover:text-blue-600 transition-colors">PDF to Word Converter</a></li>
+            <li><a href="/merge-pdf/" class="hover:text-blue-600 transition-colors">Merge &amp; Split PDF</a></li>
+            <li><a href="/compress-pdf/" class="hover:text-blue-600 transition-colors">Compress PDF Document</a></li>
+            <li><a href="/image-to-pdf/" class="hover:text-blue-600 transition-colors">Image to PDF Converter</a></li>
+            <li><a href="/image-converter/" class="hover:text-blue-600 transition-colors">Image Format Converter</a></li>
+            <li><a href="/youtube-thumbnail/" class="hover:text-blue-600 transition-colors">YouTube Thumbnail Grabber</a></li>
           </ul>
         </div>
 
@@ -199,14 +199,14 @@ function getFooterHtml() {
         <div class="space-y-3">
           <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">Calculators &amp; Utilities</h4>
           <ul class="space-y-2">
-            <li><a href="/age-calculator" class="hover:text-blue-600 transition-colors">Age &amp; Date Calculator</a></li>
-            <li><a href="/emi-calculator" class="hover:text-blue-600 transition-colors">GST &amp; EMI Calculator</a></li>
-            <li><a href="/qr-code-generator" class="hover:text-blue-600 transition-colors">QR Code Studio</a></li>
-            <li><a href="/password-generator" class="hover:text-blue-600 transition-colors">Password Generator</a></li>
-            <li><a href="/word-counter" class="hover:text-blue-600 transition-colors">Word Counter &amp; Analyzer</a></li>
-            <li><a href="/text-case-converter" class="hover:text-blue-600 transition-colors">Text Case Converter</a></li>
-            <li><a href="/json-formatter" class="hover:text-blue-600 transition-colors">JSON Formatter &amp; Validator</a></li>
-            <li><a href="/seo-meta-generator" class="hover:text-blue-600 transition-colors">SEO Meta Tag Generator</a></li>
+            <li><a href="/age-calculator/" class="hover:text-blue-600 transition-colors">Age &amp; Date Calculator</a></li>
+            <li><a href="/emi-calculator/" class="hover:text-blue-600 transition-colors">GST &amp; EMI Calculator</a></li>
+            <li><a href="/qr-code-generator/" class="hover:text-blue-600 transition-colors">QR Code Studio</a></li>
+            <li><a href="/password-generator/" class="hover:text-blue-600 transition-colors">Password Generator</a></li>
+            <li><a href="/word-counter/" class="hover:text-blue-600 transition-colors">Word Counter &amp; Analyzer</a></li>
+            <li><a href="/text-case-converter/" class="hover:text-blue-600 transition-colors">Text Case Converter</a></li>
+            <li><a href="/json-formatter/" class="hover:text-blue-600 transition-colors">JSON Formatter &amp; Validator</a></li>
+            <li><a href="/seo-meta-generator/" class="hover:text-blue-600 transition-colors">SEO Meta Tag Generator</a></li>
           </ul>
         </div>
 
@@ -214,12 +214,12 @@ function getFooterHtml() {
         <div class="space-y-3">
           <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">Resources &amp; Legal</h4>
           <ul class="space-y-2">
-            <li><a href="/blog" class="hover:text-blue-600 font-semibold text-blue-600 dark:text-blue-400 transition-colors">Blog &amp; How-To Guides</a></li>
-            <li><a href="/about" class="hover:text-blue-600 transition-colors">About ToolsHere</a></li>
-            <li><a href="/contact" class="hover:text-blue-600 transition-colors">Contact &amp; Support</a></li>
-            <li><a href="/privacy" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
-            <li><a href="/terms" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
-            <li><a href="/disclaimer" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
+            <li><a href="/blog/" class="hover:text-blue-600 font-semibold text-blue-600 dark:text-blue-400 transition-colors">Blog &amp; How-To Guides</a></li>
+            <li><a href="/about/" class="hover:text-blue-600 transition-colors">About ToolsHere</a></li>
+            <li><a href="/contact/" class="hover:text-blue-600 transition-colors">Contact &amp; Support</a></li>
+            <li><a href="/privacy/" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms/" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
           </ul>
         </div>
 
@@ -229,10 +229,10 @@ function getFooterHtml() {
       <div class="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500 dark:text-slate-500">
         <p>&copy; ${new Date().getFullYear()} ToolsHere.online. All rights reserved. Free productivity utilities.</p>
         <div class="flex items-center gap-4">
-          <a href="/privacy" class="hover:text-blue-600 transition-colors">Privacy</a>
-          <a href="/terms" class="hover:text-blue-600 transition-colors">Terms</a>
-          <a href="/contact" class="hover:text-blue-600 transition-colors">Support</a>
-          <a href="/blog" class="hover:text-blue-600 transition-colors">Blog</a>
+          <a href="/privacy/" class="hover:text-blue-600 transition-colors">Privacy</a>
+          <a href="/terms/" class="hover:text-blue-600 transition-colors">Terms</a>
+          <a href="/contact/" class="hover:text-blue-600 transition-colors">Support</a>
+          <a href="/blog/" class="hover:text-blue-600 transition-colors">Blog</a>
           <a href="/sitemap.xml" class="hover:text-blue-600 transition-colors">Sitemap</a>
         </div>
       </div>
@@ -245,7 +245,7 @@ function getFooterHtml() {
 function generateBlogListingPage() {
   const title = "ToolsHere Blog: Free Guides, Tutorials & Productivity Tips";
   const metaDesc = "Read expert how-to guides and tutorials on merging PDFs, compressing documents for email, converting formats, and optimizing digital files.";
-  const canonicalUrl = "https://toolshere.online/blog";
+  const canonicalUrl = "https://toolshere.online/blog/";
 
   const jsonLd = [
     {
@@ -538,7 +538,7 @@ function generateBlogListingPage() {
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
-        <a href="/merge-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
+        <a href="/merge-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
           <div class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center text-sm"><i class="fa-solid fa-object-group"></i></span>
             <span class="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">Merge PDF</span>
@@ -546,7 +546,7 @@ function generateBlogListingPage() {
           <span class="text-[11px] text-slate-400 mt-2 block">Combine multiple PDFs</span>
         </a>
 
-        <a href="/compress-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
+        <a href="/compress-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
           <div class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center text-sm"><i class="fa-solid fa-file-zipper"></i></span>
             <span class="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">Compress PDF</span>
@@ -554,7 +554,7 @@ function generateBlogListingPage() {
           <span class="text-[11px] text-slate-400 mt-2 block">Shrink file size for email</span>
         </a>
 
-        <a href="/image-to-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
+        <a href="/image-to-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
           <div class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-lg bg-red-50 dark:bg-red-950/60 text-red-600 flex items-center justify-center text-sm"><i class="fa-solid fa-file-pdf"></i></span>
             <span class="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">Image to PDF</span>
@@ -562,7 +562,7 @@ function generateBlogListingPage() {
           <span class="text-[11px] text-slate-400 mt-2 block">Combine JPG/PNG into PDF</span>
         </a>
 
-        <a href="/pdf-to-word" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
+        <a href="/pdf-to-word/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-sm transition-all group min-h-[44px] flex flex-col justify-between">
           <div class="flex items-center gap-2.5">
             <span class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-blue-700 flex items-center justify-center text-sm"><i class="fa-solid fa-file-word"></i></span>
             <span class="font-bold text-xs text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">PDF to Word</span>
@@ -588,7 +588,7 @@ function generateBlogListingPage() {
 function generateArticlePage() {
   const title = "How to Convert PDF to JPG Online – Free Step-by-Step Guide - ToolsHere";
   const metaDesc = "Learn how to convert PDF documents to high-quality JPG images online using trusted converters, plus native offline methods for Windows and Mac with privacy guidance.";
-  const canonicalUrl = "https://toolshere.online/blog/how-to-convert-pdf-to-jpg";
+  const canonicalUrl = "https://toolshere.online/blog/how-to-convert-pdf-to-jpg/";
   const publishDate = "2026-11-05";
 
   const jsonLd = [
@@ -607,7 +607,7 @@ function generateArticlePage() {
       "author": {
         "@type": "Organization",
         "name": "ToolsHere Editorial Team",
-        "url": "https://toolshere.online/about"
+        "url": "https://toolshere.online/about/"
       },
       "publisher": {
         "@type": "Organization",
@@ -633,7 +633,7 @@ function generateArticlePage() {
           "@type": "ListItem",
           "position": 2,
           "name": "Blog",
-          "item": "https://toolshere.online/blog"
+          "item": "https://toolshere.online/blog/"
         },
         {
           "@type": "ListItem",
@@ -774,7 +774,7 @@ function generateArticlePage() {
         <i class="fa-solid fa-house text-xs"></i> Home
       </a>
       <span class="text-slate-300 dark:text-slate-600">/</span>
-      <a href="/blog" class="hover:text-blue-600 transition-colors font-medium">Blog</a>
+      <a href="/blog/" class="hover:text-blue-600 transition-colors font-medium">Blog</a>
       <span class="text-slate-300 dark:text-slate-600">/</span>
       <span class="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-xs sm:max-w-md">How to Convert PDF to JPG</span>
     </nav>
@@ -936,7 +936,7 @@ function generateArticlePage() {
                 <li>Navigate to <strong>Tools &gt; Export PDF</strong>.</li>
                 <li>Choose <strong>Image</strong> and select <strong>JPEG</strong>.</li>
                 <li>Click the settings gear icon to configure color management and resolution (e.g. 300 DPI for print).</li>
-                <li>Click <strong>Export</strong> and select a destination folder. All pages will be exported as individual high-quality JPG files. If the exported images exceed file size limits for email or online portals, optimize them to exact file sizes (such as 20KB, 50KB, or 100KB) using our free <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a>.</li>
+                <li>Click <strong>Export</strong> and select a destination folder. All pages will be exported as individual high-quality JPG files. If the exported images exceed file size limits for email or online portals, optimize them to exact file sizes (such as 20KB, 50KB, or 100KB) using our free <a href="/image-compressor/" class="text-blue-600 hover:underline font-semibold">Image Compressor</a>.</li>
               </ol>
 
               <div class="pt-2">
@@ -1035,7 +1035,7 @@ function generateArticlePage() {
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
           <!-- Link to image-compressor -->
-          <a href="/image-compressor" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/image-compressor/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-compress"></i>
             </div>
@@ -1046,7 +1046,7 @@ function generateArticlePage() {
           </a>
 
           <!-- Link to image-to-pdf -->
-          <a href="/image-to-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/image-to-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/60 text-red-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-file-pdf"></i>
             </div>
@@ -1057,7 +1057,7 @@ function generateArticlePage() {
           </a>
 
           <!-- Link to image-converter -->
-          <a href="/image-converter" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/image-converter/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-arrows-rotate"></i>
             </div>
@@ -1068,7 +1068,7 @@ function generateArticlePage() {
           </a>
 
           <!-- Link to compress-pdf -->
-          <a href="/compress-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/compress-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-file-zipper"></i>
             </div>
@@ -1079,7 +1079,7 @@ function generateArticlePage() {
           </a>
 
           <!-- Link to pdf-to-word -->
-          <a href="/pdf-to-word" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/pdf-to-word/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-file-word"></i>
             </div>
@@ -1144,7 +1144,7 @@ function generateArticlePage() {
               <i class="fa-solid fa-chevron-down text-xs text-slate-400 group-open:rotate-180 transition-transform"></i>
             </summary>
             <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
-              You can use ToolsHere's free <a href="/image-to-pdf" class="text-blue-600 hover:underline font-semibold">Image to PDF Converter</a> to compile multiple JPG, JPEG, and PNG images into a clean, organized PDF document directly in your browser.
+              You can use ToolsHere's free <a href="/image-to-pdf/" class="text-blue-600 hover:underline font-semibold">Image to PDF Converter</a> to compile multiple JPG, JPEG, and PNG images into a clean, organized PDF document directly in your browser.
             </p>
           </details>
         </div>
@@ -1184,7 +1184,7 @@ function generateArticlePage() {
 function generateCompressPdfArticlePage() {
   const title = "How to Compress PDF for Email – Free Online Guide - ToolsHere";
   const metaDesc = "Learn practical ways to compress PDF files for email attachments, understand provider size caps, Base64 overhead, and steps to optimize files with ToolsHere.";
-  const canonicalUrl = "https://toolshere.online/blog/how-to-compress-pdf-for-email";
+  const canonicalUrl = "https://toolshere.online/blog/how-to-compress-pdf-for-email/";
   const publishDate = "2026-11-06";
 
   const jsonLd = [
@@ -1203,7 +1203,7 @@ function generateCompressPdfArticlePage() {
       "author": {
         "@type": "Organization",
         "name": "ToolsHere Editorial Team",
-        "url": "https://toolshere.online/about"
+        "url": "https://toolshere.online/about/"
       },
       "publisher": {
         "@type": "Organization",
@@ -1229,7 +1229,7 @@ function generateCompressPdfArticlePage() {
           "@type": "ListItem",
           "position": 2,
           "name": "Blog",
-          "item": "https://toolshere.online/blog"
+          "item": "https://toolshere.online/blog/"
         },
         {
           "@type": "ListItem",
@@ -1386,7 +1386,7 @@ function generateCompressPdfArticlePage() {
         <i class="fa-solid fa-house text-xs"></i> Home
       </a>
       <span class="text-slate-300 dark:text-slate-600">/</span>
-      <a href="/blog" class="hover:text-blue-600 transition-colors font-medium">Blog</a>
+      <a href="/blog/" class="hover:text-blue-600 transition-colors font-medium">Blog</a>
       <span class="text-slate-300 dark:text-slate-600">/</span>
       <span class="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-xs sm:max-w-md">How to Compress PDF for Email</span>
     </nav>
@@ -1690,7 +1690,7 @@ function generateCompressPdfArticlePage() {
             <div>
               <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block">Pre-Compress Photos Before Document Insertion</span>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                If you are assembling a document in Word or Docs, optimize your photos with an <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a> before inserting them.
+                If you are assembling a document in Word or Docs, optimize your photos with an <a href="/image-compressor/" class="text-blue-600 hover:underline font-semibold">Image Compressor</a> before inserting them.
               </p>
             </div>
           </div>
@@ -1809,7 +1809,7 @@ function generateCompressPdfArticlePage() {
           </a>
 
           <!-- Link to image-compressor -->
-          <a href="/image-compressor" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/image-compressor/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-compress"></i>
             </div>
@@ -1820,7 +1820,7 @@ function generateCompressPdfArticlePage() {
           </a>
 
           <!-- Link to image-to-pdf -->
-          <a href="/image-to-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/image-to-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/60 text-red-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-file-pdf"></i>
             </div>
@@ -1831,7 +1831,7 @@ function generateCompressPdfArticlePage() {
           </a>
 
           <!-- Link to pdf-to-word -->
-          <a href="/pdf-to-word" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/pdf-to-word/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-file-word"></i>
             </div>
@@ -1963,7 +1963,7 @@ function generateCompressPdfArticlePage() {
 function generateMergePdfArticlePage() {
   const title = "How to Merge PDF Files Online for Free – Step-by-Step Guide - ToolsHere";
   const metaDesc = "Learn how to merge PDF files into one document online for free. Step-by-step guide with file ordering, common issues, mobile tips, and ToolsHere Merge PDF.";
-  const canonicalUrl = "https://toolshere.online/blog/how-to-merge-pdf-files-online";
+  const canonicalUrl = "https://toolshere.online/blog/how-to-merge-pdf-files-online/";
   const publishDate = "2026-11-06";
 
   const jsonLd = [
@@ -1982,7 +1982,7 @@ function generateMergePdfArticlePage() {
       "author": {
         "@type": "Organization",
         "name": "ToolsHere Editorial Team",
-        "url": "https://toolshere.online/about"
+        "url": "https://toolshere.online/about/"
       },
       "publisher": {
         "@type": "Organization",
@@ -2008,7 +2008,7 @@ function generateMergePdfArticlePage() {
           "@type": "ListItem",
           "position": 2,
           "name": "Blog",
-          "item": "https://toolshere.online/blog"
+          "item": "https://toolshere.online/blog/"
         },
         {
           "@type": "ListItem",
@@ -2165,7 +2165,7 @@ function generateMergePdfArticlePage() {
         <i class="fa-solid fa-house text-xs"></i> Home
       </a>
       <span class="text-slate-300 dark:text-slate-600">/</span>
-      <a href="/blog" class="hover:text-blue-600 transition-colors font-medium">Blog</a>
+      <a href="/blog/" class="hover:text-blue-600 transition-colors font-medium">Blog</a>
       <span class="text-slate-300 dark:text-slate-600">/</span>
       <span class="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-xs sm:max-w-md">How to Merge PDF Files Online</span>
     </nav>
@@ -2382,7 +2382,7 @@ function generateMergePdfArticlePage() {
             <div>
               <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block">Problem 2: Resulting Merged File Exceeds Email Limits</span>
               <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Combining five 6 MB scanned PDFs results in a 30 MB master document that will bounce on email providers with 20 MB or 25 MB caps. <em>Solution:</em> Run the combined document through our <a href="/compress-pdf" class="text-blue-600 hover:underline font-semibold">Compress PDF</a> tool or read our guide on <a href="/blog/how-to-compress-pdf-for-email" class="text-blue-600 hover:underline font-semibold">How to Compress PDF for Email</a> to downsample raster imagery before sending. If your PDF pages contain raw photo scans, you can also optimize the individual images beforehand using our <a href="/image-compressor" class="text-blue-600 hover:underline font-semibold">Image Compressor</a>.
+                Combining five 6 MB scanned PDFs results in a 30 MB master document that will bounce on email providers with 20 MB or 25 MB caps. <em>Solution:</em> Run the combined document through our <a href="/compress-pdf/" class="text-blue-600 hover:underline font-semibold">Compress PDF</a> tool or read our guide on <a href="/blog/how-to-compress-pdf-for-email/" class="text-blue-600 hover:underline font-semibold">How to Compress PDF for Email</a> to downsample raster imagery before sending. If your PDF pages contain raw photo scans, you can also optimize the individual images beforehand using our <a href="/image-compressor/" class="text-blue-600 hover:underline font-semibold">Image Compressor</a>.
               </p>
             </div>
           </div>
@@ -2490,7 +2490,7 @@ function generateMergePdfArticlePage() {
           </a>
 
           <!-- Link to compress-pdf -->
-          <a href="/compress-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/compress-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-file-zipper"></i>
             </div>
@@ -2501,7 +2501,7 @@ function generateMergePdfArticlePage() {
           </a>
 
           <!-- Link to image-to-pdf -->
-          <a href="/image-to-pdf" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/image-to-pdf/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-950/60 text-red-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-file-pdf"></i>
             </div>
@@ -2512,7 +2512,7 @@ function generateMergePdfArticlePage() {
           </a>
 
           <!-- Link to pdf-to-word -->
-          <a href="/pdf-to-word" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
+          <a href="/pdf-to-word/" class="p-4 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-blue-500 hover:shadow-xs transition-all flex items-start gap-3 group min-h-[44px]">
             <div class="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 flex items-center justify-center shrink-0 text-base">
               <i class="fa-solid fa-file-word"></i>
             </div>
@@ -2651,10 +2651,10 @@ function updateSitemap() {
     return;
   }
   let sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
-  const blogUrl = 'https://toolshere.online/blog';
-  const article1Url = 'https://toolshere.online/blog/how-to-convert-pdf-to-jpg';
-  const article2Url = 'https://toolshere.online/blog/how-to-compress-pdf-for-email';
-  const article3Url = 'https://toolshere.online/blog/how-to-merge-pdf-files-online';
+  const blogUrl = 'https://toolshere.online/blog/';
+  const article1Url = 'https://toolshere.online/blog/how-to-convert-pdf-to-jpg/';
+  const article2Url = 'https://toolshere.online/blog/how-to-compress-pdf-for-email/';
+  const article3Url = 'https://toolshere.online/blog/how-to-merge-pdf-files-online/';
   const today = new Date().toISOString().split('T')[0];
 
   let addedCount = 0;

@@ -115,7 +115,7 @@ const seoOverrides = {
             The Image Compressor exports optimized <strong>JPEG (.jpg)</strong> files for maximum file size reduction, even when your input file is a PNG, WebP, or GIF image. Because the standard JPEG format does not support alpha transparency, transparent backgrounds may not be preserved and will render with a solid background.
           </p>
           <p class="leading-relaxed">
-            If you need to maintain transparent backgrounds or convert your files into PNG, WebP, or other formats without compression, please use our <a href="/image-converter" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Image Converter</a> tool.
+            If you need to maintain transparent backgrounds or convert your files into PNG, WebP, or other formats without compression, please use our <a href="/image-converter/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Image Converter</a> tool.
           </p>
         </div>
     `,
@@ -126,12 +126,12 @@ const seoOverrides = {
           <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
             <i class="fa-solid fa-book-open text-blue-600"></i> Helpful Guides &amp; Tutorials
           </h2>
-          <a href="/blog" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
+          <a href="/blog/" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
             View All Guides <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </a>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <a href="/blog/how-to-convert-pdf-to-jpg" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+          <a href="/blog/how-to-convert-pdf-to-jpg/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
             <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
               <i class="fa-solid fa-file-image"></i>
             </div>
@@ -144,7 +144,7 @@ const seoOverrides = {
               </p>
             </div>
           </a>
-          <a href="/blog/how-to-compress-pdf-for-email" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+          <a href="/blog/how-to-compress-pdf-for-email/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
             <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
               <i class="fa-solid fa-file-zipper"></i>
             </div>
@@ -501,7 +501,7 @@ function generateGuideHtml(tool) {
         <div class="flex flex-wrap gap-2">
           ${tool.relatedTools.map(rt => {
             const slug = rt.hash.replace('#', '');
-            return `<a href="/${slug}" class="px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-slate-200 dark:border-slate-700">
+            return `<a href="/${slug}/" class="px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-arrow-right text-[10px] text-blue-500"></i> ${rt.name}
             </a>`;
           }).join('')}
@@ -800,7 +800,7 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
           <a href="/#pdf" class="hover:text-blue-600 transition-colors">PDF Tools</a>
           <a href="/#image" class="hover:text-blue-600 transition-colors">Image Tools</a>
           <a href="/" class="hover:text-blue-600 transition-colors">All Tools</a>
-          <a href="/about" class="hover:text-blue-600 transition-colors">About</a>
+          <a href="/about/" class="hover:text-blue-600 transition-colors">About</a>
         </nav>
 
         <!-- Theme Toggle Button -->
@@ -881,10 +881,10 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
         <!-- Informational & Legal Links -->
         <div class="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-1">
           <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2 block">Information</label>
-          <a href="/about" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">About ToolsHere</a>
-          <a href="/contact" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Contact Support</a>
-          <a href="/privacy" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Privacy Policy</a>
-          <a href="/terms" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Terms of Service</a>
+          <a href="/about/" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">About ToolsHere</a>
+          <a href="/contact/" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Contact Support</a>
+          <a href="/privacy/" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Privacy Policy</a>
+          <a href="/terms/" class="block px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-blue-600 text-xs font-semibold min-h-[44px] flex items-center">Terms of Service</a>
         </div>
       </div>
 
@@ -973,14 +973,14 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
         <div class="space-y-3">
           <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">PDF &amp; Image Tools</h4>
           <ul class="space-y-2 text-xs">
-            <li><a href="/image-compressor" class="hover:text-blue-600 transition-colors">Image Compressor &amp; Resizer</a></li>
-            <li><a href="/background-remover" class="hover:text-blue-600 transition-colors">AI Background Remover</a></li>
-            <li><a href="/pdf-to-word" class="hover:text-blue-600 transition-colors">PDF to Word Converter</a></li>
-            <li><a href="/merge-pdf" class="hover:text-blue-600 transition-colors">Merge &amp; Split PDF</a></li>
-            <li><a href="/compress-pdf" class="hover:text-blue-600 transition-colors">Compress PDF Document</a></li>
-            <li><a href="/image-to-pdf" class="hover:text-blue-600 transition-colors">Image to PDF Converter</a></li>
-            <li><a href="/image-converter" class="hover:text-blue-600 transition-colors">Image Format Converter</a></li>
-            <li><a href="/youtube-thumbnail" class="hover:text-blue-600 transition-colors">YouTube Thumbnail Grabber</a></li>
+            <li><a href="/image-compressor/" class="hover:text-blue-600 transition-colors">Image Compressor &amp; Resizer</a></li>
+            <li><a href="/background-remover/" class="hover:text-blue-600 transition-colors">AI Background Remover</a></li>
+            <li><a href="/pdf-to-word/" class="hover:text-blue-600 transition-colors">PDF to Word Converter</a></li>
+            <li><a href="/merge-pdf/" class="hover:text-blue-600 transition-colors">Merge &amp; Split PDF</a></li>
+            <li><a href="/compress-pdf/" class="hover:text-blue-600 transition-colors">Compress PDF Document</a></li>
+            <li><a href="/image-to-pdf/" class="hover:text-blue-600 transition-colors">Image to PDF Converter</a></li>
+            <li><a href="/image-converter/" class="hover:text-blue-600 transition-colors">Image Format Converter</a></li>
+            <li><a href="/youtube-thumbnail/" class="hover:text-blue-600 transition-colors">YouTube Thumbnail Grabber</a></li>
           </ul>
         </div>
 
@@ -988,14 +988,14 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
         <div class="space-y-3">
           <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">Calculators &amp; Utilities</h4>
           <ul class="space-y-2 text-xs">
-            <li><a href="/age-calculator" class="hover:text-blue-600 transition-colors">Age &amp; Date Calculator</a></li>
-            <li><a href="/emi-calculator" class="hover:text-blue-600 transition-colors">GST &amp; Loan EMI Calculator</a></li>
-            <li><a href="/qr-code-generator" class="hover:text-blue-600 transition-colors">QR Code Studio &amp; Reader</a></li>
-            <li><a href="/password-generator" class="hover:text-blue-600 transition-colors">Strong Password Creator</a></li>
-            <li><a href="/word-counter" class="hover:text-blue-600 transition-colors">Word &amp; Character Counter</a></li>
-            <li><a href="/text-case-converter" class="hover:text-blue-600 transition-colors">Text Case Converter</a></li>
-            <li><a href="/json-formatter" class="hover:text-blue-600 transition-colors">JSON Formatter &amp; Validator</a></li>
-            <li><a href="/seo-meta-generator" class="hover:text-blue-600 transition-colors">SEO Meta Tag Generator</a></li>
+            <li><a href="/age-calculator/" class="hover:text-blue-600 transition-colors">Age &amp; Date Calculator</a></li>
+            <li><a href="/emi-calculator/" class="hover:text-blue-600 transition-colors">GST &amp; Loan EMI Calculator</a></li>
+            <li><a href="/qr-code-generator/" class="hover:text-blue-600 transition-colors">QR Code Studio &amp; Reader</a></li>
+            <li><a href="/password-generator/" class="hover:text-blue-600 transition-colors">Strong Password Creator</a></li>
+            <li><a href="/word-counter/" class="hover:text-blue-600 transition-colors">Word &amp; Character Counter</a></li>
+            <li><a href="/text-case-converter/" class="hover:text-blue-600 transition-colors">Text Case Converter</a></li>
+            <li><a href="/json-formatter/" class="hover:text-blue-600 transition-colors">JSON Formatter &amp; Validator</a></li>
+            <li><a href="/seo-meta-generator/" class="hover:text-blue-600 transition-colors">SEO Meta Tag Generator</a></li>
           </ul>
         </div>
 
@@ -1003,11 +1003,11 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
         <div class="space-y-3">
           <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider">About &amp; Trust</h4>
           <ul class="space-y-2">
-            <li><a href="/about" class="hover:text-blue-600 transition-colors">About Toolshere</a></li>
-            <li><a href="/contact" class="hover:text-blue-600 transition-colors">Contact Support</a></li>
-            <li><a href="/privacy" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
-            <li><a href="/terms" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
-            <li><a href="/disclaimer" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
+            <li><a href="/about/" class="hover:text-blue-600 transition-colors">About Toolshere</a></li>
+            <li><a href="/contact/" class="hover:text-blue-600 transition-colors">Contact Support</a></li>
+            <li><a href="/privacy/" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
+            <li><a href="/terms/" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
           </ul>
         </div>
       </div>
@@ -1022,7 +1022,7 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
   <!-- Core Minified Application Script (Deferred & Cached) -->
   <script defer src="/assets/js/app.js"></script>
 </body>
-</html>`;
+</html>`.replace(/[ \t]+$/gm, '');
 }
 
 // 2. Generate All 16 Tool Pages
@@ -1056,7 +1056,7 @@ for (const tool of tools) {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": tool.name,
-      "url": `https://toolshere.online/${slug}`,
+      "url": `https://toolshere.online/${slug}/`,
       "description": tool.metaDesc,
       "applicationCategory": "UtilitiesApplication",
       "operatingSystem": "All modern browsers (Chrome, Firefox, Safari, Edge, Android, iOS)",
@@ -1072,7 +1072,7 @@ for (const tool of tools) {
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolshere.online/" },
         { "@type": "ListItem", "position": 2, "name": tool.category, "item": `https://toolshere.online/#${tool.category.toLowerCase()}` },
-        { "@type": "ListItem", "position": 3, "name": tool.name, "item": `https://toolshere.online/${slug}` }
+        { "@type": "ListItem", "position": 3, "name": tool.name, "item": `https://toolshere.online/${slug}/` }
       ]
     },
     {
@@ -1093,7 +1093,7 @@ for (const tool of tools) {
     slug,
     title: tool.seoTitle || route.title,
     metaDesc: tool.metaDesc || route.metaDesc,
-    canonicalUrl: `https://toolshere.online/${slug}`,
+    canonicalUrl: `https://toolshere.online/${slug}/`,
     h1: tool.h1 || route.h1,
     category: tool.category,
     iconClass: toolIconsMap[tool.id] || 'fa-solid fa-wrench',
@@ -1184,7 +1184,7 @@ for (const p of legalPages) {
       "@type": "BreadcrumbList",
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://toolshere.online/" },
-        { "@type": "ListItem", "position": 2, "name": p.h1, "item": `https://toolshere.online/${p.slug}` }
+        { "@type": "ListItem", "position": 2, "name": p.h1, "item": `https://toolshere.online/${p.slug}/` }
       ]
     }
   ];
@@ -1193,7 +1193,7 @@ for (const p of legalPages) {
     slug: p.slug,
     title: p.title || route.title,
     metaDesc: p.metaDesc || route.metaDesc,
-    canonicalUrl: `https://toolshere.online/${p.slug}`,
+    canonicalUrl: `https://toolshere.online/${p.slug}/`,
     h1: p.h1,
     category: p.category,
     iconClass: p.iconClass,
@@ -1235,13 +1235,13 @@ const sitemapUrls = [
   ...tools.map(t => {
     const modalKey = Object.keys(routes).find(k => routes[k].toolId === t.id);
     const slug = modalKey ? routes[modalKey].hash : t.hash.replace('#', '');
-    return { loc: `https://toolshere.online/${slug}`, priority: '0.9', changefreq: 'weekly' };
+    return { loc: `https://toolshere.online/${slug}/`, priority: '0.9', changefreq: 'weekly' };
   }),
-  { loc: 'https://toolshere.online/about', priority: '0.6', changefreq: 'monthly' },
-  { loc: 'https://toolshere.online/contact', priority: '0.6', changefreq: 'monthly' },
-  { loc: 'https://toolshere.online/privacy', priority: '0.4', changefreq: 'monthly' },
-  { loc: 'https://toolshere.online/terms', priority: '0.4', changefreq: 'monthly' },
-  { loc: 'https://toolshere.online/disclaimer', priority: '0.4', changefreq: 'monthly' }
+  { loc: 'https://toolshere.online/about/', priority: '0.6', changefreq: 'monthly' },
+  { loc: 'https://toolshere.online/contact/', priority: '0.6', changefreq: 'monthly' },
+  { loc: 'https://toolshere.online/privacy/', priority: '0.4', changefreq: 'monthly' },
+  { loc: 'https://toolshere.online/terms/', priority: '0.4', changefreq: 'monthly' },
+  { loc: 'https://toolshere.online/disclaimer/', priority: '0.4', changefreq: 'monthly' }
 ];
 
 const today = new Date().toISOString().split('T')[0];
@@ -1266,13 +1266,17 @@ let updatedIndex = fs.readFileSync(indexHtmlPath, 'utf8');
 tools.forEach(t => {
   const modalKey = Object.keys(routes).find(k => routes[k].toolId === t.id);
   const slug = modalKey ? routes[modalKey].hash : t.hash.replace('#', '');
-  updatedIndex = updatedIndex.split(`href="#${slug}"`).join(`href="/${slug}"`);
-  updatedIndex = updatedIndex.split(`"url": "https://toolshere.online/#${slug}"`).join(`"url": "https://toolshere.online/${slug}"`);
+  updatedIndex = updatedIndex.split(`href="#${slug}"`).join(`href="/${slug}/"`);
+  updatedIndex = updatedIndex.split(`href="/${slug}"`).join(`href="/${slug}/"`);
+  updatedIndex = updatedIndex.split(`"url": "https://toolshere.online/#${slug}"`).join(`"url": "https://toolshere.online/${slug}/"`);
+  updatedIndex = updatedIndex.split(`"url": "https://toolshere.online/${slug}"`).join(`"url": "https://toolshere.online/${slug}/"`);
 });
 
-// Update legal links
-['about', 'contact', 'privacy', 'terms', 'disclaimer'].forEach(l => {
-  updatedIndex = updatedIndex.split(`href="#${l}"`).join(`href="/${l}"`);
+// Update legal and blog links
+['about', 'contact', 'privacy', 'terms', 'disclaimer', 'blog'].forEach(l => {
+  updatedIndex = updatedIndex.split(`href="#${l}"`).join(`href="/${l}/"`);
+  updatedIndex = updatedIndex.split(`href="/${l}"`).join(`href="/${l}/"`);
+  updatedIndex = updatedIndex.split(`"url": "https://toolshere.online/${l}"`).join(`"url": "https://toolshere.online/${l}/"`);
 });
 
 fs.writeFileSync(indexHtmlPath, updatedIndex, 'utf8');
@@ -1334,16 +1338,16 @@ const errorPageHtml = `<!DOCTYPE html>
     <div class="pt-10 border-t border-slate-200 text-left space-y-3">
       <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block text-center">Popular Online Utilities</span>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-semibold">
-        <a href="/image-compressor" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors">
+        <a href="/image-compressor/" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors">
           <i class="fa-solid fa-compress text-blue-600"></i> Image Resizer
         </a>
-        <a href="/merge-pdf" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors">
+        <a href="/merge-pdf/" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors">
           <i class="fa-solid fa-object-group text-red-600"></i> Merge PDF
         </a>
-        <a href="/qr-code-generator" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors">
+        <a href="/qr-code-generator/" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors">
           <i class="fa-solid fa-qrcode text-teal-600"></i> QR Generator
         </a>
-        <a href="/age-calculator" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors">
+        <a href="/age-calculator/" class="p-3 rounded-xl bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-slate-700 border border-slate-200 flex items-center gap-2 transition-colors">
           <i class="fa-solid fa-calendar-check text-emerald-600"></i> Age Calculator
         </a>
       </div>

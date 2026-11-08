@@ -72,7 +72,7 @@ pages.forEach(p => {
     console.error(`❌ ${p}: Missing canonical tag`);
     totalErrors++;
   } else {
-    const expected = p === '/' ? 'https://toolshere.online/' : `https://toolshere.online${p}`;
+    const expected = p === '/' ? 'https://toolshere.online/' : `https://toolshere.online${p}/`;
     if (canonMatch[1] !== expected) {
       console.error(`❌ ${p}: Canonical mismatch. Expected ${expected}, got ${canonMatch[1]}`);
       totalErrors++;
@@ -122,7 +122,7 @@ if (!fs.existsSync(sitemapPath)) {
 } else {
   const smContent = fs.readFileSync(sitemapPath, 'utf8');
   pages.forEach(p => {
-    const expectedLoc = p === '/' ? 'https://toolshere.online/' : `https://toolshere.online${p}`;
+    const expectedLoc = p === '/' ? 'https://toolshere.online/' : `https://toolshere.online${p}/`;
     if (!smContent.includes(`<loc>${expectedLoc}</loc>`)) {
       console.error(`❌ sitemap.xml missing URL: ${expectedLoc}`);
       totalErrors++;
