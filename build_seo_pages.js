@@ -278,8 +278,8 @@ const seoOverrides = {
     ]
   },
   wordCount: {
-    seoTitle: "Word Counter: Live Word & Character Analyzer - ToolsHere",
-    metaDesc: "Count words, characters, sentences, paragraphs, and reading time in real time. Perfect for essays, social media posts, articles, and SEO copy editing.",
+    seoTitle: "Word Counter: Live Word, Character & Text Analyzer - ToolsHere",
+    metaDesc: "Count words, characters (with and without spaces), sentences, paragraphs, and reading time in real time. 100% private client-side text analyzer for essays and SEO.",
     relatedTools: [
       { name: "Text Case Converter", hash: "#text-case-converter" },
       { name: "SEO Meta Tag Generator", hash: "#seo-meta-generator" },
@@ -287,9 +287,10 @@ const seoOverrides = {
       { name: "Strong Password Creator", hash: "#password-generator" }
     ],
     useCases: [
-      "Monitoring character counts to fit Twitter (280c), LinkedIn, and Instagram limits.",
-      "Checking academic essay, dissertation, and college submission word quotas.",
-      "Verifying optimal SEO meta description (150-160c) and title tag (50-60c) lengths."
+      "Monitoring character counts with and without spaces to fit Twitter/X (280c), LinkedIn, and Instagram captions.",
+      "Verifying academic essays, college admissions personal statements, and dissertation word and paragraph quotas.",
+      "Optimizing SEO meta title (50–60 characters) and meta description (150–160 characters) lengths for Google snippet visibility.",
+      "Timing speech drafts, video scripts, and presentation notes using estimated reading time (200 WPM)."
     ]
   },
   gstEmi: {

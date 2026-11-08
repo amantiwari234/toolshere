@@ -11,8 +11,8 @@
       }
     }
   </script>
-  <title>Word Counter: Live Word & Character Analyzer - ToolsHere</title>
-  <meta name="description" content="Count words, characters, sentences, paragraphs, and reading time in real time. Perfect for essays, social media posts, articles, and SEO copy editing.">
+  <title>Word Counter: Live Word, Character & Text Analyzer - ToolsHere</title>
+  <meta name="description" content="Count words, characters (with and without spaces), sentences, paragraphs, and reading time in real time. 100% private client-side text analyzer for essays and SEO.">
   <meta name="keywords" content="word counter, online tools, free web utilities, text tools, toolshere">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://toolshere.online/word-counter/">
@@ -21,8 +21,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Toolshere">
   <meta property="og:url" content="https://toolshere.online/word-counter/">
-  <meta property="og:title" content="Word Counter: Live Word & Character Analyzer - ToolsHere">
-  <meta property="og:description" content="Count words, characters, sentences, paragraphs, and reading time in real time. Perfect for essays, social media posts, articles, and SEO copy editing.">
+  <meta property="og:title" content="Word Counter: Live Word, Character & Text Analyzer - ToolsHere">
+  <meta property="og:description" content="Count words, characters (with and without spaces), sentences, paragraphs, and reading time in real time. 100% private client-side text analyzer for essays and SEO.">
   <meta property="og:image" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:type" content="image/png">
@@ -33,8 +33,8 @@
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://toolshere.online/word-counter/">
-  <meta property="twitter:title" content="Word Counter: Live Word & Character Analyzer - ToolsHere">
-  <meta property="twitter:description" content="Count words, characters, sentences, paragraphs, and reading time in real time. Perfect for essays, social media posts, articles, and SEO copy editing.">
+  <meta property="twitter:title" content="Word Counter: Live Word, Character & Text Analyzer - ToolsHere">
+  <meta property="twitter:description" content="Count words, characters (with and without spaces), sentences, paragraphs, and reading time in real time. 100% private client-side text analyzer for essays and SEO.">
   <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
 
   <!-- Favicon & Touch Icons (Google Search Best Practice: 48x48 PNG First) -->
@@ -141,7 +141,7 @@
   "@type": "WebApplication",
   "name": "Word & Character Counter",
   "url": "https://toolshere.online/word-counter/",
-  "description": "Count words, characters, sentences, paragraphs, and reading time in real time. Perfect for essays, social media posts, articles, and SEO copy editing.",
+  "description": "Count words, characters (with and without spaces), sentences, paragraphs, and reading time in real time. 100% private client-side text analyzer for essays and SEO.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "All modern browsers (Chrome, Firefox, Safari, Edge, Android, iOS)",
   "offers": {
@@ -184,26 +184,50 @@
   "mainEntity": [
     {
       "@type": "Question",
+      "name": "How does this tool accurately count words?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The counter uses Unicode-aware word tokenization that groups letters, numbers, hyphens, and apostrophes into words while ignoring multiple consecutive spaces, tabs, and isolated punctuation marks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between character count with and without spaces?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Character count with spaces measures the total length including every space, tab, and newline using Unicode grapheme cluster counting so emojis (like 😀) accurately count as single characters. Character count without spaces tallies only visible letters, numbers, and symbols."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does sentence counting handle decimals and abbreviations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our algorithm protects decimal numbers (like 3.14 or $9.99), single-letter initials (like J. K.), and common abbreviations (like Dr., Mr., vs., e.g., and etc.) from triggering false sentence breaks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What qualifies as a paragraph in the counter?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paragraphs are counted as distinct text blocks separated by one or more blank lines. Wrapped lines within the same paragraph stay together, while empty or whitespace-only lines are excluded from the paragraph tally."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "How is the estimated reading time calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Reading time is computed using the universally accepted average adult reading speed of 200 words per minute."
+        "text": "Reading time is calculated using the widely accepted average adult reading speed of 200 words per minute (WPM). Text under one minute is displayed in seconds for granular accuracy."
       }
     },
     {
       "@type": "Question",
-      "name": "Does the character count include spaces?",
+      "name": "Is my pasted text private and secure?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, the character counter tallies every typed character including whitespace, line breaks, and punctuation marks."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is there a limit on how much text I can paste?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You can paste tens of thousands of words without issue; the browser JavaScript engine processes large texts smoothly."
+        "text": "Yes, 100%. All analysis runs locally in your device's web browser using JavaScript. No text is ever uploaded, cached, or stored on any server."
       }
     }
   ]
@@ -377,7 +401,7 @@
             Free Online Word Counter & Character Analyzer
           </h1>
           <p class="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 mt-1 max-w-3xl leading-relaxed">
-            Count words, characters, sentences, paragraphs, and reading time in real time. Perfect for essays, social media posts, articles, and SEO copy editing.
+            Count words, characters (with and without spaces), sentences, paragraphs, and reading time in real time. 100% private client-side text analyzer for essays and SEO.
           </p>
         </div>
       </div>
@@ -386,24 +410,60 @@
     <!-- Pre-rendered Tool Workspace (Exempt from intrusive auto-ads to protect file uploads/downloads) -->
     <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-6 sm:space-y-8 google-auto-ads-ignore adsbygoogle-noablate">
 
-        <div class="space-y-6">
-          <textarea id="wordTextInput" rows="8" placeholder="Type or paste your text here to count words, characters, and reading time..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm" oninput="updateWordCounts()"></textarea>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span class="block text-xs font-semibold text-slate-500">Words</span>
-              <span id="countWords" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
+        <div class="space-y-5">
+          <div class="relative">
+            <textarea id="wordTextInput" rows="8" placeholder="Type or paste your text here to count words, characters, sentences, paragraphs, and reading time in real time..." class="w-full p-4 sm:p-5 rounded-2xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm sm:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-xs leading-relaxed" oninput="updateWordCounts()"></textarea>
+          </div>
+
+          <!-- Action Controls Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="clearWordCounterText()" class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors flex items-center gap-1.5 min-h-[38px] shadow-2xs">
+                <i class="fa-solid fa-trash-can text-slate-400"></i> Clear Text
+              </button>
+              <button type="button" onclick="copyWordCounterText()" class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors flex items-center gap-1.5 min-h-[38px] shadow-2xs">
+                <i class="fa-solid fa-copy text-slate-400"></i> Copy Text
+              </button>
+              <button type="button" onclick="copyWordCounterStats()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors flex items-center gap-1.5 min-h-[38px] shadow-xs">
+                <i class="fa-solid fa-chart-simple"></i> Copy Statistics
+              </button>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span class="block text-xs font-semibold text-slate-500">Characters</span>
-              <span id="countChars" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
+              <i class="fa-solid fa-bolt text-amber-500"></i> Live real-time analysis
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span class="block text-xs font-semibold text-slate-500">Sentences</span>
-              <span id="countSentences" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
+          </div>
+
+          <!-- 6-Metric Statistics Dashboard -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-center">
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Words</span>
+              <span id="countWords" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">Total words</span>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span class="block text-xs font-semibold text-slate-500">Reading Time</span>
-              <span id="countReadTime" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0m</span>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Characters</span>
+              <span id="countChars" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">With spaces</span>
+            </div>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Characters</span>
+              <span id="countCharsNoSpaces" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">No spaces</span>
+            </div>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Sentences</span>
+              <span id="countSentences" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">Punctuation</span>
+            </div>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Paragraphs</span>
+              <span id="countParagraphs" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">Content blocks</span>
+            </div>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reading Time</span>
+              <span id="countReadTime" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0 sec</span>
+              <span class="block text-[10px] text-slate-400">~200 wpm speed</span>
             </div>
           </div>
         </div>
@@ -421,7 +481,7 @@
         </div>
         <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About Word & Character Counter &amp; Core Utility</h2>
         <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
-          <p>ToolsHere Word & Character Counter is a clean, distraction-free writing companion tailored for students drafting academic essays, authors writing manuscripts, copywriters crafting ad copy, and social media managers meeting character caps for Twitter/X and LinkedIn. As you paste or type your draft, the analyzer updates key metrics simultaneously in real time: total word count, total character count with spaces, sentence count based on standard punctuation markers, and estimated reading time. Its lightweight client-side design ensures zero lag even with lengthy multi-thousand-word documents, helping you hit editorial guidelines without data tracking.</p>
+          <p>ToolsHere Word & Character Counter is a fast, clean, and distraction-free text analyzer tailored for writers, students, researchers, copywriters, and social media creators. As you type or paste your content, it simultaneously calculates words, characters with spaces, characters without spaces, sentences, paragraphs, and estimated reading time in real time. Designed with a strict client-side architecture, your text is processed entirely inside your browser memory with zero server uploads, keeping essays, manuscripts, confidential emails, and sensitive notes completely private.</p>
         </div>
       </div>
 
@@ -434,22 +494,22 @@
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">1</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Type or paste your text into the large text area.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Type or paste your text directly into the large editor area.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">2</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Review the live analytics tiles immediately above the editor.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">View live numerical updates in the 6-metric statistics dashboard immediately as you write.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Check words, characters, sentences, and estimated read time.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Check word count, characters (with and without spaces), sentences, paragraphs, and reading time.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">4</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Edit or trim your content to match your required platform limits.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Use 'Copy Statistics' to export an editorial summary, or 'Clear Text' to reset your workspace.</span>
             </li>
 
         </ol>
@@ -464,27 +524,37 @@
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Instant real-time statistical updates with zero delay.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Real-time live updates as you type or paste with zero latency.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Accurate word segmentation accounting for multiple spaces and line breaks.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Dual character counters: exact counts both including and excluding whitespace.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Exact character counter for social media character cap compliance.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Smart sentence detection that avoids false splits on decimals (e.g. 3.14) and abbreviations.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Sentence counter based on full stops, exclamation marks, and question marks.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Non-empty paragraph detection that ignores blank and whitespace-only lines.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Estimated reading time calculation based on standard 200 words-per-minute speeds.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Estimated reading time based on standard 200 words-per-minute adult reading speed.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">One-click action controls: Clear Text, Copy Text, and Copy Formatted Statistics.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">100% client-side privacy with zero server storage, logging, or third-party tracking.</span>
             </div>
 
         </div>
@@ -498,15 +568,15 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Raw text, markdown, HTML, or code snippets</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Plain text, essays, articles, social posts, code snippets, and markdown</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Numerical statistical counters (words, characters, sentences, read time)</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Live numerical statistics (words, characters, sentences, paragraphs, reading time)</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Analyzes standard Unicode text directly in browser memory without language restrictions.</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Processes standard multi-language Unicode text smoothly in browser memory with no artificial character limits.</span>
           </div>
         </div>
 
@@ -521,15 +591,19 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Monitoring character counts to fit Twitter (280c), LinkedIn, and Instagram limits.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Monitoring character counts with and without spaces to fit Twitter/X (280c), LinkedIn, and Instagram captions.
             </div>
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Checking academic essay, dissertation, and college submission word quotas.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Verifying academic essays, college admissions personal statements, and dissertation word and paragraph quotas.
             </div>
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Verifying optimal SEO meta description (150-160c) and title tag (50-60c) lengths.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Optimizing SEO meta title (50–60 characters) and meta description (150–160 characters) lengths for Google snippet visibility.
+            </div>
+
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Timing speech drafts, video scripts, and presentation notes using estimated reading time (200 WPM).
             </div>
 
         </div>
@@ -547,23 +621,44 @@
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How does this tool accurately count words?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The counter uses Unicode-aware word tokenization that groups letters, numbers, hyphens, and apostrophes into words while ignoring multiple consecutive spaces, tabs, and isolated punctuation marks.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What is the difference between character count with and without spaces?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Character count with spaces measures the total length including every space, tab, and newline using Unicode grapheme cluster counting so emojis (like 😀) accurately count as single characters. Character count without spaces tallies only visible letters, numbers, and symbols.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How does sentence counting handle decimals and abbreviations?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Our algorithm protects decimal numbers (like 3.14 or $9.99), single-letter initials (like J. K.), and common abbreviations (like Dr., Mr., vs., e.g., and etc.) from triggering false sentence breaks.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What qualifies as a paragraph in the counter?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Paragraphs are counted as distinct text blocks separated by one or more blank lines. Wrapped lines within the same paragraph stay together, while empty or whitespace-only lines are excluded from the paragraph tally.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How is the estimated reading time calculated?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Reading time is computed using the universally accepted average adult reading speed of 200 words per minute.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Reading time is calculated using the widely accepted average adult reading speed of 200 words per minute (WPM). Text under one minute is displayed in seconds for granular accuracy.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Does the character count include spaces?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Is my pasted text private and secure?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Yes, the character counter tallies every typed character including whitespace, line breaks, and punctuation marks.</p>
-            </div>
-
-            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
-              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Is there a limit on how much text I can paste?
-              </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">You can paste tens of thousands of words without issue; the browser JavaScript engine processes large texts smoothly.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Yes, 100%. All analysis runs locally in your device's web browser using JavaScript. No text is ever uploaded, cached, or stored on any server.</p>
             </div>
 
         </div>

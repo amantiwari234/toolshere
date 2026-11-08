@@ -384,7 +384,7 @@ function ensureScript(name) {
       'wordCountModal': {
         hash: 'word-counter',
         title: 'Free Word & Character Counter Online | Accurate Text Length Counter — ToolsHere.online',
-        metaDesc: 'Count words, characters, sentences, and estimated reading time live. Perfect for essays, social media posts, academic papers, and SEO content writing.',
+        metaDesc: 'Count words, characters (with & without spaces), sentences, paragraphs, and reading time live. 100% private in-browser text analyzer for essays, posts, and SEO.',
         h1: 'Free Online Word Counter & Character Analyzer',
         toolId: 'wordCount'
       },
@@ -1116,44 +1116,58 @@ function ensureScript(name) {
   {
     "id": "wordCount",
     "hash": "#word-counter",
-    "url": "https://toolshere.online/word-counter",
+    "url": "https://toolshere.online/word-counter/",
     "name": "Word & Character Counter",
     "category": "Text",
-    "cardDesc": "Count words, characters, sentences, and estimated reading time in real time as you type or paste text for essays, tweets, and articles.",
+    "cardDesc": "Count words, characters (with & without spaces), sentences, paragraphs, and reading time in real time as you type or paste text.",
     "seoTitle": "Free Word & Character Counter Online | Accurate Text Length Counter",
-    "metaDesc": "Count words, characters, sentences, and estimated reading time live. Perfect for essays, social media posts, academic papers, and SEO content writing.",
+    "metaDesc": "Count words, characters (with and without spaces), sentences, paragraphs, and estimated reading time live. Free, 100% private in-browser text analyzer.",
     "h1": "Free Online Word Counter & Character Analyzer",
-    "intro": "ToolsHere Word & Character Counter is a clean, distraction-free writing companion tailored for students drafting academic essays, authors writing manuscripts, copywriters crafting ad copy, and social media managers meeting character caps for Twitter/X and LinkedIn. As you paste or type your draft, the analyzer updates key metrics simultaneously in real time: total word count, total character count with spaces, sentence count based on standard punctuation markers, and estimated reading time. Its lightweight client-side design ensures zero lag even with lengthy multi-thousand-word documents, helping you hit editorial guidelines without data tracking.",
+    "intro": "ToolsHere Word & Character Counter is a fast, clean, and distraction-free text analyzer tailored for writers, students, researchers, copywriters, and social media creators. As you type or paste your content, it simultaneously calculates words, characters with spaces, characters without spaces, sentences, paragraphs, and estimated reading time in real time. Designed with a strict client-side architecture, your text is processed entirely inside your browser memory with zero server uploads, keeping essays, manuscripts, confidential emails, and sensitive notes completely private.",
     "howToUse": [
-      "Type or paste your text into the large text area.",
-      "Review the live analytics tiles immediately above the editor.",
-      "Check words, characters, sentences, and estimated read time.",
-      "Edit or trim your content to match your required platform limits."
+      "Type or paste your text directly into the large editor area.",
+      "View live numerical updates in the 6-metric statistics dashboard immediately as you write.",
+      "Check word count, characters (with and without spaces), sentences, paragraphs, and reading time.",
+      "Use 'Copy Statistics' to export an editorial summary, or 'Clear Text' to reset your workspace."
     ],
     "features": [
-      "Instant real-time statistical updates with zero delay.",
-      "Accurate word segmentation accounting for multiple spaces and line breaks.",
-      "Exact character counter for social media character cap compliance.",
-      "Sentence counter based on full stops, exclamation marks, and question marks.",
-      "Estimated reading time calculation based on standard 200 words-per-minute speeds."
+      "Real-time live updates as you type or paste with zero latency.",
+      "Dual character counters: exact counts both including and excluding whitespace.",
+      "Smart sentence detection that avoids false splits on decimals (e.g. 3.14) and abbreviations.",
+      "Non-empty paragraph detection that ignores blank and whitespace-only lines.",
+      "Estimated reading time based on standard 200 words-per-minute adult reading speed.",
+      "One-click action controls: Clear Text, Copy Text, and Copy Formatted Statistics.",
+      "100% client-side privacy with zero server storage, logging, or third-party tracking."
     ],
     "formatsAndLimits": {
-      "supportedInputs": "Raw text, markdown, HTML, or code snippets",
-      "outputFormat": "Numerical statistical counters (words, characters, sentences, read time)",
-      "limitations": "Analyzes standard Unicode text directly in browser memory without language restrictions."
+      "supportedInputs": "Plain text, essays, articles, social posts, code snippets, and markdown",
+      "outputFormat": "Live numerical statistics (words, characters, sentences, paragraphs, reading time)",
+      "limitations": "Processes standard multi-language Unicode text smoothly in browser memory with no artificial character limits."
     },
     "faqs": [
       {
+        "q": "How does this tool accurately count words?",
+        "a": "The counter uses Unicode-aware word tokenization that groups letters, numbers, hyphens, and apostrophes into words while ignoring multiple consecutive spaces, tabs, and isolated punctuation marks."
+      },
+      {
+        "q": "What is the difference between character count with and without spaces?",
+        "a": "Character count with spaces measures the total length including every space, tab, and newline using Unicode grapheme cluster counting so emojis (like 😀) accurately count as single characters. Character count without spaces tallies only visible letters, numbers, and symbols."
+      },
+      {
+        "q": "How does sentence counting handle decimals and abbreviations?",
+        "a": "Our algorithm protects decimal numbers (like 3.14 or $9.99), single-letter initials (like J. K.), and common abbreviations (like Dr., Mr., vs., e.g., and etc.) from triggering false sentence breaks."
+      },
+      {
+        "q": "What qualifies as a paragraph in the counter?",
+        "a": "Paragraphs are counted as distinct text blocks separated by one or more blank lines. Wrapped lines within the same paragraph stay together, while empty or whitespace-only lines are excluded from the paragraph tally."
+      },
+      {
         "q": "How is the estimated reading time calculated?",
-        "a": "Reading time is computed using the universally accepted average adult reading speed of 200 words per minute."
+        "a": "Reading time is calculated using the widely accepted average adult reading speed of 200 words per minute (WPM). Text under one minute is displayed in seconds for granular accuracy."
       },
       {
-        "q": "Does the character count include spaces?",
-        "a": "Yes, the character counter tallies every typed character including whitespace, line breaks, and punctuation marks."
-      },
-      {
-        "q": "Is there a limit on how much text I can paste?",
-        "a": "You can paste tens of thousands of words without issue; the browser JavaScript engine processes large texts smoothly."
+        "q": "Is my pasted text private and secure?",
+        "a": "Yes, 100%. All analysis runs locally in your device's web browser using JavaScript. No text is ever uploaded, cached, or stored on any server."
       }
     ],
     "relatedTools": [
@@ -1164,6 +1178,14 @@ function ensureScript(name) {
       {
         "name": "SEO Meta Tag Generator",
         "hash": "#seo-meta-generator"
+      },
+      {
+        "name": "JSON Formatter & Validator",
+        "hash": "#json-formatter"
+      },
+      {
+        "name": "Strong Password Creator",
+        "hash": "#password-generator"
       }
     ]
   },
@@ -3282,41 +3304,188 @@ function ensureScript(name) {
       if (title) title.innerText = 'Word & Character Counter';
       if (icon) icon.className = 'fa-solid fa-align-left';
       container.innerHTML = `
-        <div class="space-y-6">
-          <textarea id="wordTextInput" rows="8" placeholder="Type or paste your text here to count words, characters, and reading time..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm" oninput="updateWordCounts()"></textarea>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span class="block text-xs font-semibold text-slate-500">Words</span>
-              <span id="countWords" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
+        <div class="space-y-5">
+          <div class="relative">
+            <textarea id="wordTextInput" rows="8" placeholder="Type or paste your text here to count words, characters, sentences, paragraphs, and reading time in real time..." class="w-full p-4 sm:p-5 rounded-2xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-white text-sm sm:text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all shadow-xs leading-relaxed" oninput="updateWordCounts()"></textarea>
+          </div>
+
+          <!-- Action Controls Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" onclick="clearWordCounterText()" class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors flex items-center gap-1.5 min-h-[38px] shadow-2xs">
+                <i class="fa-solid fa-trash-can text-slate-400"></i> Clear Text
+              </button>
+              <button type="button" onclick="copyWordCounterText()" class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors flex items-center gap-1.5 min-h-[38px] shadow-2xs">
+                <i class="fa-solid fa-copy text-slate-400"></i> Copy Text
+              </button>
+              <button type="button" onclick="copyWordCounterStats()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-colors flex items-center gap-1.5 min-h-[38px] shadow-xs">
+                <i class="fa-solid fa-chart-simple"></i> Copy Statistics
+              </button>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span class="block text-xs font-semibold text-slate-500">Characters</span>
-              <span id="countChars" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
+            <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1">
+              <i class="fa-solid fa-bolt text-amber-500"></i> Live real-time analysis
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span class="block text-xs font-semibold text-slate-500">Sentences</span>
-              <span id="countSentences" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0</span>
+          </div>
+
+          <!-- 6-Metric Statistics Dashboard -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-center">
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Words</span>
+              <span id="countWords" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">Total words</span>
             </div>
-            <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-2xl border border-[#E5E7EB] dark:border-slate-700">
-              <span class="block text-xs font-semibold text-slate-500">Reading Time</span>
-              <span id="countReadTime" class="text-2xl font-black text-blue-600 dark:text-cyan-400">0m</span>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Characters</span>
+              <span id="countChars" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">With spaces</span>
+            </div>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Characters</span>
+              <span id="countCharsNoSpaces" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">No spaces</span>
+            </div>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Sentences</span>
+              <span id="countSentences" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">Punctuation</span>
+            </div>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Paragraphs</span>
+              <span id="countParagraphs" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0</span>
+              <span class="block text-[10px] text-slate-400">Content blocks</span>
+            </div>
+            <div class="p-3.5 sm:p-4 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between">
+              <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Reading Time</span>
+              <span id="countReadTime" class="text-2xl sm:text-3xl font-black text-blue-600 dark:text-cyan-400 my-1">0 sec</span>
+              <span class="block text-[10px] text-slate-400">~200 wpm speed</span>
             </div>
           </div>
         </div>
       `;
     }
 
-    function updateWordCounts() {
-      const text = document.getElementById('wordTextInput')?.value || '';
-      const words = text.trim() ? text.trim().split(/\s+/).length : 0;
-      const chars = text.length;
-      const sentences = text.trim() ? (text.match(/[.!?]+(\s|$)/g) || []).length : 0;
-      const readMinutes = Math.ceil(words / 200);
+    let wordCounterGraphemeSegmenter = null;
+    function countGraphemes(str) {
+      if (!str) return 0;
+      if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+        try {
+          if (!wordCounterGraphemeSegmenter) {
+            wordCounterGraphemeSegmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+          }
+          let count = 0;
+          for (const _ of wordCounterGraphemeSegmenter.segment(str)) {
+            count++;
+          }
+          return count;
+        } catch (e) {
+          // Fallback if segmenter throws
+        }
+      }
+      return Array.from(str).length;
+    }
 
-      document.getElementById('countWords').innerText = words.toLocaleString();
-      document.getElementById('countChars').innerText = chars.toLocaleString();
-      document.getElementById('countSentences').innerText = sentences;
-      document.getElementById('countReadTime').innerText = readMinutes + 'm';
+    function updateWordCounts() {
+      const inputEl = document.getElementById('wordTextInput');
+      const text = inputEl ? inputEl.value : '';
+
+      // 1. Words: Match Unicode words or numbers, supporting hyphens and apostrophes inside words
+      const words = text.trim() ? (text.trim().match(/[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu) || []).length : 0;
+
+      // 2. Characters (with spaces): Unicode grapheme cluster aware (emojis count as 1)
+      const charsWithSpaces = countGraphemes(text);
+
+      // 3. Characters (excluding spaces): Unicode grapheme cluster aware
+      const charsNoSpaces = countGraphemes(text.replace(/\s/g, ''));
+
+      // 4. Sentences: Protect decimals, initials, and common abbreviations
+      let sentences = 0;
+      if (text && text.trim()) {
+        let clean = text.trim();
+        // Protect decimal numbers (e.g. 3.14, $9.99)
+        clean = clean.replace(/(\d)\.(\d)/g, '$1[DOT]$2');
+        // Protect common abbreviations
+        const abbrevs = ['mr', 'mrs', 'ms', 'dr', 'prof', 'sr', 'jr', 'vs', 'etc', 'e.g', 'i.e', 'approx', 'dept', 'est', 'inc', 'ltd', 'co'];
+        abbrevs.forEach(abbr => {
+          clean = clean.replace(new RegExp('\\b' + abbr + '\\.', 'gi'), abbr + '[DOT]');
+        });
+        // Protect single-letter initials (e.g. "J. K. Rowling")
+        clean = clean.replace(/\b([A-Za-z])\./g, '$1[DOT]');
+        // Match sentences ending in [.!?] or end of string
+        const sentenceMatches = clean.match(/[^.!?]+[.!?]+(?:\s+|$)|[^.!?]+$/g);
+        // Filter to segments containing actual letters or numbers
+        sentences = sentenceMatches ? sentenceMatches.filter(s => /[\p{L}\p{N}]/u.test(s)).length : 0;
+      }
+
+      // 5. Paragraphs: Count paragraph blocks separated by one or more blank lines (wrapped lines in same block stay together)
+      const paragraphs = text.trim() ? text.trim().split(/\r?\n\s*\r?\n+/).filter(p => p.trim().length > 0).length : 0;
+
+      // 6. Estimated Reading Time (based on standard 200 WPM)
+      let readTimeStr = '0 sec';
+      if (words > 0) {
+        const totalSeconds = Math.ceil((words / 200) * 60);
+        if (totalSeconds < 60) {
+          readTimeStr = `${totalSeconds} sec`;
+        } else {
+          const mins = Math.ceil(words / 200);
+          readTimeStr = `${mins} min`;
+        }
+      }
+
+      const elWords = document.getElementById('countWords');
+      const elChars = document.getElementById('countChars');
+      const elCharsNoSpaces = document.getElementById('countCharsNoSpaces');
+      const elSentences = document.getElementById('countSentences');
+      const elParagraphs = document.getElementById('countParagraphs');
+      const elReadTime = document.getElementById('countReadTime');
+
+      if (elWords) elWords.innerText = words.toLocaleString();
+      if (elChars) elChars.innerText = charsWithSpaces.toLocaleString();
+      if (elCharsNoSpaces) elCharsNoSpaces.innerText = charsNoSpaces.toLocaleString();
+      if (elSentences) elSentences.innerText = sentences.toLocaleString();
+      if (elParagraphs) elParagraphs.innerText = paragraphs.toLocaleString();
+      if (elReadTime) elReadTime.innerText = readTimeStr;
+    }
+
+    function clearWordCounterText() {
+      const inputEl = document.getElementById('wordTextInput');
+      if (inputEl) {
+        inputEl.value = '';
+        inputEl.focus();
+      }
+      updateWordCounts();
+      showToast('Text cleared', 'info');
+    }
+
+    function copyWordCounterText() {
+      const inputEl = document.getElementById('wordTextInput');
+      const text = inputEl ? inputEl.value : '';
+      if (!text) {
+        showToast('No text to copy', 'error');
+        return;
+      }
+      copyText(text);
+    }
+
+    function copyWordCounterStats() {
+      const elWords = document.getElementById('countWords')?.innerText || '0';
+      const elChars = document.getElementById('countChars')?.innerText || '0';
+      const elCharsNoSpaces = document.getElementById('countCharsNoSpaces')?.innerText || '0';
+      const elSentences = document.getElementById('countSentences')?.innerText || '0';
+      const elParagraphs = document.getElementById('countParagraphs')?.innerText || '0';
+      const elReadTime = document.getElementById('countReadTime')?.innerText || '0 sec';
+
+      const summary = [
+        '=== ToolsHere Word & Text Counter Statistics ===',
+        `Words: ${elWords}`,
+        `Characters (with spaces): ${elChars}`,
+        `Characters (no spaces): ${elCharsNoSpaces}`,
+        `Sentences: ${elSentences}`,
+        `Paragraphs: ${elParagraphs}`,
+        `Estimated Reading Time: ${elReadTime} (based on 200 wpm)`,
+        'Analyzed securely via https://toolshere.online/word-counter/'
+      ].join('\n');
+
+      copyText(summary);
     }
 
     /* ================= UTILITY 10: GST & EMI CALCULATOR ================= */
