@@ -5991,42 +5991,717 @@ function ensureScript(name) {
     }
 
     /* ================= UTILITY 13: JSON FORMATTER ================= */
-    function renderJsonFormat(title, icon, container) {
-      if (title) title.innerText = 'JSON Formatter, Beautifier & Validator';
-      if (icon) icon.className = 'fa-solid fa-code';
-      container.innerHTML = `
-        <div class="space-y-4">
-          <textarea id="jsonInput" rows="10" placeholder="Paste your raw JSON here to beautify or validate..." class="w-full p-4 font-mono text-xs rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white"></textarea>
-          <div class="flex gap-2 flex-wrap">
-            <button type="button" onclick="formatJson(2)" class="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-bold text-xs shadow-md">Beautify (2 Spaces)</button>
-            <button type="button" onclick="formatJson(4)" class="px-5 py-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl font-bold text-xs">Beautify (4 Spaces)</button>
-            <button type="button" onclick="minifyJson()" class="px-5 py-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl font-bold text-xs">Minify JSON</button>
-            <button type="button" onclick="copyText(document.getElementById('jsonInput').value)" class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl font-bold text-xs ml-auto">Copy JSON</button>
+    let jsonHistory = [];
+
+    function saveJsonHistory(val) {
+      if (typeof val !== 'string') return;
+      jsonHistory.push(val);
+      if (jsonHistory.length > 25) {
+        jsonHistory.shift();
+      }
+    }
+
+    function escapeJsonHtml(str) {
+      if (typeof str !== 'string') return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function getByteLength(str) {
+      if (typeof Blob !== 'undefined') {
+        try { return new Blob([str]).size; } catch (e) {}
+      }
+      if (typeof Buffer !== 'undefined') {
+        return Buffer.byteLength(str, 'utf8');
+      }
+      return encodeURI(str).split(/%..|./).length - 1;
+    }
+
+    function getLineColFromIndex(text, index) {
+      const clamped = Math.max(0, Math.min(index, text.length));
+      const upTo = text.slice(0, clamped);
+      const lines = upTo.split('\n');
+      const line = lines.length;
+      const col = lines[lines.length - 1].length + 1;
+      return { line, col };
+    }
+
+    function createErrorExcerpt(text, targetLine, targetCol) {
+      const lines = text.split('\n');
+      const lineIdx = targetLine - 1;
+      const startIdx = Math.max(0, lineIdx - 1);
+      const endIdx = Math.min(lines.length - 1, lineIdx + 1);
+
+      const excerptLines = [];
+      for (let i = startIdx; i <= endIdx; i++) {
+        const lineNum = String(i + 1).padStart(4, ' ');
+        const isErrorLine = i === lineIdx;
+        const prefix = isErrorLine ? '> ' : '  ';
+        excerptLines.push(`${prefix}${lineNum} | ${lines[i]}`);
+        if (isErrorLine) {
+          const caretIndent = ' '.repeat(Math.max(0, targetCol - 1));
+          excerptLines.push(`       | ${caretIndent}^`);
+        }
+      }
+      return excerptLines.join('\n');
+    }
+
+    function scanJsonError(text) {
+      let pos = 0;
+      const len = text.length;
+
+      function isWhitespace(ch) {
+        return ch === ' ' || ch === '\t' || ch === '\n' || ch === '\r';
+      }
+
+      function skipWhitespace() {
+        while (pos < len && isWhitespace(text[pos])) {
+          pos++;
+        }
+      }
+
+      function parseValue() {
+        skipWhitespace();
+        if (pos >= len) {
+          return { error: 'Unexpected end of JSON input', pos };
+        }
+        const ch = text[pos];
+        if (ch === '{') return parseObject();
+        if (ch === '[') return parseArray();
+        if (ch === '"') return parseString();
+        if (ch === '-' || (ch >= '0' && ch <= '9')) return parseNumber();
+        if (text.startsWith('true', pos)) { pos += 4; return null; }
+        if (text.startsWith('false', pos)) { pos += 5; return null; }
+        if (text.startsWith('null', pos)) { pos += 4; return null; }
+
+        if (ch === "'") {
+          return { error: 'Single quotes are not valid in JSON; use double quotes', pos };
+        }
+        if (ch === ',') {
+          return { error: 'Unexpected comma', pos };
+        }
+        if (ch === '}' || ch === ']') {
+          return { error: `Unexpected closing bracket '${ch}'`, pos };
+        }
+        return { error: `Unexpected token '${ch}'`, pos };
+      }
+
+      function parseString() {
+        pos++;
+        while (pos < len) {
+          const ch = text[pos];
+          if (ch === '"') {
+            pos++;
+            return null;
+          }
+          if (ch === '\\') {
+            pos++;
+            if (pos >= len) return { error: 'Unterminated string escape sequence', pos };
+            const esc = text[pos];
+            if ('"\\/bfnrt'.includes(esc)) {
+              pos++;
+            } else if (esc === 'u') {
+              pos++;
+              for (let i = 0; i < 4; i++) {
+                if (pos >= len || !/[0-9a-fA-F]/.test(text[pos])) {
+                  return { error: 'Invalid Unicode escape sequence in string', pos };
+                }
+                pos++;
+              }
+            } else {
+              return { error: `Invalid escape character '\\${esc}'`, pos };
+            }
+          } else if (ch === '\n' || ch === '\r') {
+            return { error: 'Unescaped newline in string literal', pos };
+          } else {
+            pos++;
+          }
+        }
+        return { error: 'Unterminated string literal', pos };
+      }
+
+      function parseNumber() {
+        const start = pos;
+        if (text[pos] === '-') pos++;
+        if (pos >= len) return { error: 'Invalid number', pos: start };
+
+        if (text[pos] === '0') {
+          pos++;
+        } else if (text[pos] >= '1' && text[pos] <= '9') {
+          while (pos < len && text[pos] >= '0' && text[pos] <= '9') pos++;
+        } else {
+          return { error: 'Invalid number format', pos };
+        }
+
+        if (pos < len && text[pos] === '.') {
+          pos++;
+          if (pos >= len || !(text[pos] >= '0' && text[pos] <= '9')) {
+            return { error: 'Decimal point must be followed by at least one digit', pos };
+          }
+          while (pos < len && text[pos] >= '0' && text[pos] <= '9') pos++;
+        }
+
+        if (pos < len && (text[pos] === 'e' || text[pos] === 'E')) {
+          pos++;
+          if (pos < len && (text[pos] === '+' || text[pos] === '-')) pos++;
+          if (pos >= len || !(text[pos] >= '0' && text[pos] <= '9')) {
+            return { error: 'Exponent must be followed by at least one digit', pos };
+          }
+          while (pos < len && text[pos] >= '0' && text[pos] <= '9') pos++;
+        }
+        return null;
+      }
+
+      function parseObject() {
+        pos++;
+        skipWhitespace();
+        if (pos < len && text[pos] === '}') {
+          pos++;
+          return null;
+        }
+
+        while (pos < len) {
+          skipWhitespace();
+          if (pos >= len) return { error: "Expected '}' but reached end of input", pos };
+          if (text[pos] === '}') return { error: 'Trailing comma before object closing brace', pos };
+
+          if (text[pos] !== '"') {
+            if (text[pos] === "'") {
+              return { error: 'Object keys must be wrapped in double quotes, not single quotes', pos };
+            }
+            if (text[pos] === ',') {
+              return { error: 'Unexpected comma in object', pos };
+            }
+            return { error: `Expected double-quoted property name, found '${text[pos]}'`, pos };
+          }
+
+          const strErr = parseString();
+          if (strErr) return strErr;
+
+          skipWhitespace();
+          if (pos >= len || text[pos] !== ':') {
+            return { error: "Expected ':' after property name", pos };
+          }
+          pos++;
+
+          const valErr = parseValue();
+          if (valErr) return valErr;
+
+          skipWhitespace();
+          if (pos >= len) return { error: "Expected ',' or '}' after property value", pos };
+          if (text[pos] === ',') {
+            pos++;
+          } else if (text[pos] === '}') {
+            pos++;
+            return null;
+          } else {
+            return { error: `Expected ',' or '}' after property value, found '${text[pos]}'`, pos };
+          }
+        }
+        return { error: "Unclosed object; expected '}'", pos };
+      }
+
+      function parseArray() {
+        pos++;
+        skipWhitespace();
+        if (pos < len && text[pos] === ']') {
+          pos++;
+          return null;
+        }
+
+        while (pos < len) {
+          skipWhitespace();
+          if (pos >= len) return { error: "Expected ']' but reached end of input", pos };
+          if (text[pos] === ']') return { error: 'Trailing comma before array closing bracket', pos };
+
+          const valErr = parseValue();
+          if (valErr) return valErr;
+
+          skipWhitespace();
+          if (pos >= len) return { error: "Expected ',' or ']' after array element", pos };
+          if (text[pos] === ',') {
+            pos++;
+          } else if (text[pos] === ']') {
+            pos++;
+            return null;
+          } else {
+            return { error: `Expected ',' or ']' after array element, found '${text[pos]}'`, pos };
+          }
+        }
+        return { error: "Unclosed array; expected ']'", pos };
+      }
+
+      const err = parseValue();
+      if (err) return err;
+
+      skipWhitespace();
+      if (pos < len) {
+        return { error: `Unexpected trailing characters after JSON value: '${text.slice(pos, pos + 10)}'`, pos };
+      }
+      return null;
+    }
+
+    function parseJsonWithDiagnostics(text) {
+      if (!text || !text.trim()) {
+        return { valid: false, empty: true, message: 'Please enter or paste JSON data to format and validate.' };
+      }
+
+      try {
+        const parsed = JSON.parse(text);
+        let rootType = 'Primitive';
+        let summary = '';
+
+        if (Array.isArray(parsed)) {
+          rootType = 'Array';
+          summary = `Array with ${parsed.length} item${parsed.length === 1 ? '' : 's'}`;
+        } else if (parsed === null) {
+          rootType = 'Null';
+          summary = 'Null literal value';
+        } else if (typeof parsed === 'object') {
+          rootType = 'Object';
+          const keys = Object.keys(parsed);
+          summary = `Object with ${keys.length} top-level key${keys.length === 1 ? '' : 's'}`;
+        } else {
+          rootType = typeof parsed;
+          rootType = rootType.charAt(0).toUpperCase() + rootType.slice(1);
+          summary = `Primitive ${rootType} (${JSON.stringify(parsed)})`;
+        }
+
+        const lines = text.split('\n').length;
+        const bytes = getByteLength(text);
+        const sizeStr = bytes < 1024 ? `${bytes} B` : `${(bytes / 1024).toFixed(1)} KB`;
+
+        return {
+          valid: true,
+          empty: false,
+          parsed,
+          rootType,
+          summary,
+          stats: { lines, bytes, sizeStr, chars: text.length }
+        };
+      } catch (nativeErr) {
+        let line = 1;
+        let col = 1;
+        let message = nativeErr.message || 'Syntax Error';
+
+        const lineColMatch = message.match(/line\s+(\d+)\s+column\s+(\d+)/i) ||
+                             message.match(/at\s+line\s+(\d+)\s+column\s+(\d+)/i);
+        const posMatch = message.match(/position\s+(\d+)/i) ||
+                         message.match(/at\s+position\s+(\d+)/i);
+
+        if (lineColMatch) {
+          line = parseInt(lineColMatch[1], 10);
+          col = parseInt(lineColMatch[2], 10);
+        } else if (posMatch) {
+          const pos = parseInt(posMatch[1], 10);
+          const lc = getLineColFromIndex(text, pos);
+          line = lc.line;
+          col = lc.col;
+        } else {
+          const scanErr = scanJsonError(text);
+          if (scanErr) {
+            const lc = getLineColFromIndex(text, scanErr.pos);
+            line = lc.line;
+            col = lc.col;
+            if (scanErr.error) {
+              message = scanErr.error;
+            }
+          }
+        }
+
+        const excerpt = createErrorExcerpt(text, line, col);
+        return {
+          valid: false,
+          empty: false,
+          message,
+          line,
+          col,
+          excerpt
+        };
+      }
+    }
+
+    function resetJsonStatusBanner() {
+      const banner = document.getElementById('jsonStatusBanner');
+      if (!banner) return;
+      banner.className = 'p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 transition-all';
+      banner.innerHTML = `
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-sm">
+            <i class="fa-solid fa-info"></i>
+          </div>
+          <div class="flex-1 space-y-1">
+            <h3 class="text-xs font-bold text-slate-800 dark:text-slate-200">Ready to Validate &amp; Format</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Paste your JSON above and click <span class="font-semibold text-slate-700 dark:text-slate-300">Validate JSON</span> to inspect syntax, or choose <span class="font-semibold text-slate-700 dark:text-slate-300">Beautify</span> / <span class="font-semibold text-slate-700 dark:text-slate-300">Minify</span>. All processing occurs 100% inside your local browser.
+            </p>
           </div>
         </div>
       `;
     }
 
+    function updateJsonStatus(diag) {
+      const banner = document.getElementById('jsonStatusBanner');
+      if (!banner) return;
+      if (!diag || diag.empty) {
+        resetJsonStatusBanner();
+        return;
+      }
+      if (diag.valid) {
+        banner.className = 'p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 transition-all';
+        banner.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0 mt-0.5 text-sm">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="flex-1 space-y-1">
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <h3 class="text-xs font-bold text-emerald-800 dark:text-emerald-200 flex items-center gap-1.5">
+                  Valid JSON (${escapeJsonHtml(diag.rootType)})
+                </h3>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 uppercase tracking-wide">Syntax OK</span>
+              </div>
+              <p class="text-xs text-emerald-700 dark:text-emerald-300/90 leading-relaxed font-medium">
+                ${escapeJsonHtml(diag.summary)} • ${diag.stats ? diag.stats.sizeStr : ''} • ${diag.stats ? diag.stats.lines : 0} line${diag.stats && diag.stats.lines === 1 ? '' : 's'} • ${diag.stats ? diag.stats.chars : 0} char${diag.stats && diag.stats.chars === 1 ? '' : 's'}
+              </p>
+            </div>
+          </div>
+        `;
+      } else {
+        banner.className = 'p-4 rounded-xl border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/40 transition-all';
+        banner.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-300 flex items-center justify-center shrink-0 mt-0.5 text-sm">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="flex-1 space-y-1.5 overflow-hidden">
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <h3 class="text-xs font-bold text-red-800 dark:text-red-200">
+                  Invalid JSON Syntax (Line ${diag.line}, Column ${diag.col})
+                </h3>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-900/60 text-red-700 dark:text-red-300 uppercase tracking-wide">Error</span>
+              </div>
+              <p class="text-xs text-red-700 dark:text-red-300/90 leading-relaxed font-medium">
+                ${escapeJsonHtml(diag.message)}
+              </p>
+              ${diag.excerpt ? `
+                <div class="mt-2 space-y-1">
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-red-600/80 dark:text-red-400/80">Error Location:</span>
+                  <pre class="p-3 bg-slate-900 text-slate-100 font-mono text-[11px] rounded-lg overflow-x-auto leading-relaxed border border-red-500/20 shadow-inner"><code>${escapeJsonHtml(diag.excerpt)}</code></pre>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function updateJsonStats() {
+      const el = document.getElementById('jsonInput');
+      const statsEl = document.getElementById('jsonStats');
+      if (!el || !statsEl) return;
+      const val = el.value;
+      if (!val) {
+        statsEl.innerText = '0 lines • 0 characters • 0 B';
+        return;
+      }
+      const lines = val.split('\n').length;
+      const chars = val.length;
+      const bytes = getByteLength(val);
+      const sizeStr = bytes < 1024 ? `${bytes} B` : `${(bytes / 1024).toFixed(1)} KB`;
+      statsEl.innerText = `${lines} line${lines === 1 ? '' : 's'} • ${chars} character${chars === 1 ? '' : 's'} • ${sizeStr}`;
+    }
+
+    function handleJsonTab(e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const el = e.target;
+        const start = el.selectionStart;
+        const end = el.selectionEnd;
+        const val = el.value;
+        el.value = val.substring(0, start) + '  ' + val.substring(end);
+        el.selectionStart = el.selectionEnd = start + 2;
+        updateJsonStats();
+      }
+    }
+
+    function undoJson() {
+      const el = document.getElementById('jsonInput');
+      if (!el) return;
+      if (!jsonHistory || jsonHistory.length === 0) {
+        showToast('Nothing to undo', 'info');
+        return;
+      }
+      const prev = jsonHistory.pop();
+      el.value = prev;
+      el.focus();
+      updateJsonStats();
+      if (prev.trim()) {
+        validateJson(true);
+      } else {
+        resetJsonStatusBanner();
+      }
+      showToast('Restored previous text!', 'success');
+    }
+
+    function clearJson() {
+      const el = document.getElementById('jsonInput');
+      if (!el || !el.value) return;
+      saveJsonHistory(el.value);
+      el.value = '';
+      el.focus();
+      updateJsonStats();
+      resetJsonStatusBanner();
+      showToast('JSON input cleared', 'info');
+    }
+
+    async function pasteJson() {
+      const el = document.getElementById('jsonInput');
+      if (!el) return;
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (!text || !text.trim()) {
+            showToast('Clipboard is empty', 'warning');
+            return;
+          }
+          saveJsonHistory(el.value);
+          el.value = text;
+          el.focus();
+          updateJsonStats();
+          validateJson(true);
+          showToast('JSON pasted from clipboard!', 'success');
+        } catch (err) {
+          showToast('Clipboard access was blocked or denied. Press Ctrl+V / Cmd+V to paste.', 'warning');
+        }
+      } else {
+        showToast('Direct paste not supported by browser. Press Ctrl+V / Cmd+V to paste.', 'info');
+      }
+    }
+
+    function copyJson() {
+      const el = document.getElementById('jsonInput');
+      if (!el) return;
+      const val = el.value;
+      if (!val || !val.trim()) {
+        showToast('Nothing to copy. Enter some JSON first.', 'warning');
+        return;
+      }
+      if (typeof copyText === 'function') {
+        copyText(val);
+      } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(val)
+          .then(() => showToast('Copied to clipboard!', 'success'))
+          .catch(() => showToast('Failed to copy text', 'error'));
+      }
+    }
+
+    function downloadJson() {
+      const el = document.getElementById('jsonInput');
+      if (!el) return;
+      const val = el.value;
+      if (!val || !val.trim()) {
+        showToast('Please enter some JSON to download', 'warning');
+        return;
+      }
+      try {
+        const blob = new Blob([val], { type: 'application/json;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'formatted.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast('Downloaded formatted.json!', 'success');
+      } catch (err) {
+        showToast('Download failed: ' + err.message, 'error');
+      }
+    }
+
+    function loadSampleJson() {
+      const el = document.getElementById('jsonInput');
+      if (!el) return;
+      if (el.value && el.value.trim()) {
+        saveJsonHistory(el.value);
+      }
+      const sample = {
+        appName: "ToolsHere",
+        version: "2.0.0",
+        status: "online",
+        features: [
+          "JSON Beautifier",
+          "Syntax Validator",
+          "Minifier",
+          "Client-Side Privacy"
+        ],
+        settings: {
+          indentSpaces: 2,
+          localProcessing: true,
+          cacheTTL: 3600
+        },
+        stats: {
+          toolsAvailable: 16,
+          uptimePercentage: 99.98
+        }
+      };
+      el.value = JSON.stringify(sample, null, 2);
+      el.focus();
+      updateJsonStats();
+      validateJson(true);
+      showToast('Sample JSON loaded!', 'success');
+    }
+
+    function validateJson(silent = false) {
+      const el = document.getElementById('jsonInput');
+      if (!el) return;
+      const raw = el.value.trim();
+      if (!raw) {
+        resetJsonStatusBanner();
+        if (!silent) showToast('Please enter some JSON to validate', 'warning');
+        return;
+      }
+      const diag = parseJsonWithDiagnostics(el.value);
+      updateJsonStatus(diag);
+      if (!silent) {
+        if (diag.valid) {
+          showToast(`JSON is valid! (${diag.rootType})`, 'success');
+        } else {
+          showToast(`Invalid JSON: Line ${diag.line}, Column ${diag.col}`, 'error');
+        }
+      }
+    }
+
     function formatJson(spaces) {
       const el = document.getElementById('jsonInput');
-      try {
-        const parsed = JSON.parse(el.value);
-        el.value = JSON.stringify(parsed, null, spaces);
-        showToast('JSON formatted successfully!', 'success');
-      } catch (e) {
-        showToast('Invalid JSON: ' + e.message, 'error');
+      if (!el) return;
+      const raw = el.value.trim();
+      if (!raw) {
+        showToast('Please enter or paste JSON to format', 'warning');
+        return;
       }
+      const diag = parseJsonWithDiagnostics(el.value);
+      updateJsonStatus(diag);
+      if (!diag.valid) {
+        showToast(`Invalid JSON: Line ${diag.line}, Column ${diag.col}`, 'error');
+        return;
+      }
+      saveJsonHistory(el.value);
+      const formatted = JSON.stringify(diag.parsed, null, spaces);
+      el.value = formatted;
+      updateJsonStats();
+      const newDiag = parseJsonWithDiagnostics(formatted);
+      updateJsonStatus(newDiag);
+      showToast('JSON formatted successfully!', 'success');
     }
 
     function minifyJson() {
       const el = document.getElementById('jsonInput');
-      try {
-        const parsed = JSON.parse(el.value);
-        el.value = JSON.stringify(parsed);
-        showToast('JSON minified!', 'success');
-      } catch (e) {
-        showToast('Invalid JSON: ' + e.message, 'error');
+      if (!el) return;
+      const raw = el.value.trim();
+      if (!raw) {
+        showToast('Please enter or paste JSON to minify', 'warning');
+        return;
       }
+      const diag = parseJsonWithDiagnostics(el.value);
+      updateJsonStatus(diag);
+      if (!diag.valid) {
+        showToast(`Invalid JSON: Line ${diag.line}, Column ${diag.col}`, 'error');
+        return;
+      }
+      saveJsonHistory(el.value);
+      const minified = JSON.stringify(diag.parsed);
+      el.value = minified;
+      updateJsonStats();
+      const newDiag = parseJsonWithDiagnostics(minified);
+      updateJsonStatus(newDiag);
+      showToast('JSON minified!', 'success');
+    }
+
+    function renderJsonFormat(title, icon, container) {
+      if (title) title.innerText = 'JSON Formatter, Beautifier & Validator';
+      if (icon) icon.className = 'fa-solid fa-code';
+      container.innerHTML = `
+        <div class="space-y-5">
+          <!-- Top Utility Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-2.5 pb-2 border-b border-slate-200 dark:border-slate-700">
+            <div class="flex items-center gap-2 flex-wrap">
+              <button type="button" onclick="pasteJson()" title="Paste from clipboard" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-paste text-slate-400 text-[11px]"></i> Paste
+              </button>
+              <button type="button" onclick="loadSampleJson()" title="Load demo sample JSON" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-wand-magic-sparkles text-amber-500 text-[11px]"></i> Sample JSON
+              </button>
+              <button type="button" onclick="undoJson()" title="Undo last change" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-rotate-left text-slate-400 text-[11px]"></i> Undo
+              </button>
+              <button type="button" onclick="clearJson()" title="Clear editor" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/40 dark:hover:text-red-400 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-trash-can text-[11px]"></i> Clear
+              </button>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap ml-auto">
+              <button type="button" onclick="downloadJson()" title="Download as formatted.json" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-download text-slate-400 text-[11px]"></i> Download .json
+              </button>
+              <button type="button" onclick="copyJson()" title="Copy JSON to clipboard" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-xs transition-all flex items-center gap-1.5 min-h-[36px]">
+                <i class="fa-solid fa-copy text-[11px]"></i> Copy JSON
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Payload Stats Bar -->
+          <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
+            <div class="flex items-center gap-2 font-medium">
+              <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+              <span>JSON Input &amp; Editor</span>
+            </div>
+            <div id="jsonStats" class="font-mono text-[11px] text-slate-600 dark:text-slate-300">
+              0 lines • 0 characters • 0 B
+            </div>
+          </div>
+
+          <!-- Main Textarea -->
+          <div class="relative">
+            <textarea id="jsonInput" rows="12" oninput="updateJsonStats()" onkeydown="handleJsonTab(event)" placeholder="Paste or type raw JSON here (e.g. {&#34;name&#34;: &#34;ToolsHere&#34;, &#34;features&#34;: [&#34;Formatter&#34;, &#34;Validator&#34;]})..." class="w-full p-4 font-mono text-xs sm:text-sm rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all leading-relaxed"></textarea>
+          </div>
+
+          <!-- Primary Action Buttons Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <button type="button" onclick="validateJson()" class="py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 min-h-[44px]">
+              <i class="fa-solid fa-circle-check text-sm"></i> Validate JSON
+            </button>
+            <button type="button" onclick="formatJson(2)" class="py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-align-left text-xs"></i> Beautify (2 Spaces)
+            </button>
+            <button type="button" onclick="formatJson(4)" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-indent text-xs"></i> Beautify (4 Spaces)
+            </button>
+            <button type="button" onclick="minifyJson()" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-compress text-xs"></i> Minify JSON
+            </button>
+          </div>
+
+          <!-- Persistent Valid / Invalid / Helper Status Banner -->
+          <div id="jsonStatusBanner" class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 transition-all">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-sm">
+                <i class="fa-solid fa-info"></i>
+              </div>
+              <div class="flex-1 space-y-1">
+                <h3 class="text-xs font-bold text-slate-800 dark:text-slate-200">Ready to Validate &amp; Format</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Paste your JSON above and click <span class="font-semibold text-slate-700 dark:text-slate-300">Validate JSON</span> to inspect syntax, or choose <span class="font-semibold text-slate-700 dark:text-slate-300">Beautify</span> / <span class="font-semibold text-slate-700 dark:text-slate-300">Minify</span>. All processing occurs 100% inside your local browser.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     /* ================= UTILITY 14: SEO META TAG GENERATOR ================= */

@@ -386,13 +386,78 @@
     <!-- Pre-rendered Tool Workspace (Exempt from intrusive auto-ads to protect file uploads/downloads) -->
     <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-6 sm:space-y-8 google-auto-ads-ignore adsbygoogle-noablate">
 
-        <div class="space-y-4">
-          <textarea id="jsonInput" rows="10" placeholder="Paste your raw JSON here to beautify or validate..." class="w-full p-4 font-mono text-xs rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white"></textarea>
-          <div class="flex gap-2 flex-wrap">
-            <button type="button" onclick="formatJson(2)" class="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-bold text-xs shadow-md">Beautify (2 Spaces)</button>
-            <button type="button" onclick="formatJson(4)" class="px-5 py-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl font-bold text-xs">Beautify (4 Spaces)</button>
-            <button type="button" onclick="minifyJson()" class="px-5 py-2.5 bg-slate-100 dark:bg-slate-700 rounded-xl font-bold text-xs">Minify JSON</button>
-            <button type="button" onclick="copyText(document.getElementById('jsonInput').value)" class="px-5 py-2.5 bg-emerald-600 text-white rounded-xl font-bold text-xs ml-auto">Copy JSON</button>
+        <div class="space-y-5">
+          <!-- Top Utility Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-2.5 pb-2 border-b border-slate-200 dark:border-slate-700">
+            <div class="flex items-center gap-2 flex-wrap">
+              <button type="button" onclick="pasteJson()" title="Paste from clipboard" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-paste text-slate-400 text-[11px]"></i> Paste
+              </button>
+              <button type="button" onclick="loadSampleJson()" title="Load demo sample JSON" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-wand-magic-sparkles text-amber-500 text-[11px]"></i> Sample JSON
+              </button>
+              <button type="button" onclick="undoJson()" title="Undo last change" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-rotate-left text-slate-400 text-[11px]"></i> Undo
+              </button>
+              <button type="button" onclick="clearJson()" title="Clear editor" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/40 dark:hover:text-red-400 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-trash-can text-[11px]"></i> Clear
+              </button>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap ml-auto">
+              <button type="button" onclick="downloadJson()" title="Download as formatted.json" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs min-h-[36px]">
+                <i class="fa-solid fa-download text-slate-400 text-[11px]"></i> Download .json
+              </button>
+              <button type="button" onclick="copyJson()" title="Copy JSON to clipboard" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg shadow-xs transition-all flex items-center gap-1.5 min-h-[36px]">
+                <i class="fa-solid fa-copy text-[11px]"></i> Copy JSON
+              </button>
+            </div>
+          </div>
+
+          <!-- Live Payload Stats Bar -->
+          <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
+            <div class="flex items-center gap-2 font-medium">
+              <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
+              <span>JSON Input &amp; Editor</span>
+            </div>
+            <div id="jsonStats" class="font-mono text-[11px] text-slate-600 dark:text-slate-300">
+              0 lines • 0 characters • 0 B
+            </div>
+          </div>
+
+          <!-- Main Textarea -->
+          <div class="relative">
+            <textarea id="jsonInput" rows="12" oninput="updateJsonStats()" onkeydown="handleJsonTab(event)" placeholder="Paste or type raw JSON here (e.g. {&#34;name&#34;: &#34;ToolsHere&#34;, &#34;features&#34;: [&#34;Formatter&#34;, &#34;Validator&#34;]})..." class="w-full p-4 font-mono text-xs sm:text-sm rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all leading-relaxed"></textarea>
+          </div>
+
+          <!-- Primary Action Buttons Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <button type="button" onclick="validateJson()" class="py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 min-h-[44px]">
+              <i class="fa-solid fa-circle-check text-sm"></i> Validate JSON
+            </button>
+            <button type="button" onclick="formatJson(2)" class="py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-align-left text-xs"></i> Beautify (2 Spaces)
+            </button>
+            <button type="button" onclick="formatJson(4)" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-indent text-xs"></i> Beautify (4 Spaces)
+            </button>
+            <button type="button" onclick="minifyJson()" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-compress text-xs"></i> Minify JSON
+            </button>
+          </div>
+
+          <!-- Persistent Valid / Invalid / Helper Status Banner -->
+          <div id="jsonStatusBanner" class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 transition-all">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 mt-0.5 text-sm">
+                <i class="fa-solid fa-info"></i>
+              </div>
+              <div class="flex-1 space-y-1">
+                <h3 class="text-xs font-bold text-slate-800 dark:text-slate-200">Ready to Validate &amp; Format</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Paste your JSON above and click <span class="font-semibold text-slate-700 dark:text-slate-300">Validate JSON</span> to inspect syntax, or choose <span class="font-semibold text-slate-700 dark:text-slate-300">Beautify</span> / <span class="font-semibold text-slate-700 dark:text-slate-300">Minify</span>. All processing occurs 100% inside your local browser.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
