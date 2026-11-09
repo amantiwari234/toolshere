@@ -172,6 +172,47 @@ const seoOverrides = {
   bgRemover: {
     seoTitle: "Free Image Background Remover & Transparent PNG - ToolsHere",
     metaDesc: "Remove image backgrounds instantly in your browser. Fine-tune color tolerance, isolate subjects, and download transparent PNG photos with 100% device privacy.",
+    helpfulGuidesHtml: `
+      <!-- Helpful Guides & Tutorials Section -->
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-blue-600"></i> Helpful Guides &amp; Tutorials
+          </h2>
+          <a href="/blog/" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
+            View All Guides <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="/blog/how-to-convert-pdf-to-jpg/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-image"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Convert PDF to JPG Online
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Export clean visual assets and graphics from PDF pages ready for subject isolation and background removal.
+              </p>
+            </div>
+          </a>
+          <a href="/blog/how-to-compress-pdf-for-email/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Compress Files for Email Attachments
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Ensure transparent PNG portraits and product cutouts remain lightweight for fast email delivery.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    `,
     relatedTools: [
       { name: "Image Compressor & Resizer", hash: "#image-compressor" },
       { name: "Image Format Converter", hash: "#image-converter" },
@@ -187,6 +228,47 @@ const seoOverrides = {
   pdfWord: {
     seoTitle: "PDF to Word Converter: Convert PDF to DOC Free - ToolsHere",
     metaDesc: "Convert PDF files into editable Word (.doc) documents directly in your browser. Fast, free, confidential text extraction with zero server file uploads.",
+    helpfulGuidesHtml: `
+      <!-- Helpful Guides & Tutorials Section -->
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-blue-600"></i> Helpful Guides &amp; Tutorials
+          </h2>
+          <a href="/blog/" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
+            View All Guides <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="/blog/how-to-convert-pdf-to-jpg/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-image"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Convert PDF to JPG Online
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Need images instead of Word text? Learn methods to extract and export PDF pages into high-resolution JPG pictures.
+              </p>
+            </div>
+          </a>
+          <a href="/blog/how-to-compress-pdf-for-email/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Compress PDF Files for Email
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Reduce document file size before emailing converted Word and PDF documents.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    `,
     relatedTools: [
       { name: "Merge & Split PDF", hash: "#merge-pdf" },
       { name: "Compress PDF Document", hash: "#compress-pdf" },
@@ -202,6 +284,47 @@ const seoOverrides = {
   pdfMerge: {
     seoTitle: "Merge PDF Files Online: Combine PDFs Free - ToolsHere",
     metaDesc: "Combine multiple PDF documents into a single organized file in seconds. Free, secure, client-side PDF merging with page order preview and no file limits.",
+    helpfulGuidesHtml: `
+      <!-- Helpful Guides & Tutorials Section -->
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-blue-600"></i> Helpful Guides &amp; Tutorials
+          </h2>
+          <a href="/blog/" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
+            View All Guides <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="/blog/how-to-merge-pdf-files-online/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-object-group"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                Complete Guide to Merging PDF Files Online
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Discover tips for combining different documents, previewing page order, and keeping confidential records private.
+              </p>
+            </div>
+          </a>
+          <a href="/blog/how-to-compress-pdf-for-email/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Compress PDF Files for Email
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Merged files can become large. Learn how to downscale and optimize your consolidated PDFs for fast sharing.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    `,
     relatedTools: [
       { name: "Compress PDF Document", hash: "#compress-pdf" },
       { name: "PDF to Word Converter", hash: "#pdf-to-word" },
@@ -309,6 +432,47 @@ const seoOverrides = {
   imgFormat: {
     seoTitle: "Image Format Converter: Convert PNG, JPG, WebP - ToolsHere",
     metaDesc: "Convert photos between JPG, PNG, and WebP formats instantly in your browser. Fast, free batch image conversion preserving original resolution and privacy.",
+    helpfulGuidesHtml: `
+      <!-- Helpful Guides & Tutorials Section -->
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-blue-600"></i> Helpful Guides &amp; Tutorials
+          </h2>
+          <a href="/blog/" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
+            View All Guides <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="/blog/how-to-convert-pdf-to-jpg/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-image"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Convert PDF to JPG Online
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Learn best practices for high-resolution format conversion and image quality preservation.
+              </p>
+            </div>
+          </a>
+          <a href="/blog/how-to-compress-pdf-for-email/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Compress Files for Email Attachments
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Downscale and optimize large graphics and documents to meet email provider attachment quotas.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    `,
     relatedTools: [
       { name: "Image Compressor & Resizer", hash: "#image-compressor" },
       { name: "AI Background Remover", hash: "#background-remover" },
@@ -458,6 +622,47 @@ const seoOverrides = {
   compressPdf: {
     seoTitle: "Compress PDF Online: Reduce PDF File Size Free - ToolsHere",
     metaDesc: "Compress PDF files online without losing readability. Reduce document size for email and job portal uploads with 100% private client-side processing.",
+    helpfulGuidesHtml: `
+      <!-- Helpful Guides & Tutorials Section -->
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-blue-600"></i> Helpful Guides &amp; Tutorials
+          </h2>
+          <a href="/blog/" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
+            View All Guides <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="/blog/how-to-compress-pdf-for-email/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Compress PDF Files for Email Attachments
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Step-by-step tutorial on reducing PDF file sizes to fit Gmail, Outlook, and portal attachment restrictions.
+              </p>
+            </div>
+          </a>
+          <a href="/blog/how-to-merge-pdf-files-online/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-object-group"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Merge Multiple PDF Files Online
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Combine receipts, invoices, and reports into a single organized document before compressing.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    `,
     relatedTools: [
       { name: "PDF to Word Converter", hash: "#pdf-to-word" },
       { name: "Merge & Split PDF", hash: "#merge-pdf" },
@@ -473,6 +678,47 @@ const seoOverrides = {
   imgToPdf: {
     seoTitle: "Image to PDF Converter: Convert JPG & PNG to PDF - ToolsHere",
     metaDesc: "Convert and bundle multiple JPG, PNG, and WebP images into a single printable PDF document. Set page size, orientation, and margins with zero server uploads.",
+    helpfulGuidesHtml: `
+      <!-- Helpful Guides & Tutorials Section -->
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-blue-600"></i> Helpful Guides &amp; Tutorials
+          </h2>
+          <a href="/blog/" class="text-xs font-semibold text-blue-600 hover:underline flex items-center gap-1">
+            View All Guides <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="/blog/how-to-convert-pdf-to-jpg/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-file-image"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Convert PDF to JPG Online
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Explore the companion workflow: extracting images from PDF documents compared to bundling images into PDF.
+              </p>
+            </div>
+          </a>
+          <a href="/blog/how-to-merge-pdf-files-online/" class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 text-sm mt-0.5">
+              <i class="fa-solid fa-object-group"></i>
+            </div>
+            <div>
+              <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                How to Merge Multiple PDF Files Online
+              </span>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+                Combine your newly generated image PDFs with existing document pages into a consolidated file.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    `,
     relatedTools: [
       { name: "Image Compressor & Resizer", hash: "#image-compressor" },
       { name: "Image Format Converter", hash: "#image-converter" },
@@ -495,13 +741,37 @@ function generateGuideHtml(tool) {
   let relatedHtml = '';
   if (tool.relatedTools && tool.relatedTools.length > 0) {
     relatedHtml = `
-      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-3">
-        <h2 class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Related Productivity Utilities</h2>
-        <div class="flex flex-wrap gap-2">
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-shapes text-blue-600"></i> Related Tools
+          </h2>
+          <a href="/" class="text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1">
+            View All Tools <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           ${tool.relatedTools.map(rt => {
             const slug = rt.hash.replace('#', '');
-            return `<a href="/${slug}/" class="px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-300 dark:hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-colors flex items-center gap-1.5 border border-slate-200 dark:border-slate-700">
-              <i class="fa-solid fa-arrow-right text-[10px] text-blue-500"></i> ${rt.name}
+            const targetTool = tools.find(t => t.hash === rt.hash || (routes && Object.values(routes).some(r => r.hash === slug && r.toolId === t.id)));
+            const icon = targetTool && toolIconsMap[targetTool.id] ? toolIconsMap[targetTool.id] : 'fa-solid fa-screwdriver-wrench';
+            const shortDesc = rt.desc || (targetTool && targetTool.metaDesc ? targetTool.metaDesc.split('.')[0] + '.' : 'Fast in-browser utility.');
+            return `<a href="/${slug}/" class="p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-2xs transition-all group flex flex-col justify-between">
+              <div>
+                <div class="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-sm mb-2.5">
+                  <i class="${icon}"></i>
+                </div>
+                <span class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 transition-colors block leading-snug">
+                  ${rt.name}
+                </span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed line-clamp-2">
+                  ${shortDesc}
+                </p>
+              </div>
+              <div class="pt-3 mt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between text-[11px] font-semibold text-blue-600 dark:text-blue-400">
+                <span>Use Tool</span>
+                <i class="fa-solid fa-arrow-right text-[9px] group-hover:translate-x-0.5 transition-transform"></i>
+              </div>
             </a>`;
           }).join('')}
         </div>
@@ -615,7 +885,25 @@ function generateGuideHtml(tool) {
         </div>
       </section>
 
-      ${tool.helpfulGuidesHtml || ''}
+      ${tool.helpfulGuidesHtml || `
+      <!-- Knowledge Base & Blog Guide Banner -->
+      <section class="pt-6 border-t border-slate-200 dark:border-slate-800">
+        <div class="p-4 rounded-xl bg-gradient-to-r from-blue-50/70 to-indigo-50/70 dark:from-slate-800/80 dark:to-slate-800 border border-blue-100 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 text-sm">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div>
+              <h3 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">ToolsHere Knowledge Base &amp; Guides</h3>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Discover step-by-step tutorials, document tips, and digital productivity workflows.</p>
+            </div>
+          </div>
+          <a href="/blog/" class="px-4 py-2 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-300 font-bold text-xs hover:border-blue-400 shadow-2xs transition-all shrink-0 flex items-center justify-center gap-1.5">
+            Visit Blog <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </section>
+      `}
 
       ${relatedHtml}
     </article>
@@ -1119,7 +1407,18 @@ const legalPages = [
     title: 'About ToolsHere: Privacy-First Browser Tools - ToolsHere',
     metaDesc: 'Learn about ToolsHere.online, our mission for 100% private client-side web utility tools, our zero-upload architecture, and our engineering standards.',
     category: 'Information',
-    h2s: ['Our Client-Side Privacy Architecture', 'Engineering & Security Standards', 'Zero Data Retention Policy']
+    h2s: ['Our Client-Side Privacy Architecture', 'Engineering & Security Standards', 'Zero Data Retention Policy'],
+    extraHtml: `
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+        <p class="font-bold text-slate-800 dark:text-slate-200">Explore ToolsHere Resources:</p>
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <a href="/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-xs hover:border-blue-400 transition-colors">All 16+ Free Tools</a>
+          <a href="/blog/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-xs hover:border-blue-400 transition-colors">Blog &amp; How-To Guides</a>
+          <a href="/privacy/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Privacy Policy</a>
+          <a href="/contact/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Contact Support</a>
+        </div>
+      </div>
+    `
   },
   {
     slug: 'contact',
@@ -1129,7 +1428,18 @@ const legalPages = [
     title: 'Contact ToolsHere Support & Feedback Team - ToolsHere',
     metaDesc: 'Get in touch with the ToolsHere.online team for technical support, feature requests, bug reports, and business inquiries. We value user feedback.',
     category: 'Information',
-    h2s: ['Technical Support & Bug Inquiries', 'Feature Requests & Suggestions', 'Response Time Expectations']
+    h2s: ['Technical Support & Bug Inquiries', 'Feature Requests & Suggestions', 'Response Time Expectations'],
+    extraHtml: `
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+        <p class="font-bold text-slate-800 dark:text-slate-200">Helpful Links &amp; Policies:</p>
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <a href="/about/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">About ToolsHere</a>
+          <a href="/privacy/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Privacy Policy</a>
+          <a href="/terms/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Terms of Service</a>
+          <a href="/blog/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-xs hover:border-blue-400 transition-colors">Educational Blog</a>
+        </div>
+      </div>
+    `
   },
   {
     slug: 'privacy',
@@ -1139,7 +1449,17 @@ const legalPages = [
     title: 'Privacy Policy: Zero Server Data Storage - ToolsHere',
     metaDesc: 'Read the ToolsHere.online privacy policy. Understand our client-side architecture where all image, PDF, and text processing stays locally on your device.',
     category: 'Legal',
-    h2s: ['Local Browser Execution Guarantee', 'Cookies & Analytics Disclosure', 'Third-Party Services & User Rights']
+    h2s: ['Local Browser Execution Guarantee', 'Cookies & Analytics Disclosure', 'Third-Party Services & User Rights'],
+    extraHtml: `
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+        <p class="font-bold text-slate-800 dark:text-slate-200">Related Legal Documents:</p>
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <a href="/terms/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Terms of Service</a>
+          <a href="/disclaimer/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">General Disclaimer</a>
+          <a href="/contact/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-xs hover:border-blue-400 transition-colors">Contact Support</a>
+        </div>
+      </div>
+    `
   },
   {
     slug: 'terms',
@@ -1149,7 +1469,17 @@ const legalPages = [
     title: 'Terms of Service & Usage Guidelines - ToolsHere',
     metaDesc: 'Review the terms of service, conditions of use, and intellectual property policies governing your access to ToolsHere.online free browser utilities.',
     category: 'Legal',
-    h2s: ['Permitted Utility Usage', 'Intellectual Property & Content Ownership', 'Disclaimer of Warranties & Liability']
+    h2s: ['Permitted Utility Usage', 'Intellectual Property & Content Ownership', 'Disclaimer of Warranties & Liability'],
+    extraHtml: `
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+        <p class="font-bold text-slate-800 dark:text-slate-200">Related Legal Documents:</p>
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <a href="/privacy/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Privacy Policy</a>
+          <a href="/disclaimer/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">General Disclaimer</a>
+          <a href="/about/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-xs hover:border-blue-400 transition-colors">About ToolsHere</a>
+        </div>
+      </div>
+    `
   },
   {
     slug: 'disclaimer',
@@ -1159,7 +1489,18 @@ const legalPages = [
     title: 'General & Technical Disclaimer Policy - ToolsHere',
     metaDesc: 'Read the legal and technical disclaimer for ToolsHere.online. Clarifications on calculations, document conversions, and third-party content policies.',
     category: 'Legal',
-    h2s: ['Calculation & Conversion Estimates', 'Third-Party Content & External Links', 'User Responsibility & Due Diligence']
+    h2s: ['Calculation & Conversion Estimates', 'Third-Party Content & External Links', 'User Responsibility & Due Diligence'],
+    extraHtml: `
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
+        <p class="font-bold text-slate-800 dark:text-slate-200">Related Tools &amp; Policies:</p>
+        <div class="flex flex-wrap items-center gap-2 pt-1">
+          <a href="/emi-calculator/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-xs hover:border-blue-400 transition-colors">GST &amp; EMI Calculator</a>
+          <a href="/age-calculator/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-xs hover:border-blue-400 transition-colors">Age &amp; Date Calculator</a>
+          <a href="/terms/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Terms of Service</a>
+          <a href="/contact/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Contact Support</a>
+        </div>
+      </div>
+    `
   }
 ];
 
@@ -1199,6 +1540,7 @@ for (const p of legalPages) {
     workspaceHtml: `
       <div class="space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed text-sm">
         ${container.innerHTML || '<p>Content</p>'}
+        ${p.extraHtml || ''}
         ${p.h2s ? `
           <div class="pt-6 border-t border-slate-200 dark:border-slate-700 space-y-6">
             ${p.h2s.map(h2 => `
@@ -1207,7 +1549,7 @@ for (const p of legalPages) {
                   <i class="fa-solid fa-shield-check text-blue-600 text-sm"></i> ${h2}
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  ToolsHere is dedicated to providing reliable, private client-side utilities. For inquiries or updates regarding ${h2.toLowerCase()}, our support team is available via our contact page.
+                  ToolsHere is dedicated to providing reliable, private client-side utilities. For inquiries or updates regarding ${h2.toLowerCase()}, our team is available via our <a href="/contact/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">contact and support page</a>.
                 </p>
               </section>
             `).join('')}
@@ -1240,7 +1582,11 @@ const sitemapUrls = [
   { loc: 'https://toolshere.online/contact/', priority: '0.6', changefreq: 'monthly' },
   { loc: 'https://toolshere.online/privacy/', priority: '0.4', changefreq: 'monthly' },
   { loc: 'https://toolshere.online/terms/', priority: '0.4', changefreq: 'monthly' },
-  { loc: 'https://toolshere.online/disclaimer/', priority: '0.4', changefreq: 'monthly' }
+  { loc: 'https://toolshere.online/disclaimer/', priority: '0.4', changefreq: 'monthly' },
+  { loc: 'https://toolshere.online/blog/', priority: '0.8', changefreq: 'weekly' },
+  { loc: 'https://toolshere.online/blog/how-to-convert-pdf-to-jpg/', priority: '0.7', changefreq: 'monthly' },
+  { loc: 'https://toolshere.online/blog/how-to-compress-pdf-for-email/', priority: '0.7', changefreq: 'monthly' },
+  { loc: 'https://toolshere.online/blog/how-to-merge-pdf-files-online/', priority: '0.7', changefreq: 'monthly' }
 ];
 
 const today = new Date().toISOString().split('T')[0];
