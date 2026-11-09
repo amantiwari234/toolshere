@@ -5709,21 +5709,160 @@ function ensureScript(name) {
       `;
     }
     /* ================= UTILITY 12: TEXT CASE CONVERTER ================= */
+    let textCaseHistory = [];
+
+    function saveCaseHistory(val) {
+      if (typeof val !== 'string') return;
+      textCaseHistory.push(val);
+      if (textCaseHistory.length > 25) {
+        textCaseHistory.shift();
+      }
+    }
+
+    function updateTextCaseStats() {
+      const el = document.getElementById('textCaseInput');
+      const val = el ? el.value : '';
+      const charEl = document.getElementById('textCaseCharCount');
+      const wordEl = document.getElementById('textCaseWordCount');
+      if (charEl) {
+        charEl.innerText = `${val.length} character${val.length === 1 ? '' : 's'}`;
+      }
+      if (wordEl) {
+        const words = val.trim().split(/\s+/).filter(Boolean);
+        wordEl.innerText = `${words.length} word${words.length === 1 ? '' : 's'}`;
+      }
+    }
+
+    function undoCase() {
+      const el = document.getElementById('textCaseInput');
+      if (!el) return;
+      if (!textCaseHistory || textCaseHistory.length === 0) {
+        showToast('Nothing to undo', 'info');
+        return;
+      }
+      const prev = textCaseHistory.pop();
+      el.value = prev;
+      el.focus();
+      updateTextCaseStats();
+      showToast('Restored previous text!', 'success');
+    }
+
+    function clearTextCase() {
+      const el = document.getElementById('textCaseInput');
+      if (!el || !el.value) return;
+      saveCaseHistory(el.value);
+      el.value = '';
+      el.focus();
+      updateTextCaseStats();
+      showToast('Text cleared', 'info');
+    }
+
+    async function pasteTextCase() {
+      const el = document.getElementById('textCaseInput');
+      if (!el) return;
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        try {
+          const text = await navigator.clipboard.readText();
+          if (!text) {
+            showToast('Clipboard is empty', 'warning');
+            return;
+          }
+          saveCaseHistory(el.value);
+          el.value = text;
+          el.focus();
+          updateTextCaseStats();
+          showToast('Text pasted from clipboard!', 'success');
+        } catch (err) {
+          showToast('Clipboard access was blocked or denied. Press Ctrl+V / Cmd+V to paste.', 'warning');
+        }
+      } else {
+        showToast('Direct paste not supported by browser. Press Ctrl+V / Cmd+V to paste.', 'info');
+      }
+    }
+
+    function downloadTextCase() {
+      const el = document.getElementById('textCaseInput');
+      const val = el ? el.value : '';
+      if (!val) {
+        showToast('Please enter some text to download', 'warning');
+        return;
+      }
+      const blob = new Blob([val], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'converted-text.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Downloaded converted-text.txt!', 'success');
+    }
+
+    function copyTextCase() {
+      const el = document.getElementById('textCaseInput');
+      const val = el ? el.value : '';
+      if (!val) {
+        showToast('Nothing to copy. Enter some text first.', 'warning');
+        return;
+      }
+      copyText(val);
+    }
+
     function renderTextCase(title, icon, container) {
       if (title) title.innerText = 'Text Case Converter';
       if (icon) icon.className = 'fa-solid fa-font';
       container.innerHTML = `
-        <div class="space-y-6">
-          <textarea id="textCaseInput" rows="6" placeholder="Type or paste text to convert case..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm"></textarea>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            <button type="button" onclick="transformCase('upper')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">UPPERCASE</button>
-            <button type="button" onclick="transformCase('lower')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">lowercase</button>
-            <button type="button" onclick="transformCase('title')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">Title Case</button>
-            <button type="button" onclick="transformCase('sentence')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">Sentence case</button>
-            <button type="button" onclick="transformCase('slug')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">url-slug</button>
-            <button type="button" onclick="transformCase('camel')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">camelCase</button>
-            <button type="button" onclick="transformCase('snake')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">snake_case</button>
-            <button type="button" onclick="copyText(document.getElementById('textCaseInput').value)" class="py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md">Copy Text</button>
+        <div class="space-y-4">
+          <textarea id="textCaseInput" rows="7" oninput="updateTextCaseStats()" placeholder="Type or paste text to convert case..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"></textarea>
+
+          <!-- Action & Metrics Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 p-2 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 pl-1">
+              <span id="textCaseWordCount">0 words</span>
+              <span>&bull;</span>
+              <span id="textCaseCharCount">0 characters</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <button type="button" onclick="pasteTextCase()" title="Paste from clipboard" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-paste text-slate-400 text-[11px]"></i> Paste
+              </button>
+              <button type="button" onclick="undoCase()" title="Undo last conversion" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-rotate-left text-slate-400 text-[11px]"></i> Undo
+              </button>
+              <button type="button" onclick="clearTextCase()" title="Clear text area" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/40 dark:hover:text-red-400 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-trash-can text-[11px]"></i> Clear
+              </button>
+              <button type="button" onclick="downloadTextCase()" title="Download as .txt file" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-download text-slate-400 text-[11px]"></i> Download .txt
+              </button>
+              <button type="button" onclick="copyTextCase()" title="Copy converted text" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg shadow-xs transition-all flex items-center gap-1.5">
+                <i class="fa-solid fa-copy text-[11px]"></i> Copy Text
+              </button>
+            </div>
+          </div>
+
+          <!-- Conversion Formats Grid -->
+          <div class="space-y-2.5 pt-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Conversion Formats</span>
+              <span class="text-[11px] text-slate-400">Click to convert instantly</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+              <button type="button" onclick="transformCase('sentence')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">Sentence case</button>
+              <button type="button" onclick="transformCase('lower')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">lowercase</button>
+              <button type="button" onclick="transformCase('upper')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">UPPERCASE</button>
+              <button type="button" onclick="transformCase('title')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">Title Case</button>
+              <button type="button" onclick="transformCase('camel')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">camelCase</button>
+              <button type="button" onclick="transformCase('pascal')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">PascalCase</button>
+              <button type="button" onclick="transformCase('snake')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">snake_case</button>
+              <button type="button" onclick="transformCase('constant')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">CONSTANT_CASE</button>
+              <button type="button" onclick="transformCase('kebab')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">kebab-case</button>
+              <button type="button" onclick="transformCase('slug')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">url-slug</button>
+              <button type="button" onclick="transformCase('dot')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">dot.case</button>
+              <button type="button" onclick="transformCase('alternating')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">aLtErNaTiNg CaSe</button>
+              <button type="button" onclick="transformCase('invert')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center col-span-2 sm:col-span-1">iNVERT cASE</button>
+            </div>
           </div>
         </div>
       `;
@@ -5731,8 +5870,15 @@ function ensureScript(name) {
 
     function transformCase(mode) {
       const el = document.getElementById('textCaseInput');
-      if (!el || !el.value) return;
+      if (!el) return;
       const str = el.value;
+      if (!str) {
+        showToast('Please enter or paste some text first', 'warning');
+        return;
+      }
+
+      // Save state to undo history before applying conversion
+      saveCaseHistory(str);
 
       // Normalize Unicode diacritics / accents (café -> cafe, résumé -> resume, Über -> Uber)
       const removeAccents = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -5757,8 +5903,8 @@ function ensureScript(name) {
           return abbr.toLowerCase() + ' ' + letter.toLowerCase();
         });
         el.value = s;
-      } else if (mode === 'slug') {
-        // Clean URL slug: normalized Unicode diacritics, stripped apostrophes, no stray hyphens
+      } else if (mode === 'slug' || mode === 'kebab') {
+        // Clean URL slug & kebab-case: normalized Unicode diacritics, stripped apostrophes, no stray hyphens
         el.value = removeAccents(str)
           .replace(/['’]/g, '')
           .toLowerCase()
@@ -5773,6 +5919,22 @@ function ensureScript(name) {
           .trim()
           .replace(/[^a-z0-9]+/g, '_')
           .replace(/^_+|_+$/g, '');
+      } else if (mode === 'constant') {
+        // Clean CONSTANT_CASE (SCREAMING_SNAKE_CASE): uppercase, normalized diacritics, underscores
+        el.value = removeAccents(str)
+          .replace(/['’]/g, '')
+          .toUpperCase()
+          .trim()
+          .replace(/[^A-Z0-9]+/g, '_')
+          .replace(/^_+|_+$/g, '');
+      } else if (mode === 'dot') {
+        // Clean dot.case: normalized diacritics, lowercase, separated by periods, no stray dots
+        el.value = removeAccents(str)
+          .replace(/['’]/g, '')
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, '.')
+          .replace(/^\.+|\.+$/g, '');
       } else if (mode === 'camel') {
         // Clean camelCase: normalized Unicode diacritics, guaranteed lowercase first word, no trailing punctuation
         const words = removeAccents(str)
@@ -5785,7 +5947,46 @@ function ensureScript(name) {
         } else {
           el.value = words[0].toLowerCase() + words.slice(1).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
         }
+      } else if (mode === 'pascal') {
+        // Clean PascalCase: normalized diacritics, every word capitalized, joined without separators
+        const words = removeAccents(str)
+          .replace(/['’]/g, '')
+          .trim()
+          .split(/[^a-zA-Z0-9]+/)
+          .filter(Boolean);
+        if (words.length === 0) {
+          el.value = '';
+        } else {
+          el.value = words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
+        }
+      } else if (mode === 'alternating') {
+        // aLtErNaTiNg CaSe: alternating letter case, preserving spaces and punctuation
+        let upper = false;
+        let res = '';
+        for (const char of str) {
+          if (/\p{L}/u.test(char)) {
+            res += upper ? char.toUpperCase() : char.toLowerCase();
+            upper = !upper;
+          } else {
+            res += char;
+          }
+        }
+        el.value = res;
+      } else if (mode === 'invert') {
+        // iNVERT cASE: toggle casing for each letter
+        let res = '';
+        for (const char of str) {
+          if (char === char.toUpperCase() && char !== char.toLowerCase()) {
+            res += char.toLowerCase();
+          } else if (char === char.toLowerCase() && char !== char.toUpperCase()) {
+            res += char.toUpperCase();
+          } else {
+            res += char;
+          }
+        }
+        el.value = res;
       }
+      updateTextCaseStats();
       showToast('Text converted!', 'success');
     }
 

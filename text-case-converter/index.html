@@ -386,17 +386,56 @@
     <!-- Pre-rendered Tool Workspace (Exempt from intrusive auto-ads to protect file uploads/downloads) -->
     <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-6 sm:space-y-8 google-auto-ads-ignore adsbygoogle-noablate">
 
-        <div class="space-y-6">
-          <textarea id="textCaseInput" rows="6" placeholder="Type or paste text to convert case..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm"></textarea>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-            <button type="button" onclick="transformCase('upper')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">UPPERCASE</button>
-            <button type="button" onclick="transformCase('lower')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">lowercase</button>
-            <button type="button" onclick="transformCase('title')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">Title Case</button>
-            <button type="button" onclick="transformCase('sentence')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">Sentence case</button>
-            <button type="button" onclick="transformCase('slug')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">url-slug</button>
-            <button type="button" onclick="transformCase('camel')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">camelCase</button>
-            <button type="button" onclick="transformCase('snake')" class="py-2.5 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all">snake_case</button>
-            <button type="button" onclick="copyText(document.getElementById('textCaseInput').value)" class="py-2.5 bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md">Copy Text</button>
+        <div class="space-y-4">
+          <textarea id="textCaseInput" rows="7" oninput="updateTextCaseStats()" placeholder="Type or paste text to convert case..." class="w-full p-4 rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"></textarea>
+
+          <!-- Action & Metrics Toolbar -->
+          <div class="flex flex-wrap items-center justify-between gap-3 p-2 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400 pl-1">
+              <span id="textCaseWordCount">0 words</span>
+              <span>&bull;</span>
+              <span id="textCaseCharCount">0 characters</span>
+            </div>
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <button type="button" onclick="pasteTextCase()" title="Paste from clipboard" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-paste text-slate-400 text-[11px]"></i> Paste
+              </button>
+              <button type="button" onclick="undoCase()" title="Undo last conversion" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-rotate-left text-slate-400 text-[11px]"></i> Undo
+              </button>
+              <button type="button" onclick="clearTextCase()" title="Clear text area" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950/40 dark:hover:text-red-400 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-trash-can text-[11px]"></i> Clear
+              </button>
+              <button type="button" onclick="downloadTextCase()" title="Download as .txt file" class="px-3 py-1.5 bg-white dark:bg-slate-700 hover:bg-slate-100 dark:hover:bg-slate-600 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-download text-slate-400 text-[11px]"></i> Download .txt
+              </button>
+              <button type="button" onclick="copyTextCase()" title="Copy converted text" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg shadow-xs transition-all flex items-center gap-1.5">
+                <i class="fa-solid fa-copy text-[11px]"></i> Copy Text
+              </button>
+            </div>
+          </div>
+
+          <!-- Conversion Formats Grid -->
+          <div class="space-y-2.5 pt-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Conversion Formats</span>
+              <span class="text-[11px] text-slate-400">Click to convert instantly</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+              <button type="button" onclick="transformCase('sentence')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">Sentence case</button>
+              <button type="button" onclick="transformCase('lower')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">lowercase</button>
+              <button type="button" onclick="transformCase('upper')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">UPPERCASE</button>
+              <button type="button" onclick="transformCase('title')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">Title Case</button>
+              <button type="button" onclick="transformCase('camel')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">camelCase</button>
+              <button type="button" onclick="transformCase('pascal')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">PascalCase</button>
+              <button type="button" onclick="transformCase('snake')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">snake_case</button>
+              <button type="button" onclick="transformCase('constant')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">CONSTANT_CASE</button>
+              <button type="button" onclick="transformCase('kebab')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">kebab-case</button>
+              <button type="button" onclick="transformCase('slug')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">url-slug</button>
+              <button type="button" onclick="transformCase('dot')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">dot.case</button>
+              <button type="button" onclick="transformCase('alternating')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center">aLtErNaTiNg CaSe</button>
+              <button type="button" onclick="transformCase('invert')" class="py-2.5 px-3 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white font-bold text-xs rounded-xl transition-all text-center col-span-2 sm:col-span-1">iNVERT cASE</button>
+            </div>
           </div>
         </div>
 
