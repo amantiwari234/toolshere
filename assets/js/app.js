@@ -2313,6 +2313,57 @@ function ensureScript(name) {
       reader.readAsDataURL(file);
     }
 
+    function commitResizerBlob(blob, opId) {
+      if (opId !== resizerOpSeq || !loadedResizerImg) return false;
+
+      const newBlobUrl = createResizerBlobUrl(blob);
+      if (opId !== resizerOpSeq || !loadedResizerImg) {
+        revokeResizerBlobUrl(newBlobUrl);
+        return false;
+      }
+
+      resizerCurrentBlob = blob;
+      resizerCurrentBlobUrl = newBlobUrl;
+
+      const preview = document.getElementById('resizerPreview');
+      if (preview) {
+        const onPreviewDone = () => {
+          // Safely revoke older URLs only when the current new preview has completed loading
+          if (resizerCurrentBlobUrl === newBlobUrl) {
+            revokeAllResizerBlobUrlsExcept(newBlobUrl);
+          }
+        };
+        preview.onload = onPreviewDone;
+        preview.onerror = onPreviewDone;
+        preview.src = newBlobUrl;
+      } else {
+        revokeAllResizerBlobUrlsExcept(newBlobUrl);
+      }
+
+      const sizeInBytes = blob.size;
+      const sizeKb = (sizeInBytes / 1024).toFixed(1);
+      const compEl = document.getElementById('compressedSize');
+      if (compEl) {
+        compEl.innerText = sizeInBytes > 1024 * 1024
+          ? `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`
+          : `${sizeKb} KB`;
+      }
+
+      if (originalResizerFile && originalResizerFile.size > 0) {
+        const savedPercent = Math.round((1 - (sizeInBytes / originalResizerFile.size)) * 100);
+        const badge = document.getElementById('savingsBadge');
+        if (badge) {
+          badge.innerText = savedPercent >= 0 ? `-${savedPercent}%` : `+${Math.abs(savedPercent)}%`;
+          badge.className = savedPercent >= 0
+            ? 'text-sm sm:text-base font-extrabold text-emerald-700 dark:text-emerald-300'
+            : 'text-sm sm:text-base font-extrabold text-amber-600 dark:text-amber-400';
+        }
+      }
+
+      clearResizerError();
+      return true;
+    }
+
     async function processResizer(parentOpId) {
       if (!loadedResizerImg) return;
       const opId = (parentOpId !== undefined) ? parentOpId : ++resizerOpSeq;
@@ -2342,55 +2393,8 @@ function ensureScript(name) {
 
       try {
         const blob = await getCanvasBlob(canvas, mimeType, qualityVal);
-
-        // Guard after async encoding: discard if operation superseded or reset/navigated
-        if (opId !== resizerOpSeq || !loadedResizerImg) {
-          return;
-        }
-
-        const newBlobUrl = createResizerBlobUrl(blob);
-        if (opId !== resizerOpSeq || !loadedResizerImg) {
-          revokeResizerBlobUrl(newBlobUrl);
-          return;
-        }
-
-        resizerCurrentBlob = blob;
-        resizerCurrentBlobUrl = newBlobUrl;
-
-        const preview = document.getElementById('resizerPreview');
-        if (preview) {
-          const onPreviewDone = () => {
-            // Safely revoke older URLs only when the current new preview has completed loading
-            if (resizerCurrentBlobUrl === newBlobUrl) {
-              revokeAllResizerBlobUrlsExcept(newBlobUrl);
-            }
-          };
-          preview.onload = onPreviewDone;
-          preview.onerror = onPreviewDone;
-          preview.src = newBlobUrl;
-        } else {
-          revokeAllResizerBlobUrlsExcept(newBlobUrl);
-        }
-
-        const sizeInBytes = blob.size;
-        const sizeKb = (sizeInBytes / 1024).toFixed(1);
-        const compEl = document.getElementById('compressedSize');
-        if (compEl) {
-          compEl.innerText = sizeInBytes > 1024 * 1024
-            ? `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`
-            : `${sizeKb} KB`;
-        }
-
-        if (originalResizerFile && originalResizerFile.size > 0) {
-          const savedPercent = Math.round((1 - (sizeInBytes / originalResizerFile.size)) * 100);
-          const badge = document.getElementById('savingsBadge');
-          if (badge) {
-            badge.innerText = savedPercent >= 0 ? `-${savedPercent}%` : `+${Math.abs(savedPercent)}%`;
-            badge.className = savedPercent >= 0
-              ? 'text-sm sm:text-base font-extrabold text-emerald-700 dark:text-emerald-300'
-              : 'text-sm sm:text-base font-extrabold text-amber-600 dark:text-amber-400';
-          }
-        }
+        if (opId !== resizerOpSeq || !loadedResizerImg) return;
+        commitResizerBlob(blob, opId);
       } catch (err) {
         if (opId !== resizerOpSeq || !loadedResizerImg) return;
         console.error('Compression processing error:', err);
@@ -2422,160 +2426,253 @@ function ensureScript(name) {
       const customInput = document.getElementById('customTargetKB');
       if (customInput) customInput.value = targetKB;
 
-      const targetBytes = targetKB * 1024;
+      // Invalidate pending debounce and any prior async operation
+      clearTimeout(resizerDebounceTimer);
+      resizerDebounceTimer = null;
+      const opId = ++resizerOpSeq;
+
+      const targetBytes = Math.floor(targetKB * 1024);
+      // Small safety margin (2%, 256-1024 bytes) below target to absorb encoding variations
+      const safetyMargin = Math.max(256, Math.min(1024, Math.round(targetBytes * 0.02)));
+      const safeTargetBytes = Math.max(256, targetBytes - safetyMargin);
+
       const naturalW = loadedResizerImg.naturalWidth;
       const naturalH = loadedResizerImg.naturalHeight;
+      const ratio = naturalW / naturalH;
+      const minDim = 20;
+      const minDimW = naturalW >= naturalH ? Math.max(minDim, Math.round(minDim * ratio)) : minDim;
+      const minDimH = naturalH > naturalW ? Math.max(minDim, Math.round(minDim / ratio)) : minDim;
       const effectiveMime = getEffectiveResizerMime();
 
-      // Begin new operation: any older optimization or compression is immediately invalidated
-      const opId = ++resizerOpSeq;
-      showToast(`Optimizing for target ${targetKB} KB...`, 'info');
+      showToast(`Optimizing for target \u2264 ${targetKB} KB...`, 'info');
 
-      if (effectiveMime === 'image/png') {
-        // PNG is lossless: optimize dimensions to target size
-        let lowScale = 0.05, highScale = 1.0;
-        let bestScale = 1.0;
-        let closestDiff = Infinity;
+      async function renderCanvasToBlob(w, h, mime, q) {
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, w);
+        canvas.height = Math.max(1, h);
+        const ctx = canvas.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        if (mime === 'image/jpeg') {
+          ctx.fillStyle = resizerJpegBg === 'black' ? '#000000' : '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        ctx.drawImage(loadedResizerImg, 0, 0, canvas.width, canvas.height);
+        return await getCanvasBlob(canvas, mime, q);
+      }
 
-        for (let i = 0; i < 6; i++) {
+      try {
+        let bestW = naturalW;
+        let bestH = naturalH;
+        let bestQ = 0.80;
+        let bestBlob = null;
+
+        if (effectiveMime === 'image/png') {
+          // PNG is lossless: canvas quality parameter is not supported; reduce dimensions progressively
+          const testBlobFull = await renderCanvasToBlob(naturalW, naturalH, 'image/png');
           if (opId !== resizerOpSeq || !loadedResizerImg) return;
           if (getEffectiveResizerMime() !== 'image/png') return;
 
-          const midScale = (lowScale + highScale) / 2;
-          const testW = Math.max(50, Math.round(naturalW * midScale));
-          const testH = Math.max(50, Math.round(naturalH * midScale));
-
-          const canvas = document.createElement('canvas');
-          canvas.width = testW;
-          canvas.height = testH;
-          const ctx = canvas.getContext('2d');
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = 'high';
-          ctx.drawImage(loadedResizerImg, 0, 0, testW, testH);
-
-          try {
-            const blob = await getCanvasBlob(canvas, 'image/png');
+          if (testBlobFull.size <= safeTargetBytes) {
+            bestBlob = testBlobFull;
+          } else {
+            // Check minimum dimensions to verify feasibility
+            const minBlob = await renderCanvasToBlob(minDimW, minDimH, 'image/png');
             if (opId !== resizerOpSeq || !loadedResizerImg) return;
             if (getEffectiveResizerMime() !== 'image/png') return;
 
-            const diff = Math.abs(blob.size - targetBytes);
-            if (diff < closestDiff) {
-              closestDiff = diff;
-              bestScale = midScale;
+            if (minBlob.size > targetBytes) {
+              const minKB = (minBlob.size / 1024).toFixed(1);
+              showToast(`PNG target of ${targetKB} KB cannot be reached (minimum size: ${minKB} KB). Switch to WebP or JPEG for smaller files.`, 'error');
+              showResizerError(`PNG target of ${targetKB} KB cannot be reached. Minimum possible output is ${minKB} KB.`);
+              return;
             }
-            if (blob.size > targetBytes) {
-              highScale = midScale;
-            } else {
-              lowScale = midScale;
+
+            // Binary search scale between minScale and 1.0 to find largest dimensions <= safeTargetBytes
+            let lowScale = minDimW / naturalW;
+            let highScale = 1.0;
+            bestW = minDimW;
+            bestH = minDimH;
+            bestBlob = minBlob;
+
+            for (let i = 0; i < 8; i++) {
+              if (opId !== resizerOpSeq || !loadedResizerImg) return;
+              if (getEffectiveResizerMime() !== 'image/png') return;
+
+              const midScale = (lowScale + highScale) / 2;
+              const testW = Math.max(minDimW, Math.round(naturalW * midScale));
+              const testH = Math.max(minDimH, Math.round(naturalH * midScale));
+
+              const testBlob = await renderCanvasToBlob(testW, testH, 'image/png');
+              if (opId !== resizerOpSeq || !loadedResizerImg) return;
+              if (getEffectiveResizerMime() !== 'image/png') return;
+
+              if (testBlob.size <= safeTargetBytes) {
+                bestW = testW;
+                bestH = testH;
+                bestBlob = testBlob;
+                lowScale = midScale; // try larger dimensions
+              } else {
+                highScale = midScale; // shrink dimensions
+              }
             }
-          } catch (e) {
-            break;
           }
-        }
-
-        if (opId !== resizerOpSeq || !loadedResizerImg) return;
-        if (getEffectiveResizerMime() !== 'image/png') return;
-
-        const finalW = Math.max(50, Math.round(naturalW * bestScale));
-        const finalH = Math.max(50, Math.round(naturalH * bestScale));
-        const widthInput = document.getElementById('resizerWidth');
-        const heightInput = document.getElementById('resizerHeight');
-        if (widthInput) widthInput.value = finalW;
-        if (heightInput) heightInput.value = finalH;
-
-        await processResizer(opId);
-        if (opId !== resizerOpSeq || !loadedResizerImg) return;
-        if (getEffectiveResizerMime() !== 'image/png') return;
-
-        const actualBytes = resizerCurrentBlob ? resizerCurrentBlob.size : 0;
-        const actualKB = (actualBytes / 1024).toFixed(1);
-
-        if (actualBytes > targetBytes) {
-          showToast(`PNG target of ${targetKB} KB could not be reached losslessly (achieved: ${actualKB} KB). Switch to WebP or JPEG for smaller file size.`, 'warning');
         } else {
-          showToast(`PNG dimensions adjusted: achieved ${actualKB} KB (Target: ${targetKB} KB)`, 'success');
-        }
-        return;
-      }
+          // JPEG & WebP: first reduce quality where supported, then progressively reduce dimensions
+          const minQ = 0.08;
+          const maxQ = 0.95;
 
-      // JPEG / WebP quality + dimension optimization
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-
-      let bestW = naturalW;
-      let bestH = naturalH;
-
-      // Check min size at natural resolution
-      canvas.width = naturalW;
-      canvas.height = naturalH;
-      if (effectiveMime === 'image/jpeg') {
-        ctx.fillStyle = resizerJpegBg === 'black' ? '#000000' : '#ffffff';
-        ctx.fillRect(0, 0, naturalW, naturalH);
-      }
-      ctx.drawImage(loadedResizerImg, 0, 0, naturalW, naturalH);
-
-      try {
-        const testBlobMin = await getCanvasBlob(canvas, effectiveMime, 0.1);
-        if (opId !== resizerOpSeq || !loadedResizerImg) return;
-        if (getEffectiveResizerMime() !== effectiveMime) return;
-
-        if (testBlobMin.size > targetBytes) {
-          const scale = Math.sqrt(targetBytes / testBlobMin.size) * 0.95;
-          bestW = Math.max(50, Math.round(naturalW * Math.min(0.92, scale)));
-          bestH = Math.max(50, Math.round(naturalH * Math.min(0.92, scale)));
-        }
-
-        canvas.width = bestW;
-        canvas.height = bestH;
-        if (effectiveMime === 'image/jpeg') {
-          ctx.fillStyle = resizerJpegBg === 'black' ? '#000000' : '#ffffff';
-          ctx.fillRect(0, 0, bestW, bestH);
-        }
-        ctx.drawImage(loadedResizerImg, 0, 0, bestW, bestH);
-
-        let low = 0.05, high = 0.98;
-        let finalQ = 0.8;
-        let closestDiff = Infinity;
-
-        for (let i = 0; i < 7; i++) {
+          // Step 1: Test minimum quality at natural dimensions
+          const testBlobMinQ = await renderCanvasToBlob(naturalW, naturalH, effectiveMime, minQ);
           if (opId !== resizerOpSeq || !loadedResizerImg) return;
           if (getEffectiveResizerMime() !== effectiveMime) return;
 
-          const mid = (low + high) / 2;
-          const testBlob = await getCanvasBlob(canvas, effectiveMime, mid);
-          if (opId !== resizerOpSeq || !loadedResizerImg) return;
-          if (getEffectiveResizerMime() !== effectiveMime) return;
+          if (testBlobMinQ.size <= safeTargetBytes) {
+            // Target reachable at natural dimensions! Find highest quality that stays <= safeTargetBytes
+            const testBlobMaxQ = await renderCanvasToBlob(naturalW, naturalH, effectiveMime, maxQ);
+            if (opId !== resizerOpSeq || !loadedResizerImg) return;
+            if (getEffectiveResizerMime() !== effectiveMime) return;
 
-          const diff = Math.abs(testBlob.size - targetBytes);
-          if (diff < closestDiff) {
-            closestDiff = diff;
-            finalQ = mid;
-          }
-          if (testBlob.size > targetBytes) {
-            high = mid;
+            if (testBlobMaxQ.size <= safeTargetBytes) {
+              bestQ = maxQ;
+              bestBlob = testBlobMaxQ;
+            } else {
+              let lowQ = minQ, highQ = maxQ;
+              bestQ = minQ;
+              bestBlob = testBlobMinQ;
+              for (let i = 0; i < 7; i++) {
+                if (opId !== resizerOpSeq || !loadedResizerImg) return;
+                if (getEffectiveResizerMime() !== effectiveMime) return;
+
+                const midQ = (lowQ + highQ) / 2;
+                const testBlob = await renderCanvasToBlob(naturalW, naturalH, effectiveMime, midQ);
+                if (opId !== resizerOpSeq || !loadedResizerImg) return;
+                if (getEffectiveResizerMime() !== effectiveMime) return;
+
+                if (testBlob.size <= safeTargetBytes) {
+                  bestQ = midQ;
+                  bestBlob = testBlob;
+                  lowQ = midQ;
+                } else {
+                  highQ = midQ;
+                }
+              }
+            }
           } else {
-            low = mid;
+            // Quality at natural dimensions alone cannot reach target.
+            // Progressively reduce dimensions until actual Blob size is within target.
+            let curScale = Math.min(0.92, Math.sqrt(safeTargetBytes / testBlobMinQ.size) * 0.95);
+            let curW = Math.max(minDimW, Math.round(naturalW * curScale));
+            let curH = Math.max(minDimH, Math.round(naturalH * curScale));
+            let scaleBlob = null;
+
+            while (curW >= minDimW && curH >= minDimH) {
+              if (opId !== resizerOpSeq || !loadedResizerImg) return;
+              if (getEffectiveResizerMime() !== effectiveMime) return;
+
+              scaleBlob = await renderCanvasToBlob(curW, curH, effectiveMime, minQ);
+              if (opId !== resizerOpSeq || !loadedResizerImg) return;
+              if (getEffectiveResizerMime() !== effectiveMime) return;
+
+              if (scaleBlob.size <= safeTargetBytes) {
+                bestW = curW;
+                bestH = curH;
+                bestQ = minQ;
+                bestBlob = scaleBlob;
+                break;
+              }
+
+              if (curW === minDimW && curH === minDimH) {
+                bestW = curW;
+                bestH = curH;
+                bestQ = minQ;
+                bestBlob = scaleBlob;
+                break;
+              }
+
+              const nextScale = Math.min(curScale * 0.85, Math.sqrt(safeTargetBytes / scaleBlob.size) * 0.95);
+              curScale = nextScale;
+              const nextW = Math.max(minDimW, Math.round(naturalW * curScale));
+              const nextH = Math.max(minDimH, Math.round(naturalH * curScale));
+              if (nextW === curW && nextH === curH) {
+                curW = Math.max(minDimW, curW - 5);
+                curH = Math.max(minDimH, Math.round(curW / ratio));
+                curScale = curW / naturalW;
+              } else {
+                curW = nextW;
+                curH = nextH;
+              }
+            }
+
+            // If dimensions are valid and > minDim, optimize quality upwards
+            if (bestBlob && bestBlob.size <= safeTargetBytes && bestW > minDimW) {
+              let lowQ = minQ, highQ = 0.92;
+              for (let i = 0; i < 6; i++) {
+                if (opId !== resizerOpSeq || !loadedResizerImg) return;
+                if (getEffectiveResizerMime() !== effectiveMime) return;
+
+                const midQ = (lowQ + highQ) / 2;
+                const testBlob = await renderCanvasToBlob(bestW, bestH, effectiveMime, midQ);
+                if (opId !== resizerOpSeq || !loadedResizerImg) return;
+                if (getEffectiveResizerMime() !== effectiveMime) return;
+
+                if (testBlob.size <= safeTargetBytes) {
+                  bestQ = midQ;
+                  bestBlob = testBlob;
+                  lowQ = midQ;
+                } else {
+                  highQ = midQ;
+                }
+              }
+            }
           }
         }
 
-        if (opId !== resizerOpSeq || !loadedResizerImg) return;
-        if (getEffectiveResizerMime() !== effectiveMime) return;
+        // Final strict verification: ensure bestBlob strictly satisfies targetBytes
+        if (!bestBlob || bestBlob.size > targetBytes) {
+          let adjustAttempts = 0;
+          while (bestBlob && bestBlob.size > targetBytes && adjustAttempts < 6) {
+            adjustAttempts++;
+            if (effectiveMime !== 'image/png' && bestQ > 0.12) {
+              bestQ = Math.max(0.05, bestQ - 0.08);
+            } else {
+              bestW = Math.max(minDimW, Math.round(bestW * 0.88));
+              bestH = Math.max(minDimH, Math.round(bestH * 0.88));
+            }
+            bestBlob = await renderCanvasToBlob(bestW, bestH, effectiveMime, bestQ);
+            if (opId !== resizerOpSeq || !loadedResizerImg) return;
+          }
+        }
 
+        // Hard check: NEVER claim success if actual size exceeds target
+        if (!bestBlob || bestBlob.size > targetBytes) {
+          const actualKB = bestBlob ? (bestBlob.size / 1024).toFixed(1) : 0;
+          showToast(`Target of ${targetKB} KB could not be reached (minimum achieved: ${actualKB} KB). Try a larger target or different format.`, 'error');
+          showResizerError(`Target of ${targetKB} KB could not be reached. Minimum possible output is ${actualKB} KB.`);
+          return;
+        }
+
+        // Target achieved: update UI inputs
         const widthInput = document.getElementById('resizerWidth');
         const heightInput = document.getElementById('resizerHeight');
         const qualityRange = document.getElementById('qualityRange');
+        const qualityVal = document.getElementById('qualityVal');
 
         if (widthInput) widthInput.value = bestW;
         if (heightInput) heightInput.value = bestH;
-        if (qualityRange) qualityRange.value = Math.round(finalQ * 100);
+        if (qualityRange && effectiveMime !== 'image/png') {
+          qualityRange.value = Math.round(bestQ * 100);
+        }
+        if (qualityVal && effectiveMime !== 'image/png') {
+          qualityVal.innerText = `${Math.round(bestQ * 100)}%`;
+        }
 
-        await processResizer(opId);
-        if (opId !== resizerOpSeq || !loadedResizerImg) return;
-        if (getEffectiveResizerMime() !== effectiveMime) return;
+        // Commit verified blob to preview and download
+        const committed = commitResizerBlob(bestBlob, opId);
+        if (!committed) return;
 
-        showToast(`Optimized for target ${targetKB} KB`, 'success');
+        const finalKB = (bestBlob.size / 1024).toFixed(1);
+        showToast(`Optimized: ${finalKB} KB (Target: \u2264 ${targetKB} KB)`, 'success');
       } catch (err) {
         if (opId !== resizerOpSeq || !loadedResizerImg) return;
         console.error('Target KB optimization error:', err);
