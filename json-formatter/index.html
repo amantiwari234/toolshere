@@ -386,7 +386,7 @@
     <!-- Pre-rendered Tool Workspace (Exempt from intrusive auto-ads to protect file uploads/downloads) -->
     <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-6 sm:space-y-8 google-auto-ads-ignore adsbygoogle-noablate">
 
-        <div class="space-y-5">
+        <div class="space-y-4">
           <!-- Top Utility Toolbar -->
           <div class="flex flex-wrap items-center justify-between gap-2.5 pb-2 border-b border-slate-200 dark:border-slate-700">
             <div class="flex items-center gap-2 flex-wrap">
@@ -413,8 +413,8 @@
             </div>
           </div>
 
-          <!-- Live Payload Stats Bar -->
-          <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
+          <!-- Live Payload Stats Bar with formatted/minified sizes and savings -->
+          <div class="flex flex-wrap items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-2 px-1">
             <div class="flex items-center gap-2 font-medium">
               <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
               <span>JSON Input &amp; Editor</span>
@@ -429,16 +429,39 @@
             <textarea id="jsonInput" rows="12" oninput="updateJsonStats()" onkeydown="handleJsonTab(event)" placeholder="Paste or type raw JSON here (e.g. {&#34;name&#34;: &#34;ToolsHere&#34;, &#34;features&#34;: [&#34;Formatter&#34;, &#34;Validator&#34;]})..." class="w-full p-4 font-mono text-xs sm:text-sm rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all leading-relaxed"></textarea>
           </div>
 
+          <!-- Format Controls & Options Bar -->
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3">
+            <!-- Indentation Selector -->
+            <div class="flex items-center gap-2">
+              <label for="jsonIndentSelect" class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-bars-staggered text-blue-600 text-xs"></i> Indentation:
+              </label>
+              <select id="jsonIndentSelect" onchange="updateJsonStats()" class="py-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-800 dark:text-white focus:outline-none focus:border-blue-500">
+                <option value="2" selected>2 Spaces</option>
+                <option value="4">4 Spaces</option>
+                <option value="tab">Tabs (\t)</option>
+              </select>
+            </div>
+
+            <!-- Sorting & Options -->
+            <div class="flex items-center gap-4 flex-wrap">
+              <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                <input type="checkbox" id="jsonSortKeys" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300 dark:border-slate-600 dark:bg-slate-700">
+                <span>Sort Keys Alphabetically (A–Z)</span>
+              </label>
+            </div>
+          </div>
+
           <!-- Primary Action Buttons Grid -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             <button type="button" onclick="validateJson()" class="py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 min-h-[44px]">
               <i class="fa-solid fa-circle-check text-sm"></i> Validate JSON
             </button>
-            <button type="button" onclick="formatJson(2)" class="py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
-              <i class="fa-solid fa-align-left text-xs"></i> Beautify (2 Spaces)
+            <button type="button" onclick="formatJson()" class="py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-align-left text-xs"></i> Beautify JSON
             </button>
-            <button type="button" onclick="formatJson(4)" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
-              <i class="fa-solid fa-indent text-xs"></i> Beautify (4 Spaces)
+            <button type="button" onclick="sortJson()" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-arrow-down-a-z text-xs"></i> Sort Keys (A–Z)
             </button>
             <button type="button" onclick="minifyJson()" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
               <i class="fa-solid fa-compress text-xs"></i> Minify JSON

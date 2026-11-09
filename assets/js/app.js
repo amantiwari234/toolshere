@@ -6021,6 +6021,192 @@ function ensureScript(name) {
       return encodeURI(str).split(/%..|./).length - 1;
     }
 
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+    }
+
+    function sortJsonKeys(value) {
+      if (Array.isArray(value)) {
+        return value.map(sortJsonKeys);
+      } else if (value !== null && typeof value === 'object') {
+        const sorted = {};
+        const keys = Object.keys(value).sort((a, b) => a.localeCompare(b));
+        for (const k of keys) {
+          sorted[k] = sortJsonKeys(value[k]);
+        }
+        return sorted;
+      }
+      return value;
+    }
+
+    function findDuplicateKeys(text) {
+      const duplicates = [];
+      let pos = 0;
+      const len = text.length;
+
+      function skipWhitespace() {
+        while (pos < len && (text[pos] === ' ' || text[pos] === '\t' || text[pos] === '\n' || text[pos] === '\r')) pos++;
+      }
+
+      function getLineCol(p) {
+        const lines = text.slice(0, p).split('\n');
+        return { line: lines.length, col: lines[lines.length - 1].length + 1 };
+      }
+
+      function parseString() {
+        pos++;
+        let str = '';
+        while (pos < len) {
+          const ch = text[pos];
+          if (ch === '"') { pos++; return str; }
+          if (ch === '\\') {
+            pos++;
+            if (pos < len) {
+              const esc = text[pos];
+              if (esc === '"') str += '"';
+              else if (esc === '\\') str += '\\';
+              else if (esc === 'n') str += '\n';
+              else if (esc === 't') str += '\t';
+              else str += esc;
+              pos++;
+            }
+          } else {
+            str += ch;
+            pos++;
+          }
+        }
+        return str;
+      }
+
+      function skipValue() {
+        skipWhitespace();
+        if (pos >= len) return;
+        const ch = text[pos];
+        if (ch === '{') {
+          scanObject();
+        } else if (ch === '[') {
+          scanArray();
+        } else if (ch === '"') {
+          parseString();
+        } else {
+          while (pos < len && text[pos] !== ',' && text[pos] !== '}' && text[pos] !== ']') {
+            pos++;
+          }
+        }
+      }
+
+      function scanObject() {
+        pos++;
+        const seen = new Map();
+        while (pos < len) {
+          skipWhitespace();
+          if (pos >= len || text[pos] === '}') { if (pos < len) pos++; return; }
+          if (text[pos] === ',') { pos++; continue; }
+          if (text[pos] === '"') {
+            const keyPos = pos;
+            const key = parseString();
+            skipWhitespace();
+            if (pos < len && text[pos] === ':') pos++;
+            const lc = getLineCol(keyPos);
+            if (seen.has(key)) {
+              duplicates.push({ key, line: lc.line, col: lc.col, originalLine: seen.get(key).line });
+            } else {
+              seen.set(key, lc);
+            }
+            skipValue();
+          } else {
+            pos++;
+          }
+        }
+      }
+
+      function scanArray() {
+        pos++;
+        while (pos < len) {
+          skipWhitespace();
+          if (pos >= len || text[pos] === ']') { if (pos < len) pos++; return; }
+          if (text[pos] === ',') { pos++; continue; }
+          skipValue();
+        }
+      }
+
+      skipWhitespace();
+      if (text[pos] === '{') scanObject();
+      else if (text[pos] === '[') scanArray();
+
+      return duplicates;
+    }
+
+    function findLargeIntegers(text) {
+      const warnings = [];
+      let inString = false;
+      let pos = 0;
+      const len = text.length;
+
+      while (pos < len) {
+        const ch = text[pos];
+        if (ch === '"') {
+          inString = !inString;
+          pos++;
+          while (inString && pos < len) {
+            if (text[pos] === '\\') {
+              pos += 2;
+            } else if (text[pos] === '"') {
+              inString = false;
+              pos++;
+              break;
+            } else {
+              pos++;
+            }
+          }
+          continue;
+        }
+
+        if (!inString && (ch === '-' || (ch >= '0' && ch <= '9'))) {
+          const numStart = pos;
+          if (text[pos] === '-') pos++;
+          let digits = '';
+          while (pos < len && text[pos] >= '0' && text[pos] <= '9') {
+            digits += text[pos];
+            pos++;
+          }
+          let isFloat = false;
+          if (pos < len && text[pos] === '.') {
+            isFloat = true;
+            pos++;
+            while (pos < len && text[pos] >= '0' && text[pos] <= '9') pos++;
+          }
+          if (pos < len && (text[pos] === 'e' || text[pos] === 'E')) {
+            isFloat = true;
+            pos++;
+            if (pos < len && (text[pos] === '+' || text[pos] === '-')) pos++;
+            while (pos < len && text[pos] >= '0' && text[pos] <= '9') pos++;
+          }
+
+          if (!isFloat && digits.length >= 16) {
+            try {
+              if (typeof BigInt !== 'undefined') {
+                const val = BigInt(digits);
+                if (val > 9007199254740991n) {
+                  const lines = text.slice(0, numStart).split('\n');
+                  warnings.push({
+                    number: text.slice(numStart, pos),
+                    line: lines.length,
+                    col: lines[lines.length - 1].length + 1
+                  });
+                }
+              }
+            } catch (e) {}
+          }
+        } else {
+          pos++;
+        }
+      }
+      return warnings;
+    }
+
     function getLineColFromIndex(text, index) {
       const clamped = Math.max(0, Math.min(index, text.length));
       const upTo = text.slice(0, clamped);
@@ -6273,7 +6459,20 @@ function ensureScript(name) {
 
         const lines = text.split('\n').length;
         const bytes = getByteLength(text);
-        const sizeStr = bytes < 1024 ? `${bytes} B` : `${(bytes / 1024).toFixed(1)} KB`;
+        const sizeStr = formatBytes(bytes);
+
+        // Check for duplicate keys and large integers
+        const duplicateKeys = findDuplicateKeys(text);
+        const largeIntegers = findLargeIntegers(text);
+        const warnings = [];
+        if (duplicateKeys.length > 0) {
+          const dupSummary = duplicateKeys.map(d => `"${d.key}" at Line ${d.line}`).join(', ');
+          warnings.push(`Duplicate key${duplicateKeys.length === 1 ? '' : 's'} detected: ${dupSummary}. In standard JSON, duplicate keys are overwritten.`);
+        }
+        if (largeIntegers.length > 0) {
+          const intSummary = largeIntegers.map(i => `${i.number} (Line ${i.line})`).join(', ');
+          warnings.push(`Large 64-bit integer${largeIntegers.length === 1 ? '' : 's'} detected: ${intSummary}. Values exceeding 9007199254740991 may lose numeric precision in standard JavaScript.`);
+        }
 
         return {
           valid: true,
@@ -6281,6 +6480,7 @@ function ensureScript(name) {
           parsed,
           rootType,
           summary,
+          warnings,
           stats: { lines, bytes, sizeStr, chars: text.length }
         };
       } catch (nativeErr) {
@@ -6352,22 +6552,43 @@ function ensureScript(name) {
         return;
       }
       if (diag.valid) {
-        banner.className = 'p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 transition-all';
+        const hasWarnings = diag.warnings && diag.warnings.length > 0;
+        const cardClass = hasWarnings
+          ? 'p-4 rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50/70 dark:bg-amber-950/40 transition-all'
+          : 'p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 transition-all';
+        const iconBg = hasWarnings
+          ? 'bg-amber-100 dark:bg-amber-900/50 text-amber-600 dark:text-amber-300'
+          : 'bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300';
+        const iconClass = hasWarnings ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-circle-check';
+        const badgeClass = hasWarnings
+          ? 'bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-200'
+          : 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300';
+        const badgeText = hasWarnings ? 'Valid With Warnings' : 'Syntax OK';
+
+        banner.className = cardClass;
         banner.innerHTML = `
           <div class="flex items-start gap-3">
-            <div class="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-300 flex items-center justify-center shrink-0 mt-0.5 text-sm">
-              <i class="fa-solid fa-circle-check"></i>
+            <div class="w-8 h-8 rounded-lg ${iconBg} flex items-center justify-center shrink-0 mt-0.5 text-sm">
+              <i class="${iconClass}"></i>
             </div>
             <div class="flex-1 space-y-1">
               <div class="flex items-center justify-between gap-2 flex-wrap">
-                <h3 class="text-xs font-bold text-emerald-800 dark:text-emerald-200 flex items-center gap-1.5">
+                <h3 class="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                   Valid JSON (${escapeJsonHtml(diag.rootType)})
                 </h3>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 uppercase tracking-wide">Syntax OK</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${badgeClass} uppercase tracking-wide">${badgeText}</span>
               </div>
-              <p class="text-xs text-emerald-700 dark:text-emerald-300/90 leading-relaxed font-medium">
+              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                 ${escapeJsonHtml(diag.summary)} • ${diag.stats ? diag.stats.sizeStr : ''} • ${diag.stats ? diag.stats.lines : 0} line${diag.stats && diag.stats.lines === 1 ? '' : 's'} • ${diag.stats ? diag.stats.chars : 0} char${diag.stats && diag.stats.chars === 1 ? '' : 's'}
               </p>
+              ${hasWarnings ? `
+                <div class="mt-2.5 p-2.5 bg-amber-100/70 dark:bg-amber-900/40 rounded-lg border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs space-y-1">
+                  <div class="font-bold flex items-center gap-1.5 text-[11px] uppercase tracking-wide text-amber-800 dark:text-amber-300">
+                    <i class="fa-solid fa-triangle-exclamation text-xs"></i> Precision &amp; Key Warnings:
+                  </div>
+                  ${diag.warnings.map(w => `<p class="leading-relaxed text-[11px] font-medium">• ${escapeJsonHtml(w)}</p>`).join('')}
+                </div>
+              ` : ''}
             </div>
           </div>
         `;
@@ -6405,15 +6626,45 @@ function ensureScript(name) {
       const statsEl = document.getElementById('jsonStats');
       if (!el || !statsEl) return;
       const val = el.value;
-      if (!val) {
+      if (!val.trim()) {
         statsEl.innerText = '0 lines • 0 characters • 0 B';
         return;
       }
+
       const lines = val.split('\n').length;
       const chars = val.length;
-      const bytes = getByteLength(val);
-      const sizeStr = bytes < 1024 ? `${bytes} B` : `${(bytes / 1024).toFixed(1)} KB`;
-      statsEl.innerText = `${lines} line${lines === 1 ? '' : 's'} • ${chars} character${chars === 1 ? '' : 's'} • ${sizeStr}`;
+      const rawBytes = getByteLength(val);
+      const rawSizeStr = formatBytes(rawBytes);
+
+      let extra = '';
+      try {
+        const parsed = JSON.parse(val);
+        const minifiedStr = JSON.stringify(parsed);
+        const minBytes = getByteLength(minifiedStr);
+        const minSizeStr = formatBytes(minBytes);
+
+        if (rawBytes > minBytes) {
+          const savedBytes = rawBytes - minBytes;
+          const pct = Math.round((savedBytes / rawBytes) * 100);
+          extra = ` • Min: ${minSizeStr} • Saved ${pct}% (${formatBytes(savedBytes)})`;
+        } else if (rawBytes === minBytes) {
+          extra = ` • Min: ${minSizeStr} (0% saved)`;
+        } else {
+          extra = ` • Min: ${minSizeStr}`;
+        }
+      } catch (e) {
+        // Syntax error in current draft
+      }
+
+      statsEl.innerText = `${lines} line${lines === 1 ? '' : 's'} • ${chars} character${chars === 1 ? '' : 's'} • Size: ${rawSizeStr}${extra}`;
+    }
+
+    function getSelectedIndent() {
+      const select = document.getElementById('jsonIndentSelect');
+      const val = select ? select.value : '2';
+      if (val === 'tab' || val === '\t') return '\t';
+      if (val === '4' || val === 4) return '    ';
+      return '  ';
     }
 
     function handleJsonTab(e) {
@@ -6423,8 +6674,9 @@ function ensureScript(name) {
         const start = el.selectionStart;
         const end = el.selectionEnd;
         const val = el.value;
-        el.value = val.substring(0, start) + '  ' + val.substring(end);
-        el.selectionStart = el.selectionEnd = start + 2;
+        const indentStr = getSelectedIndent();
+        el.value = val.substring(0, start) + indentStr + val.substring(end);
+        el.selectionStart = el.selectionEnd = start + indentStr.length;
         updateJsonStats();
       }
     }
@@ -6570,7 +6822,11 @@ function ensureScript(name) {
       updateJsonStatus(diag);
       if (!silent) {
         if (diag.valid) {
-          showToast(`JSON is valid! (${diag.rootType})`, 'success');
+          if (diag.warnings && diag.warnings.length > 0) {
+            showToast(`JSON is valid with ${diag.warnings.length} warning(s)`, 'warning');
+          } else {
+            showToast(`JSON is valid! (${diag.rootType})`, 'success');
+          }
         } else {
           showToast(`Invalid JSON: Line ${diag.line}, Column ${diag.col}`, 'error');
         }
@@ -6592,12 +6848,63 @@ function ensureScript(name) {
         return;
       }
       saveJsonHistory(el.value);
-      const formatted = JSON.stringify(diag.parsed, null, spaces);
+
+      let indent = spaces;
+      if (indent === undefined) {
+        const select = document.getElementById('jsonIndentSelect');
+        indent = select ? select.value : 2;
+      }
+      if (indent === 'tab' || indent === '\t') {
+        indent = '\t';
+      } else {
+        indent = parseInt(indent, 10) || 2;
+      }
+
+      let dataToFormat = diag.parsed;
+      const sortCheck = document.getElementById('jsonSortKeys');
+      if (sortCheck && sortCheck.checked) {
+        dataToFormat = sortJsonKeys(dataToFormat);
+      }
+
+      const formatted = JSON.stringify(dataToFormat, null, indent);
       el.value = formatted;
       updateJsonStats();
       const newDiag = parseJsonWithDiagnostics(formatted);
       updateJsonStatus(newDiag);
       showToast('JSON formatted successfully!', 'success');
+    }
+
+    function sortJson() {
+      const el = document.getElementById('jsonInput');
+      if (!el) return;
+      const raw = el.value.trim();
+      if (!raw) {
+        showToast('Please enter or paste JSON to sort', 'warning');
+        return;
+      }
+      const diag = parseJsonWithDiagnostics(el.value);
+      updateJsonStatus(diag);
+      if (!diag.valid) {
+        showToast(`Invalid JSON: Line ${diag.line}, Column ${diag.col}`, 'error');
+        return;
+      }
+      saveJsonHistory(el.value);
+
+      const sorted = sortJsonKeys(diag.parsed);
+      const select = document.getElementById('jsonIndentSelect');
+      let indent = select ? select.value : 2;
+      if (indent === 'tab' || indent === '\t') {
+        indent = '\t';
+      } else {
+        indent = parseInt(indent, 10) || 2;
+      }
+
+      const formatted = JSON.stringify(sorted, null, indent);
+      el.value = formatted;
+      updateJsonStats();
+      const newDiag = parseJsonWithDiagnostics(formatted);
+      updateJsonStatus(newDiag);
+      showToast('Keys sorted alphabetically A–Z!', 'success');
     }
 
     function minifyJson() {
@@ -6615,7 +6922,14 @@ function ensureScript(name) {
         return;
       }
       saveJsonHistory(el.value);
-      const minified = JSON.stringify(diag.parsed);
+
+      let dataToMinify = diag.parsed;
+      const sortCheck = document.getElementById('jsonSortKeys');
+      if (sortCheck && sortCheck.checked) {
+        dataToMinify = sortJsonKeys(dataToMinify);
+      }
+
+      const minified = JSON.stringify(dataToMinify);
       el.value = minified;
       updateJsonStats();
       const newDiag = parseJsonWithDiagnostics(minified);
@@ -6627,7 +6941,7 @@ function ensureScript(name) {
       if (title) title.innerText = 'JSON Formatter, Beautifier & Validator';
       if (icon) icon.className = 'fa-solid fa-code';
       container.innerHTML = `
-        <div class="space-y-5">
+        <div class="space-y-4">
           <!-- Top Utility Toolbar -->
           <div class="flex flex-wrap items-center justify-between gap-2.5 pb-2 border-b border-slate-200 dark:border-slate-700">
             <div class="flex items-center gap-2 flex-wrap">
@@ -6654,8 +6968,8 @@ function ensureScript(name) {
             </div>
           </div>
 
-          <!-- Live Payload Stats Bar -->
-          <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
+          <!-- Live Payload Stats Bar with formatted/minified sizes and savings -->
+          <div class="flex flex-wrap items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-2 px-1">
             <div class="flex items-center gap-2 font-medium">
               <span class="inline-block w-2 h-2 rounded-full bg-blue-600"></span>
               <span>JSON Input &amp; Editor</span>
@@ -6670,16 +6984,39 @@ function ensureScript(name) {
             <textarea id="jsonInput" rows="12" oninput="updateJsonStats()" onkeydown="handleJsonTab(event)" placeholder="Paste or type raw JSON here (e.g. {&#34;name&#34;: &#34;ToolsHere&#34;, &#34;features&#34;: [&#34;Formatter&#34;, &#34;Validator&#34;]})..." class="w-full p-4 font-mono text-xs sm:text-sm rounded-2xl border border-slate-300 dark:border-slate-600 dark:bg-slate-800 text-slate-800 dark:text-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 dark:focus:ring-blue-900/30 transition-all leading-relaxed"></textarea>
           </div>
 
+          <!-- Format Controls & Options Bar -->
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3">
+            <!-- Indentation Selector -->
+            <div class="flex items-center gap-2">
+              <label for="jsonIndentSelect" class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-bars-staggered text-blue-600 text-xs"></i> Indentation:
+              </label>
+              <select id="jsonIndentSelect" onchange="updateJsonStats()" class="py-1.5 px-2.5 bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-xs font-semibold text-slate-800 dark:text-white focus:outline-none focus:border-blue-500">
+                <option value="2" selected>2 Spaces</option>
+                <option value="4">4 Spaces</option>
+                <option value="tab">Tabs (\\t)</option>
+              </select>
+            </div>
+
+            <!-- Sorting & Options -->
+            <div class="flex items-center gap-4 flex-wrap">
+              <label class="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300 cursor-pointer select-none">
+                <input type="checkbox" id="jsonSortKeys" class="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-slate-300 dark:border-slate-600 dark:bg-slate-700">
+                <span>Sort Keys Alphabetically (A–Z)</span>
+              </label>
+            </div>
+          </div>
+
           <!-- Primary Action Buttons Grid -->
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             <button type="button" onclick="validateJson()" class="py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-2 min-h-[44px]">
               <i class="fa-solid fa-circle-check text-sm"></i> Validate JSON
             </button>
-            <button type="button" onclick="formatJson(2)" class="py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
-              <i class="fa-solid fa-align-left text-xs"></i> Beautify (2 Spaces)
+            <button type="button" onclick="formatJson()" class="py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-xs transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-align-left text-xs"></i> Beautify JSON
             </button>
-            <button type="button" onclick="formatJson(4)" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
-              <i class="fa-solid fa-indent text-xs"></i> Beautify (4 Spaces)
+            <button type="button" onclick="sortJson()" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
+              <i class="fa-solid fa-arrow-down-a-z text-xs"></i> Sort Keys (A–Z)
             </button>
             <button type="button" onclick="minifyJson()" class="py-3 px-4 bg-slate-100 dark:bg-slate-700 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 text-slate-800 dark:text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 min-h-[44px]">
               <i class="fa-solid fa-compress text-xs"></i> Minify JSON
