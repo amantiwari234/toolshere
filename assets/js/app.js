@@ -494,6 +494,7 @@ function ensureScript(name) {
       const workspace = document.getElementById('toolWorkspace');
       const isDedicatedPage = window.location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase() === route.hash.toLowerCase();
       if (workspace && (!isDedicatedPage || workspace.children.length === 0)) {
+        if (typeof cleanupResizerBlob === 'function') cleanupResizerBlob();
         workspace.innerHTML = '';
         const titleHolder = { innerText: '' };
         const iconHolder = { className: '' };
@@ -555,6 +556,7 @@ function ensureScript(name) {
 
     function navigateToHome(event) {
       if (typeof stopQrCamera === 'function') stopQrCamera();
+      if (typeof cleanupResizerBlob === 'function') cleanupResizerBlob();
       if (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -683,22 +685,23 @@ function ensureScript(name) {
     "howToUse": [
       "Click or drag your image file (PNG, JPG, WebP, or GIF) into the upload dropzone.",
       "Choose a quick preset button (20KB, 50KB, 100KB, 200KB) or drag the compression slider to set your custom quality level.",
-      "Optionally adjust the pixel width and height to resize the dimensions to exact specifications.",
+      "Optionally select your preferred output format (Auto, JPG, WebP, or PNG) and adjust pixel dimensions.",
       "Review the live compressed file size and visual preview on the screen.",
-      "Click 'Download Compressed Image' to save your optimized JPG file instantly."
+      "Click 'Download Compressed Image' to save your optimized file instantly."
     ],
     "features": [
       "One-click target file size presets: 20 KB, 50 KB, 100 KB, and 200 KB for exam and job portals.",
-      "Granular compression quality slider ranging from 10% to 100%.",
-      "Custom pixel dimension controls to change width and height on the fly.",
+      "Multi-format output support: Auto (matches original), JPEG, WebP, and PNG.",
+      "Full alpha transparency preservation for WebP and PNG, plus clean solid background fill for JPEG.",
+      "Granular compression quality slider ranging from 10% to 100% for lossy formats.",
+      "Custom pixel dimension controls with aspect ratio lock to resize on the fly.",
       "Real-time dual file size counter displaying original size versus compressed output size.",
-      "Instant visual preview with checkerboard background support.",
-      "100% private client-side processing with zero server uploads or latency."
+      "100% private client-side processing using canvas.toBlob() with zero server uploads."
     ],
     "formatsAndLimits": {
-      "supportedInputs": "PNG, JPG/JPEG, WebP, GIF",
-      "outputFormat": "JPEG (.jpg) for optimal compression ratios",
-      "limitations": "Single image processing per batch; large raw photos (over 25MB) may require extra browser memory."
+      "supportedInputs": "PNG, JPG/JPEG, WebP, GIF, BMP",
+      "outputFormat": "Auto (matches original), JPEG, WebP, or PNG",
+      "limitations": "PNG format uses lossless compression (dimensions control size); WebP & JPEG support lossy quality adjustment. 100% private in-browser memory processing."
     },
     "faqs": [
       {
@@ -707,15 +710,19 @@ function ensureScript(name) {
       },
       {
         "q": "Are my photos uploaded to any external server?",
-        "a": "No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API. Your pictures never leave your local device."
+        "a": "No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API using canvas.toBlob(). Your pictures never leave your local device."
       },
       {
-        "q": "What output format will my compressed image be saved in?",
-        "a": "The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals. All uploaded images (including PNG and WebP) are exported as JPEG. Note that transparent backgrounds may not be preserved; if you need to convert to other formats or preserve transparency, use our Image Converter tool."
+        "q": "What output formats can I export my compressed image to?",
+        "a": "You can select your preferred output format: Auto (matches your original format), JPEG (.jpg), WebP (.webp), or PNG (.png). WebP and PNG fully preserve transparent backgrounds, while JPEG offers white (default) or black solid background fill options for maximum compatibility."
       },
       {
         "q": "Can I resize the width and height without losing quality?",
         "a": "Yes. You can enter specific pixel values into the width and height input fields. Downscaling dimensions also dramatically reduces the final file weight."
+      },
+      {
+        "q": "Why does changing the quality slider not affect PNG file size?",
+        "a": "PNG is a strictly lossless image format, meaning browser compression engines do not support lossy quality reduction for PNG. To reduce PNG file weight, adjust the pixel width and height dimensions, or switch the output format to WebP for high-efficiency lossy compression with transparency."
       }
     ],
     "relatedTools": [
@@ -1708,6 +1715,134 @@ function ensureScript(name) {
     let originalResizerFile = null;
     let isAspectLocked = true;
     let imgRatio = 1;
+    let resizerOutputFormat = 'auto'; // 'auto' | 'image/jpeg' | 'image/webp' | 'image/png'
+    let resizerJpegBg = 'white'; // 'white' | 'black'
+    let resizerCurrentBlobUrl = null;
+    let resizerCurrentBlob = null;
+    let resizerInputHasTransparency = false;
+    let resizerDebounceTimer = null;
+    let resizerOpSeq = 0; // Monotonic operation counter for async race-condition protection
+    const resizerAllocatedUrls = new Set(); // Tracks all active/pending object URLs for safe lifecycle management
+
+    function createResizerBlobUrl(blob) {
+      if (!blob || typeof URL === 'undefined' || typeof URL.createObjectURL !== 'function') return null;
+      const url = URL.createObjectURL(blob);
+      resizerAllocatedUrls.add(url);
+      return url;
+    }
+
+    function revokeResizerBlobUrl(url) {
+      if (url && resizerAllocatedUrls.has(url)) {
+        try {
+          URL.revokeObjectURL(url);
+        } catch (e) {}
+        resizerAllocatedUrls.delete(url);
+      }
+    }
+
+    function revokeAllResizerBlobUrlsExcept(keepUrl) {
+      for (const url of Array.from(resizerAllocatedUrls)) {
+        if (url !== keepUrl) {
+          revokeResizerBlobUrl(url);
+        }
+      }
+    }
+
+    function cleanupResizerBlob() {
+      resizerOpSeq++; // Invalidate any in-flight async compression or binary search loops
+      if (resizerDebounceTimer) {
+        clearTimeout(resizerDebounceTimer);
+        resizerDebounceTimer = null;
+      }
+      const preview = document.getElementById('resizerPreview');
+      if (preview) {
+        preview.onload = null;
+        preview.onerror = null;
+        preview.removeAttribute('src');
+      }
+      for (const url of Array.from(resizerAllocatedUrls)) {
+        try {
+          URL.revokeObjectURL(url);
+        } catch (e) {}
+      }
+      resizerAllocatedUrls.clear();
+      resizerCurrentBlobUrl = null;
+      resizerCurrentBlob = null;
+    }
+
+    function checkWebpSupport() {
+      if (typeof document === 'undefined' || typeof document.createElement !== 'function') return true;
+      try {
+        const c = document.createElement('canvas');
+        if (!c || typeof c.toDataURL !== 'function') return true;
+        return c.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function getEffectiveResizerMime() {
+      const isWebp = checkWebpSupport();
+      if (resizerOutputFormat === 'auto') {
+        if (originalResizerFile && originalResizerFile.type) {
+          const t = originalResizerFile.type.toLowerCase();
+          if (t === 'image/png') return 'image/png';
+          if (t === 'image/webp' && isWebp) return 'image/webp';
+        }
+        return 'image/jpeg';
+      }
+      if (resizerOutputFormat === 'image/webp' && !isWebp) {
+        return 'image/jpeg';
+      }
+      return resizerOutputFormat;
+    }
+
+    function detectImageTransparency(img) {
+      if (typeof document === 'undefined' || typeof document.createElement !== 'function') return false;
+      try {
+        const c = document.createElement('canvas');
+        const sampleW = Math.min(64, img.naturalWidth || 64);
+        const sampleH = Math.min(64, img.naturalHeight || 64);
+        c.width = sampleW;
+        c.height = sampleH;
+        const ctx = c.getContext('2d', { willReadFrequently: true });
+        ctx.drawImage(img, 0, 0, sampleW, sampleH);
+        const data = ctx.getImageData(0, 0, sampleW, sampleH).data;
+        for (let i = 3; i < data.length; i += 4) {
+          if (data[i] < 250) return true;
+        }
+        return false;
+      } catch (e) {
+        return Boolean(originalResizerFile && /png|webp|gif/i.test(originalResizerFile.type || ''));
+      }
+    }
+
+    function getCanvasBlob(canvas, mimeType, quality) {
+      return new Promise((resolve, reject) => {
+        try {
+          if (typeof canvas.toBlob === 'function') {
+            canvas.toBlob((blob) => {
+              if (blob) {
+                resolve(blob);
+              } else {
+                reject(new Error('Canvas toBlob returned null'));
+              }
+            }, mimeType, quality);
+          } else {
+            const dataUrl = canvas.toDataURL(mimeType, quality);
+            const byteString = atob(dataUrl.split(',')[1]);
+            const ab = new ArrayBuffer(byteString.length);
+            const ia = new Uint8Array(ab);
+            for (let i = 0; i < byteString.length; i++) {
+              ia[i] = byteString.charCodeAt(i);
+            }
+            resolve(new Blob([ab], { type: mimeType }));
+          }
+        } catch (err) {
+          reject(err);
+        }
+      });
+    }
 
     function renderImageResizer(title, icon, container) {
       if (title) title.innerText = 'Image Compressor & Resizer';
@@ -1715,9 +1850,21 @@ function ensureScript(name) {
 
       container.innerHTML = `
         <div class="space-y-6">
+          <!-- Inline Error Notification Box -->
+          <div id="resizerErrorBox" class="hidden p-4 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 rounded-2xl flex items-start gap-3 text-red-700 dark:text-red-300 text-xs sm:text-sm">
+            <i class="fa-solid fa-circle-exclamation text-red-500 text-base mt-0.5 shrink-0"></i>
+            <div class="flex-1 space-y-1">
+              <div class="font-bold">Image Processing Notice</div>
+              <p id="resizerErrorMsg" class="leading-relaxed"></p>
+            </div>
+            <button type="button" onclick="clearResizerError()" class="text-red-500 hover:text-red-700 p-1 rounded-lg" aria-label="Dismiss error">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
           <!-- Large Prominent Upload Drop Zone -->
           <div id="resizerDropZone" class="relative border-2 border-dashed border-sky-400 dark:border-sky-500 hover:border-sky-600 dark:hover:border-sky-400 bg-gradient-to-b from-sky-50/70 via-white to-sky-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-sky-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
-            <input type="file" id="resizerInput" accept="image/jpeg,image/png,image/webp,image/gif" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleResizerImage(this)">
+            <input type="file" id="resizerInput" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleResizerImage(this)">
             <div class="w-20 h-20 rounded-3xl bg-sky-100 dark:bg-sky-950/80 text-sky-600 dark:text-sky-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300 shadow-md">
               <i class="fa-solid fa-cloud-arrow-up"></i>
             </div>
@@ -1740,9 +1887,10 @@ function ensureScript(name) {
               <div class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
                 <i class="fa-solid fa-image text-sky-500"></i>
                 <span id="selectedFileName">photo.jpg</span>
+                <span id="resizerMetaBadge" class="text-[11px] px-2 py-0.5 rounded-md bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 font-semibold border border-sky-200 dark:border-sky-800"></span>
               </div>
-              <button type="button" onclick="document.getElementById('resizerInput').click()" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline">
-                Choose Different Image
+              <button type="button" onclick="resetResizerToUpload()" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-rotate-left text-[10px]"></i> Choose Different Image
               </button>
             </div>
 
@@ -1773,6 +1921,57 @@ function ensureScript(name) {
 
               <!-- Right Column: Granular Controls -->
               <div class="lg:col-span-5 space-y-5 bg-slate-50/70 dark:bg-slate-700/40 p-5 sm:p-6 rounded-3xl border border-[#E5E7EB]/80 dark:border-slate-700/80">
+                <!-- 1. Output Format Selector -->
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between">
+                    <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white flex items-center gap-1.5">
+                      <i class="fa-solid fa-file-export text-sky-600 dark:text-cyan-400"></i> Output Format
+                    </label>
+                    <span id="activeFormatBadge" class="text-[11px] text-sky-600 dark:text-cyan-400 font-bold uppercase tracking-wide">JPEG (.jpg)</span>
+                  </div>
+                  <div class="grid grid-cols-4 gap-2 text-xs">
+                    <button type="button" id="fmtBtnAuto" onclick="setResizerFormat('auto')" class="format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-sky-600 text-white border-sky-600 shadow-sm">Auto</button>
+                    <button type="button" id="fmtBtnJpeg" onclick="setResizerFormat('image/jpeg')" class="format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-[#E5E7EB] dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600">JPG</button>
+                    <button type="button" id="fmtBtnWebp" onclick="setResizerFormat('image/webp')" class="format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-[#E5E7EB] dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600">WebP</button>
+                    <button type="button" id="fmtBtnPng" onclick="setResizerFormat('image/png')" class="format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-[#E5E7EB] dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600">PNG</button>
+                  </div>
+
+                  <!-- Transparency Handling Container -->
+                  <div id="resizerTransparencyArea" class="space-y-2 pt-1">
+                    <!-- JPEG Notice and Fill Buttons -->
+                    <div id="resizerJpegBgBox" class="hidden p-3 bg-amber-50/90 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-300 space-y-2">
+                      <div class="font-bold flex items-center gap-1.5 text-amber-800 dark:text-amber-200">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> JPEG does not support transparency
+                      </div>
+                      <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-300">
+                        Transparent areas will be rendered with a solid background fill. (Select <strong>WebP</strong> or <strong>PNG</strong> to keep transparent backgrounds).
+                      </p>
+                      <div class="flex items-center gap-2 pt-1">
+                        <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300">Background Fill:</span>
+                        <button type="button" id="bgBtnWhite" onclick="setResizerJpegBg('white')" class="px-2.5 py-1 text-xs rounded-lg font-bold border bg-sky-600 text-white border-sky-600 shadow-xs">White (Default)</button>
+                        <button type="button" id="bgBtnBlack" onclick="setResizerJpegBg('black')" class="px-2.5 py-1 text-xs rounded-lg font-bold border bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600">Black</button>
+                      </div>
+                    </div>
+
+                    <!-- Transparency Preserved Badge -->
+                    <div id="resizerTransparencyPreservedBox" class="hidden p-2.5 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-300 flex items-center gap-2 font-medium">
+                      <i class="fa-solid fa-circle-check text-emerald-600 shrink-0"></i>
+                      <span id="transparencyPreservedMsg">Alpha transparency is fully preserved in export.</span>
+                    </div>
+
+                    <!-- Animated GIF Warning Notice -->
+                    <div id="resizerGifNotice" class="hidden p-3 bg-amber-50/90 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-300 space-y-1">
+                      <div class="font-bold flex items-center gap-1.5 text-amber-800 dark:text-amber-200">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Animated GIF detected
+                      </div>
+                      <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-300">
+                        Only the first frame will be exported. Animation will not be preserved.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Target File Size (Presets + Custom) -->
                 <div class="space-y-2.5">
                   <div class="flex items-center justify-between">
                     <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white flex items-center gap-1.5">
@@ -1799,14 +1998,27 @@ function ensureScript(name) {
                   </div>
                 </div>
 
-                <div>
+                <!-- 3. Compression Quality Slider (Active for JPEG & WebP) -->
+                <div id="qualityControlSection" class="space-y-1.5">
                   <div class="flex justify-between items-center mb-1.5">
                     <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white">Compression Quality</label>
                     <span id="qualityVal" class="font-bold text-sm text-sky-600 dark:text-cyan-400">80%</span>
                   </div>
-                  <input type="range" id="qualityRange" min="10" max="100" value="80" oninput="processResizer()" class="w-full h-2.5 bg-slate-200 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-sky-600">
+                  <input type="range" id="qualityRange" min="10" max="100" value="80" oninput="debouncedProcessResizer()" class="w-full h-2.5 bg-slate-200 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-sky-600">
+                  <p class="text-[11px] text-slate-400">Lower quality = smaller file size. 75–85% recommended for clean clarity.</p>
                 </div>
 
+                <!-- PNG Lossless Info Notice (shown when PNG is selected) -->
+                <div id="pngLosslessNotice" class="hidden p-3 bg-blue-50/80 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800 text-xs text-blue-900 dark:text-blue-300 space-y-1">
+                  <div class="font-bold flex items-center gap-1.5 text-blue-700 dark:text-blue-300">
+                    <i class="fa-solid fa-circle-info text-blue-600"></i> Lossless PNG Compression
+                  </div>
+                  <p class="text-[11px] leading-relaxed text-blue-800 dark:text-blue-300">
+                    PNG files use lossless compression (canvas quality parameters are ignored by browser engines). To reduce PNG file weight, adjust pixel dimensions below, or choose <strong>WebP</strong> for high-efficiency lossy compression with transparency.
+                  </p>
+                </div>
+
+                <!-- 4. Dimension Resizing -->
                 <div class="space-y-2">
                   <div class="flex items-center justify-between">
                     <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white">Resize Dimensions (px)</label>
@@ -1826,7 +2038,8 @@ function ensureScript(name) {
                   </div>
                 </div>
 
-                <button type="button" onclick="downloadCompressedImg()" class="w-full py-4 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.01] transition-all flex items-center justify-center gap-2.5">
+                <!-- 5. Download Button -->
+                <button type="button" id="downloadCompressedBtn" onclick="downloadCompressedImg()" class="w-full py-4 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.01] transition-all flex items-center justify-center gap-2.5">
                   <i class="fa-solid fa-download text-lg"></i> Download Compressed Image
                 </button>
               </div>
@@ -1848,74 +2061,340 @@ function ensureScript(name) {
     function handleWidthChange() {
       if (isAspectLocked && imgRatio && loadedResizerImg) {
         const w = parseInt(document.getElementById('resizerWidth').value) || loadedResizerImg.naturalWidth;
-        document.getElementById('resizerHeight').value = Math.round(w / imgRatio);
+        document.getElementById('resizerHeight').value = Math.max(1, Math.round(w / imgRatio));
       }
-      processResizer();
+      debouncedProcessResizer();
     }
 
     function handleHeightChange() {
       if (isAspectLocked && imgRatio && loadedResizerImg) {
         const h = parseInt(document.getElementById('resizerHeight').value) || loadedResizerImg.naturalHeight;
-        document.getElementById('resizerWidth').value = Math.round(h * imgRatio);
+        document.getElementById('resizerWidth').value = Math.max(1, Math.round(h * imgRatio));
       }
+      debouncedProcessResizer();
+    }
+
+    function debouncedProcessResizer() {
+      if (resizerDebounceTimer) clearTimeout(resizerDebounceTimer);
+      resizerDebounceTimer = setTimeout(() => {
+        resizerDebounceTimer = null;
+        processResizer();
+      }, 50);
+    }
+
+    function setResizerFormat(format) {
+      resizerOutputFormat = format;
+      syncResizerFormatUI();
       processResizer();
     }
 
-    function handleResizerImage(input) {
-      if (input.files && input.files[0]) {
-        const file = input.files[0];
-        originalResizerFile = file;
-        const fileNameEl = document.getElementById('selectedFileName');
-        if (fileNameEl) fileNameEl.innerText = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+    function setResizerJpegBg(color) {
+      resizerJpegBg = color === 'black' ? 'black' : 'white';
+      syncResizerFormatUI();
+      processResizer();
+    }
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          loadedResizerImg = new Image();
-          loadedResizerImg.onload = function() {
-            imgRatio = loadedResizerImg.naturalWidth / loadedResizerImg.naturalHeight;
-            const dropZone = document.getElementById('resizerDropZone');
-            const controls = document.getElementById('resizerControls');
-            if (dropZone) dropZone.classList.add('hidden');
-            if (controls) controls.classList.remove('hidden');
+    function syncResizerFormatUI() {
+      const effectiveMime = getEffectiveResizerMime();
+      const badge = document.getElementById('activeFormatBadge');
+      if (badge) {
+        if (effectiveMime === 'image/webp') badge.innerText = 'WebP (.webp)';
+        else if (effectiveMime === 'image/png') badge.innerText = 'PNG (.png)';
+        else badge.innerText = 'JPEG (.jpg)';
+      }
 
-            document.getElementById('resizerWidth').value = loadedResizerImg.naturalWidth;
-            document.getElementById('resizerHeight').value = loadedResizerImg.naturalHeight;
-            document.getElementById('originalSize').innerText = `${(file.size / 1024).toFixed(1)} KB`;
-            processResizer();
-          };
-          loadedResizerImg.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
+      // Update format pill buttons
+      const pills = [
+        { id: 'fmtBtnAuto', active: resizerOutputFormat === 'auto' },
+        { id: 'fmtBtnJpeg', active: resizerOutputFormat === 'image/jpeg' },
+        { id: 'fmtBtnWebp', active: resizerOutputFormat === 'image/webp' },
+        { id: 'fmtBtnPng', active: resizerOutputFormat === 'image/png' }
+      ];
+      pills.forEach(p => {
+        const el = document.getElementById(p.id);
+        if (el) {
+          if (p.active) {
+            el.className = 'format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-sky-600 text-white border-sky-600 shadow-sm';
+          } else {
+            el.className = 'format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-[#E5E7EB] dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600';
+          }
+        }
+      });
+
+      // Transparency handling UI
+      const jpegBox = document.getElementById('resizerJpegBgBox');
+      const preservedBox = document.getElementById('resizerTransparencyPreservedBox');
+      const preservedMsg = document.getElementById('transparencyPreservedMsg');
+      const qualitySec = document.getElementById('qualityControlSection');
+      const pngNotice = document.getElementById('pngLosslessNotice');
+
+      if (effectiveMime === 'image/jpeg') {
+        if (resizerInputHasTransparency && jpegBox) {
+          jpegBox.classList.remove('hidden');
+        } else if (jpegBox) {
+          jpegBox.classList.add('hidden');
+        }
+        if (preservedBox) preservedBox.classList.add('hidden');
+        if (qualitySec) qualitySec.classList.remove('hidden');
+        if (pngNotice) pngNotice.classList.add('hidden');
+      } else if (effectiveMime === 'image/webp') {
+        if (jpegBox) jpegBox.classList.add('hidden');
+        if (resizerInputHasTransparency && preservedBox) {
+          if (preservedMsg) preservedMsg.innerText = 'Alpha transparency is fully preserved in WebP export.';
+          preservedBox.classList.remove('hidden');
+        } else if (preservedBox) {
+          preservedBox.classList.add('hidden');
+        }
+        if (qualitySec) qualitySec.classList.remove('hidden');
+        if (pngNotice) pngNotice.classList.add('hidden');
+      } else if (effectiveMime === 'image/png') {
+        if (jpegBox) jpegBox.classList.add('hidden');
+        if (resizerInputHasTransparency && preservedBox) {
+          if (preservedMsg) preservedMsg.innerText = 'Alpha transparency is fully preserved in PNG export.';
+          preservedBox.classList.remove('hidden');
+        } else if (preservedBox) {
+          preservedBox.classList.add('hidden');
+        }
+        if (qualitySec) qualitySec.classList.add('hidden');
+        if (pngNotice) pngNotice.classList.remove('hidden');
+      }
+
+      // Update White/Black background button states
+      const btnWhite = document.getElementById('bgBtnWhite');
+      const btnBlack = document.getElementById('bgBtnBlack');
+      if (btnWhite) {
+        btnWhite.className = `px-2.5 py-1 text-xs rounded-lg font-bold border transition-all ${resizerJpegBg === 'white' ? 'bg-sky-600 text-white border-sky-600 shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600'}`;
+      }
+      if (btnBlack) {
+        btnBlack.className = `px-2.5 py-1 text-xs rounded-lg font-bold border transition-all ${resizerJpegBg === 'black' ? 'bg-sky-600 text-white border-sky-600 shadow-xs' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600'}`;
+      }
+
+      // Animated GIF Warning Notice
+      const isGif = Boolean(originalResizerFile && (
+        (originalResizerFile.type && /gif/i.test(originalResizerFile.type)) ||
+        (/\.gif$/i.test(originalResizerFile.name || ''))
+      ));
+      const gifNotice = document.getElementById('resizerGifNotice');
+      if (gifNotice) {
+        if (isGif) {
+          gifNotice.classList.remove('hidden');
+        } else {
+          gifNotice.classList.add('hidden');
+        }
       }
     }
 
-    function processResizer() {
-      if (!loadedResizerImg) return;
-      const quality = (parseInt(document.getElementById('qualityRange').value) || 80) / 100;
-      document.getElementById('qualityVal').innerText = `${Math.round(quality * 100)}%`;
+    function showResizerError(msg) {
+      const errBox = document.getElementById('resizerErrorBox');
+      const errText = document.getElementById('resizerErrorMsg');
+      if (errBox && errText) {
+        errText.innerText = msg;
+        errBox.classList.remove('hidden');
+      } else {
+        showToast(msg, 'error');
+      }
+    }
 
-      const w = parseInt(document.getElementById('resizerWidth').value) || loadedResizerImg.naturalWidth;
-      const h = parseInt(document.getElementById('resizerHeight').value) || loadedResizerImg.naturalHeight;
+    function clearResizerError() {
+      const errBox = document.getElementById('resizerErrorBox');
+      if (errBox) errBox.classList.add('hidden');
+    }
+
+    function resetResizerToUpload() {
+      cleanupResizerBlob();
+      loadedResizerImg = null;
+      originalResizerFile = null;
+      resizerInputHasTransparency = false;
+      clearResizerError();
+      const gifNotice = document.getElementById('resizerGifNotice');
+      if (gifNotice) gifNotice.classList.add('hidden');
+      const input = document.getElementById('resizerInput');
+      if (input) input.value = '';
+      const dropZone = document.getElementById('resizerDropZone');
+      const controls = document.getElementById('resizerControls');
+      if (dropZone) dropZone.classList.remove('hidden');
+      if (controls) controls.classList.add('hidden');
+    }
+
+    function handleResizerImage(input) {
+      clearResizerError();
+      cleanupResizerBlob();
+      if (!input || !input.files || input.files.length === 0) return;
+      const file = input.files[0];
+
+      // 1. Empty file validation
+      if (!file || file.size === 0) {
+        showResizerError("The selected file is empty (0 bytes). Please choose a valid image file.");
+        input.value = '';
+        return;
+      }
+
+      // 2. Oversized image validation (50MB)
+      if (file.size > 50 * 1024 * 1024) {
+        showResizerError(`File is too large (${(file.size / (1024 * 1024)).toFixed(1)} MB). The maximum supported file size is 50 MB.`);
+        input.value = '';
+        return;
+      }
+
+      // 3. Supported formats check
+      const supportedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/bmp', 'image/x-icon', 'image/svg+xml'];
+      const ext = file.name.split('.').pop().toLowerCase();
+      const validExts = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'svg'];
+      if (file.type && !supportedTypes.includes(file.type.toLowerCase()) && !validExts.includes(ext)) {
+        showResizerError(`Unsupported file format (${file.type || ext}). Please upload a JPG, PNG, WebP, GIF, or BMP image.`);
+        input.value = '';
+        return;
+      }
+
+      originalResizerFile = file;
+
+      const fileNameEl = document.getElementById('selectedFileName');
+      if (fileNameEl) {
+        const sizeDisplay = file.size > 1024 * 1024
+          ? `${(file.size / (1024 * 1024)).toFixed(2)} MB`
+          : `${(file.size / 1024).toFixed(1)} KB`;
+        fileNameEl.innerText = `${file.name} (${sizeDisplay})`;
+      }
+
+      const reader = new FileReader();
+      reader.onerror = function() {
+        showResizerError("Failed to read the selected file from disk. Please try again.");
+        input.value = '';
+      };
+
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onerror = function() {
+          showResizerError("Unable to decode image. The file may be corrupted, truncated, or in an unsupported codec.");
+          input.value = '';
+        };
+
+        img.onload = function() {
+          if (img.naturalWidth === 0 || img.naturalHeight === 0) {
+            showResizerError("Invalid image dimensions (0x0). The image could not be rendered.");
+            input.value = '';
+            return;
+          }
+
+          loadedResizerImg = img;
+          imgRatio = img.naturalWidth / img.naturalHeight;
+          resizerInputHasTransparency = detectImageTransparency(img);
+
+          // Reveal controls, hide dropzone
+          const dropZone = document.getElementById('resizerDropZone');
+          const controls = document.getElementById('resizerControls');
+          if (dropZone) dropZone.classList.add('hidden');
+          if (controls) controls.classList.remove('hidden');
+
+          const widthInput = document.getElementById('resizerWidth');
+          const heightInput = document.getElementById('resizerHeight');
+          if (widthInput) widthInput.value = img.naturalWidth;
+          if (heightInput) heightInput.value = img.naturalHeight;
+
+          const origSizeEl = document.getElementById('originalSize');
+          if (origSizeEl) {
+            origSizeEl.innerText = file.size > 1024 * 1024
+              ? `${(file.size / (1024 * 1024)).toFixed(2)} MB`
+              : `${(file.size / 1024).toFixed(1)} KB`;
+          }
+
+          const metaBadge = document.getElementById('resizerMetaBadge');
+          if (metaBadge) {
+            metaBadge.innerText = `${img.naturalWidth} × ${img.naturalHeight} px`;
+          }
+
+          syncResizerFormatUI();
+          processResizer();
+        };
+
+        img.src = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    async function processResizer(parentOpId) {
+      if (!loadedResizerImg) return;
+      const opId = (parentOpId !== undefined) ? parentOpId : ++resizerOpSeq;
+      if (opId !== resizerOpSeq || !loadedResizerImg) return;
+
+      const mimeType = getEffectiveResizerMime();
+      const qualityVal = (parseInt(document.getElementById('qualityRange')?.value) || 80) / 100;
+      const qualityDisplay = document.getElementById('qualityVal');
+      if (qualityDisplay) qualityDisplay.innerText = `${Math.round(qualityVal * 100)}%`;
+
+      const w = parseInt(document.getElementById('resizerWidth')?.value) || loadedResizerImg.naturalWidth;
+      const h = parseInt(document.getElementById('resizerHeight')?.value) || loadedResizerImg.naturalHeight;
 
       const canvas = document.createElement('canvas');
       canvas.width = Math.max(1, w);
       canvas.height = Math.max(1, h);
       const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+
+      if (mimeType === 'image/jpeg') {
+        ctx.fillStyle = resizerJpegBg === 'black' ? '#000000' : '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+
       ctx.drawImage(loadedResizerImg, 0, 0, canvas.width, canvas.height);
 
-      const dataUrl = canvas.toDataURL('image/jpeg', quality);
-      document.getElementById('resizerPreview').src = dataUrl;
+      try {
+        const blob = await getCanvasBlob(canvas, mimeType, qualityVal);
 
-      const head = 'data:image/jpeg;base64,';
-      const sizeInBytes = Math.round((dataUrl.length - head.length) * 3 / 4);
-      document.getElementById('compressedSize').innerText = `${(sizeInBytes / 1024).toFixed(1)} KB`;
-
-      if (originalResizerFile && originalResizerFile.size > 0) {
-        const savedPercent = Math.round((1 - (sizeInBytes / originalResizerFile.size)) * 100);
-        const badge = document.getElementById('savingsBadge');
-        if (badge) {
-          badge.innerText = savedPercent >= 0 ? `-${savedPercent}%` : `+${Math.abs(savedPercent)}%`;
+        // Guard after async encoding: discard if operation superseded or reset/navigated
+        if (opId !== resizerOpSeq || !loadedResizerImg) {
+          return;
         }
+
+        const newBlobUrl = createResizerBlobUrl(blob);
+        if (opId !== resizerOpSeq || !loadedResizerImg) {
+          revokeResizerBlobUrl(newBlobUrl);
+          return;
+        }
+
+        resizerCurrentBlob = blob;
+        resizerCurrentBlobUrl = newBlobUrl;
+
+        const preview = document.getElementById('resizerPreview');
+        if (preview) {
+          const onPreviewDone = () => {
+            // Safely revoke older URLs only when the current new preview has completed loading
+            if (resizerCurrentBlobUrl === newBlobUrl) {
+              revokeAllResizerBlobUrlsExcept(newBlobUrl);
+            }
+          };
+          preview.onload = onPreviewDone;
+          preview.onerror = onPreviewDone;
+          preview.src = newBlobUrl;
+        } else {
+          revokeAllResizerBlobUrlsExcept(newBlobUrl);
+        }
+
+        const sizeInBytes = blob.size;
+        const sizeKb = (sizeInBytes / 1024).toFixed(1);
+        const compEl = document.getElementById('compressedSize');
+        if (compEl) {
+          compEl.innerText = sizeInBytes > 1024 * 1024
+            ? `${(sizeInBytes / (1024 * 1024)).toFixed(2)} MB`
+            : `${sizeKb} KB`;
+        }
+
+        if (originalResizerFile && originalResizerFile.size > 0) {
+          const savedPercent = Math.round((1 - (sizeInBytes / originalResizerFile.size)) * 100);
+          const badge = document.getElementById('savingsBadge');
+          if (badge) {
+            badge.innerText = savedPercent >= 0 ? `-${savedPercent}%` : `+${Math.abs(savedPercent)}%`;
+            badge.className = savedPercent >= 0
+              ? 'text-sm sm:text-base font-extrabold text-emerald-700 dark:text-emerald-300'
+              : 'text-sm sm:text-base font-extrabold text-amber-600 dark:text-amber-400';
+          }
+        }
+      } catch (err) {
+        if (opId !== resizerOpSeq || !loadedResizerImg) return;
+        console.error('Compression processing error:', err);
+        showResizerError('Canvas compression failed. Your browser may have run out of canvas memory for these dimensions. Try reducing the width and height.');
       }
     }
 
@@ -1929,7 +2408,7 @@ function ensureScript(name) {
       setTargetKB(val);
     }
 
-    function setTargetKB(targetKB) {
+    async function setTargetKB(targetKB) {
       if (!loadedResizerImg) {
         showToast('Please upload an image first', 'warning');
         return;
@@ -1946,9 +2425,84 @@ function ensureScript(name) {
       const targetBytes = targetKB * 1024;
       const naturalW = loadedResizerImg.naturalWidth;
       const naturalH = loadedResizerImg.naturalHeight;
+      const effectiveMime = getEffectiveResizerMime();
 
+      // Begin new operation: any older optimization or compression is immediately invalidated
+      const opId = ++resizerOpSeq;
+      showToast(`Optimizing for target ${targetKB} KB...`, 'info');
+
+      if (effectiveMime === 'image/png') {
+        // PNG is lossless: optimize dimensions to target size
+        let lowScale = 0.05, highScale = 1.0;
+        let bestScale = 1.0;
+        let closestDiff = Infinity;
+
+        for (let i = 0; i < 6; i++) {
+          if (opId !== resizerOpSeq || !loadedResizerImg) return;
+          if (getEffectiveResizerMime() !== 'image/png') return;
+
+          const midScale = (lowScale + highScale) / 2;
+          const testW = Math.max(50, Math.round(naturalW * midScale));
+          const testH = Math.max(50, Math.round(naturalH * midScale));
+
+          const canvas = document.createElement('canvas');
+          canvas.width = testW;
+          canvas.height = testH;
+          const ctx = canvas.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+          ctx.drawImage(loadedResizerImg, 0, 0, testW, testH);
+
+          try {
+            const blob = await getCanvasBlob(canvas, 'image/png');
+            if (opId !== resizerOpSeq || !loadedResizerImg) return;
+            if (getEffectiveResizerMime() !== 'image/png') return;
+
+            const diff = Math.abs(blob.size - targetBytes);
+            if (diff < closestDiff) {
+              closestDiff = diff;
+              bestScale = midScale;
+            }
+            if (blob.size > targetBytes) {
+              highScale = midScale;
+            } else {
+              lowScale = midScale;
+            }
+          } catch (e) {
+            break;
+          }
+        }
+
+        if (opId !== resizerOpSeq || !loadedResizerImg) return;
+        if (getEffectiveResizerMime() !== 'image/png') return;
+
+        const finalW = Math.max(50, Math.round(naturalW * bestScale));
+        const finalH = Math.max(50, Math.round(naturalH * bestScale));
+        const widthInput = document.getElementById('resizerWidth');
+        const heightInput = document.getElementById('resizerHeight');
+        if (widthInput) widthInput.value = finalW;
+        if (heightInput) heightInput.value = finalH;
+
+        await processResizer(opId);
+        if (opId !== resizerOpSeq || !loadedResizerImg) return;
+        if (getEffectiveResizerMime() !== 'image/png') return;
+
+        const actualBytes = resizerCurrentBlob ? resizerCurrentBlob.size : 0;
+        const actualKB = (actualBytes / 1024).toFixed(1);
+
+        if (actualBytes > targetBytes) {
+          showToast(`PNG target of ${targetKB} KB could not be reached losslessly (achieved: ${actualKB} KB). Switch to WebP or JPEG for smaller file size.`, 'warning');
+        } else {
+          showToast(`PNG dimensions adjusted: achieved ${actualKB} KB (Target: ${targetKB} KB)`, 'success');
+        }
+        return;
+      }
+
+      // JPEG / WebP quality + dimension optimization
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
 
       let bestW = naturalW;
       let bestH = naturalH;
@@ -1956,61 +2510,104 @@ function ensureScript(name) {
       // Check min size at natural resolution
       canvas.width = naturalW;
       canvas.height = naturalH;
+      if (effectiveMime === 'image/jpeg') {
+        ctx.fillStyle = resizerJpegBg === 'black' ? '#000000' : '#ffffff';
+        ctx.fillRect(0, 0, naturalW, naturalH);
+      }
       ctx.drawImage(loadedResizerImg, 0, 0, naturalW, naturalH);
-      const dataUrlMin = canvas.toDataURL('image/jpeg', 0.1);
-      const minSizeBytes = Math.round((dataUrlMin.length - 23) * 3 / 4);
 
-      if (minSizeBytes > targetBytes) {
-        const scale = Math.sqrt(targetBytes / minSizeBytes) * 0.95;
-        bestW = Math.max(50, Math.round(naturalW * Math.min(0.92, scale)));
-        bestH = Math.max(50, Math.round(naturalH * Math.min(0.92, scale)));
-      }
+      try {
+        const testBlobMin = await getCanvasBlob(canvas, effectiveMime, 0.1);
+        if (opId !== resizerOpSeq || !loadedResizerImg) return;
+        if (getEffectiveResizerMime() !== effectiveMime) return;
 
-      canvas.width = bestW;
-      canvas.height = bestH;
-      ctx.drawImage(loadedResizerImg, 0, 0, bestW, bestH);
-
-      let low = 0.05, high = 0.98;
-      let finalQ = 0.8;
-      let closestDiff = Infinity;
-
-      for (let i = 0; i < 9; i++) {
-        const mid = (low + high) / 2;
-        const testUrl = canvas.toDataURL('image/jpeg', mid);
-        const testBytes = Math.round((testUrl.length - 23) * 3 / 4);
-        const diff = Math.abs(testBytes - targetBytes);
-
-        if (diff < closestDiff) {
-          closestDiff = diff;
-          finalQ = mid;
+        if (testBlobMin.size > targetBytes) {
+          const scale = Math.sqrt(targetBytes / testBlobMin.size) * 0.95;
+          bestW = Math.max(50, Math.round(naturalW * Math.min(0.92, scale)));
+          bestH = Math.max(50, Math.round(naturalH * Math.min(0.92, scale)));
         }
 
-        if (testBytes > targetBytes) {
-          high = mid;
-        } else {
-          low = mid;
+        canvas.width = bestW;
+        canvas.height = bestH;
+        if (effectiveMime === 'image/jpeg') {
+          ctx.fillStyle = resizerJpegBg === 'black' ? '#000000' : '#ffffff';
+          ctx.fillRect(0, 0, bestW, bestH);
         }
+        ctx.drawImage(loadedResizerImg, 0, 0, bestW, bestH);
+
+        let low = 0.05, high = 0.98;
+        let finalQ = 0.8;
+        let closestDiff = Infinity;
+
+        for (let i = 0; i < 7; i++) {
+          if (opId !== resizerOpSeq || !loadedResizerImg) return;
+          if (getEffectiveResizerMime() !== effectiveMime) return;
+
+          const mid = (low + high) / 2;
+          const testBlob = await getCanvasBlob(canvas, effectiveMime, mid);
+          if (opId !== resizerOpSeq || !loadedResizerImg) return;
+          if (getEffectiveResizerMime() !== effectiveMime) return;
+
+          const diff = Math.abs(testBlob.size - targetBytes);
+          if (diff < closestDiff) {
+            closestDiff = diff;
+            finalQ = mid;
+          }
+          if (testBlob.size > targetBytes) {
+            high = mid;
+          } else {
+            low = mid;
+          }
+        }
+
+        if (opId !== resizerOpSeq || !loadedResizerImg) return;
+        if (getEffectiveResizerMime() !== effectiveMime) return;
+
+        const widthInput = document.getElementById('resizerWidth');
+        const heightInput = document.getElementById('resizerHeight');
+        const qualityRange = document.getElementById('qualityRange');
+
+        if (widthInput) widthInput.value = bestW;
+        if (heightInput) heightInput.value = bestH;
+        if (qualityRange) qualityRange.value = Math.round(finalQ * 100);
+
+        await processResizer(opId);
+        if (opId !== resizerOpSeq || !loadedResizerImg) return;
+        if (getEffectiveResizerMime() !== effectiveMime) return;
+
+        showToast(`Optimized for target ${targetKB} KB`, 'success');
+      } catch (err) {
+        if (opId !== resizerOpSeq || !loadedResizerImg) return;
+        console.error('Target KB optimization error:', err);
+        showResizerError('Failed to optimize for target KB. Please try manually adjusting dimensions or quality.');
       }
-
-      document.getElementById('resizerWidth').value = bestW;
-      document.getElementById('resizerHeight').value = bestH;
-      document.getElementById('qualityRange').value = Math.round(finalQ * 100);
-
-      processResizer();
-      showToast(`Optimized for target ${targetKB} KB`, 'success');
     }
 
     function downloadCompressedImg() {
-      const img = document.getElementById('resizerPreview');
-      if (!img || !img.src) return;
+      if (!resizerCurrentBlobUrl && !loadedResizerImg) {
+        showToast('Please upload an image first', 'warning');
+        return;
+      }
+      if (!resizerCurrentBlobUrl) {
+        showToast('Image is still processing, please wait...', 'info');
+        return;
+      }
+      const effectiveMime = getEffectiveResizerMime();
+      let ext = 'jpg';
+      if (effectiveMime === 'image/webp') ext = 'webp';
+      else if (effectiveMime === 'image/png') ext = 'png';
+
+      const origName = (originalResizerFile && originalResizerFile.name)
+        ? originalResizerFile.name.replace(/\.[^/.]+$/, "")
+        : "image";
+
       const a = document.createElement('a');
-      a.href = img.src;
-      const origName = (originalResizerFile && originalResizerFile.name) ? originalResizerFile.name.replace(/\.[^/.]+$/, "") : "image";
-      a.download = `compressed-${origName}.jpg`;
+      a.href = resizerCurrentBlobUrl;
+      a.download = `compressed-${origName}.${ext}`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      showToast('Image downloaded successfully!', 'success');
+      showToast(`Image downloaded as .${ext.toUpperCase()}!`, 'success');
       triggerConfetti();
     }
 

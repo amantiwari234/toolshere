@@ -109,13 +109,10 @@ const seoOverrides = {
     formatNoticeHtml: `
         <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
           <div class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-info text-blue-600 dark:text-blue-400"></i> Output Format &amp; Transparency Notice
+            <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400"></i> Multi-Format Export &amp; Transparency Handling
           </div>
           <p class="leading-relaxed">
-            The Image Compressor exports optimized <strong>JPEG (.jpg)</strong> files for maximum file size reduction, even when your input file is a PNG, WebP, or GIF image. Because the standard JPEG format does not support alpha transparency, transparent backgrounds may not be preserved and will render with a solid background.
-          </p>
-          <p class="leading-relaxed">
-            If you need to maintain transparent backgrounds or convert your files into PNG, WebP, or other formats without compression, please use our <a href="/image-converter/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Image Converter</a> tool.
+            The Image Compressor lets you export your images in <strong>Auto (Match Original)</strong>, <strong>JPEG</strong>, <strong>WebP</strong>, or <strong>PNG</strong> format. Alpha transparency is fully preserved when exporting as WebP or PNG. When exporting as JPEG, you can choose a clean white (default) or black solid background fill for transparent areas.
           </p>
         </div>
     `,

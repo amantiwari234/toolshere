@@ -195,15 +195,15 @@
       "name": "Are my photos uploaded to any external server?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API. Your pictures never leave your local device."
+        "text": "No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API using canvas.toBlob(). Your pictures never leave your local device."
       }
     },
     {
       "@type": "Question",
-      "name": "What output format will my compressed image be saved in?",
+      "name": "What output formats can I export my compressed image to?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals. All uploaded images (including PNG and WebP) are exported as JPEG. Note that transparent backgrounds may not be preserved; if you need to convert to other formats or preserve transparency, use our Image Converter tool."
+        "text": "You can select your preferred output format: Auto (matches your original format), JPEG (.jpg), WebP (.webp), or PNG (.png). WebP and PNG fully preserve transparent backgrounds, while JPEG offers white (default) or black solid background fill options for maximum compatibility."
       }
     },
     {
@@ -212,6 +212,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Yes. You can enter specific pixel values into the width and height input fields. Downscaling dimensions also dramatically reduces the final file weight."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does changing the quality slider not affect PNG file size?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PNG is a strictly lossless image format, meaning browser compression engines do not support lossy quality reduction for PNG. To reduce PNG file weight, adjust the pixel width and height dimensions, or switch the output format to WebP for high-efficiency lossy compression with transparency."
       }
     }
   ]
@@ -395,9 +403,21 @@
     <div id="toolWorkspace" class="bg-white dark:bg-slate-800 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 md:p-10 border border-slate-200 dark:border-slate-700 shadow-xs space-y-6 sm:space-y-8 google-auto-ads-ignore adsbygoogle-noablate">
 
         <div class="space-y-6">
+          <!-- Inline Error Notification Box -->
+          <div id="resizerErrorBox" class="hidden p-4 bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 rounded-2xl flex items-start gap-3 text-red-700 dark:text-red-300 text-xs sm:text-sm">
+            <i class="fa-solid fa-circle-exclamation text-red-500 text-base mt-0.5 shrink-0"></i>
+            <div class="flex-1 space-y-1">
+              <div class="font-bold">Image Processing Notice</div>
+              <p id="resizerErrorMsg" class="leading-relaxed"></p>
+            </div>
+            <button type="button" onclick="clearResizerError()" class="text-red-500 hover:text-red-700 p-1 rounded-lg" aria-label="Dismiss error">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
           <!-- Large Prominent Upload Drop Zone -->
           <div id="resizerDropZone" class="relative border-2 border-dashed border-sky-400 dark:border-sky-500 hover:border-sky-600 dark:hover:border-sky-400 bg-gradient-to-b from-sky-50/70 via-white to-sky-50/30 dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-3xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-lg shadow-sky-500/5 flex flex-col items-center justify-center min-h-[260px] sm:min-h-[300px] group">
-            <input type="file" id="resizerInput" accept="image/jpeg,image/png,image/webp,image/gif" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleResizerImage(this)">
+            <input type="file" id="resizerInput" accept="image/jpeg,image/png,image/webp,image/gif,image/bmp" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="handleResizerImage(this)">
             <div class="w-20 h-20 rounded-3xl bg-sky-100 dark:bg-sky-950/80 text-sky-600 dark:text-sky-400 flex items-center justify-center text-4xl mb-4 group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300 shadow-md">
               <i class="fa-solid fa-cloud-arrow-up"></i>
             </div>
@@ -420,9 +440,10 @@
               <div class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
                 <i class="fa-solid fa-image text-sky-500"></i>
                 <span id="selectedFileName">photo.jpg</span>
+                <span id="resizerMetaBadge" class="text-[11px] px-2 py-0.5 rounded-md bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 font-semibold border border-sky-200 dark:border-sky-800"></span>
               </div>
-              <button type="button" onclick="document.getElementById('resizerInput').click()" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline">
-                Choose Different Image
+              <button type="button" onclick="resetResizerToUpload()" class="text-xs font-bold text-sky-600 dark:text-sky-400 hover:underline flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-rotate-left text-[10px]"></i> Choose Different Image
               </button>
             </div>
 
@@ -453,6 +474,57 @@
 
               <!-- Right Column: Granular Controls -->
               <div class="lg:col-span-5 space-y-5 bg-slate-50/70 dark:bg-slate-700/40 p-5 sm:p-6 rounded-3xl border border-[#E5E7EB]/80 dark:border-slate-700/80">
+                <!-- 1. Output Format Selector -->
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between">
+                    <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white flex items-center gap-1.5">
+                      <i class="fa-solid fa-file-export text-sky-600 dark:text-cyan-400"></i> Output Format
+                    </label>
+                    <span id="activeFormatBadge" class="text-[11px] text-sky-600 dark:text-cyan-400 font-bold uppercase tracking-wide">JPEG (.jpg)</span>
+                  </div>
+                  <div class="grid grid-cols-4 gap-2 text-xs">
+                    <button type="button" id="fmtBtnAuto" onclick="setResizerFormat('auto')" class="format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-sky-600 text-white border-sky-600 shadow-sm">Auto</button>
+                    <button type="button" id="fmtBtnJpeg" onclick="setResizerFormat('image/jpeg')" class="format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-[#E5E7EB] dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600">JPG</button>
+                    <button type="button" id="fmtBtnWebp" onclick="setResizerFormat('image/webp')" class="format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-[#E5E7EB] dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600">WebP</button>
+                    <button type="button" id="fmtBtnPng" onclick="setResizerFormat('image/png')" class="format-pill-btn px-2 py-2 rounded-xl font-bold border transition-all text-center bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-[#E5E7EB] dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600">PNG</button>
+                  </div>
+
+                  <!-- Transparency Handling Container -->
+                  <div id="resizerTransparencyArea" class="space-y-2 pt-1">
+                    <!-- JPEG Notice and Fill Buttons -->
+                    <div id="resizerJpegBgBox" class="hidden p-3 bg-amber-50/90 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-300 space-y-2">
+                      <div class="font-bold flex items-center gap-1.5 text-amber-800 dark:text-amber-200">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> JPEG does not support transparency
+                      </div>
+                      <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-300">
+                        Transparent areas will be rendered with a solid background fill. (Select <strong>WebP</strong> or <strong>PNG</strong> to keep transparent backgrounds).
+                      </p>
+                      <div class="flex items-center gap-2 pt-1">
+                        <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300">Background Fill:</span>
+                        <button type="button" id="bgBtnWhite" onclick="setResizerJpegBg('white')" class="px-2.5 py-1 text-xs rounded-lg font-bold border bg-sky-600 text-white border-sky-600 shadow-xs">White (Default)</button>
+                        <button type="button" id="bgBtnBlack" onclick="setResizerJpegBg('black')" class="px-2.5 py-1 text-xs rounded-lg font-bold border bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600">Black</button>
+                      </div>
+                    </div>
+
+                    <!-- Transparency Preserved Badge -->
+                    <div id="resizerTransparencyPreservedBox" class="hidden p-2.5 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-200 dark:border-emerald-800 text-xs text-emerald-800 dark:text-emerald-300 flex items-center gap-2 font-medium">
+                      <i class="fa-solid fa-circle-check text-emerald-600 shrink-0"></i>
+                      <span id="transparencyPreservedMsg">Alpha transparency is fully preserved in export.</span>
+                    </div>
+
+                    <!-- Animated GIF Warning Notice -->
+                    <div id="resizerGifNotice" class="hidden p-3 bg-amber-50/90 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-300 space-y-1">
+                      <div class="font-bold flex items-center gap-1.5 text-amber-800 dark:text-amber-200">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Animated GIF detected
+                      </div>
+                      <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-300">
+                        Only the first frame will be exported. Animation will not be preserved.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Target File Size (Presets + Custom) -->
                 <div class="space-y-2.5">
                   <div class="flex items-center justify-between">
                     <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white flex items-center gap-1.5">
@@ -479,14 +551,27 @@
                   </div>
                 </div>
 
-                <div>
+                <!-- 3. Compression Quality Slider (Active for JPEG & WebP) -->
+                <div id="qualityControlSection" class="space-y-1.5">
                   <div class="flex justify-between items-center mb-1.5">
                     <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white">Compression Quality</label>
                     <span id="qualityVal" class="font-bold text-sm text-sky-600 dark:text-cyan-400">80%</span>
                   </div>
-                  <input type="range" id="qualityRange" min="10" max="100" value="80" oninput="processResizer()" class="w-full h-2.5 bg-slate-200 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-sky-600">
+                  <input type="range" id="qualityRange" min="10" max="100" value="80" oninput="debouncedProcessResizer()" class="w-full h-2.5 bg-slate-200 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer accent-sky-600">
+                  <p class="text-[11px] text-slate-400">Lower quality = smaller file size. 75–85% recommended for clean clarity.</p>
                 </div>
 
+                <!-- PNG Lossless Info Notice (shown when PNG is selected) -->
+                <div id="pngLosslessNotice" class="hidden p-3 bg-blue-50/80 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800 text-xs text-blue-900 dark:text-blue-300 space-y-1">
+                  <div class="font-bold flex items-center gap-1.5 text-blue-700 dark:text-blue-300">
+                    <i class="fa-solid fa-circle-info text-blue-600"></i> Lossless PNG Compression
+                  </div>
+                  <p class="text-[11px] leading-relaxed text-blue-800 dark:text-blue-300">
+                    PNG files use lossless compression (canvas quality parameters are ignored by browser engines). To reduce PNG file weight, adjust pixel dimensions below, or choose <strong>WebP</strong> for high-efficiency lossy compression with transparency.
+                  </p>
+                </div>
+
+                <!-- 4. Dimension Resizing -->
                 <div class="space-y-2">
                   <div class="flex items-center justify-between">
                     <label class="font-bold text-xs sm:text-sm text-slate-800 dark:text-white">Resize Dimensions (px)</label>
@@ -506,7 +591,8 @@
                   </div>
                 </div>
 
-                <button type="button" onclick="downloadCompressedImg()" class="w-full py-4 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.01] transition-all flex items-center justify-center gap-2.5">
+                <!-- 5. Download Button -->
+                <button type="button" id="downloadCompressedBtn" onclick="downloadCompressedImg()" class="w-full py-4 bg-gradient-to-r from-sky-500 via-blue-600 to-cyan-500 hover:from-sky-600 hover:to-cyan-600 text-white font-extrabold text-base rounded-2xl shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:scale-[1.01] transition-all flex items-center justify-center gap-2.5">
                   <i class="fa-solid fa-download text-lg"></i> Download Compressed Image
                 </button>
               </div>
@@ -550,7 +636,7 @@
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Optionally adjust the pixel width and height to resize the dimensions to exact specifications.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Optionally select your preferred output format (Auto, JPG, WebP, or PNG) and adjust pixel dimensions.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
@@ -560,7 +646,7 @@
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">5</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Download Compressed Image' to save your optimized JPG file instantly.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Download Compressed Image' to save your optimized file instantly.</span>
             </li>
 
         </ol>
@@ -580,12 +666,22 @@
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Granular compression quality slider ranging from 10% to 100%.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Multi-format output support: Auto (matches original), JPEG, WebP, and PNG.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Custom pixel dimension controls to change width and height on the fly.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Full alpha transparency preservation for WebP and PNG, plus clean solid background fill for JPEG.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Granular compression quality slider ranging from 10% to 100% for lossy formats.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Custom pixel dimension controls with aspect ratio lock to resize on the fly.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
@@ -595,12 +691,7 @@
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Instant visual preview with checkerboard background support.</span>
-            </div>
-
-            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">100% private client-side processing with zero server uploads or latency.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">100% private client-side processing using canvas.toBlob() with zero server uploads.</span>
             </div>
 
         </div>
@@ -614,27 +705,24 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">PNG, JPG/JPEG, WebP, GIF</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">PNG, JPG/JPEG, WebP, GIF, BMP</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">JPEG (.jpg) for optimal compression ratios</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Auto (matches original), JPEG, WebP, or PNG</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Single image processing per batch; large raw photos (over 25MB) may require extra browser memory.</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">PNG format uses lossless compression (dimensions control size); WebP & JPEG support lossy quality adjustment. 100% private in-browser memory processing.</span>
           </div>
         </div>
 
         <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
           <div class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-info text-blue-600 dark:text-blue-400"></i> Output Format &amp; Transparency Notice
+            <i class="fa-solid fa-circle-check text-emerald-600 dark:text-emerald-400"></i> Multi-Format Export &amp; Transparency Handling
           </div>
           <p class="leading-relaxed">
-            The Image Compressor exports optimized <strong>JPEG (.jpg)</strong> files for maximum file size reduction, even when your input file is a PNG, WebP, or GIF image. Because the standard JPEG format does not support alpha transparency, transparent backgrounds may not be preserved and will render with a solid background.
-          </p>
-          <p class="leading-relaxed">
-            If you need to maintain transparent backgrounds or convert your files into PNG, WebP, or other formats without compression, please use our <a href="/image-converter/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Image Converter</a> tool.
+            The Image Compressor lets you export your images in <strong>Auto (Match Original)</strong>, <strong>JPEG</strong>, <strong>WebP</strong>, or <strong>PNG</strong> format. Alpha transparency is fully preserved when exporting as WebP or PNG. When exporting as JPEG, you can choose a clean white (default) or black solid background fill for transparent areas.
           </p>
         </div>
 
@@ -684,14 +772,14 @@
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Are my photos uploaded to any external server?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API. Your pictures never leave your local device.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API using canvas.toBlob(). Your pictures never leave your local device.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What output format will my compressed image be saved in?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What output formats can I export my compressed image to?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals. All uploaded images (including PNG and WebP) are exported as JPEG. Note that transparent backgrounds may not be preserved; if you need to convert to other formats or preserve transparency, use our Image Converter tool.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">You can select your preferred output format: Auto (matches your original format), JPEG (.jpg), WebP (.webp), or PNG (.png). WebP and PNG fully preserve transparent backgrounds, while JPEG offers white (default) or black solid background fill options for maximum compatibility.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
@@ -699,6 +787,13 @@
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Can I resize the width and height without losing quality?
               </h3>
               <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Yes. You can enter specific pixel values into the width and height input fields. Downscaling dimensions also dramatically reduces the final file weight.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Why does changing the quality slider not affect PNG file size?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">PNG is a strictly lossless image format, meaning browser compression engines do not support lossy quality reduction for PNG. To reduce PNG file weight, adjust the pixel width and height dimensions, or switch the output format to WebP for high-efficiency lossy compression with transparency.</p>
             </div>
 
         </div>
