@@ -5733,13 +5733,59 @@ function ensureScript(name) {
       const el = document.getElementById('textCaseInput');
       if (!el || !el.value) return;
       const str = el.value;
-      if (mode === 'upper') el.value = str.toUpperCase();
-      else if (mode === 'lower') el.value = str.toLowerCase();
-      else if (mode === 'title') el.value = str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
-      else if (mode === 'sentence') el.value = str.toLowerCase().replace(/(^\s*\w|[\.?!]\s*\w)/g, c => c.toUpperCase());
-      else if (mode === 'slug') el.value = str.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-      else if (mode === 'snake') el.value = str.toLowerCase().trim().replace(/[^a-z0-9]+/g, '_');
-      else if (mode === 'camel') el.value = str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+
+      // Normalize Unicode diacritics / accents (café -> cafe, résumé -> resume, Über -> Uber)
+      const removeAccents = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+      if (mode === 'upper') {
+        el.value = str.toUpperCase();
+      } else if (mode === 'lower') {
+        el.value = str.toLowerCase();
+      } else if (mode === 'title') {
+        // Unicode-aware word boundary capitalization; replace deprecated substr() with slice()
+        el.value = str.toLowerCase().replace(/(^|[^\p{L}\p{N}'])([\p{L}])/gu, (m, sep, letter) => sep + letter.toUpperCase());
+      } else if (mode === 'sentence') {
+        // Lookbehind-free Sentence case with quotes, brackets, multiline, standalone "I", and protected URLs/domains
+        let s = str.toLowerCase();
+        s = s.replace(/(^|[.?!](?:\s+|["'”’)\}\]>]\s*)|\n\s*)(["'“‘(\[{<—\s]*)(\p{L})/gu, (m, prefix, leading, letter) => {
+          return prefix + leading + letter.toUpperCase();
+        });
+        s = s.replace(/\b(i)('m|'ve|'ll|'d)?\b/gi, (m, p1, p2) => {
+          return 'I' + (p2 ? p2.toLowerCase() : '');
+        });
+        s = s.replace(/\b(e\.g\.|i\.e\.|vs\.)\s+(\p{L})/giu, (m, abbr, letter) => {
+          return abbr.toLowerCase() + ' ' + letter.toLowerCase();
+        });
+        el.value = s;
+      } else if (mode === 'slug') {
+        // Clean URL slug: normalized Unicode diacritics, stripped apostrophes, no stray hyphens
+        el.value = removeAccents(str)
+          .replace(/['’]/g, '')
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+      } else if (mode === 'snake') {
+        // Clean snake_case: normalized Unicode diacritics, no leading/trailing underscores, collapsed separators
+        el.value = removeAccents(str)
+          .replace(/['’]/g, '')
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9]+/g, '_')
+          .replace(/^_+|_+$/g, '');
+      } else if (mode === 'camel') {
+        // Clean camelCase: normalized Unicode diacritics, guaranteed lowercase first word, no trailing punctuation
+        const words = removeAccents(str)
+          .replace(/['’]/g, '')
+          .trim()
+          .split(/[^a-zA-Z0-9]+/)
+          .filter(Boolean);
+        if (words.length === 0) {
+          el.value = '';
+        } else {
+          el.value = words[0].toLowerCase() + words.slice(1).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join('');
+        }
+      }
       showToast('Text converted!', 'success');
     }
 
