@@ -1,28 +1,59 @@
 # Cloudflare Pages Redirects — Toolshere.online
 # Format: [source_path] [destination_path] [status_code]
 
+# Canonical trailing-slash redirects for tool directories (301 Permanent Redirect)
+/image-compressor                         /image-compressor/                         301
+/background-remover                       /background-remover/                       301
+/pdf-to-word                              /pdf-to-word/                              301
+/merge-pdf                                /merge-pdf/                                301
+/age-calculator                           /age-calculator/                           301
+/youtube-thumbnail                        /youtube-thumbnail/                        301
+/qr-code-generator                        /qr-code-generator/                        301
+/password-generator                       /password-generator/                       301
+/word-counter                             /word-counter/                             301
+/emi-calculator                           /emi-calculator/                           301
+/image-converter                          /image-converter/                          301
+/text-case-converter                      /text-case-converter/                      301
+/json-formatter                           /json-formatter/                           301
+/seo-meta-generator                       /seo-meta-generator/                       301
+/compress-pdf                             /compress-pdf/                             301
+/image-to-pdf                             /image-to-pdf/                             301
+
+# Canonical trailing-slash redirects for legal and info directories (301 Permanent Redirect)
+/about                                    /about/                                    301
+/contact                                  /contact/                                  301
+/privacy                                  /privacy/                                  301
+/terms                                    /terms/                                    301
+/disclaimer                               /disclaimer/                               301
+
+# Canonical trailing-slash redirects for blog directories (301 Permanent Redirect)
+/blog                                     /blog/                                     301
+/blog/how-to-convert-pdf-to-jpg           /blog/how-to-convert-pdf-to-jpg/           301
+/blog/how-to-compress-pdf-for-email       /blog/how-to-compress-pdf-for-email/       301
+/blog/how-to-merge-pdf-files-online       /blog/how-to-merge-pdf-files-online/       301
+
 # Legacy standalone HTML page redirects to canonical directories
-/about.html            /about/            301
-/contact.html          /contact/          301
-/privacy.html          /privacy/          301
-/terms.html            /terms/            301
-/disclaimer.html       /disclaimer/       301
+/about.html                               /about/                                    301
+/contact.html                             /contact/                                  301
+/privacy.html                             /privacy/                                  301
+/terms.html                               /terms/                                    301
+/disclaimer.html                          /disclaimer/                               301
 
 # Legacy tools directory redirects
-/tools/image-compressor.html             /image-compressor/     301
-/tools/background-remover.html           /background-remover/   301
-/tools/pdf-to-word.html                  /pdf-to-word/          301
-/tools/merge-pdf.html                    /merge-pdf/            301
-/tools/compress-pdf.html                 /compress-pdf/         301
-/tools/image-to-pdf.html                 /image-to-pdf/         301
-/tools/image-converter.html              /image-converter/      301
-/tools/age-calculator.html               /age-calculator/       301
-/tools/emi-calculator.html               /emi-calculator/       301
-/tools/qr-code-generator.html            /qr-code-generator/    301
-/tools/password-generator.html           /password-generator/   301
-/tools/word-counter.html                 /word-counter/         301
-/tools/text-case-converter.html          /text-case-converter/  301
-/tools/json-formatter.html               /json-formatter/       301
-/tools/youtube-thumbnail-downloader.html /youtube-thumbnail/    301
-/tools/seo-meta-tag-generator.html       /seo-meta-generator/   301
-/tools/*                                 /                      301
+/tools/image-compressor.html              /image-compressor/                         301
+/tools/background-remover.html            /background-remover/                       301
+/tools/pdf-to-word.html                   /pdf-to-word/                              301
+/tools/merge-pdf.html                     /merge-pdf/                                301
+/tools/compress-pdf.html                  /compress-pdf/                             301
+/tools/image-to-pdf.html                  /image-to-pdf/                             301
+/tools/image-converter.html               /image-converter/                          301
+/tools/age-calculator.html                /age-calculator/                           301
+/tools/emi-calculator.html                /emi-calculator/                           301
+/tools/qr-code-generator.html             /qr-code-generator/                        301
+/tools/password-generator.html            /password-generator/                       301
+/tools/word-counter.html                  /word-counter/                             301
+/tools/text-case-converter.html           /text-case-converter/                      301
+/tools/json-formatter.html                /json-formatter/                           301
+/tools/youtube-thumbnail-downloader.html  /youtube-thumbnail/                        301
+/tools/seo-meta-tag-generator.html        /seo-meta-generator/                       301
+/tools/*                                  /                                          301
