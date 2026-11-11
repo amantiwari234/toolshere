@@ -7869,13 +7869,24 @@ function ensureScript(name) {
       if (icon) icon.className = 'fa-solid fa-shield-halved';
       container.innerHTML = `
         <div class="space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-          <h4 class="font-bold text-slate-800 dark:text-white text-base">Client-Side Data Privacy Commitment</h4>
-          <p>At <strong>ToolsHere.online</strong>, your privacy is our primary engineering principle. When you use any tool (such as image compression, background removal, PDF manipulation, or calculators), all processing happens directly in your device's browser memory.</p>
-          <ul class="list-disc pl-5 space-y-1.5">
-            <li>We do not store, copy, or upload your photos, documents, or data.</li>
-            <li>No user tracking beyond standard privacy-preserving anonymous traffic metrics.</li>
-            <li>You can even disconnect your internet after loading the page and the utilities will continue to function!</li>
-          </ul>
+          <p class="font-medium text-slate-800 dark:text-white text-base">Welcome to <strong class="text-blue-600 dark:text-cyan-400">ToolsHere.online</strong> — an independent web utility project governed by the laws of India.</p>
+          <p>We are dedicated to transparent, privacy-first engineering. Verified file utilities (such as image compression, image conversion, and PDF manipulation) execute directly inside your browser memory using client-side JavaScript APIs and Canvas elements. Your files are not transmitted to or stored on our servers.</p>
+
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-700/60 border border-slate-200 dark:border-slate-600 space-y-2 text-xs">
+            <div class="flex items-center gap-2 font-medium text-slate-800 dark:text-slate-200">
+              <i class="fa-solid fa-shield-check text-emerald-500 text-sm"></i> In-browser file processing with zero server file uploads
+            </div>
+            <div class="flex items-center gap-2 font-medium text-slate-800 dark:text-slate-200">
+              <i class="fa-solid fa-cookie text-blue-500 text-sm"></i> Programmatic ads (Google AdSense) &amp; traffic metrics (Google Analytics 4)
+            </div>
+            <div class="flex items-center gap-2 font-medium text-slate-800 dark:text-slate-200">
+              <i class="fa-solid fa-sliders text-blue-500 text-sm"></i> Certified CMP consent preferences for applicable regions via footer link
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            For complete disclosures on advertising partners, cookies, external proxy calls (YouTube thumbnails), and data rights, visit our dedicated <a href="/privacy/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Privacy Policy page</a> or contact us at <a href="mailto:support@toolshere.online" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">support@toolshere.online</a>.
+          </p>
         </div>
       `;
     }
@@ -7901,4 +7912,32 @@ function ensureScript(name) {
         </div>
       `;
     }
-  
+
+    // Global Google Certified CMP Consent Handler
+    function openCookieConsentPreferences(event) {
+      if (event && event.preventDefault) event.preventDefault();
+
+      if (typeof window.loadThirdParty === 'function') {
+        try {
+          window.loadThirdParty();
+        } catch (err) {
+          // Safe error containment
+        }
+      }
+
+      window.googlefc = window.googlefc || {};
+      window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+
+      window.googlefc.callbackQueue.push({
+        'CONSENT_API_READY': function() {
+          if (window.googlefc && typeof window.googlefc.showRevocationMessage === 'function') {
+            try {
+              window.googlefc.showRevocationMessage();
+            } catch (e) {
+              // Graceful error containment
+            }
+          }
+        }
+      });
+    }
+    window.openCookieConsentPreferences = openCookieConsentPreferences;

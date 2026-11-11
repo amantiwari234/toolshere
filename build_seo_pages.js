@@ -1295,6 +1295,7 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
             <li><a href="/privacy/" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
             <li><a href="/terms/" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
             <li><a href="/disclaimer/" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
+            <li><button type="button" onclick="openCookieConsentPreferences(event)" class="hover:text-blue-600 transition-colors text-left cursor-pointer focus:outline-hidden focus:underline text-xs" aria-label="Manage Cookie and Privacy Consent Preferences">Cookie Preferences</button></li>
           </ul>
         </div>
       </div>
@@ -1612,7 +1613,6 @@ const legalPages = [
     title: 'Privacy Policy: Zero Server Data Storage - ToolsHere',
     metaDesc: 'Read the ToolsHere.online privacy policy. Understand our client-side architecture where all image, PDF, and text processing stays locally on your device.',
     category: 'Legal',
-    h2s: ['Local Browser Execution Guarantee', 'Cookies & Analytics Disclosure', 'Third-Party Services & User Rights'],
     extraHtml: `
       <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
         <p class="font-bold text-slate-800 dark:text-slate-200">Related Legal Documents:</p>
@@ -1622,7 +1622,219 @@ const legalPages = [
           <a href="/contact/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-xs hover:border-blue-400 transition-colors">Contact Support</a>
         </div>
       </div>
-    `
+    `,
+    customSectionsHtml: `
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-circle-info text-blue-600 text-sm"></i> Project Identity &amp; Operating Jurisdiction
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            <strong>ToolsHere.online</strong> is an independent web utility project maintained to provide free, privacy-conscious browser tools. The project operates from and is governed in accordance with the laws of <strong>India</strong>.
+          </p>
+          <p>
+            Our core mission is to provide accessible digital utilities without forced accounts, subscriptions, or invasive user tracking. If you have questions regarding our data practices or this policy, our team can be reached directly via email at <a href="mailto:support@toolshere.online" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">support@toolshere.online</a> or through our <a href="/contact/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Contact &amp; Support page</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-shield-check text-blue-600 text-sm"></i> Verified In-Browser File Processing Architecture
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            ToolsHere is engineered around client-side execution. When using our file-based tools—including <a href="/image-compressor/" class="text-blue-600 dark:text-blue-400 hover:underline">Image Compressor</a>, <a href="/image-converter/" class="text-blue-600 dark:text-blue-400 hover:underline">Image Converter</a>, <a href="/background-remover/" class="text-blue-600 dark:text-blue-400 hover:underline">Background Remover</a>, <a href="/merge-pdf/" class="text-blue-600 dark:text-blue-400 hover:underline">Merge PDF</a>, and <a href="/compress-pdf/" class="text-blue-600 dark:text-blue-400 hover:underline">Compress PDF</a>—your files are processed directly inside your browser's local memory.
+          </p>
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+              <span><strong>Client-Side Web APIs:</strong> Tools operate via standard browser APIs, including HTML5 Canvas 2D context manipulation, the JavaScript FileReader API, and in-memory WebAssembly/JavaScript libraries.</span>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+              <span><strong>Zero Server File Transmission:</strong> Selected files are never uploaded to, transmitted across, or stored on ToolsHere.online backend servers. We do not operate remote file storage databases.</span>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-emerald-500 mt-0.5 shrink-0"></i>
+              <span><strong>Memory Volatility:</strong> Document and image data reside only in transient browser memory and are discarded when you refresh or close the browser tab.</span>
+            </div>
+          </div>
+          <p>
+            <em>User Responsibility Notice:</em> Because processing occurs exclusively on your local device without cloud backup, you remain responsible for maintaining backups of your original documents and images before manipulation.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-rectangle-ad text-blue-600 text-sm"></i> Google AdSense &amp; Advertising Partners
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            To keep our utilities completely free and accessible without mandatory paywalls, ToolsHere displays digital advertising served by <strong>Google AdSense</strong> (Publisher ID: <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">ca-pub-5695881882047202</code>).
+          </p>
+          <p>
+            Google and its certified third-party ad technology partners may place and read cookies (such as <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">__gads</code>, <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">__gpi</code>, and DoubleClick <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">IDE</code>) or unique device identifiers on your browser to serve relevant ads, limit ad frequency, combat fraud, and measure ad performance.
+          </p>
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+            <h3 class="font-bold text-slate-900 dark:text-white">Programmatic Partner Network</h3>
+            <p>
+              Google's certified Consent Management Platform is used for applicable European consent requirements, coordinating ad serving through certified advertising partners. The specific number and identity of third-party vendors are dynamically maintained through Google's Certified Consent Management Platform and may change over time as Google updates partner integrations.
+            </p>
+            <p>
+              You can learn how Google uses information from sites that use its services at <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Google Advertising Policies</a> and manage personalized advertising controls via <a href="https://adssettings.google.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Google Ad Settings</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-chart-line text-blue-600 text-sm"></i> Web Traffic Analytics (Google Analytics 4)
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            ToolsHere uses <strong>Google Analytics 4</strong> (Property ID: <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">G-RXVYKC5YG5</code>) to understand aggregated audience interactions, navigation trends, general device categories, and performance bottlenecks.
+          </p>
+          <p>
+            Google Analytics sets first-party measurement cookies (including <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">_ga</code> and container-specific tokens like <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">_ga_RXVYKC5YG5</code>) to distinguish unique sessions across web visits. These analytics cookies collect pseudonymous interaction data and IP-derived approximate geolocation without identifying you personally.
+          </p>
+          <p>
+            <em>Data Retention Notice:</em> User and event-level retention in Google Analytics is governed by administrative property configurations (which default to 2 months and may be configured up to 14 months by property administrators). Visitors wishing to opt out of Google Analytics measurement across all websites can install the official <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Google Analytics Opt-Out Browser Add-on</a>.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-database text-blue-600 text-sm"></i> First-Party Local Storage &amp; Tracking Hygiene
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            ToolsHere maintains clean first-party storage hygiene. Our proprietary scripts do not write or read first-party cookies (<code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">document.cookie</code> is never accessed by custom site code). We use browser <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">localStorage</code> solely for functional UI preferences:
+          </p>
+          <ul class="list-disc pl-5 space-y-1 text-xs">
+            <li><code class="font-mono text-blue-600 dark:text-cyan-400">theme</code>: Stores your visual display preference (<code class="font-mono">light</code> or <code class="font-mono">dark</code>).</li>
+            <li><code class="font-mono text-blue-600 dark:text-cyan-400">th_favorites</code>: Stores a local array of your favorited tool identifiers to pin them to the top of your dashboard.</li>
+          </ul>
+          <p>
+            <em>No Device Fingerprinting:</em> Aligned with our advertising setup, <strong>Special Feature 2 is disabled</strong>. ToolsHere does not perform canvas fingerprinting, scan device characteristics, or track hardware configurations to identify individual users.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-network-wired text-blue-600 text-sm"></i> Third-Party Services, CDNs &amp; External Requests
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            While document manipulation occurs strictly in your browser, loading certain pages and utility features makes external network calls:
+          </p>
+          <ul class="list-disc pl-5 space-y-1.5 text-xs">
+            <li>
+              <strong>YouTube Thumbnail Grabber:</strong> When entering a YouTube URL, our script queries public thumbnail endpoints (<code class="font-mono">img.youtube.com</code>) routed through the public caching proxy <code class="font-mono">images.weserv.nl</code> to bypass browser Cross-Origin Resource Sharing (CORS) restrictions. Only the public video identifier is transmitted.
+            </li>
+            <li>
+              <strong>Dynamic Open-Source Libraries:</strong> To ensure fast page loads, specific utilities load static open-source scripts on-demand from Cloudflare's CDN (<code class="font-mono">cdnjs.cloudflare.com</code>), including PDF.js for <a href="/pdf-to-word/" class="text-blue-600 dark:text-blue-400 hover:underline">PDF to Word Text Extractor</a> and QRCode.js for <a href="/qr-code-generator/" class="text-blue-600 dark:text-blue-400 hover:underline">QR Code Studio</a>. Core PDF utilities (Merge, Compress, Image to PDF) use <code class="font-mono">pdf-lib.min.js</code> hosted locally on our own domain.
+            </li>
+            <li>
+              <strong>Web Fonts &amp; Icons:</strong> Tools pages load FontAwesome icons from <code class="font-mono">cdnjs.cloudflare.com</code>, and 404 pages utilize Inter font assets from Google Fonts (<code class="font-mono">fonts.googleapis.com</code>).
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-cookie-bite text-blue-600 text-sm"></i> Consent Management &amp; Privacy Preferences
+        </h2>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            ToolsHere respects regional privacy frameworks. For visitors located in the European Economic Area (EEA), the United Kingdom, and Switzerland, ToolsHere supports Google's certified Consent Management Platform (CMP) for applicable European consent requirements. Where the relevant consent message is published and active in Google AdSense, the CMP collects and records consent choices for third-party advertising cookies and vendor data processing.
+          </p>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-blue-600"></i> Manage Consent Preferences
+              </h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                Reopen the certified consent dialogue to modify or revoke your cookie choices at any time.
+              </p>
+            </div>
+            <button type="button" onclick="openCookieConsentPreferences(event)" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition-colors shrink-0 shadow-xs cursor-pointer focus:ring-2 focus:ring-blue-500 focus:outline-hidden" aria-label="Open Cookie Consent Preferences Dialog">
+              <i class="fa-solid fa-gear text-xs"></i> Change Preferences
+            </button>
+          </div>
+
+          <p class="text-xs text-slate-500 dark:text-slate-400">
+            <em>Technical Note:</em> Consent revocation via this button uses Google's official <code class="px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-xs">CONSENT_API_READY</code> callback queue. If you browse from outside regulated regions, if the relevant European consent message is not published and active in AdSense, or if an ad-blocking extension prevents Google's CMP from initializing, the dialogue may not display. In such cases, you can manage cookies directly through your browser settings.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-scale-balanced text-blue-600 text-sm"></i> Applicable Legal Frameworks &amp; User Rights
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            Depending on your physical location and applicable data protection legislation, you may have specific statutory rights regarding personal data:
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-xs">
+            <li>
+              <strong>India — Digital Personal Data Protection Act, 2023 (DPDP Act):</strong> ToolsHere aligns its privacy transparency with the DPDP Act as rules and operative provisions are brought into force in accordance with the central government's phased commencement notifications. Document and image files handled by the audited file-processing tools are processed locally within your browser. These files are not transmitted to or stored on ToolsHere's backend servers through those audited processing workflows. Files may contain personal information, which is temporarily processed on your device.
+            </li>
+            <li>
+              <strong>European Union &amp; United Kingdom (GDPR / UK GDPR):</strong> Visitors in the EEA and UK possess statutory rights regarding personal data, including the right to request access, rectification, erasure, or restriction of processing, and to object to processing based on legitimate interest. ToolsHere does not maintain user accounts or store uploaded files on its own servers through the audited file-processing tools. Accordingly, ToolsHere does not hold those uploaded files in a server-side account that can be retrieved or erased on request. Data held by Google or other third-party providers must be managed through the relevant provider's privacy controls.
+            </li>
+            <li>
+              <strong>United States State Privacy Laws (e.g., CCPA / CPRA):</strong> ToolsHere does not sell your personal information for monetary consideration. Visitors can manage ad personalization and advertising preferences through Google Ad Settings. Browser-level privacy controls may also be available, depending on the browser and applicable third-party services.
+            </li>
+          </ul>
+          <p>
+            To submit an inquiry regarding your data rights, contact us at <a href="mailto:support@toolshere.online" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">support@toolshere.online</a>. Inquiries are reviewed and addressed in accordance with applicable laws without fixed turnaround commitments.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-lock text-blue-600 text-sm"></i> Security, Data Retention &amp; Policy Updates
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            All communications between your browser and ToolsHere.online are secured in transit using modern Transport Layer Security (TLS/HTTPS). Because file conversions occur entirely in temporary browser memory, ToolsHere enforces a strict zero-server-retention policy for your digital documents and images.
+          </p>
+          <p>
+            We may revise this Privacy Policy periodically to reflect technological adjustments, third-party provider updates, or statutory developments. Any changes will be posted directly to this page with an updated modification timestamp.
+          </p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200 dark:border-slate-700">
+            <strong>Last Modified:</strong> November 11, 2026 • ToolsHere.online Independent Web Utility Project
+          </p>
+        </div>
+      </section>
+    `,
+    extraSchemas: [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://toolshere.online/privacy/#webpage",
+        "url": "https://toolshere.online/privacy/",
+        "name": "Privacy Policy: Zero Server Data Storage - ToolsHere",
+        "description": "Read the ToolsHere.online privacy policy. Understand our client-side architecture where all image, PDF, and text processing stays locally on your device.",
+        "isPartOf": {
+          "@id": "https://toolshere.online/#website"
+        },
+        "publisher": {
+          "@id": "https://toolshere.online/#organization"
+        },
+        "inLanguage": "en-US",
+        "dateModified": "2026-11-11"
+      }
+    ]
   },
   {
     slug: 'terms',
