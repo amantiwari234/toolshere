@@ -1506,13 +1506,13 @@ function ensureScript(name) {
     "howToUse": [
       "Click or drag your PDF document into the file selector.",
       "Check your displayed original file size on screen.",
-      "Select your preferred compression profile ('Standard Quality' or 'Maximum Compression').",
+      "Select your compression profile: Balanced for structural optimization, or Extreme for canvas JPEG re-encoding.",
       "Click 'Download Compressed PDF' to download your optimized document immediately."
     ],
     "features": [
-      "Selectable compression profiles for balanced quality or maximum file size reduction.",
+      "Selectable compression profiles for structural optimization or canvas raster re-encoding.",
       "Live display of original file size in kilobytes/megabytes.",
-      "Estimated reduction indicator for quick expectations.",
+      "Active compression profile indicator for clear processing expectations.",
       "100% confidential processing inside browser memory—no server uploads.",
       "Fast processing with zero document watermarks or fees."
     ],
@@ -1524,11 +1524,11 @@ function ensureScript(name) {
     "faqs": [
       {
         "q": "Will compressing a PDF make the text blurry?",
-        "a": "No. Standard vector text and fonts remain crisp. Compression primarily optimizes embedded raster images and strips redundant metadata."
+        "a": "In Balanced mode, original vector text, fonts, and raster images are preserved without rasterization or downsampling. In Extreme mode, pages are rendered to canvas at scale 1.0 and re-encoded as JPEG images at quality 0.55; this flattens text into bitmap graphics, which means text is no longer selectable and small text may lose sharpness."
       },
       {
-        "q": "What is the difference between Standard and Maximum compression?",
-        "a": "Standard Quality maintains higher image fidelity, while Maximum Compression applies stronger optimization for strict upload size limits."
+        "q": "What is the difference between Balanced and Extreme compression?",
+        "a": "Balanced mode uses PDF-Lib to copy PDF pages into a clean document and saves with object streams enabled (useObjectStreams: true), repackaging internal PDF data without rasterizing pages or guaranteeing a specific file-size reduction. Extreme mode renders each page via PDF.js onto an HTML5 canvas at scale 1.0 and re-encodes it as a JPEG image at quality 0.55; file size may decrease or increase depending on the original document content."
       },
       {
         "q": "Is there any risk of my personal documents leaking?",
@@ -7210,7 +7210,7 @@ function ensureScript(name) {
                   <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     <span id="pdfOriginalSize" class="font-semibold">0 KB</span>
                     <span>•</span>
-                    <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Est. Reduction: ~50%</span>
+                    <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Profile: Balanced (Structural Optimization)</span>
                   </div>
                 </div>
               </div>
@@ -7226,20 +7226,53 @@ function ensureScript(name) {
 
             <!-- Compression Level Presets -->
             <div class="space-y-3">
-              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Level:</label>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Mode:</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <button type="button" id="cmpRecBtn" onclick="setCompressLevel('recommended')" class="p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer">
                   <span class="block text-sm mb-1 font-extrabold flex items-center justify-between">Balanced <span class="text-[10px] uppercase tracking-wide bg-white/20 px-2 py-0.5 rounded-full font-semibold">Recommended</span></span>
-                  <span class="text-[11px] opacity-90 block">~50% reduction. High visual quality for email, portals, and documents.</span>
+                  <span class="text-[11px] opacity-90 block">Structural optimization. Repackages PDF objects without rasterizing pages. File-size reduction is not guaranteed.</span>
                 </button>
                 <button type="button" id="cmpExtBtn" onclick="setCompressLevel('extreme')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer">
-                  <span class="block text-sm mb-1 font-extrabold">Extreme Compression</span>
-                  <span class="text-[11px] text-slate-400 block">~75% reduction. Maximum shrinkage for upload portals under 500KB.</span>
+                  <span class="block text-sm mb-1 font-extrabold flex items-center justify-between">Extreme Compression <span class="text-[10px] uppercase tracking-wide bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-700 px-2 py-0.5 rounded-full font-semibold">Raster Warning</span></span>
+                  <span class="text-[11px] opacity-90 block">Converts pages into JPEG images. Text becomes non-selectable and quality may decrease. File size is not guaranteed to become smaller.</span>
                 </button>
-                <button type="button" id="cmpLowBtn" onclick="setCompressLevel('low')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer">
-                  <span class="block text-sm mb-1 font-extrabold">Low Compression</span>
-                  <span class="text-[11px] text-slate-400 block">~25% reduction. Maximum image and vector resolution preserved.</span>
-                </button>
+              </div>
+
+              <!-- Extreme Mode Warning Callout -->
+              <div id="extremeWarningBox" class="hidden p-4 rounded-2xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/60 text-amber-900 dark:text-amber-200 text-xs sm:text-sm shadow-xs transition-all">
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 text-base mt-0.5">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </div>
+                  <div class="space-y-1.5 min-w-0 flex-1">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <h4 class="font-extrabold text-amber-950 dark:text-amber-100 text-xs sm:text-sm tracking-tight">Extreme Compression Notice</h4>
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-200/80 dark:bg-amber-800/60 text-amber-900 dark:text-amber-100 uppercase tracking-wide">Lossy Raster Re-encoding</span>
+                    </div>
+                    <p class="text-xs text-amber-900/90 dark:text-amber-200/90 leading-relaxed">
+                      Extreme mode converts each PDF page into a JPEG image (quality 0.55). Before proceeding, please note:
+                    </p>
+                    <ul class="text-xs text-amber-900/90 dark:text-amber-200/90 space-y-1 list-none pl-0">
+                      <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-amber-600 dark:text-amber-400 text-xs mt-0.5 shrink-0"></i>
+                        <span><strong>Text is no longer selectable or searchable:</strong> Pages become flat images; you cannot highlight or find text with <kbd class="px-1.5 py-0.5 rounded bg-amber-200/60 dark:bg-amber-800/60 font-mono text-[10px]">Ctrl+F</kbd>.</span>
+                      </li>
+                      <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-amber-600 dark:text-amber-400 text-xs mt-0.5 shrink-0"></i>
+                        <span><strong>Quality may decrease:</strong> Text and graphics may lose sharpness or show compression artifacts, especially when zooming in.</span>
+                      </li>
+                      <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-amber-600 dark:text-amber-400 text-xs mt-0.5 shrink-0"></i>
+                        <span><strong>File size is not guaranteed to become smaller:</strong> Files containing primarily vector text may actually increase in size.</span>
+                      </li>
+                    </ul>
+                    <div class="pt-2 mt-2 border-t border-amber-200 dark:border-amber-800/50 flex flex-wrap items-center gap-1.5 text-xs font-semibold text-amber-950 dark:text-amber-100">
+                      <i class="fa-solid fa-circle-info text-blue-600 dark:text-blue-400"></i>
+                      <span>Need to preserve searchability &amp; text quality? We recommend</span>
+                      <button type="button" onclick="setCompressLevel('recommended')" class="text-blue-700 dark:text-blue-300 underline font-bold hover:text-blue-800 cursor-pointer">Balanced (Recommended) mode</button>.
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -7341,29 +7374,30 @@ function ensureScript(name) {
       const options = document.getElementById('pdfCompressOptions');
       if (options) options.classList.add('hidden');
 
+      setCompressLevel('recommended');
+
       showToast('PDF removed. Select another PDF to compress.', 'info');
     }
 
     function setCompressLevel(level) {
-      compressLevel = level;
+      compressLevel = (level === 'extreme') ? 'extreme' : 'recommended';
       const recBtn = document.getElementById('cmpRecBtn');
       const extBtn = document.getElementById('cmpExtBtn');
-      const lowBtn = document.getElementById('cmpLowBtn');
       const redBadge = document.getElementById('pdfEstReduction');
+      const warnBox = document.getElementById('extremeWarningBox');
 
-      [recBtn, extBtn, lowBtn].forEach(b => {
+      [recBtn, extBtn].forEach(b => {
         if (b) b.className = 'p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer';
       });
 
-      if (level === 'recommended') {
-        if (recBtn) recBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer';
-        if (redBadge) redBadge.innerText = 'Est. Reduction: ~50-60%';
-      } else if (level === 'extreme') {
+      if (compressLevel === 'extreme') {
         if (extBtn) extBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer';
-        if (redBadge) redBadge.innerText = 'Est. Reduction: ~70-80%';
-      } else if (level === 'low') {
-        if (lowBtn) lowBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer';
-        if (redBadge) redBadge.innerText = 'Est. Reduction: ~20-30%';
+        if (redBadge) redBadge.innerText = 'Profile: Extreme (Canvas JPEG 0.55 Re-encode)';
+        if (warnBox) warnBox.classList.remove('hidden');
+      } else {
+        if (recBtn) recBtn.className = 'p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer';
+        if (redBadge) redBadge.innerText = 'Profile: Balanced (Structural Optimization)';
+        if (warnBox) warnBox.classList.add('hidden');
       }
     }
 
@@ -7380,7 +7414,7 @@ function ensureScript(name) {
         btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-lg mr-2"></i> Compressing PDF...';
       }
 
-      showToast('Compressing PDF stream and removing duplicate resources...', 'info');
+      showToast('Optimizing PDF object streams in your browser...', 'info');
 
       try {
         if (typeof PDFLib === 'undefined') {
@@ -7388,26 +7422,78 @@ function ensureScript(name) {
         }
         if (typeof PDFLib === 'undefined') {
           showToast('PDF engine initializing, please retry...', 'info');
-          if (btn) { btn.disabled = false; btn.innerHTML = originalBtnHtml; }
           return;
         }
 
         const buffer = await selectedPdfToCompress.arrayBuffer();
         const originalBytes = buffer.byteLength;
 
+        // Comprehensive encryption / password-protection detection across all modes
+        let isEncrypted = false;
+        try {
+          const testDoc = await PDFLib.PDFDocument.load(buffer);
+          if (testDoc && testDoc.isEncrypted) {
+            isEncrypted = true;
+          }
+        } catch (loadErr) {
+          if (/encrypt|password/i.test(loadErr?.message || '') || loadErr?.name === 'EncryptedPDFError') {
+            isEncrypted = true;
+          } else {
+            try {
+              const testDocIgnore = await PDFLib.PDFDocument.load(buffer, { ignoreEncryption: true });
+              if (testDocIgnore && testDocIgnore.isEncrypted) {
+                isEncrypted = true;
+              }
+            } catch (ignoreErr) {
+              if (/encrypt|password/i.test(ignoreErr?.message || '') || ignoreErr?.name === 'EncryptedPDFError') {
+                isEncrypted = true;
+              }
+            }
+          }
+        }
+
+        // Secondary binary trailer check for /Encrypt dictionary
+        if (!isEncrypted) {
+          try {
+            const uint8 = new Uint8Array(buffer);
+            const searchLen = Math.min(uint8.length, 16384);
+            const tailBytes = uint8.subarray(uint8.length - searchLen);
+            let tailStr = '';
+            for (let i = 0; i < tailBytes.length; i++) {
+              tailStr += String.fromCharCode(tailBytes[i]);
+            }
+            if (/\/Encrypt\b/.test(tailStr)) {
+              isEncrypted = true;
+            }
+          } catch (binErr) {}
+        }
+
+        if (isEncrypted) {
+          showToast('This PDF is password-protected. Please unlock it before compressing.', 'error');
+          return;
+        }
+
         if (compressLevel === 'extreme') {
           if (typeof pdfjsLib === 'undefined') {
             await ensureScript('pdfjsLib');
           }
-          if (typeof pdfjsLib !== 'undefined') {
-            try {
-              const pdfjsDoc = await pdfjsLib.getDocument({ data: buffer }).promise;
-              const newDoc = await PDFLib.PDFDocument.create();
+          if (typeof pdfjsLib === 'undefined') {
+            showToast('The Extreme compression engine could not be loaded. Please check your connection and retry.', 'error');
+            return;
+          }
 
-              for (let i = 1; i <= pdfjsDoc.numPages; i++) {
-                const page = await pdfjsDoc.getPage(i);
+          let pdfjsDoc = null;
+          try {
+            pdfjsDoc = await pdfjsLib.getDocument({ data: buffer }).promise;
+            const newDoc = await PDFLib.PDFDocument.create();
+
+            for (let i = 1; i <= pdfjsDoc.numPages; i++) {
+              let page = null;
+              let canvas = null;
+              try {
+                page = await pdfjsDoc.getPage(i);
                 const viewport = page.getViewport({ scale: 1.0 });
-                const canvas = document.createElement('canvas');
+                canvas = document.createElement('canvas');
                 canvas.width = viewport.width;
                 canvas.height = viewport.height;
                 const ctx = canvas.getContext('2d');
@@ -7417,46 +7503,93 @@ function ensureScript(name) {
                 const jpgImage = await newDoc.embedJpg(jpegUrl);
                 const newPage = newDoc.addPage([viewport.width, viewport.height]);
                 newPage.drawImage(jpgImage, { x: 0, y: 0, width: viewport.width, height: viewport.height });
+              } finally {
+                if (canvas) {
+                  canvas.width = 0;
+                  canvas.height = 0;
+                }
+                if (page && typeof page.cleanup === 'function') {
+                  page.cleanup();
+                }
               }
+            }
 
-              const compressedBytes = await newDoc.save();
-              const blob = new Blob([compressedBytes], { type: 'application/pdf' });
-              const a = document.createElement('a');
-              a.href = URL.createObjectURL(blob);
-              a.download = `compressed-${selectedPdfToCompress.name}`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
+            const compressedBytes = await newDoc.save();
+            const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+            const blobUrl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = `compressed-${selectedPdfToCompress.name}`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => {
+              URL.revokeObjectURL(blobUrl);
+            }, 60000);
 
-              showToast(`Compressed from ${formatPdfSize(originalBytes)} to ${formatPdfSize(compressedBytes.length)}!`, 'success');
-              triggerConfetti();
-              if (btn) { btn.disabled = false; btn.innerHTML = originalBtnHtml; }
+            const isSmaller = compressedBytes.length < originalBytes;
+            const verb = isSmaller ? 'Compressed' : 'Processed';
+            showToast(`${verb} from ${formatPdfSize(originalBytes)} to ${formatPdfSize(compressedBytes.length)}!`, 'success');
+            triggerConfetti();
+            return;
+          } catch(e) {
+            const isPassword = e && (e.name === 'PasswordException' || /password/i.test(e.message));
+            if (isPassword) {
+              showToast('This PDF is password-protected. Please unlock it before compressing.', 'error');
               return;
-            } catch(e) {
-              console.warn('Canvas recompression fallback:', e);
+            }
+            console.error('Extreme mode rendering error:', e);
+            showToast('Extreme compression failed on this document structure. Please try Balanced mode.', 'error');
+            return;
+          } finally {
+            if (pdfjsDoc) {
+              try {
+                if (typeof pdfjsDoc.destroy === 'function') {
+                  await pdfjsDoc.destroy();
+                } else if (typeof pdfjsDoc.cleanup === 'function') {
+                  await pdfjsDoc.cleanup();
+                }
+              } catch(cleanupErr) {
+                console.warn('PDF.js document cleanup error:', cleanupErr);
+              }
             }
           }
         }
 
-        const doc = await PDFLib.PDFDocument.load(buffer, { ignoreEncryption: true });
+        const doc = await PDFLib.PDFDocument.load(buffer);
+        if (doc && doc.isEncrypted) {
+          showToast('This PDF is password-protected. Please unlock it before compressing.', 'error');
+          return;
+        }
         const cleanDoc = await PDFLib.PDFDocument.create();
         const copiedPages = await cleanDoc.copyPages(doc, doc.getPageIndices());
         copiedPages.forEach(p => cleanDoc.addPage(p));
 
         const compressedBytes = await cleanDoc.save({ useObjectStreams: true });
         const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+        const blobUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
+        a.href = blobUrl;
         a.download = `compressed-${selectedPdfToCompress.name}`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+        setTimeout(() => {
+          URL.revokeObjectURL(blobUrl);
+        }, 60000);
 
-        showToast(`Compressed PDF downloaded! (${formatPdfSize(compressedBytes.length)})`, 'success');
+        const isSmaller = compressedBytes.length < originalBytes;
+        const verb = isSmaller ? 'Compressed' : 'Processed';
+        showToast(`${verb} from ${formatPdfSize(originalBytes)} to ${formatPdfSize(compressedBytes.length)}!`, 'success');
         triggerConfetti();
       } catch (err) {
         console.error(err);
-        showToast('Error during compression: ' + err.message, 'error');
+        const isPassword = err && (/password|encrypt/i.test(err.message) || err.name === 'EncryptedPDFError');
+        if (isPassword) {
+          showToast('This PDF is password-protected. Please unlock it before compressing.', 'error');
+        } else {
+          showToast('Error during compression: ' + err.message, 'error');
+        }
       } finally {
         if (btn) { btn.disabled = false; btn.innerHTML = originalBtnHtml; }
       }

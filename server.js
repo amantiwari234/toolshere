@@ -50,10 +50,10 @@ const server = http.createServer((req, res) => {
   const contentType = MIME_TYPES[ext] || 'application/octet-stream';
   
   // Cache headers
-  if (filePath.includes(path.sep + 'assets' + path.sep)) {
+  if (filePath.includes(path.sep + 'assets' + path.sep + 'vendor' + path.sep)) {
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
   } else {
-    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   }
 
   res.setHeader('Content-Type', contentType);

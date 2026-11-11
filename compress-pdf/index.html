@@ -187,15 +187,15 @@
       "name": "Will compressing a PDF make the text blurry?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. Standard vector text and fonts remain crisp. Compression primarily optimizes embedded raster images and strips redundant metadata."
+        "text": "In Balanced mode, original vector text, fonts, and raster images are preserved without rasterization or downsampling. In Extreme mode, pages are rendered to canvas at scale 1.0 and re-encoded as JPEG images at quality 0.55; this flattens text into bitmap graphics, which means text is no longer selectable and small text may lose sharpness."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the difference between Standard and Maximum compression?",
+      "name": "What is the difference between Balanced and Extreme compression?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Standard Quality maintains higher image fidelity, while Maximum Compression applies stronger optimization for strict upload size limits."
+        "text": "Balanced mode uses PDF-Lib to copy PDF pages into a clean document and saves with object streams enabled (useObjectStreams: true), repackaging internal PDF data without rasterizing pages or guaranteeing a specific file-size reduction. Extreme mode renders each page via PDF.js onto an HTML5 canvas at scale 1.0 and re-encodes it as a JPEG image at quality 0.55; file size may decrease or increase depending on the original document content."
       }
     },
     {
@@ -417,7 +417,7 @@
                   <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     <span id="pdfOriginalSize" class="font-semibold">0 KB</span>
                     <span>•</span>
-                    <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Est. Reduction: ~50%</span>
+                    <span id="pdfEstReduction" class="font-bold text-emerald-600 dark:text-emerald-400">Profile: Balanced (Structural Optimization)</span>
                   </div>
                 </div>
               </div>
@@ -433,20 +433,53 @@
 
             <!-- Compression Level Presets -->
             <div class="space-y-3">
-              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Level:</label>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+              <label class="block font-bold text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400">Select Compression Mode:</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <button type="button" id="cmpRecBtn" onclick="setCompressLevel('recommended')" class="p-4 rounded-2xl bg-rose-600 text-white font-bold text-left shadow-xs transition-all border border-rose-600 cursor-pointer">
                   <span class="block text-sm mb-1 font-extrabold flex items-center justify-between">Balanced <span class="text-[10px] uppercase tracking-wide bg-white/20 px-2 py-0.5 rounded-full font-semibold">Recommended</span></span>
-                  <span class="text-[11px] opacity-90 block">~50% reduction. High visual quality for email, portals, and documents.</span>
+                  <span class="text-[11px] opacity-90 block">Structural optimization. Repackages PDF objects without rasterizing pages. File-size reduction is not guaranteed.</span>
                 </button>
                 <button type="button" id="cmpExtBtn" onclick="setCompressLevel('extreme')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer">
-                  <span class="block text-sm mb-1 font-extrabold">Extreme Compression</span>
-                  <span class="text-[11px] text-slate-400 block">~75% reduction. Maximum shrinkage for upload portals under 500KB.</span>
+                  <span class="block text-sm mb-1 font-extrabold flex items-center justify-between">Extreme Compression <span class="text-[10px] uppercase tracking-wide bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-700 px-2 py-0.5 rounded-full font-semibold">Raster Warning</span></span>
+                  <span class="text-[11px] opacity-90 block">Converts pages into JPEG images. Text becomes non-selectable and quality may decrease. File size is not guaranteed to become smaller.</span>
                 </button>
-                <button type="button" id="cmpLowBtn" onclick="setCompressLevel('low')" class="p-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-left border border-slate-200 dark:border-slate-700 hover:border-rose-400 transition-all cursor-pointer">
-                  <span class="block text-sm mb-1 font-extrabold">Low Compression</span>
-                  <span class="text-[11px] text-slate-400 block">~25% reduction. Maximum image and vector resolution preserved.</span>
-                </button>
+              </div>
+
+              <!-- Extreme Mode Warning Callout -->
+              <div id="extremeWarningBox" class="hidden p-4 rounded-2xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/60 text-amber-900 dark:text-amber-200 text-xs sm:text-sm shadow-xs transition-all">
+                <div class="flex items-start gap-3">
+                  <div class="w-8 h-8 rounded-xl bg-amber-100 dark:bg-amber-900/60 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 text-base mt-0.5">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                  </div>
+                  <div class="space-y-1.5 min-w-0 flex-1">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <h4 class="font-extrabold text-amber-950 dark:text-amber-100 text-xs sm:text-sm tracking-tight">Extreme Compression Notice</h4>
+                      <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-200/80 dark:bg-amber-800/60 text-amber-900 dark:text-amber-100 uppercase tracking-wide">Lossy Raster Re-encoding</span>
+                    </div>
+                    <p class="text-xs text-amber-900/90 dark:text-amber-200/90 leading-relaxed">
+                      Extreme mode converts each PDF page into a JPEG image (quality 0.55). Before proceeding, please note:
+                    </p>
+                    <ul class="text-xs text-amber-900/90 dark:text-amber-200/90 space-y-1 list-none pl-0">
+                      <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-amber-600 dark:text-amber-400 text-xs mt-0.5 shrink-0"></i>
+                        <span><strong>Text is no longer selectable or searchable:</strong> Pages become flat images; you cannot highlight or find text with <kbd class="px-1.5 py-0.5 rounded bg-amber-200/60 dark:bg-amber-800/60 font-mono text-[10px]">Ctrl+F</kbd>.</span>
+                      </li>
+                      <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-amber-600 dark:text-amber-400 text-xs mt-0.5 shrink-0"></i>
+                        <span><strong>Quality may decrease:</strong> Text and graphics may lose sharpness or show compression artifacts, especially when zooming in.</span>
+                      </li>
+                      <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-xmark text-amber-600 dark:text-amber-400 text-xs mt-0.5 shrink-0"></i>
+                        <span><strong>File size is not guaranteed to become smaller:</strong> Files containing primarily vector text may actually increase in size.</span>
+                      </li>
+                    </ul>
+                    <div class="pt-2 mt-2 border-t border-amber-200 dark:border-amber-800/50 flex flex-wrap items-center gap-1.5 text-xs font-semibold text-amber-950 dark:text-amber-100">
+                      <i class="fa-solid fa-circle-info text-blue-600 dark:text-blue-400"></i>
+                      <span>Need to preserve searchability &amp; text quality? We recommend</span>
+                      <button type="button" onclick="setCompressLevel('recommended')" class="text-blue-700 dark:text-blue-300 underline font-bold hover:text-blue-800 cursor-pointer">Balanced (Recommended) mode</button>.
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -493,7 +526,7 @@
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Select your preferred compression profile ('Standard Quality' or 'Maximum Compression').</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Select your compression profile: Balanced for structural optimization, or Extreme for canvas JPEG re-encoding.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
@@ -513,7 +546,7 @@
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Selectable compression profiles for balanced quality or maximum file size reduction.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Selectable compression profiles for structural optimization or canvas raster re-encoding.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
@@ -523,7 +556,7 @@
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Estimated reduction indicator for quick expectations.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Active compression profile indicator for clear processing expectations.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
@@ -598,14 +631,14 @@
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Will compressing a PDF make the text blurry?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">No. Standard vector text and fonts remain crisp. Compression primarily optimizes embedded raster images and strips redundant metadata.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">In Balanced mode, original vector text, fonts, and raster images are preserved without rasterization or downsampling. In Extreme mode, pages are rendered to canvas at scale 1.0 and re-encoded as JPEG images at quality 0.55; this flattens text into bitmap graphics, which means text is no longer selectable and small text may lose sharpness.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What is the difference between Standard and Maximum compression?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What is the difference between Balanced and Extreme compression?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Standard Quality maintains higher image fidelity, while Maximum Compression applies stronger optimization for strict upload size limits.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Balanced mode uses PDF-Lib to copy PDF pages into a clean document and saves with object streams enabled (useObjectStreams: true), repackaging internal PDF data without rasterizing pages or guaranteeing a specific file-size reduction. Extreme mode renders each page via PDF.js onto an HTML5 canvas at scale 1.0 and re-encodes it as a JPEG image at quality 0.55; file size may decrease or increase depending on the original document content.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
@@ -818,6 +851,6 @@
   </footer>
 
   <!-- Core Minified Application Script (Deferred & Cached) -->
-  <script defer src="/assets/js/app.js"></script>
+  <script defer src="/assets/js/app.js?v=20261110_encfix"></script>
 </body>
 </html>
