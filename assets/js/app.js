@@ -1096,7 +1096,7 @@ function ensureScript(name) {
     "seoTitle": "Free Strong Password Generator | Cryptographically Secure Passwords",
     "metaDesc": "Generate cryptographically secure, random passwords with custom lengths, symbols, and numbers using the Web Crypto API. Fast, private, and unhackable.",
     "h1": "Free Cryptographically Secure Password Generator",
-    "intro": "ToolsHere Strong Password Creator is an essential security tool designed to safeguard your online banking, email accounts, cloud databases, and social media profiles against credential stuffing and brute-force attacks. Utilizing your browser's hardware-backed `crypto.getRandomValues()` API rather than predictable pseudorandom math generators, every password generated provides true cryptographic randomness. You can tailor password lengths from 8 to 32 characters, toggle special symbols and numerals, and copy the final output with a single tap. Because no passwords are ever transmitted or stored on a server, your credentials remain strictly between you and your password manager.",
+    "intro": "ToolsHere Strong Password Creator is an essential security tool designed to safeguard your online banking, email accounts, cloud databases, and social media profiles against credential stuffing and brute-force attacks. Utilizing your browser's native `crypto.getRandomValues()` API rather than predictable pseudorandom math generators, every password generated provides true cryptographic randomness. You can tailor password lengths from 8 to 32 characters, toggle special symbols and numerals, and copy the final output with a single tap. Because no passwords are ever transmitted or stored on a server, your credentials remain strictly between you and your password manager.",
     "howToUse": [
       "Use the 'Password Length' slider to select your desired character count (8 to 32 characters).",
       "Check or uncheck the 'Symbols (@#$%)' and 'Numbers (0-9)' boxes according to your requirements.",
@@ -1118,7 +1118,7 @@ function ensureScript(name) {
     "faqs": [
       {
         "q": "Why is the Web Crypto API more secure than standard generators?",
-        "a": "The Web Crypto API draws on hardware-level system entropy, making the generated numbers mathematically unpredictable and resistant to pattern-prediction attacks."
+        "a": "The Web Crypto API draws on operating-system cryptographic entropy, making the generated numbers mathematically unpredictable and resistant to pattern-prediction attacks."
       },
       {
         "q": "Does ToolsHere store or log any generated passwords?",
@@ -7836,10 +7836,10 @@ function ensureScript(name) {
       if (icon) icon.className = 'fa-solid fa-circle-info';
       container.innerHTML = `
         <div class="space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-          <p class="font-medium text-slate-800 dark:text-white text-base">Welcome to <strong class="text-blue-600 dark:text-cyan-400">ToolsHere.online</strong> — your ultimate browser-based productivity workstation.</p>
-          <p>Our philosophy is simple: <strong>Zero Latency, 100% Client-Side Privacy</strong>. Every file conversion, image compression, password generation, and document processing task executes directly inside your browser's local memory using modern WebAssembly, Canvas API, and JavaScript runtimes.</p>
+          <p class="font-medium text-slate-800 dark:text-white text-base">Welcome to <strong class="text-blue-600 dark:text-cyan-400">ToolsHere.online</strong> — an independent web utility project providing private, browser-based tools.</p>
+          <p>Our philosophy is simple: <strong>Zero Latency, Client-Side Privacy</strong>. File conversions, image compression, password generation, and document processing execute directly inside your browser's local memory using modern HTML5 Canvas, the JavaScript FileReader API, and in-memory binary stream processing.</p>
           <div class="p-4 bg-slate-50 dark:bg-slate-700/60 rounded-2xl space-y-2 border border-[#E5E7EB] dark:border-slate-700">
-            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> No file uploads to cloud servers</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> Local browser processing for user documents and images</div>
             <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> No account or signup required</div>
             <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-500"></i> 100% free and open for personal and commercial usage</div>
           </div>

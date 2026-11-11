@@ -1307,7 +1307,7 @@ function generatePageTemplate({ slug, title, metaDesc, canonicalUrl, h1, categor
   </footer>
 
   <!-- Core Minified Application Script (Deferred & Cached) -->
-  <script defer src="/assets/js/app.js"></script>
+  <script defer src="/assets/js/app.js${slug === 'compress-pdf' ? '?v=20261110_encfix' : ''}"></script>
 </body>
 </html>`.replace(/[ \t]+$/gm, '');
 }
@@ -1404,10 +1404,9 @@ const legalPages = [
     modalKey: 'aboutModal',
     iconClass: 'fa-solid fa-circle-info',
     h1: 'About ToolsHere.online',
-    title: 'About ToolsHere: Privacy-First Browser Tools - ToolsHere',
-    metaDesc: 'Learn about ToolsHere.online, our mission for 100% private client-side web utility tools, our zero-upload architecture, and our engineering standards.',
+    title: 'About Us: Privacy-First Browser Tools — ToolsHere',
+    metaDesc: 'Learn about ToolsHere.online, an independent online tools project dedicated to private, client-side document processing, image optimization, and utilities.',
     category: 'Information',
-    h2s: ['Our Client-Side Privacy Architecture', 'Engineering & Security Standards', 'Zero Data Retention Policy'],
     extraHtml: `
       <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-2">
         <p class="font-bold text-slate-800 dark:text-slate-200">Explore ToolsHere Resources:</p>
@@ -1418,7 +1417,171 @@ const legalPages = [
           <a href="/contact/" class="px-3 py-1.5 rounded-lg bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 font-semibold text-xs hover:border-blue-400 transition-colors">Contact Support</a>
         </div>
       </div>
-    `
+    `,
+    customSectionsHtml: `
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-compass text-blue-600 text-sm"></i> Why We Built ToolsHere
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            In recent years, the online tools ecosystem has become frustratingly hostile to users. Basic everyday utilities—like compressing a PDF under 200KB for an official portal, converting an image to PNG, extracting text, or formatting JSON—frequently demand account registration, lock high-resolution output behind paid subscriptions, impose artificial daily quotas, or stamp intrusive watermarks onto exported documents.
+          </p>
+          <p>
+            Even more concerning is the hidden privacy cost. Traditional converter sites upload your files to remote cloud servers for background processing. When handling sensitive assets—such as tax returns, government identification cards, employment contracts, medical records, or personal photos—uploading to third-party cloud infrastructure creates unnecessary exposure to data retention, server breaches, and unauthorized access.
+          </p>
+          <p>
+            ToolsHere was built as an independent, transparent alternative. We believe modern desktop and mobile browsers have more than enough computing power to perform document and image manipulations locally. By executing all computations on your device, ToolsHere eliminates cloud data storage risks while delivering fast, free productivity without paywalls or subscriptions.
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-microchip text-blue-600 text-sm"></i> How Client-Side Processing Works
+        </h2>
+        <div class="space-y-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            Rather than operating as a cloud-hosted converter pipeline, ToolsHere delivers lightweight client-side applications directly to your browser session. Here is how our architecture operates:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
+              <h3 class="font-bold text-slate-900 dark:text-white text-xs flex items-center gap-2">
+                <i class="fa-solid fa-file-lines text-blue-500"></i> In-Memory Document Streams
+              </h3>
+              <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+                When you select a document, the browser reads raw byte buffers into sandboxed memory via the HTML5 <code>FileReader</code> and <code>ArrayBuffer</code> APIs. PDF restructuring, page extraction, and optimization run entirely in client JavaScript using PDF-Lib and PDF.js.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
+              <h3 class="font-bold text-slate-900 dark:text-white text-xs flex items-center gap-2">
+                <i class="fa-solid fa-image text-emerald-500"></i> Hardware-Accelerated Canvas
+              </h3>
+              <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+                Image compression, resizing, color isolation, and format conversions (JPG, PNG, WebP) utilize the browser's native HTML5 Canvas 2D engine (<code>toBlob()</code> and <code>getImageData()</code>), rendering pixels directly with your device's hardware.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
+              <h3 class="font-bold text-slate-900 dark:text-white text-xs flex items-center gap-2">
+                <i class="fa-solid fa-key text-amber-500"></i> Cryptographic Security
+              </h3>
+              <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+                Password generation uses the browser's native Web Crypto API (<code>window.crypto.getRandomValues()</code>) to produce cryptographically secure random values without transmitting passphrases over the network.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
+              <h3 class="font-bold text-slate-900 dark:text-white text-xs flex items-center gap-2">
+                <i class="fa-solid fa-download text-purple-500"></i> Ephemeral Blob URLs
+              </h3>
+              <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
+                Generated outputs are packaged into temporary in-memory Blob references (<code>URL.createObjectURL()</code>) for immediate local download, followed by automatic memory revocation.
+              </p>
+            </div>
+          </div>
+          <div class="p-3 bg-blue-50/70 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800/60 text-xs text-slate-700 dark:text-slate-300">
+            <strong class="text-blue-900 dark:text-blue-200 font-semibold">Device Performance Note:</strong> Because all rendering and computing execute locally rather than on a remote server farm, processing speed is determined by your device's available CPU cores and RAM. Processing very large multi-page PDFs or heavy images may take longer on low-powered mobile devices.
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-emerald-600 text-sm"></i> Data Privacy vs. Third-Party Services
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            We maintain a transparent boundary between local browser processing, utility network requests, and external services:
+          </p>
+          <ul class="space-y-2.5 list-disc pl-5">
+            <li>
+              <strong class="text-slate-900 dark:text-white">Local User File Processing:</strong> For our PDF, image, text, and calculator tools, all file manipulation and computation execute entirely inside your browser's local sandbox memory. We maintain zero file-upload endpoints, zero backend servers, and zero storage databases for your files.
+            </li>
+            <li>
+              <strong class="text-slate-900 dark:text-white">YouTube Thumbnail Network Retrieval:</strong> The YouTube Thumbnail Grabber operates on public video links you provide. To fetch and display thumbnail images from YouTube media servers in your browser, requests pass through YouTube CDNs and an open image CORS proxy (<code>images.weserv.nl</code>). No private user documents are involved in this process.
+            </li>
+            <li>
+              <strong class="text-slate-900 dark:text-white">Locally Hosted vs. CDN Resources:</strong> Core processing libraries such as PDF-Lib (<code>/assets/vendor/pdf-lib.min.js</code>), QR Code Generator (<code>/assets/vendor/qrcode.min.js</code>), and QR Scanner (<code>/assets/vendor/jsqr.min.js</code>) are hosted directly on our origin. Supporting helper libraries (PDF.js and JSZip on <code>cdnjs.cloudflare.com</code>, canvas-confetti on <code>cdn.jsdelivr.net</code>) and Google Fonts are loaded from public CDNs.
+            </li>
+            <li>
+              <strong class="text-slate-900 dark:text-white">Web Analytics &amp; Advertising:</strong> To monitor technical site health and sustain project operations, ToolsHere integrates Google Analytics and Google AdSense. These services collect standard browser, device, and navigation metadata per their respective privacy policies; they do not access or process your local document or image buffers.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-layer-group text-blue-600 text-sm"></i> Our Four Utility Categories
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
+            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-file-pdf text-red-500"></i> PDF Document Suite
+            </h3>
+            <p class="text-slate-500 dark:text-slate-400">
+              Private document workflows: <a href="/compress-pdf/" class="text-blue-600 dark:text-blue-400 hover:underline">Compress PDF</a> (Balanced and Extreme modes), <a href="/merge-pdf/" class="text-blue-600 dark:text-blue-400 hover:underline">Merge &amp; Split PDF</a>, <a href="/pdf-to-word/" class="text-blue-600 dark:text-blue-400 hover:underline">PDF to Word Text Extractor (.doc draft)</a>, and <a href="/image-to-pdf/" class="text-blue-600 dark:text-blue-400 hover:underline">Image to PDF</a>.
+            </p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 italic">
+              Note: The PDF to Word tool extracts available document text and generates an HTML-based Word-compatible (.doc) draft. It does not preserve complex original layouts or guarantee binary DOCX formatting; scanned image-only PDFs require OCR, which this client utility does not provide.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
+            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-image text-blue-500"></i> Image &amp; Media Studio
+            </h3>
+            <p class="text-slate-500 dark:text-slate-400">
+              Client-side visual tools: <a href="/image-compressor/" class="text-blue-600 dark:text-blue-400 hover:underline">Image Compressor &amp; Resizer</a> (20KB, 50KB, 100KB targets), <a href="/background-remover/" class="text-blue-600 dark:text-blue-400 hover:underline">Background Remover</a> (canvas cutout), <a href="/image-converter/" class="text-blue-600 dark:text-blue-400 hover:underline">Image Format Converter</a>, and <a href="/youtube-thumbnail/" class="text-blue-600 dark:text-blue-400 hover:underline">YouTube Thumbnail Grabber</a>.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
+            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-code text-amber-500"></i> Developer &amp; Text Utilities
+            </h3>
+            <p class="text-slate-500 dark:text-slate-400">
+              Essential daily utilities: <a href="/json-formatter/" class="text-blue-600 dark:text-blue-400 hover:underline">JSON Formatter &amp; Validator</a>, <a href="/seo-meta-generator/" class="text-blue-600 dark:text-blue-400 hover:underline">SEO Meta Tag Generator</a>, <a href="/word-counter/" class="text-blue-600 dark:text-blue-400 hover:underline">Word &amp; Character Counter</a>, and <a href="/text-case-converter/" class="text-blue-600 dark:text-blue-400 hover:underline">Text Case Converter</a>.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-1">
+            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-calculator text-emerald-500"></i> Calculators &amp; Security
+            </h3>
+            <p class="text-slate-500 dark:text-slate-400">
+              Offline-ready tools: <a href="/age-calculator/" class="text-blue-600 dark:text-blue-400 hover:underline">Age &amp; Date Calculator</a>, <a href="/emi-calculator/" class="text-blue-600 dark:text-blue-400 hover:underline">GST &amp; Loan EMI Calculator</a>, <a href="/password-generator/" class="text-blue-600 dark:text-blue-400 hover:underline">Strong Password Generator</a>, and <a href="/qr-code-generator/" class="text-blue-600 dark:text-blue-400 hover:underline">QR Code Studio &amp; Scanner</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-circle-check text-blue-600 text-sm"></i> Project Governance &amp; Support
+        </h2>
+        <div class="space-y-2.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            ToolsHere is an independent online tools project maintained with a focus on simplicity, speed, and privacy. We do not require accounts, we do not lock features behind paywalls, and we maintain all utilities continuously to ensure compatibility across modern browsers.
+          </p>
+          <p>
+            Have feedback, found a bug, or want to suggest a new utility? Our team welcomes user inquiries. Visit our <a href="/contact/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Contact &amp; Support page</a> or email us directly at <a href="mailto:support@toolshere.online" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">support@toolshere.online</a>.
+          </p>
+        </div>
+      </section>
+    `,
+    extraSchemas: [
+      {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "@id": "https://toolshere.online/about/#aboutpage",
+        "url": "https://toolshere.online/about/",
+        "name": "About Us: Privacy-First Browser Tools — ToolsHere",
+        "description": "Learn about ToolsHere.online, an independent online tools project dedicated to private, client-side document processing, image optimization, and utilities.",
+        "isPartOf": {
+          "@id": "https://toolshere.online/#website"
+        },
+        "about": {
+          "@id": "https://toolshere.online/#organization"
+        }
+      }
+    ]
   },
   {
     slug: 'contact',
@@ -1528,6 +1691,9 @@ for (const p of legalPages) {
       ]
     }
   ];
+  if (p.extraSchemas && Array.isArray(p.extraSchemas)) {
+    jsonLdSchemas.push(...p.extraSchemas);
+  }
 
   const pageHtml = generatePageTemplate({
     slug: p.slug,
@@ -1541,7 +1707,11 @@ for (const p of legalPages) {
       <div class="space-y-6 text-slate-700 dark:text-slate-300 leading-relaxed text-sm">
         ${container.innerHTML || '<p>Content</p>'}
         ${p.extraHtml || ''}
-        ${p.h2s ? `
+        ${p.customSectionsHtml ? `
+          <div class="pt-6 border-t border-slate-200 dark:border-slate-700 space-y-6">
+            ${p.customSectionsHtml}
+          </div>
+        ` : (p.h2s ? `
           <div class="pt-6 border-t border-slate-200 dark:border-slate-700 space-y-6">
             ${p.h2s.map(h2 => `
               <section class="space-y-2">
@@ -1554,7 +1724,7 @@ for (const p of legalPages) {
               </section>
             `).join('')}
           </div>
-        ` : ''}
+        ` : '')}
       </div>
     `,
     guideHtml: '',
