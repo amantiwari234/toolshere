@@ -336,11 +336,17 @@
 
         <div class="space-y-4 text-sm leading-relaxed">
           <p class="text-slate-600 dark:text-slate-300">Have suggestions for new utilities or found a bug? We would love to hear from you!</p>
-          <div class="p-6 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 space-y-3">
+          <div class="p-6 bg-slate-50 dark:bg-slate-700/60 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
             <span class="block font-bold text-slate-800 dark:text-white">Official Support Email:</span>
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-blue-600 dark:text-cyan-400 font-bold text-base">support@toolshere.online</span>
-              <button type="button" onclick="copyText('support@toolshere.online')" class="px-4 py-2 bg-blue-600 text-white rounded-xl font-bold text-xs shadow-md">Copy</button>
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <a href="mailto:support@toolshere.online" class="font-mono text-blue-600 dark:text-cyan-400 font-bold text-base hover:underline hover:text-blue-700 dark:hover:text-cyan-300 transition-colors inline-flex items-center gap-2 focus:outline-hidden focus:ring-2 focus:ring-blue-500 rounded-md py-1" aria-label="Send email to support@toolshere.online">
+                <i class="fa-regular fa-envelope text-sm" aria-hidden="true"></i>
+                <span>support@toolshere.online</span>
+              </a>
+              <button type="button" onclick="copyText('support@toolshere.online')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow-md transition-colors min-h-[44px] inline-flex items-center justify-center gap-1.5 cursor-pointer" aria-label="Copy email address to clipboard">
+                <i class="fa-regular fa-copy text-xs" aria-hidden="true"></i>
+                <span>Copy</span>
+              </button>
             </div>
           </div>
         </div>
@@ -364,7 +370,7 @@
                   <i class="fa-solid fa-shield-check text-blue-600 text-sm"></i> Technical Support & Bug Inquiries
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  ToolsHere is dedicated to providing reliable, private client-side utilities. For inquiries or updates regarding technical support & bug inquiries, our team is available via our <a href="/contact/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">contact and support page</a>.
+                  Found a bug or unexpected behavior in one of our tools? Email us at <a href="mailto:support@toolshere.online" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">support@toolshere.online</a> with the tool name, your browser, operating system, and a short description of the issue. Include any error message you see so we can investigate it more effectively.
                 </p>
               </section>
 
@@ -373,7 +379,7 @@
                   <i class="fa-solid fa-shield-check text-blue-600 text-sm"></i> Feature Requests & Suggestions
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  ToolsHere is dedicated to providing reliable, private client-side utilities. For inquiries or updates regarding feature requests & suggestions, our team is available via our <a href="/contact/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">contact and support page</a>.
+                  Have an idea for a new online utility, calculator, converter, or document tool? Send us your suggestion at <a href="mailto:support@toolshere.online" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">support@toolshere.online</a>. We especially welcome ideas for privacy-focused tools that can process files directly in the browser.
                 </p>
               </section>
 
@@ -382,7 +388,7 @@
                   <i class="fa-solid fa-shield-check text-blue-600 text-sm"></i> Response Time Expectations
                 </h2>
                 <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  ToolsHere is dedicated to providing reliable, private client-side utilities. For inquiries or updates regarding response time expectations, our team is available via our <a href="/contact/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">contact and support page</a>.
+                  We review incoming messages regularly and prioritize reports involving broken tools, security concerns, and compatibility issues. We do not currently guarantee a fixed response time, but we appreciate every message and feedback submission.
                 </p>
               </section>
 
