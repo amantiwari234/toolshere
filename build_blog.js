@@ -12,6 +12,46 @@ if (!fs.existsSync(article3Dir)) fs.mkdirSync(article3Dir, { recursive: true });
 if (!fs.existsSync(blogDir)) fs.mkdirSync(blogDir, { recursive: true });
 if (!fs.existsSync(articleDir)) fs.mkdirSync(articleDir, { recursive: true });
 
+// Smart Non-Blocking Google Analytics & AdSense Loader
+function getThirdPartyScript() {
+  return `  <!-- Smart Non-Blocking Google Analytics & AdSense Loader -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RXVYKC5YG5');
+
+    (function() {
+      let loaded = false;
+      function loadThirdParty() {
+        if (loaded) return;
+        loaded = true;
+        ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'].forEach(function(e) {
+          window.removeEventListener(e, loadThirdParty, { passive: true });
+        });
+        const gtm = document.createElement('script');
+        gtm.src = 'https://www.googletagmanager.com/gtag/js?id=G-RXVYKC5YG5';
+        gtm.async = true;
+        document.head.appendChild(gtm);
+
+        const ads = document.createElement('script');
+        ads.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5695881882047202';
+        ads.async = true;
+        ads.crossOrigin = 'anonymous';
+        document.head.appendChild(ads);
+      }
+      ['scroll', 'touchstart', 'mousemove', 'click', 'keydown'].forEach(function(e) {
+        window.addEventListener(e, loadThirdParty, { passive: true, once: true });
+      });
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() { setTimeout(loadThirdParty, 3500); });
+      } else {
+        setTimeout(loadThirdParty, 3500);
+      }
+    })();
+  </script>`;
+}
+
 // Common Header HTML with Blog link active
 function getHeaderHtml(activeTab = 'blog') {
   return `
@@ -350,6 +390,8 @@ function generateBlogListingPage() {
   <!-- Non-blocking FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+${getThirdPartyScript()}
 
   <!-- Structured Data (JSON-LD) -->
   ${jsonLd.map(schema => `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`).join('\n  ')}
@@ -773,6 +815,8 @@ function generateArticlePage() {
   <!-- Non-blocking FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+${getThirdPartyScript()}
 
   <!-- Structured Data (JSON-LD) -->
   ${jsonLd.map(schema => `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`).join('\n  ')}
@@ -1394,6 +1438,8 @@ function generateCompressPdfArticlePage() {
   <!-- Non-blocking FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+${getThirdPartyScript()}
 
   <!-- Structured Data (JSON-LD) -->
   ${jsonLd.map(schema => `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`).join('\n  ')}
@@ -2173,6 +2219,8 @@ function generateMergePdfArticlePage() {
   <!-- Non-blocking FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+${getThirdPartyScript()}
 
   <!-- Structured Data (JSON-LD) -->
   ${jsonLd.map(schema => `<script type="application/ld+json">\n${JSON.stringify(schema, null, 2)}\n</script>`).join('\n  ')}
