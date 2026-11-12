@@ -12,7 +12,7 @@
     }
   </script>
   <title>Free Online Tools &amp; Private Web Utilities - ToolsHere</title>
-  <meta name="description" content="Access fast, free, client-side web utility tools for PDF editing, image optimization, developer tasks, and calculations with 100% in-browser privacy.">
+  <meta name="description" content="Access fast, free web utility tools for PDF editing, image optimization, developer tasks, and calculations with in-browser file processing and zero server document storage.">
   <meta name="keywords" content="toolshere, free online tools, online tools for everything, image compressor, background remover, pdf tools, merge pdf, age calculator, emi calculator, gst calculator, qr code generator, password generator, word counter, json formatter">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://toolshere.online/">
@@ -21,8 +21,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Toolshere">
   <meta property="og:url" content="https://toolshere.online/">
-  <meta property="og:title" content="Toolshere — Free Online Tools & Web Utilities | 100% Private">
-  <meta property="og:description" content="Free, fast, and 100% private client-side web utility tools. Everything runs directly inside your browser.">
+  <meta property="og:title" content="Toolshere — Free Online Tools & Web Utilities | Private File Processing">
+  <meta property="og:description" content="Free, fast web utilities. Supported document and image conversions execute locally in your browser without uploading files to our servers.">
   <meta property="og:image" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:type" content="image/png">
@@ -132,7 +132,7 @@
         "url": "https://toolshere.online/",
         "name": "Toolshere",
         "alternateName": "Toolshere.online",
-        "description": "Free, fast, and 100% private client-side online tools for everything.",
+        "description": "Free, fast, and privacy-conscious online utilities with in-browser file processing.",
         "publisher": {
           "@id": "https://toolshere.online/#organization"
         },
@@ -159,7 +159,7 @@
         "description": "Comprehensive collection of free, client-side online tools.",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Image Compressor & Resizer", "url": "https://toolshere.online/image-compressor/" },
-          { "@type": "ListItem", "position": 2, "name": "AI Background Remover", "url": "https://toolshere.online/background-remover/" },
+          { "@type": "ListItem", "position": 2, "name": "Background Remover", "url": "https://toolshere.online/background-remover/" },
           { "@type": "ListItem", "position": 3, "name": "PDF to Word Converter", "url": "https://toolshere.online/pdf-to-word/" },
           { "@type": "ListItem", "position": 4, "name": "Merge & Split PDF", "url": "https://toolshere.online/merge-pdf/" },
           { "@type": "ListItem", "position": 5, "name": "Age & Date Calculator", "url": "https://toolshere.online/age-calculator/" },
@@ -219,7 +219,7 @@
     },
     {
       "@type": "Question",
-      "name": "AI Background Remover: What types of photos work best with this background remover?",
+      "name": "Background Remover: What types of photos work best with this background remover?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Photos with solid, plain, or uniform studio backgrounds (such as white, grey, green screen, or studio product shots) yield the crispest results."
@@ -227,7 +227,7 @@
     },
     {
       "@type": "Question",
-      "name": "AI Background Remover: Does downloading the image add any watermarks?",
+      "name": "Background Remover: Does downloading the image add any watermarks?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "No. All images downloaded from ToolsHere are 100% free of watermarks, branding, or restrictions."
@@ -235,7 +235,7 @@
     },
     {
       "@type": "Question",
-      "name": "AI Background Remover: Why did parts of my subject disappear?",
+      "name": "Background Remover: Why did parts of my subject disappear?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "If the subject shares very similar colors with the background, lowering the Sensitivity Threshold slider will protect those pixels from being removed."
@@ -246,7 +246,7 @@
       "name": "PDF to Word Converter: Can I open the downloaded .doc file in Microsoft Word and Google Docs?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The downloaded .doc format is universally compatible with Microsoft Office Word, Google Docs, Apple Pages, and LibreOffice."
+        "text": "The downloaded .doc file contains HTML-based Word-compatible content. It can be opened in Microsoft Word and LibreOffice Writer, although Word may display a file-format warning. Compatibility with other document editors may vary."
       }
     },
     {
@@ -451,7 +451,7 @@
             <i class="fa-solid fa-circle-half-stroke"></i> Switch
           </button>
         </div>
-        <p class="text-[10px] text-slate-400 mt-3 text-center">100% In-Browser Local Processing • Zero Server Uploads</p>
+        <p class="text-[10px] text-slate-400 mt-3 text-center">In-Browser File Processing • Zero Server Document Uploads</p>
       </div>
     </div>
 
@@ -460,13 +460,16 @@
     <!-- ================= HOME DASHBOARD VIEW ================= -->
     <div id="homeView" class="space-y-4 sm:space-y-5">
 
-      <!-- Minimal White Hero Header Inspired by iLovePDF / Smallpdf -->
-      <section class="pt-4 sm:pt-8 pb-1 text-center max-w-3xl mx-auto px-4">
+      <!-- Hero Header & Project Introduction -->
+      <section class="pt-4 sm:pt-8 pb-2 text-center max-w-3xl mx-auto px-4">
         <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
           Free Online Tools
         </h1>
-        <p class="text-xs sm:text-base text-slate-500 dark:text-slate-400 mt-2 max-w-xl mx-auto leading-relaxed font-normal">
-          Fast, simple, and reliable web utilities for your everyday productivity tasks.
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 max-w-2xl mx-auto leading-relaxed">
+          ToolsHere.online is an independent web utility project providing practical tools for PDF documents, image processing, text formatting, and calculations. Built for students, job applicants, office professionals, digital creators, and developers who need instant productivity without mandatory accounts, paywalls, or software downloads.
+        </p>
+        <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1.5 max-w-xl mx-auto">
+          Supported file-processing tools perform their documented operations in the browser for rapid, confidential document handling.
         </p>
 
         <!-- Prominent Full-Width Search Bar Below Heading -->
@@ -504,82 +507,37 @@
         </div>
       </section>
 
-      <!-- Popular Tools Section (Highlighted Top 4 Utilities) -->
+      <!-- Quick Category Shortcuts Bar -->
       <section id="popularSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-3 pb-2 border-b border-[#E5E7EB] dark:border-slate-800">
-          <div class="flex items-center gap-2">
-            <i class="fa-solid fa-fire text-amber-500 text-sm"></i>
-            <h2 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Popular Tools</h2>
+        <div class="p-3 sm:p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-[#E5E7EB] dark:border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
+            <i class="fa-solid fa-bolt-lightning text-amber-500"></i>
+            <span>Quick Category Jump:</span>
           </div>
-          <span class="text-xs text-slate-400 font-medium">Most used online utilities</span>
-        </div>
-        <div class="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <!-- Pop 1: Image Compressor -->
-          <a href="/image-compressor/" class="tool-card touch-card group block bg-white dark:bg-slate-800 rounded-xl border border-[#E5E7EB] dark:border-slate-700 hover:border-[#2563EB] hover:shadow-md transition-all p-4 sm:p-5 flex flex-col justify-between h-full min-h-[145px] sm:min-h-[155px]">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800/40 text-[#2563EB] dark:text-blue-400 flex items-center justify-center text-base mb-3 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-compress"></i>
-              </div>
-              <h3 class="font-bold text-base text-slate-900 dark:text-white group-hover:text-[#2563EB] transition-colors mb-1 leading-snug">Image Compressor</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">Compress JPG, PNG & WebP to 20KB, 50KB or custom size.</p>
-            </div>
-            <div class="mt-3 pt-2.5 border-t border-[#E5E7EB] dark:border-slate-700/60 flex items-center justify-between">
-              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/30 text-[#2563EB] dark:text-blue-400">Image</span>
-              <span class="text-xs font-bold text-[#2563EB] dark:text-blue-400 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
-            </div>
-          </a>
-
-          <!-- Pop 2: Merge PDF -->
-          <a href="/merge-pdf/" class="tool-card touch-card group block bg-white dark:bg-slate-800 rounded-xl border border-[#E5E7EB] dark:border-slate-700 hover:border-[#2563EB] hover:shadow-md transition-all p-4 sm:p-5 flex flex-col justify-between h-full min-h-[145px] sm:min-h-[155px]">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-red-50 dark:bg-red-900/30 border border-red-100 dark:border-red-800/40 text-red-600 dark:text-red-400 flex items-center justify-center text-base mb-3 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-object-group"></i>
-              </div>
-              <h3 class="font-bold text-base text-slate-900 dark:text-white group-hover:text-[#2563EB] transition-colors mb-1 leading-snug">Merge PDF</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">Combine multiple PDF files into one single document.</p>
-            </div>
-            <div class="mt-3 pt-2.5 border-t border-[#E5E7EB] dark:border-slate-700/60 flex items-center justify-between">
-              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400">PDF</span>
-              <span class="text-xs font-bold text-[#2563EB] dark:text-blue-400 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
-            </div>
-          </a>
-
-          <!-- Pop 3: Background Remover -->
-          <a href="/background-remover/" class="tool-card touch-card group block bg-white dark:bg-slate-800 rounded-xl border border-[#E5E7EB] dark:border-slate-700 hover:border-[#2563EB] hover:shadow-md transition-all p-4 sm:p-5 flex flex-col justify-between h-full min-h-[145px] sm:min-h-[155px]">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/30 border border-purple-100 dark:border-purple-800/40 text-purple-600 dark:text-purple-400 flex items-center justify-center text-base mb-3 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-              </div>
-              <h3 class="font-bold text-base text-slate-900 dark:text-white group-hover:text-[#2563EB] transition-colors mb-1 leading-snug">Background Remover</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">Remove photo backgrounds and download transparent PNGs.</p>
-            </div>
-            <div class="mt-3 pt-2.5 border-t border-[#E5E7EB] dark:border-slate-700/60 flex items-center justify-between">
-              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400">Image</span>
-              <span class="text-xs font-bold text-[#2563EB] dark:text-blue-400 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
-            </div>
-          </a>
-
-          <!-- Pop 4: Age Calculator -->
-          <a href="/age-calculator/" class="tool-card touch-card group block bg-white dark:bg-slate-800 rounded-xl border border-[#E5E7EB] dark:border-slate-700 hover:border-[#2563EB] hover:shadow-md transition-all p-4 sm:p-5 flex flex-col justify-between h-full min-h-[145px] sm:min-h-[155px]">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-base mb-3 group-hover:scale-105 transition-transform">
-                <i class="fa-solid fa-calendar-check"></i>
-              </div>
-              <h3 class="font-bold text-base text-slate-900 dark:text-white group-hover:text-[#2563EB] transition-colors mb-1 leading-snug">Age Calculator</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">Calculate exact age in years, months, days and next birthday.</p>
-            </div>
-            <div class="mt-3 pt-2.5 border-t border-[#E5E7EB] dark:border-slate-700/60 flex items-center justify-between">
-              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">Calculator</span>
-              <span class="text-xs font-bold text-[#2563EB] dark:text-blue-400 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
-            </div>
-          </a>
+          <div class="flex items-center gap-1.5 flex-wrap justify-center text-xs">
+            <button type="button" onclick="filterCategory('pdf')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-red-400 hover:text-red-600 transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
+              <i class="fa-solid fa-file-pdf text-red-500"></i> PDF Utilities
+            </button>
+            <button type="button" onclick="filterCategory('image')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-blue-400 hover:text-[#2563EB] transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
+              <i class="fa-solid fa-image text-[#2563EB]"></i> Image Tools
+            </button>
+            <button type="button" onclick="filterCategory('calc')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-emerald-400 hover:text-emerald-600 transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
+              <i class="fa-solid fa-calculator text-emerald-600"></i> Calculators
+            </button>
+            <button type="button" onclick="filterCategory('text')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-purple-400 hover:text-purple-600 transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
+              <i class="fa-solid fa-font text-purple-600"></i> Text Tools
+            </button>
+            <button type="button" onclick="filterCategory('dev')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-cyan-400 hover:text-cyan-600 transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
+              <i class="fa-solid fa-code text-cyan-600"></i> Developer
+            </button>
+          </div>
         </div>
       </section>
 
       <!-- Main Tools Section Heading -->
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div class="flex items-center justify-between pb-2 border-b border-[#E5E7EB] dark:border-slate-800">
-          <h2 class="text-base sm:text-lg font-bold text-slate-900">All Available Tools</h2>
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">All Available Tools</h2>
           <span class="text-xs text-slate-400 font-medium">16 Client-Side Utilities</span>
         </div>
       </div>
@@ -594,14 +552,14 @@
           <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-compress"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-blue-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors mb-1.5 leading-snug">
             Image Compressor & Resizer
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Compress JPEG, PNG, and WebP images to custom dimensions or exact file sizes (20KB, 50KB, 100KB) with zero server uploads.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-600">Image</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 group-hover:text-blue-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -609,20 +567,20 @@
         </div>
       </a>
 
-      <!-- TOOL 2: AI Background Remover -->
-      <a href="/background-remover/" class="tool-card touch-card group block bg-white dark:bg-slate-800 rounded-xl border border-[#E5E7EB] dark:border-slate-700 hover:border-violet-500 dark:hover:border-violet-400 hover:shadow-md transition-all p-3 sm:p-5 flex flex-col justify-between h-full min-h-[140px] sm:min-h-[180px]" data-id="bgRemover" data-category="image" data-title="AI Background Remover">
+      <!-- TOOL 2: Background Remover -->
+      <a href="/background-remover/" class="tool-card touch-card group block bg-white dark:bg-slate-800 rounded-xl border border-[#E5E7EB] dark:border-slate-700 hover:border-violet-500 dark:hover:border-violet-400 hover:shadow-md transition-all p-3 sm:p-5 flex flex-col justify-between h-full min-h-[140px] sm:min-h-[180px]" data-id="bgRemover" data-category="image" data-title="Background Remover">
         <div>
           <div class="w-12 h-12 rounded-xl bg-violet-50 border border-violet-100 text-violet-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-violet-600 transition-colors mb-1.5 leading-snug">
-            AI Background Remover
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-violet-600 transition-colors mb-1.5 leading-snug">
+            Background Remover
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
-            Isolate subjects and create transparent PNG photos directly in your browser using client-side color tolerance algorithms.
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            Remove simple or solid-color backgrounds from images using browser-based color selection and Canvas processing. Results depend on background contrast and image complexity.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-violet-50 text-violet-600">Image</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-violet-600 group-hover:text-violet-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -636,14 +594,14 @@
           <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-file-word"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
             PDF to Word Converter
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
-            Convert confidential PDF documents into editable Word (.doc) files safely without server queue delays or file retention.
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            Extract selectable text from digital PDF documents into an editable Word-compatible (.doc) draft directly in your browser. Best for text-based PDFs; original formatting, tables and images are not preserved.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600">PDF</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 group-hover:text-red-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -657,14 +615,14 @@
           <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-object-group"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
             Merge & Split PDF
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Combine multiple PDF files into one clean document or organize pages in seconds right in your browser memory.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600">PDF</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 group-hover:text-red-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -678,14 +636,14 @@
           <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-calendar-check"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-emerald-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors mb-1.5 leading-snug">
             Age & Date Calculator
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Calculate your exact age in years, months, and days alongside total days lived and next birthday countdown.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-600">Calculator</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -699,14 +657,14 @@
           <div class="w-12 h-12 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-brands fa-youtube"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-rose-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-rose-600 transition-colors mb-1.5 leading-snug">
             YouTube Thumbnail Grabber
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Download high-resolution 1080p Full-HD video thumbnails instantly from any standard or Shorts YouTube URL.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-rose-50 text-rose-600">Media</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-600 group-hover:text-rose-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -720,14 +678,14 @@
           <div class="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-100 text-cyan-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-qrcode"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-cyan-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-cyan-600 transition-colors mb-1.5 leading-snug">
             QR Code Generator & Scanner
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Generate custom QR codes for websites, Wi-Fi, and vCards, or scan QR codes from photos and live camera in real time.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-cyan-50 text-cyan-600">Developer</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-600 group-hover:text-cyan-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -741,14 +699,14 @@
           <div class="w-12 h-12 rounded-xl bg-teal-50 border border-teal-100 text-teal-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-shield-halved"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-teal-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-teal-600 transition-colors mb-1.5 leading-snug">
             Strong Password Creator
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Generate cryptographically secure passwords with custom lengths and symbols using the browser's Web Crypto API.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-teal-50 text-teal-600">Security</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-teal-600 group-hover:text-teal-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -762,14 +720,14 @@
           <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-font"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-indigo-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors mb-1.5 leading-snug">
             Word & Character Counter
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Count words, characters (with &amp; without spaces), sentences, paragraphs, and reading time in real time as you type or paste text.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-600">Text</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 group-hover:text-indigo-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -783,14 +741,14 @@
           <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-calculator"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-emerald-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors mb-1.5 leading-snug">
             GST & Loan EMI Calculator
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Calculate monthly loan EMIs and Goods and Services Tax (5%, 12%, 18%, 28%) with accurate numerical breakdowns.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-600">Calculator</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 group-hover:text-emerald-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -804,14 +762,14 @@
           <div class="w-12 h-12 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-arrows-rotate"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-blue-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors mb-1.5 leading-snug">
             Image Format Converter
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Convert image files between PNG, JPG, and WebP instantly in your browser while preserving full original resolution.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-blue-600">Image</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 group-hover:text-blue-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -825,14 +783,14 @@
           <div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-text-height"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-indigo-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors mb-1.5 leading-snug">
             Text Case Converter
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Convert text between UPPERCASE, lowercase, Title Case, Sentence case, and clean URL Slugs with one click.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-600">Text</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-600 group-hover:text-indigo-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -846,14 +804,14 @@
           <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-code"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-amber-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-amber-600 transition-colors mb-1.5 leading-snug">
             JSON Formatter & Validator
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Beautify nested JSON payloads, minify code for production APIs, and validate syntax errors privately.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-50 text-amber-600">Developer</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 group-hover:text-amber-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -867,14 +825,14 @@
           <div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-amber-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-amber-600 transition-colors mb-1.5 leading-snug">
             SEO Meta Tag Generator
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Generate standard HTML title, meta description, robots, and OpenGraph tags to optimize search engine ranking.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-50 text-amber-600">Developer</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 group-hover:text-amber-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -888,14 +846,14 @@
           <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-file-zipper"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
             Compress PDF Document
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Shrink heavy PDF documents down to portal-friendly file sizes with selectable compression modes privately.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600">PDF</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 group-hover:text-red-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -909,14 +867,14 @@
           <div class="w-12 h-12 rounded-xl bg-red-50 border border-red-100 text-red-600 flex items-center justify-center text-xl mb-4 group-hover:scale-105 transition-transform">
             <i class="fa-solid fa-images"></i>
           </div>
-          <h3 class="font-bold text-base sm:text-lg text-slate-900 group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
+          <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white group-hover:text-red-600 transition-colors mb-1.5 leading-snug">
             Image to PDF Converter
           </h3>
-          <p class="text-xs text-slate-500 leading-relaxed">
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
             Convert and bundle multiple PNG, JPG, and WebP images into a single clean PDF document ready for printing.
           </p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+        <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between">
           <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600">PDF</span>
           <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600 group-hover:text-red-700">
             Use Tool <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -938,6 +896,192 @@
       </button>
     </div>
 
+    <!-- ================= HOW IN-BROWSER PROCESSING WORKS ================= -->
+    <section id="architectureSection" class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-4" aria-labelledby="architectureHeading">
+      <div class="pb-4 border-b border-[#E5E7EB] dark:border-slate-800">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2.5 py-1 rounded-full">Architecture &amp; Data Flow</span>
+        <h2 id="architectureHeading" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-2">How In-Browser Processing Works</h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-3xl">
+          Unlike legacy cloud converters that upload your confidential files to remote servers, ToolsHere executes supported document and image operations locally inside your web browser engine.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-6">
+        <!-- Step 1 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 p-5 flex flex-col justify-between shadow-xs">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-sm flex items-center justify-center border border-blue-100 dark:border-blue-800">01</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">Local Input</span>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Select Your File</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Standard browser <code class="text-[11px] bg-slate-100 dark:bg-slate-700/60 px-1 py-0.5 rounded">FileReader</code> and <code class="text-[11px] bg-slate-100 dark:bg-slate-700/60 px-1 py-0.5 rounded">File.arrayBuffer()</code> APIs read selected file data into browser memory for local processing. No file upload payload is created or dispatched to a remote conversion farm.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-hard-drive text-blue-600 dark:text-blue-400"></i> Stays in local device memory
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 p-5 flex flex-col justify-between shadow-xs">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 font-bold text-sm flex items-center justify-center border border-indigo-100 dark:border-indigo-800">02</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">Client Engine</span>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Process in Your Browser</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Document parsing, image resizing, color selection, or text extraction runs locally using PDF.js, HTML5 Canvas, and Web Crypto APIs. Processing runs directly on your device rather than through a server-side conversion queue.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-microchip text-indigo-600 dark:text-indigo-400"></i> Rendered via client-side JavaScript
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 p-5 flex flex-col justify-between shadow-xs">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 font-bold text-sm flex items-center justify-center border border-emerald-100 dark:border-emerald-800">03</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">Instant Output</span>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Download Your Result</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              The converted document or optimized image is packaged as a local <code class="text-[11px] bg-slate-100 dark:bg-slate-700/60 px-1 py-0.5 rounded">Blob</code> URL and saved straight to your computer or phone. Your source files never linger on an external hard drive or cloud bucket.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-download text-emerald-600 dark:text-emerald-400"></i> Direct browser blob download
+          </div>
+        </div>
+      </div>
+
+      <!-- Network and Privacy Disclosure Note -->
+      <div class="mt-5 p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-[#E5E7EB] dark:border-slate-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+        <div class="flex items-start sm:items-center gap-2.5 text-slate-600 dark:text-slate-300">
+          <i class="fa-solid fa-shield-halved text-blue-600 dark:text-blue-400 text-sm mt-0.5 sm:mt-0 shrink-0"></i>
+          <span>
+            <strong>Transparency Notice:</strong> In-browser processing applies to supported document and image conversion utilities. Standard web traffic (static assets, anonymous usage metrics, and Google AdSense advertising) operates over the network in compliance with our <a href="/privacy/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Privacy Policy</a>.
+          </span>
+        </div>
+        <a href="/privacy/" class="shrink-0 text-blue-600 dark:text-blue-400 font-bold hover:underline inline-flex items-center gap-1">
+          Review Privacy Policy <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= COMMON PRODUCTIVITY WORKFLOWS ================= -->
+    <section id="workflowsSection" class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-4" aria-labelledby="workflowsHeading">
+      <div class="pb-4 border-b border-[#E5E7EB] dark:border-slate-800">
+        <span class="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2.5 py-1 rounded-full">Workflow Guides</span>
+        <h2 id="workflowsHeading" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-2">Common Productivity Workflows</h2>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-3xl">
+          Accomplish complex digital tasks faster by chaining lightweight, browser-based utilities together without installing heavy desktop software.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-6">
+        <!-- Workflow 1: Job & Academic Applications -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 p-5 flex flex-col justify-between shadow-xs">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center text-lg mb-3">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Job &amp; Academic Applications</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+              Prepare job applications, college admissions packets, and resume submissions under strict portal upload constraints.
+            </p>
+            <ol class="space-y-2.5 text-xs text-slate-600 dark:text-slate-300">
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-blue-600 dark:text-blue-400">1.</span>
+                <span>Extract text drafts from digital resumes using <a href="/pdf-to-word/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">PDF to Word</a>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-blue-600 dark:text-blue-400">2.</span>
+                <span>Combine your cover letter and credentials with <a href="/merge-pdf/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Merge PDF</a>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-blue-600 dark:text-blue-400">3.</span>
+                <span>Reduce final PDF size under strict portal limits with <a href="/compress-pdf/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Compress PDF</a>.</span>
+              </li>
+            </ol>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60">
+            <p class="text-[11px] text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-900/20 p-2 rounded-lg border border-amber-200 dark:border-amber-800/40">
+              <i class="fa-solid fa-circle-info mr-1"></i> <strong>Note:</strong> PDF to Word extracts selectable digital text; scanned documents without digital text are not supported, and complex formatting should be refined in Word.
+            </p>
+          </div>
+        </div>
+
+        <!-- Workflow 2: Web Publishing & Media -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 p-5 flex flex-col justify-between shadow-xs">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center text-lg mb-3">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Web Publishing &amp; Content Creation</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+              Optimize visual and search assets for fast web page load speeds, higher Core Web Vitals, and social previews.
+            </p>
+            <ol class="space-y-2.5 text-xs text-slate-600 dark:text-slate-300">
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-purple-600 dark:text-purple-400">1.</span>
+                <span>Compress bulky camera photos and banner graphics with <a href="/image-compressor/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Image Compressor</a>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-purple-600 dark:text-purple-400">2.</span>
+                <span>Convert legacy PNG or JPG images into modern WebP with <a href="/image-converter/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Image Converter</a>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-purple-600 dark:text-purple-400">3.</span>
+                <span>Generate title, description, and Open Graph tags using <a href="/seo-meta-generator/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">SEO Meta Generator</a>.</span>
+              </li>
+            </ol>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60">
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">
+              <i class="fa-solid fa-gauge-high mr-1 text-purple-600"></i> Can reduce image file size to help improve page loading. Results vary depending on image content, format, and quality settings.
+            </p>
+          </div>
+        </div>
+
+        <!-- Workflow 3: Everyday Document Management -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 p-5 flex flex-col justify-between shadow-xs">
+          <div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-lg mb-3">
+              <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white mb-2">Everyday Document Management</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+              Consolidate financial receipts, bills, and physical photos into tidy, shareable digital bundles.
+            </p>
+            <ol class="space-y-2.5 text-xs text-slate-600 dark:text-slate-300">
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">1.</span>
+                <span>Bundle camera receipts or tax screenshots into a PDF via <a href="/image-to-pdf/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Image to PDF</a>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">2.</span>
+                <span>Arrange and merge multiple PDF statements together with <a href="/merge-pdf/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">Merge PDF</a>.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="font-bold text-emerald-600 dark:text-emerald-400">3.</span>
+                <span>Create touchless access links or Wi-Fi share codes with <a href="/qr-code-generator/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">QR Code Generator</a>.</span>
+              </li>
+            </ol>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60">
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">
+              <i class="fa-solid fa-shield-halved mr-1 text-emerald-600"></i> Keep sensitive financial records on your machine without cloud uploads.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Featured Guides & Walkthroughs Section -->
     <section class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-4" aria-label="Helpful Guides and Tutorials">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 pb-4 border-b border-[#E5E7EB] dark:border-slate-800">
@@ -951,7 +1095,7 @@
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-6">
         <!-- Guide Card 1: Convert PDF to JPG -->
         <a href="/blog/how-to-convert-pdf-to-jpg/" class="group block bg-white dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 hover:border-[#2563EB] dark:hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/5 transition-all p-5 flex flex-col justify-between">
           <div>
@@ -963,7 +1107,7 @@
               How to Convert PDF to JPG Online for Free (Step-by-Step)
             </h3>
             <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Extract crisp, high-resolution JPG images from multi-page PDFs directly in your web browser with zero server uploads and complete privacy.
+              Extract crisp, high-resolution JPG images from multi-page PDFs directly in your web browser with in-browser processing and zero server file storage.
             </p>
           </div>
           <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs">
@@ -1017,6 +1161,283 @@
             </span>
           </div>
         </a>
+
+        <!-- Guide Card 4: All Guides & Knowledge Base -->
+        <a href="/blog/" class="group block bg-white dark:bg-slate-800 rounded-2xl border border-[#E5E7EB] dark:border-slate-700 hover:border-[#2563EB] dark:hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/5 transition-all p-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs text-slate-400 dark:text-slate-500 mb-3">
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300">Complete Archive</span>
+              <span class="flex items-center gap-1"><i class="fa-regular fa-folder-open text-[10px]"></i> Hub</span>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 dark:text-white group-hover:text-[#2563EB] transition-colors leading-snug mb-2">
+              Explore All How-To Guides &amp; Workflow Tutorials
+            </h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Browse our complete library of walkthroughs covering document conversions, compression ratios, OCR limitations, and browser privacy tips.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700/60 flex items-center justify-between text-xs">
+            <span class="text-slate-400 font-medium text-[11px]">Archive: Tutorials &amp; Tips</span>
+            <span class="font-bold text-[#2563EB] dark:text-blue-400 inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+              Browse All <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= FREQUENTLY ASKED QUESTIONS (FAQ) SECTION ================= -->
+    <section class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 pt-10 sm:pt-14 pb-4" aria-labelledby="faqHeading">
+      <div class="flex items-center justify-between pb-3 border-b border-[#E5E7EB] dark:border-slate-800">
+        <div>
+          <span class="text-xs font-bold text-[#2563EB] dark:text-blue-400 uppercase tracking-wider">Help &amp; Answers</span>
+          <h2 id="faqHeading" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1 flex items-center gap-2">
+            <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-lg"></i> Frequently Asked Questions
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+            Common questions regarding our client-side file compression, PDF conversion, background removal, and calculator utilities.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 space-y-8">
+        <!-- FAQ Group: Image Compressor & Resizer -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+            <i class="fa-solid fa-compress text-blue-600"></i>
+            <h3>Image Compressor &amp; Resizer</h3>
+          </div>
+          <div class="space-y-2.5">
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Image Compressor &amp; Resizer: How does the target size preset (20KB, 50KB, 100KB) work?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>The tool automatically calibrates the image compression ratio and resolution algorithms in browser memory to aim for your selected target threshold, making it easy to comply with government form restrictions.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Image Compressor &amp; Resizer: Are my photos uploaded to any external server?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>No. The entire compression and resizing pipeline runs inside your browser via the HTML5 Canvas API. Your pictures never leave your local device.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Image Compressor &amp; Resizer: What output format will my compressed image be saved in?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>The compressor exports as a standard JPEG (.jpg) file, which provides the best balance of file size reduction and image clarity for online portals.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Image Compressor &amp; Resizer: Can I resize the width and height without losing quality?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>Yes. You can enter specific pixel values into the width and height input fields. Downscaling dimensions also dramatically reduces the final file weight.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+        <!-- FAQ Group: Background Remover -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+            <i class="fa-solid fa-wand-magic-sparkles text-violet-600"></i>
+            <h3>Background Remover</h3>
+          </div>
+          <div class="space-y-2.5">
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Background Remover: What types of photos work best with this background remover?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>Photos with solid, plain, or uniform studio backgrounds (such as white, grey, green screen, or studio product shots) yield the crispest results.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Background Remover: Does downloading the image add any watermarks?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>No. All images downloaded from ToolsHere are 100% free of watermarks, branding, or restrictions.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Background Remover: Why did parts of my subject disappear?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>If the subject shares very similar colors with the background, lowering the Sensitivity Threshold slider will protect those pixels from being removed.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+        <!-- FAQ Group: PDF to Word Converter -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+            <i class="fa-solid fa-file-word text-red-600"></i>
+            <h3>PDF to Word Converter</h3>
+          </div>
+          <div class="space-y-2.5">
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>PDF to Word Converter: Can I open the downloaded .doc file in Microsoft Word and Google Docs?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>The downloaded .doc file contains HTML-based Word-compatible content. It can be opened in Microsoft Word and LibreOffice Writer, although Word may display a file-format warning. Compatibility with other document editors may vary.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>PDF to Word Converter: Is there a limit on how many PDFs I can convert?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>No. You can convert as many PDF files as you need throughout the day without fees or daily caps.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>PDF to Word Converter: Are my confidential files stored anywhere?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>Never. The conversion happens in your local browser runtime. Your files are not transmitted to or stored on any server.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+        <!-- FAQ Group: Merge & Split PDF -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+            <i class="fa-solid fa-file-lines text-red-600"></i>
+            <h3>Merge &amp; Split PDF</h3>
+          </div>
+          <div class="space-y-2.5">
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Merge &amp; Split PDF: How many PDF documents can I combine at once?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>You can select multiple files at once. Memory availability on your device is the only practical constraint.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Merge &amp; Split PDF: Does this merger alter the visual layout or fonts of my PDFs?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>No, original page streams, formatting, vector text, and embedded graphics are maintained intact.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Merge &amp; Split PDF: Do I have to register an account or subscribe?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>No registration, credit card, or personal information is ever requested.</p>
+              </div>
+            </details>
+          </div>
+        </div>
+        <!-- FAQ Group: Age & Date Calculator -->
+        <div class="space-y-3">
+          <div class="flex items-center gap-2 text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+            <i class="fa-solid fa-calendar-days text-emerald-600"></i>
+            <h3>Age &amp; Date Calculator</h3>
+          </div>
+          <div class="space-y-2.5">
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Age &amp; Date Calculator: Does this calculator account for leap years?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>Yes. The algorithm dynamically checks leap years (such as February having 29 days) and exact month lengths for 100% calendar precision.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Age &amp; Date Calculator: Why is the total days lived count useful?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>Official government recruitments, medical evaluations, and insurance policies frequently specify age eligibility criteria strictly in total elapsed days.</p>
+              </div>
+            </details>
+            <details class="group rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 transition-all duration-200 shadow-2xs open:ring-1 open:ring-blue-500/20">
+              <summary class="flex items-center justify-between cursor-pointer list-none text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 p-3.5 sm:p-4 select-none focus:outline-hidden hover:text-[#2563EB] dark:hover:text-blue-400 transition-colors">
+                <span class="flex items-start gap-2.5 pr-2">
+                  <i class="fa-solid fa-circle-question text-[#2563EB] dark:text-blue-400 text-xs mt-0.5 shrink-0"></i>
+                  <span>Age &amp; Date Calculator: Can I calculate past historical dates other than birth dates?</span>
+                </span>
+                <i class="fa-solid fa-chevron-down text-slate-400 group-open:rotate-180 transition-transform duration-200 text-xs shrink-0 mt-1"></i>
+              </summary>
+              <div class="pt-2.5 pb-4 px-4 pl-9 sm:pl-10 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-700/60">
+                <p>Yes. You can select any past date to compute the exact elapsed time between that event and today.</p>
+              </div>
+            </details>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -1039,7 +1460,7 @@
 
           <div class="flex items-center gap-2 self-start sm:self-auto">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs font-semibold rounded-full border border-emerald-200 dark:border-emerald-800/80 shadow-sm">
-              <i class="fa-solid fa-lock text-emerald-500 text-[10px]"></i> 100% In-Browser Private
+              <i class="fa-solid fa-shield-check text-emerald-500 text-[10px]"></i> In-Browser File Processing
             </span>
           </div>
         </div>
@@ -1084,7 +1505,10 @@
           <span class="font-bold text-lg text-slate-900 dark:text-white tracking-tight">ToolsHere.online</span>
         </div>
         <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
-          Fast, simple, and reliable web utilities for everyday tasks. Process PDFs, compress images, calculate dates, and manage text right in your browser.
+          ToolsHere.online is an independent web utility project providing fast tools for everyday productivity. Supported document and image files are processed directly in your browser without server uploads. External services, analytics, and advertising operate under our <a href="/privacy/" class="text-blue-600 dark:text-blue-400 hover:underline">Privacy Policy</a>.
+        </p>
+        <p class="text-xs text-slate-500 dark:text-slate-400">
+          Support: <a href="mailto:support@toolshere.online" class="text-blue-600 dark:text-blue-400 hover:underline">support@toolshere.online</a>
         </p>
         <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium pt-1">
           <i class="fa-solid fa-shield-halved text-[#2563EB]"></i> Client-side browser processing
@@ -1131,6 +1555,7 @@
           <li><a href="/privacy/" class="hover:text-[#2563EB] transition-colors">Privacy Policy</a></li>
           <li><a href="/terms/" class="hover:text-[#2563EB] transition-colors">Terms of Service</a></li>
           <li><a href="/disclaimer/" class="hover:text-[#2563EB] transition-colors">Disclaimer</a></li>
+          <li><button type="button" onclick="openCookieConsentPreferences(event)" class="hover:text-[#2563EB] transition-colors text-left cursor-pointer focus:outline-hidden focus:underline text-xs" aria-label="Manage Cookie and Privacy Consent Preferences">Cookie Preferences</button></li>
         </ul>
       </div>
     </div>

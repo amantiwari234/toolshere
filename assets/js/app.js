@@ -344,7 +344,7 @@ function ensureScript(name) {
       'pdfWordModal': {
         hash: 'pdf-to-word',
         title: 'Free PDF to Word Converter Online | Convert PDF to Editable DOC — ToolsHere.online',
-        metaDesc: 'Convert PDF documents to editable Word (.doc) files right in your browser. Fast, free, confidential, and requires no email sign-up or software install.',
+        metaDesc: 'Extract selectable text from PDF documents into an editable Word-compatible (.doc) draft directly in your browser. Fast, free, confidential with zero server uploads.',
         h1: 'Free Online PDF to Word Converter (Client-Side)',
         toolId: 'pdfWord'
       },
@@ -801,11 +801,11 @@ function ensureScript(name) {
     "url": "https://toolshere.online/pdf-to-word",
     "name": "PDF to Word Converter",
     "category": "Document",
-    "cardDesc": "Convert PDF documents into editable Word (.doc) files quickly inside your browser without uploading proprietary files to external servers.",
+    "cardDesc": "Extract selectable text from digital PDF documents into an editable Word-compatible (.doc) draft directly in your browser. Best for text-based PDFs; original formatting, tables and images are not preserved.",
     "seoTitle": "Free PDF to Word Converter Online | Convert PDF to Editable DOC",
     "metaDesc": "Convert PDF documents to editable Word (.doc) files right in your browser. Fast, free, confidential, and requires no email sign-up or software install.",
     "h1": "Free Online PDF to Word Converter (Client-Side)",
-    "intro": "ToolsHere PDF to Word Converter offers an instant, confidential solution for students, educators, and office workers needing to turn static PDF documents into editable text documents. Rather than sending confidential contracts, resumes, or financial records to unfamiliar remote servers, our tool processes the document container directly in your local session. It parses the document file and outputs a cleanly structured Word-compatible .doc file that opens seamlessly in Microsoft Word, Google Docs, LibreOffice, and WPS Office. It eliminates manual retyping and saves valuable administrative time.",
+    "intro": "ToolsHere PDF to Word Converter offers an instant, confidential solution for students, educators, and office workers needing to turn static PDF documents into editable text documents. Rather than sending confidential contracts, resumes, or financial records to unfamiliar remote servers, our tool processes the document container directly in your local session. It parses the document file and outputs a cleanly structured Word-compatible .doc file that can be opened in Microsoft Word, LibreOffice, and compatible document editors. It eliminates manual retyping and saves valuable administrative time.",
     "howToUse": [
       "Click the file upload area and select a PDF file from your device.",
       "Click the 'Convert to Word (.doc)' action button.",
@@ -826,7 +826,7 @@ function ensureScript(name) {
     "faqs": [
       {
         "q": "Can I open the downloaded .doc file in Microsoft Word and Google Docs?",
-        "a": "Yes. The downloaded .doc format is universally compatible with Microsoft Office Word, Google Docs, Apple Pages, and LibreOffice."
+        "a": "The downloaded .doc file contains HTML-based Word-compatible content. It can be opened in Microsoft Word and LibreOffice Writer, although Word may display a file-format warning. Compatibility with other document editors may vary."
       },
       {
         "q": "Is there a limit on how many PDFs I can convert?",
@@ -3091,7 +3091,7 @@ function ensureScript(name) {
             <span class="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-base rounded-2xl shadow-lg shadow-red-500/25 group-hover:shadow-red-500/40 group-hover:scale-[1.02] transition-all">
               <i class="fa-solid fa-folder-open"></i> Choose PDF to Convert to Word
             </span>
-            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Converts text, formatting, and pages directly in your browser</p>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-200 mt-4">Extracts selectable text and page breaks into an editable Word-compatible draft directly in your browser.</p>
             <p id="pdfWordFileInfo" class="text-[11px] text-slate-400 mt-2">100% private client-side processing • Zero server uploads</p>
           </div>
 
@@ -3112,7 +3112,7 @@ function ensureScript(name) {
             <div class="space-y-2">
               <div class="flex justify-between items-center text-xs font-bold text-slate-700 dark:text-slate-300">
                 <span>Extracted Document Preview:</span>
-                <span class="text-emerald-600 dark:text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Text Extracted</span>
+                <span id="pdfWordStatusBadge" class="text-emerald-600 dark:text-emerald-400 flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Text Extracted</span>
               </div>
               <div id="pdfWordTextPreview" class="w-full max-h-56 overflow-y-auto p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm font-sans leading-relaxed text-slate-700 dark:text-slate-300 whitespace-pre-wrap select-text"></div>
             </div>
@@ -3178,19 +3178,75 @@ function ensureScript(name) {
           if (currentLine.trim()) pageLines.push(currentLine.trim());
 
           const pageText = pageLines.join('\n');
-          fullText += `--- PAGE ${pageNum} ---\n${pageText}\n\n`;
-          htmlPages.push(pageLines.map(line => `<p style="margin: 0 0 8pt 0; font-size: 11pt; line-height: 1.4;">${escapeHtml(line)}</p>`).join(''));
+          if (pageText.trim()) {
+            fullText += `--- PAGE ${pageNum} ---\n${pageText}\n\n`;
+            htmlPages.push(pageLines.map(line => `<p style="margin: 0 0 8pt 0; font-size: 11pt; line-height: 1.4;">${escapeHtml(line)}</p>`).join(''));
+          }
         }
 
+        if (!fullText.trim()) {
+          pdfWordExtractedText = '';
+          window.pdfWordPagesHtml = [];
+          const statusBadge = document.getElementById('pdfWordStatusBadge');
+          if (statusBadge) {
+            statusBadge.className = 'text-amber-600 dark:text-amber-400 flex items-center gap-1';
+            statusBadge.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> No Text Detected';
+          }
+          previewBox.innerHTML = `<div class="p-4 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 rounded-xl text-amber-800 dark:text-amber-200 text-xs sm:text-sm leading-relaxed space-y-2">
+            <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-amber-600"></i> No Selectable Text Found</p>
+            <p>No selectable text found in this PDF. It may be a scanned or image-only document. This tool does not currently include OCR. Please use an OCR-enabled tool to extract text.</p>
+            <div class="pt-1">
+              <button type="button" onclick="document.getElementById('pdfWordInput').click()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-bold text-xs transition-colors shadow-xs">
+                <i class="fa-solid fa-file-arrow-up"></i> Choose Another PDF
+              </button>
+            </div>
+          </div>`;
+          showToast('No selectable text found in this PDF. OCR is required for scanned documents.', 'warning');
+          return;
+        }
+
+        const statusBadge = document.getElementById('pdfWordStatusBadge');
+        if (statusBadge) {
+          statusBadge.className = 'text-emerald-600 dark:text-emerald-400 flex items-center gap-1';
+          statusBadge.innerHTML = '<i class="fa-solid fa-circle-check"></i> Text Extracted';
+        }
         pdfWordExtractedText = fullText;
         window.pdfWordPagesHtml = htmlPages;
         previewBox.innerText = fullText.slice(0, 1500) + (fullText.length > 1500 ? '\n\n[... Content continues in downloaded Word document ...]' : '');
         showToast('Document parsed successfully!', 'success');
       } catch (err) {
         console.error(err);
-        previewBox.innerText = 'Notice: Could not parse text directly. Click "Download Word Document" to generate editable draft.';
-        pdfWordExtractedText = `Converted Document: ${filename}`;
-        window.pdfWordPagesHtml = [`<p>Document: ${escapeHtml(filename)}</p>`];
+        pdfWordExtractedText = '';
+        window.pdfWordPagesHtml = [];
+        const statusBadge = document.getElementById('pdfWordStatusBadge');
+        if (statusBadge) {
+          statusBadge.className = 'text-red-600 dark:text-red-400 flex items-center gap-1';
+          statusBadge.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Parsing Error';
+        }
+        const isPassword = err && (err.name === 'PasswordException' || String(err.message || '').toLowerCase().includes('password') || String(err.message || '').toLowerCase().includes('encrypted'));
+        if (isPassword) {
+          previewBox.innerHTML = `<div class="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-xl text-red-800 dark:text-red-200 text-xs sm:text-sm leading-relaxed space-y-2">
+            <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-lock text-red-600"></i> Password-Protected PDF</p>
+            <p>This PDF is encrypted or password-protected. Please remove password encryption before converting.</p>
+            <div class="pt-1">
+              <button type="button" onclick="document.getElementById('pdfWordInput').click()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold text-xs transition-colors shadow-xs">
+                <i class="fa-solid fa-file-arrow-up"></i> Choose Another PDF
+              </button>
+            </div>
+          </div>`;
+          showToast('Cannot convert password-protected PDF files.', 'error');
+        } else {
+          previewBox.innerHTML = `<div class="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-xl text-red-800 dark:text-red-200 text-xs sm:text-sm leading-relaxed space-y-2">
+            <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-circle-exclamation text-red-600"></i> Parsing Error</p>
+            <p>Could not extract text from this PDF file. The file may be damaged or in an unsupported format.</p>
+            <div class="pt-1">
+              <button type="button" onclick="document.getElementById('pdfWordInput').click()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-bold text-xs transition-colors shadow-xs">
+                <i class="fa-solid fa-file-arrow-up"></i> Choose Another PDF
+              </button>
+            </div>
+          </div>`;
+          showToast('Could not extract text from this PDF file.', 'error');
+        }
       }
     }
 
@@ -3202,6 +3258,10 @@ function ensureScript(name) {
     function downloadPdfAsWordDoc() {
       if (!pdfWordSelectedFile) {
         showToast('Please select a PDF file first', 'error');
+        return;
+      }
+      if (!pdfWordExtractedText || !pdfWordExtractedText.trim() || !window.pdfWordPagesHtml || window.pdfWordPagesHtml.length === 0) {
+        showToast('No selectable text found in this PDF. Cannot generate an empty Word document.', 'error');
         return;
       }
       showToast('Generating formatted Microsoft Word document...', 'info');
@@ -3240,8 +3300,8 @@ function ensureScript(name) {
     }
 
     function copyPdfExtractedText() {
-      if (!pdfWordExtractedText) {
-        showToast('No text available to copy', 'error');
+      if (!pdfWordExtractedText || !pdfWordExtractedText.trim()) {
+        showToast('No selectable text available to copy', 'error');
         return;
       }
       copyText(pdfWordExtractedText);
