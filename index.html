@@ -60,6 +60,175 @@
   <link rel="preload" href="/assets/css/style.min.css" as="style">
   <link rel="stylesheet" href="/assets/css/style.min.css">
 
+  <!-- Continuous Full-Page White & Blue Aurora Flow Animation (GPU Accelerated & Reduced-Motion Compliant) -->
+  <style>
+    .homepage-aurora-wrapper {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      contain: paint;
+      background-color: #F8FAFC;
+    }
+    .dark .homepage-aurora-wrapper {
+      background-color: #0F172A;
+    }
+    .full-aurora-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .full-aurora-layer {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    .dark .full-aurora-layer {
+      mix-blend-mode: screen;
+    }
+    /* Stream 1: Top Hero & Search Ambient Stream */
+    .aurora-stream-1 {
+      width: 900px;
+      height: 520px;
+      top: 0%;
+      left: calc(50% - 450px);
+      filter: blur(75px);
+      background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.22) 0%, rgba(56, 189, 248, 0.16) 45%, rgba(147, 197, 253, 0) 70%);
+      animation: auroraFullStream1 24s ease-in-out infinite alternate;
+    }
+    /* Stream 2: Upper Tool Cards Flow (Cyan & Sky Blue) */
+    .aurora-stream-2 {
+      width: 780px;
+      height: 550px;
+      top: 15%;
+      left: -120px;
+      filter: blur(80px);
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.18) 0%, rgba(59, 130, 246, 0.14) 45%, rgba(165, 243, 252, 0) 70%);
+      animation: auroraFullStream2 28s ease-in-out infinite alternate;
+    }
+    /* Stream 3: Lower Tool Cards & Workflows Flow (Royal Blue & Light Cyan) */
+    .aurora-stream-3 {
+      width: 820px;
+      height: 580px;
+      top: 35%;
+      right: -120px;
+      filter: blur(85px);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(56, 189, 248, 0.14) 50%, rgba(219, 234, 254, 0) 75%);
+      animation: auroraFullStream3 30s ease-in-out infinite alternate;
+    }
+    /* Stream 4: In-Browser Architecture & Guides Stream (Azure & Soft Indigo) */
+    .aurora-stream-4 {
+      width: 860px;
+      height: 600px;
+      top: 58%;
+      left: calc(50% - 430px);
+      filter: blur(85px);
+      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.16) 0%, rgba(6, 182, 212, 0.13) 45%, rgba(147, 197, 253, 0) 70%);
+      animation: auroraFullStream4 32s ease-in-out infinite alternate;
+    }
+    /* Stream 5: FAQs & Footer Aurora Stream (Deep Azure & Electric Sky) */
+    .aurora-stream-5 {
+      width: 920px;
+      height: 650px;
+      top: 80%;
+      right: -100px;
+      filter: blur(90px);
+      background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.16) 0%, rgba(96, 165, 250, 0.13) 40%, rgba(165, 243, 252, 0) 70%);
+      animation: auroraFullStream5 26s ease-in-out infinite alternate;
+    }
+    /* Subtle Translucent Depth Ring in Hero */
+    .aurora-accent-ring {
+      position: absolute;
+      top: 175px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 720px;
+      height: 250px;
+      border-radius: 50%;
+      border: 1px solid rgba(147, 197, 253, 0.22);
+      box-shadow: 0 0 50px rgba(56, 189, 248, 0.08), inset 0 0 40px rgba(37, 99, 235, 0.04);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .dark .aurora-stream-1 {
+      background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.28) 0%, rgba(56, 189, 248, 0.18) 45%, rgba(147, 197, 253, 0) 70%);
+      opacity: 0.85;
+    }
+    .dark .aurora-stream-2 {
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.24) 0%, rgba(59, 130, 246, 0.18) 45%, rgba(165, 243, 252, 0) 70%);
+      opacity: 0.8;
+    }
+    .dark .aurora-stream-3 {
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.24) 0%, rgba(56, 189, 248, 0.16) 50%, rgba(219, 234, 254, 0) 75%);
+      opacity: 0.8;
+    }
+    .dark .aurora-stream-4 {
+      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.22) 0%, rgba(6, 182, 212, 0.16) 45%, rgba(147, 197, 253, 0) 70%);
+      opacity: 0.75;
+    }
+    .dark .aurora-stream-5 {
+      background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.20) 0%, rgba(96, 165, 250, 0.15) 40%, rgba(165, 243, 252, 0) 70%);
+      opacity: 0.75;
+    }
+    .dark .aurora-accent-ring {
+      border-color: rgba(56, 189, 248, 0.15);
+      box-shadow: 0 0 60px rgba(37, 99, 235, 0.15), inset 0 0 40px rgba(56, 189, 248, 0.05);
+    }
+    @keyframes auroraFullStream1 {
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(40px, 20px, 0) scale(1.08) rotate(4deg); }
+      100% { transform: translate3d(-35px, 12px, 0) scale(0.96) rotate(-3deg); }
+    }
+    @keyframes auroraFullStream2 {
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(35px, -20px, 0) scale(1.06) rotate(-4deg); }
+      100% { transform: translate3d(-20px, 25px, 0) scale(0.95) rotate(5deg); }
+    }
+    @keyframes auroraFullStream3 {
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(-35px, 25px, 0) scale(1.07) rotate(4deg); }
+      100% { transform: translate3d(25px, -15px, 0) scale(0.94) rotate(-5deg); }
+    }
+    @keyframes auroraFullStream4 {
+      0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
+      50% { transform: translate3d(25px, -20px, 0) scale(1.08); opacity: 0.88; }
+      100% { transform: translate3d(-25px, 15px, 0) scale(0.93); opacity: 0.65; }
+    }
+    @keyframes auroraFullStream5 {
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(-30px, 20px, 0) scale(1.07) rotate(-4deg); }
+      100% { transform: translate3d(20px, -15px, 0) scale(0.95) rotate(3deg); }
+    }
+    @media (max-width: 768px) {
+      .aurora-stream-1 { width: 500px; height: 350px; filter: blur(55px); }
+      .aurora-stream-2 { width: 420px; height: 360px; filter: blur(55px); left: -100px; }
+      .aurora-stream-3 { width: 440px; height: 380px; filter: blur(60px); right: -100px; }
+      .aurora-stream-4 { width: 460px; height: 400px; filter: blur(60px); }
+      .aurora-stream-5 { width: 500px; height: 420px; filter: blur(65px); right: -80px; }
+      .aurora-accent-ring { width: 360px; height: 180px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-stream-1,
+      .aurora-stream-2,
+      .aurora-stream-3,
+      .aurora-stream-4,
+      .aurora-stream-5 {
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+
   <!-- Asynchronous Google Fonts (Inter) with display=swap -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
@@ -455,87 +624,63 @@
       </div>
     </div>
 
-  <!-- ================= MAIN DASHBOARD CONTAINER ================= -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 space-y-4">
-    <!-- ================= HOME DASHBOARD VIEW ================= -->
-    <div id="homeView" class="space-y-4 sm:space-y-5">
+  <!-- ================= CONTINUOUS FULL HOMEPAGE AURORA WRAPPER ================= -->
+  <div class="homepage-aurora-wrapper relative w-full flex-grow flex flex-col overflow-hidden bg-[#F8FAFC] dark:bg-slate-900">
+    <!-- Continuous Full-Page Aurora Canvas (Flows behind all sections to bottom of page) -->
+    <div class="full-aurora-canvas pointer-events-none" aria-hidden="true">
+      <div class="full-aurora-layer aurora-stream-1"></div>
+      <div class="full-aurora-layer aurora-stream-2"></div>
+      <div class="full-aurora-layer aurora-stream-3"></div>
+      <div class="full-aurora-layer aurora-stream-4"></div>
+      <div class="full-aurora-layer aurora-stream-5"></div>
+      <div class="aurora-accent-ring"></div>
+    </div>
 
-      <!-- Hero Header & Project Introduction -->
-      <section class="pt-4 sm:pt-8 pb-2 text-center max-w-3xl mx-auto px-4">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-          Free Online Tools
-        </h1>
-        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3 max-w-2xl mx-auto leading-relaxed">
-          ToolsHere.online is an independent web utility project providing practical tools for PDF documents, image processing, text formatting, and calculations. Built for students, job applicants, office professionals, digital creators, and developers who need instant productivity without mandatory accounts, paywalls, or software downloads.
-        </p>
-        <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1.5 max-w-xl mx-auto">
-          Supported file-processing tools perform their documented operations in the browser for rapid, confidential document handling.
-        </p>
+    <!-- ================= MAIN DASHBOARD CONTAINER ================= -->
+    <main class="relative z-10 flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 space-y-4">
+      <!-- ================= HOME DASHBOARD VIEW ================= -->
+      <div id="homeView" class="space-y-4 sm:space-y-5">
 
-        <!-- Prominent Full-Width Search Bar Below Heading -->
-        <div class="mt-4 sm:mt-6 max-w-xl mx-auto">
-          <div class="relative flex items-center bg-white dark:bg-slate-800 border border-[#E5E7EB] dark:border-slate-700 rounded-xl shadow-xs hover:border-slate-300 dark:hover:border-slate-600 focus-within:border-[#2563EB] focus-within:ring-4 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30 transition-all p-1.5 pl-3.5 sm:pl-4 min-h-[48px]">
-            <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm mr-2.5"></i>
-            <input type="text" id="heroSearchInput" onkeyup="filterToolsByQuery(this.value)" placeholder="Search any tool (e.g. compress, merge, emi, background)..." class="w-full py-2 text-xs sm:text-sm bg-transparent text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none font-medium">
-            <span id="searchResultCount" class="hidden text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 text-[#2563EB] dark:bg-blue-900/50 dark:text-blue-300 mr-2 shrink-0"></span>
-            
-            <button type="button" onclick="clearHeroSearch()" id="heroClearBtn" class="hidden w-8 h-8 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 active:scale-90" title="Clear search">
-              <i class="fa-solid fa-xmark text-xs"></i>
-            </button>
+        <!-- Hero Header & Project Introduction -->
+        <section class="relative pt-3 sm:pt-6 pb-2 text-center max-w-4xl mx-auto px-4">
+          <div class="max-w-3xl mx-auto">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+              Free Online Tools
+            </h1>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1.5 max-w-xl mx-auto leading-relaxed">
+              An independent suite of fast, free utilities for PDF, image, text, and everyday calculations. Supported files are processed directly in your browser without server uploads.
+            </p>
+
+            <!-- Prominent Full-Width Search Bar Below Heading -->
+            <div class="mt-3 sm:mt-4 max-w-xl mx-auto">
+              <div class="relative flex items-center bg-white dark:bg-slate-800 border border-[#E5E7EB] dark:border-slate-700 rounded-xl shadow-xs hover:border-slate-300 dark:hover:border-slate-600 focus-within:border-[#2563EB] focus-within:ring-4 focus-within:ring-blue-100 dark:focus-within:ring-blue-900/30 transition-all p-1.5 pl-3.5 sm:pl-4 min-h-[46px]">
+                <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm mr-2.5"></i>
+                <input type="text" id="heroSearchInput" onkeyup="filterToolsByQuery(this.value)" placeholder="Search any tool (e.g. compress, merge, emi, background)..." class="w-full py-2 text-xs sm:text-sm bg-transparent text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none font-medium">
+                <span id="searchResultCount" class="hidden text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 text-[#2563EB] dark:bg-blue-900/50 dark:text-blue-300 mr-2 shrink-0"></span>
+                <button type="button" onclick="clearHeroSearch()" id="heroClearBtn" class="hidden w-8 h-8 flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 active:scale-90" title="Clear search">
+                  <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Horizontally Scrollable Category Filter Chips -->
+            <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar sm:flex-wrap sm:justify-center mt-3 sm:mt-4 px-1 scroll-smooth">
+              <button onclick="filterCategory('all')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white shadow-xs transition-all text-xs font-semibold min-h-[32px] sm:min-h-[34px] flex items-center justify-center active:scale-95" data-cat="all">All Tools</button>
+              <button onclick="filterCategory('pdf')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[32px] sm:min-h-[34px] flex items-center justify-center active:scale-95" data-cat="pdf">PDF Tools</button>
+              <button onclick="filterCategory('image')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[32px] sm:min-h-[34px] flex items-center justify-center active:scale-95" data-cat="image">Image Tools</button>
+              <button onclick="filterCategory('text')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[32px] sm:min-h-[34px] flex items-center justify-center active:scale-95" data-cat="text">Text Tools</button>
+              <button onclick="filterCategory('calc')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[32px] sm:min-h-[34px] flex items-center justify-center active:scale-95" data-cat="calc">Calculators</button>
+              <button onclick="filterCategory('dev')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[32px] sm:min-h-[34px] flex items-center justify-center active:scale-95" data-cat="dev">Developer</button>
+              <button onclick="filterCategory('security')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[32px] sm:min-h-[34px] flex items-center justify-center active:scale-95" data-cat="security">Security</button>
+            </div>
           </div>
+        </section>
 
-          <!-- Useful Search Suggestions -->
-          <div class="flex items-center justify-center gap-1.5 mt-2.5 flex-wrap text-xs text-slate-400 dark:text-slate-500 font-medium">
-            <span class="text-[11px] text-slate-400">Popular searches:</span>
-            <button type="button" onclick="setSearchSuggestion('compress')" class="px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-[#E5E7EB] dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#2563EB] hover:text-[#2563EB] text-[11px] transition-colors">compress</button>
-            <button type="button" onclick="setSearchSuggestion('pdf')" class="px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-[#E5E7EB] dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#2563EB] hover:text-[#2563EB] text-[11px] transition-colors">pdf</button>
-            <button type="button" onclick="setSearchSuggestion('age')" class="px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-[#E5E7EB] dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#2563EB] hover:text-[#2563EB] text-[11px] transition-colors">age</button>
-            <button type="button" onclick="setSearchSuggestion('background')" class="px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-[#E5E7EB] dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#2563EB] hover:text-[#2563EB] text-[11px] transition-colors">background</button>
-            <button type="button" onclick="setSearchSuggestion('qr')" class="px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-[#E5E7EB] dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#2563EB] hover:text-[#2563EB] text-[11px] transition-colors">qr</button>
-          </div>
-        </div>
-
-        <!-- Horizontally Scrollable Category Filter Tabs on Mobile -->
-        <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar sm:flex-wrap sm:justify-center mt-4 sm:mt-5 px-1 scroll-smooth">
-          <button onclick="filterCategory('all')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-[#2563EB] text-white shadow-xs transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95" data-cat="all">All Tools</button>
-          <button onclick="filterCategory('pdf')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95" data-cat="pdf">PDF Tools</button>
-          <button onclick="filterCategory('image')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95" data-cat="image">Image Tools</button>
-          <button onclick="filterCategory('text')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95" data-cat="text">Text Tools</button>
-          <button onclick="filterCategory('calc')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95" data-cat="calc">Calculators</button>
-          <button onclick="filterCategory('dev')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95" data-cat="dev">Developer</button>
-          <button onclick="filterCategory('security')" class="cat-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-[#E5E7EB] dark:border-slate-700 hover:border-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-xs font-semibold min-h-[34px] flex items-center justify-center active:scale-95" data-cat="security">Security</button>
-        </div>
-      </section>
-
-      <!-- Quick Category Shortcuts Bar -->
-      <section id="popularSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="p-3 sm:p-4 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-[#E5E7EB] dark:border-slate-700/80 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div class="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
-            <i class="fa-solid fa-bolt-lightning text-amber-500"></i>
-            <span>Quick Category Jump:</span>
-          </div>
-          <div class="flex items-center gap-1.5 flex-wrap justify-center text-xs">
-            <button type="button" onclick="filterCategory('pdf')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-red-400 hover:text-red-600 transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
-              <i class="fa-solid fa-file-pdf text-red-500"></i> PDF Utilities
-            </button>
-            <button type="button" onclick="filterCategory('image')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-blue-400 hover:text-[#2563EB] transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
-              <i class="fa-solid fa-image text-[#2563EB]"></i> Image Tools
-            </button>
-            <button type="button" onclick="filterCategory('calc')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-emerald-400 hover:text-emerald-600 transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
-              <i class="fa-solid fa-calculator text-emerald-600"></i> Calculators
-            </button>
-            <button type="button" onclick="filterCategory('text')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-purple-400 hover:text-purple-600 transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
-              <i class="fa-solid fa-font text-purple-600"></i> Text Tools
-            </button>
-            <button type="button" onclick="filterCategory('dev')" class="px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold hover:border-cyan-400 hover:text-cyan-600 transition-colors shadow-2xs flex items-center gap-1.5 active:scale-95">
-              <i class="fa-solid fa-code text-cyan-600"></i> Developer
-            </button>
-          </div>
-        </div>
-      </section>
+      <!-- Popular section hook preserved for JavaScript toggle compatibility -->
+      <div id="popularSection" class="hidden" aria-hidden="true"></div>
 
       <!-- Main Tools Section Heading -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2">
         <div class="flex items-center justify-between pb-2 border-b border-[#E5E7EB] dark:border-slate-800">
           <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">All Available Tools</h2>
           <span class="text-xs text-slate-400 font-medium">16 Client-Side Utilities</span>
@@ -1493,7 +1638,7 @@
 
   <!-- ================= GLOBAL MODAL / BOTTOM SHEET CONTAINER ================= -->
   <!-- ================= GLOBAL FOOTER ================= -->
-  <footer class="bg-white dark:bg-slate-900 border-t border-[#E5E7EB] dark:border-slate-800 py-12 px-4 sm:px-6 lg:px-8 mt-16 text-slate-600 dark:text-slate-400">
+  <footer class="relative z-10 bg-white/75 dark:bg-slate-900/80 backdrop-blur-md border-t border-[#E5E7EB] dark:border-slate-800 py-12 px-4 sm:px-6 lg:px-8 mt-16 text-slate-600 dark:text-slate-400">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8 mb-10">
       
       <!-- Brand column -->
@@ -1572,6 +1717,7 @@
       </div>
     </div>
   </footer>
+  </div>
 
   <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
   <!-- Core Minified Application Script (Deferred & Cached) -->
