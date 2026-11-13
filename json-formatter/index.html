@@ -11,8 +11,8 @@
       }
     }
   </script>
-  <title>JSON Formatter & Validator: Beautify & Minify - ToolsHere</title>
-  <meta name="description" content="Format, beautify, validate, and minify JSON data online. Inspect syntax errors with clear line indicators. 100% client-side for secure API debugging.">
+  <title>JSON Formatter & Validator: Beautify, Minify & Validate - ToolsHere</title>
+  <meta name="description" content="Format, beautify, validate, and minify JSON online. Catch syntax errors with line and column indicators, sort keys, and inspect payload size client-side.">
   <meta name="keywords" content="json formatter, online tools, free web utilities, developer tools, toolshere">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://toolshere.online/json-formatter/">
@@ -21,8 +21,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Toolshere">
   <meta property="og:url" content="https://toolshere.online/json-formatter/">
-  <meta property="og:title" content="JSON Formatter & Validator: Beautify & Minify - ToolsHere">
-  <meta property="og:description" content="Format, beautify, validate, and minify JSON data online. Inspect syntax errors with clear line indicators. 100% client-side for secure API debugging.">
+  <meta property="og:title" content="JSON Formatter & Validator: Beautify, Minify & Validate - ToolsHere">
+  <meta property="og:description" content="Format, beautify, validate, and minify JSON online. Catch syntax errors with line and column indicators, sort keys, and inspect payload size client-side.">
   <meta property="og:image" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:type" content="image/png">
@@ -33,8 +33,8 @@
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://toolshere.online/json-formatter/">
-  <meta property="twitter:title" content="JSON Formatter & Validator: Beautify & Minify - ToolsHere">
-  <meta property="twitter:description" content="Format, beautify, validate, and minify JSON data online. Inspect syntax errors with clear line indicators. 100% client-side for secure API debugging.">
+  <meta property="twitter:title" content="JSON Formatter & Validator: Beautify, Minify & Validate - ToolsHere">
+  <meta property="twitter:description" content="Format, beautify, validate, and minify JSON online. Catch syntax errors with line and column indicators, sort keys, and inspect payload size client-side.">
   <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
 
   <!-- Favicon & Touch Icons (Google Search Best Practice: 48x48 PNG First) -->
@@ -141,7 +141,7 @@
   "@type": "WebApplication",
   "name": "JSON Formatter & Validator",
   "url": "https://toolshere.online/json-formatter/",
-  "description": "Format, beautify, validate, and minify JSON data online. Inspect syntax errors with clear line indicators. 100% client-side for secure API debugging.",
+  "description": "Format, beautify, validate, and minify JSON online. Catch syntax errors with line and column indicators, sort keys, and inspect payload size client-side.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "All modern browsers (Chrome, Firefox, Safari, Edge, Android, iOS)",
   "offers": {
@@ -184,26 +184,58 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Why is client-side JSON formatting safer for developers?",
+      "name": "How does the JSON Formatter validate and format JSON?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Many developer payloads include authorization tokens, user passwords, or confidential database records. Because ToolsHere runs entirely in your local browser, your private data is never sent to a remote server."
+        "text": "The tool validates and formats JSON using your browser's native JavaScript engine via standard JSON.parse() and JSON.stringify(). When you enter text, the parser first checks syntax compliance with RFC 8259. If valid, the serializer outputs clean hierarchical text using your chosen indentation (2 spaces, 4 spaces, or tabs). If syntax errors are found, a dedicated scanner analyzes the text to report the exact line and column numbers alongside a visual code excerpt. All processing occurs locally in browser memory."
       }
     },
     {
       "@type": "Question",
-      "name": "Why did the validator flag an error on my JSON?",
+      "name": "Why are single quotes and trailing commas rejected?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Common causes of invalid JSON include single quotes instead of double quotes around keys/strings, trailing commas after the last item, or unclosed brackets."
+        "text": "Single quotes and trailing commas are rejected because the official JSON specification (RFC 8259 and ECMA-404) explicitly forbids them. In standard JSON, all strings and object keys must use double quotes (\"key\": \"value\"), and elements in arrays or objects cannot be followed by a trailing comma. While languages like JavaScript and extensions like JSON5 permit trailing commas and single quotes, standard JSON parsers in APIs, databases, and microservices will reject them. The tool enforces standard JSON to ensure interoperability across platforms."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I minify large JSON files for production use?",
+      "name": "Does formatting or minifying change JSON values?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Minifying strips unnecessary whitespace and line breaks, minimizing the payload size for API requests and mobile app efficiency."
+        "text": "For ordinary valid JSON, formatting and minifying only modify whitespace, line breaks, and indentation without changing any underlying data values, strings, booleans, or numbers. However, data changes can occur in two specific edge cases: (1) if an object contains duplicate keys, standard JSON.parse() keeps only the last occurrence and discards previous ones; and (2) if numbers exceed JavaScript's safe integer threshold (9,007,199,254,740,991), IEEE 754 64-bit floating-point limitations will cause precision loss. In addition, checking Sort Keys will reorder object properties alphabetically."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the large integer precision warning?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JavaScript integers are guaranteed to be represented exactly only within the safe integer range, from -(2^53 - 1) to +(2^53 - 1). Some 16-digit integers are still safe; precision loss becomes possible when an integer exceeds Number.MAX_SAFE_INTEGER (9,007,199,254,740,991). For large identifiers such as database BIGINTs and Snowflake IDs, use quoted JSON strings to preserve their exact digits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when JSON contains duplicate keys?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When an object contains duplicate keys (such as {\"id\": 1, \"id\": 2}), RFC 8259 notes that parser behavior is unpredictable. In standard JavaScript and this tool, JSON.parse() processes keys in order, meaning subsequent duplicate keys overwrite earlier ones, resulting in only {\"id\": 2}. Because this causes silent data loss, ToolsHere includes a duplicate-key detection scanner that inspects the raw text and displays an amber warning banner with the duplicate key name and line numbers before you save or format the data."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does key sorting work, including integer-like keys?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When you enable Sort Keys Alphabetically (A–Z), the tool recursively sorts object properties using String.prototype.localeCompare(). However, developers should note that ECMAScript defines strict property traversal rules: properties that qualify as non-negative integer indices (such as \"0\", \"1\", \"10\", \"2\") are always enumerated first in ascending numerical order, followed by other string keys in alphabetical order. In addition, sorting applies strictly to object keys; array element order is preserved exactly as written."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to paste confidential API keys or production tokens?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSON parsing, validation, formatting, and minification execute entirely client-side in your web browser session and are never transmitted to our servers. However, as general security hygiene, you should not paste highly confidential production credentials, live database passwords, or unmasked authorization tokens into any online browser tool unless you are fully comfortable with the site's data-handling practices and your local browser extensions. Whenever possible, sanitize or redact sensitive tokens with placeholder strings before formatting."
       }
     }
   ]
@@ -377,7 +409,7 @@
             Free Online JSON Formatter, Beautifier & Validator
           </h1>
           <p class="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 mt-1 max-w-3xl leading-relaxed">
-            Format, beautify, validate, and minify JSON data online. Inspect syntax errors with clear line indicators. 100% client-side for secure API debugging.
+            Format, beautify, validate, and minify JSON online. Catch syntax errors with line and column indicators, sort keys, and inspect payload size client-side.
           </p>
         </div>
       </div>
@@ -495,9 +527,9 @@
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-[10px] text-emerald-600"></i> 100% In-Browser Privacy</span>
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About JSON Formatter & Validator &amp; Core Utility</h2>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About ToolsHere JSON Formatter, Beautifier & Validator</h2>
         <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
-          <p>ToolsHere JSON Formatter & Validator is a fast, secure debugging utility engineered for software engineers, backend developers, API testers, and student programmers. Working with unformatted, minified single-line API responses can make debugging tedious and error-prone. With this tool, simply paste your JSON string and click 'Beautify JSON' to format it with clean 2-space indentation, or click 'Minify JSON' to compress payloads for network transmission. If your JSON contains a trailing comma, unquoted key, or bracket mismatch, our validator flags the exact syntax error immediately, all within your browser memory so sensitive API keys and user data never leave your computer.</p>
+          <p>ToolsHere JSON Formatter & Validator is an in-browser developer utility designed to inspect, beautify, validate, and minify JSON (JavaScript Object Notation) data. Built on native ECMAScript parsing and serialization engines (<code>JSON.parse()</code> and <code>JSON.stringify()</code>), the tool formats raw API payloads with configurable indentation (2 spaces, 4 spaces, or tabs) and compresses payloads into single-line strings for network efficiency. If your data contains syntax violations—such as trailing commas, single-quoted strings, or unescaped characters—the built-in syntax diagnostic scanner pinpoints the exact line, column, and code excerpt with a visual caret pointer. Furthermore, the tool alerts you to duplicate object keys and integers exceeding JavaScript's safe precision threshold. All JSON parsing, formatting, sorting, and minification execute entirely within your local browser session.</p>
         </div>
       </div>
 
@@ -510,27 +542,32 @@
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">1</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Paste your raw JSON text or API response into the editor window.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Paste your raw JSON text or API response into the editor, or click 'Sample JSON' to test with an example payload.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">2</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Beautify JSON' to reformat with neat, legible 2-space hierarchy indentation.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Choose your preferred indentation from the Indentation dropdown: 2 Spaces (default), 4 Spaces, or Tabs (\t).</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Minify JSON' if you want to strip all whitespace and compress it into a compact payload.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Optionally check 'Sort Keys Alphabetically (A–Z)' if you want object properties ordered lexicographically.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">4</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">If the JSON is invalid, an error toast will explain the syntax issue.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Beautify JSON' to format the data with clean hierarchical indentation, or click 'Minify JSON' to strip all extraneous whitespace into a compact single-line string.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">5</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click the copy button to copy the validated result to your clipboard.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">If the input contains syntax errors, inspect the persistent error banner below the editor for the exact line number, column number, and caret code excerpt.</span>
+            </li>
+
+            <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">6</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Copy JSON' to copy the formatted output to your clipboard, or click 'Download .json' to save the output locally as a formatted.json file.</span>
             </li>
 
         </ol>
@@ -545,27 +582,47 @@
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Instant JSON beautification with clean 2-space hierarchical indentation.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Native In-Browser Engine: Formats and parses data using browser-standard JSON.parse() and JSON.stringify().</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">One-click payload minification removing unnecessary whitespace.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Flexible Indentation Levels: Supports 2-space, 4-space, and tab-based indentation with automatic in-editor Tab key handling.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Real-time syntax validation identifying malformed keys, quotes, or missing commas.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">One-Click Minification: Strips all whitespace, line breaks, and indentation to produce compact single-line JSON.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">One-click clipboard copy button with confetti and notification confirmation.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Detailed Syntax Error Diagnostics: Identifies exact line and column numbers with a 3-line contextual code excerpt and caret pointer.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">100% confidential client-side processing protecting proprietary API keys and tokens.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Duplicate Key Detection: Proactively warns when objects contain duplicate keys that would otherwise be silently collapsed.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">64-Bit Integer Precision Warning: Flags numbers exceeding Number.MAX_SAFE_INTEGER (9,007,199,254,740,991) that may suffer precision loss.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Alphabetical Key Sorting: Recursively sorts object properties alphabetically (A–Z) while preserving array element sequence.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Productivity Toolbar: Includes clipboard Paste, Undo history stack, Clear, Sample JSON loader, Copy, and client-side .json File Download.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Live Payload Statistics: Displays line counts, character counts, UTF-8 byte size, and real-time minification compression percentage.</span>
             </div>
 
         </div>
@@ -579,17 +636,29 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Standard JSON objects, arrays, strings, and primitives</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Standard RFC 8259 / ECMA-404 JSON (objects, arrays, strings, numbers, booleans, and null)</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Beautified indented JSON or minified single-line JSON string</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Beautified indented JSON (2 spaces, 4 spaces, or tabs) or minified single-line JSON string</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Requires valid standard JSON syntax (strict double quotes for strings and keys; comments are not standard JSON).</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Strict standard JSON only; does not support JSON5, JSONC, comments, single quotes, or trailing commas; does not auto-repair invalid syntax</span>
           </div>
         </div>
+
+    <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
+      <div class="flex items-center gap-2 font-bold text-blue-900 dark:text-blue-300">
+        <i class="fa-solid fa-circle-info text-blue-600"></i> Strict Standard JSON Compliance
+      </div>
+      <p class="leading-relaxed">
+        <strong>RFC 8259 Standard:</strong> This tool parses data using strict standard JSON specifications. Object keys and string values must be enclosed in double quotes (<code>"..."</code>). Non-standard constructs such as single quotes, trailing commas, comments (<code>//</code> or <code>/* */</code>), hexadecimal numbers, and unquoted keys will be flagged as syntax errors.
+      </p>
+      <p class="leading-relaxed">
+        <strong>Diagnostics, Not Auto-Repair:</strong> The tool pinpoints the exact line and column of syntax errors to help you locate and fix them manually. It does not alter your syntax or guess intent by automatically inserting missing quotes or stripping commas.
+      </p>
+    </div>
 
       </section>
 
@@ -602,21 +671,338 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Formatting compressed API JSON responses into human-readable indented structures.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Beautifying unreadable, minified REST API responses and GraphQL outputs into legible hierarchical structures.
             </div>
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Validating complex payload syntax to catch missing commas, quotes, and brackets.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Validating configuration payloads, package manifests, and database exports against strict RFC 8259 JSON syntax.
             </div>
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Minifying configuration files to strip unnecessary whitespace for production deployments.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Minifying JSON data before storing in database columns or transmitting over network connections to reduce byte size.
+            </div>
+
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Sorting object keys alphabetically across JSON schemas to simplify git diff comparisons and code reviews.
+            </div>
+
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Inspecting nested API payloads for duplicate keys and unsafe 64-bit integers prior to client-side parsing.
             </div>
 
         </div>
       </section>
 
 
+
+    <!-- Comprehensive Educational & Technical Guide -->
+    <section class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      <div class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+          <i class="fa-solid fa-book-code text-blue-600"></i> Deep Dive: JSON Standards, Precision &amp; Formatting Mechanics
+        </h2>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          JSON (JavaScript Object Notation) is the ubiquitous data interchange format of the modern web, standardized under <strong>RFC 8259</strong> and <strong>ECMA-404</strong>. While human-readable and lightweight, JSON is governed by rigid grammatical constraints. Understanding the nuances of strict standard JSON, browser parser behaviors, floating-point precision boundaries, and payload optimization is critical for building robust APIs and debugging production services.
+        </p>
+      </div>
+
+      <!-- Section 1: Standard JSON vs JSON5 and JSONC -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-code-compare text-blue-600"></i> 1. Standard JSON (RFC 8259) vs. JSON5 &amp; JSONC
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Many modern development environments allow relaxed syntax in configuration files (such as VS Code's <code>settings.json</code> or TypeScript's <code>tsconfig.json</code>). However, these configuration formats are often <strong>JSON5</strong> or <strong>JSONC</strong> (JSON with Comments), which are supersets of JSON and are strictly incompatible with standard RFC 8259 JSON parsers:
+        </p>
+        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
+              <tr>
+                <th class="p-3">Feature</th>
+                <th class="p-3">Standard JSON (RFC 8259)</th>
+                <th class="p-3">JSON5 &amp; JSONC</th>
+                <th class="p-3">Parser Compatibility</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 font-mono text-xs">
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold font-sans">String &amp; Key Quotes</td>
+                <td class="p-3 text-emerald-600 dark:text-emerald-400">Strictly Double Quotes (<code class="text-[11px]">"key"</code>)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Single quotes or unquoted identifiers</td>
+                <td class="p-3 font-sans text-slate-600 dark:text-slate-300">Standard parsers reject single quotes</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold font-sans">Comments</td>
+                <td class="p-3 text-rose-600 dark:text-rose-400">Forbidden (No <code class="text-[11px]">//</code> or <code class="text-[11px]">/* */</code>)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Supported (single-line &amp; multi-line)</td>
+                <td class="p-3 font-sans text-slate-600 dark:text-slate-300">Standard <code class="text-[11px]">JSON.parse()</code> throws SyntaxError</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold font-sans">Trailing Commas</td>
+                <td class="p-3 text-rose-600 dark:text-rose-400">Forbidden (<code class="text-[11px]">[1, 2,]</code> is invalid)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Permitted in arrays and objects</td>
+                <td class="p-3 font-sans text-slate-600 dark:text-slate-300">Strictly rejected by RFC 8259 parsers</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold font-sans">Numeric Formats</td>
+                <td class="p-3 text-emerald-600 dark:text-emerald-400">Base-10 decimals, exponents (<code class="text-[11px]">1e3</code>)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Hex (<code class="text-[11px]">0xFF</code>), leading decimals (<code class="text-[11px]">.5</code>), NaN, Infinity</td>
+                <td class="p-3 font-sans text-slate-600 dark:text-slate-300">Standard JSON requires leading digit (<code class="text-[11px]">0.5</code>)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+          <strong>Interoperability Rule:</strong> When publishing or consuming REST API responses, webhooks, or database JSON records, you must always adhere strictly to RFC 8259. This tool validates against standard JSON to guarantee compatibility across diverse server environments (Go, Python, Java, Rust, Node.js).
+        </p>
+      </div>
+
+      <!-- Section 2: Common Syntax Errors & Step-by-Step Corrections -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> 2. Common JSON Syntax Errors &amp; How to Fix Them
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          When <code class="text-xs font-mono">JSON.parse()</code> fails, browser errors are often cryptic (such as &ldquo;Unexpected token at position 42&rdquo;). ToolsHere's built-in syntax analyzer scans the tokens to pinpoint the underlying grammatical issue. Here are the most frequent JSON syntax mistakes and their corrections:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h4 class="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-xmark text-rose-600"></i> Single Quotes Instead of Double Quotes
+            </h4>
+            <div class="p-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 font-mono text-xs text-rose-800 dark:text-rose-300">
+              <span class="text-rose-500 font-bold block mb-1">Invalid:</span>
+              {'name': 'Alice', 'role': 'admin'}
+            </div>
+            <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 font-mono text-xs text-emerald-800 dark:text-emerald-300">
+              <span class="text-emerald-500 font-bold block mb-1">Correct:</span>
+              {"name": "Alice", "role": "admin"}
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Standard JSON requires double quotes around both property keys and string values. Single quotes are never permitted.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h4 class="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-xmark text-rose-600"></i> Trailing Commas After Last Element
+            </h4>
+            <div class="p-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 font-mono text-xs text-rose-800 dark:text-rose-300">
+              <span class="text-rose-500 font-bold block mb-1">Invalid:</span>
+              {"items": ["apple", "banana",], "total": 2,}
+            </div>
+            <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 font-mono text-xs text-emerald-800 dark:text-emerald-300">
+              <span class="text-emerald-500 font-bold block mb-1">Correct:</span>
+              {"items": ["apple", "banana"], "total": 2}
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              In standard JSON, commas serve strictly as element separators. Placing a trailing comma immediately before <code class="text-xs font-mono">}</code> or <code class="text-xs font-mono">]</code> is a syntax error.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h4 class="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-xmark text-rose-600"></i> Unquoted Object Keys
+            </h4>
+            <div class="p-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 font-mono text-xs text-rose-800 dark:text-rose-300">
+              <span class="text-rose-500 font-bold block mb-1">Invalid:</span>
+              {status: "active", count: 10}
+            </div>
+            <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 font-mono text-xs text-emerald-800 dark:text-emerald-300">
+              <span class="text-emerald-500 font-bold block mb-1">Correct:</span>
+              {"status": "active", "count": 10}
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              While JavaScript object literals allow unquoted identifier keys, JSON requires every property key to be an explicit double-quoted string.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h4 class="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-xmark text-rose-600"></i> Unescaped Control Characters &amp; Newlines
+            </h4>
+            <div class="p-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 font-mono text-xs text-rose-800 dark:text-rose-300">
+              <span class="text-rose-500 font-bold block mb-1">Invalid:</span>
+              {"bio": "Line one<br>Line two"} (raw newline)
+            </div>
+            <div class="p-2.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 font-mono text-xs text-emerald-800 dark:text-emerald-300">
+              <span class="text-emerald-500 font-bold block mb-1">Correct:</span>
+              {"bio": "Line one\nLine two"} (escaped \n)
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+              Literal line breaks and control characters are illegal inside JSON string values. They must be escaped using <code class="text-xs font-mono">\n</code>, <code class="text-xs font-mono">\r</code>, or <code class="text-xs font-mono">\t</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Large Integer Precision & Safe ID Representation -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-calculator text-blue-600"></i> 3. 64-Bit Integer Precision &amp; Safe ID Representation
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          A common and dangerous pitfall when handling JSON in JavaScript environments is <strong>floating-point precision loss</strong> on large integer identifiers. The ECMAScript specification defines all numbers as IEEE 754 double-precision 64-bit binary floating-point values. Under this standard, exact integer precision is guaranteed only up to:
+        </p>
+        <div class="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs sm:text-sm text-center">
+          Number.MAX_SAFE_INTEGER = 2<sup>53</sup> &minus; 1 = 9,007,199,254,740,991
+        </div>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          When backend databases (such as PostgreSQL, MySQL, or distributed key generators) emit 64-bit integers—such as database <code>BIGINT</code> primary keys, Discord/Twitter <strong>Snowflake IDs</strong>, or transaction timestamps—integers exceeding $9,007,199,254,740,991$ will be rounded or truncated during client-side <code>JSON.parse()</code>. For example:
+        </p>
+        <div class="p-3.5 bg-amber-50/70 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/60 text-xs font-mono text-amber-900 dark:text-amber-200 space-y-1">
+          <p><span class="font-bold">Raw JSON input:</span> {"snowflake_id": 1856729012345678901}</p>
+          <p><span class="font-bold">Parsed in JavaScript:</span> {"snowflake_id": 1856729012345678800} <span class="text-rose-600 font-bold">&larr; Precision Loss!</span></p>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          <strong>Best Practice for APIs:</strong> ToolsHere includes an automated scanner that flags integers with 16 or more digits exceeding <code class="text-xs font-mono">Number.MAX_SAFE_INTEGER</code>. Whenever you design or consume APIs handling 64-bit identifiers, always encode them as quoted strings (e.g. <code class="text-xs font-mono">"snowflake_id": "1856729012345678901"</code>) to preserve bit-level accuracy across all platforms.
+        </p>
+      </div>
+
+      <!-- Section 4: Duplicate Keys & JavaScript Parser Behavior -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-clone text-blue-600"></i> 4. Duplicate Object Keys &amp; JavaScript Parser Behavior
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Section 4 of RFC 8259 states that object keys <em>should</em> be unique, but does not define how parsers must behave when duplicate keys exist. In standard JavaScript and ECMAScript engines, executing <code class="text-xs font-mono">JSON.parse()</code> over duplicate keys silently applies a <strong>last-write-wins</strong> policy:
+        </p>
+        <div class="p-3.5 bg-slate-100 dark:bg-slate-800 rounded-xl font-mono text-xs text-slate-800 dark:text-slate-200 space-y-1">
+          <p><span class="font-bold text-slate-500">// Original Payload:</span></p>
+          <p>{"userId": 101, "role": "viewer", "role": "admin"}</p>
+          <p><span class="font-bold text-slate-500">// Result after JSON.parse() and formatting:</span></p>
+          <p class="text-emerald-600 dark:text-emerald-400">{"userId": 101, "role": "admin"}</p>
+        </div>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Because the earlier key (<code class="text-xs font-mono">"role": "viewer"</code>) is discarded without an exception being thrown, developers may fail to notice that configuration settings or database updates have been overwritten. To safeguard your workflow, ToolsHere parses the raw token stream with a custom duplicate-key detector and highlights any repeated keys in an amber warning box with their exact line locations.
+        </p>
+      </div>
+
+      <!-- Section 5: Formatting vs Minification: Performance & Use Cases -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-compress text-blue-600"></i> 5. Formatting vs. Minification: When to Use Each
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          JSON indentation and minification serve opposing but complementary roles across software engineering workflows:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-align-left text-blue-600"></i> Beautified JSON (Indented)
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Formats data with 2 spaces, 4 spaces, or tab indentations alongside structural line breaks. Ideal for:
+            </p>
+            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1 list-disc pl-4">
+              <li>Human inspection of nested API responses and error messages during debugging.</li>
+              <li>Version-controlled configuration files (e.g. <code class="font-mono">package.json</code>) where clean diffs are essential.</li>
+              <li>Technical documentation, tutorials, and API reference examples.</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-file-zipper text-emerald-600"></i> Minified JSON (Compact)
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Strips all leading spaces, trailing whitespace, and line breaks into a continuous single string. Ideal for:
+            </p>
+            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1 list-disc pl-4">
+              <li>High-throughput HTTP request and response payloads between microservices.</li>
+              <li>Storing structured configuration strings in SQL/NoSQL document columns.</li>
+              <li>Reducing mobile data consumption and transmission latency over cellular networks.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6: Key Sorting Mechanics & ECMAScript Property Ordering -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-arrow-down-a-z text-blue-600"></i> 6. Alphabetical Key Sorting &amp; Property Order Nuances
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          When comparing two JSON payloads in Git or automated testing suites, differences in object property ordering create noisy diffs even when the data is semantically identical. Checking <strong>Sort Keys Alphabetically (A–Z)</strong> or clicking <strong>Sort Keys</strong> recursively orders object keys using <code class="text-xs font-mono">String.prototype.localeCompare()</code>.
+        </p>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          However, developers should understand an important nuance of modern JavaScript engine specifications (ECMAScript 2015+):
+        </p>
+        <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-xl border border-blue-200 dark:border-blue-800/60 text-xs text-slate-700 dark:text-slate-300 space-y-1.5">
+          <p class="font-bold text-blue-900 dark:text-blue-200">The ECMAScript OrdinaryOwnPropertyKeys Traversal Rule:</p>
+          <p class="leading-relaxed">
+            In JavaScript engines, object property keys that parse as integer indices (such as <code class="font-mono">"0"</code>, <code class="font-mono">"1"</code>, <code class="font-mono">"2"</code>, <code class="font-mono">"10"</code>) are always iterated first in ascending numerical order, followed by general string keys in their specified sort order. If an object mixes integer-like keys with alphabetic keys, the numeric properties will precede the alphabetical properties in the serialized output.
+          </p>
+          <p class="leading-relaxed">
+            <strong>Array Elements Unaffected:</strong> Key sorting applies exclusively to object properties (<code class="font-mono">{"a": 1, "b": 2}</code>). The sequential order of items inside arrays (<code class="font-mono">[3, 1, 2]</code>) is strictly preserved, as array ordering conveys semantic sequence.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 7: Practical API Payload Examples -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-code text-blue-600"></i> 7. Practical API Payload Reference Examples
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Below are clean, RFC 8259-compliant examples demonstrating standard data structures across web APIs:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <div class="p-4 rounded-xl bg-slate-900 text-slate-200 font-mono text-xs space-y-2 border border-slate-700 shadow-inner">
+            <span class="text-blue-400 font-bold block text-[11px] uppercase tracking-wider font-sans">Example A: Paginated API Response</span>
+            <pre class="overflow-x-auto leading-relaxed"><code>{
+  "status": "success",
+  "data": {
+    "items": [
+      {
+        "id": "item_9012",
+        "title": "Document Scanner",
+        "active": true
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "per_page": 20,
+      "total_records": 105
+    }
+  }
+}</code></pre>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-900 text-slate-200 font-mono text-xs space-y-2 border border-slate-700 shadow-inner">
+            <span class="text-emerald-400 font-bold block text-[11px] uppercase tracking-wider font-sans">Example B: Safe 64-Bit Financial Order</span>
+            <pre class="overflow-x-auto leading-relaxed"><code>{
+  "order_id": "9007199254740995",
+  "customer_ref": "cust_8821",
+  "currency": "USD",
+  "amounts": {
+    "subtotal": 149.50,
+    "tax": 12.71,
+    "total": 162.21
+  },
+  "tags": ["express_shipping", "verified"]
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 8: Privacy & Data Handling Boundary -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-emerald-600"></i> 8. Client-Side Processing &amp; Secret Hygiene
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          All JSON parsing, validation, indentation, minification, and key sorting execute entirely inside your local browser memory using standard ECMAScript engines. Your JSON text is never uploaded to, transmitted across, or stored on ToolsHere backend servers.
+        </p>
+        <div class="p-3.5 bg-amber-50/70 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 space-y-1.5">
+          <p class="font-bold flex items-center gap-1.5">
+            <i class="fa-solid fa-triangle-exclamation"></i> Security Best Practice for Production Secrets:
+          </p>
+          <p class="leading-relaxed">
+            While our JSON processing occurs 100% locally in client-side memory, ToolsHere loads standard web services (such as Google Fonts and web analytics) that operate under their respective privacy policies. As general cybersecurity hygiene, we advise developers never to paste live production secrets, unmasked authorization bearer tokens, private SSH keys, or confidential database credentials into any web-based utility unless they are fully comfortable with the site's data-handling practices and their local browser extensions. Always redact or replace sensitive tokens with placeholder strings (e.g. <code class="font-mono">"api_key": "REDACTED_SECRET"</code>) before formatting.
+          </p>
+        </div>
+      </div>
+    </section>
 
 
       <!-- Frequently Asked Questions -->
@@ -628,23 +1014,51 @@
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Why is client-side JSON formatting safer for developers?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How does the JSON Formatter validate and format JSON?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Many developer payloads include authorization tokens, user passwords, or confidential database records. Because ToolsHere runs entirely in your local browser, your private data is never sent to a remote server.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The tool validates and formats JSON using your browser's native JavaScript engine via standard JSON.parse() and JSON.stringify(). When you enter text, the parser first checks syntax compliance with RFC 8259. If valid, the serializer outputs clean hierarchical text using your chosen indentation (2 spaces, 4 spaces, or tabs). If syntax errors are found, a dedicated scanner analyzes the text to report the exact line and column numbers alongside a visual code excerpt. All processing occurs locally in browser memory.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Why did the validator flag an error on my JSON?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Why are single quotes and trailing commas rejected?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Common causes of invalid JSON include single quotes instead of double quotes around keys/strings, trailing commas after the last item, or unclosed brackets.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Single quotes and trailing commas are rejected because the official JSON specification (RFC 8259 and ECMA-404) explicitly forbids them. In standard JSON, all strings and object keys must use double quotes ("key": "value"), and elements in arrays or objects cannot be followed by a trailing comma. While languages like JavaScript and extensions like JSON5 permit trailing commas and single quotes, standard JSON parsers in APIs, databases, and microservices will reject them. The tool enforces standard JSON to ensure interoperability across platforms.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Can I minify large JSON files for production use?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Does formatting or minifying change JSON values?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Yes. Minifying strips unnecessary whitespace and line breaks, minimizing the payload size for API requests and mobile app efficiency.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">For ordinary valid JSON, formatting and minifying only modify whitespace, line breaks, and indentation without changing any underlying data values, strings, booleans, or numbers. However, data changes can occur in two specific edge cases: (1) if an object contains duplicate keys, standard JSON.parse() keeps only the last occurrence and discards previous ones; and (2) if numbers exceed JavaScript's safe integer threshold (9,007,199,254,740,991), IEEE 754 64-bit floating-point limitations will cause precision loss. In addition, checking Sort Keys will reorder object properties alphabetically.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What is the large integer precision warning?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">JavaScript integers are guaranteed to be represented exactly only within the safe integer range, from -(2^53 - 1) to +(2^53 - 1). Some 16-digit integers are still safe; precision loss becomes possible when an integer exceeds Number.MAX_SAFE_INTEGER (9,007,199,254,740,991). For large identifiers such as database BIGINTs and Snowflake IDs, use quoted JSON strings to preserve their exact digits.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What happens when JSON contains duplicate keys?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">When an object contains duplicate keys (such as {"id": 1, "id": 2}), RFC 8259 notes that parser behavior is unpredictable. In standard JavaScript and this tool, JSON.parse() processes keys in order, meaning subsequent duplicate keys overwrite earlier ones, resulting in only {"id": 2}. Because this causes silent data loss, ToolsHere includes a duplicate-key detection scanner that inspects the raw text and displays an amber warning banner with the duplicate key name and line numbers before you save or format the data.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How does key sorting work, including integer-like keys?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">When you enable Sort Keys Alphabetically (A–Z), the tool recursively sorts object properties using String.prototype.localeCompare(). However, developers should note that ECMAScript defines strict property traversal rules: properties that qualify as non-negative integer indices (such as "0", "1", "10", "2") are always enumerated first in ascending numerical order, followed by other string keys in alphabetical order. In addition, sorting applies strictly to object keys; array element order is preserved exactly as written.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Is it safe to paste confidential API keys or production tokens?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">JSON parsing, validation, formatting, and minification execute entirely client-side in your web browser session and are never transmitted to our servers. However, as general security hygiene, you should not paste highly confidential production credentials, live database passwords, or unmasked authorization tokens into any online browser tool unless you are fully comfortable with the site's data-handling practices and your local browser extensions. Whenever possible, sanitize or redact sensitive tokens with placeholder strings before formatting.</p>
             </div>
 
         </div>
@@ -738,7 +1152,7 @@
                   Strong Password Creator
                 </span>
                 <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed line-clamp-2">
-                  Generate cryptographically secure, random passwords with custom symbols, numbers, and length using the Web Crypto API.
+                  Generate cryptographically secure random passwords using the browser Web Crypto API.
                 </p>
               </div>
               <div class="pt-3 mt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between text-[11px] font-semibold text-blue-600 dark:text-blue-400">
@@ -816,6 +1230,7 @@
             <li><a href="/privacy/" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
             <li><a href="/terms/" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
             <li><a href="/disclaimer/" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
+            <li><button type="button" onclick="openCookieConsentPreferences(event)" class="hover:text-blue-600 transition-colors text-left cursor-pointer focus:outline-hidden focus:underline text-xs" aria-label="Manage Cookie and Privacy Consent Preferences">Cookie Preferences</button></li>
           </ul>
         </div>
       </div>
