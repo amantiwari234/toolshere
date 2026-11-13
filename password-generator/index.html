@@ -11,8 +11,8 @@
       }
     }
   </script>
-  <title>Strong Password Generator: Secure Random Keys - ToolsHere</title>
-  <meta name="description" content="Generate cryptographically secure, random passwords with custom symbols, numbers, and length using the Web Crypto API. 100% private and unhackable.">
+  <title>Strong Password Generator: Secure Random Keys (8–64 Chars) - ToolsHere</title>
+  <meta name="description" content="Generate cryptographically secure random passwords using the browser Web Crypto API. Customize length (8–64 chars), symbols, and numbers with zero server uploads.">
   <meta name="keywords" content="password generator, online tools, free web utilities, security tools, toolshere">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://toolshere.online/password-generator/">
@@ -21,8 +21,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Toolshere">
   <meta property="og:url" content="https://toolshere.online/password-generator/">
-  <meta property="og:title" content="Strong Password Generator: Secure Random Keys - ToolsHere">
-  <meta property="og:description" content="Generate cryptographically secure, random passwords with custom symbols, numbers, and length using the Web Crypto API. 100% private and unhackable.">
+  <meta property="og:title" content="Strong Password Generator: Secure Random Keys (8–64 Chars) - ToolsHere">
+  <meta property="og:description" content="Generate cryptographically secure random passwords using the browser Web Crypto API. Customize length (8–64 chars), symbols, and numbers with zero server uploads.">
   <meta property="og:image" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:type" content="image/png">
@@ -33,8 +33,8 @@
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://toolshere.online/password-generator/">
-  <meta property="twitter:title" content="Strong Password Generator: Secure Random Keys - ToolsHere">
-  <meta property="twitter:description" content="Generate cryptographically secure, random passwords with custom symbols, numbers, and length using the Web Crypto API. 100% private and unhackable.">
+  <meta property="twitter:title" content="Strong Password Generator: Secure Random Keys (8–64 Chars) - ToolsHere">
+  <meta property="twitter:description" content="Generate cryptographically secure random passwords using the browser Web Crypto API. Customize length (8–64 chars), symbols, and numbers with zero server uploads.">
   <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
 
   <!-- Favicon & Touch Icons (Google Search Best Practice: 48x48 PNG First) -->
@@ -141,7 +141,7 @@
   "@type": "WebApplication",
   "name": "Strong Password Creator",
   "url": "https://toolshere.online/password-generator/",
-  "description": "Generate cryptographically secure, random passwords with custom symbols, numbers, and length using the Web Crypto API. 100% private and unhackable.",
+  "description": "Generate cryptographically secure random passwords using the browser Web Crypto API. Customize length (8–64 chars), symbols, and numbers with zero server uploads.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "All modern browsers (Chrome, Firefox, Safari, Edge, Android, iOS)",
   "offers": {
@@ -184,26 +184,58 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "Why is the Web Crypto API more secure than standard generators?",
+      "name": "How does the Web Crypto API generate random passwords?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The Web Crypto API draws on hardware-level system entropy, making the generated numbers mathematically unpredictable and resistant to pattern-prediction attacks."
+        "text": "The tool generates random numbers using window.crypto.getRandomValues(new Uint32Array(len)). This is the browser's standardized API for cryptographically secure random values, designed specifically for cryptographic operations where unpredictability is essential."
       }
     },
     {
       "@type": "Question",
-      "name": "Does ToolsHere store or log any generated passwords?",
+      "name": "Why is Math.random() not suitable for generating passwords?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Never. The generator runs completely within your device's browser memory. Not a single character is sent to our servers or saved anywhere."
+        "text": "Standard Math.random() is not designed or specified for cryptographic security. For password generation, use the Web Crypto API instead."
       }
     },
     {
       "@type": "Question",
-      "name": "What password length is recommended for maximum security?",
+      "name": "What is the supported password length range and the default length?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Cybersecurity experts recommend a minimum of 16 characters with a mixture of uppercase letters, lowercase letters, numbers, and symbols."
+        "text": "The password length slider supports values from 8 to 64 characters, with a default setting of 18 characters. Adjusting the slider automatically recalculates and generates a fresh random credential of the chosen length in real time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I generate a new password with the tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The generator updates automatically in response to user input. Adjusting the length slider or toggling any of the character set checkboxes (Uppercase, Lowercase, Numbers, Symbols) instantly generates a new random password. There is no separate 'Generate' button; changing any setting produces a fresh credential."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are selected character categories guaranteed to appear in every password?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Characters are selected through independent, uniform random draws from the active character pool (chars[array[i] % chars.length]). Because selection is purely probabilistic, the algorithm does not enforce artificial composition rules requiring at least one character from each checked category, meaning a selected category may occasionally not appear, particularly at shorter lengths."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is password entropy, and how does length affect password strength?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Password entropy measures the theoretical unpredictability of a credential in bits, calculated as Length x log2(Pool Size). Increasing password length expands the search space exponentially (for example, an 18-character password from an 89-character pool provides approximately 116.6 bits of theoretical entropy). However, real-world security also depends on server-side password hashing, phishing defenses, and avoiding credential reuse."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are generated passwords stored on or transmitted to any server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Password generation occurs entirely within your browser memory using client-side JavaScript. The generation function does not transmit generated passwords to our servers or save them in browser storage. Users should save credentials in a reputable password manager immediately and exercise caution regarding local clipboard security."
       }
     }
   ]
@@ -377,7 +409,7 @@
             Free Cryptographically Secure Password Generator
           </h1>
           <p class="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 mt-1 max-w-3xl leading-relaxed">
-            Generate cryptographically secure, random passwords with custom symbols, numbers, and length using the Web Crypto API. 100% private and unhackable.
+            Generate cryptographically secure random passwords using the browser Web Crypto API. Customize length (8–64 chars), symbols, and numbers with zero server uploads.
           </p>
         </div>
       </div>
@@ -427,9 +459,9 @@
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-[10px] text-emerald-600"></i> 100% In-Browser Privacy</span>
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About Strong Password Creator &amp; Core Utility</h2>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About ToolsHere Strong Password Creator</h2>
         <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
-          <p>ToolsHere Strong Password Creator is an essential security tool designed to safeguard your online banking, email accounts, cloud databases, and social media profiles against credential stuffing and brute-force attacks. Utilizing your browser's hardware-backed `crypto.getRandomValues()` API rather than predictable pseudorandom math generators, every password generated provides true cryptographic randomness. You can tailor password lengths from 8 to 32 characters, toggle special symbols and numerals, and copy the final output with a single tap. Because no passwords are ever transmitted or stored on a server, your credentials remain strictly between you and your password manager.</p>
+          <p>ToolsHere Strong Password Creator is an in-browser security utility designed to generate random, high-entropy credentials for accounts, applications, and digital services. Powered by the native Web Crypto API (<code>window.crypto.getRandomValues()</code>), the generator uses the browser's cryptographically secure random-value API rather than non-cryptographic pseudorandom math functions. You can adjust password lengths from 8 to 64 characters (defaulting to 18 characters) and toggle uppercase letters, lowercase letters, numbers, and symbols. Every password is generated locally in your browser memory and is never transmitted to or stored on any server.</p>
         </div>
       </div>
 
@@ -442,22 +474,22 @@
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">1</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Use the 'Password Length' slider to select your desired character count (8 to 32 characters).</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Adjust the 'Password Length' slider to your desired character count between 8 and 64 characters (18 characters selected by default).</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">2</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Check or uncheck the 'Symbols (@#$%)' and 'Numbers (0-9)' boxes according to your requirements.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Select or deselect character set options: Uppercase (A-Z), Lowercase (a-z), Numbers (0-9), and Symbols (!@#$).</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Generate New Password' to refresh the random string whenever desired.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Notice that adjusting the slider or toggling any checkbox automatically generates a fresh random password in real time.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">4</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click the 'Copy' button to copy your secure password directly to your clipboard.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click the 'Copy' button to copy the generated credential directly to your system clipboard for immediate entry into your password manager.</span>
             </li>
 
         </ol>
@@ -472,27 +504,32 @@
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Cryptographically secure randomness powered by the browser Web Crypto API.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Cryptographically secure randomness powered by the native Web Crypto API (crypto.getRandomValues).</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Customizable length slider from 8 up to 32 characters.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Adjustable password length slider supporting 8 to 64 characters (default 18 characters).</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Granular symbol (@#$%^&*()_+-=[]{}|) and numeric (0-9) toggle checkboxes.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Granular toggles for uppercase, lowercase, numeric, and special symbol character sets.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">One-click clipboard copy button with visual confirmation toast notification.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Combined character pool of up to 89 distinct characters for elevated theoretical entropy.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">100% offline and client-side operation with zero data retention.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Automatic real-time regeneration on any slider or checkbox adjustment (generates one password per event).</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">One-click clipboard copy button with client-side execution and zero server storage.</span>
             </div>
 
         </div>
@@ -506,17 +543,29 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Slider length 8–32 characters, symbol and number toggles</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Slider length from 8 to 64 characters (default 18), individual toggles for uppercase, lowercase, numbers, and symbols</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Alphanumeric and special character string</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Single random character string displayed on screen with one-click clipboard copying</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Passwords are generated in memory and never stored; ensure you save them in a secure password manager before closing the tab.</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Generates one password at a time; does not feature a visual strength meter, ambiguous-character filter, or Diceware passphrase generator; does not guarantee inclusion of every selected character category</span>
           </div>
         </div>
+
+      <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
+        <div class="flex items-center gap-2 font-bold text-blue-900 dark:text-blue-300">
+          <i class="fa-solid fa-circle-info text-blue-600"></i> Generation Mechanics &amp; Length Limits
+        </div>
+        <p class="leading-relaxed">
+          <strong>Supported Length Range:</strong> The generator slider supports lengths from <strong>8 to 64 characters</strong>, with a recommended default of <strong>18 characters</strong>.
+        </p>
+        <p class="leading-relaxed">
+          <strong>Automatic Real-Time Generation:</strong> The tool generates a new password automatically whenever you drag the length slider or toggle any character set checkbox. There is no separate &ldquo;Generate&rdquo; button; simply adjust any control to produce a new random credential.
+        </p>
+      </div>
 
       </section>
 
@@ -529,21 +578,265 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Generating high-entropy, brute-force-resistant master passwords for email and banking.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Generating high-entropy master credentials for personal email, cloud accounts, and password managers.
             </div>
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Creating random API keys, database secrets, and SSH passphrases for developers.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Creating robust, random credentials for database connections, administrative consoles, and local Wi-Fi networks.
             </div>
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Creating secure one-time credentials for team members and Wi-Fi networks.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Replacing compromised, reused, or dictionary-based passwords with cryptographically random character sequences.
+            </div>
+
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Generating strong temporary keys and secrets for developer configuration files and API endpoints.
             </div>
 
         </div>
       </section>
 
 
+
+      <!-- Comprehensive Educational & Security Guide -->
+      <section class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+        <div class="space-y-3">
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-blue-600"></i> Cryptographic Randomness vs. Standard Pseudorandomness
+          </h2>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            The foundation of any secure password generator is the quality of its random number generator. In web development, developers frequently encounter standard JavaScript functions like <code>Math.random()</code>. However, <code>Math.random()</code> is not designed or specified for cryptographic security. It is intended for general programming tasks such as casual games, animations, and non-sensitive simulations where execution speed is prioritized over cryptographic unpredictability.
+          </p>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            In contrast, ToolsHere uses the browser's standardized <strong>Web Crypto API</strong> via:
+          </p>
+
+          <!-- Code Callout -->
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs sm:text-sm overflow-x-auto space-y-2">
+            <div class="text-blue-400 font-bold text-xs uppercase tracking-wide">Actual In-Browser Implementation</div>
+            <div class="text-white py-1">
+              const array = new Uint32Array(len);<br>
+              window.crypto.getRandomValues(array);<br>
+              for (let i = 0; i &lt; len; i++) {<br>
+              &nbsp;&nbsp;pass += chars[array[i] % chars.length];<br>
+              }
+            </div>
+            <div class="text-slate-400 text-xs pt-1 border-t border-slate-800">
+              <code>window.crypto.getRandomValues()</code> is the browser's standardized API for cryptographically secure random values, providing unpredictable numbers suitable for sensitive credential generation.
+            </div>
+          </div>
+
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            In this implementation, cryptographically generated random values are mapped to characters using modulo arithmetic: <code>chars[array[i] % chars.length]</code>. Because 32-bit unsigned integers (spanning from 0 to 4,294,967,295) are divided by character pool sizes up to 89, this modulo operation introduces a very small theoretical selection bias rather than a perfectly uniform character distribution. However, because $2^{32}$ is vastly larger than the pool size, the theoretical bias is extremely small ($&lt; 89 / 2^{32} &approx; 2.07 &times; 10^{-8}$), and theoretical entropy estimates remain reliable approximations under this model.
+          </p>
+        </div>
+
+        <!-- Character Sets & Pools -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-font text-blue-600"></i> Supported Character Sets &amp; Pool Capacities
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            The tool allows you to customize the character pool by toggling four distinct categories. When multiple categories are checked, their character strings are concatenated into a single pool:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white block text-sm">Uppercase (A&ndash;Z)</span>
+              <span class="text-blue-600 dark:text-blue-400 font-semibold block">26 Characters</span>
+              <p class="text-slate-500 dark:text-slate-400 text-[11px] font-mono break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+            </div>
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white block text-sm">Lowercase (a&ndash;z)</span>
+              <span class="text-blue-600 dark:text-blue-400 font-semibold block">26 Characters</span>
+              <p class="text-slate-500 dark:text-slate-400 text-[11px] font-mono break-all">abcdefghijklmnopqrstuvwxyz</p>
+            </div>
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white block text-sm">Numbers (0&ndash;9)</span>
+              <span class="text-blue-600 dark:text-blue-400 font-semibold block">10 Characters</span>
+              <p class="text-slate-500 dark:text-slate-400 text-[11px] font-mono break-all">0123456789</p>
+            </div>
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white block text-sm">Symbols (!@#$)</span>
+              <span class="text-blue-600 dark:text-blue-400 font-semibold block">27 Characters</span>
+              <p class="text-slate-500 dark:text-slate-400 text-[11px] font-mono break-all">!@#$%^&amp;*()_+-=[]{}|;:,.&lt;&gt;?</p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            <strong>Combined Maximum Pool:</strong> When all four options are active, the pool contains exactly <strong>89 unique characters</strong> ($26 + 26 + 10 + 27 = 89$). If you deselect all four options, the script automatically falls back to a 36-character default pool comprising lowercase letters and digits (<code>abcdefghijklmnopqrstuvwxyz0123456789</code>) to ensure valid generation.
+          </p>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+            <strong>Composition Note:</strong> Characters are chosen through independent random draws from the active pool. The algorithm does not enforce artificial composition constraints requiring at least one character from each checked category. As a result, especially at shorter lengths, an individual generated password may randomly omit a selected character type.
+          </p>
+        </div>
+
+        <!-- Theoretical Entropy & Password Length Guide -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-calculator text-blue-600"></i> Password Entropy &amp; Mathematical Strength
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            In information theory, <strong>password entropy</strong> measures the unpredictability of a credential, expressed in bits. Under the assumption of independent, uniformly random character selection, theoretical entropy is calculated using the formula:
+          </p>
+          <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-lg font-mono text-xs text-slate-800 dark:text-slate-200">
+            Theoretical Entropy (bits) = Password Length (L) &times; log<sub>2</sub>(Character Pool Size N)
+          </div>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Each additional bit of entropy doubles the theoretical search space an attacker must explore during an exhaustive brute-force search ($2^{	ext{bits}}$ total possibilities). The table below outlines theoretical entropy estimates across representative lengths and character configurations:
+          </p>
+
+          <!-- Entropy Reference Table -->
+          <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+            <table class="w-full text-left text-xs sm:text-sm">
+              <thead class="bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
+                <tr>
+                  <th class="p-3">Length</th>
+                  <th class="p-3">Lowercase Only (N=26)</th>
+                  <th class="p-3">Alphanumeric (N=62)</th>
+                  <th class="p-3">Full Pool w/ Symbols (N=89)</th>
+                  <th class="p-3">Theoretical Combinations (N=89)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-slate-700 dark:text-slate-300">
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="p-3 font-bold text-slate-900 dark:text-white">8 chars (Min)</td>
+                  <td class="p-3">&approx; 37.6 bits</td>
+                  <td class="p-3">&approx; 47.6 bits</td>
+                  <td class="p-3 font-semibold text-amber-600 dark:text-amber-400">&approx; 51.8 bits</td>
+                  <td class="p-3 font-mono text-[11px]">&approx; 3.9 &times; 10<sup>15</sup></td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="p-3 font-bold text-slate-900 dark:text-white">12 chars</td>
+                  <td class="p-3">&approx; 56.4 bits</td>
+                  <td class="p-3">&approx; 71.5 bits</td>
+                  <td class="p-3 font-semibold">&approx; 77.7 bits</td>
+                  <td class="p-3 font-mono text-[11px]">&approx; 2.4 &times; 10<sup>23</sup></td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="p-3 font-bold text-slate-900 dark:text-white">16 chars</td>
+                  <td class="p-3">&approx; 75.2 bits</td>
+                  <td class="p-3">&approx; 95.3 bits</td>
+                  <td class="p-3 font-semibold text-emerald-600 dark:text-emerald-400">&approx; 103.6 bits</td>
+                  <td class="p-3 font-mono text-[11px]">&approx; 1.5 &times; 10<sup>31</sup></td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 bg-blue-50/40 dark:bg-blue-950/20">
+                  <td class="p-3 font-bold text-blue-700 dark:text-blue-300">18 chars (Default)</td>
+                  <td class="p-3">&approx; 84.6 bits</td>
+                  <td class="p-3">&approx; 107.2 bits</td>
+                  <td class="p-3 font-bold text-blue-700 dark:text-blue-300">&approx; 116.6 bits</td>
+                  <td class="p-3 font-mono text-[11px]">&approx; 1.2 &times; 10<sup>35</sup></td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="p-3 font-bold text-slate-900 dark:text-white">32 chars</td>
+                  <td class="p-3">&approx; 150.4 bits</td>
+                  <td class="p-3">&approx; 190.5 bits</td>
+                  <td class="p-3 font-semibold text-emerald-600 dark:text-emerald-400">&approx; 207.2 bits</td>
+                  <td class="p-3 font-mono text-[11px]">&approx; 2.1 &times; 10<sup>62</sup></td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="p-3 font-bold text-slate-900 dark:text-white">64 chars (Max)</td>
+                  <td class="p-3">&approx; 300.8 bits</td>
+                  <td class="p-3">&approx; 381.1 bits</td>
+                  <td class="p-3 font-bold text-emerald-600 dark:text-emerald-400">&approx; 414.4 bits</td>
+                  <td class="p-3 font-mono text-[11px]">&approx; 4.6 &times; 10<sup>124</sup></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+            <strong>Theoretical Approximation Context:</strong> Entropy figures assume independent selections from an ideally uniform distribution, while the actual modulo mapping introduces a very small theoretical bias. All figures are theoretical approximations. Real-world account security also depends on external factors beyond password generation, including whether servers employ modern salted hashing functions (such as Argon2 or bcrypt), rate-limiting on login portals, protection against credential stuffing, device malware, and phishing threats. High entropy does not protect an account if credentials are intercepted through social engineering, phishing, or device keyloggers.
+          </p>
+        </div>
+
+        <!-- NIST SP 800-63B Guidelines -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-book-bookmark text-blue-600"></i> Modern Password Standards &amp; NIST SP 800-63B Guidance
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            For years, traditional password policies forced users to adhere to restrictive composition rules—such as requiring at least one symbol, one uppercase letter, and mandatory password changes every 90 days. Modern cybersecurity standards, including the influential <strong>NIST SP 800-63B (Digital Identity Guidelines)</strong>, have revised this perspective based on empirical security research:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-arrows-left-right text-blue-600"></i> Length Over Arbitrary Complexity
+              </h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                NIST guidelines emphasize password <strong>length</strong> as the single most critical factor for brute-force resistance. Forcing users to include specific character types often leads to predictable substitutions (such as replacing &lsquo;E&rsquo; with &lsquo;3&rsquo; or appending &lsquo;!&rsquo; at the end). Generating truly random passwords with longer lengths (16+ characters) provides vastly superior mathematical entropy.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-calendar-xmark text-amber-500"></i> Discouraging Routine Forced Expiration
+              </h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Mandatory periodic password changes (e.g. every 60&ndash;90 days) are discouraged unless there is evidence of an actual breach. Frequent forced resets often prompt users to select predictable patterns or make trivial modifications to old passwords. Using strong, unique random passwords stored in a dedicated password manager is significantly more secure.
+              </p>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            NIST guidelines recommend that credential management systems support passwords of at least 64 characters. Our generator accommodates this recommendation by supporting a maximum slider length of <strong>64 characters</strong>. Note that this reference is provided for educational context; ToolsHere does not claim formal NIST certification or government endorsement.
+          </p>
+        </div>
+
+        <!-- Feature Limitations & Realistic Scope -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-exclamation text-amber-500"></i> Feature Boundaries &amp; Realistic Limitations
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            To maintain transparency, users should be aware of the intentional technical boundaries of this lightweight client-side utility:
+          </p>
+          <ul class="list-disc list-inside space-y-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 pl-2">
+            <li><strong>Single Password Output:</strong> The utility generates exactly one password at a time. It does not provide batch or bulk credential generation.</li>
+            <li><strong>No Ambiguous-Character Filter:</strong> The tool does not include an option to filter visually similar characters (such as uppercase &lsquo;I&rsquo;, lowercase &lsquo;l&rsquo;, digit &lsquo;1&rsquo;, letter &lsquo;O&rsquo;, or digit &lsquo;0&rsquo;). If manual typing is required, inspect the generated string carefully.</li>
+            <li><strong>No Visual Strength Meter:</strong> The interface displays the generated string directly without an integrated color-coded strength bar or scoring meter.</li>
+            <li><strong>Random Character Sequences Only:</strong> The generator produces character-based random strings and does not feature a multi-word Diceware passphrase generator.</li>
+          </ul>
+        </div>
+
+        <!-- Best Practices & Practical Security Advice -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-key text-blue-600"></i> Practical Credential Hygiene Best Practices
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white block text-sm"><i class="fa-solid fa-lock text-blue-600 mr-1"></i> Unique Password Per Service</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Never reuse passwords across multiple websites. If one service experiences a credential leak, attackers immediately attempt credential-stuffing attacks across email, banking, and social platforms.
+              </p>
+            </div>
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white block text-sm"><i class="fa-solid fa-vault text-blue-600 mr-1"></i> Use a Reputable Password Manager</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Because strong 18+ character random passwords are impossible to memorize, store them in a trusted end-to-end encrypted password manager (such as Bitwarden, 1Password, or KeePass).
+              </p>
+            </div>
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white block text-sm"><i class="fa-solid fa-mobile-screen-button text-blue-600 mr-1"></i> Enable Two-Factor Authentication</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Combine strong random passwords with multi-factor authentication (MFA/2FA) using hardware security keys or authenticator apps for critical financial and primary email accounts.
+              </p>
+            </div>
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white block text-sm"><i class="fa-solid fa-clipboard text-blue-600 mr-1"></i> Exercise Clipboard Caution</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                After copying your password, paste it into your destination and clear your system clipboard if using shared or public workstations, as other local applications may inspect clipboard contents.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scoped Client-Side Privacy Notice -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-emerald-600"></i> Client-Side Generation &amp; Privacy Scope
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            The password generation function runs entirely within your device's web browser using native JavaScript and the Web Crypto API. The generated character string is held in local volatile memory and is not sent to our servers across the network for generation or storage. We do not log, retain, or transmit your generated credentials. However, this architectural privacy does not protect against local host compromises, such as malicious browser extensions, screen recorders, or device-level keyloggers installed on your system.
+          </p>
+        </div>
+      </section>
 
 
       <!-- Frequently Asked Questions -->
@@ -555,23 +848,51 @@
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Why is the Web Crypto API more secure than standard generators?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How does the Web Crypto API generate random passwords?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The Web Crypto API draws on hardware-level system entropy, making the generated numbers mathematically unpredictable and resistant to pattern-prediction attacks.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The tool generates random numbers using window.crypto.getRandomValues(new Uint32Array(len)). This is the browser's standardized API for cryptographically secure random values, designed specifically for cryptographic operations where unpredictability is essential.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Does ToolsHere store or log any generated passwords?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Why is Math.random() not suitable for generating passwords?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Never. The generator runs completely within your device's browser memory. Not a single character is sent to our servers or saved anywhere.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Standard Math.random() is not designed or specified for cryptographic security. For password generation, use the Web Crypto API instead.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What password length is recommended for maximum security?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What is the supported password length range and the default length?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Cybersecurity experts recommend a minimum of 16 characters with a mixture of uppercase letters, lowercase letters, numbers, and symbols.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The password length slider supports values from 8 to 64 characters, with a default setting of 18 characters. Adjusting the slider automatically recalculates and generates a fresh random credential of the chosen length in real time.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How do I generate a new password with the tool?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The generator updates automatically in response to user input. Adjusting the length slider or toggling any of the character set checkboxes (Uppercase, Lowercase, Numbers, Symbols) instantly generates a new random password. There is no separate 'Generate' button; changing any setting produces a fresh credential.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Are selected character categories guaranteed to appear in every password?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">No. Characters are selected through independent, uniform random draws from the active character pool (chars[array[i] % chars.length]). Because selection is purely probabilistic, the algorithm does not enforce artificial composition rules requiring at least one character from each checked category, meaning a selected category may occasionally not appear, particularly at shorter lengths.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What is password entropy, and how does length affect password strength?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Password entropy measures the theoretical unpredictability of a credential in bits, calculated as Length x log2(Pool Size). Increasing password length expands the search space exponentially (for example, an 18-character password from an 89-character pool provides approximately 116.6 bits of theoretical entropy). However, real-world security also depends on server-side password hashing, phishing defenses, and avoiding credential reuse.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Are generated passwords stored on or transmitted to any server?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">No. Password generation occurs entirely within your browser memory using client-side JavaScript. The generation function does not transmit generated passwords to our servers or save them in browser storage. Users should save credentials in a reputable password manager immediately and exercise caution regarding local clipboard security.</p>
             </div>
 
         </div>
@@ -743,6 +1064,7 @@
             <li><a href="/privacy/" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
             <li><a href="/terms/" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
             <li><a href="/disclaimer/" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
+            <li><button type="button" onclick="openCookieConsentPreferences(event)" class="hover:text-blue-600 transition-colors text-left cursor-pointer focus:outline-hidden focus:underline text-xs" aria-label="Manage Cookie and Privacy Consent Preferences">Cookie Preferences</button></li>
           </ul>
         </div>
       </div>
