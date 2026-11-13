@@ -757,18 +757,336 @@ const seoOverrides = {
     ]
   },
   gstEmi: {
-    seoTitle: "Loan EMI & GST Calculator: Quick Financial Tool - ToolsHere",
-    metaDesc: "Calculate monthly loan EMIs and standard GST tax rates (5%, 12%, 18%, 28%) instantly. Accurate financial planning for home, car, and personal loans.",
+    seoTitle: "Loan EMI & GST Calculator (3%, 5%, 12%, 18%, 28%) - ToolsHere",
+    metaDesc: "Calculate reducing-balance loan EMIs and statutory GST tax rates (3%, 5%, 12%, 18%, 28%) instantly. Free client-side financial calculator for loans and invoices.",
+    aboutHeading: "About ToolsHere GST & Loan EMI Calculator",
+    intro: "Managing financial projections and commercial tax estimations is straightforward with the ToolsHere GST & Loan EMI Calculator. Designed for prospective home buyers, vehicle loan applicants, personal loan borrowers, and commercial billing, this dual-mode utility delivers instant numerical calculations directly in your web browser. In the Loan EMI tab, enter your principal borrowed amount, annual reducing interest rate, and repayment tenure in years (which the calculator converts to monthly installments internally) to calculate your fixed monthly installment, total cumulative interest, and aggregate repayment amount. In the GST tab, enter your net billing amount and choose from five selectable tax rate buttons—3%, 5%, 12%, 18%, or 28%—to instantly determine the added tax and gross billable price. All financial calculations execute entirely client-side in your browser, ensuring your entered calculation values are never transmitted to a server.",
+    howToUse: [
+      "Select either the 'Loan EMI Calculator' or 'GST Calculator' tab at the top of the utility.",
+      "For Loan EMI: Enter your loan Principal amount (₹), annual interest Rate (% p.a.), and Tenure in full YEARS (the tool converts years into monthly installments internally).",
+      "For GST: Enter your Net billing Amount (₹) and select your desired tax rate button (3%, 5%, 12%, 18%, or 28%).",
+      "Read your real-time results instantly: Monthly Loan EMI, Total Interest, and Total Payment in EMI mode; or Added GST and Total Gross Price in GST mode."
+    ],
+    features: [
+      "Standard reducing-balance monthly compound amortization formula for banking loan estimations.",
+      "Tenure input in full years, automatically converted to monthly installments for calculations.",
+      "Five preconfigured selectable GST rate buttons: 3%, 5%, 12%, 18%, and 28%.",
+      "Real-time calculations that update instantly as you type numbers or switch tax slabs.",
+      "Client-side browser execution ensures entered calculation values are not uploaded to a server.",
+      "Clear localized currency formatting (₹) displaying principal, interest components, and gross totals."
+    ],
+    formatsAndLimits: {
+      supportedInputs: "Principal amount (₹), annual interest rate (% p.a.), tenure in YEARS, and net billing amount (₹)",
+      outputFormat: "Monthly EMI, total interest, total repayment, added GST, and gross amount with Rupee (₹) formatting",
+      limitations: "Requires an interest rate greater than 0% (entering 0% halts execution via early return and retains prior values); models fixed periodic amortization and forward exclusive GST across five selectable rates without bank processing fees, stamp duty, or insurance"
+    },
+    formatNoticeHtml: `
+      <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
+        <div class="flex items-center gap-2 font-bold text-blue-900 dark:text-blue-300">
+          <i class="fa-solid fa-circle-info text-blue-600"></i> Tenure Input &amp; Interest Rate Guidelines
+        </div>
+        <p class="leading-relaxed">
+          <strong>Tenure in Years:</strong> The EMI input field expects loan tenure in <strong>full years</strong> (e.g., enter <code>5</code> for a five-year loan or <code>20</code> for a twenty-year mortgage). The calculator internally converts years into months (<span class="font-mono">n = years &times; 12</span>). Do not enter tenure in months.
+        </p>
+        <p class="leading-relaxed">
+          <strong>Interest Rate Requirement:</strong> The current EMI engine checks whether the interest rate is greater than 0% (<span class="font-mono">if (p &lt;= 0 || r &lt;= 0 || n &lt;= 0) return;</span>) and returns before running the formula. Consequently, entering 0% interest stops the calculator from updating and retains the previous displayed result rather than calculating a zero-interest installment plan.
+        </p>
+      </div>
+    `,
+    useCases: [
+      "Computing monthly reducing-balance installments, total interest costs, and overall payback totals for home, vehicle, or personal loans.",
+      "Evaluating how different loan tenures (5, 10, or 20 years) affect monthly cash flow versus long-term cumulative interest.",
+      "Comparing the true cost of reducing-balance bank loans against flat-rate interest quotes.",
+      "Calculating statutory GST addition (3%, 5%, 12%, 18%, 28%) for commercial sales invoices, service billing, and purchase orders."
+    ],
+    extraGuideHtml: `
+      <!-- Comprehensive Educational Guide -->
+      <section class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+        <div class="space-y-3">
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            <i class="fa-solid fa-calculator text-blue-600"></i> The Mathematics of Reducing-Balance EMI
+          </h2>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Equated Monthly Installments (EMIs) are structured payments where a borrower pays a fixed sum to a lender each calendar month. In modern retail banking and consumer finance, loans are structured using the <strong>reducing-balance (or reducing-principal) amortization method</strong>. Under this method, interest is computed at each payment cycle solely on the remaining unpaid principal balance, rather than the initial borrowed amount.
+          </p>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Our calculator implements the standard monthly compound amortization formula used across retail banks and financial institutions:
+          </p>
+
+          <!-- Formula Callout -->
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-900 text-slate-100 font-mono text-xs sm:text-sm overflow-x-auto space-y-2">
+            <div class="text-blue-400 font-bold text-xs uppercase tracking-wide">Standard Reducing-Balance Amortization Formula</div>
+            <div class="text-center sm:text-left text-sm sm:text-base text-white font-bold py-1">
+              EMI = [P &times; r &times; (1 + r)<sup>n</sup>] / [(1 + r)<sup>n</sup> &minus; 1]
+            </div>
+            <div class="text-slate-400 text-xs space-y-1 pt-1 border-t border-slate-800">
+              <div><strong>P</strong> = Principal loan amount (the initial amount borrowed)</div>
+              <div><strong>r</strong> = Monthly fractional interest rate, derived as: <code>r = (Annual Rate in %) / (12 &times; 100)</code></div>
+              <div><strong>n</strong> = Total number of monthly installments, derived as: <code>n = Tenure in Years &times; 12</code></div>
+            </div>
+          </div>
+
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            Total payment and cumulative interest over the full loan term are derived as:
+          </p>
+          <ul class="list-disc list-inside space-y-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 pl-2">
+            <li><strong>Total Repayment:</strong> <span class="font-mono">Total Payment = EMI &times; n</span></li>
+            <li><strong>Total Interest Payable:</strong> <span class="font-mono">Total Interest = Total Payment &minus; P</span></li>
+          </ul>
+        </div>
+
+        <!-- Worked Numerical Example -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-blue-600"></i> Step-by-Step Worked Calculation Example
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            To illustrate how the mathematical engine calculates monthly installments, consider a standard loan with the following verified inputs:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <span class="text-slate-400 font-bold block uppercase text-[10px]">Loan Principal (P)</span>
+              <span class="text-sm font-bold text-slate-900 dark:text-white">₹5,00,000</span>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <span class="text-slate-400 font-bold block uppercase text-[10px]">Annual Interest Rate</span>
+              <span class="text-sm font-bold text-slate-900 dark:text-white">8.5% p.a.</span>
+            </div>
+            <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+              <span class="text-slate-400 font-bold block uppercase text-[10px]">Repayment Tenure</span>
+              <span class="text-sm font-bold text-slate-900 dark:text-white">5 Years (60 Months)</span>
+            </div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-2">
+            <div class="font-bold text-slate-900 dark:text-white">Mathematical Step-by-Step Evaluation:</div>
+            <ol class="list-decimal list-inside space-y-1.5 pl-1 leading-relaxed">
+              <li><strong>Derive Monthly Rate:</strong> <code>r = 8.5 / (12 &times; 100) = 0.007083333333333333</code></li>
+              <li><strong>Derive Number of Installments:</strong> <code>n = 5 &times; 12 = 60 installments</code></li>
+              <li><strong>Compute Compounding Factor:</strong> <code>(1 + r)<sup>60</sup> &approx; (1.0070833333)<sup>60</sup> &approx; 1.5273005979</code></li>
+              <li><strong>Calculate Monthly EMI:</strong> <code>EMI = [500000 &times; 0.0070833333 &times; 1.5273005979] / [1.5273005979 &minus; 1] &approx; 10,258.27</code></li>
+              <li><strong>Apply Integer Rounding:</strong> <strong>Monthly EMI = ₹10,258</strong></li>
+              <li><strong>Calculate Total Repayment:</strong> <code>Total Payment = 10,258.26566... &times; 60 = ₹6,15,495.94 &rarr; </code> <strong>₹6,15,496</strong></li>
+              <li><strong>Calculate Total Interest:</strong> <code>Total Interest = 6,15,495.94 &minus; 5,00,000 = ₹1,15,495.94 &rarr; </code> <strong>₹1,15,496</strong></li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Tenure Comparison Analysis -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-clock-rotate-left text-blue-600"></i> Loan Tenure Comparison: Monthly EMI vs. Total Interest
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            The length of your loan tenure profoundly influences your financial commitment. Extending repayment tenure spreads the principal across more installments, lowering your fixed monthly cash outflow. However, because principal is repaid more slowly, interest accumulates over a much longer horizon, substantially increasing the total interest paid over the life of the loan.
+          </p>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            The table below demonstrates this dynamic for a <strong>₹5,00,000 principal loan</strong> at an <strong>8.5% annual reducing-balance interest rate</strong> across three common repayment periods:
+          </p>
+
+          <!-- Comparison Table -->
+          <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+            <table class="w-full text-left text-xs sm:text-sm">
+              <thead class="bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
+                <tr>
+                  <th class="p-3">Tenure</th>
+                  <th class="p-3">Total Installments</th>
+                  <th class="p-3">Monthly EMI</th>
+                  <th class="p-3">Total Interest</th>
+                  <th class="p-3">Total Payment</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-slate-700 dark:text-slate-300">
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="p-3 font-bold text-slate-900 dark:text-white">5 years</td>
+                  <td class="p-3">60 months</td>
+                  <td class="p-3 font-semibold text-blue-600 dark:text-blue-400">₹10,258</td>
+                  <td class="p-3">₹1,15,496</td>
+                  <td class="p-3">₹6,15,496</td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="p-3 font-bold text-slate-900 dark:text-white">10 years</td>
+                  <td class="p-3">120 months</td>
+                  <td class="p-3 font-semibold text-blue-600 dark:text-blue-400">₹6,199</td>
+                  <td class="p-3 text-amber-600 dark:text-amber-400 font-medium">₹2,43,914</td>
+                  <td class="p-3">₹7,43,914</td>
+                </tr>
+                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                  <td class="p-3 font-bold text-slate-900 dark:text-white">20 years</td>
+                  <td class="p-3">240 months</td>
+                  <td class="p-3 font-semibold text-blue-600 dark:text-blue-400">₹4,339</td>
+                  <td class="p-3 text-rose-600 dark:text-rose-400 font-bold">₹5,41,388</td>
+                  <td class="p-3">₹10,41,388</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+            <strong>Key Insight:</strong> Extending the tenure from 5 to 20 years reduces the monthly payment from ₹10,258 to ₹4,339 (freeing up monthly cash flow), but increases total interest paid from ₹1,15,496 to ₹5,41,388—more than 4.6 times the original interest cost, exceeding the entire original principal borrowed.
+          </p>
+        </div>
+
+        <!-- Flat Rate vs Reducing Balance -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-scale-unbalanced text-blue-600"></i> Flat-Rate vs. Reducing-Balance Interest: What Borrowers Must Know
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            When shopping for loans, borrowers frequently encounter two distinct methods of quoting interest rates: <strong>reducing-balance interest</strong> and <strong>flat interest</strong>. Understanding the mathematical divergence between these two methods is vital for evaluating credit offers accurately.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-emerald-600"></i> Reducing-Balance Method (Standard Banking)
+              </h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Interest is calculated only on the remaining balance of the principal after each monthly repayment. As you pay down principal each month, the interest charge diminishes progressively. This is the model computed by our tool and required for regulated consumer lending.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Flat-Rate Method (Fixed Principal)
+              </h4>
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                Interest is calculated continuously on the full original principal for the entire loan duration, completely ignoring that you are repaying the principal every month. This significantly elevates the effective annual percentage rate (APR).
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 sm:p-5 rounded-xl bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/60 space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+            <div class="font-bold text-amber-900 dark:text-amber-300">Mathematical Comparison: ₹5,00,000 Loan at 8.5% for 5 Years</div>
+            <div class="space-y-1 pl-1">
+              <div>&bull; <strong>Under 8.5% Flat Rate Interest:</strong></div>
+              <div class="pl-4 text-slate-600 dark:text-slate-400">
+                Flat Interest = ₹5,00,000 &times; 8.5% &times; 5 = <strong>₹2,12,500</strong><br>
+                Total Repayment = ₹5,00,000 + ₹2,12,500 = <strong>₹7,12,500</strong><br>
+                Monthly Installment = ₹7,12,500 / 60 = <strong>₹11,875</strong>
+              </div>
+              <div class="pt-1">&bull; <strong>Under 8.5% Reducing-Balance Interest (Our Calculator):</strong></div>
+              <div class="pl-4 text-slate-600 dark:text-slate-400">
+                Total Interest = <strong>₹1,15,496</strong><br>
+                Total Repayment = <strong>₹6,15,496</strong><br>
+                Monthly Installment = <strong>₹10,258</strong>
+              </div>
+            </div>
+            <p class="text-xs text-amber-900 dark:text-amber-400/90 pt-1 font-medium leading-relaxed">
+              <strong>Outcome:</strong> In this illustrative scenario, the flat-rate structure requires paying ₹97,004 more in total interest (₹2,12,500 vs. ₹1,15,496) and ₹1,617 more each month (₹11,875 vs. ₹10,258), even though both quote a nominal rate of &ldquo;8.5%&rdquo;.
+            </p>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+            <em>Important Qualification:</em> This numerical comparison is an illustrative mathematical demonstration showing how interest calculation methodologies diverge. It is not an assertion about every lender's pricing structure, contract terminology, or loan agreement terms.
+          </p>
+        </div>
+
+        <!-- GST Slabs & Computation -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-receipt text-blue-600"></i> Understanding the Five Selectable GST Rates
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            The Goods and Services Tax (GST) is a destination-based consumption tax. In our tool's GST tab, calculations follow the <strong>forward (exclusive) tax computation model</strong>, where tax is computed as a percentage of your entered net base amount and added to yield the total gross billable price:
+          </p>
+          <div class="p-3 bg-slate-100 dark:bg-slate-800 rounded-lg font-mono text-xs text-slate-800 dark:text-slate-200 space-y-1">
+            <div>GST Added = (Net Base Amount &times; GST Rate) / 100</div>
+            <div>Total Gross Price = Net Base Amount + GST Added</div>
+          </div>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            The calculator provides five selectable rate buttons: <strong>3%</strong>, <strong>5%</strong>, <strong>12%</strong>, <strong>18%</strong> (default), and <strong>28%</strong>. These buttons represent commonly used statutory rate tiers under official tax schedules, allowing users to quickly estimate tax additions for various commercial invoices and bills. Note that these five buttons represent selectable calculation presets and do not constitute an exhaustive list of every statutory rate or classification under tax regulations (which may include specialized rates, conditional exemptions, or statutory cess). Users should select the rate that corresponds to their specific invoice or statutory billing requirement:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-blue-600 dark:text-blue-400 block text-sm">3% Rate Button</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Selectable lower statutory percentage rate tier for commercial calculations requiring a 3% tax addition.
+              </p>
+            </div>
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-blue-600 dark:text-blue-400 block text-sm">5% Rate Button</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Selectable concessional statutory percentage rate tier for billing calculations requiring a 5% tax addition.
+              </p>
+            </div>
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-blue-600 dark:text-blue-400 block text-sm">12% Rate Button</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Selectable standard statutory percentage rate tier for billing calculations requiring a 12% tax addition.
+              </p>
+            </div>
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-blue-600 dark:text-blue-400 block text-sm">18% Rate Button (Default)</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                The default standard statutory percentage rate tier, widely used across commercial services and standard billing requiring an 18% tax addition.
+              </p>
+            </div>
+            <div class="p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1 sm:col-span-2 lg:col-span-1">
+              <span class="font-bold text-blue-600 dark:text-blue-400 block text-sm">28% Rate Button</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Selectable upper statutory percentage rate tier for billing calculations requiring a 28% tax addition.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scoped Privacy Notice -->
+        <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-shield-halved text-emerald-600"></i> Client-Side Processing &amp; Data Privacy
+          </h3>
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+            The financial calculations provided by this calculator execute entirely within your web browser using client-side JavaScript. The loan amounts, interest rates, repayment tenures, and billing figures you enter are processed locally in your device memory and are not uploaded to our servers for calculation. We do not store, log, or track your personal financial figures or loan planning data.
+          </p>
+        </div>
+
+        <!-- Financial Advisory & Accuracy Disclaimer -->
+        <div class="p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2 text-xs text-slate-600 dark:text-slate-300">
+          <div class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-sm">
+            <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Financial Advisory &amp; Accuracy Disclaimer
+          </div>
+          <p class="leading-relaxed">
+            The calculations, amortization formulas, and tax estimates generated by this utility are mathematical approximations intended strictly for personal budgeting, educational reference, and illustrative planning. They do not constitute personalized financial advice, credit appraisal, loan sanction commitments, or tax consulting.
+          </p>
+          <p class="leading-relaxed">
+            Actual repayment amounts, interest charges, and amortization schedules issued by commercial banks and housing finance corporations may differ slightly from these calculations due to lender-specific daily interest compounding conventions, leap-year day-count fractions, odd-period interest on initial disbursements, loan processing fees, documentation charges, pre-EMI interest, mandatory credit insurance premiums, and statutory taxes on banking services. Always consult your financial institution or a certified tax professional before finalizing binding credit or purchasing decisions.
+          </p>
+        </div>
+      </section>
+    `,
+    faqs: [
+      {
+        q: "What exact mathematical formula is used to calculate the monthly loan EMI?",
+        a: "The calculator uses the standard monthly compound reducing-balance formula: EMI = [P x r x (1 + r)^n] / [(1 + r)^n - 1]. In this formula, P represents the principal loan amount, r is the monthly fractional interest rate (derived by dividing the annual percentage rate by 12 and then by 100: r = annualRate / 1200), and n represents the total number of monthly installments (derived by multiplying the loan tenure in years by 12: n = years x 12). Total repayment is calculated as EMI x n, and total interest payable is calculated as Total Repayment minus Principal."
+      },
+      {
+        q: "Does the calculator expect loan tenure in years or months?",
+        a: "The calculator input field strictly expects loan tenure in full YEARS (for example, enter 5 for a five-year loan or 20 for a twenty-year home mortgage). The calculation script automatically converts the entered number of years into monthly payment cycles internally by multiplying by 12 (n = tenure x 12). Entering tenure in months (such as entering 60 instead of 5) will cause the calculator to compute repayment for 60 years (720 months), producing an incorrect calculation."
+      },
+      {
+        q: "How does reducing-balance interest differ from flat-rate interest?",
+        a: "Under the reducing-balance method (used by our calculator and standard bank loans), interest is charged only on the remaining unpaid loan balance at each monthly interval. As you repay principal, the interest portion of each monthly payment progressively decreases. In contrast, under flat-rate interest, interest is calculated continuously on the full original principal for the entire loan tenure, ignoring regular principal repayments. For example, a 5-year loan of ₹5,00,000 at 8.5% costs ₹1,15,496 in total interest under reducing-balance, compared to ₹2,12,500 under a flat rate—costing ₹97,004 more in interest. This is a mathematical comparison, not a claim about every lender's pricing or loan agreement."
+      },
+      {
+        q: "Why does an interest rate of 0% not produce a calculation?",
+        a: "The JavaScript calculation engine includes an explicit guard check (if (p <= 0 || r <= 0 || n <= 0) return;) that halts execution and returns before computing the amortization formula. Because the script returns immediately when the interest rate is zero or negative, the calculator stops updating and retains whatever previous results were already displayed on the screen. The tool currently models only positive-interest loans and does not calculate zero-interest repayment schedules."
+      },
+      {
+        q: "Which GST tax slabs are supported, and how is tax computed?",
+        a: "The calculator provides five selectable rate buttons: 3%, 5%, 12%, 18% (default), and 28%. These buttons represent commonly encountered rate tiers under statutory tax schedules, though they do not include every specialized rate or statutory cess. Tax is computed using the forward exclusive method: GST Added = (Net Amount x Rate) / 100, and Total Gross Price = Net Amount + GST Added. Users can select any of the five rate buttons according to the applicable tax rate for their specific billing needs."
+      },
+      {
+        q: "What additional bank costs and fees are excluded from this EMI calculation?",
+        a: "The calculated EMI models only the core repayment of principal and interest. It does not include ancillary lending fees and statutory costs commonly charged by banks and financial institutions. Excluded costs include one-time loan processing and administrative fees, legal and title verification charges, property valuation fees, stamp duty and mortgage registration charges, pre-EMI interest during partial construction disbursements, mandatory loan protection or property insurance premiums, prepayment or foreclosure penalties, and applicable GST levied on banking services."
+      },
+      {
+        q: "Are my financial figures, loan amounts, or calculations stored on any server?",
+        a: "No. The calculator's financial calculations run entirely within your web browser using client-side JavaScript. The loan amounts, interest rates, repayment tenures, and invoice amounts you enter are processed locally in your device memory and are not uploaded to our servers for calculation. We do not store, log, or track your personal financial planning figures."
+      }
+    ],
     relatedTools: [
       { name: "Age & Date Calculator", hash: "#age-calculator" },
       { name: "Word & Character Counter", hash: "#word-counter" },
       { name: "QR Code Studio & Reader", hash: "#qr-code-generator" },
       { name: "Strong Password Creator", hash: "#password-generator" }
-    ],
-    useCases: [
-      "Calculating monthly loan repayments, interest components, and total loan payback costs.",
-      "Adding or removing GST amounts from wholesale invoices and retail billings.",
-      "Comparing car, home, or personal loan offers across varied interest rates and tenures."
     ]
   },
   imgFormat: {
