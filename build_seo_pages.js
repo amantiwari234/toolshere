@@ -170,8 +170,242 @@ const seoOverrides = {
     ]
   },
   bgRemover: {
-    seoTitle: "Free Image Background Remover & Transparent PNG - ToolsHere",
-    metaDesc: "Remove image backgrounds instantly in your browser. Fine-tune color tolerance, isolate subjects, and download transparent PNG photos with 100% device privacy.",
+    name: "Online Background Remover",
+    seoTitle: "Free Online Background Remover: Create Transparent PNGs - ToolsHere",
+    metaDesc: "Remove image backgrounds directly in your browser using color-difference selection. Fine-tune sensitivity, smooth edges with feathering, and download transparent PNGs.",
+    h1: "Free Online Background Remover & Transparent PNG Maker",
+    aboutHeading: "About ToolsHere In-Browser Background Remover & Cutout Studio",
+    intro: "ToolsHere Online Background Remover is a client-side image isolation utility designed for online sellers, designers, educators, and content creators who need to isolate subjects and create transparent cutouts without uploading graphics to third-party cloud servers. Operating entirely in your browser using the HTML5 Canvas 2D API, the tool evaluates color differences between backdrop reference pixels and foreground elements using Euclidean RGB color distance calculations. You can adjust the sensitivity threshold, apply edge feathering to soften borders, sample specific background shades with an interactive eyedropper, and perform pixel-level touch-ups using manual erase and restore brushes. Because all processing executes locally in device memory, your product photography, personal portraits, and confidential documents remain private on your device.",
+    howToUse: [
+      "Select or drag your image file (PNG, JPG, or WebP) into the upload dropzone.",
+      "The tool samples reference corner pixels automatically to detect the background color and generate an initial cutout.",
+      "If the background is multi-toned or non-white, click 'Pick Color' and tap the background tone directly on your image.",
+      "Adjust the 'Sensitivity' slider (5–95) to control how aggressively similar color shades are made transparent.",
+      "Adjust the 'Feathering' slider (0–8px) to soften rough edges and blend boundaries naturally.",
+      "Use the manual 'Erase' brush to wipe away remaining backdrop artifacts, or 'Restore' brush to recover masked subject details.",
+      "Click 'Download PNG' to save your cutout as a high-resolution transparent PNG with full alpha channel preservation."
+    ],
+    features: [
+      "Client-side HTML5 Canvas pixel manipulation with zero server file uploads.",
+      "Automatic 4-corner backdrop color sampling with average RGB baseline calculation.",
+      "Interactive eyedropper color picker to sample any background pixel on the canvas.",
+      "Granular Sensitivity Threshold slider (5–95) for precise color tolerance control.",
+      "Edge feathering slider (0–8px) providing anti-aliased gradient transitions.",
+      "Dual manual editing brushes: Erase brush for leftover pixels and Restore brush for recovering subject details.",
+      "Real-time transparency preview with high-contrast checkerboard canvas backdrop.",
+      "High-resolution transparent PNG export with full 8-bit alpha channel preservation.",
+      "Completely free with unlimited conversions, zero watermarks, and no registration required."
+    ],
+    formatsAndLimits: {
+      supportedInputs: "PNG, JPG/JPEG, WebP, GIF, BMP",
+      outputFormat: "Transparent PNG (.png) with 8-bit Alpha Channel",
+      limitations: "Mathematical color-difference processing in browser memory. Best suited for high-contrast, solid, or studio backgrounds; complex scenes with matching subject colors require eyedropper and manual brush adjustment."
+    },
+    formatNoticeHtml: `
+        <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-2.5 mt-3">
+          <div class="font-bold text-amber-900 dark:text-amber-300 flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 dark:text-amber-400"></i> How Background Removal Works &amp; Format Specifications
+          </div>
+          <p class="leading-relaxed">
+            <strong>Color-Difference Algorithm (Not Machine Learning/AI):</strong> This tool operates using mathematical color distance rather than neural network object segmentation. It establishes a target RGB color (sampled from image corners or chosen with the eyedropper) and calculates the Euclidean color distance of every pixel. Pixels falling within the sensitivity threshold are rendered transparent. Because this is a color-matching utility, it cannot distinguish between background and subject if both share identical color values.
+          </p>
+          <p class="leading-relaxed">
+            <strong>Contrast &amp; Backdrop Uniformity:</strong> Best results are achieved on images with solid, plain, or uniform studio backdrops (such as white e-commerce photography, green screen backdrops, or scanned black ink on white paper). Busy outdoor scenes, gradients, or subjects wearing clothing that matches the background color will require fine-tuning sensitivity, using the eyedropper, and refining with manual erase/restore brushes.
+          </p>
+          <p class="leading-relaxed">
+            <strong>Transparent PNG (.png) Output:</strong> The downloaded cutout is exported as a transparent PNG using 8-bit alpha channel encoding. The JPEG format does not support transparency and always replaces transparent areas with a solid color. You can place your exported PNG onto any website, document, or colored backdrop.
+          </p>
+        </div>
+    `,
+    useCases: [
+      "E-Commerce Product Listings: Isolate products photographed against solid or white studio backgrounds for product listings across marketplaces such as Amazon, eBay, Shopify, and Etsy. Always verify each platform's current image dimensions, padding, background, and other image specifications.",
+      "Digital Signatures & Documents: Strip white paper backdrops from scanned ink signatures to overlay them cleanly onto contracts and PDF forms.",
+      "Logos & Graphic Asset Isolation: Remove solid background boxes from company logos, icons, and badges for transparent overlay on websites and presentations.",
+      "Presentations & Slide Decks: Extract diagrams, charts, and product photos from solid backgrounds for clean integration into PowerPoint and Google Slides."
+    ],
+    extraGuideHtml: `
+      <!-- Deep Technical Guidance & Operational Mechanics Section -->
+      <section class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+        <div class="space-y-2">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-microchip text-blue-600"></i> How the Color-Difference Algorithm Works
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Unlike server-side tools that transmit your images to remote GPU clusters running heavy deep learning models, ToolsHere executes entirely inside your browser using the HTML5 Canvas 2D API. The processing pipeline uses a deterministic mathematical color distance model:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center">1</div>
+            <h3 class="font-bold text-slate-900 dark:text-white">Corner Baseline Sampling</h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-xs">
+              When an image is uploaded, the tool samples the RGB values at the four outer corners (top-left, top-right, bottom-left, bottom-right). It averages these samples to establish a target baseline background color <code class="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 font-mono text-[11px]">(t_R, t_G, t_B)</code>.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 font-bold text-xs flex items-center justify-center">2</div>
+            <h3 class="font-bold text-slate-900 dark:text-white">Euclidean Distance Matching</h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-xs">
+              For every pixel, the tool computes its 3D Euclidean distance from the target: <code class="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 font-mono text-[11px]">dist = &radic;((r-t_R)&sup2; + (g-t_G)&sup2; + (b-t_B)&sup2;)</code>. Pixels within the threshold cutoff (<code class="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 font-mono text-[11px]">tolerance &times; 2.5</code>) are flagged as background.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="w-7 h-7 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 font-bold text-xs flex items-center justify-center">3</div>
+            <h3 class="font-bold text-slate-900 dark:text-white">Feathered Alpha Blending</h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-xs">
+              Rather than producing harsh pixelated cutouts, the feathering algorithm calculates a transitional boundary zone. Pixels along the edge receive fractional alpha values, creating smooth, anti-aliased contours that blend cleanly onto any background.
+            </p>
+          </div>
+        </div>
+
+        <!-- Understanding Controls & Adjustment Sliders -->
+        <div class="space-y-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-blue-600"></i> Understanding the Controls &amp; Adjustment Sliders
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
+              <span class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-gauge text-blue-500"></i> Sensitivity Threshold (Range: 5 to 95, Default: 38)
+              </span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Controls the color distance tolerance. Lower values (5–25) restrict removal to colors virtually identical to the target, preventing accidental erasure of subject edges. Higher values (40–90) aggressively remove color variations, lighting gradients, and subtle shadows.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
+              <span class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-wand-magic text-purple-500"></i> Feathering (Range: 0 to 8px, Default: 2)
+              </span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Controls edge softness along the cutout perimeter. Setting feathering to 0 yields crisp binary edges (ideal for pixel art and sharp icons). Setting feathering to 2–5 creates a subtle anti-aliased gradient that eliminates jagged edges on portraits and products.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
+              <span class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-eye-dropper text-amber-500"></i> Eyedropper / Color Picker
+              </span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Allows you to override the 4-corner auto-sampling by tapping any pixel directly on the image canvas. Essential when isolating subjects on colored studio backdrops or when corner pixels contain shadows or subject elements.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
+              <span class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-paintbrush text-emerald-500"></i> Manual Erase &amp; Restore Brushes (Radius: 8 to 60px, Default: 25px)
+              </span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                Provide tactile pixel-level editing. The Erase brush sets painted pixels to full transparency to remove lingering backdrop artifacts. The Restore brush paints back original pixels from memory to recover subject details without restarting.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suitable vs Challenging Images -->
+        <div class="space-y-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-images text-blue-600"></i> Which Images Work Best: Suitable vs. Challenging Scenarios
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                <i class="fa-solid fa-circle-check"></i> High-Accuracy Candidates (Recommended)
+              </h3>
+              <ul class="space-y-1.5 text-slate-600 dark:text-slate-300 list-disc list-inside">
+                <li>Studio product photography on seamless white, grey, or solid color backdrops.</li>
+                <li>Digital and scanned ink signatures on plain white paper.</li>
+                <li>Logos, vector icons, and badges placed on uniform background squares.</li>
+                <li>Packaged retail goods, electronics, books, and boxed merchandise with well-defined borders.</li>
+                <li>Portraits shot against dedicated chroma-key green or solid studio paper screens.</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="font-bold text-amber-600 dark:text-amber-400 flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation"></i> Challenging Images (Requires Manual Touch-Up)
+              </h3>
+              <ul class="space-y-1.5 text-slate-600 dark:text-slate-300 list-disc list-inside">
+                <li>Low-contrast images where the subject wears clothing matching the background tone.</li>
+                <li>Complex, multi-colored outdoor backgrounds (e.g., foliage, city streets, crowded rooms).</li>
+                <li>Semi-transparent objects such as glassware, sheer fabrics, smoke, or water splashes.</li>
+                <li>Fine flyaway hair, fur, or plumage against variegated or textured backdrops.</li>
+                <li>Subjects extending into the four image corners, which disrupts automatic baseline sampling.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Troubleshooting Common Issues -->
+        <div class="space-y-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-wrench text-blue-600"></i> Troubleshooting Common Cutout Issues
+          </h2>
+          <div class="space-y-2.5 text-xs sm:text-sm">
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">1. Parts of the subject disappeared or have transparent holes</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> The Sensitivity slider is set too high, or the subject contains colors closely matching the background. <strong>Solution:</strong> Lower the Sensitivity slider (try 15–25) and reprocess. Alternatively, select the &quot;Restore&quot; brush and paint over the transparent areas to recover the subject&#39;s original pixels.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">2. Background is not fully removed or leaves a halo around the subject</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> Lighting gradients or shadows make edge pixels darker than the sampled background color. <strong>Solution:</strong> Increase the Sensitivity slider incrementally (try 40–55). If shadows remain, use the &quot;Erase&quot; brush with a medium radius (20–40px) to manually clear leftover background remnants.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">3. Edges look rough, pixelated, or stepped</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> Feathering is set to 0, producing a binary cutoff. <strong>Solution:</strong> Increase the &quot;Feathering&quot; slider to 2–4 to introduce smooth semi-transparent transitions along the border contours.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">4. The tool removed the subject instead of the background</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> The subject extends into the four outer corners of the image, causing the auto-detector to sample subject pixels as the baseline. <strong>Solution:</strong> Click the &quot;Pick Color&quot; eyedropper button and click directly on the true background to re-target the algorithm accurately.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">5. Fine hair or fur against a busy scene looks artificial</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> Mathematical RGB distance operates uniformly across the canvas without semantic boundary awareness. <strong>Solution:</strong> For complex portrait matting with flyaway hair against textured outdoor backgrounds, shoot against a solid backdrop or utilize manual erase/restore brushes at low brush radius (8–15px) to refine hair strands.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    `,
+    faqs: [
+      {
+        q: "How does this background remover work without AI or machine learning models?",
+        a: "ToolsHere uses direct client-side pixel manipulation via the HTML5 Canvas API. When you load an image, the tool samples the reference background color (from the four corners or via the eyedropper) and calculates the Euclidean color distance in RGB space for every pixel. Pixels whose color difference falls below the sensitivity threshold have their alpha (transparency) channel set to 0. This mathematical approach operates entirely in your browser without requiring external neural network downloads or server-side machine learning models."
+      },
+      {
+        q: "Why does the tool work best on solid or high-contrast backgrounds?",
+        a: "Because the algorithm relies on mathematical RGB color differences, it requires measurable contrast between foreground subject pixels and background pixels. When an image has a solid, uniform background (such as studio white, black, or chroma-key green), the color difference between subject and backdrop is distinct and easy to separate. If a subject wears clothing with identical color values to the background, the algorithm cannot distinguish the boundary automatically, requiring manual brush intervention."
+      },
+      {
+        q: "How do the Sensitivity Threshold and Feathering sliders affect my cutout?",
+        a: "The Sensitivity slider (ranging from 5 to 95) sets the maximum color distance tolerance: higher values remove a wider spectrum of shades resembling the target color, while lower values restrict removal to nearly identical colors. The Feathering slider (0 to 8px) creates a graduated transition zone along the cutout boundary, smoothing harsh pixel edges with semi-transparent anti-aliasing so the subject blends naturally into new backgrounds."
+      },
+      {
+        q: "What should I do if my subject touches the corners of the image?",
+        a: "By default, the automated background detector samples pixels at the four corners of your image (top-left, top-right, bottom-left, bottom-right) to establish the baseline background color. If your subject extends into any corner, its colors may contaminate the baseline. To fix this, click the 'Pick Color' eyedropper button and click directly on a clear section of the true background to re-calibrate the tool instantly."
+      },
+      {
+        q: "How do the manual Erase and Restore brushes work?",
+        a: "The tool retains both the original image pixel data and the active transparency mask in memory. When you select the 'Erase' brush, painting over any area sets the alpha channel to 0, wiping away stubborn background remnants or shadows. When you select the 'Restore' brush, painting brings back the original opaque pixels, allowing you to easily recover any parts of the subject that were inadvertently erased."
+      },
+      {
+        q: "Why is the exported file saved as a PNG instead of JPEG?",
+        a: "The JPEG image standard (JFIF) does not support an alpha transparency channel; saving a transparent cutout as JPEG forces transparent pixels to be filled with a solid color (typically white or black). PNG fully supports an 8-bit alpha channel with 256 levels of transparency, allowing clean overlay onto any webpage, graphic design, or colored document."
+      },
+      {
+        q: "Are my uploaded photos or cutouts sent to any remote server?",
+        a: "The selected image is processed in your browser and is not uploaded to our server for background removal. The image data remains in local browser memory during processing using the HTML5 Canvas 2D API, without transmission to remote cloud databases or external image processing services."
+      }
+    ],
     helpfulGuidesHtml: `
       <!-- Helpful Guides & Tutorials Section -->
       <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
@@ -193,7 +427,7 @@ const seoOverrides = {
                 How to Convert PDF to JPG Online
               </span>
               <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                Export clean visual assets and graphics from PDF pages ready for subject isolation and background removal.
+                Extract visual assets, graphics, and diagrams from PDF pages ready for subject isolation and background removal.
               </p>
             </div>
           </a>
@@ -206,7 +440,7 @@ const seoOverrides = {
                 How to Compress Files for Email Attachments
               </span>
               <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
-                Ensure transparent PNG portraits and product cutouts remain lightweight for fast email delivery.
+                Ensure transparent PNG cutouts and high-resolution product graphics remain compact for fast sharing and email delivery.
               </p>
             </div>
           </a>
@@ -218,11 +452,6 @@ const seoOverrides = {
       { name: "Image Format Converter", hash: "#image-converter" },
       { name: "YouTube Thumbnail Grabber", hash: "#youtube-thumbnail" },
       { name: "Image to PDF Converter", hash: "#image-to-pdf" }
-    ],
-    useCases: [
-      "Creating transparent product cutouts for e-commerce listings on Amazon, eBay, and Shopify.",
-      "Extracting clean headshot portraits for resume profiles, company websites, and badges.",
-      "Isolating logos and vector icons from white or uniform backdrops."
     ]
   },
   pdfWord: {
