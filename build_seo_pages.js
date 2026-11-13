@@ -226,8 +226,23 @@ const seoOverrides = {
     ]
   },
   pdfWord: {
-    seoTitle: "PDF to Word Converter: Convert PDF to DOC Free - ToolsHere",
-    metaDesc: "Convert PDF files into editable Word (.doc) documents directly in your browser. Fast, free, confidential text extraction with zero server file uploads.",
+    seoTitle: "PDF to Word Converter: Convert Digital PDF to DOC Free - ToolsHere",
+    metaDesc: "Extract text from selectable digital PDF documents into an editable Word-compatible (.doc) draft directly in your browser with no server file uploads.",
+    aboutHeading: "About ToolsHere In-Browser PDF to Word Document Converter",
+    intro: "ToolsHere PDF to Word Converter is a client-side document extraction utility designed for students, educators, researchers, and office workers who need to extract text from digital PDF documents into an editable draft without uploading files to remote servers. The conversion process executes locally in your browser memory using the client-side pdfjsLib library; the selected PDF file is not transmitted to our servers for conversion. The tool reads your document's text stream, preserves paragraph boundaries and page breaks, and generates an HTML-based Word-compatible document (.doc). This utility is intended for selectable digital text; scanned documents and photocopies require optical character recognition (OCR) software.",
+    formatNoticeHtml: `
+        <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-2 mt-3">
+          <div class="font-bold text-amber-900 dark:text-amber-300 flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 dark:text-amber-400"></i> Supported PDF Types &amp; Document Output Format
+          </div>
+          <p class="leading-relaxed">
+            <strong>Selectable Digital Text Only (No OCR):</strong> This tool extracts text embedded directly inside vector PDF files. If your document is a flat scanned photocopy, image-only receipt, or photograph from a physical scanner without a text layer, optical character recognition (OCR) is required to detect characters. Scanned PDFs without an embedded text layer cannot be converted by this tool.
+          </p>
+          <p class="leading-relaxed">
+            <strong>HTML-Based Word (.doc) Output:</strong> The downloaded file is structured as an HTML-based document formatted with Microsoft Word XML namespaces (<code class="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 font-mono text-xs">.doc</code>), not a modern zipped binary OpenXML (<code class="px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 font-mono text-xs">.docx</code>) archive. When opening in desktop word processors such as Microsoft Word or LibreOffice Writer, an informational format prompt may appear. Complex multi-column newspaper layouts, vector artwork, embedded raster images, and nested table borders are not preserved.
+          </p>
+        </div>
+    `,
     helpfulGuidesHtml: `
       <!-- Helpful Guides & Tutorials Section -->
       <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
@@ -276,9 +291,107 @@ const seoOverrides = {
       { name: "Word & Character Counter", hash: "#word-counter" }
     ],
     useCases: [
-      "Extracting text from read-only PDF reports and contracts into editable Microsoft Word documents.",
-      "Updating resume text and CV formatting when original source files are lost.",
-      "Copying structured content and paragraphs without manual re-typing."
+      "Extracting Text from Digital Business Reports: Convert digital PDF proposals, reports, and whitepapers into editable text drafts for editing or updating.",
+      "Revising Resumes and CVs: Extract text from previously exported digital PDF resumes to update employment history, skills, and contact details.",
+      "Academic Reference and Note-Taking: Extract study passages and bibliography text from digital lecture notes and research handouts for coursework."
+    ],
+    extraGuideHtml: `
+      <!-- Deep Technical Guidance & Troubleshooting Section -->
+      <section class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+        <div class="space-y-2">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-file-circle-question text-blue-600"></i> Conversion Scope: Technical Structure &amp; Formatting Transfer
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            PDF documents and word processing files use distinct architectural models. A PDF specifies fixed visual coordinates for text glyphs on a visual page, whereas word processors use flow-based document models. Below is an overview of what the client-side parser transfers and where manual formatting adjustments may be necessary:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
+              <i class="fa-solid fa-circle-check"></i> Supported Document Elements
+            </h3>
+            <ul class="space-y-1.5 text-slate-600 dark:text-slate-300 list-disc list-inside">
+              <li>Selectable body text, headings, and paragraph strings.</li>
+              <li>Line groupings based on relative vertical positions.</li>
+              <li>Multi-page document separation with standard page breaks.</li>
+              <li>Clean default typography (Calibri, 11pt, 1.5 line height).</li>
+              <li>Interactive preview and one-click clipboard text copying.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-amber-600 dark:text-amber-400">
+              <i class="fa-solid fa-circle-xmark"></i> Unsupported Formatting &amp; Elements
+            </h3>
+            <ul class="space-y-1.5 text-slate-600 dark:text-slate-300 list-disc list-inside">
+              <li>Scanned paper documents and photocopies (requires OCR).</li>
+              <li>Multi-column layouts (text is extracted sequentially).</li>
+              <li>Embedded images, figures, and vector illustrations.</li>
+              <li>Complex nested data tables (extracted as text lines).</li>
+              <li>Password-protected or encrypted PDF documents.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Troubleshooting Guidance -->
+        <div class="space-y-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-wrench text-blue-600"></i> Troubleshooting Common Issues
+          </h2>
+          <div class="space-y-2.5 text-xs sm:text-sm">
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">1. Error: &quot;No selectable text found in this PDF&quot;</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Explanation:</strong> The PDF consists of raster images (such as a scanned document or photograph) without an embedded text layer. To confirm this, open your PDF in any viewer and try selecting a word with your mouse cursor. If you cannot highlight text, the file requires optical character recognition (OCR) software before text can be extracted.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">2. Microsoft Word alert: &quot;The file format and extension don&#39;t match&quot;</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Explanation:</strong> The converter produces an HTML-based document structured for Microsoft Word compatibility with a <code class="font-mono text-xs">.doc</code> extension. Microsoft Word may display a format notice confirming this structure. Click <strong>&quot;Yes&quot;</strong> to open and edit the document. You can subsequently save the file as a native <code class="font-mono text-xs">.docx</code> via File &gt; Save As.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">3. Unexpected characters or missing symbols</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Explanation:</strong> Some PDF creation tools embed non-standard character codes (Type 3 font subsets) that do not correspond directly to standard Unicode codepoints during client-side extraction.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    `,
+    faqs: [
+      {
+        q: "How does this PDF to Word converter process files without uploading them to a server?",
+        a: "ToolsHere uses the Mozilla pdfjsLib library running inside your web browser. When you select a document, your browser reads the binary file into local device memory using FileReader, parses the text stream directly, and generates a downloadable Word-compatible .doc file. The selected PDF file is not uploaded to our servers for conversion."
+      },
+      {
+        q: "What is the difference between this tool's .doc output and a native .docx file?",
+        a: "The downloaded file contains Word-compatible HTML markup saved with a .doc extension rather than the zipped XML package used by modern .docx files. Desktop word processors like Microsoft Word and LibreOffice Writer can open this format, though Microsoft Word may display a standard prompt confirming the file format."
+      },
+      {
+        q: "Can this converter extract text from scanned documents or photocopies?",
+        a: "No. This tool requires a digital, selectable text layer inside the PDF. If a document was created by scanning physical paper or photographing a page without OCR software, it contains image pixels rather than character codes. Scanned documents require optical character recognition software before text can be extracted."
+      },
+      {
+        q: "Which formatting features may not be preserved during conversion?",
+        a: "Because this client-side utility extracts text rather than performing complete desktop publishing reconstruction, complex layouts such as multi-column magazine grids, floating text frames, vector artwork, and embedded images are not transferred. Data tables are extracted sequentially as formatted text lines."
+      },
+      {
+        q: "Are there file size or browser memory limitations?",
+        a: "Because processing runs entirely within your web browser's memory, performance depends on your device's available RAM and processor. Very large PDF files (such as documents over 50MB or containing hundreds of pages) may cause tab slowdowns or memory exhaustion in mobile or resource-constrained browsers."
+      },
+      {
+        q: "Will the downloaded .doc file open in all word processors?",
+        a: "The generated document is structured for Microsoft Word and LibreOffice Writer. While many other document viewers can open HTML-based .doc files, compatibility varies across different third-party and mobile office applications. Once opened in your word processor, you can re-save the document in your preferred native format, such as .docx."
+      },
+      {
+        q: "Can I copy the extracted text directly without downloading a file?",
+        a: "Yes. Once text extraction completes, a live preview box displays the extracted text in the workspace. You can click the 'Copy Text' button to place the extracted text onto your clipboard for pasting directly into an email, notepad, or text editor."
+      }
     ]
   },
   pdfMerge: {
