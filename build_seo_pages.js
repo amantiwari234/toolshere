@@ -962,8 +962,267 @@ const seoOverrides = {
     ]
   },
   compressPdf: {
-    seoTitle: "Compress PDF Online: Reduce PDF File Size Free - ToolsHere",
-    metaDesc: "Compress PDF files online without losing readability. Reduce document size for email and job portal uploads with 100% private client-side processing.",
+    name: "Compress PDF Document",
+    seoTitle: "Compress PDF Online: Reduce Document File Size Free - ToolsHere",
+    metaDesc: "Compress PDF files directly in your web browser. Choose between lossless Balanced structural optimization or Extreme raster compression with zero server uploads.",
+    h1: "Free Online PDF Compressor & Document Size Reducer",
+    aboutHeading: "About ToolsHere In-Browser PDF Compression Utility",
+    intro: "ToolsHere Compress PDF is a client-side document optimization utility designed for students, job applicants, office workers, and researchers who need to reduce PDF file sizes without transmitting sensitive documents to remote servers. Operating entirely in your browser using WebAssembly and JavaScript libraries (PDF-Lib and PDF.js), the tool offers two distinct compression approaches: a lossless Balanced mode that reorganizes document object streams without degrading text sharpness, and an Extreme mode that rasterizes pages into compressed JPEG images. All file processing takes place in your local device memory, ensuring your confidential resumes, contracts, and financial statements remain private on your computer or phone.",
+    howToUse: [
+      "Click or drag your PDF document into the upload dropzone.",
+      "Review the displayed original file size in kilobytes (KB) or megabytes (MB).",
+      "Choose your compression profile: Balanced mode for lossless structural optimization, or Extreme mode for lossy raster re-encoding.",
+      "Click 'Compress & Download PDF' to execute the compression pipeline in your browser.",
+      "Compare the original file size against the final output size on screen.",
+      "Download and inspect the resulting PDF to verify visual quality and confirm file size reduction."
+    ],
+    features: [
+      "Client-side document processing with zero server file uploads.",
+      "Two distinct optimization profiles: Lossless Balanced structural optimization and Lossy Extreme raster compression.",
+      "Lossless PDF 1.5 object-stream compression (useObjectStreams: true) in Balanced mode.",
+      "Complete text searchability and vector fidelity preservation in Balanced mode.",
+      "Visual page rasterization with adjustable JPEG quality (0.55) at 72 DPI in Extreme mode.",
+      "Automatic multi-tier password-protected and encrypted PDF detection.",
+      "Live file size display comparing original vs. optimized document byte size.",
+      "Cross-platform drag-and-drop and tap-to-select file picker supporting desktop and mobile browsers.",
+      "100% free with unlimited conversions, zero document watermarks, and no user registration required."
+    ],
+    formatsAndLimits: {
+      supportedInputs: "Standard PDF documents (.pdf, application/pdf)",
+      outputFormat: "Optimized PDF file (.pdf)",
+      limitations: "Client-side browser memory processing. Password-locked or encrypted PDFs must be unlocked prior to compression. Very large files (50MB+ or 100+ pages) may be constrained by device RAM."
+    },
+    formatNoticeHtml: `
+        <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/80 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-xs sm:text-sm text-slate-700 dark:text-slate-300 space-y-2.5 mt-3">
+          <div class="font-bold text-amber-900 dark:text-amber-300 flex items-center gap-2">
+            <i class="fa-solid fa-triangle-exclamation text-amber-600 dark:text-amber-400"></i> Compression Profiles: Balanced vs. Extreme Mode Notice
+          </div>
+          <p class="leading-relaxed">
+            <strong>Use Balanced Mode First (Recommended):</strong> Balanced mode uses lossless structural optimization. It cleans orphaned objects, removes incremental revision history, and repacks PDF data into compressed object streams. It preserves sharp vector typography, selectable text (<kbd class="px-1 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 font-mono text-[11px]">Ctrl+F</kbd>), and original raster images. If your document requires searchability or high-resolution readability, always try Balanced mode first.
+          </p>
+          <p class="leading-relaxed">
+            <strong>Extreme Mode (Lossy Raster Conversion):</strong> Extreme mode renders each PDF page into an HTML5 Canvas at 72 DPI and re-encodes it as a JPEG image at 55% quality. This flattens the page into a bitmap, meaning text is no longer selectable or searchable. Fine 8pt/9pt typography, footnotes, or intricate CAD blueprints may show visible compression artifacts.
+          </p>
+          <p class="leading-relaxed">
+            <strong>Important File Size Behavior:</strong> Compression is not guaranteed to reduce every file. Documents that contain primarily digital text and vector artwork (such as clean exports from Microsoft Word or LaTeX) may <em>increase in size</em> under Extreme mode because rasterizing pages into full-bleed JPEGs produces more byte data than vector character codes. Always keep a backup of your original PDF before applying Extreme compression.
+          </p>
+        </div>
+    `,
+    useCases: [
+      "Job & Government Portal Submissions: Compress scanned certificates, ID cards, and application forms to meet strict portal upload ceilings (always verify the receiving portal's current file size limits).",
+      "Email Document Attachments: Reduce oversized reports and presentation decks to fit within email provider attachment restrictions (check your specific email service guidelines).",
+      "Academic Coursework & Thesis Filings: Optimize research papers and lecture slide handouts for submission to university portals while preserving legible text and citations.",
+      "Digital Archiving & Local Storage: Reorganize internal PDF object streams to eliminate redundant revision data and save disk space across personal and business document archives."
+    ],
+    extraGuideHtml: `
+      <!-- Deep Technical Guidance & Architecture Section -->
+      <section class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+        <div class="space-y-2">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-layer-group text-blue-600"></i> The Two Compression Engines Explained
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            Unlike cloud-based PDF compression platforms that upload documents to remote servers, ToolsHere operates entirely inside your web browser using client-side JavaScript libraries. The utility provides two fundamentally different compression mechanisms designed for distinct document types:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 dark:text-white text-sm">
+              <div class="w-7 h-7 rounded-lg bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xs">1</div>
+              <span>Balanced Mode (PDF-Lib Structural Optimization)</span>
+            </div>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-xs">
+              Balanced mode reconstructs the document using the <code class="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 font-mono text-[11px]">pdf-lib</code> engine. It creates a brand-new PDF container, copies all page objects sequentially, and serializes the document using PDF 1.5 object stream compression (<code class="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 font-mono text-[11px]">useObjectStreams: true</code>).
+            </p>
+            <ul class="text-slate-600 dark:text-slate-300 text-xs space-y-1 list-disc list-inside">
+              <li><strong>Zero raster downsampling:</strong> Text and vector drawings remain crisp at any zoom level.</li>
+              <li><strong>Preserves searchability:</strong> All text stays selectable and searchable via <kbd class="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 font-mono text-[10px]">Ctrl+F</kbd>.</li>
+              <li><strong>Structural cleanup:</strong> Eliminates unreferenced metadata, dead objects, and past edit revisions.</li>
+              <li><strong>Expected reduction:</strong> Typically 5% to 30% on unoptimized files; minimal on pre-compressed PDFs.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2.5">
+            <div class="flex items-center gap-2 font-bold text-slate-900 dark:text-white text-sm">
+              <div class="w-7 h-7 rounded-lg bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xs">2</div>
+              <span>Extreme Mode (PDF.js Canvas Rasterization)</span>
+            </div>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-xs">
+              Extreme mode leverages the <code class="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 font-mono text-[11px]">pdfjsLib</code> engine to render each page onto an HTML5 Canvas at standard 72 DPI (<code class="px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-700 font-mono text-[11px]">scale: 1.0</code>). The canvas bitmap is re-encoded as a JPEG image at 55% quality and embedded into a newly created PDF page.
+            </p>
+            <ul class="text-slate-600 dark:text-slate-300 text-xs space-y-1 list-disc list-inside">
+              <li><strong>Heavy lossy compression:</strong> Drastically reduces oversized 300 DPI scanned paper documents.</li>
+              <li><strong>Text flattening:</strong> Text is converted into image pixels and can no longer be highlighted or searched.</li>
+              <li><strong>Compression artifacts:</strong> Fine typography, barcodes, and hairline diagrams may appear soft or blurry.</li>
+              <li><strong>Expected reduction:</strong> 50% to 80% on scanned image documents; may enlarge digital text PDFs.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Balanced vs Extreme Comparison Table -->
+        <div class="space-y-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-table-cells text-blue-600"></i> Technical Comparison: Balanced vs. Extreme Mode
+          </h2>
+          <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+            <table class="w-full text-left text-xs sm:text-sm">
+              <thead class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700">
+                <tr>
+                  <th class="p-3 sm:p-3.5 font-bold">Feature / Attribute</th>
+                  <th class="p-3 sm:p-3.5 font-bold text-rose-600 dark:text-rose-400">Balanced Mode (Recommended)</th>
+                  <th class="p-3 sm:p-3.5 font-bold text-amber-600 dark:text-amber-400">Extreme Mode (Raster)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-slate-600 dark:text-slate-300">
+                <tr class="bg-white dark:bg-slate-850">
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">Underlying Engine</td>
+                  <td class="p-3">PDF-Lib Object Stream Serializer</td>
+                  <td class="p-3">PDF.js Canvas 2D + PDF-Lib JPEG Embedder</td>
+                </tr>
+                <tr class="bg-slate-50/50 dark:bg-slate-800/40">
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">Compression Nature</td>
+                  <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-semibold text-xs">100% Lossless</span></td>
+                  <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 font-semibold text-xs">Lossy Raster Re-encoding</span></td>
+                </tr>
+                <tr class="bg-white dark:bg-slate-850">
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">Text Searchability (Ctrl+F)</td>
+                  <td class="p-3 font-medium text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-check mr-1"></i> Fully Preserved &amp; Selectable</td>
+                  <td class="p-3 font-medium text-rose-500"><i class="fa-solid fa-xmark mr-1"></i> Lost (Flattened into JPEG Pixels)</td>
+                </tr>
+                <tr class="bg-slate-50/50 dark:bg-slate-800/40">
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">Vector Artwork &amp; Fonts</td>
+                  <td class="p-3 font-medium text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-check mr-1"></i> Preserved as Scalable Vectors</td>
+                  <td class="p-3 font-medium text-rose-500"><i class="fa-solid fa-xmark mr-1"></i> Converted to 72 DPI Bitmap Pixels</td>
+                </tr>
+                <tr class="bg-white dark:bg-slate-850">
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">Visual Quality Impact</td>
+                  <td class="p-3">Zero visual loss; original clarity retained</td>
+                  <td class="p-3">72 DPI resolution; 55% JPEG compression</td>
+                </tr>
+                <tr class="bg-slate-50/50 dark:bg-slate-800/40">
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">Typical File Size Effect</td>
+                  <td class="p-3">5% to 30% reduction on unoptimized PDFs</td>
+                  <td class="p-3">50% to 80% on scans; may enlarge text PDFs</td>
+                </tr>
+                <tr class="bg-white dark:bg-slate-850">
+                  <td class="p-3 font-semibold text-slate-900 dark:text-white">Best Document Types</td>
+                  <td class="p-3">Resumes, contracts, academic papers, books</td>
+                  <td class="p-3">300 DPI scanned paper photocopies, print fliers</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Which Documents Compress Best vs Worst -->
+        <div class="space-y-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-file-circle-check text-blue-600"></i> Which Documents Compress Best vs. Worst
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
+                <i class="fa-solid fa-circle-check"></i> High-Compression Candidates
+              </h3>
+              <ul class="space-y-1.5 text-slate-600 dark:text-slate-300 list-disc list-inside">
+                <li>High-resolution scanned documents (e.g., 300–600 DPI photocopies) in Extreme mode.</li>
+                <li>PDFs generated by legacy software with uncompressed cross-reference streams.</li>
+                <li>Documents with accumulated incremental revision histories and orphaned objects.</li>
+                <li>Multi-page image-heavy presentations, catalogs, and marketing brochures.</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+              <h3 class="font-bold text-amber-600 dark:text-amber-400 flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation"></i> Low-Compression or Challenging Documents
+              </h3>
+              <ul class="space-y-1.5 text-slate-600 dark:text-slate-300 list-disc list-inside">
+                <li>Pure digital text documents (LaTeX, Word exports); Extreme mode may increase size.</li>
+                <li>PDFs already linearized or optimized with modern Adobe Acrobat or Ghostscript pipelines.</li>
+                <li>Documents already dominated by pre-compressed JPEG photo streams.</li>
+                <li>Password-protected or encrypted PDF documents (rejected for security reasons).</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Troubleshooting Common Issues -->
+        <div class="space-y-3">
+          <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-wrench text-blue-600"></i> Troubleshooting Common PDF Compression Issues
+          </h2>
+          <div class="space-y-2.5 text-xs sm:text-sm">
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">1. Error: &quot;This PDF is password-protected. Please unlock it before compressing.&quot;</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> The PDF contains an encrypted stream or permissions lock (<code class="font-mono text-xs">/Encrypt</code> dictionary). <strong>Solution:</strong> Open the document in your desktop PDF viewer or browser, enter your password, and save or export an unencrypted copy prior to compressing.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">2. The compressed PDF became larger instead of smaller in Extreme mode</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> The original document consisted of lightweight digital vector text and fonts (e.g., 40 KB for 5 pages). Extreme mode rendered each page into a full-page raster JPEG image, creating more total data than the original vector instructions. <strong>Solution:</strong> Use Balanced mode for digital text documents.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">3. Balanced mode showed minimal (0% to 2%) or no file size reduction</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> The PDF was already streamlined by its authoring application, or its file weight is dominated by already-compressed image payloads. <strong>Solution:</strong> If you must achieve a smaller file size regardless of text searchability, switch to Extreme mode.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">4. Text appears soft, blurry, or pixelated upon zooming in</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> Extreme mode converted text glyphs into 72 DPI JPEG pixels at 55% quality. <strong>Solution:</strong> Re-run the compression using Balanced mode to preserve native vector font definitions.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">5. Browser tab slowed down or crashed on a very large PDF</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> Because compression executes locally inside browser RAM, files with hundreds of pages or heavy embedded graphics can exceed available tab memory limits on mobile or low-RAM devices. <strong>Solution:</strong> Close other browser tabs, or process multi-page documents on a desktop browser.
+              </p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+              <span class="font-bold text-slate-900 dark:text-white">6. Mobile file picker fails to open or select the PDF</span>
+              <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong>Cause:</strong> Some mobile browsers and file manager apps restrict direct MIME access. <strong>Solution:</strong> Tap the &quot;Select PDF File&quot; button directly, or browse through your device's &quot;Files&quot; / &quot;Downloads&quot; directory instead of recent cloud shortcuts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    `,
+    faqs: [
+      {
+        q: "What is the difference between Balanced and Extreme compression?",
+        a: "Balanced mode uses PDF-Lib to reorganize internal document structures and save pages with PDF 1.5 object streams, preserving vector text and searchability without rasterization. Extreme mode uses PDF.js to render every page onto an HTML5 canvas at 72 DPI and re-encode it as a JPEG image at 0.55 quality, flattening text into bitmap graphics for maximum compression of scanned documents."
+      },
+      {
+        q: "Why did my compressed PDF become larger instead of smaller?",
+        a: "If you choose Extreme mode on a document containing primarily digital text and vector graphics, the tool converts compact vector font instructions into full-page raster JPEG images. A 5-page vector PDF that occupies only 50KB can expand to over 500KB when converted into five 72 DPI JPEG bitmaps. For text-heavy documents, Balanced mode should always be used."
+      },
+      {
+        q: "Does compressing a PDF keep the text selectable and searchable?",
+        a: "In Balanced mode, the text layer, font definitions, and character glyph coordinates remain completely intact, meaning you can highlight text, copy passages to your clipboard, and search with Ctrl+F. In Extreme mode, pages are rendered into flat JPEG images, permanently removing the selectable text layer."
+      },
+      {
+        q: "Why did Balanced mode reduce my PDF file size by very little or not at all?",
+        a: "Balanced mode achieves savings by stripping unreferenced metadata, removing incremental save revisions, and packing objects into compressed streams. If a PDF has already been optimized by modern publishing software or consists almost entirely of pre-compressed JPEG photos, structural optimization cannot squeeze the file further without lossy image downsampling."
+      },
+      {
+        q: "Why does the tool reject password-protected or encrypted PDFs?",
+        a: "ToolsHere operates entirely client-side in your web browser. When an encrypted PDF is loaded, cryptographic protection prevents the PDF-Lib parser from reading object streams or reconstructing pages without the correct decryption key. To compress a protected file, you must first remove the password restriction in your PDF viewer."
+      },
+      {
+        q: "Is my original PDF file changed or overwritten during compression?",
+        a: "No. Web browsers operate within a secure sandboxed filesystem. When you select a document, the browser reads an in-memory copy of the file via the FileReader API. Your original file on your hard drive or mobile storage is never modified or overwritten; the compressed version is saved as a new file prefixed with compressed-."
+      },
+      {
+        q: "How does browser-based processing work, and are my files uploaded to a server?",
+        a: "The compression pipeline executes entirely in your browser using client-side JavaScript and WebAssembly libraries. The selected PDF file is read directly into your device's local memory and is not uploaded to our servers, stored in cloud databases, or analyzed remotely, ensuring your documents remain on your device during processing."
+      }
+    ],
     helpfulGuidesHtml: `
       <!-- Helpful Guides & Tutorials Section -->
       <section class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
@@ -1010,11 +1269,6 @@ const seoOverrides = {
       { name: "Merge & Split PDF", hash: "#merge-pdf" },
       { name: "Image to PDF Converter", hash: "#image-to-pdf" },
       { name: "Image Compressor & Resizer", hash: "#image-compressor" }
-    ],
-    useCases: [
-      "Shrinking oversized PDF contracts, resumes, and tax filings to under 500KB or 1MB for portal uploads.",
-      "Optimizing scanned school assignments and textbooks for rapid email attachments.",
-      "Compressing archived PDF reports to save local device storage."
     ]
   },
   imgToPdf: {
