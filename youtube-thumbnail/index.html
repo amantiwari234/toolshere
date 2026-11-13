@@ -11,8 +11,8 @@
       }
     }
   </script>
-  <title>YouTube Thumbnail Downloader: 1080p Full HD - ToolsHere</title>
-  <meta name="description" content="Download high-resolution 1080p HD YouTube video and Shorts thumbnails instantly. Paste any video URL to preview and save Maxresdefault images for free.">
+  <title>YouTube Thumbnail Downloader: HD & MaxRes Cover Grabber - ToolsHere</title>
+  <meta name="description" content="Download YouTube video and Shorts thumbnails in HD and MaxRes quality. Inspect previews, understand resolution availability, and save cover images online.">
   <meta name="keywords" content="youtube thumbnail, online tools, free web utilities, media tools, toolshere">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://toolshere.online/youtube-thumbnail/">
@@ -21,8 +21,8 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Toolshere">
   <meta property="og:url" content="https://toolshere.online/youtube-thumbnail/">
-  <meta property="og:title" content="YouTube Thumbnail Downloader: 1080p Full HD - ToolsHere">
-  <meta property="og:description" content="Download high-resolution 1080p HD YouTube video and Shorts thumbnails instantly. Paste any video URL to preview and save Maxresdefault images for free.">
+  <meta property="og:title" content="YouTube Thumbnail Downloader: HD & MaxRes Cover Grabber - ToolsHere">
+  <meta property="og:description" content="Download YouTube video and Shorts thumbnails in HD and MaxRes quality. Inspect previews, understand resolution availability, and save cover images online.">
   <meta property="og:image" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:type" content="image/png">
@@ -33,8 +33,8 @@
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://toolshere.online/youtube-thumbnail/">
-  <meta property="twitter:title" content="YouTube Thumbnail Downloader: 1080p Full HD - ToolsHere">
-  <meta property="twitter:description" content="Download high-resolution 1080p HD YouTube video and Shorts thumbnails instantly. Paste any video URL to preview and save Maxresdefault images for free.">
+  <meta property="twitter:title" content="YouTube Thumbnail Downloader: HD & MaxRes Cover Grabber - ToolsHere">
+  <meta property="twitter:description" content="Download YouTube video and Shorts thumbnails in HD and MaxRes quality. Inspect previews, understand resolution availability, and save cover images online.">
   <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
 
   <!-- Favicon & Touch Icons (Google Search Best Practice: 48x48 PNG First) -->
@@ -141,7 +141,7 @@
   "@type": "WebApplication",
   "name": "YouTube Thumbnail Grabber",
   "url": "https://toolshere.online/youtube-thumbnail/",
-  "description": "Download high-resolution 1080p HD YouTube video and Shorts thumbnails instantly. Paste any video URL to preview and save Maxresdefault images for free.",
+  "description": "Download YouTube video and Shorts thumbnails in HD and MaxRes quality. Inspect previews, understand resolution availability, and save cover images online.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "All modern browsers (Chrome, Firefox, Safari, Edge, Android, iOS)",
   "offers": {
@@ -184,26 +184,58 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is the resolution of the downloaded thumbnail?",
+      "name": "How does the YouTube Thumbnail Grabber extract video thumbnails?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The tool fetches the maximum resolution available from YouTube servers, typically 1920x1080 or 1280x720 pixels (Maxresdefault)."
+        "text": "The tool uses a client-side regular expression in your browser to extract the 11-character video ID from a full YouTube URL. Once identified, it queries YouTube's public image CDN endpoints (img.youtube.com) to load preview images for MaxRes (maxresdefault.jpg) and HQ (hqdefault.jpg). No video links or user data are stored on ToolsHere servers."
       }
     },
     {
       "@type": "Question",
-      "name": "Does this tool work with YouTube Shorts URLs?",
+      "name": "What are the actual pixel dimensions of MaxRes and HQ thumbnails?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. You can paste standard video links, shortened youtu.be links, or Shorts URLs containing the video ID."
+        "text": "On YouTube's CDN, the MaxRes thumbnail (maxresdefault.jpg) is typically 1280×720 pixels (720p HD), and reaches 1920×1080 only if the creator uploaded a full 1080p asset. The HQ thumbnail (hqdefault.jpg) has a physical resolution of 480×360 pixels. While the interface labels these as Full HD and HD, actual dimensions depend on YouTube's CDN files. Other formats like MQ (320×180) and Default (120×90) exist on the CDN but are not currently offered as separate download buttons."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I use downloaded thumbnails commercially?",
+      "name": "Why does the MaxRes (1080p) thumbnail fail or show standard quality on some videos?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Thumbnails belong to their respective video creators. Downloading them for educational, reference, critique, or fair-use review is customary, but obtain permission for commercial reuse."
+        "text": "YouTube only generates a maxresdefault.jpg file when a video has been uploaded in high resolution and the creator has supplied high-definition custom artwork. For older videos, low-resolution uploads (480p or lower), or auto-generated thumbnails, YouTube's CDN returns a 404 error for MaxRes. When this occurs, the tool's preview automatically falls back to display the HQ thumbnail, though attempting to download the missing MaxRes file may fail."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What YouTube URL formats are supported, and why are live links or bare IDs rejected?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Supported formats include standard watch URLs (youtube.com/watch?v=ID), watch URLs with additional query parameters, shortened youtu.be links (youtu.be/ID), Shorts links (youtube.com/shorts/ID), embed URLs (youtube.com/embed/ID), legacy /v/ URLs, and mobile links (m.youtube.com). Bare 11-character video IDs and /live/ broadcast URLs are currently not matched by the parser regex and will trigger an invalid link error. Always paste the full browser or share URL."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are YouTube Shorts thumbnails not vertical 9:16 images?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Although YouTube Shorts are recorded in a vertical 9:16 format, the public thumbnail endpoints queried by this tool (maxresdefault.jpg and hqdefault.jpg) return horizontal thumbnail assets, typically 16:9 or 4:3 with pillarboxing. The tool does not guarantee an original vertical 9:16 thumbnail. The actual image dimensions and appearance depend on the asset YouTube makes available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the download feature work, and why is an external proxy used?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Direct browser downloads from Google's CDN are blocked by Cross-Origin Resource Sharing (CORS) security headers. To allow you to download the image file directly to your device, ToolsHere routes the download request through an open-source CORS proxy (images.weserv.nl) that packages the image as a local Blob. If the proxy fails or the image returns a 404, the tool falls back to opening the raw YouTube CDN image in a new browser tab for manual saving."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use downloaded YouTube thumbnails for commercial projects or re-uploading?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Thumbnail use for commentary, criticism, news reporting, or educational analysis may qualify as fair use or fair dealing depending on the applicable jurisdiction and circumstances. Downloading an image does not transfer copyright or grant reuse rights. Before using a thumbnail commercially or republishing it, check the applicable licence, legal exceptions, and whether permission from the copyright owner is required."
       }
     }
   ]
@@ -377,7 +409,7 @@
             Free YouTube Thumbnail Downloader & Image Grabber
           </h1>
           <p class="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 mt-1 max-w-3xl leading-relaxed">
-            Download high-resolution 1080p HD YouTube video and Shorts thumbnails instantly. Paste any video URL to preview and save Maxresdefault images for free.
+            Download YouTube video and Shorts thumbnails in HD and MaxRes quality. Inspect previews, understand resolution availability, and save cover images online.
           </p>
         </div>
       </div>
@@ -430,9 +462,9 @@
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-[10px] text-emerald-600"></i> 100% In-Browser Privacy</span>
           <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-1.5"><i class="fa-solid fa-bolt text-blue-600 text-[10px]"></i> Zero Server Latency</span>
         </div>
-        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About YouTube Thumbnail Grabber &amp; Core Utility</h2>
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">About ToolsHere YouTube Thumbnail Grabber</h2>
         <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 leading-relaxed text-sm text-slate-600 dark:text-slate-300">
-          <p>ToolsHere YouTube Thumbnail Grabber is an indispensable utility for digital marketers, graphic designers, video editors, and content researchers looking to download video cover artwork for presentations, blog posts, competitive research, and design inspiration. By parsing standard watch links, shortened youtu.be URLs, embed links, and mobile URLs, our tool extracts the official high-resolution `maxresdefault` 1920x1080 YouTube CDN cover image. You can inspect the preview instantly, download the full-resolution artwork to your local machine, or copy the direct image asset link with a single tap.</p>
+          <p>ToolsHere YouTube Thumbnail Grabber is a specialized web utility engineered for content creators, digital marketers, graphic designers, video editors, and media researchers. The tool extracts and displays official video cover artwork directly from YouTube's content delivery network (CDN). By parsing standard watch URLs, shortened youtu.be links, embed links, and mobile Shorts URLs, it retrieves high-resolution MaxRes and HQ thumbnail assets. You can inspect visual previews in your browser, understand resolution availability, and download JPEG files directly to your device. All URL parsing runs in your local browser, preview images are loaded from YouTube CDN servers, and file downloads are routed through an open CORS proxy.</p>
         </div>
       </div>
 
@@ -445,22 +477,22 @@
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">1</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Copy the web link of any YouTube video from your browser address bar or mobile share button.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Copy the full web link of any public YouTube video or Shorts from your browser address bar or mobile share menu (e.g., https://www.youtube.com/watch?v=... or https://youtu.be/...).</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">2</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Paste the URL into the 'Paste YouTube Video Link' input field.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Paste the complete URL into the 'Paste YouTube Video URL or Shorts link...' input field. (Note: Bare 11-character video IDs without a URL prefix are not supported).</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">3</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">The tool instantly parses the video ID and renders the highest available thumbnail preview.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click the red 'Get Thumbnails' button to parse the video ID and fetch the thumbnail previews from YouTube's image servers.</span>
             </li>
 
             <li class="flex items-start gap-3 p-3.5 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs">
               <span class="shrink-0 w-6 h-6 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs flex items-center justify-center mt-0.5">4</span>
-              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Click 'Download Max HD' to open and save the 1080p image, or click 'Copy URL' to copy the direct CDN link.</span>
+              <span class="text-slate-700 dark:text-slate-300 font-medium leading-relaxed">Review the dual preview cards: click 'Download 1080p (Full HD)' to save the MaxRes image (typically 1280×720, up to 1920×1080 when available), or click 'Download 720p (HD)' to save the HQ image (480×360).</span>
             </li>
 
         </ol>
@@ -475,27 +507,32 @@
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Supports all YouTube URL structures (standard watch?v=, youtu.be, embed, and mobile links).</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">In-Browser Video ID Parsing: Client-side regular expression extracts the 11-character video identifier without transmitting URLs to ToolsHere servers.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Direct extraction of top-tier Maxresdefault 1080p HD thumbnail graphics.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Dual Resolution Display: Fetches both MaxRes (typically 1280×720, up to 1920×1080) and HQ (480×360) thumbnail assets simultaneously.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Instant visual preview banner before downloading.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Automatic Preview Fallback: Gracefully switches the high-resolution preview to the HQ image if YouTube does not provide a MaxRes file.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">One-click 'Copy URL' button for easy sharing and markdown embedding.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Broad URL Format Support: Compatible with standard desktop watch URLs, parameter-rich links, youtu.be shortlinks, embed links, and YouTube Shorts.</span>
             </div>
 
             <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
               <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
-              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Completely browser-based with zero external API rate limits.</span>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Client-Side Triggered Downloads: Uses an open-source CORS image proxy to convert remote image streams into downloadable JPEG files on your device.</span>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+              <i class="fa-solid fa-check text-emerald-600 text-xs mt-1 shrink-0"></i>
+              <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Zero Registration or Fees: Free to use without user accounts, browser extension installations, or daily usage caps.</span>
             </div>
 
         </div>
@@ -509,17 +546,29 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Supported Inputs</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Any public YouTube video URL or 11-character video ID</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Full YouTube URLs (watch?v=, youtu.be/, /shorts/, /embed/, legacy /v/, and mobile m.youtube.com links)</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Output Format</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">High-resolution JPEG image (1280x720 / 1920x1080)</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">JPEG image files (youtube-thumbnail-[id]-max.jpg or youtube-thumbnail-[id]-hq.jpg)</span>
           </div>
           <div class="p-3 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
             <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Processing Scope</span>
-            <span class="font-semibold text-slate-800 dark:text-slate-200">Private or unlisted videos with restricted CDN access may fall back to standard high quality (hqdefault) thumbnails.</span>
+            <span class="font-semibold text-slate-800 dark:text-slate-200">Bare 11-character video IDs and /live/ URLs are unsupported; MaxRes is not available for all videos; Shorts CDN endpoints deliver horizontal format rather than guaranteed vertical 9:16</span>
           </div>
         </div>
+
+    <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
+      <div class="flex items-center gap-2 font-bold text-blue-900 dark:text-blue-300">
+        <i class="fa-solid fa-circle-info text-blue-600"></i> Supported URLs &amp; Resolution Availability
+      </div>
+      <p class="leading-relaxed">
+        <strong>Full URL Requirement:</strong> You must enter a complete YouTube URL containing <code>youtube.com/</code> or <code>youtu.be/</code>. Entering a bare 11-character video ID alone will not match the input parser. Live broadcast URLs (<code>/live/</code>), channel handles, and playlist links are currently unsupported.
+      </p>
+      <p class="leading-relaxed">
+        <strong>MaxRes Availability Notice:</strong> YouTube generates <code>maxresdefault.jpg</code> only when a video was uploaded in high definition with custom artwork. If a video is low-resolution or older, YouTube returns a 404 error; our preview falls back to the HQ thumbnail, though the MaxRes download button may fail.
+      </p>
+    </div>
 
       </section>
 
@@ -532,21 +581,318 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Extracting full HD 1080p thumbnails from YouTube videos for editorial commentary and blog previews.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Analyzing competitor thumbnail typography, color schemes, and composition for YouTube content strategy.
             </div>
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Saving reference graphic design templates, fonts, and compositions for creator inspiration.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Extracting high-resolution artwork for editorial commentary, blog articles, and video reviews under fair use.
             </div>
 
             <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Downloading video artwork for offline educational and media archives.
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Creating presentation slide decks and educational materials that reference public video lectures and tutorials.
+            </div>
+
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Archiving video cover graphics for offline research, graphic design inspiration, and creative mood boards.
+            </div>
+
+            <div class="p-3.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              <i class="fa-solid fa-check text-blue-600 text-xs mr-1.5"></i> Verifying how your own published video thumbnails render across YouTube's content delivery network.
             </div>
 
         </div>
       </section>
 
 
+
+    <!-- Comprehensive Educational & Technical Guide -->
+    <section class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      <div class="space-y-3">
+        <h2 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+          <i class="fa-solid fa-photo-film text-red-600"></i> Comprehensive Guide to YouTube Thumbnails &amp; CDN Mechanics
+        </h2>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Video thumbnails are among the most critical visual assets on the internet. As the primary visual cue in search results, browse feeds, and recommendation algorithms, thumbnails determine whether a viewer clicks or scrolls past. Understanding how YouTube stores, scales, and serves thumbnail images—alongside the technical constraints of CDN endpoints and copyright law—is vital for creators, digital marketers, and developers alike.
+        </p>
+      </div>
+
+      <!-- Section 1: Video IDs & Supported URL Formats -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-link text-blue-600"></i> 1. Anatomy of Video IDs &amp; Supported URL Formats
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Every video uploaded to YouTube is assigned a unique, immutable <strong>11-character identifier</strong>. This identifier consists of alphanumeric characters, hyphens (<code>-</code>), and underscores (<code>_</code>)—a modified base64 representation of a 64-bit integer. When you paste a link into ToolsHere, our client-side parser uses regular expressions to isolate this 11-character key from various URL structures:
+        </p>
+        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
+              <tr>
+                <th class="p-3">URL Format</th>
+                <th class="p-3">Example Pattern</th>
+                <th class="p-3">Support Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 font-mono text-xs">
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-sans font-semibold">Standard Watch URL</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">https://www.youtube.com/watch?v=dQw4w9WgXcQ</td>
+                <td class="p-3 font-sans text-emerald-600 dark:text-emerald-400 font-bold">Supported</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-sans font-semibold">URL with Parameters</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">https://www.youtube.com/watch?feature=shared&amp;v=dQw4w9WgXcQ</td>
+                <td class="p-3 font-sans text-emerald-600 dark:text-emerald-400 font-bold">Supported</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-sans font-semibold">Shortened youtu.be Link</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">https://youtu.be/dQw4w9WgXcQ</td>
+                <td class="p-3 font-sans text-emerald-600 dark:text-emerald-400 font-bold">Supported</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-sans font-semibold">YouTube Shorts Link</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">https://www.youtube.com/shorts/dQw4w9WgXcQ</td>
+                <td class="p-3 font-sans text-emerald-600 dark:text-emerald-400 font-bold">Supported</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-sans font-semibold">Embedded Video URL</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">https://www.youtube.com/embed/dQw4w9WgXcQ</td>
+                <td class="p-3 font-sans text-emerald-600 dark:text-emerald-400 font-bold">Supported</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-sans font-semibold">Mobile Watch URL</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">https://m.youtube.com/watch?v=dQw4w9WgXcQ</td>
+                <td class="p-3 font-sans text-emerald-600 dark:text-emerald-400 font-bold">Supported</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-sans font-semibold">Live Stream URL (/live/)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">https://www.youtube.com/live/dQw4w9WgXcQ</td>
+                <td class="p-3 font-sans text-rose-600 dark:text-rose-400 font-bold">Unsupported</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-sans font-semibold">Bare 11-Character Video ID</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">dQw4w9WgXcQ</td>
+                <td class="p-3 font-sans text-rose-600 dark:text-rose-400 font-bold">Unsupported (Requires URL)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+          <strong>Important Note on Unsupported Formats:</strong> Bare 11-character video IDs without a domain prefix and dedicated live stream URLs (<code>youtube.com/live/...</code>) are not matched by the tool's parser regex. If you have a live stream link, you can typically convert it by replacing <code>/live/</code> with <code>/watch?v=</code> to extract the thumbnail.
+        </p>
+      </div>
+
+      <!-- Section 2: YouTube CDN Architecture & Resolutions -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-server text-blue-600"></i> 2. YouTube Thumbnail CDN Architecture &amp; Image Resolutions
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          YouTube hosts thumbnail graphics across its globally distributed image CDN domains (principally <code>img.youtube.com</code> and <code>i.ytimg.com</code>). When a video is published, YouTube generates multiple standardized image sizes from the creator's uploaded artwork:
+        </p>
+        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
+              <tr>
+                <th class="p-3">CDN File Name</th>
+                <th class="p-3">Typical Dimensions</th>
+                <th class="p-3">Aspect Ratio</th>
+                <th class="p-3">ToolsHere Offering</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 font-mono text-xs">
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold text-blue-600 dark:text-cyan-400">maxresdefault.jpg</td>
+                <td class="p-3">1280 &times; 720 (up to 1920 &times; 1080)</td>
+                <td class="p-3 font-sans">16:9 (Widescreen)</td>
+                <td class="p-3 font-sans text-emerald-600 dark:text-emerald-400 font-bold">Download Card 1 (MaxRes)</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold text-blue-600 dark:text-cyan-400">hqdefault.jpg</td>
+                <td class="p-3">480 &times; 360</td>
+                <td class="p-3 font-sans">4:3 (Letterboxed)</td>
+                <td class="p-3 font-sans text-emerald-600 dark:text-emerald-400 font-bold">Download Card 2 (HQ)</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 text-slate-500">sddefault.jpg</td>
+                <td class="p-3">640 &times; 480</td>
+                <td class="p-3 font-sans">4:3 (Letterboxed)</td>
+                <td class="p-3 font-sans text-slate-500">CDN Reference Format</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 text-slate-500">mqdefault.jpg</td>
+                <td class="p-3">320 &times; 180</td>
+                <td class="p-3 font-sans">16:9 (Widescreen)</td>
+                <td class="p-3 font-sans text-slate-500">CDN Reference Format</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 text-slate-500">default.jpg</td>
+                <td class="p-3">120 &times; 90</td>
+                <td class="p-3 font-sans">4:3 (Letterboxed)</td>
+                <td class="p-3 font-sans text-slate-500">CDN Reference Format</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+          <strong>Resolution Clarification:</strong> While ToolsHere UI buttons are labeled &ldquo;Download 1080p (Full HD)&rdquo; and &ldquo;Download 720p (HD)&rdquo;, the physical dimensions are dictated by YouTube's CDN: <code>maxresdefault</code> is typically 1280&times;720 (reaching 1920&times;1080 only if uploaded by the creator at 1080p), and <code>hqdefault</code> is physically 480&times;360 pixels. The tool targets these two primary tiers; formats like SD (640&times;480) and MQ (320&times;180) exist on the CDN but are not provided as dedicated buttons.
+        </p>
+      </div>
+
+      <!-- Section 3: MaxRes Availability & Fallback Mechanics -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-triangle-exclamation text-amber-500"></i> 3. Why MaxRes Thumbnails Fail &amp; Preview Fallback
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          A common source of confusion for users is discovering that certain videos do not produce a high-resolution MaxRes thumbnail. This occurs because <strong>YouTube does not generate a <code>maxresdefault.jpg</code> for every video</strong>. Specifically, YouTube returns an HTTP 404 (Not Found) error on the MaxRes endpoint under these circumstances:
+        </p>
+        <ul class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 space-y-1.5 list-disc pl-5">
+          <li><strong>Standard-Definition Source Uploads:</strong> If a video was uploaded in 480p, 360p, or lower resolution, YouTube does not synthesize a high-definition MaxRes graphic.</li>
+          <li><strong>Older Legacy Videos:</strong> Videos uploaded before YouTube introduced widescreen custom thumbnails often lack 720p or 1080p cover assets.</li>
+          <li><strong>Automated Frame Captures:</strong> When a creator does not upload custom thumbnail artwork, YouTube auto-extracts low-resolution stills that often lack MaxRes dimensions.</li>
+        </ul>
+        <div class="p-3.5 bg-amber-50/70 dark:bg-amber-950/40 rounded-xl border border-amber-200 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 space-y-1">
+          <p class="font-bold">How the Tool Handles Missing MaxRes Assets:</p>
+          <p class="leading-relaxed">
+            In the on-screen preview, ToolsHere listens for image loading errors (<code>imgMax.onerror</code>). If <code>maxresdefault.jpg</code> fails with a 404, the preview image automatically switches its source to <code>hqdefault.jpg</code> so you never see a broken image icon. However, clicking the &ldquo;Download 1080p (Full HD)&rdquo; button directly requests the MaxRes asset from the CDN; if that file does not exist on YouTube servers, the download will fail and fallback to opening the missing CDN link in a new tab. In such cases, use the &ldquo;Download 720p (HD)&rdquo; button to save the available 480&times;360 HQ asset.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 4: Shorts Thumbnails & Aspect Ratios -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-mobile-screen text-blue-600"></i> 4. YouTube Shorts Thumbnails &amp; Aspect Ratio Quirks
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Although YouTube Shorts are recorded in a vertical 9:16 format, the public thumbnail endpoints queried by this tool (<code>maxresdefault.jpg</code> and <code>hqdefault.jpg</code>) return horizontal thumbnail assets, typically 16:9 or 4:3 with pillarboxing. The tool does not guarantee an original vertical 9:16 thumbnail. The actual image dimensions and appearance depend on the asset YouTube makes available.
+        </p>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Depending on how YouTube processes the vertical video, the horizontal CDN asset typically takes one of two presentations:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white">Pillarboxing / Blur Padding</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300">
+              The vertical video frame is centered in a 16:9 canvas with black bars or blurred side-extensions filling the horizontal borders.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white">Center-Crop Landscape Crop</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300">
+              A 16:9 horizontal crop is extracted from the middle of the vertical frame for desktop browse grids and search feeds.
+            </p>
+          </div>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+          <strong>Key Takeaway:</strong> ToolsHere fully supports pasting Shorts URLs (<code>youtube.com/shorts/...</code>) and extracting their official CDN artwork. The tool retrieves the official asset as delivered by YouTube, which is delivered as a horizontal canvas rather than a guaranteed vertical 9:16 portrait graphic.
+        </p>
+      </div>
+
+      <!-- Section 5: Download Process & CORS Proxy Disclosure -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-download text-blue-600"></i> 5. In-Browser Download Pipeline &amp; CORS Proxy Transparency
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          When downloading images from third-party websites in a browser, web security standards enforce <strong>Cross-Origin Resource Sharing (CORS)</strong> restrictions. Because Google's <code>img.youtube.com</code> servers do not send CORS-enabling headers (<code>Access-Control-Allow-Origin: *</code>), client-side JavaScript cannot directly convert a YouTube CDN image URL into a downloadable binary Blob using <code>fetch()</code>.
+        </p>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          To overcome this limitation without operating our own centralized storage server, ToolsHere utilizes a well-known, open-source image caching proxy:
+        </p>
+        <div class="p-3.5 bg-slate-100 dark:bg-slate-800 rounded-xl font-mono text-xs text-slate-800 dark:text-slate-200 space-y-1">
+          <p><span class="font-bold text-slate-500">// Download Proxy Pipeline:</span></p>
+          <p>https://images.weserv.nl/?url=https%3A%2F%2Fimg.youtube.com%2Fvi%2F[ID]%2Fmaxresdefault.jpg&amp;output=jpg</p>
+        </div>
+        <div class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+          <p>
+            <strong>How the Download Operates:</strong>
+          </p>
+          <ol class="list-decimal pl-5 space-y-1">
+            <li>When you click a download button, the browser sends an asynchronous request to <code>images.weserv.nl</code> with the encoded YouTube image URL.</li>
+            <li>The proxy fetches the image from YouTube's CDN and serves it back with permissive CORS headers.</li>
+            <li>The browser converts the response into an in-memory <code>Blob</code> and creates a temporary <code>URL.createObjectURL()</code> to trigger an automated local file download (named <code>youtube-thumbnail-[id]-[quality].jpg</code>).</li>
+            <li><strong>Graceful Fallback:</strong> If the proxy is blocked by your network or if the image does not exist (HTTP 404), the script catches the failure and immediately opens the raw YouTube CDN image URL in a new browser tab (<code>target="_blank"</code>), allowing you to right-click and save manually.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Section 6: Copyright, Fair Use & Commercial Reuse -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-scale-balanced text-emerald-600"></i> 6. Copyright, Fair Use &amp; Responsible Reuse Guidelines
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Thumbnail use for commentary, criticism, news reporting, or educational analysis may qualify as fair use or fair dealing depending on the applicable jurisdiction and circumstances. Downloading an image does not transfer copyright or grant reuse rights. Before using a thumbnail commercially or republishing it, check the applicable licence, legal exceptions, and whether permission from the copyright owner is required.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
+          <div class="p-4 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 space-y-2">
+            <h4 class="text-xs font-bold text-emerald-900 dark:text-emerald-200 flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i> Potential Fair Use Contexts
+            </h4>
+            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1 list-disc pl-4">
+              <li>Editorial commentary, criticism, and video critique in blog posts or news articles.</li>
+              <li>Academic research, digital media studies, and classroom presentations.</li>
+              <li>Personal, non-public graphic design inspiration and creative mood boards.</li>
+              <li>Archiving your own channel's thumbnail assets when original design files are lost.</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 space-y-2">
+            <h4 class="text-xs font-bold text-rose-900 dark:text-rose-200 flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-circle-xmark text-rose-600"></i> Prohibited Without License
+            </h4>
+            <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1 list-disc pl-4">
+              <li>Re-uploading another creator's thumbnail onto your own YouTube videos.</li>
+              <li>Using downloaded artwork on commercial merchandise, printed products, or advertisements.</li>
+              <li>Redistributing thumbnail packages or selling creator graphics on asset marketplaces.</li>
+              <li>Misrepresenting another channel's brand identity or video assets as your own.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 7: Independent Platform & Trademark Disclaimer -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-blue-600"></i> 7. Independent Platform &amp; Trademark Disclaimer
+        </h3>
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs leading-relaxed text-slate-600 dark:text-slate-300 space-y-2">
+          <p>
+            <strong>Official Trademark Notice:</strong> ToolsHere is an independent web utility platform and is <strong>not affiliated with, associated with, authorized by, endorsed by, or in any way officially connected with YouTube, Google LLC, or Alphabet Inc.</strong>
+          </p>
+          <p>
+            The names &ldquo;YouTube&rdquo;, &ldquo;YouTube Shorts&rdquo;, and associated trademarks, logos, and emblems are registered trademarks of Google LLC. The use of these trademarks within this tool and documentation is solely for descriptive, informational, and nominative purposes to indicate software compatibility under nominative fair use. ToolsHere does not host, store, or stream video content; it acts solely as an in-browser URL parser that points to publicly accessible CDN image assets.
+          </p>
+        </div>
+      </div>
+
+      <!-- Section 8: Troubleshooting & Creator Use Cases -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-wrench text-blue-600"></i> 8. Practical Troubleshooting &amp; Creator Tips
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-question text-blue-600"></i> "Invalid Link" Error Message
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              If the tool displays an error toast, ensure you pasted a full URL beginning with <code>https://</code>. Entering only the 11-character video ID or pasting a channel page (<code>/@username</code>) will fail. Copy the complete link from your browser address bar.
+            </p>
+          </div>
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5">
+              <i class="fa-solid fa-image text-amber-500"></i> Broken or Grey Placeholder Image
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              If an image fails to appear, the video may be set to Private, deleted, or geographically restricted. Private videos return HTTP 404 across all CDN endpoints. Verify that the video is public or unlisted before extracting.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
       <!-- Frequently Asked Questions -->
@@ -558,23 +904,51 @@
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What is the resolution of the downloaded thumbnail?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How does the YouTube Thumbnail Grabber extract video thumbnails?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The tool fetches the maximum resolution available from YouTube servers, typically 1920x1080 or 1280x720 pixels (Maxresdefault).</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">The tool uses a client-side regular expression in your browser to extract the 11-character video ID from a full YouTube URL. Once identified, it queries YouTube's public image CDN endpoints (img.youtube.com) to load preview images for MaxRes (maxresdefault.jpg) and HQ (hqdefault.jpg). No video links or user data are stored on ToolsHere servers.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Does this tool work with YouTube Shorts URLs?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What are the actual pixel dimensions of MaxRes and HQ thumbnails?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Yes. You can paste standard video links, shortened youtu.be links, or Shorts URLs containing the video ID.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">On YouTube's CDN, the MaxRes thumbnail (maxresdefault.jpg) is typically 1280×720 pixels (720p HD), and reaches 1920×1080 only if the creator uploaded a full 1080p asset. The HQ thumbnail (hqdefault.jpg) has a physical resolution of 480×360 pixels. While the interface labels these as Full HD and HD, actual dimensions depend on YouTube's CDN files. Other formats like MQ (320×180) and Default (120×90) exist on the CDN but are not currently offered as separate download buttons.</p>
             </div>
 
             <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
               <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Can I use downloaded thumbnails commercially?
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Why does the MaxRes (1080p) thumbnail fail or show standard quality on some videos?
               </h3>
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Thumbnails belong to their respective video creators. Downloading them for educational, reference, critique, or fair-use review is customary, but obtain permission for commercial reuse.</p>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">YouTube only generates a maxresdefault.jpg file when a video has been uploaded in high resolution and the creator has supplied high-definition custom artwork. For older videos, low-resolution uploads (480p or lower), or auto-generated thumbnails, YouTube's CDN returns a 404 error for MaxRes. When this occurs, the tool's preview automatically falls back to display the HQ thumbnail, though attempting to download the missing MaxRes file may fail.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> What YouTube URL formats are supported, and why are live links or bare IDs rejected?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Supported formats include standard watch URLs (youtube.com/watch?v=ID), watch URLs with additional query parameters, shortened youtu.be links (youtu.be/ID), Shorts links (youtube.com/shorts/ID), embed URLs (youtube.com/embed/ID), legacy /v/ URLs, and mobile links (m.youtube.com). Bare 11-character video IDs and /live/ broadcast URLs are currently not matched by the parser regex and will trigger an invalid link error. Always paste the full browser or share URL.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Why are YouTube Shorts thumbnails not vertical 9:16 images?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Although YouTube Shorts are recorded in a vertical 9:16 format, the public thumbnail endpoints queried by this tool (maxresdefault.jpg and hqdefault.jpg) return horizontal thumbnail assets, typically 16:9 or 4:3 with pillarboxing. The tool does not guarantee an original vertical 9:16 thumbnail. The actual image dimensions and appearance depend on the asset YouTube makes available.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> How does the download feature work, and why is an external proxy used?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Direct browser downloads from Google's CDN are blocked by Cross-Origin Resource Sharing (CORS) security headers. To allow you to download the image file directly to your device, ToolsHere routes the download request through an open-source CORS proxy (images.weserv.nl) that packages the image as a local Blob. If the proxy fails or the image returns a 404, the tool falls back to opening the raw YouTube CDN image in a new browser tab for manual saving.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Can I use downloaded YouTube thumbnails for commercial projects or re-uploading?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">Thumbnail use for commentary, criticism, news reporting, or educational analysis may qualify as fair use or fair dealing depending on the applicable jurisdiction and circumstances. Downloading an image does not transfer copyright or grant reuse rights. Before using a thumbnail commercially or republishing it, check the applicable licence, legal exceptions, and whether permission from the copyright owner is required.</p>
             </div>
 
         </div>
@@ -636,7 +1010,7 @@
                   AI Background Remover
                 </span>
                 <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-relaxed line-clamp-2">
-                  Remove image backgrounds instantly in your browser.
+                  Remove image backgrounds directly in your browser using color-difference selection.
                 </p>
               </div>
               <div class="pt-3 mt-2 border-t border-slate-200/60 dark:border-slate-700/60 flex items-center justify-between text-[11px] font-semibold text-blue-600 dark:text-blue-400">
@@ -746,6 +1120,7 @@
             <li><a href="/privacy/" class="hover:text-blue-600 transition-colors">Privacy Policy</a></li>
             <li><a href="/terms/" class="hover:text-blue-600 transition-colors">Terms of Service</a></li>
             <li><a href="/disclaimer/" class="hover:text-blue-600 transition-colors">Disclaimer</a></li>
+            <li><button type="button" onclick="openCookieConsentPreferences(event)" class="hover:text-blue-600 transition-colors text-left cursor-pointer focus:outline-hidden focus:underline text-xs" aria-label="Manage Cookie and Privacy Consent Preferences">Cookie Preferences</button></li>
           </ul>
         </div>
       </div>
