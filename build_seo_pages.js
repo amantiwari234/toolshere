@@ -103,9 +103,95 @@ const toolIconsMap = {
 
 const seoOverrides = {
   imgResizer: {
-    seoTitle: "Image Compressor & Resizer (20KB, 50KB, 100KB) - ToolsHere",
-    metaDesc: "Compress and resize JPG, PNG, and WebP images to exact sizes like 20KB, 50KB, or 100KB directly in your browser. Fast, private, with zero server uploads.",
-    aboutHeading: "About ToolsHere Image Compressor & Resizer",
+    seoTitle: "Free Online Image Compressor: Reduce Image Size in KB - ToolsHere",
+    metaDesc: "Compress and resize JPG, PNG, and WebP images to target sizes like 20KB, 50KB, or 100KB locally in your browser using HTML5 Canvas. Fast, client-side processing.",
+    aboutHeading: "About ToolsHere Free Online Image Compressor & Photo Resizer",
+    intro: "ToolsHere Free Online Image Compressor is a client-side media optimization utility engineered for web developers, content creators, students, photographers, and job applicants. Operating locally inside your browser, this utility compresses, resizes, and converts images without transmitting your private photographs, documents, or personal files to remote servers. By combining an automated binary-search optimization engine with dimension scaling, format conversion, and transparency detection, ToolsHere helps you stay below strict application portal size ceilings (such as ≤ 20KB, ≤ 50KB, or ≤ 100KB), accelerate website load speeds, and reduce digital asset weight while preserving clear visual quality.",
+    howToUse: [
+      "Select your photo by clicking 'Choose Image' or drag and drop your image directly into the upload workspace (supports JPG, PNG, WebP, GIF, BMP, and SVG files up to 50MB).",
+      "Choose your desired output format from the format selector—keep 'Auto' to match the source type, or convert to JPEG (.jpg), WebP (.webp), or PNG (.png).",
+      "Select an automated target file size preset (20 KB, 50 KB, 100 KB, 200 KB) or enter a custom KB target; the engine iteratively adjusts compression parameters to keep output size below your selected ceiling threshold.",
+      "Alternatively, fine-tune the compression quality slider (10%–100%) and enter custom pixel dimensions with aspect ratio lock enabled to manually balance sharpness against file weight.",
+      "Inspect the live visual preview, review the original vs. optimized file weight comparison card, and click 'Download Compressed Image' to save your file locally."
+],
+    features: [
+      "Client-side processing engine operating locally inside your browser memory using the HTML5 Canvas API without transmitting files to external servers.",
+      "Automated target file size ceiling calibration using an 8-iteration binary search loop with a safety margin to ensure output does not exceed the specified threshold.",
+      "Four quick target presets (20KB, 50KB, 100KB, 200KB) and custom target inputs from 5KB to 50,000KB.",
+      "Dual compression controls: perceptual quality sliding scale (10% to 100%) and custom width/height pixel dimension scaling.",
+      "Bidirectional aspect-ratio lock that dynamically calculates proportional height from width changes and vice versa.",
+      "Proactive alpha transparency detection with solid background fill selector (White or Black) when exporting transparent assets as JPEG.",
+      "Wide multi-format ingestion supporting JPEG, PNG, WebP, GIF, BMP, and SVG files up to 50MB per photo.",
+      "Multi-format export options allowing conversion to modern high-efficiency WebP, universal JPEG, or lossless PNG.",
+      "Live visual side-by-side preview with real-time file weight calculation and percentage reduction badges.",
+      "Safe object URL lifecycle management that automatically revokes unused blobs to prevent browser memory leaks on mobile devices."
+],
+    formatsAndLimits: {
+      "supportedInputs": "JPEG, PNG, WebP, GIF, BMP, and SVG (up to 50MB per file)",
+      "outputFormats": "JPEG (.jpg), WebP (.webp), and PNG (.png)",
+      "sizePresets": "20 KB, 50 KB, 100 KB, 200 KB, or any custom target from 5 KB to 50,000 KB",
+      "limitations": "Animated GIFs export first frame only; standard canvas export does not transfer original EXIF metadata; client-side execution depends on available device memory"
+},
+    useCases: [
+      "Compressing photos and signatures to stay below strict 20KB or 50KB limits for civil service, recruitment, and university admission portals.",
+      "Optimizing website banners, blog illustrations, and e-commerce product photos to accelerate Largest Contentful Paint (LCP) and boost Core Web Vitals.",
+      "Converting heavy PNG illustrations into lightweight WebP images while preserving alpha transparency for modern web design.",
+      "Shrinking large smartphone camera photos into lightweight email attachments that stay safely below typical 20MB or 25MB attachment limits.",
+      "Preparing digital photos for online visa applications (such as the U.S. DS-160 ≤ 240 KB limit or UK HMPO digital photo rules) within allowed pixel dimensions.",
+      "Downscaling large raster assets for mobile applications and presentations without introducing blurriness or layout-breaking aspect ratio distortion."
+],
+    relatedTools: [
+      {
+            "name": "Image Format Converter",
+            "hash": "#image-converter"
+      },
+      {
+            "name": "Image to PDF Converter",
+            "hash": "#image-to-pdf"
+      },
+      {
+            "name": "AI Background Remover",
+            "hash": "#background-remover"
+      },
+      {
+            "name": "PDF Compressor",
+            "hash": "#compress-pdf"
+      }
+],
+    faqs: [
+      {
+            "q": "How does the target size preset (20KB, 50KB, 100KB) work?",
+            "a": "ToolsHere uses an iterative binary-search optimization engine executed locally in your browser. When you select a preset such as 50KB or enter a custom target, the algorithm treats it as an upper ceiling limit, applying a safety margin (approx. 2%, between 256 and 1,024 bytes) so that the file will not exceed strict portal upload limits. It first tests compression quality at your image's original dimensions. If quality reduction alone cannot safely meet the target size without extreme degradation, it progressively scales down the pixel dimensions until the exported file falls safely below your specified threshold. Note that if a requested size cannot be reached (for example, attempting to compress a complex photo to 5KB in lossless PNG), the tool notifies you of the minimum reachable size."
+      },
+      {
+            "q": "Will compressing an image noticeably degrade its visual sharpness or clarity?",
+            "a": "For moderate compression (quality settings between 75% and 85%), human eyes typically cannot distinguish between the compressed file and the raw original on standard desktop and mobile screens. Noticeable degradation—such as macroblocking or edge ringing—only occurs when an image is compressed extremely aggressively (below 40% quality) or when a massive high-resolution photo is forced into a tiny file budget like 20KB. In such cases, downscaling pixel dimensions slightly produces a vastly sharper visual result than excessively quantizing full-resolution pixels."
+      },
+      {
+            "q": "Should I export my compressed image as JPEG, WebP, or PNG?",
+            "a": "Choose JPEG (.jpg) for photographs, complex scenery, and universal compatibility across legacy portals, government application systems, and older desktop software. Choose WebP (.webp) for modern website assets, e-commerce storefronts, and online portfolios, as WebP delivers 25% to 35% smaller file sizes than JPEG at equivalent visual quality while supporting alpha transparency. Choose PNG (.png) strictly for logos, charts, screenshots with fine text, and graphics where lossless pixel fidelity is non-negotiable."
+      },
+      {
+            "q": "How does this tool handle images with transparent backgrounds?",
+            "a": "The tool automatically inspects your image's pixel data using an internal canvas scan to detect alpha transparency. If you export as WebP or PNG, alpha transparency is preserved. However, the JPEG format specification does not support an alpha transparency channel. If you convert a transparent image to JPEG, ToolsHere automatically reveals a background fill selector, allowing you to choose a clean White background (standard for application forms and documents) or a Black background."
+      },
+      {
+            "q": "Does compressing an image remove private EXIF camera metadata and GPS coordinates?",
+            "a": "When an image is drawn to an HTML5 Canvas element and exported as a new file blob, the browser encodes only the raw pixel data from the canvas bitmap buffer. As a result of this standard canvas re-encoding mechanism, non-raster image metadata (such as EXIF camera settings, GPS location coordinates, and timestamps) is not included in the resulting export. Note that this is a technical property of browser canvas rendering rather than a cryptographically certified privacy audit."
+      },
+      {
+            "q": "Can I compress high-resolution photos on mobile devices without running out of memory?",
+            "a": "Yes, but device hardware limits apply. While ToolsHere accepts files up to 50MB, very large images may exceed the memory or canvas limits of some mobile browsers. Processing capacity varies by device, available RAM and browser, so results may differ. The tool revokes temporary object URLs when they are no longer needed to help release associated browser resources. This does not eliminate memory limitations on devices processing very large images. For heavy camera photos, we recommend allowing the tool a moment to process without switching tabs or refreshing the page."
+      },
+      {
+            "q": "Are my photos uploaded to, stored on, or analyzed by your servers?",
+            "a": "No. Processing occurs locally in your browser using the HTML5 Canvas API and FileReader. The tool executes entirely on your client device; no image files or photo data are transmitted to ToolsHere servers or third-party cloud services. You can verify this by inspecting the Network tab in your browser's developer tools during compression."
+      },
+      {
+            "q": "How can I resize image pixel dimensions without stretching or distorting proportions?",
+            "a": "ToolsHere includes an automated Aspect Ratio Lock enabled by default (indicated by the lock icon next to 'Resize Dimensions'). When the lock is active, the tool calculates the exact aspect ratio of your uploaded image. Typing a new value into the Width field automatically recalculates and updates the Height field proportionally, and vice versa. This ensures your subject never appears horizontally squished or vertically stretched."
+      }
+],
     formatNoticeHtml: `
         <div class="p-3.5 bg-blue-50/70 dark:bg-blue-950/40 rounded-lg border border-blue-200 dark:border-blue-800/60 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 mt-2">
           <div class="font-bold text-blue-900 dark:text-blue-300 flex items-center gap-1.5">
@@ -157,17 +243,313 @@ const seoOverrides = {
         </div>
       </section>
     `,
-    relatedTools: [
-      { name: "Image Format Converter", hash: "#image-converter" },
-      { name: "AI Background Remover", hash: "#background-remover" },
-      { name: "Image to PDF Converter", hash: "#image-to-pdf" },
-      { name: "Compress PDF Document", hash: "#compress-pdf" }
-    ],
-    useCases: [
-      "Compressing passport photos and signatures to under 20KB or 50KB for government job and exam portals.",
-      "Downscaling large camera photos and WebP banners to boost website page loading speeds.",
-      "Resizing graphics to exact pixel dimensions for Instagram, LinkedIn, and blog headers."
-    ]
+    extraGuideHtml: `
+    <!-- Comprehensive Educational & Technical Guide (Extra SEO Content) -->
+    <section class="pt-8 border-t border-slate-200 dark:border-slate-800 space-y-8 text-slate-700 dark:text-slate-300">
+
+      <!-- Section 1: The Science of Image Compression -->
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-atom text-blue-600"></i> 1. The Science of Image Compression: Lossy vs. Lossless Algorithms
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Digital image compression reduces binary payload size while maintaining acceptable visual fidelity. Two primary algorithmic paradigms govern this transformation:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-blue-600"></span> Lossy Compression (JPEG, WebP)
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Lossy algorithms achieve substantial file-weight reductions (50% to 90%) by selectively discarding imperceptible visual data. JPEG applies Discrete Cosine Transform (DCT) to convert 8&times;8 pixel blocks into spatial frequency components, applying coarser quantization to high frequencies where the human eye is less sensitive.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-2">
+            <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-600"></span> Lossless Compression (PNG)
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Lossless compression preserves 100% of raw pixel data without discarding color information. PNG uses a two-stage pipeline: spatial prediction filters followed by DEFLATE (LZ77 and Huffman coding) to eliminate statistical redundancy. It is ideal for line art and text where lossy quantization produces visible artifacts.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Comprehensive Image Format Comparison Matrix -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-table text-blue-600"></i> 2. Image Format Comparison: JPEG vs. PNG vs. WebP vs. AVIF
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Selecting the appropriate container format depends on visual content type, alpha transparency needs, and browser compatibility:
+        </p>
+        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
+              <tr>
+                <th class="p-3">Format</th>
+                <th class="p-3">Compression Type</th>
+                <th class="p-3">Alpha Transparency</th>
+                <th class="p-3">Typical Savings</th>
+                <th class="p-3">Browser Support</th>
+                <th class="p-3">Recommended Use Cases</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-xs">
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-bold text-slate-900 dark:text-white">JPEG (.jpg)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Lossy (DCT)</td>
+                <td class="p-3 text-rose-600 dark:text-rose-400 font-semibold">No</td>
+                <td class="p-3 font-mono">60% &ndash; 85%</td>
+                <td class="p-3 text-emerald-600 dark:text-emerald-400 font-semibold">Universal (99.9%)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Photographs, government portal uploads, email attachments</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-bold text-slate-900 dark:text-white">PNG (.png)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Lossless (DEFLATE)</td>
+                <td class="p-3 text-emerald-600 dark:text-emerald-400 font-semibold">Yes (8-bit alpha)</td>
+                <td class="p-3 font-mono">20% &ndash; 45%</td>
+                <td class="p-3 text-emerald-600 dark:text-emerald-400 font-semibold">Universal (99.9%)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Logos, icons, transparent graphics, UI screenshots</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-bold text-slate-900 dark:text-white">WebP (.webp)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Lossy &amp; Lossless (VP8)</td>
+                <td class="p-3 text-emerald-600 dark:text-emerald-400 font-semibold">Yes (8-bit alpha)</td>
+                <td class="p-3 font-mono">75% &ndash; 92%</td>
+                <td class="p-3 text-emerald-600 dark:text-emerald-400 font-semibold">Modern (&gt;96%)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">E-commerce storefronts, web banners, responsive web apps</td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-bold text-slate-900 dark:text-white">AVIF (.avif)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Lossy &amp; Lossless (AV1)</td>
+                <td class="p-3 text-emerald-600 dark:text-emerald-400 font-semibold">Yes (10/12-bit)</td>
+                <td class="p-3 font-mono">80% &ndash; 95%</td>
+                <td class="p-3 text-amber-600 dark:text-amber-400 font-semibold">Growing (~93%)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Next-gen web publishing with modern browser fallbacks</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section 3: Compressing Images to Target KB Ceilings -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-bullseye text-blue-600"></i> 3. Compressing Images to Target KB Ceilings (20KB, 50KB, 100KB Engine)
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          ToolsHere uses an in-browser binary search optimization algorithm to bring file weight below strict application size limits without trial and error:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-1">
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-calculator text-blue-600"></i> Ceiling Safety Margin
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              When targeting 50KB, the tool targets an internal threshold (~49KB) with a safety margin (approx. 2%, 256&ndash;1024 bytes) so that filesystem rounding does not breach the portal limit.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-sliders text-purple-600"></i> Quality Calibration First
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              For JPEG and WebP, the engine tests quality parameters (0.08 to 0.95) across 7 binary search iterations at native resolution before considering downscaling.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-crop-simple text-emerald-600"></i> Proportional Downscaling
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              If quality reduction alone cannot safely meet the ceiling, pixel dimensions are scaled down proportionally to prevent severe quantization artifacts.
+            </p>
+          </div>
+        </div>
+        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          <strong>Reachability Constraints:</strong> Because PNG is inherently lossless, browser canvas engines ignore lossy quality sliders for PNG exports. For PNG files, target weight is controlled strictly via dimensional downscaling. If a target size cannot be reached (e.g. demanding a 5KB PNG for a complex photo), the tool displays the minimum reachable file size and advises switching to JPEG or WebP.
+        </p>
+      </div>
+
+      <!-- Section 4: Official Photo & Document Upload Requirements -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-id-card text-blue-600"></i> 4. Official Photo &amp; Document Upload Requirements (Verified Matrix)
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Government agencies, recruitment boards, and visa systems enforce strict upload specifications. The following table provides verified requirements along with direct official documentation links:
+        </p>
+        <div class="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-700">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-100 dark:bg-slate-800/90 text-slate-900 dark:text-white font-bold border-b border-slate-200 dark:border-slate-700">
+              <tr>
+                <th class="p-3">Jurisdiction &amp; Authority</th>
+                <th class="p-3">Application Type</th>
+                <th class="p-3">Dimensions &amp; Resolution</th>
+                <th class="p-3">Allowed File Size</th>
+                <th class="p-3">Format &amp; Background</th>
+                <th class="p-3">Official Documentation Link</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-xs">
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold text-slate-900 dark:text-white">United States (State Dept)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Online Visa (DS-160 / DS-260 CEAC Upload)</td>
+                <td class="p-3 font-mono">600 &times; 600 px min to 1200 &times; 1200 px max (1:1 square ratio)</td>
+                <td class="p-3 font-mono font-bold text-blue-600 dark:text-blue-400">&le; 240 KB</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">JPEG (.jpg), 24-bit sRGB color, plain white/off-white background</td>
+                <td class="p-3 text-slate-500"><a href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/photos.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">travel.state.gov Visa Photo Rules</a></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold text-slate-900 dark:text-white">United States (Passport Services)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">U.S. Passport (Standard Paper Submission)</td>
+                <td class="p-3 font-mono">2 &times; 2 inches (51 &times; 51 mm); head 1 to 1 3/8 in; &ge; 300 DPI print</td>
+                <td class="p-3 font-mono text-slate-600 dark:text-slate-300">Physical paper print (Online renewal portals apply separate checks when open)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Color photo printed on photo-quality paper, plain white background</td>
+                <td class="p-3 text-slate-500"><a href="https://travel.state.gov/content/travel/en/passports/how-apply/photos.html" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">travel.state.gov Passport Photos</a></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold text-slate-900 dark:text-white">United Kingdom (HMPO)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">GOV.UK Online Passport Application (Digital Photo)</td>
+                <td class="p-3 font-mono">At least 600 &times; 750 px (width &times; height)</td>
+                <td class="p-3 font-mono font-bold text-blue-600 dark:text-blue-400">50 KB min to 10 MB max</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">JPEG (.jpg), plain cream or light grey background, no shadows</td>
+                <td class="p-3 text-slate-500"><a href="https://www.gov.uk/photos-for-passports/rules-for-digital-photos" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">gov.uk Digital Photo Rules</a></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold text-slate-900 dark:text-white">Schengen Area (EU Member States)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Schengen Visa (ICAO Doc 9303 / Visa Code)</td>
+                <td class="p-3 font-mono">Physical print: 35 &times; 45 mm (head height 32&ndash;36 mm, 70&ndash;80% of photo)</td>
+                <td class="p-3 font-mono text-slate-600 dark:text-slate-300">Digital upload caps vary by national consulate portal (typically &le; 300&ndash;500 KB)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">Uniform light grey/light blue background, sharp focus</td>
+                <td class="p-3 text-slate-500"><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32009R0810" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">EU Visa Code (Reg 810/2009)</a></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold text-slate-900 dark:text-white">India (UPSC)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">UPSC OTR &amp; Online Application (e.g. Civil Services Exam Rules)</td>
+                <td class="p-3 font-mono">Photo &amp; Signature: 350 &times; 350 px min to 1000 &times; 1000 px max</td>
+                <td class="p-3 font-mono font-bold text-blue-600 dark:text-blue-400">Photo: 20 KB to 300 KB; Signature: 20 KB to 300 KB</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">JPG/JPEG format strictly, white background; name &amp; date on photo</td>
+                <td class="p-3 text-slate-500"><a href="https://upsconline.nic.in/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">upsconline.nic.in Portal</a></td>
+              </tr>
+              <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                <td class="p-3 font-semibold text-slate-900 dark:text-white">United Arab Emirates (ICP)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">ICP Smart Services Visa &amp; Emirates ID</td>
+                <td class="p-3 font-mono">High-resolution personal photo (pixel dimensions vary by service sub-form)</td>
+                <td class="p-3 font-mono text-slate-600 dark:text-slate-300">Per application screen prompt (typically &le; 500 KB to 1 MB)</td>
+                <td class="p-3 text-slate-600 dark:text-slate-300">JPEG format, plain white background, neutral expression</td>
+                <td class="p-3 text-slate-500"><a href="https://smartservices.icp.gov.ae/" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">smartservices.icp.gov.ae Portal</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed italic">
+          <strong>Important Caveat:</strong> Specifications are subject to revision by respective government authorities and individual consulate processing systems. For UPSC applications, the sizing parameters (20&ndash;300 KB, 350&times;350 to 1000&times;1000 px) reflect the official Civil Services Examination Instructions (Appendix-IV). Because requirements may be updated across examination cycles and years, applicants must follow the official instructions and notifications published for their specific active examination.
+        </p>
+      </div>
+
+      <!-- Section 5: Image Optimization & Website Performance (Core Web Vitals) -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-gauge-high text-blue-600"></i> 5. Image Optimization &amp; Website Performance (Core Web Vitals)
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Unoptimized media represents the single largest contributor to page bloat. Implementing structured compression directly impacts Google Core Web Vitals:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-bolt text-amber-500"></i> Largest Contentful Paint (LCP)
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Hero images often determine the LCP timestamp. Compressing hero assets into modern WebP format under 100KB ensures rapid initial rendering, helping your pages comfortably meet Google's 2.5-second Good threshold.
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1.5">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+              <i class="fa-solid fa-arrows-up-down text-blue-500"></i> Cumulative Layout Shift (CLS)
+            </h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Images lacking explicit dimensions cause content below to jump downward when loaded. Specify explicit <code>width</code> and <code>height</code> attributes on your image elements to maintain a zero-shift browsing experience.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 6: Visual Quality vs. Compression Artifacts -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-eye text-blue-600"></i> 6. Visual Quality vs. Compression Artifacts (Quality Setting Guide)
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Balancing perceptual clarity against file size requires selecting the proper quality setting for your medium:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-1">
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1">
+            <div class="text-xs font-bold text-emerald-600 dark:text-emerald-400">90% &ndash; 100% Quality</div>
+            <div class="text-[11px] font-semibold text-slate-900 dark:text-white">Near-Lossless Master</div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Minimal quantization. Recommended for fine-art photography and print proofs where visual fidelity is paramount.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1">
+            <div class="text-xs font-bold text-blue-600 dark:text-blue-400">75% &ndash; 85% Quality</div>
+            <div class="text-[11px] font-semibold text-slate-900 dark:text-white">Optimal Web Balance</div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">The web standard sweet spot. Delivers 60%&ndash;80% payload savings with imperceptible loss in normal viewports.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1">
+            <div class="text-xs font-bold text-amber-600 dark:text-amber-400">50% &ndash; 70% Quality</div>
+            <div class="text-[11px] font-semibold text-slate-900 dark:text-white">Aggressive Compression</div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Substantial file reduction. Subtle banding in soft gradients; excellent for mobile thumbnails and secondary gallery items.</p>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-1">
+            <div class="text-xs font-bold text-rose-600 dark:text-rose-400">Below 50% Quality</div>
+            <div class="text-[11px] font-semibold text-slate-900 dark:text-white">Heavy Quantization</div>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">Visible macroblocking and ringing artifacts along contrast edges. Use only when forced by severe size constraints.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 7: Alpha Transparency & Background Handling -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-layer-group text-blue-600"></i> 7. Alpha Transparency &amp; Solid Background Handling
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          Managing transparency across lossy and lossless formats requires understanding container capabilities:
+        </p>
+        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+          WebP and PNG support 8-bit alpha channels for smooth transparency. JPEG operates exclusively on a 24-bit RGB canvas with no alpha channel. When you convert a transparent image to JPEG, ToolsHere automatically activates a background fill selector, allowing you to choose a solid <strong>White</strong> background (ideal for official documents) or a solid <strong>Black</strong> background.
+        </p>
+      </div>
+
+      <!-- Section 8: Privacy & In-Browser Processing Architecture -->
+      <div class="space-y-3 pt-4 border-t border-slate-200/60 dark:border-slate-800/60">
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-emerald-600"></i> 8. In-Browser Processing &amp; Client-Side Architecture
+        </h3>
+        <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+          ToolsHere processes your images directly on your client device using standard browser capabilities:
+        </p>
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs leading-relaxed text-slate-600 dark:text-slate-300 space-y-2">
+          <div class="font-bold text-slate-900 dark:text-white flex items-center gap-1.5 uppercase tracking-wide">
+            <i class="fa-solid fa-laptop-code text-blue-600"></i> Client-Side Pipeline Mechanics
+          </div>
+          <ul class="list-disc pl-4 space-y-1.5">
+            <li><strong>Local File Reading:</strong> Files are read into local browser memory using <code>FileReader.readAsDataURL()</code> without triggering network upload requests.</li>
+            <li><strong>Canvas Rasterization &amp; Re-Encoding:</strong> Compression, dimension adjustment, and format transformation are executed via the browser's <code>HTMLCanvasElement.toBlob()</code> API.</li>
+            <li><strong>Local Execution Without Server Transmission:</strong> Images are processed locally in your browser session. No image binary data is transmitted across the internet to ToolsHere or external servers.</li>
+            <li><strong>Non-Raster Metadata Handling:</strong> Because the browser renders image pixels onto an HTML5 Canvas and exports a new compressed blob from the raw pixel buffer, non-raster metadata (such as EXIF camera tags, device identifiers, and embedded GPS coordinates) is not included in the newly generated canvas export. Note that this is a technical property of browser canvas rendering rather than a cryptographically certified privacy audit.</li>
+            <li><strong>Device Memory Considerations:</strong> Processing occurs in browser memory. Keep the browser tab open while processing large photos to avoid interrupted operations.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    `
   },
   bgRemover: {
     name: "Online Background Remover",
