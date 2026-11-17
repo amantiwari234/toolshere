@@ -530,28 +530,33 @@ function ensureScript(name) {
         }
       }
 
-      // 4. Update Browser URL (HTML5 History API)
-      const targetHash = '#' + route.hash;
-      if (window.location.hash !== targetHash) {
-        history.pushState({ tool: route.hash }, '', targetHash);
+      // 4. Update Browser URL (HTML5 History API) - skip on dedicated standalone pages
+      if (!isDedicatedPage) {
+        const targetHash = '#' + route.hash;
+        if (window.location.hash !== targetHash) {
+          history.pushState({ tool: route.hash }, '', targetHash);
+        }
+
+        // 5. Update SEO Metadata & Canonical URL (on homepage SPA modal views)
+        document.title = route.title;
+        const metaDescEl = document.querySelector('meta[name="description"]');
+        if (metaDescEl && route.metaDesc) metaDescEl.setAttribute('content', route.metaDesc);
+
+        const ogTitleEl = document.querySelector('meta[property="og:title"]');
+        if (ogTitleEl) ogTitleEl.setAttribute('content', route.title);
+
+        const ogDescEl = document.querySelector('meta[property="og:description"]');
+        if (ogDescEl && route.metaDesc) ogDescEl.setAttribute('content', route.metaDesc);
+
+        const canonicalEl = document.querySelector('link[rel="canonical"]');
+        if (canonicalEl) {
+          const normalizedHash = String(route.hash || '').replace(/^\/+|\/+$/g, '');
+          canonicalEl.setAttribute('href', 'https://toolshere.online/' + normalizedHash + '/');
+        }
+
+        // 6. Smooth Scroll to Top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-
-      // 5. Update SEO Metadata & Canonical URL
-      document.title = route.title;
-      const metaDescEl = document.querySelector('meta[name="description"]');
-      if (metaDescEl && route.metaDesc) metaDescEl.setAttribute('content', route.metaDesc);
-
-      const ogTitleEl = document.querySelector('meta[property="og:title"]');
-      if (ogTitleEl) ogTitleEl.setAttribute('content', route.title);
-
-      const ogDescEl = document.querySelector('meta[property="og:description"]');
-      if (ogDescEl && route.metaDesc) ogDescEl.setAttribute('content', route.metaDesc);
-
-      const canonicalEl = document.querySelector('link[rel="canonical"]');
-      if (canonicalEl) canonicalEl.setAttribute('href', 'https://toolshere.online/' + route.hash);
-
-      // 6. Smooth Scroll to Top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function navigateToHome(event) {
