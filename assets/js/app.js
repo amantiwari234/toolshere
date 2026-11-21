@@ -5328,13 +5328,32 @@ function ensureScript(name) {
       setTargetFormat(targetMime);
     }
 
+    function showIcoUnavailableNotice() {
+      if (typeof showToast === 'function') {
+        showToast('ICO export is temporarily unavailable while we improve Windows icon compatibility.', 'info');
+      }
+      const notice = document.getElementById('formatIcoNotice');
+      if (notice) notice.classList.remove('hidden');
+      const infoBox = document.getElementById('formatFormatInfoText');
+      if (infoBox) {
+        infoBox.innerText = '⚠️ ICO export is temporarily unavailable while we improve Windows icon compatibility. Please select WebP, PNG, or JPG.';
+      }
+    }
+    window.showIcoUnavailableNotice = showIcoUnavailableNotice;
+
     function setTargetFormat(mime) {
+      if (mime === 'image/x-icon') {
+        showIcoUnavailableNotice();
+        return;
+      }
+      const notice = document.getElementById('formatIcoNotice');
+      if (notice) notice.classList.add('hidden');
+
       targetMime = mime;
       const formats = [
         { mime: 'image/webp', id: 'fmtWebpCard', name: 'WebP', ext: 'webp' },
         { mime: 'image/png', id: 'fmtPngCard', name: 'PNG', ext: 'png' },
-        { mime: 'image/jpeg', id: 'fmtJpgCard', name: 'JPG', ext: 'jpg' },
-        { mime: 'image/x-icon', id: 'fmtIcoCard', name: 'ICO', ext: 'ico' }
+        { mime: 'image/jpeg', id: 'fmtJpgCard', name: 'JPG', ext: 'jpg' }
       ];
 
       formats.forEach(f => {
@@ -5368,9 +5387,6 @@ function ensureScript(name) {
       } else if (mime === 'image/png') {
         if (qBox) qBox.classList.add('hidden');
         if (infoBox) infoBox.innerText = '🔒 Lossless quality is automatically preserved with full alpha transparency support.';
-      } else if (mime === 'image/x-icon') {
-        if (qBox) qBox.classList.add('hidden');
-        if (infoBox) infoBox.innerText = '🏷️ Exported as a favicon ICO file formatted for website tabs and bookmarks.';
       }
     }
 
@@ -5404,14 +5420,20 @@ function ensureScript(name) {
             canvas.height = imgFormatImg.naturalHeight;
             const ctx = canvas.getContext('2d');
 
+            if (targetMime === 'image/x-icon') {
+              displayFormatConfigureState();
+              showFormatError('ICO export is temporarily unavailable while we improve Windows icon compatibility.');
+              return;
+            }
+
             if (targetMime === 'image/jpeg') {
               ctx.fillStyle = '#ffffff';
               ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
             ctx.drawImage(imgFormatImg, 0, 0);
 
-            convertedExt = targetMime === 'image/webp' ? 'webp' : (targetMime === 'image/png' ? 'png' : (targetMime === 'image/x-icon' ? 'ico' : 'jpg'));
-            const exportMime = targetMime === 'image/x-icon' ? 'image/png' : targetMime;
+            convertedExt = targetMime === 'image/webp' ? 'webp' : (targetMime === 'image/png' ? 'png' : 'jpg');
+            const exportMime = targetMime;
             convertedDataUrl = canvas.toDataURL(exportMime, formatQuality);
 
             const base64Str = convertedDataUrl.split(',')[1] || '';
@@ -5518,7 +5540,7 @@ function ensureScript(name) {
     }
 
     function renderImgFormat(title, icon, container) {
-      if (title) title.innerText = 'Image Format Converter (PNG, JPG, WebP, GIF, ICO)';
+      if (title) title.innerText = 'Image Format Converter (PNG, JPG, WebP)';
       if (icon) icon.className = 'fa-solid fa-arrows-rotate';
       container.innerHTML = `
         <div class="space-y-6">
@@ -5649,15 +5671,20 @@ function ensureScript(name) {
                       <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 w-fit">Compatible</span>
                     </div>
 
-                    <!-- ICO -->
-                    <div id="fmtIcoCard" onclick="setTargetFormat('image/x-icon')" class="format-card-inactive relative p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-500 text-slate-700 dark:text-slate-300 shadow-xs cursor-pointer transition-all flex flex-col justify-between text-left min-h-[88px]">
+                    <!-- ICO (Temporarily Disabled) -->
+                    <div id="fmtIcoCard" onclick="showIcoUnavailableNotice()" class="relative p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/40 opacity-60 cursor-not-allowed text-slate-500 dark:text-slate-400 shadow-xs flex flex-col justify-between text-left min-h-[88px]" title="ICO export is temporarily unavailable while we improve Windows icon compatibility.">
                       <div class="flex items-center justify-between">
                         <span class="font-extrabold text-sm sm:text-base">ICO</span>
-                        <i class="fa-solid fa-circle-check text-blue-600 text-sm fmt-check-icon opacity-0"></i>
+                        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300">Unavailable</span>
                       </div>
-                      <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-tight mt-1">Favicon Icon</span>
-                      <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 w-fit">Browser Tab</span>
+                      <span class="text-[10px] text-slate-400 font-medium leading-tight mt-1">ICO Export &mdash; Temporarily Unavailable</span>
+                      <span class="inline-block mt-1 text-[9px] text-amber-600 dark:text-amber-400 font-semibold">Paused</span>
                     </div>
+                  </div>
+                  <!-- ICO Temporarily Unavailable Notice -->
+                  <div id="formatIcoNotice" class="hidden p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs flex items-start gap-2">
+                    <i class="fa-solid fa-circle-info text-amber-600 dark:text-amber-400 text-sm mt-0.5 shrink-0"></i>
+                    <span>ICO export is temporarily unavailable while we improve Windows icon compatibility.</span>
                   </div>
                 </div>
 

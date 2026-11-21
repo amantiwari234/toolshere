@@ -12,7 +12,7 @@
     }
   </script>
   <title>Image Format Converter: Convert PNG, JPG, WebP - ToolsHere</title>
-  <meta name="description" content="Convert photos between JPG, PNG, and WebP formats instantly in your browser. Fast, free batch image conversion preserving original resolution and privacy.">
+  <meta name="description" content="Convert PNG, JPG, and WebP images online in your browser. Preserve image dimensions and process files privately without uploading them.">
   <meta name="keywords" content="image converter, online tools, free web utilities, image tools, toolshere">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <link rel="canonical" href="https://toolshere.online/image-converter/">
@@ -22,7 +22,7 @@
   <meta property="og:site_name" content="Toolshere">
   <meta property="og:url" content="https://toolshere.online/image-converter/">
   <meta property="og:title" content="Image Format Converter: Convert PNG, JPG, WebP - ToolsHere">
-  <meta property="og:description" content="Convert photos between JPG, PNG, and WebP formats instantly in your browser. Fast, free batch image conversion preserving original resolution and privacy.">
+  <meta property="og:description" content="Convert PNG, JPG, and WebP images online in your browser. Preserve image dimensions and process files privately without uploading them.">
   <meta property="og:image" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:secure_url" content="https://toolshere.online/assets/logo.png">
   <meta property="og:image:type" content="image/png">
@@ -34,7 +34,7 @@
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://toolshere.online/image-converter/">
   <meta property="twitter:title" content="Image Format Converter: Convert PNG, JPG, WebP - ToolsHere">
-  <meta property="twitter:description" content="Convert photos between JPG, PNG, and WebP formats instantly in your browser. Fast, free batch image conversion preserving original resolution and privacy.">
+  <meta property="twitter:description" content="Convert PNG, JPG, and WebP images online in your browser. Preserve image dimensions and process files privately without uploading them.">
   <meta property="twitter:image" content="https://toolshere.online/assets/logo.png">
 
   <!-- Favicon & Touch Icons (Google Search Best Practice: 48x48 PNG First) -->
@@ -141,7 +141,7 @@
   "@type": "WebApplication",
   "name": "Image Format Converter",
   "url": "https://toolshere.online/image-converter/",
-  "description": "Convert photos between JPG, PNG, and WebP formats instantly in your browser. Fast, free batch image conversion preserving original resolution and privacy.",
+  "description": "Convert PNG, JPG, and WebP images online in your browser. Preserve image dimensions and process files privately without uploading them.",
   "applicationCategory": "UtilitiesApplication",
   "operatingSystem": "All modern browsers (Chrome, Firefox, Safari, Edge, Android, iOS)",
   "offers": {
@@ -204,6 +204,14 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "No. The converter reads the natural width and height of the image and renders it on a full-scale canvas, preserving original pixel dimensions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does this tool preserve animation when converting animated GIFs or WebPs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Under the current browser-based canvas implementation, converting an animated GIF or animated WebP captures and exports only the static first frame. Multi-frame animations and timing sequences are not preserved, so please retain your original files if you require ongoing animation."
       }
     }
   ]
@@ -377,7 +385,7 @@
             Free Online Image Format Converter (PNG, JPG, WebP)
           </h1>
           <p class="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-300 mt-1 max-w-3xl leading-relaxed">
-            Convert photos between JPG, PNG, and WebP formats instantly in your browser. Fast, free batch image conversion preserving original resolution and privacy.
+            Convert PNG, JPG, and WebP images online in your browser. Preserve image dimensions and process files privately without uploading them.
           </p>
         </div>
       </div>
@@ -514,15 +522,20 @@
                       <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 w-fit">Compatible</span>
                     </div>
 
-                    <!-- ICO -->
-                    <div id="fmtIcoCard" onclick="setTargetFormat('image/x-icon')" class="format-card-inactive relative p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-500 text-slate-700 dark:text-slate-300 shadow-xs cursor-pointer transition-all flex flex-col justify-between text-left min-h-[88px]">
+                    <!-- ICO (Temporarily Disabled) -->
+                    <div id="fmtIcoCard" onclick="showIcoUnavailableNotice()" class="relative p-3 sm:p-4 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/40 opacity-60 cursor-not-allowed text-slate-500 dark:text-slate-400 shadow-xs flex flex-col justify-between text-left min-h-[88px]" title="ICO export is temporarily unavailable while we improve Windows icon compatibility.">
                       <div class="flex items-center justify-between">
                         <span class="font-extrabold text-sm sm:text-base">ICO</span>
-                        <i class="fa-solid fa-circle-check text-blue-600 text-sm fmt-check-icon opacity-0"></i>
+                        <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 dark:bg-amber-900/60 dark:text-amber-300">Unavailable</span>
                       </div>
-                      <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium leading-tight mt-1">Favicon Icon</span>
-                      <span class="inline-block mt-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 w-fit">Browser Tab</span>
+                      <span class="text-[10px] text-slate-400 font-medium leading-tight mt-1">ICO Export &mdash; Temporarily Unavailable</span>
+                      <span class="inline-block mt-1 text-[9px] text-amber-600 dark:text-amber-400 font-semibold">Paused</span>
                     </div>
+                  </div>
+                  <!-- ICO Temporarily Unavailable Notice -->
+                  <div id="formatIcoNotice" class="hidden p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 text-xs flex items-start gap-2">
+                    <i class="fa-solid fa-circle-info text-amber-600 dark:text-amber-400 text-sm mt-0.5 shrink-0"></i>
+                    <span>ICO export is temporarily unavailable while we improve Windows icon compatibility.</span>
                   </div>
                 </div>
 
@@ -764,8 +777,38 @@
         </div>
       </section>
 
-
-
+      <!-- Image Conversion vs Image Compression Comparison -->
+      <section class="space-y-4">
+        <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <i class="fa-solid fa-code-compare text-blue-600"></i> Image Conversion vs Image Compression: Which Do You Need?
+        </h2>
+        <div class="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 space-y-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            While both processes help prepare graphics for web or email distribution, <strong>format conversion</strong> and <strong>image compression</strong> solve different problems:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
+            <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-arrows-rotate text-blue-600 text-xs"></i> Image Format Conversion
+              </h3>
+              <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
+                Changes the file container and pixel encoding (e.g., transforming WebP to PNG or PNG to JPG) to achieve application compatibility, add transparency support, or optimize web performance. Conversion preserves full canvas pixel dimensions (width &times; height) and does <em>not</em> guarantee a smaller file size. For example, PNG uses lossless DEFLATE compression; converting a lossy JPEG into a PNG cannot restore image quality or details already lost during JPEG compression, and often results in a larger file because lossless DEFLATE cannot compress continuous-tone photographic noise as aggressively as JPEG's lossy discrete cosine transform. Depending on image content and encoding, PNG output can be larger or smaller than other formats. When converting images with transparent backgrounds to JPEG, our tool automatically synthesizes a clean white background because the JPEG standard does not support alpha transparency.
+              </p>
+            </div>
+            <div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-compress text-emerald-600 text-xs"></i> Image Compression
+              </h3>
+              <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
+                Focuses specifically on reducing file weight (kilobytes or megabytes) using lossy quantization or lossless deflate algorithms. Image dimensions and compression quality are separate considerations from format encoding. If your priority is meeting upload size thresholds (such as 50KB or 100KB) or streamlining attachments, you can <a href="/image-compressor/" class="text-blue-600 dark:text-blue-400 font-semibold hover:underline">reduce image file size with our Image Compressor</a>.
+              </p>
+            </div>
+          </div>
+          <p class="pt-1 text-slate-500 dark:text-slate-400 text-xs">
+            <strong>Summary:</strong> Use this tool when you need a specific image file type; use compression when you need to make an existing image file smaller.
+          </p>
+        </div>
+      </section>
 
       <!-- Frequently Asked Questions -->
       <section class="space-y-4">
@@ -793,6 +836,13 @@
                 <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Is there any loss of image resolution during conversion?
               </h3>
               <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">No. The converter reads the natural width and height of the image and renders it on a full-scale canvas, preserving original pixel dimensions.</p>
+            </div>
+
+            <div class="p-4 sm:p-5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs space-y-2">
+              <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-circle-chevron-right text-blue-600 text-xs"></i> Does this tool preserve animation when converting animated GIFs or WebPs?
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-5">No. Under the current browser-based canvas implementation, converting an animated GIF or animated WebP captures and exports only the static first frame. Multi-frame animations and timing sequences are not preserved, so please retain your original files if you require ongoing animation.</p>
             </div>
 
         </div>
